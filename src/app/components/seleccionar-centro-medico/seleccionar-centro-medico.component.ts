@@ -10,8 +10,6 @@ import { Centro_Medico } from '../../models/Modelos';
 export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	constructor(private rest:RestService) {
-		console.log( navParams );
-//		this.centros = navParams.get('centros');
 	}
 
 	centros:Centro_Medico[] = [];
