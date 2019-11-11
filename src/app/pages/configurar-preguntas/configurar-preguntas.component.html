@@ -1,1 +1,63 @@
-<p>configurar-preguntas works!</p>
+<ion-header>
+	<ion-toolbar color="blue" class="customNavBar">
+		<ion-buttons slot="start">
+			<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
+		</ion-buttons>
+		<ion-title>
+			<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+		</ion-title>
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+	<div class="d-flex flex-wrap">
+		<!--MENU DE LA APLICACION-->
+		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
+			<!-- <app-menu></app-menu> -->
+		</div>
+		<!--FIN MENU DE LA APLICACION-->
+		<!--CONTENIDO DE LA APLICACION-->
+		<div class="p-2 flex-fill flex-wrap ">
+			<ion-card>
+				<ion-toolbar>
+					<ion-title>Configurar preguntas</ion-title>
+				</ion-toolbar>
+				<table class="basica ">
+				<thead>
+					<tr>
+						<th>Pregunta</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let p of preguntasEspecialidad;let i = index">
+						<td>{{p.pregunta_historia_clinica.pregunta}} </td>
+						<td>
+							<ion-button size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
+								Remover</ion-button>
+							<ion-button size="small" *ngIf="i>0"
+								(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</ion-button>
+							<ion-button size="small" *ngIf="i<preguntasEspecialidad.length-1"
+								(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</ion-button>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+				<div>
+					<ion-input input type="text"></ion-input>
+				</div>
+
+				<div class="container">
+					<div *ngFor="let p of busquedaPreguntas">
+						{{p.pregunta}} <ion-button size="small" (click)="agregarEspecialidadPregunta(p)">
+							<ion-icon name="add-circle"></ion-icon>Agregar
+						</ion-button>
+					</div>
+				</div>
+			</ion-card>
+		</div>
+		<!-- FIN CONTENIDO DE LA APLICACION-->
+	</div>
+</ion-content>

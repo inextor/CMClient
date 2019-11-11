@@ -1,1 +1,27 @@
-<p>consulta works!</p>
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>consulta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <td>
+        <ion-button slot="start" [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small" >Agregar HISTORIAL</ion-button>
+      </td>
+      <ion-card>
+          <ion-card-header>
+            <ion-card-title>Doctor: {{doctor.nombre}}</ion-card-title>
+            <ion-card-subtitle>Paciente: {{paciente.nombre}}</ion-card-subtitle>
+           
+          </ion-card-header>
+        
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
+  </ion-content>
+  
