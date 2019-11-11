@@ -1,1 +1,78 @@
-<p>especialidades works!</p>
+<ion-header>
+	<ion-toolbar color="blue" class="customNavBar">
+		<ion-buttons slot="start">
+			<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
+		</ion-buttons>
+		<ion-title>
+			<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+		</ion-title>
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+	<div class="d-flex flex-wrap">
+		<!--MENU DE LA APLICACION-->
+		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
+			<!-- <app-menu></app-menu> -->
+		</div>
+		<!--FIN MENU DE LA APLICACION-->
+		<!--CONTENIDO DE LA APLICACION-->
+		<div class="p-2 flex-fill flex-wrap ">
+			<ion-card>
+				<ion-toolbar>
+					<ion-title>Especialidades</ion-title>
+				</ion-toolbar>
+				<td class="generalButton">
+					<ion-button size="small" [routerLink]="['/agregar-especialidad']">Agregar especialidad
+					</ion-button>
+				</td>
+				<table class="basica ">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let especialidad of especialidades">
+							<td>{{especialidad.nombre}}</td>
+							<!-- 	" -->
+							<td>
+								<ion-button size="small" [routerLink]="['/editar-especialidad',especialidad.id]">
+									<ion-icon name="create"></ion-icon>
+								</ion-button>
+								<ion-button size="small" [routerLink]="['/configurar-especialidad',especialidad.id]">
+									<ion-icon name="construct"></ion-icon>
+								</ion-button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="btn-toolbar positionCenter" role="toolbar" aria-label="Toolbar with button groups"
+					*ngIf="totalPages>1">
+					<div class="btn-group mr-2" role="group" aria-label="First group">
+						<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
+							[routerLink]="['/especialidades',0]">&lt;&lt;</button>
+						<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
+							[routerLink]="['/especialidades',currentPage-1]">&lt;</button>
+					</div>
+
+					<div class="btn-group mr-2" role="group" aria-label="Second group">
+						<button type="button" class="btn btn-primary" *ngFor="let page of pages"
+							[routerLink]="['/especialidades',page]">{{page+1}}</button>
+					</div>
+
+					<div class="btn-group" role="group" aria-label="Third group">
+						<button [disabled]="currentPage >= totalPages-1 " type="button" class="btn btn-primary"
+							[routerLink]="['/especialidades',currentPage+1]">&gt;</button>
+						<button [disabled]="currentPage >= totalPages-1 " type="button" class="btn btn-primary"
+							[routerLink]="['/especialidades',this.totalPages-1]">&gt;&gt;</button>
+					</div>
+				</div>
+			</ion-card>
+		</div>
+		<!-- FIN CONTENIDO DE LA APLICACION-->
+	</div>
+</ion-content>

@@ -1,1 +1,36 @@
-<p>gastos works!</p>
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>gastos</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<td>
+		<ion-button [routerLink]="['/agregar-gasto']" size="small"  >Agregar gasto
+		</ion-button>
+	</td>
+	<table class="basica">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>descripcion</th>
+				<th>Usuario</th>
+				<th>Monto</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngIf="gastos.length==0" align="center">
+				<td colspan="4">No se encontraron registros</td>
+			</tr>
+			<tr *ngFor="let g of gastos">
+				<td>{{g.gasto_centro_medico.id}}</td>
+				<td>{{g.gasto_centro_medico.descripcion}}</td>
+				<td>{{g.usuario.usuario}}</td>
+				<td>{{g.gasto_centro_medico.monto| number:'.2' | currency: '$'}}</td>
+			</tr>
+		</tbody>
+	</table>
+</ion-content>
