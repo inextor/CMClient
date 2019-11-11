@@ -8,7 +8,7 @@ import { Paciente, Centro_Medico, Doctor } from 'src/app/models/Modelos';
   templateUrl: './agendar-cita.page.html',
   styleUrls: ['./agendar-cita.page.scss'],
 })
-export class AgendarCitaPage implements OnInit {
+export class AgendarCitaComponent implements OnInit {
 
   constructor(
     private restService:RestService,

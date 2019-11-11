@@ -6,9 +6,9 @@ import { Especialidad } from '../../models/Modelos';
 @Component({
 	selector: 'app-agregar-especialidad',
 	templateUrl: './agregar-especialidad.component.html',
-	styleUrls: ['./agregar-especialidad.component.css'],
+	styleUrls: ['./agregar-especialidad.component.scss'],
 })
-export class AgregarEspecialidadPage implements OnInit {
+export class AgregarEspecialidadComponent implements OnInit {
 	is_loading:boolean	= false;
 
 	especialidad:Especialidad = {

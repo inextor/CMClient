@@ -6,10 +6,10 @@ import { Paciente,Usuario } from '../../models/Modelos';
 
 @Component({
 	selector: 'app-agregar-familiar',
-	templateUrl: './agregar-familiar.page.html',
-	styleUrls: ['./agregar-familiar.page.scss'],
+	templateUrl: './agregar-familiar.component.html',
+	styleUrls: ['./agregar-familiar.component.scss'],
 })
-export class AgregarFamiliarPage implements OnInit {
+export class AgregarFamiliarComponent implements OnInit {
 
 	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 

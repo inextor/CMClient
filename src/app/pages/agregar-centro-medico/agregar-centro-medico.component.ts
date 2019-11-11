@@ -10,7 +10,7 @@ import { Centro_Medico } from '../../models/Modelos';
 	templateUrl: './agregar-centro-medico.component.html',
 	styleUrls: ['./agregar-centro-medico.component.scss'],
 })
-export class AgregarCentroMedicoPage implements OnInit {
+export class AgregarCentroMedicoComponent implements OnInit {
 
 	is_loading:boolean  = false;
 

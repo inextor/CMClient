@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario,Tipo_Gasto,Gasto_Centro_Medico,Centro_Medico } from '../../models/Modelos';
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 })
 
 
-export class AgregarGastoPage extends BasePage implements OnInit {
+export class AgregarGastoComponent extends BaseComponent implements OnInit {
 
 	id_tipo_gasto:number = null;
 	tiposGasto:Tipo_Gasto[]=[];

@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Doctor,Usuario } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 
 
 
 @Component({
 	selector: 'app-agregar-doctor',
-	templateUrl: './agregar-doctor.page.html',
-	styleUrls: ['./agregar-doctor.page.scss'],
+	templateUrl: './agregar-doctor.component.html',
+	styleUrls: ['./agregar-doctor.component.scss'],
 })
-export class AgregarDoctorPage extends BasePage implements OnInit {
+export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
-
+	
 	doctor:Doctor = {
 		'nombre':'',
 		'especialidad':'',
