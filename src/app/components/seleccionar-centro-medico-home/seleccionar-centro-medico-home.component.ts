@@ -9,9 +9,9 @@ import { Centro_Medico } from '../../models/Modelos';
 })
 export class SeleccionarCentroMedicoHomeComponent implements OnInit {
 
-  constructor(private rest:RestService,private modalCtrl:ModalController,navParams:NavParams) {
+  constructor(private rest:RestService,private modalCtrl:ModalController) {
 		console.log( navParams );
-		this.centros = navParams.get('centros');
+		//this.centros = navParams.get('centros');
 	}
 
 	centros:Centro_Medico[] = [];
@@ -20,11 +20,11 @@ export class SeleccionarCentroMedicoHomeComponent implements OnInit {
 
 	dismissModal()
 	{
-		this.modalCtrl.dismiss(null);
+		//this.modalCtrl.dismiss(null);
 	}
 
 	seleccionarCentro(centro_medico:Centro_Medico)
 	{
-		this.modalCtrl.dismiss(centro_medico);
+		//this.modalCtrl.dismiss(centro_medico);
 	}
 }

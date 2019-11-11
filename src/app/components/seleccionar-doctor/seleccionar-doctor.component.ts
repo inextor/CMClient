@@ -9,7 +9,7 @@ import { Doctor } from '../../models/Modelos';
 })
 export class SeleccionarDoctorComponent implements OnInit {
 
-	constructor(private rest:RestService,private modalCtrl:ModalController,navParams:NavParams) {
+	constructor(private rest:RestService) {
 		console.log( navParams );
 		this.doctores = navParams.get('doctores');
 	}
@@ -20,11 +20,11 @@ export class SeleccionarDoctorComponent implements OnInit {
 
 	dismissModal()
 	{
-		this.modalCtrl.dismiss(null);
+		//this.modalCtrl.dismiss(null);
 	}
 
 	seleccionarDoctor(doctor:Doctor)
 	{
-		this.modalCtrl.dismiss(doctor);
+		//this.modalCtrl.dismiss(doctor);
 	}
 }

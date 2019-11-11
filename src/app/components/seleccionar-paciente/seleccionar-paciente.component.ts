@@ -9,15 +9,16 @@ import { Paciente } from '../../models/Modelos';
 })
 export class SeleccionarPacienteComponent implements OnInit {
 
-	constructor(private rest:RestService,private modalCtrl:ModalController,navParams:NavParams) {
+	constructor(private rest:RestService) {
 		console.log( navParams );
-		this.pacientes	= navParams.get('pacientes');
+		//this.pacientes	= navParams.get('pacientes');
 	}
 
 	pacientes:Paciente[] = [];
 
 	ngOnInit() {}
 
+	/*
 	dismissModal()
 	{
 		this.modalCtrl.dismiss(null);
@@ -27,4 +28,5 @@ export class SeleccionarPacienteComponent implements OnInit {
 	{
 		this.modalCtrl.dismiss(paciente);
 	}
+	*/
 }
