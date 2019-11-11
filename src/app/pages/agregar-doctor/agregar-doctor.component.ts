@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Doctor,Usuario } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 
 
 
