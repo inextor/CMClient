@@ -12,7 +12,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 })
 export class AgregarUsuarioComponent implements OnInit {
 
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 	usuario:Usuario = {
 		id_organizacion: 1,
@@ -35,6 +35,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
 	async showError(message:string)
 	{
+		/*
 		const alert = await this.alertController.create
 		({
 			header: 'Error',
@@ -44,6 +45,7 @@ export class AgregarUsuarioComponent implements OnInit {
 		});
 
 		await alert.present();
+		*/
 	}
 
 	registrarse()

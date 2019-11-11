@@ -17,7 +17,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
 	constructor(
 		private rest: RestService,
-		public alertController: AlertController,
 		private router: Router,
 		private route: ActivatedRoute,
 		public menuCtrl: MenuController
@@ -49,6 +48,7 @@ export class LoginComponent implements implements OnInit, AfterContentInit, Afte
 	is_loading: boolean = false;
 
 	async showError(message: string) {
+		/*
 		const alert = await this.alertController.create({
 			header: 'Error',
 			//subHeader: 'Subtitle',
@@ -57,6 +57,7 @@ export class LoginComponent implements implements OnInit, AfterContentInit, Afte
 		});
 
 		await alert.present();
+		*/
 	}
 
 	doLoginKeyboard(evt:Event)

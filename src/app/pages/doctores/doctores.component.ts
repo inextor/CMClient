@@ -18,9 +18,7 @@ export class DoctoresComponent implements OnInit {
 	constructor(
 		private rest:RestService,
 		private router:Router,
-		private route:ActivatedRoute,
-		public alertController: AlertController,
-    	public modalController: ModalController
+		private route:ActivatedRoute
 	)
 	{
 		//this.rest.currentUser.subscribe(x => this.currentUser = x);
@@ -67,6 +65,7 @@ export class DoctoresComponent implements OnInit {
 
 	async showError(message:string)
 	{
+		/*
 		const alert = await this.alertController.create
 		({
 			header: 'Error',
@@ -76,10 +75,12 @@ export class DoctoresComponent implements OnInit {
 		});
 
 		await alert.present();
+		*/
 	}
 
 	editarHorario(doctor:Doctor)
 	{
+		/*
 		//XXX Centro Medico A MANO cambiar PLEASE
 
 		this.rest.centro_medico.getAll({ id_organizacion: 1}).subscribe((response)=>
@@ -121,10 +122,12 @@ export class DoctoresComponent implements OnInit {
 				});
 			}
 		});
+		*/
 	}
 
 	seleccionarPacienteNuevaCitaCon(doctor)
 	{
+		/*
 		//Buscar doctores en base a la centro medico de la recepcion
 		let s = this.rest.getSesion();
 
@@ -165,5 +168,6 @@ export class DoctoresComponent implements OnInit {
 				});
 			}
 		});
+		*/
 	}
 }

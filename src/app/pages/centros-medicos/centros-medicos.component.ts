@@ -12,7 +12,7 @@ import	{Router,ActivatedRoute}	from	"@angular/router"
 })
 export class CentrosMedicosComponent implements OnInit {
 
-	constructor(private	rest:RestService,public	alertController:	AlertController,private	router:Router,private	route:ActivatedRoute)	{	}
+	constructor(private	rest:RestService,private	router:Router,private	route:ActivatedRoute)	{	}
 
 	is_loading:boolean 	= false;
 	centros_medicos:Centro_Medico[]		= [];

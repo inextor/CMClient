@@ -3,16 +3,17 @@ import { RestService } from '../../services/rest.service';
 import { Usuario,Doctor } from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Horario_Doctor,Cita } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css']
 })
-export class DoctorComponent implements OnInit {
+export class DoctorComponent extends BaseComponent implements OnInit {
 
 
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 	doctor:Doctor		= null;
 	is_loading:boolean	= false;
@@ -48,18 +49,5 @@ export class DoctorComponent implements OnInit {
 				this.citas = respuesta.datos;
 			});
 		});
-	}
-
-	async showError(message:string)
-	{
-		const alert = await this.alertController.create
-		({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
-
-		await alert.present();
 	}
 }

@@ -14,7 +14,6 @@ import { forkJoin } from 'rxjs';
 export class EditarDoctorComponent implements OnInit {
 
 	constructor(private rest:RestService,
-		public alertController: AlertController,
 		private router:Router,
 		private route:ActivatedRoute,
 		private location: Location

@@ -19,7 +19,6 @@ export class BaseComponent implements OnInit {
 
 	constructor(
 		public rest:RestService,
-		public alertController: AlertController,
 		public router:Router,
 		public route:ActivatedRoute,
 		public location: Location
@@ -73,6 +72,7 @@ export class BaseComponent implements OnInit {
 	}
 
 	async showError(message: string) {
+		/*
 		const alert = await this.alertController.create({
 			header: 'Error',
 			//subHeader: 'Subtitle',
@@ -82,5 +82,6 @@ export class BaseComponent implements OnInit {
 
 		await alert.present();
 		this.is_loading = false;
+		*/
 	}
 }

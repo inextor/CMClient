@@ -13,7 +13,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 })
 export class ServiciosComponent implements OnInit {
 
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 	servicios:ServicioResponseItem[]= [];
 	is_loading:boolean = false;
 	ngOnInit() {

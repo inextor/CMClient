@@ -14,7 +14,6 @@ export class PacientesComponent implements OnInit {
 
 	constructor(
 		private rest:RestService,
-		public alertController: AlertController,
 		private router:Router,
 		private route:ActivatedRoute,
     	public modalController: ModalController
