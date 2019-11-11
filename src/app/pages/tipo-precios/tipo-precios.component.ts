@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import {Tipo_Precio} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-tipo-precios',
   templateUrl: './tipo-precios.component.html',
   styleUrls: ['./tipo-precios.component.css']
 })
-export class TipoPreciosPage  extends BasePage implements OnInit {
+export class TipoPreciosComponent  extends BaseComponent implements OnInit {
   tiposPrecio:Tipo_Precio[]=[];
 
   ngOnInit() {

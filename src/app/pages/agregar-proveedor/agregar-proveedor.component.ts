@@ -8,7 +8,7 @@ import { Proveedor } from '../../models/Modelos';
   templateUrl: './agregar-proveedor.component.html',
   styleUrls: ['./agregar-proveedor.component.css']
 })
-export class AgregarProveedorPage implements OnInit {
+export class AgregarProveedorComponent implements OnInit {
   is_loading:boolean  = false;
 
 	proveedor:Proveedor = {
