@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -118,7 +122,9 @@ import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+	  { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
