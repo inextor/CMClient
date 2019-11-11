@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
+import { RestService } from '../../services/rest.service';
+import { Paciente } from '../../models/Modelos';
+
+@Component({
+  selector: 'app-seleccionar-paciente',
+  templateUrl: './seleccionar-paciente.component.html',
+  styleUrls: ['./seleccionar-paciente.component.css']
+})
+export class SeleccionarPacienteComponent implements OnInit {
+
+	constructor(private rest:RestService,private modalCtrl:ModalController,navParams:NavParams) {
+		console.log( navParams );
+		this.pacientes	= navParams.get('pacientes');
+	}
+
+	pacientes:Paciente[] = [];
+
+	ngOnInit() {}
+
+	dismissModal()
+	{
+		this.modalCtrl.dismiss(null);
+	}
+
+	seleccionarPaciente(paciente:Paciente)
+	{
+		this.modalCtrl.dismiss(paciente);
+	}
+}

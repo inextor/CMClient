@@ -3,10 +3,116 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
+import { AgregarCentroMedicoComponent } from './pages/agregar-centro-medico/agregar-centro-medico.component';
+import { AgregarCitaComponent } from './pages/agregar-cita/agregar-cita.component';
+import { AgregarDoctorComponent } from './pages/agregar-doctor/agregar-doctor.component';
+import { AgregarEspecialidadComponent } from './pages/agregar-especialidad/agregar-especialidad.component';
+import { AgregarFamiliarComponent } from './pages/agregar-familiar/agregar-familiar.component';
+import { AgregarGastoComponent } from './pages/agregar-gasto/agregar-gasto.component';
+import { AgregarOrganizacionComponent } from './pages/agregar-organizacion/agregar-organizacion.component';
+import { AgregarPrecioComponent } from './pages/agregar-precio/agregar-precio.component';
+import { AgregarPreguntaComponent } from './pages/agregar-pregunta/agregar-pregunta.component';
+import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
+import { AgregarProveedorComponent } from './pages/agregar-proveedor/agregar-proveedor.component';
+import { AgregarServicioComponent } from './pages/agregar-servicio/agregar-servicio.component';
+import { AgregarTipoGastoComponent } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
+import { AgregarTipoPrecioComponent } from './pages/agregar-tipo-precio/agregar-tipo-precio.component';
+import { AgregarUsuarioComponent } from './pages/agregar-usuario/agregar-usuario.component';
+import { BaseComponent } from './pages/base/base.component';
+import { CentrosMedicosComponent } from './pages/centros-medicos/centros-medicos.component';
+import { CitaComponent } from './pages/cita/cita.component';
+import { CitasComponent } from './pages/citas/citas.component';
+import { ConfigurarHorarioComponent } from './pages/configurar-horario/configurar-horario.component';
+import { ConfigurarPreguntasComponent } from './pages/configurar-preguntas/configurar-preguntas.component';
+import { ConsultaComponent } from './pages/consulta/consulta.component';
+import { ConsultasComponent } from './pages/consultas/consultas.component';
+import { DoctorComponent } from './pages/doctor/doctor.component';
+import { DoctoresComponent } from './pages/doctores/doctores.component';
+import { EditarDoctorComponent } from './pages/editar-doctor/editar-doctor.component';
+import { EditarPreciosComponent } from './pages/editar-precios/editar-precios.component';
+import { EspecialidadesComponent } from './pages/especialidades/especialidades.component';
+import { GastosComponent } from './pages/gastos/gastos.component';
+import { HelpersComponent } from './pages/helpers/helpers.component';
+import { InventarioComponent } from './pages/inventario/inventario.component';
+import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
+import { PacienteComponent } from './pages/paciente/paciente.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { PagosComponent } from './pages/pagos/pagos.component';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
+import { ServiciosComponent } from './pages/servicios/servicios.component';
+import { TipoPreciosComponent } from './pages/tipo-precios/tipo-precios.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { VentasComponent } from './pages/ventas/ventas.component';
+import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { PaginacionComponent } from './components/paginacion/paginacion.component';
+import { SeleccionarCentroMedicoComponent } from './components/seleccionar-centro-medico/seleccionar-centro-medico.component';
+import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
+import { SeleccionarDoctorComponent } from './components/seleccionar-doctor/seleccionar-doctor.component';
+import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/seleccionar-paciente.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AgendarCitaComponent,
+    AgregarCentroMedicoComponent,
+    AgregarCitaComponent,
+    AgregarDoctorComponent,
+    AgregarEspecialidadComponent,
+    AgregarFamiliarComponent,
+    AgregarGastoComponent,
+    AgregarOrganizacionComponent,
+    AgregarPrecioComponent,
+    AgregarPreguntaComponent,
+    AgregarProductoComponent,
+    AgregarProveedorComponent,
+    AgregarServicioComponent,
+    AgregarTipoGastoComponent,
+    AgregarTipoPrecioComponent,
+    AgregarUsuarioComponent,
+    BaseComponent,
+    CentrosMedicosComponent,
+    CitaComponent,
+    CitasComponent,
+    ConfigurarHorarioComponent,
+    ConfigurarPreguntasComponent,
+    ConsultaComponent,
+    ConsultasComponent,
+    DoctorComponent,
+    DoctoresComponent,
+    EditarDoctorComponent,
+    EditarPreciosComponent,
+    EspecialidadesComponent,
+    GastosComponent,
+    HelpersComponent,
+    InventarioComponent,
+    LlenarHistoriaClinicaComponent,
+    LoginComponent,
+    MisCitasComponent,
+    PacienteComponent,
+    PacientesComponent,
+    PagosComponent,
+    ProveedoresComponent,
+    RegistroComponent,
+    RequisicionesComponent,
+    ServiciosComponent,
+    TipoPreciosComponent,
+    UsuariosComponent,
+    VentasComponent,
+    VerDoctorComponent,
+    LoadingComponent,
+    MenuComponent,
+    PaginacionComponent,
+    SeleccionarCentroMedicoComponent,
+    SeleccionarCentroMedicoHomeComponent,
+    SeleccionarDoctorComponent,
+    SeleccionarPacienteComponent
   ],
   imports: [
     BrowserModule,

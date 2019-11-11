@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>agregar-producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    
+          <ion-item>
+            <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text" name="nombre" [(ngModel)]="producto.nombre"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="stacked">Tipo<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text"	name="tipo" [(ngModel)]="producto.tipo"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="stacked">Caducidad<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text"	name="caducidad" [(ngModel)]="producto.caducidad"></ion-input>
+          </ion-item>
+    
+        </ion-list>
+        <ion-spinner *ngIf="is_loading"></ion-spinner>
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin"  [disabled]="is_loading">Registrarse</ion-button>
+        </div>
+      </form>
+</ion-content>

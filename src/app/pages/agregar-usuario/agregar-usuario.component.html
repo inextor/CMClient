@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>agregar-usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text" name="nombre" [(ngModel)]="paciente.nombre"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="stacked">Apellido<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required type="text" name="nombre" [(ngModel)]="paciente.apellidos"></ion-input>
+            </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text"  name="correo_electronico" [(ngModel)]="usuario.correo_electronico"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="stacked">Usuario<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required type="text" name="usuario" [(ngModel)]="usuario.usuario"></ion-input>
+            </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input placeholder="" type="password" name="contrasena" [(ngModel)]="usuario.contrasena"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked" >Confirmar contraseña</ion-label>
+            <ion-input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena"></ion-input>
+          </ion-item>
+        </ion-list>
+
+		<ion-spinner *ngIf="is_loading"></ion-spinner>
+
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin" (click)="registrarse()" [disabled]="is_loading">Registrarse</ion-button>
+        </div>
+      </form>
+</ion-content>
