@@ -7,8 +7,8 @@ import { Centro_Medico } from '../../models/Modelos';
 
 @Component({
 	selector: 'app-agregar-centro-medico',
-	templateUrl: './agregar-centro-medico.page.html',
-	styleUrls: ['./agregar-centro-medico.page.scss'],
+	templateUrl: './agregar-centro-medico.component.html',
+	styleUrls: ['./agregar-centro-medico.component.scss'],
 })
 export class AgregarCentroMedicoPage implements OnInit {
 

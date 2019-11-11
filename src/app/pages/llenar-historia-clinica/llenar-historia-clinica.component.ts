@@ -6,7 +6,7 @@ import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-c
 import { PreguntasHistoriaClinicaResponse } from '../../models/Respuestas';
 import { switchMap,catchError } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { BasePage } from '../base/base.page';
+import { BasePage } from '../base/base.component';
 import { RespuestaPreguntaHistoriaClinica } from '../../models/Respuestas';
 import { Respuesta } from '../../models/Respuestas';
 import { Respuesta_Historia_Clinica } from '../../models/Modelos';

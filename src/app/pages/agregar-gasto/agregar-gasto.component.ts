@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario,Tipo_Gasto,Gasto_Centro_Medico,Centro_Medico } from '../../models/Modelos';
-import { BasePage } from '../base/base.page';
+import { BasePage } from '../base/base.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
 	selector: 'app-agregar-gasto',
-	templateUrl: './agregar-gasto.page.html',
-	styleUrls: ['./agregar-gasto.page.scss'],
+	templateUrl: './agregar-gasto.component.html',
+	styleUrls: ['./agregar-gasto.component.css'],
 })
 
 

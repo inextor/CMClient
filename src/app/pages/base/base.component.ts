@@ -13,6 +13,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css']
 })
+
 export class BaseComponent implements OnInit {
 
 
