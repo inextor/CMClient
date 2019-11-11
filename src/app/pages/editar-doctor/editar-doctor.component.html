@@ -1,1 +1,58 @@
-<p>editar-doctor works!</p>
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Editar Doctor</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form>
+		<ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+
+			<div *ngIf="usuario.id_imagen">
+				<img [src]="this.rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
+			</div>
+
+			<ion-item>
+				<input type="file" (change)="uploadImage($event)" name="image">
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
+				<ion-input required type="text" name="Nombre" [(ngModel)]="doctor.nombre"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Telefono<ion-text color="danger">*</ion-text></ion-label>
+				<ion-input required type="text"	name="telefono" [(ngModel)]="doctor.telefono"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Correo Electrónico<ion-text color="danger">*</ion-text></ion-label>
+				<ion-input required type="text"	name="correo_electronico" [(ngModel)]="doctor.correo_electronico"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Especialidad<ion-text color="danger">*</ion-text></ion-label>
+				<ion-input required type="text"	name="especialidad" [(ngModel)]="doctor.especialidad"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Usuario</ion-label>
+				<ion-input type="text" name="usuario" [(ngModel)]="usuario.usuario"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Contraseña<ion-text color="danger"></ion-text></ion-label>
+				<ion-input type="text" name="contrasena" [(ngModel)]="usuario.contrasena"></ion-input>
+			</ion-item>
+		</ion-list>
+		<ion-spinner *ngIf="is_loading"></ion-spinner>
+		<div class="ion-padding">
+			<ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
+		</div>
+	</form>
+</ion-content>

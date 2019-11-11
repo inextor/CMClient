@@ -1,1 +1,35 @@
-<p>editar-precios works!</p>
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>editar precios</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div *ngIf="servicio !== null">
+		<div *ngFor="let sucursal of servicio.centro_medico">
+			<div>
+			<b>{{sucursal.centro_medico.nombre}}</b>
+			</div>
+
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Tipo de Precio</th>
+						<th>Precio</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let precio of sucursal.precios">
+						<td>{{precio.tipo_precio.nombre}}</td>
+						<td><input type="text" value="{{precio.precio_servicio !== null ? precio.precio_servicio.precio : '' }}"></td>
+						<td>Guardar</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</ion-content>
