@@ -3,15 +3,14 @@ import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute,ParamMap} from "@angular/router"
 import { HttpErrorResponse } from '@angular/common/http';
 import { Paciente,Usuario } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
 	selector: 'app-agregar-familiar',
 	templateUrl: './agregar-familiar.component.html',
 	styleUrls: ['./agregar-familiar.component.scss'],
 })
-export class AgregarFamiliarComponent implements OnInit {
-
-	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
+export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 
 	is_loading:boolean = false;
 
