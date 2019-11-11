@@ -1,13 +1,6 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-		</ion-buttons>
-		<ion-title>editar precios</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header title="editar precios"></app-header>
 
-<ion-content>
+<div class="container">
 	<div *ngIf="servicio !== null">
 		<div *ngFor="let sucursal of servicio.centro_medico">
 			<div>
@@ -32,4 +25,4 @@
 			</table>
 		</div>
 	</div>
-</ion-content>
+</div>

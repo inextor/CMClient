@@ -1,23 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-	<ion-buttons slot="start">
-		<ion-back-button></ion-back-button>
-	</ion-buttons>
-    <ion-title>Pacientes</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
+<app-header title="Pacientes"></app-header>
+<div class="container">
 	<td>
-		<ion-button slot="start" size="small" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</ion-button>
-	    
+		<button type="button" slot="start" size="small" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</button>
 	</td>
-	<ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
-	<!-- <ion-item> -->
-			<!-- <ion-searchbar></ion-searchbar> -->
-			<!-- <ion-label color="primary">Busqueda:</ion-label>
-			<ion-input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-input> -->
-		<!--ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date-->
-	<!-- </ion-item> -->
+	<input  type="text" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></input>
 	<table class="basica">
 		<thead>
 			<tr>
@@ -33,13 +19,13 @@
 				<td>{{paciente.apellidos}}</td>
 				<td>{{paciente.telefono}}</td>
 				<td>
-					<ion-button size="small" [routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">Editar</ion-button>
-					<ion-button size="small" [routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</ion-button>
-					<ion-button size="small" (click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar Cita</ion-button>
-					<ion-button size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar Familiar</ion-button>
-					<ion-button size="small" [routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary" [appAccess]="['Doctor']">Agregar Consulta</ion-button>
+					<button type="button" size="small" [routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">Editar</button>
+					<button type="button" size="small" [routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</button>
+					<button type="button" size="small" (click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar Cita</button>
+					<button type="button" size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar Familiar</button>
+					<button type="button" size="small" [routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary" [appAccess]="['Doctor']">Agregar Consulta</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-</ion-content>
+</div>

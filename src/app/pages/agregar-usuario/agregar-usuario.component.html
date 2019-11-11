@@ -1,44 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>agregar-usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header tile="Agregar Usuario"></app-header>
 
-<ion-content>
+<div class="container">
       <form>
         <ion-list lines="full" class="ion-no-margin ion-no-padding">
 
-          <ion-item>
-            <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" name="nombre" [(ngModel)]="paciente.nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label position="stacked">Apellido<ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required type="text" name="nombre" [(ngModel)]="paciente.apellidos"></ion-input>
-            </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Correo Electrónico<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text"  name="correo_electronico" [(ngModel)]="usuario.correo_electronico"></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label position="stacked">Usuario<ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required type="text" name="usuario" [(ngModel)]="usuario.usuario"></ion-input>
-            </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input placeholder="" type="password" name="contrasena" [(ngModel)]="usuario.contrasena"></ion-input>
-          </ion-item>
+          <div class="form-group">
+            <label position="stacked">Nombre<span color="danger">*</span></label>
+            <input required type="text" name="nombre" [(ngModel)]="paciente.nombre"></input>
+          </div>
+          <div class="form-group">
+              <label position="stacked">Apellido<span color="danger">*</span></label>
+              <input required type="text" name="nombre" [(ngModel)]="paciente.apellidos"></input>
+            </div>
+          <div class="form-group">
+            <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+            <input required type="text"  name="correo_electronico" [(ngModel)]="usuario.correo_electronico"></input>
+          </div>
+          <div class="form-group">
+              <label position="stacked">Usuario<span color="danger">*</span></label>
+              <input required type="text" name="usuario" [(ngModel)]="usuario.usuario"></input>
+            </div>
+          <div class="form-group">
+            <label position="stacked">Contraseña</label>
+            <input placeholder="" type="password" name="contrasena" [(ngModel)]="usuario.contrasena"></input>
+          </div>
 
-          <ion-item>
-            <ion-label position="stacked" >Confirmar contraseña</ion-label>
-            <ion-input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena"></ion-input>
-          </ion-item>
+          <div class="form-group">
+            <label position="stacked" >Confirmar contraseña</label>
+            <input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena"></input>
+          </div>
         </ion-list>
 
-		<ion-spinner *ngIf="is_loading"></ion-spinner>
+		<app-loading *ngIf="is_loading"></app-loading>
 
         <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin" (click)="registrarse()" [disabled]="is_loading">Registrarse</ion-button>
+          <button type="button" expand="block" type="submit" class="ion-no-margin" (click)="registrarse()" [disabled]="is_loading">Registrarse</button>
         </div>
       </form>
-</ion-content>
+</div>

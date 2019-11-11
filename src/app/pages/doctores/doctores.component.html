@@ -1,20 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-	<ion-buttons slot="start" *ngIf="currentUser">
-		<ion-back-button></ion-back-button>
-	</ion-buttons>
-	<ion-title>Doctores</ion-title>
-	<ion-button size="default" slot="primary" [routerLink]="['/login']" *ngIf="!currentUser">Login</ion-button>
-	<ion-buttons slot="end"></ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Doctores"></app-header>
 
-<ion-content>
-	<ion-toolbar *ngIf="currentUser" [appAccess]="['Paciente']">
-		<ion-buttons slot="start">
-			<ion-button size="small" slot="start" [routerLink]="['/mis-citas']" ><ion-icon name="arrow-round-back"></ion-icon></ion-button>
-		</ion-buttons>
-	</ion-toolbar>
+<div class="container">
+	<div *ngIf="currentUser" [appAccess]="['Paciente']">
+		<button type="button"s slot="start">
+			<button type="button" size="small" slot="start" [routerLink]="['/mis-citas']" ><ion-icon name="arrow-round-back"></ion-icon></button>
+		</buttons>
+	</div>
+
 	<table class="basica">
 		<thead>
 			<tr >
@@ -29,16 +21,16 @@
 				<td >{{doctor.nombre}}</td>
 				<td>{{doctor.especialidad}}</td>
 				<td>{{doctor.telefono}}</td>
-				<!-- <td><ion-button size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</ion-button> -->
-				<!-- <td><ion-button size="small"  [routerLink]="['/doctor',doctor.id]">Editar</ion-button><ion-button size="small" color="secondary">Citas</ion-button> -->
+				<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
+				<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
 				<td>
-					<ion-button size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</ion-button>
-					<ion-button *ngIf="currentUser" size="small" (click)="editarHorario(doctor)" [appAccess]="['Recepcionista']">Editar Horario</ion-button>
-					<ion-button *ngIf="currentUser" size="small" (click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista']">Agendar Cita</ion-button>
-					<ion-button *ngIf="currentUser" size="small" [routerLink]="['/citas','doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Citas</ion-button>
-					<ion-button *ngIf="currentUser" size="small" [routerLink]="['/editar-doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Editar Doctor</ion-button>
+					<button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</button>
+					<button type="button" *ngIf="currentUser" size="small" (click)="editarHorario(doctor)" [appAccess]="['Recepcionista']">Editar Horario</button>
+					<button type="button" *ngIf="currentUser" size="small" (click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista']">Agendar Cita</button>
+					<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/citas','doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Citas</button>
+					<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/editar-doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Editar Doctor</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-</ion-content>
+</div>

@@ -1,35 +1,35 @@
-<ion-header>
+<app-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
+      <button type="button"s slot="start">
           <ion-back-button></ion-back-button>
-        </ion-buttons>
-    <ion-title>agregar-producto</ion-title>
+        </buttons>
+    <h1>agregar-producto</h1>
   </ion-toolbar>
-</ion-header>
+</app-header>
 
-<ion-content>
+<div class="container">
     <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-    
-          <ion-item>
+        <div lines="full" class="list ion-no-margin ion-no-padding">
+
+          <div class="form-group">
             <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
             <ion-input required type="text" name="nombre" [(ngModel)]="producto.nombre"></ion-input>
-          </ion-item>
-    
-          <ion-item>
+          </div>
+
+          <div class="form-group">
             <ion-label position="stacked">Tipo<ion-text color="danger">*</ion-text></ion-label>
             <ion-input required type="text"	name="tipo" [(ngModel)]="producto.tipo"></ion-input>
-          </ion-item>
-  
-          <ion-item>
+          </div>
+
+          <div class="form-group">
             <ion-label position="stacked">Caducidad<ion-text color="danger">*</ion-text></ion-label>
             <ion-input required type="text"	name="caducidad" [(ngModel)]="producto.caducidad"></ion-input>
-          </ion-item>
-    
-        </ion-list>
-        <ion-spinner *ngIf="is_loading"></ion-spinner>
+          </div>
+
+        </div>
+        <app-loading *ngIf="is_loading"></app-loading>
         <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin"  [disabled]="is_loading">Registrarse</ion-button>
+          <button type="button" expand="block" type="submit" class="ion-no-margin"  [disabled]="is_loading">Registrarse</button>
         </div>
       </form>
-</ion-content>
+</div>

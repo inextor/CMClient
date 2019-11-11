@@ -1,32 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>usuarios</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content>
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<div>Id</div>
-			</ion-col>
-			<ion-col>
-				<div>Pacientes</div>
-			</ion-col>
-			<ion-col>
-				<div>Editar</div>
-			</ion-col>
-		</ion-row>
-		<ion-row *ngFor="let usuario of usuarios">
-			<ion-col>
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Pacientes</th>
+				<th>Editar</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let usuario of usuarios">
 				<div>Telefono</div>
-			</ion-col>
-			<ion-col>
 				<div>Correo Electrónico</div>
-			</ion-col>
-			<ion-col>
 				<div>Editar</div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
-</ion-content>
+			</tr>
+		</tbody>
+	</table>
+</div>

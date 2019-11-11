@@ -1,23 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>agregar-organizacion</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Agregar Organizacion"></app-header>
 
-<ion-content>
+<div class="container">
       <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <div lines="full" class="list ion-no-margin ion-no-padding">
 
-          <ion-item>
-            <ion-label position="stacked">Nombre Organización<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" name="nombre" [(ngModel)]="organizacion.nombre"></ion-input>
-          </ion-item>
-        </ion-list>
+          <div class="form-group">
+            <label position="stacked">Nombre Organización<span color="danger">*</span></label>
+            <input required type="text" name="nombre" [(ngModel)]="organizacion.nombre">
+          </div>
+        </div>
 
-		<ion-spinner *ngIf="is_loading"></ion-spinner>
+		<app-loading *ngIf="is_loading"></app-loading>
 
         <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Agregar</ion-button>
+          <button type="button" expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Agregar</button>
         </div>
       </form>
-</ion-content>
+</div>

@@ -1,43 +1,30 @@
-<ion-header>
-    <ion-toolbar color="blue" class="customNavBar">
-      <ion-buttons slot="start">
-        <ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        <img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-      </ion-title>
-    </ion-toolbar>
-  
-  </ion-header>
-  
-  <ion-content>
-    <div class="d-flex flex-wrap">
-      <!--MENU DE LA APLICACION-->
-      <div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-        <!-- <app-menu></app-menu> -->
-      </div>
-      <!--FIN MENU DE LA APLICACION-->
-      <!--CONTENIDO DE LA APLICACION-->
-      <div class="p-2 flex-fill flex-wrap ">
-        <ion-card>
-          <ion-toolbar>
-            <ion-title>Especialidades</ion-title>
-          </ion-toolbar>
-          <form>
-              <ion-list lines="full" class="ion-no-margin ion-no-padding">
-                <ion-item>
-                  <ion-label position="stacked">Nombre Precio<ion-text color="danger">*</ion-text></ion-label>
-                  <ion-input required type="text" name="nombre" [(ngModel)]="tipoPrecio.nombre"></ion-input>
-                </ion-item>
-              </ion-list>
-          <ion-spinner *ngIf="is_loading"></ion-spinner>
-              <div class="ion-padding">
-                <ion-button expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Agregar</ion-button>
-              </div>
-            </form>
-        </ion-card>
-      </div>
-      <!-- FIN CONTENIDO DE LA APLICACION-->
-    </div>
-  </ion-content>
+<app-header title="Especialidades"></app-header>
+
+<div class="container">
+	<div class="d-flex flex-wrap">
+		<!--MENU DE LA APLICACION-->
+		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
+			<!-- <app-menu></app-menu> -->
+		</div>
+		<!--FIN MENU DE LA APLICACION-->
+		<!--CONTENIDO DE LA APLICACION-->
+		<div class="p-2 flex-fill flex-wrap ">
+			<div class="card">
+				<form>
+					<div class="list ion-no-margin ion-no-padding">
+						<div class="form-group">
+							<label position="stacked">Nombre Precio<span color="danger">*</span></label>
+							<input required type="text" name="nombre" [(ngModel)]="tipoPrecio.nombre">
+						</div>
+					</div>
+					<app-loading *ngIf="is_loading"></app-loading>
+					<div class="ion-padding">
+						<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Agregar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- FIN CONTENIDO DE LA APLICACION-->
+	</div>
+</div>
 <!--  -->

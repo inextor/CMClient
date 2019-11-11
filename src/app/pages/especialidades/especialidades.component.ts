@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Servicio,Especialidad} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
-import { BasePage } from '../base/base.page';
+import { BasePage } from '../base/base.component';
 
 @Component({
   selector: 'app-especialidades',

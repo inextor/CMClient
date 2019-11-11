@@ -4,7 +4,7 @@ import { Usuario,Doctor,Paciente } from '../../models/Modelos';
 import { SearchCitaResponse,SearchCitaRequest } from '../../models/Respuestas';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Cita } from '../../models/Modelos';
-import { BasePage } from '../base/base.page';
+import { BasePage } from '../base/base.component';
 
 @Component({
   selector: 'app-citas',

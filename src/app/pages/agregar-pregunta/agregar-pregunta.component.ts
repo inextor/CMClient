@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage } from '../base/base.page';
+import { BasePage } from '../base/base.component';
 import { Pregunta_Historia_Clinica,Doctor} from '../../models/Modelos';
 import { forkJoin } from 'rxjs';
 

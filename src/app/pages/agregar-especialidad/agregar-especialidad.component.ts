@@ -5,8 +5,8 @@ import { Especialidad } from '../../models/Modelos';
 
 @Component({
 	selector: 'app-agregar-especialidad',
-	templateUrl: './agregar-especialidad.page.html',
-	styleUrls: ['./agregar-especialidad.page.scss'],
+	templateUrl: './agregar-especialidad.component.html',
+	styleUrls: ['./agregar-especialidad.component.css'],
 })
 export class AgregarEspecialidadPage implements OnInit {
 	is_loading:boolean	= false;
