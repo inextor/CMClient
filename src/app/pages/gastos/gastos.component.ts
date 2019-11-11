@@ -4,7 +4,7 @@ import { Usuario,Gasto_Centro_Medico,Tipo_Gasto } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
 import { Location } from '@angular/common';
 import { forkJoin } from 'rxjs';
-import { BasePage } from '../../pages/base/base.page';
+import { BasePage } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 
 @Component({
