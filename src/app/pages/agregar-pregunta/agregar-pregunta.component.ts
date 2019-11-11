@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 import { Pregunta_Historia_Clinica,Doctor} from '../../models/Modelos';
 import { forkJoin } from 'rxjs';
 
 @Component({
 	selector: 'app-agregar-pregunta',
-	templateUrl: './agregar-pregunta.page.html',
-	styleUrls: ['./agregar-pregunta.page.scss'],
+	templateUrl: './agregar-pregunta.component.html',
+	styleUrls: ['./agregar-pregunta.component.scss'],
 })
-export class AgregarPreguntaPage extends BasePage implements OnInit {
+export class AgregarPreguntaComponent extends BaseComponent implements OnInit {
 
 
 	preguntas_generales:Pregunta_Historia_Clinica[] = [];
