@@ -9,8 +9,7 @@ import { Centro_Medico } from '../../models/Modelos';
 })
 export class SeleccionarCentroMedicoHomeComponent implements OnInit {
 
-  constructor(private rest:RestService,private modalCtrl:ModalController) {
-		console.log( navParams );
+  constructor(private rest:RestService) {
 		//this.centros = navParams.get('centros');
 	}
 

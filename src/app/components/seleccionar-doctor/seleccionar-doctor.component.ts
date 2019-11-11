@@ -10,8 +10,8 @@ import { Doctor } from '../../models/Modelos';
 export class SeleccionarDoctorComponent implements OnInit {
 
 	constructor(private rest:RestService) {
-		console.log( navParams );
-		this.doctores = navParams.get('doctores');
+		// console.log( navParams );
+		// this.doctores = navParams.get('doctores');
 	}
 
 	doctores:Doctor[] = [];

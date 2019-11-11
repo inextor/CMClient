@@ -10,7 +10,7 @@ import { Paciente } from '../../models/Modelos';
 export class SeleccionarPacienteComponent implements OnInit {
 
 	constructor(private rest:RestService) {
-		console.log( navParams );
+		// console.log( navParams );
 		//this.pacientes	= navParams.get('pacientes');
 	}
 
