@@ -1,55 +1,51 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>agregar-doctor</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content>
+<div class="container">
 	<form>
-		<ion-list lines="full" class="ion-no-margin ion-no-padding">
+		<div lines="full" class="list ion-no-margin ion-no-padding">
 
 			<div *ngIf="usuario.id_imagen">
 				<img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
 			</div>
 
-			<ion-item>
+			<div class="item">
 				<input type="file" (change)="uploadImage($event)" name="image">
-			</ion-item>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-				<ion-input required type="text" name="especialidad" [(ngModel)]="doctor.nombre"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Nombre<ion-text color="danger">*</ion-text></label>
+				<input required type="text" name="especialidad" [(ngModel)]="doctor.nombre"></input>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Telefono<ion-text color="danger">*</ion-text></ion-label>
-				<ion-input required type="text"	name="telefono" [(ngModel)]="doctor.telefono"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Telefono<ion-text color="danger">*</ion-text></label>
+				<input required type="text"	name="telefono" [(ngModel)]="doctor.telefono"></input>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Correo Electrónico<ion-text color="danger">*</ion-text></ion-label>
-				<ion-input required type="text"	name="correo_electronico" [(ngModel)]="doctor.correo_electronico"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Correo Electrónico<ion-text color="danger">*</ion-text></label>
+				<input required type="text"	name="correo_electronico" [(ngModel)]="doctor.correo_electronico"></input>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Especialidad<ion-text color="danger">*</ion-text></ion-label>
-				<ion-input required type="text"	name="especialidad" [(ngModel)]="doctor.especialidad"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Especialidad<ion-text color="danger">*</ion-text></label>
+				<input required type="text"	name="especialidad" [(ngModel)]="doctor.especialidad"></input>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Usuario</ion-label>
-				<ion-input type="text" name="usuario" [(ngModel)]="usuario.usuario"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Usuario</label>
+				<input type="text" name="usuario" [(ngModel)]="usuario.usuario"></input>
+			</div>
 
-			<ion-item>
-				<ion-label position="stacked">Contraseña<ion-text color="danger"></ion-text></ion-label>
-				<ion-input type="text" name="contrasena" [(ngModel)]="usuario.contrasena"></ion-input>
-			</ion-item>
+			<div class="item">
+				<label position="stacked">Contraseña<ion-text color="danger"></ion-text></label>
+				<input type="text" name="contrasena" [(ngModel)]="usuario.contrasena"></input>
+			</div>
 
-		</ion-list>
-		<ion-spinner *ngIf="is_loading"></ion-spinner>
+		</div>
+		<app-loading [is_loading]="is_loading"></app-loading>
 		<div class="ion-padding">
-			<ion-button expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Registrarse</ion-button>
+			<button expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Registrarse</button>
 		</div>
 	</form>
-</ion-content>
+</div class="container">
