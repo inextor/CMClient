@@ -112,6 +112,7 @@ export class MisCitasComponent implements OnInit {
 
 	confirmarPaciente(id_cita:number)
 	{
+		/*
 		let alert = this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Confirmar paciente',
@@ -150,10 +151,12 @@ export class MisCitasComponent implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	cancelar(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Cancelar la cita',
@@ -196,10 +199,12 @@ export class MisCitasComponent implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	activar(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Activar la cita',
@@ -242,7 +247,9 @@ export class MisCitasComponent implements OnInit {
 			(error)=>{
 				console.log('Ocurrio un error',error);
 			});
+
 		});
+		*/
 	}
 
 }
