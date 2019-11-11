@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute,ParamMap} from "@angular/router"
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
 import { Paciente,Usuario } from '../../models/Modelos';
 
 @Component({

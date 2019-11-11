@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router";
 import { Tipo_Precio, Usuario } from '../../models/Modelos';
@@ -16,7 +15,7 @@ export class AgregarTipoPrecioComponent implements OnInit {
 		nombre: '',
 		id_organizacion: null,
   };
-  
+
   constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {

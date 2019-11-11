@@ -8,8 +8,6 @@ import {
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
-import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',

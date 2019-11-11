@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Centro_Medico } from '../../models/Modelos';
@@ -63,7 +62,7 @@ export class AgregarCentroMedicoPage implements OnInit {
 			});
 		}
 	}
-	
+
 	uploadImage(evt)
 	{
 		if( evt.target.files.length )

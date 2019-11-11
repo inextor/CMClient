@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import {Tipo_Precio} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
@@ -26,7 +25,7 @@ export class TipoPreciosPage  extends BasePage implements OnInit {
 			{
 				this.tiposPrecio = respuesta.datos;
 				console.log(this.tiposPrecio)
-				
+
 				this.setPages( this.currentPage, respuesta.total );
 			},(error)=>
 			{

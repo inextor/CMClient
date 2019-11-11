@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { NavParams } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Centro_Medico } from '../../models/Modelos';
 

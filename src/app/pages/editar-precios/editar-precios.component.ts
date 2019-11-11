@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Servicio,Precio_Servicio,} from '../../models/Modelos';
 import { ServicioResponseItem } from '../../models/Respuestas';
@@ -17,7 +16,7 @@ export class EditarPreciosComponent implements OnInit {
 	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
 	servicio:ServicioResponseItem = null;
 	is_loading:boolean = false;
-	
+
 
 	precio:Precio_Servicio = {
 		precio:null,
@@ -26,7 +25,7 @@ export class EditarPreciosComponent implements OnInit {
 
 	ngOnInit() {
 		this.rest.servicio.getAll({}).subscribe(params => {
-			
+
 		})
 
 		this.route.paramMap.subscribe( params =>{

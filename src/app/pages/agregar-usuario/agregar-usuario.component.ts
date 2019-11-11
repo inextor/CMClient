@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Usuario , Paciente } from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
@@ -49,7 +48,7 @@ export class AgregarUsuarioComponent implements OnInit {
 
 	registrarse()
 	{
-	
+
 		this.is_loading = true;
 		this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
 		{

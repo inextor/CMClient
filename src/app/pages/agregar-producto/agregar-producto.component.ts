@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Usuario } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"
@@ -18,12 +17,12 @@ export class AgregarProductoComponent implements OnInit {
 // 		'nombre':'',
 // 		'tipo':'',
 //     'caducidad':''
-    
+
 //   };
-  
+
   ngOnInit() {
   }
- 
+
 	async showError(message:string)
 	{
 		const alert = await this.alertController.create

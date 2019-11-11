@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { SearchPacienteResponse,SearchPacienteRequest } from '../../models/Respuestas';
 import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos';
@@ -48,8 +46,8 @@ export class PacientesComponent implements OnInit {
 		{
 			this.rest.doctor.get( usuario.id ).subscribe(doctor=> this.doctor = doctor);
 		}
-		
-	
+
+
 
 		if( usuario )
 		{

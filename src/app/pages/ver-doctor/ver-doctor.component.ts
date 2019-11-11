@@ -3,7 +3,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CitasService } from 'src/app/services/citas.service';
-import { AlertController } from '@ionic/angular';
 import { Usuario, Doctor } from '../../models/Modelos';
 import { RestService } from '../../services/rest.service';
 import {Router, ActivatedRoute} from '@angular/router';

@@ -6,14 +6,12 @@ import { catchError } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso} from '../models/Respuestas';
 import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
-import { ModalController } from '@ionic/angular';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
 import {ObjRest} from './ObjRest';
 import {SearchRest} from './SearchRest';
 import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models/Respuestas';
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
-import { MenuController } from '@ionic/angular';
 import {   Centro_Medico, Cita,
 Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
 Detalle_Venta, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,

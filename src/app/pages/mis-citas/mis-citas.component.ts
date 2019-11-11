@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Doctor,Paciente } from '../../models/Modelos';
 import { SearchCitaResponse } from '../../models/Respuestas';

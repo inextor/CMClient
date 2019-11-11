@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Servicio,Especialidad} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
@@ -29,7 +28,7 @@ especialidades:Especialidad[]=[];
 			{
 				this.especialidades = respuesta.datos;
 				console.log(this.especialidades)
-				
+
 				this.setPages( this.currentPage, respuesta.total );
 			},(error)=>
 			{
