@@ -71,8 +71,9 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			},
 			(error)=>
 			{
-				this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
+				console.log("error")
+				// this.showError( this.rest.getErrorMessage( error ) );
+				// this.is_loading = false;
 			});
 
 		}
@@ -86,8 +87,9 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			},
 			(error)=>
 			{
-				this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
+				console.log("error")
+				// this.showError( this.rest.getErrorMessage( error ) );
+				// this.is_loading = false;
 			});
 		}
 	}
@@ -104,18 +106,18 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	}
 
 
-	/*
-	async showError(message:string)
-	{
-		const alert = await this.alertController.create
-		({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
+	
+	// async showError(message:string)
+	// {
+	// 	const alert = await this.alertController.create
+	// 	({
+	// 		header: 'Error',
+	// 		//subHeader: 'Subtitle',
+	// 		message: message,
+	// 		buttons: ['OK']
+	// 	});
 
-		await alert.present();
-	}
-	*/
+	// 	await alert.present();
+	// }
+	
 }
