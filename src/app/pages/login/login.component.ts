@@ -18,8 +18,7 @@ export class LoginComponent implements implements OnInit, AfterContentInit, Afte
 	constructor(
 		private rest: RestService,
 		private router: Router,
-		private route: ActivatedRoute,
-		public menuCtrl: MenuController
+		private route: ActivatedRoute
 	) {
 		if(this.rest.currentUserValue){
 			this.router.navigate(['/'])
@@ -27,20 +26,20 @@ export class LoginComponent implements implements OnInit, AfterContentInit, Afte
 	}
 
 	ngOnInit() {
-		this.menuCtrl.enable(false);
-		this.menuCtrl.swipeEnable(false);
+		//this.menuCtrl.enable(false);
+		//this.menuCtrl.swipeEnable(false);
 	}
 	ngAfterContentInit() {
-		this.menuCtrl.enable(true);
-		this.menuCtrl.swipeEnable(true);
+		//this.menuCtrl.enable(true);
+		//this.menuCtrl.swipeEnable(true);
 	}
 	ngAfterViewInit() {
-		this.menuCtrl.enable(false);
-		this.menuCtrl.swipeEnable(false);
+		//this.menuCtrl.enable(false);
+		//this.menuCtrl.swipeEnable(false);
 	}
 	ngOnDestroy() {
-		this.menuCtrl.enable(true);
-		this.menuCtrl.swipeEnable(true);
+		//this.menuCtrl.enable(true);
+		//this.menuCtrl.swipeEnable(true);
 	}
 
 	usuario: string = '';

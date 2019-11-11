@@ -6,7 +6,7 @@ import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-c
 import { PreguntasHistoriaClinicaResponse } from '../../models/Respuestas';
 import { switchMap,catchError } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 import { RespuestaPreguntaHistoriaClinica } from '../../models/Respuestas';
 import { Respuesta } from '../../models/Respuestas';
 import { Respuesta_Historia_Clinica } from '../../models/Modelos';
@@ -16,7 +16,7 @@ import { Respuesta_Historia_Clinica } from '../../models/Modelos';
   templateUrl: './llenar-historia-clinica.component.html',
   styleUrls: ['./llenar-historia-clinica.component.css']
 })
-export class LlenarHistoriaClinicaComponent  extends BasePage implements OnInit {
+export class LlenarHistoriaClinicaComponent  extends BaseComponent implements OnInit {
 
 	preguntas:RespuestaPreguntaHistoriaClinica[] = [];
 	doctor:Doctor = {};

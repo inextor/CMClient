@@ -16,7 +16,6 @@ export class PacientesComponent implements OnInit {
 		private rest:RestService,
 		private router:Router,
 		private route:ActivatedRoute,
-    	public modalController: ModalController
 	) { }
 
 	pacientes:Paciente[] = [];
@@ -91,6 +90,7 @@ export class PacientesComponent implements OnInit {
 			}
 			else
 			{
+				/*
 				this.modalController.create({
 					component: SeleccionarDoctorComponent,
 					componentProps: {
@@ -115,6 +115,7 @@ export class PacientesComponent implements OnInit {
 						console.error( 'error',error );
 					});
 				});
+				*/
 			}
 		});
 
