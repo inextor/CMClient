@@ -1,1 +1,80 @@
-<p>citas works!</p>
+<ion-header>
+  <ion-toolbar>
+	<ion-buttons slot="start">
+		<ion-back-button></ion-back-button>
+	</ion-buttons>
+	<ion-title>Citas {{paciente.nombre}} {{doctor.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+	<!-- <ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
+	<ion-item>
+		<ion-label color="primary">Busqueda:</ion-label>
+		<ion-input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-input>
+		ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date
+	</ion-item> -->
+	
+	<div *ngIf="is_loading">
+		<div class="spinner-border" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+	<ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
+	<ion-segment (ionChange)="segmentChanged($event)">
+			<ion-segment-button href="#dogs" value="dogs">
+			  <ion-label>Pendientes</ion-label>
+			</ion-segment-button>
+			<ion-segment-button href="#cats" value="cats">
+			  <ion-label>Cats</ion-label>
+			</ion-segment-button>
+	</ion-segment>
+	<table class="basica">
+		<thead>
+			<tr>
+				<th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}" (click)="ordenar('Fecha')">Fecha</th>
+				<th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}" (click)="ordenar('Paciente')">Paciente</th>
+				<th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}" (click)="ordenar('Doctor')">Doctor</th>
+				<th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}" (click)="ordenar('Especialidad')">Especialidad</th>
+				<th >Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+					<td>{{i.cita.inicio| date: 'short' }}</td>
+					<td>{{i.paciente.nombre}}</td>
+					<td>{{i.doctor? i.doctor.nombre : ''}}</td>
+					<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
+					<td>
+						<ion-button  size="small" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'" (click)="confirmarPaciente(i.cita.id)">
+							<ion-icon slot="icon-only" name="person"></ion-icon>
+						</ion-button>
+						<ion-button  size="small" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'" (click)="confirmarDoctor(i.cita.id)">
+							<ion-icon slot="icon-only" name="people"></ion-icon>
+						</ion-button>
+						<ion-button  size="small" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="cancelar(i.cita.id)">
+							<ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+						</ion-button>
+						<ion-button  size="small" *ngIf="i.cita.estatus == 'CANCELADA'" (click)="activar(i.cita.id)">
+							<ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+						</ion-button>
+						<ion-button  size="small" [routerLink]="['/agregar-centro-medico',i.cita.id]">
+							<ion-icon slot="icon-only" name="create"></ion-icon>
+						</ion-button>
+					</td>
+				</tr>
+		</tbody>
+	</table>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
