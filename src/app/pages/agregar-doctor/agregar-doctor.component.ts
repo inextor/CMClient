@@ -11,9 +11,9 @@ import { BasePage } from '../base/base.page';
 	templateUrl: './agregar-doctor.page.html',
 	styleUrls: ['./agregar-doctor.page.scss'],
 })
-export class AgregarDoctorPage extends BasePage implements OnInit {
+export class AgregarDoctorComponent extends BasePage implements OnInit {
 
-
+	
 	doctor:Doctor = {
 		'nombre':'',
 		'especialidad':'',

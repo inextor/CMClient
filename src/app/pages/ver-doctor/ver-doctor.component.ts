@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import TimeGrid from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import { CitasService } from 'src/app/services/citas.service';
-import { Usuario, Doctor } from '../../models/Modelos';
-import { RestService } from '../../services/rest.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import TimeGrid from '@fullcalendar/timegrid';
+import { CitasService } from 'src/app/services/citas.service';
+import { RestService } from '../../services/rest.service';
 
 
 @Component({
@@ -20,7 +19,6 @@ export class VerDoctorComponent implements OnInit {
 		private router: Router,
 		private rest:RestService,
 		private citasService:CitasService,
-		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute )
 	{ }
 
@@ -89,32 +87,32 @@ export class VerDoctorComponent implements OnInit {
 
 	async presentAlertConfirm() {
 		const currentUser = this.rest.currentUserValue;
-		const alert = await this.alertController.create({
-			header: 'Confirmacion',
-			message: 'La fecha es <strong>correcta</strong>?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role: 'cancel',
-					cssClass: 'secondary',
-					handler: (blah) => {
-						return
-					}
-				}, {
-					text: 'Aceptar',
-					handler: () => {
-						if(currentUser){
-							console.log('ENVIANDO HORARIO');
-							this.router.navigate(['mis-citas'])
-						}else{
-							this.router.navigate(['login'])
-						}
-					}
-				}
-			]
-		});
+		// const alert = await this.alertController.create({
+		// 	header: 'Confirmacion',
+		// 	message: 'La fecha es <strong>correcta</strong>?',
+		// 	buttons: [
+		// 		{
+		// 			text: 'Cancelar',
+		// 			role: 'cancel',
+		// 			cssClass: 'secondary',
+		// 			handler: (blah) => {
+		// 				return
+		// 			}
+		// 		}, {
+		// 			text: 'Aceptar',
+		// 			handler: () => {
+		// 				if(currentUser){
+		// 					console.log('ENVIANDO HORARIO');
+		// 					this.router.navigate(['mis-citas'])
+		// 				}else{
+		// 					this.router.navigate(['login'])
+		// 				}
+		// 			}
+		// 		}
+		// 	]
+		// });
 
-		await alert.present();
+		// await alert.present();
 	}
 
 	addEvent(event){

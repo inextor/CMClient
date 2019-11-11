@@ -1,16 +1,4 @@
-<ion-header>
-		<ion-toolbar color="blue" class="customNavBar">
-			<ion-buttons slot="start">
-				<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-			</ion-buttons>
-			<ion-title>
-				<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-			</ion-title>
-		</ion-toolbar>
-	
-	</ion-header>
-	
-	<ion-content>
+
 		<div class="d-flex flex-wrap">
 			<!--MENU DE LA APLICACION-->
 			<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -19,7 +7,7 @@
 			<!--FIN MENU DE LA APLICACION-->
 			<!--CONTENIDO DE LA APLICACION-->
 			<div class="p-2 flex-fill flex-wrap ">
-				<ion-card>
+				<mat-card>
 					<ion-toolbar>
 						<ion-title>Especialidades</ion-title>
 					</ion-toolbar>
@@ -43,9 +31,8 @@
 								<ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
 							</div>
 						</form>
-				</ion-card>
+				</mat-card>
 			</div>
 			<!-- FIN CONTENIDO DE LA APLICACION-->
 		</div>
-	</ion-content>
 

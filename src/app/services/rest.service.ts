@@ -77,7 +77,7 @@ export class RestService {
 	venta:ObjRest<Venta>;
 
 
-	constructor(private http: HttpClient, public menuCtrl: MenuController,)
+	constructor(private http: HttpClient)
 	{
 		//Produccion por cambiarx`x
 		this.urlBase = 'http://';
