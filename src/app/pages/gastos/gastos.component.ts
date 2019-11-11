@@ -4,7 +4,7 @@ import { Usuario,Gasto_Centro_Medico,Tipo_Gasto } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
 import { Location } from '@angular/common';
 import { forkJoin } from 'rxjs';
-import { BasePage } from '../../pages/base/base.component';
+import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 
 @Component({
@@ -12,7 +12,7 @@ import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 	templateUrl: './gastos.page.html',
 	styleUrls: ['./gastos.page.scss'],
 })
-export class GastosComponent extends BasePage implements OnInit {
+export class GastosComponent extends BaseComponent implements OnInit {
 
 
 	tipos_gasto:Tipo_Gasto[] = [];

@@ -4,14 +4,14 @@ import { Usuario,Doctor,Paciente } from '../../models/Modelos';
 import { SearchCitaResponse,SearchCitaRequest } from '../../models/Respuestas';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Cita } from '../../models/Modelos';
-import { BasePage } from '../base/base.component';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
   styleUrls: ['./citas.component.css']
 })
-export class CitasComponent extends BasePage implements OnInit {
+export class CitasComponent extends BaseComponent implements OnInit {
 
 	cita:Cita = {};
 	info_citas:SearchCitaResponse[] = [];
@@ -120,6 +120,7 @@ export class CitasComponent extends BasePage implements OnInit {
 
 	confirmarDoctor(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Confirmar doctor',
@@ -161,10 +162,12 @@ export class CitasComponent extends BasePage implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	confirmarPaciente(id_cita:number)
 	{
+		/*
 		let alert = this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Confirmar paciente',
@@ -203,10 +206,12 @@ export class CitasComponent extends BasePage implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	cancelar(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Cancelar la cita',
@@ -249,10 +254,12 @@ export class CitasComponent extends BasePage implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	activar(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Activar la cita',
@@ -296,6 +303,7 @@ export class CitasComponent extends BasePage implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 
