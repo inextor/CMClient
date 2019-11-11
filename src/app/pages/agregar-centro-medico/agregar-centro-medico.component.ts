@@ -17,7 +17,7 @@ export class AgregarCentroMedicoPage implements OnInit {
 	centro_medico:Centro_Medico = {
 		nombre: ''
 	};
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 	ngOnInit() {
 		this.centro_medico = {

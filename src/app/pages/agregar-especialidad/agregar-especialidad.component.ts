@@ -15,7 +15,7 @@ export class AgregarEspecialidadPage implements OnInit {
 		nombre: '',
 		abreviacion: ''
 	};
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 	ngOnInit() {
 		this.especialidad = {

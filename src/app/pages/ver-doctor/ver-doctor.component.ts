@@ -20,7 +20,6 @@ export class VerDoctorComponent implements OnInit {
 		private router: Router,
 		private rest:RestService,
 		private citasService:CitasService,
-		private alertController: AlertController,
 		private activatedRoute: ActivatedRoute )
 	{ }
 
@@ -89,6 +88,7 @@ export class VerDoctorComponent implements OnInit {
 
 	async presentAlertConfirm() {
 		const currentUser = this.rest.currentUserValue;
+		/*
 		const alert = await this.alertController.create({
 			header: 'Confirmacion',
 			message: 'La fecha es <strong>correcta</strong>?',
@@ -115,6 +115,7 @@ export class VerDoctorComponent implements OnInit {
 		});
 
 		await alert.present();
+		*/
 	}
 
 	addEvent(event){

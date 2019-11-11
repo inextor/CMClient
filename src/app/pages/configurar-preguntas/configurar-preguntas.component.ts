@@ -14,7 +14,7 @@ import { Especialidad_Pregunta_Accion } from '../../models/Respuestas';
 })
 export class ConfigurarPreguntasComponent implements OnInit {
 
-	constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 
 	preguntas:Pregunta_Historia_Clinica[] = []; //All the questions

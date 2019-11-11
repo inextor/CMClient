@@ -10,7 +10,7 @@ import { Router,ActivatedRoute} from "@angular/router"
 })
 export class AgregarProductoComponent implements OnInit {
 
-  constructor(private rest:RestService,public alertController: AlertController,private router:Router,private route:ActivatedRoute) { }
+  constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
   is_loading:boolean = false;
 
 // 	producto: Producto = {
@@ -22,7 +22,7 @@ export class AgregarProductoComponent implements OnInit {
 
   ngOnInit() {
   }
-
+/*
 	async showError(message:string)
 	{
 		const alert = await this.alertController.create
@@ -35,5 +35,6 @@ export class AgregarProductoComponent implements OnInit {
 
 		await alert.present();
 	}
+	*/
 
 }

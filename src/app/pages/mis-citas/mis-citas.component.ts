@@ -13,7 +13,6 @@ export class MisCitasComponent implements OnInit {
 
   constructor(
 		private rest:RestService,
-		public alertController:AlertController,
 		private router:Router,
 		private route:ActivatedRoute,
 	) { }
@@ -66,6 +65,7 @@ export class MisCitasComponent implements OnInit {
 
 	confirmarDoctor(id_cita:number)
 	{
+		/*
 		this.alertController.create({
 			header: 'Alerta',
 			subHeader: 'Confirmar doctor',
@@ -107,6 +107,7 @@ export class MisCitasComponent implements OnInit {
 				console.log('Ocurrio un error',error);
 			});
 		});
+		*/
 	}
 
 	confirmarPaciente(id_cita:number)
