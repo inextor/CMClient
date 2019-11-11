@@ -1,1 +1,45 @@
-<p>pacientes works!</p>
+<ion-header>
+  <ion-toolbar>
+	<ion-buttons slot="start">
+		<ion-back-button></ion-back-button>
+	</ion-buttons>
+    <ion-title>Pacientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+	<td>
+		<ion-button slot="start" size="small" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</ion-button>
+	    
+	</td>
+	<ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
+	<!-- <ion-item> -->
+			<!-- <ion-searchbar></ion-searchbar> -->
+			<!-- <ion-label color="primary">Busqueda:</ion-label>
+			<ion-input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-input> -->
+		<!--ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date-->
+	<!-- </ion-item> -->
+	<table class="basica">
+		<thead>
+			<tr>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Telefono</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let paciente of pacientes">
+				<td>{{paciente.nombre}}</td>
+				<td>{{paciente.apellidos}}</td>
+				<td>{{paciente.telefono}}</td>
+				<td>
+					<ion-button size="small" [routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">Editar</ion-button>
+					<ion-button size="small" [routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</ion-button>
+					<ion-button size="small" (click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar Cita</ion-button>
+					<ion-button size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar Familiar</ion-button>
+					<ion-button size="small" [routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary" [appAccess]="['Doctor']">Agregar Consulta</ion-button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</ion-content>
