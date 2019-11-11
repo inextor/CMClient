@@ -1,16 +1,7 @@
-<ion-header>
-		<ion-toolbar color="blue" class="customNavBar">
-			<ion-buttons slot="start">
-				<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-			</ion-buttons>
-			<ion-title>
-				<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-			</ion-title>
-		</ion-toolbar>
-	
-	</ion-header>
-	
-	<ion-content>
+<app-header title="Especialidades"></app-header>
+
+	<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+	<div class="container">
 		<div class="d-flex flex-wrap">
 			<!--MENU DE LA APLICACION-->
 			<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -19,33 +10,30 @@
 			<!--FIN MENU DE LA APLICACION-->
 			<!--CONTENIDO DE LA APLICACION-->
 			<div class="p-2 flex-fill flex-wrap ">
-				<ion-card>
-					<ion-toolbar>
-						<ion-title>Especialidades</ion-title>
-					</ion-toolbar>
+				<div class="card">
 					<form>
-							<ion-list lines="full" class="ion-no-margin ion-no-padding">
+							<div lines="full" class="list ion-no-margin ion-no-padding">
 								<div *ngIf="centro_medico.id_imagen">
 									<img [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen">
 								</div>
-								<ion-item>
+								<div class="form-group">
 									<input type="file" (change)="uploadImage($event)" name="image">
-								</ion-item>
-								<ion-item>
-									<ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-									<ion-input required type="text" name="nombre" [(ngModel)]="centro_medico.nombre"></ion-input>
-								</ion-item>
-							</ion-list>
-					
-							<ion-spinner *ngIf="is_loading"></ion-spinner>
-					
+								</div>
+								<div class="form-group">
+									<label position="stacked">Nombre<span color="danger">*</span></label>
+									<input type="text" required type="text" name="nombre" [(ngModel)]="centro_medico.nombre">
+								</div>
+							</div>
+
+							<app-loading *ngIf="is_loading"></app-loading>
+
 							<div class="ion-padding">
-								<ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
+								<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 							</div>
 						</form>
-				</ion-card>
+				</div>
 			</div>
 			<!-- FIN CONTENIDO DE LA APLICACION-->
 		</div>
-	</ion-content>
+	</div>
 

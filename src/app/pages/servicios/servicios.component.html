@@ -1,16 +1,8 @@
-<ion-header>
-		<ion-toolbar color="blue" class="customNavBar">
-			<ion-buttons slot="start">
-				<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-			</ion-buttons>
-			<ion-title>
-				<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-			</ion-title>
-		</ion-toolbar>
-	
-	</ion-header>
-	
-	<ion-content>
+<app-header>
+	<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+</app-header>
+
+	<div class="container">
 		<div class="d-flex flex-wrap">
 			<!--MENU DE LA APLICACION-->
 			<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -19,40 +11,36 @@
 			<!--FIN MENU DE LA APLICACION-->
 			<!--CONTENIDO DE LA APLICACION-->
 			<div class="p-2 flex-fill flex-wrap ">
-				<ion-card>
-					<ion-toolbar>
-						<ion-title>Productos y servicios</ion-title>
-					</ion-toolbar>
-					<td>
-							<ion-button slot="start" size="small" [routerLink]="['/agregar-producto']">Agregar producto</ion-button>
-						</td>
-						<table class="basica">
-								<thead>
-									<tr>
-										<th>Nombre</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr *ngFor="let servicio of servicios">
-										<td>{{servicio.servicio.nombre}}</td>
-										<!-- 	" -->
-										<td>
-											<ion-button size="small" [routerLink]="['/editar-producto',servicio.servicio.id]">
-												<ion-icon name="create"></ion-icon>
-											</ion-button>
-											<ion-button size="small" [routerLink]="['/editar-precios',servicio.servicio.id]">
-												<ion-icon name="cash"></ion-icon>
-											</ion-button>
-											<ion-button size="small" [routerLink]="['/inventario']">
-												<ion-icon name="cube"></ion-icon>
-											</ion-button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-				</ion-card>
+				<div class="card">
+					<h1>Productos y servicios</h1>
+					<button type="button" slot="start" size="small" [routerLink]="['/agregar-producto']">Agregar producto</button>
+					<table class="basica">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let servicio of servicios">
+								<td>{{servicio.servicio.nombre}}</td>
+								<!-- 	" -->
+								<td>
+									<button type="button" size="small" [routerLink]="['/editar-producto',servicio.servicio.id]">
+										<ion-icon name="create"></ion-icon>
+									</button>
+									<button type="button" size="small" [routerLink]="['/editar-precios',servicio.servicio.id]">
+										<ion-icon name="cash"></ion-icon>
+									</button>
+									<button type="button" size="small" [routerLink]="['/inventario']">
+										<ion-icon name="cube"></ion-icon>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<!-- FIN CONTENIDO DE LA APLICACION-->
 		</div>
-	</ion-content>
+	</div>

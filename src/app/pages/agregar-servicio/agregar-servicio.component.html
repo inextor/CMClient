@@ -1,10 +1,6 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>agregar-servicio</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header title="Agregar Servicio"></app-header>
 
-<ion-content>
+<div class="container">
 	<form>
 		<input type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">
 		<select name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
@@ -28,4 +24,4 @@
 	<div>
 		<button type="button" class="btn btn-primary" [disabled]="is_loading" (click)="guardar()">Guardar</button>
 	</div>
-</ion-content>
+</div>

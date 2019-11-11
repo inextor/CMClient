@@ -1,21 +1,21 @@
-<ion-header>
+<app-header>
   <ion-toolbar>
-    <ion-title>agregar-tipo-gasto</ion-title>
+    <h1>agregar-tipo-gasto</h1>
   </ion-toolbar>
-</ion-header>
+</app-header>
 
-<ion-content>
+<div class="container">
 
 	<ion-list lines="full" class="ion-no-margin ion-no-padding">
-		<ion-item>
-			<ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
+		<div class="form-group"
+			<label position="stacked">Nombre<span color="danger">*</span></label>
 			<ion-input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre"></ion-input>
-		</ion-item>
+		</div>
 	</ion-list>
 
-	<ion-spinner *ngIf="is_loading"></ion-spinner>
+	<app-loading *ngIf="is_loading"></app-loading>
 
 	<div class="ion-padding">
-		<ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
+		<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 	</div>
-</ion-content>
+</div>

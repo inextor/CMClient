@@ -1,16 +1,7 @@
-<ion-header>
-	<ion-toolbar color="blue" class="customNavBar">
-		<ion-buttons slot="start">
-			<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-		</ion-buttons>
-		<ion-title>
-			<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-		</ion-title>
-	</ion-toolbar>
+<app-header title="Especialidades"></app-header>
 
-</ion-header>
-
-<ion-content>
+<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+<div class="container">
 	<div class="d-flex flex-wrap">
 		<!--MENU DE LA APLICACION-->
 		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -19,13 +10,9 @@
 		<!--FIN MENU DE LA APLICACION-->
 		<!--CONTENIDO DE LA APLICACION-->
 		<div class="p-2 flex-fill flex-wrap ">
-			<ion-card>
-				<ion-toolbar>
-					<ion-title>Especialidades</ion-title>
-				</ion-toolbar>
+			<div class="card">
 				<td class="generalButton">
-					<ion-button size="small" [routerLink]="['/agregar-especialidad']">Agregar especialidad
-					</ion-button>
+					<button type="button" size="small" [routerLink]="['/agregar-especialidad']">Agregar especialidad</button>
 				</td>
 				<table class="basica ">
 					<thead>
@@ -39,12 +26,12 @@
 							<td>{{especialidad.nombre}}</td>
 							<!-- 	" -->
 							<td>
-								<ion-button size="small" [routerLink]="['/editar-especialidad',especialidad.id]">
+								<button type="button" size="small" [routerLink]="['/editar-especialidad',especialidad.id]">
 									<ion-icon name="create"></ion-icon>
-								</ion-button>
-								<ion-button size="small" [routerLink]="['/configurar-especialidad',especialidad.id]">
+								</button>
+								<button type="button" size="small" [routerLink]="['/configurar-especialidad',especialidad.id]">
 									<ion-icon name="construct"></ion-icon>
-								</ion-button>
+								</button>
 							</td>
 						</tr>
 					</tbody>
@@ -71,8 +58,8 @@
 							[routerLink]="['/especialidades',this.totalPages-1]">&gt;&gt;</button>
 					</div>
 				</div>
-			</ion-card>
+			</div>
 		</div>
 		<!-- FIN CONTENIDO DE LA APLICACION-->
 	</div>
-</ion-content>
+</div>

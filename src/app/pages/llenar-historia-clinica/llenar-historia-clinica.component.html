@@ -1,9 +1,5 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>llenar-historia-clinica</ion-title>
-	</ion-toolbar>
-</ion-header>
-<ion-content>
+<app-header title="llena Histori Clinica"></app-header>
+<div class="container">
 	<app-loading [display]="is_loading"></app-loading>
 	<div class="container">
 		<div *ngIf="msgError" class="alert alert-danger" role="alert">{{msgError}}</div>
@@ -21,34 +17,27 @@
 			<div>
 				<div *ngFor="let p of preguntas;let i = index;">
 					<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
-						<ion-radio-group>
-							<ion-list-header>
-								<ion-label>{{p.pregunta.pregunta}}</ion-label>
-							</ion-list-header>
-							<ion-item>
-								<ion-label>SI</ion-label>
-								<ion-radio slot="start" value="SI"
-									[(ngModel)]="preguntas[i].respuesta.respuesta_binaria"></ion-radio>
-							</ion-item>
-							<ion-item>
-								<ion-label>NO</ion-label>
-								<ion-radio slot="start" value="NO"
-									[(ngModel)]="preguntas[i].respuesta.respuesta_binaria"></ion-radio>
-							</ion-item>
-							<ion-item>
-								<ion-label>OTRO</ion-label>
-								<ion-radio slot="start" value="OTRO"
-									[(ngModel)]="preguntas[i].respuesta.respuesta_binaria"></ion-radio>
-							</ion-item>
-						</ion-radio-group>
+						<label>{{p.pregunta.pregunta}}</label>
+						<div class="form-group">
+							<label>SI</label>
+							<input type="radio" value="SI"
+								[(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+						</div>
+						<div class="form-group">
+							<label>NO</label>
+							<input type="radio" value="NO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+						</div>
+						<div class="form-group">
+							<label>OTRO</label>
+							<input type="radio" value="OTRO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+						</div>
 					</div>
-					<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta"
-						[(ngModel)]="preguntas[i].respuesta.respuesta">
+					<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta" [(ngModel)]="preguntas[i].respuesta.respuesta">
 				</div>
 				<div>
-					<ion-button (click)="guardar()">Guardar</ion-button>
+					<button type="button" (click)="guardar()">Guardar</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</ion-content>
+</div>
