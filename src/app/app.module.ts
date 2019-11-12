@@ -61,6 +61,8 @@ import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-c
 import { SeleccionarDoctorComponent } from './components/seleccionar-doctor/seleccionar-doctor.component';
 import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/seleccionar-paciente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -117,7 +119,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SeleccionarCentroMedicoComponent,
     SeleccionarCentroMedicoHomeComponent,
     SeleccionarDoctorComponent,
-    SeleccionarPacienteComponent
+    SeleccionarPacienteComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
