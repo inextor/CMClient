@@ -1,6 +1,6 @@
 <app-header title="Especialidades"></app-header>
 
-<div class="container">
+<div class="container mt-3 p-3">
 	<h1>Especialidades</h1>
 	<div class="d-flex flex-wrap">
 		<!--MENU DE LA APLICACION-->
@@ -23,9 +23,10 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let especialidad of especialidades">
-							<td>{{especialidad.nombre}}</td>
+							<td><div>{{especialidad.nombre}}</div></td>
 							<!-- 	" -->
 							<td class="acciones">
+
 								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/editar-especialidad',especialidad.id]">
 									<!--icon name="create"></ion-icon-->
 									<i class="material-icons">create</i>
@@ -37,6 +38,7 @@
 									<i class="material-icons">settings</i>
 
 								</button>
+
 							</td>
 						</tr>
 					</tbody>

@@ -15,13 +15,13 @@ table.basica,.basica td,.basica th{
 }
 
 .basica td, .basica th {
-    border-width: 0 1px 1px 0;
+    border-width: 0;
     line-height: 1.5;
     padding: 5px;
     text-align: left;
 }
 table.basica {
-    border-width: 1px 0 0 1px;
+    border-width: 0;
     font-size: 13px;
     margin: 1em 0;
     overflow-x: auto;
@@ -29,10 +29,39 @@ table.basica {
 	font-family: 'Lato',"Helvetica Neue",sans-serif;
 	color: #000000;
   background-color: white;
+  border: 2px white solid;
 }
 
+.basica thead tr{
+  background-color: #3684C1;
+  color: white;
+}
 .basica thead {
     display: table-header-group;
     vertical-align: middle;
     border-color: inherit;
+}
+.basica thead th
+{
+  border: 5px solid white;
+  color: white;
+  margin: 0 10px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.basica tr:nth-child(odd) td
+{
+  background-color: #F3F3F3;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  padding: 10px;
+}
+.basica tr:nth-child(even) td
+{
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+    padding: 10px;
 }
