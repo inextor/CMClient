@@ -65,3 +65,8 @@ table.basica {
   border-right: 5px solid white;
     padding: 10px;
 }
+
+app-header+div
+{
+	margin-top: 60px;
+}

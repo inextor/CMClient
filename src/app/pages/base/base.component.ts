@@ -4,6 +4,7 @@ import { Usuario,Tipo_Gasto } from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { HeaderComponent } from '../../components/header/header.component';
 
 
 
