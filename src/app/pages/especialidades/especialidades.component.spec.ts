@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EspecialidadesComponent } from './especialidades.component';
 
+import { from } from 'rxjs';
 describe('EspecialidadesComponent', () => {
   let component: EspecialidadesComponent;
   let fixture: ComponentFixture<EspecialidadesComponent>;

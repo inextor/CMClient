@@ -3,7 +3,7 @@ import { RestService } from '../../services/rest.service';
 import { Usuario,Servicio,Especialidad} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
-
+import { HeaderComponent } from "../../components/header/header.component";
 @Component({
   selector: 'app-especialidades',
   templateUrl: './especialidades.component.html',

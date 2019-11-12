@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../../pages/base/base.component'
 
 @Component({
@@ -7,7 +7,7 @@ import { BaseComponent } from '../../pages/base/base.component'
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
-
+@Input() pagina:string;
   ngOnInit() {
       let usuario = this.rest.getUsuarioSesion();
   }
