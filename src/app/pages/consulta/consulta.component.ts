@@ -11,7 +11,7 @@ import { Route } from '@angular/compiler/src/core';
 })
 export class ConsultaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rest :RestService, private route: Route, private paramMap:ParamMap) { }
 
   ngOnInit() {
     let usuario = this.rest.getUsuarioSesion();
@@ -25,6 +25,6 @@ export class ConsultaComponent implements OnInit {
     
     });
   
-  }
+  }s
 
 }
