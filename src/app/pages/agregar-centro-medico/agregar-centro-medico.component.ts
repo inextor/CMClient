@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Centro_Medico } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
 
 
 
@@ -10,16 +11,16 @@ import { Centro_Medico } from '../../models/Modelos';
 	templateUrl: './agregar-centro-medico.component.html',
 	styleUrls: ['./agregar-centro-medico.component.css'],
 })
-export class AgregarCentroMedicoComponent implements OnInit {
+export class AgregarCentroMedicoComponent extends BaseComponent implements OnInit {
 
 	is_loading:boolean  = false;
 
 	centro_medico:Centro_Medico = {
 		nombre: ''
 	};
-	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
-	ngOnInit() {
+	ngOnInit()
+	{
 		this.centro_medico = {
 			id: null,
 			nombre:''
@@ -73,5 +74,4 @@ export class AgregarCentroMedicoComponent implements OnInit {
 			});
 		}
 	}
-
 }

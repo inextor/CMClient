@@ -60,6 +60,7 @@ import { SeleccionarCentroMedicoComponent } from './components/seleccionar-centr
 import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
 import { SeleccionarDoctorComponent } from './components/seleccionar-doctor/seleccionar-doctor.component';
 import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/seleccionar-paciente.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/
     SeleccionarCentroMedicoComponent,
     SeleccionarCentroMedicoHomeComponent,
     SeleccionarDoctorComponent,
-    SeleccionarPacienteComponent
+    SeleccionarPacienteComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
