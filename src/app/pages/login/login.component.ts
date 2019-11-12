@@ -14,7 +14,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+
+export class LoginComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
 	constructor(
 		private rest: RestService,
 		private router: Router,
