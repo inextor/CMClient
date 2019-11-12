@@ -1,80 +1,86 @@
 <!-- NAVBAR -->
-<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-<!-- FIN NAVBAR -->
-<div class="d-flex flex-wrap">
-	<!-- MENU -->
-	<div class="pt-2 flex-wrap">
-		<app-menu></app-menu>
+<div class="page">
+	<div>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
 	</div>
-	<!-- FIN MENU -->
-	<!-- CONTENIDO -->
-	<div class="p-2 flex-fill flex-wrap ">
-		<div class="card p-3">
-			<h1>Especialidades</h1>
-			<td>
-				<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
-					Agregar especialidad
-				</button>
-			</td>
-			<table class="basica">
-				<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let especialidad of especialidades">
-						<td>
-							<div>{{ especialidad.nombre }}</div>
-						</td>
-						<td class="acciones">
-							<button type="button" class="btn btn-sm btn-primary"
-								[routerLink]="['/editar-especialidad', especialidad.id]">
-								<!--icon name="create"></ion-icon-->
-								<i class="material-icons">create</i>
-							</button>
-							<button type="button" class="ml-2 btn btn-sm btn-primary"
-								[routerLink]="['/configurar-especialidad', especialidad.id]">
-								<!-- mat-icon name="construct"></mat-icon -->
-								<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-								<i class="material-icons">settings</i>
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="d-flex flex-wrap">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<div class="p-2 flex-fill flex-wrap ">
+				<div class="card p-3">
+					<h1>Especialidades</h1>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
+							Agregar especialidad
+						</button>
+					</td>
+					<table class="basica">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let especialidad of especialidades">
+								<td>
+									<div>{{ especialidad.nombre }}</div>
+								</td>
+								<td class="acciones">
+									<button type="button" class="btn btn-sm btn-primary"
+										[routerLink]="['/editar-especialidad', especialidad.id]">
+										<!--icon name="create"></ion-icon-->
+										<i class="material-icons">create</i>
+									</button>
+									<button type="button" class="ml-2 btn btn-sm btn-primary"
+										[routerLink]="['/configurar-especialidad', especialidad.id]">
+										<!-- mat-icon name="construct"></mat-icon -->
+										<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+										<i class="material-icons">settings</i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-			<div class="btn-toolbar positionCenter" role="toolbar" aria-label="Toolbar with button groups"
-				*ngIf="totalPages > 1">
-				<div class="btn-group mr-2" role="group" aria-label="First group">
-					<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
-						[routerLink]="['/especialidades', 0]">
-						&lt;&lt;
-					</button>
-					<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
-						[routerLink]="['/especialidades', currentPage - 1]">
-						&lt;
-					</button>
-				</div>
-				<div class="btn-group mr-2" role="group" aria-label="Second group">
-					<button type="button" class="btn btn-primary" *ngFor="let page of pages"
-						[routerLink]="['/especialidades', page]">
-						{{ page + 1 }}
-					</button>
-				</div>
-				<div class="btn-group" role="group" aria-label="Third group">
-					<button [disabled]="currentPage >= totalPages - 1" type="button" class="btn btn-primary"
-						[routerLink]="['/especialidades', currentPage + 1]">
-						&gt;
-					</button>
-					<button [disabled]="currentPage >= totalPages - 1" type="button" class="btn btn-primary"
-						[routerLink]="['/especialidades', this.totalPages - 1]">
-						&gt;&gt;
-					</button>
+					<div class="btn-toolbar positionCenter" role="toolbar" aria-label="Toolbar with button groups"
+						*ngIf="totalPages > 1">
+						<div class="btn-group mr-2" role="group" aria-label="First group">
+							<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
+								[routerLink]="['/especialidades', 0]">
+								&lt;&lt;
+							</button>
+							<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"
+								[routerLink]="['/especialidades', currentPage - 1]">
+								&lt;
+							</button>
+						</div>
+						<div class="btn-group mr-2" role="group" aria-label="Second group">
+							<button type="button" class="btn btn-primary" *ngFor="let page of pages"
+								[routerLink]="['/especialidades', page]">
+								{{ page + 1 }}
+							</button>
+						</div>
+						<div class="btn-group" role="group" aria-label="Third group">
+							<button [disabled]="currentPage >= totalPages - 1" type="button" class="btn btn-primary"
+								[routerLink]="['/especialidades', currentPage + 1]">
+								&gt;
+							</button>
+							<button [disabled]="currentPage >= totalPages - 1" type="button" class="btn btn-primary"
+								[routerLink]="['/especialidades', this.totalPages - 1]">
+								&gt;&gt;
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
-	<!-- FIN CONTENIDO -->
 </div>
