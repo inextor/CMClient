@@ -1,36 +1,21 @@
 <app-header title="Agregar Especialidad"></app-header>
-
-<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+<!-- <img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png"> -->
 <div class="container">
-	<div class="d-flex flex-wrap">
-		<!--MENU DE LA APLICACION-->
-		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-			<!-- <app-menu></app-menu> -->
-		</div>
-		<!--FIN MENU DE LA APLICACION-->
 		<!--CONTENIDO DE LA APLICACION-->
-		<div class="p-2 flex-fill flex-wrap ">
 			<div class="card">
 				<form>
 					<div  class="list ">
-
 						<div class="form-group">
 							<label position="stacked">Nombre Especialidad<span color="danger">*</span></label>
 							<input required type="text" name="nombre" [(ngModel)]="especialidad.nombre">
 							<label position="stacked">Abreviacion<span color="danger">*</span></label>
 							<input required type="text" name="abreviacion" [(ngModel)]="especialidad.abreviacion">
-
 						</div>
 					</div>
-
-					<app-loading *ngIf="is_loading"></app-loading>
-
 					<div class="">
 						<button type="button" expand="block" type="submit" class="" (click)="agregar()" [disabled]="is_loading">Agregar</button>
 					</div>
 				</form>
 			</div>
-		</div>
 		<!-- FIN CONTENIDO DE LA APLICACION-->
-	</div>
 </div>

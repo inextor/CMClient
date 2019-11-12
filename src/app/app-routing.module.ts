@@ -45,8 +45,8 @@ import { AgregarEspecialidadComponent  } from './pages/agregar-especialidad/agre
 import { AgregarTipoPrecioComponent    } from './pages/agregar-tipo-precio/agregar-tipo-precio.component';
 import { AgregarPrecioComponent        } from './pages/agregar-precio/agregar-precio.component';
 import { TipoPreciosComponent          } from './pages/tipo-precios/tipo-precios.component';
-
-
+import { CitasComponent 			   } from './pages/citas/citas.component';
+import { CitaComponent 				   } from "./pages/cita/cita.component";
 
 
 
@@ -70,15 +70,15 @@ const routes: Routes = [
 { path: 'registro', component: RegistroComponent, pathMatch: 'full'},
 { path: 'agregar-doctor', component: AgregarDoctorComponent, pathMatch: 'full'},
 { path: 'agregar-organizacion', component: AgregarOrganizacionComponent, pathMatch: 'full'},
-{ path: 'editar-paciente/:id_paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
-{ path: 'agregar-paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
+// { path: 'editar-paciente/:id_paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
+// { path: 'agregar-paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
 { path: 'editar-centro-medico/:id', component: AgregarCentroMedicoComponent, pathMatch: 'full'},
 { path: 'agregar-centro-medico', component: AgregarCentroMedicoComponent, pathMatch: 'full'},
 { path: 'doctores', component: DoctoresComponent, pathMatch: 'full'},
 { path: 'doctor/:id_usuario', component: DoctorComponent, pathMatch: 'full'},
 { path: 'centros-medicos', component: CentrosMedicosComponent, pathMatch: 'full'},
 { path: 'editar-precios/:id', component: EditarPreciosComponent, pathMatch: 'full'},
-{ path: 'modal-page', component: ModalPageComponent, pathMatch: 'full'},
+// { path: 'modal-page', component: ModalPageComponent, pathMatch: 'full'},
 { path: 'configurar-preguntas', component: ConfigurarPreguntasComponent, pathMatch: 'full'},
 { path: 'configurar-especialidad/:idEspecialidad', component: ConfigurarPreguntasComponent, pathMatch: 'full'},
 { path: 'llenar-historia-clinica/doctor/:idDoctor/paciente/:idPaciente', component: LlenarHistoriaClinicaComponent, pathMatch: 'full'},
