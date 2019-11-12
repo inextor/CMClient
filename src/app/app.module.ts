@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
+import { FormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -125,7 +126,9 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+	  FormsModule
+
   ],
   providers: [
 	  { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true }

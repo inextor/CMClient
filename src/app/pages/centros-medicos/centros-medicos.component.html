@@ -1,47 +1,34 @@
-<ion-header>
-		<ion-toolbar color="blue" class="customNavBar">
-			<ion-buttons slot="start">
-				<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-			</ion-buttons>
-			<ion-title>
-				<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-			</ion-title>
-		</ion-toolbar>
-	
-	</ion-header>
-	
-	<ion-content>
-		<div class="d-flex flex-wrap">
-			<!--MENU DE LA APLICACION-->
-			<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-				<!-- <app-menu></app-menu> -->
-			</div>
-			<!--FIN MENU DE LA APLICACION-->
-			<!--CONTENIDO DE LA APLICACION-->
-			<div class="p-2 flex-fill flex-wrap ">
-				<ion-card>
-					<ion-toolbar>
-						<ion-title>Centros Medicos</ion-title>
-					</ion-toolbar>
-					<table class="basica">
-							<thead>
-								<tr>
-									<th>Nombre</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let centro_medico of centros_medicos">
-									<td>{{centro_medico.nombre}}</td>
-									<td>
-										<ion-button size="small"  [routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</ion-button>
-										<ion-button size="small" color="secondary" [routerLink]="['/servicios',centro_medico.id]">Servicios</ion-button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-				</ion-card>
-			</div>
-			<!-- FIN CONTENIDO DE LA APLICACION-->
+<app-header title="Centros Medicos"></app-header>
+<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
+<div class="container">
+	<div class="d-flex flex-wrap">
+		<!--MENU DE LA APLICACION-->
+		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
+			<!-- <app-menu></app-menu> -->
 		</div>
-	</ion-content>
+		<!--FIN MENU DE LA APLICACION-->
+		<!--CONTENIDO DE LA APLICACION-->
+		<div class="p-2 flex-fill flex-wrap ">
+			<div class="card">
+				<table class="basica">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let centro_medico of centros_medicos">
+							<td>{{centro_medico.nombre}}</td>
+							<td>
+								<button type="button" size="small"  [routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
+								<button type="button" size="small" color="secondary" [routerLink]="['/servicios',centro_medico.id]">Servicios</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- FIN CONTENIDO DE LA APLICACION-->
+	</div>
+</div>

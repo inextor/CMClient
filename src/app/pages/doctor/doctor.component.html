@@ -1,56 +1,53 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>doctor</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header title="doctor"></app-header>
 
-<ion-content>
+<div class="container">
 
-	<ion-spinner *ngIf="doctor==null"></ion-spinner>
-	<ion-card *ngIf="doctor!==null">
-		<ion-card-header>
-			<ion-card-subtitle>{{doctor.nombre}}</ion-card-subtitle>
-			<ion-card-title>{{doctor.especialidad}}</ion-card-title>
-		</ion-card-header>
+	<app-loading *ngIf="doctor==null"></app-loading>
 
-		<ion-card-content>
+	<div class="card" *ngIf="doctor!==null">
+		<div class="card header">
+			<div class="card subtitle">{{doctor.nombre}}</div>
+			<div class="card title">{{doctor.especialidad}}</div>
+		</div>
+
+		<div class="card"-content>
 			Keep close to Nature's heart... and break clear away, once in awhile,
 			and climb a mountain or spend a week in the woods. Wash your spirit clean.
-		</ion-card-content>
-	</ion-card>
+		</div>
+	</div>
 
-	<ion-card>
-		<ion-item>
-			<ion-icon name="pin" slot="start"></ion-icon>
-			<ion-label>ion-item in a card, icon left, button right</ion-label>
-			<ion-button fill="outline" slot="end">View</ion-button>
-		</ion-item>
+	<div class="card">
+		<div class="form-group">
+			<span class="oi" data-glyph="pin" title="icon name" aria-hidden="true"></span>
+			<label>ion-item in a card, icon left, button right</label>
+			<button type="button" fill="outline" slot="end">View</button>
+		</div>
 
-		<ion-card-content>
+		<div class="card"-content>
 			This is content, without any paragraph or header tags,
 			within an ion-card-content element.
-		</ion-card-content>
-	</ion-card>
+		</div>
+	</div>
 
-	<ion-card>
-		<ion-item href="#" class="activated">
+	<!--div class="card">
+		<div class="form-group" href="#" class="activated">
 			<ion-icon name="wifi" slot="start"></ion-icon>
-			<ion-label>Card Link Item 1 .activated</ion-label>
-		</ion-item>
+			<label>Card Link Item 1 .activated</label>
+		</div>
 
-		<ion-item href="#">
+		<div class="form-group" href="#">
 			<ion-icon name="wine" slot="start"></ion-icon>
-			<ion-label>Card Link Item 2</ion-label>
-		</ion-item>
+			<label>Card Link Item 2</label>
+		</div>
 
-		<ion-item class="activated">
+		<div class="form-group" class="activated">
 			<ion-icon name="warning" slot="start"></ion-icon>
-			<ion-label>Card Button Item 1 .activated</ion-label>
-		</ion-item>
+			<label>Card Button Item 1 .activated</label>
+		</div>
 
-		<ion-item>
+		<div class="form-group">
 			<ion-icon name="walk" slot="start"></ion-icon>
-			<ion-label>Card Button Item 2</ion-label>
-		</ion-item>
-	</ion-card>
-</ion-content>
+			<label>Card Button Item 2</label>
+		</div>
+	</div -->
+</div>

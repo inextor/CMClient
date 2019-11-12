@@ -1,51 +1,44 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>agregar-paciente</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header title="Agregar Familiar"></app-header>
 
-  <ion-content>
+  <div class="container">
     <form>
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <div lines="full" class="list  ">
         <div *ngIf="usuario.id_imagen">
           <img [src]="this.rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
         </div>
-        <ion-item>
+        <div class="form-group">
           <input type="file" (change)="uploadImage($event)" name="image">
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text" name="nombre" [(ngModel)]="paciente.nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Apellidos<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text" name="apellidos" [(ngModel)]="paciente.apellidos"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Sexo<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text" name="sexo" [(ngModel)]="paciente.sexo"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Fecha de nacimiento<ion-text color="danger">*</ion-text></ion-label>
-          <!--ion-input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></ion-input-->
-          <ion-datetime displayFormat="YYYY-MM-DD" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></ion-datetime>
-        </ion-item>
+        </div>
+        <div class="form-group">
+          <label position="stacked">Nombre<span color="danger">*</span></label>
+          <input required type="text" name="nombre" [(ngModel)]="paciente.nombre">
+        </div>
+        <div class="form-group">
+          <label position="stacked">Apellidos<span color="danger">*</span></label>
+          <input required type="text" name="apellidos" [(ngModel)]="paciente.apellidos">
+        </div>
+        <div class="form-group">
+          <label position="stacked">Sexo<span color="danger">*</span></label>
+          <input required type="text" name="sexo" [(ngModel)]="paciente.sexo">
+        </div>
+        <div class="form-group">
+          <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
+          <!--input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></input-->
+          <input type="date" displayFormat="YYYY-MM-DD" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento">
+        </div>
 
-        <ion-item>
-          <ion-label position="stacked">Telefono<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text" name="telefono" [(ngModel)]="paciente.telefono" ></ion-input>
-        </ion-item>
-      </ion-list>
+        <div class="form-group">
+          <label position="stacked">Telefono<span color="danger">*</span></label>
+          <input required type="text" name="telefono" [(ngModel)]="paciente.telefono" >
+        </div>
+      </div>
 
-      <ion-spinner *ngIf="is_loading"></ion-spinner>
+      <app-loading *ngIf="is_loading"></app-loading>
 
-      <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardarPaciente()" [disabled]="is_loading">Guardar Paciente</ion-button>
+      <div class="">
+        <button type="button" expand="block" type="submit" class="" (click)="guardarPaciente()" [disabled]="is_loading">Guardar Paciente</button>
       </div>
 
     </form>
-  </ion-content>
+  </div>
 

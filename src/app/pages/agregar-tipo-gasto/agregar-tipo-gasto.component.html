@@ -1,12 +1,12 @@
 <app-header title="agregar-tipo-gasto"></app-header>
 <div class="container">
 
-	<ion-list lines="full" class="ion-no-margin ion-no-padding">
+	<div lines="full" class="list ion-no-margin ion-no-padding">
 		<div class="form-group">
 			<label position="stacked">Nombre<span color="danger">*</span></label>
 			<input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre">
 		</div>
-	</ion-list>
+	</div>
 
 	<app-loading *ngIf="is_loading"></app-loading>
 
