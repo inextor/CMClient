@@ -2,7 +2,7 @@
 
 html, body { height: 100%; }
 body {
-  margin: 0; 
+  margin: 0;
   font-family: Lato,'Lato', "Helvetica Neue", sans-serif;
   background-image: url(/assets/wallpaper.png);
   background-repeat: repeat;
@@ -28,6 +28,7 @@ table.basica {
     width: 100%;
 	font-family: 'Lato',"Helvetica Neue",sans-serif;
 	color: #000000;
+  background-color: white;
 }
 
 .basica thead {
