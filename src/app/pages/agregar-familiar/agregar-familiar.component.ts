@@ -8,7 +8,7 @@ import { BaseComponent } from '../base/base.component';
 @Component({
 	selector: 'app-agregar-familiar',
 	templateUrl: './agregar-familiar.component.html',
-	styleUrls: ['./agregar-familiar.component.scss'],
+	styleUrls: ['./agregar-familiar.component.css'],
 })
 export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 
@@ -106,7 +106,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	}
 
 
-	
+
 	// async showError(message:string)
 	// {
 	// 	const alert = await this.alertController.create
@@ -119,5 +119,5 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 
 	// 	await alert.present();
 	// }
-	
+
 }
