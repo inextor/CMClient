@@ -1,7 +1,7 @@
 <app-header title="Especialidades"></app-header>
 
-<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
 <div class="container">
+	<h1>Especialidades</h1>
 	<div class="d-flex flex-wrap">
 		<!--MENU DE LA APLICACION-->
 		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -25,20 +25,17 @@
 						<tr *ngFor="let especialidad of especialidades">
 							<td>{{especialidad.nombre}}</td>
 							<!-- 	" -->
-							<td>
+							<td class="acciones">
 								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/editar-especialidad',especialidad.id]">
 									<!--icon name="create"></ion-icon-->
-									<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-									Editar
+									<i class="material-icons">create</i>
+
 								</button>
-								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad',especialidad.id]">
+								<button type="button" class="ml-2 btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad',especialidad.id]">
 									<!-- mat-icon name="construct"></mat-icon -->
 									<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-									Agregar
-								</button>
-								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad',especialidad.id]">
-									<span class="oi" data-glyph="construct" title="icon name" aria-hidden="true"></span>
-									Configurar
+									<i class="material-icons">settings</i>
+
 								</button>
 							</td>
 						</tr>
