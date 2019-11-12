@@ -8,7 +8,7 @@
 
 
 		<!-- <ion-label position="floating">Pregunta</ion-label> -->
-		<ion-input [(ngModel)]="pregunta.pregunta"></ion-input>
+		<input [(ngModel)]="pregunta.pregunta"></input>
 
 
 
@@ -20,7 +20,7 @@
 		</ion-select>
 
 
-	< *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
+	<!-- < *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'"> -->
 		<!-- <ion-label>Depende de pregunta</ion-label> -->
 		<ion-select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
 			<ion-select-option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</ion-select-option>
