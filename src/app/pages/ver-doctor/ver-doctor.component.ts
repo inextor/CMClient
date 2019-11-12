@@ -23,7 +23,6 @@ export class VerDoctorComponent implements OnInit {
 	{ }
 
 
-
 	counterId = 1;
 	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
 
