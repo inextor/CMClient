@@ -10,8 +10,10 @@ import { Route } from '@angular/compiler/src/core';
   styleUrls: ['./consulta.component.css']
 })
 export class ConsultaComponent implements OnInit {
-
-  constructor(private rest :RestService, private route: Route, private paramMap:ParamMap) { }
+  doctor:Doctor		= null;
+  paciente: Paciente = null;
+  constructor(private rest :RestService,
+   private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
     let usuario = this.rest.getUsuarioSesion();
