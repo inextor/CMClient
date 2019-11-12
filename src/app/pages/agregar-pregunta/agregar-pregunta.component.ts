@@ -6,7 +6,7 @@ import { forkJoin } from 'rxjs';
 @Component({
 	selector: 'app-agregar-pregunta',
 	templateUrl: './agregar-pregunta.component.html',
-	styleUrls: ['./agregar-pregunta.component.scss'],
+	styleUrls: ['./agregar-pregunta.component.css'],
 })
 export class AgregarPreguntaComponent extends BaseComponent implements OnInit {
 
