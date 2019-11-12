@@ -16,7 +16,7 @@ import { UsuariosComponent             } from './pages/usuarios/usuarios.compone
 import { RegistroComponent             } from './pages/registro/registro.component';
 import { AgregarDoctorComponent        } from './pages/agregar-doctor/agregar-doctor.component';
 import { AgregarOrganizacionComponent  } from './pages/agregar-organizacion/agregar-organizacion.component';
-// import { AgregarPacienteComponent      } from './pages/agregar-paciente/agregar-paciente.component';
+//import { AgregarPacienteComponent      } from './pages/agregar-paciente/agregar-paciente.component';
 import { AgregarCentroMedicoComponent  } from './pages/agregar-centro-medico/agregar-centro-medico.component';
 import { DoctoresComponent             } from './pages/doctores/doctores.component';
 import { DoctorComponent               } from './pages/doctor/doctor.component';
@@ -55,12 +55,12 @@ const routes: Routes = [
 { path: 'doctores/:idDoctor/centro-medico/:idCentroMedico/agendar-cita/:idPaciente', component: AgendarCitaComponent, pathMatch: 'full'},
 { path: 'agendar-cita', component: AgendarCitaComponent, pathMatch: 'full'},
 { path: 'ventas', component: VentasComponent, pathMatch: 'full'},
-{ path: 'citas', component: CitasComponent, pathMatch: 'full'},
-{ path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full'},
-{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
+//{ path: 'citas', component: CitasComponent, pathMatch: 'full'},
+//{ path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full'},
+//{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
 { path: 'pacientes', component: PacientesComponent, pathMatch: 'full'},
 { path: 'paciente', component: PacienteComponent, pathMatch: 'full'},
-{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
+//{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
 { path: 'agregar-usuario', component: AgregarUsuarioComponent, pathMatch: 'full'},
 { path: 'servicios', component: ServiciosComponent, pathMatch: 'full'},
 { path: 'agregar-producto', component: AgregarServicioComponent, pathMatch: 'full'},
@@ -70,15 +70,15 @@ const routes: Routes = [
 { path: 'registro', component: RegistroComponent, pathMatch: 'full'},
 { path: 'agregar-doctor', component: AgregarDoctorComponent, pathMatch: 'full'},
 { path: 'agregar-organizacion', component: AgregarOrganizacionComponent, pathMatch: 'full'},
-{ path: 'editar-paciente/:id_paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
-{ path: 'agregar-paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
+//{ path: 'editar-paciente/:id_paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
+//{ path: 'agregar-paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
 { path: 'editar-centro-medico/:id', component: AgregarCentroMedicoComponent, pathMatch: 'full'},
 { path: 'agregar-centro-medico', component: AgregarCentroMedicoComponent, pathMatch: 'full'},
 { path: 'doctores', component: DoctoresComponent, pathMatch: 'full'},
 { path: 'doctor/:id_usuario', component: DoctorComponent, pathMatch: 'full'},
 { path: 'centros-medicos', component: CentrosMedicosComponent, pathMatch: 'full'},
 { path: 'editar-precios/:id', component: EditarPreciosComponent, pathMatch: 'full'},
-{ path: 'modal-page', component: ModalPageComponent, pathMatch: 'full'},
+//{ path: 'modal-page', component: ModalPageComponent, pathMatch: 'full'},
 { path: 'configurar-preguntas', component: ConfigurarPreguntasComponent, pathMatch: 'full'},
 { path: 'configurar-especialidad/:idEspecialidad', component: ConfigurarPreguntasComponent, pathMatch: 'full'},
 { path: 'llenar-historia-clinica/doctor/:idDoctor/paciente/:idPaciente', component: LlenarHistoriaClinicaComponent, pathMatch: 'full'},
