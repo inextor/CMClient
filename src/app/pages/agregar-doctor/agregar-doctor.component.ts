@@ -9,7 +9,7 @@ import { BaseComponent } from '../base/base.component';
 @Component({
 	selector: 'app-agregar-doctor',
 	templateUrl: './agregar-doctor.component.html',
-	styleUrls: ['./agregar-doctor.component.scss'],
+	styleUrls: ['./agregar-doctor.component.css'],
 })
 export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 

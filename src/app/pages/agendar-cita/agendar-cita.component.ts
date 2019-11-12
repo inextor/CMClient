@@ -6,7 +6,7 @@ import { Paciente, Centro_Medico, Doctor } from 'src/app/models/Modelos';
 @Component({
   selector: 'app-agendar-cita',
   templateUrl: './agendar-cita.component.html',
-  styleUrls: ['./agendar-cita.component.scss'],
+  styleUrls: ['./agendar-cita.component.css'],
 })
 export class AgendarCitaComponent implements OnInit {
 
