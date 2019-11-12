@@ -1,16 +1,15 @@
-<ion-header>
-	<ion-toolbar color="blue" class="customNavBar">
-		<ion-buttons slot="start">
+<app-header title="Configurar Pregunatas"> </app-header>
+<!--	<ion-toolbar color="blue" class="customNavBar">
+		<button type="button"s slot="start">
 			<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-		</ion-buttons>
-		<ion-title>
+		</buttons>
+		<h1>
 			<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-		</ion-title>
+		</h1>
 	</ion-toolbar>
+-->
 
-</ion-header>
-
-<ion-content>
+<div class="container">
 	<div class="d-flex flex-wrap">
 		<!--MENU DE LA APLICACION-->
 		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
@@ -19,10 +18,7 @@
 		<!--FIN MENU DE LA APLICACION-->
 		<!--CONTENIDO DE LA APLICACION-->
 		<div class="p-2 flex-fill flex-wrap ">
-			<ion-card>
-				<ion-toolbar>
-					<ion-title>Configurar preguntas</ion-title>
-				</ion-toolbar>
+			<div class="card">
 				<table class="basica ">
 				<thead>
 					<tr>
@@ -34,30 +30,30 @@
 					<tr *ngFor="let p of preguntasEspecialidad;let i = index">
 						<td>{{p.pregunta_historia_clinica.pregunta}} </td>
 						<td>
-							<ion-button size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
-								Remover</ion-button>
-							<ion-button size="small" *ngIf="i>0"
-								(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</ion-button>
-							<ion-button size="small" *ngIf="i<preguntasEspecialidad.length-1"
-								(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</ion-button>
+							<button type="button" size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
+								Remover</button>
+							<button type="button" size="small" *ngIf="i>0"
+								(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</button>
+							<button type="button" size="small" *ngIf="i<preguntasEspecialidad.length-1"
+								(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</button>
 						</td>
 
 					</tr>
 				</tbody>
 			</table>
 				<div>
-					<ion-input input type="text"></ion-input>
+					<input input type="text"></input>
 				</div>
 
 				<div class="container">
 					<div *ngFor="let p of busquedaPreguntas">
-						{{p.pregunta}} <ion-button size="small" (click)="agregarEspecialidadPregunta(p)">
-							<ion-icon name="add-circle"></ion-icon>Agregar
-						</ion-button>
+						{{p.pregunta}} <button type="button" size="small" (click)="agregarEspecialidadPregunta(p)">
+							<span class="oi" data-glyph="add-circle" title="icon add-circle" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
-			</ion-card>
+			</div>
 		</div>
 		<!-- FIN CONTENIDO DE LA APLICACION-->
 	</div>
-</ion-content>
+</div>

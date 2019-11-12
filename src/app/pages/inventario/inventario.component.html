@@ -1,28 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>inventario</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Inventario"></app-header>
 
-<ion-content>
-  <ion-list lines="none"  >
-    <ion-list-header>
-      <ion-label>Resources</ion-label>
-    </ion-list-header>
-   <ion-item [routerLink]="['/requisiciones']">
-      <ion-icon slot="start" color="medium" name="contacts"></ion-icon>
-        <ion-label>Requisicion</ion-label>
-      </ion-item>
-	<ion-item [routerLink]="['/agregar-producto']">
-		<ion-icon slot="start" color="medium" name="md-calendar"></ion-icon>
-		<ion-label>Agregar Producto</ion-label>
-	</ion-item>
-	<ion-item [routerLink]="['/proveedores']">
-		<ion-icon slot="start" color="medium" name="medkit"></ion-icon>
-      <ion-label>proveedores</ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
+<div class="container">
+  <div class="list">
+    <div class="list-header">
+      <label>Resources</label>
+    </div>
+   <div class="form-group" [routerLink]="['/requisiciones']">
+
+	   <span class="oi" data-glyph="contacts" title="contacts" aria-hidden="true"></span>
+        <label>Requisicion</label>
+      </div>
+	<div class="form-group" [routerLink]="['/agregar-producto']">
+	   <span class="oi" data-glyph="md-calendar" title="contacts" aria-hidden="true"></span>
+		<label>Agregar Producto</label>
+	</div>
+	<div class="form-group" [routerLink]="['/proveedores']">
+	   <span class="oi" data-glyph="medkit" title="contacts" aria-hidden="true"></span>
+      <label>proveedores</label>
+    </div>
+  </div>
+</div>

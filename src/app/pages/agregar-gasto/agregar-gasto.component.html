@@ -1,42 +1,38 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>Agregar Gasto</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header title="Agregar Gasto"></app-header>
 
-<ion-content>
+<div class="container">
 
 	<app-loading [display]="is_loading"></app-loading>
-	<ion-list lines="full" class="ion-no-margin ion-no-padding">
-		<ion-item>
-			<ion-label position="stacked">Cantidad<ion-text color="danger">*</ion-text></ion-label>
-			<ion-input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.monto"></ion-input>
-		</ion-item>
+	<div lines="full" class="list  ion-no-padding">
+		<div class="form-group">
+			<label position="stacked">Cantidad<span color="danger">*</span></label>
+			<input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.monto">
+		</div>
 
-		<ion-item>
-			<ion-label position="stacked">Referencia<ion-text color="danger">*</ion-text></ion-label>
-			<ion-input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.referencia"></ion-input>
-		</ion-item>
+		<div class="form-group">
+			<label position="stacked">Referencia<span color="danger">*</span></label>
+			<input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
+		</div>
 
-		<ion-item>
-			<ion-label>Centro Medico</ion-label>
-			<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
-				<ion-select-option *ngFor="let centro of centros_medicos" value="tipo.id">{{centro.nombre}}</ion-select-option>
-			</ion-select>
-		</ion-item>
+		<div class="form-group">
+			<label>Centro Medico</label>
+			<select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
+				<option *ngFor="let centro of centros_medicos" value="tipo.id">{{centro.nombre}}</option>
+			</select>
+		</div>
 
-		<ion-item>
-			<ion-label>Tipo Gasto</ion-label>
-			<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
-				<ion-select-option *ngFor="let tipo of tiposGasto" value="tipo.id">{{tipo.nombre}}</ion-select-option>
-			</ion-select>
-		</ion-item>
+		<div class="form-group">
+			<label>Tipo Gasto</label>
+			<select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
+				<option *ngFor="let tipo of tiposGasto" value="tipo.id">{{tipo.nombre}}</option>
+			</select>
+		</div>
 
-	</ion-list>
+	</div>
 
-	<ion-spinner *ngIf="is_loading"></ion-spinner>
+	<app-loading *ngIf="is_loading"></app-loading>
 
 	<div class="ion-padding">
-		<ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
+		<button type="button" expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 	</div>
-</ion-content>
+</div>

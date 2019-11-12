@@ -6,7 +6,7 @@
 <div class="container">
 	<div class="card">
 		<form>
-			<div lines="full" class="list ion-no-margin ion-no-padding">
+			<div lines="full" class="list  ion-no-padding">
 				<div *ngIf="centro_medico.id_imagen">
 					<img [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen">
 				</div>
@@ -22,7 +22,7 @@
 			<app-loading *ngIf="is_loading"></app-loading>
 
 			<div class="ion-padding">
-				<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
+				<button type="button" expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 			</div>
 		</form>
 	</div>
