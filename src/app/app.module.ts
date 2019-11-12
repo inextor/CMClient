@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
 import { FormsModule } from '@angular/forms';
+import { AccessModule } from './modules/access/access.module';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -124,6 +125,7 @@ import { HeaderComponent } from './components/header/header.component';
     HeaderComponent
   ],
   imports: [
+    AccessModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

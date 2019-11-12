@@ -1,16 +1,9 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-back-button></ion-back-button>
-		</ion-buttons>
-		<ion-title>gastos</ion-title>
-	</ion-toolbar>
-</ion-header>
+<app-header title="Gastos"></app-header>
 
-<ion-content>
+<div class="container">
 	<td>
-		<ion-button [routerLink]="['/agregar-gasto']" size="small"  >Agregar gasto
-		</ion-button>
+		<button type="button" [routerLink]="['/agregar-gasto']" size="small"  >Agregar gasto
+		</button>
 	</td>
 	<table class="basica">
 		<thead>
@@ -33,4 +26,4 @@
 			</tr>
 		</tbody>
 	</table>
-</ion-content>
+</div>

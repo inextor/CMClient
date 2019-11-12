@@ -1,6 +1,5 @@
-<app-header>
-	<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-</app-header>
+<app-header></app-header>
+<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
 
 	<div class="container">
 		<div class="d-flex flex-wrap">
@@ -27,13 +26,13 @@
 								<!-- 	" -->
 								<td>
 									<button type="button" size="small" [routerLink]="['/editar-producto',servicio.servicio.id]">
-										<ion-icon name="create"></ion-icon>
+										 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
 									</button>
 									<button type="button" size="small" [routerLink]="['/editar-precios',servicio.servicio.id]">
-										<ion-icon name="cash"></ion-icon>
+										 <span class="oi" data-glyph="cash" title="icon name" aria-hidden="true"></span>
 									</button>
 									<button type="button" size="small" [routerLink]="['/inventario']">
-										<ion-icon name="cube"></ion-icon>
+										 <span class="oi" data-glyph="cube" title="icon name" aria-hidden="true"></span>
 									</button>
 								</td>
 							</tr>
