@@ -25,6 +25,6 @@ export class ConsultaComponent implements OnInit {
     
     });
   
-  }s
+  }
 
 }
