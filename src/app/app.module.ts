@@ -128,6 +128,8 @@ import { HeaderComponent } from './components/header/header.component';
     AccessModule,
     BrowserModule,
     AppRoutingModule,
+   HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
 	  FormsModule
 
