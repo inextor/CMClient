@@ -3,10 +3,10 @@
 <div class="container">
 	<form #form="ngForm">
 		<h3>Iniciar Sesión</h3>
-		<ion-input name="email" type="text" placeholder="your@email.com"	[(ngModel)]="usuario" required></ion-input>
-		<ion-input name="password" type="password" placeholder="Password" [(ngModel)]="contrasena" (change)="doLoginKeyboard($event)" required></ion-input>
+		<input name="email" type="text" placeholder="your@email.com"	[(ngModel)]="usuario" required>
+		<input name="password" type="password" placeholder="Password" [(ngModel)]="contrasena" (change)="doLoginKeyboard($event)" required>
 		<div>
-			<ion-button size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="doLogin()">Acceder</ion-button>
+			<button type="button" size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="doLogin()">Acceder</button>
 		</div>
 	</form>
-</ion-content>
+</div>

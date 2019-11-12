@@ -1,53 +1,46 @@
+<app-header title="Agregar Proveedor"></app-header>
 <div>
-  <mat-toolbar>
-      <mat-buttons slot="start">
-        <ion-back-button></ion-back-button>
-        </ion-buttons>
-    <ion-title>agregar-proveedor</ion-title>
-  <mat-toolbar>
-</div>
-<div>
-    <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-    
-          <ion-item>
-            <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" name="nombre" [(ngModel)]="proveedor.nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-              <ion-label position="stacked">Telefono<ion-text color="danger">*</ion-text></ion-label>
-              <ion-input required type="text" name="telefono" [(ngModel)]="proveedor.telefono"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="stacked">RFC<ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required type="text" name="rfc" [(ngModel)]="proveedor.rfc"></ion-input>
-              </ion-item>
-            <ion-item>
-                <ion-label position="stacked">Direccion<ion-text color="danger">*</ion-text></ion-label>
-                <ion-input required type="text" name="direccion" [(ngModel)]="proveedor.direccion"></ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-label position="stacked">Contacto<ion-text color="danger">*</ion-text></ion-label>
-                  <ion-input required type="text" name="contacto" [(ngModel)]="proveedor.contacto"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label position="stacked">Cuenta Bancaria<ion-text color="danger">*</ion-text></ion-label>
-                    <ion-input required type="text" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                      <ion-label position="stacked">Dias Credito<ion-text color="danger">*</ion-text></ion-label>
-                      <ion-input required type="text" name="dias_credito" [(ngModel)]="proveedor.dias_credito"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="stacked">Nota<ion-text color="danger">*</ion-text></ion-label>
-                        <ion-input required type="text" name="nota" [(ngModel)]="proveedor.nota"></ion-input>
-                      </ion-item>
-        </ion-list>
-    
-        <ion-spinner *ngIf="is_loading"></ion-spinner>
-    
-        <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
-        </div>
-      </form>
+	<form>
+		<div lines="full" class="list ion-no-margin ion-no-padding">
+
+			<div class="form-group">
+				<label position="stacked">Nombre<span color="danger">*</span></label>
+				<input required type="text" name="nombre" [(ngModel)]="proveedor.nombre">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Telefono<span color="danger">*</span></label>
+				<input required type="text" name="telefono" [(ngModel)]="proveedor.telefono">
+			</div>
+			<div class="form-group">
+				<label position="stacked">RFC<span color="danger">*</span></label>
+				<input required type="text" name="rfc" [(ngModel)]="proveedor.rfc">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Direccion<span color="danger">*</span></label>
+				<input required type="text" name="direccion" [(ngModel)]="proveedor.direccion">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Contacto<span color="danger">*</span></label>
+				<input required type="text" name="contacto" [(ngModel)]="proveedor.contacto">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Cuenta Bancaria<span color="danger">*</span></label>
+				<input required type="text" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Dias Credito<span color="danger">*</span></label>
+				<input required type="text" name="dias_credito" [(ngModel)]="proveedor.dias_credito">
+			</div>
+			<div class="form-group">
+				<label position="stacked">Nota<span color="danger">*</span></label>
+				<input required type="text" name="nota" [(ngModel)]="proveedor.nota">
+			</div>
+		</div>
+
+		<app-loading *ngIf="is_loading"></app-loading>
+
+		<div class="ion-padding">
+			<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
+		</div>
+	</form>
 </div>

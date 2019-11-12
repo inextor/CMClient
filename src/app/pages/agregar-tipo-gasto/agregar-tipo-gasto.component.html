@@ -1,15 +1,10 @@
-<app-header>
-  <ion-toolbar>
-    <h1>agregar-tipo-gasto</h1>
-  </ion-toolbar>
-</app-header>
-
+<app-header title="agregar-tipo-gasto"></app-header>
 <div class="container">
 
 	<ion-list lines="full" class="ion-no-margin ion-no-padding">
-		<div class="form-group"
+		<div class="form-group">
 			<label position="stacked">Nombre<span color="danger">*</span></label>
-			<ion-input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre"></ion-input>
+			<input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre">
 		</div>
 	</ion-list>
 

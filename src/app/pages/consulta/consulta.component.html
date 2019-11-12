@@ -1,20 +1,20 @@
 <app-header title="Consulta"></app-header>
 
-  <div class="container">
-      <td>
-        <button type="button" slot="start" [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small" >Agregar HISTORIAL</button>
-      </td>
-      <div class="card">
-          <div class="card"-header>
-            <div class="card"-title>Doctor: {{doctor.nombre}}</div-title>
-            <div class="card"-subtitle>Paciente: {{paciente.nombre}}</div-subtitle>
+<div class="container">
+	<td>
+		<button type="button" slot="start" [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small" >Agregar HISTORIAL</button>
+	</td>
+	<div class="card">
+		<div class="card"-header>
+			<div class="card"-title>Doctor: {{doctor.nombre}}</div>
+			<div class="card"-subtitle>Paciente: {{paciente.nombre}}</div>
 
-          </div-header>
+		</div>
 
-          <div class="card"-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </div-content>
-        </div>
-  </div>
+		<div class="card"-content>
+			Keep close to Nature's heart... and break clear away, once in awhile,
+			and climb a mountain or spend a week in the woods. Wash your spirit clean.
+		</div>
+	</div>
+</div>
 
