@@ -9,12 +9,12 @@
 		</div>
 		<!--FIN MENU DE LA APLICACION-->
 		<!--CONTENIDO DE LA APLICACION-->
-		<div class="p-2 flex-fill flex-wrap ">
-			<div class="card">
+		<div class="flex-fill flex-wrap m-3">
+			<div class="p-3">
 				<td class="generalButton">
-					<button type="button" size="small" [routerLink]="['/agregar-especialidad']">Agregar especialidad</button>
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">Agregar especialidad</button>
 				</td>
-				<table class="basica ">
+				<table class="basica">
 					<thead>
 						<tr>
 							<th>Nombre</th>
@@ -26,15 +26,19 @@
 							<td>{{especialidad.nombre}}</td>
 							<!-- 	" -->
 							<td>
-								<button type="button" size="small" [routerLink]="['/editar-especialidad',especialidad.id]">
+								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/editar-especialidad',especialidad.id]">
 									<!--icon name="create"></ion-icon-->
+									<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+									Editar
 								</button>
-								<button type="button" size="small" [routerLink]="['/configurar-especialidad',especialidad.id]">
+								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad',especialidad.id]">
 									<!-- mat-icon name="construct"></mat-icon -->
 									<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+									Agregar
 								</button>
-								<button type="button" size="small" [routerLink]="['/configurar-especialidad',especialidad.id]">
+								<button type="button" class="btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad',especialidad.id]">
 									<span class="oi" data-glyph="construct" title="icon name" aria-hidden="true"></span>
+									Configurar
 								</button>
 							</td>
 						</tr>
