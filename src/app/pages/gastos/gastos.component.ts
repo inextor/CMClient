@@ -9,8 +9,8 @@ import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 
 @Component({
 	selector: 'app-gastos',
-	templateUrl: './gastos.page.html',
-	styleUrls: ['./gastos.page.scss'],
+	templateUrl: './gastos.component.html',
+	styleUrls: ['./gastos.component.scss'],
 })
 export class GastosComponent extends BaseComponent implements OnInit {
 
