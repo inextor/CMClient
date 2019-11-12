@@ -1,7 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0; 
+  font-family: Lato,'Lato', "Helvetica Neue", sans-serif;
+  background-image: url(/assets/wallpaper.png);
+  background-repeat: repeat;
+}
 
 table.basica,.basica td,.basica th{
 	border-collapse: collapse;
@@ -21,7 +26,7 @@ table.basica {
     margin: 1em 0;
     overflow-x: auto;
     width: 100%;
-	font-family: "Roboto","Helvetica Neue",sans-serif;
+	font-family: 'Lato',"Helvetica Neue",sans-serif;
 	color: #000000;
 }
 
