@@ -12,5 +12,5 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     let usuario = this.rest.getUsuarioSesion();
   }
 
-  isNavbarCollapsed=true;
+  isNavbarCollapsed=false;
 }
