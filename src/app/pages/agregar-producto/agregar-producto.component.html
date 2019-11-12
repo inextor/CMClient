@@ -1,29 +1,22 @@
-<app-header>
-  <ion-toolbar>
-      <button type="button"s slot="start">
-          <ion-back-button></ion-back-button>
-        </buttons>
-    <h1>agregar-producto</h1>
-  </ion-toolbar>
-</app-header>
+<app-header title="Agregar Producto"></app-header>
 
 <div class="container">
     <form>
         <div lines="full" class="list ion-no-margin ion-no-padding">
 
           <div class="form-group">
-            <ion-label position="stacked">Nombre<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" name="nombre" [(ngModel)]="producto.nombre"></ion-input>
+            <label position="stacked">Nombre<span color="danger">*</span></label>
+            <input required type="text" name="nombre" [(ngModel)]="producto.nombre">
           </div>
 
           <div class="form-group">
-            <ion-label position="stacked">Tipo<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text"	name="tipo" [(ngModel)]="producto.tipo"></ion-input>
+            <label position="stacked">Tipo<span color="danger">*</span></label>
+            <input required type="text"	name="tipo" [(ngModel)]="producto.tipo">
           </div>
 
           <div class="form-group">
-            <ion-label position="stacked">Caducidad<ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text"	name="caducidad" [(ngModel)]="producto.caducidad"></ion-input>
+            <label position="stacked">Caducidad<span color="danger">*</span></label>
+            <input required type="text"	name="caducidad" [(ngModel)]="producto.caducidad">
           </div>
 
         </div>
