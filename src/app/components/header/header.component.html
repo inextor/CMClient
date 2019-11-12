@@ -1,10 +1,58 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="#">Angular</a>
+  <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+    data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show" id="navbarsDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle dropdown-toggle" id="id01" href="#" ngbDropdownToggle>Files</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">HTML</a>
+          <a class="dropdown-item" href="#">TS</a>
+          <a class="dropdown-item" href="#">JS</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    Brand
+  </a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse show" [ngClass]="{ 'show': navbarOpen }" >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Item 1</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Item 2</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+ -->
+
+
+<!-- 
 <nav class="navbar navbar-expand-lg navbar-light bg-light {{pagina}}">
   <div class="collapse navbar-collapse ">
     <i class="fas fa-bars fa-lg"></i>
   </div>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> -->
+    </button>
 
   <div class="collapse navbar-collapse">
     <img
@@ -13,10 +61,23 @@
       alt="Sample image"
     />
   </div>
-  <div class="collapse navbar-collapse" >
+  <div>
+  <ul class="navbar-nav ml-auto nav-flex-icons">
+    <li class="nav-item avatar dropdown" dropdown>
+      <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <img src="../../../assets/icon/Mehr-Software-34.png4" alt=""
+          class="img-fluid rounded-circle z-depth-0"></a>
+      <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+        <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+        <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+      </div>
+    </li>
+  </ul>
+  </div> -->
+  <!-- <div class="collapse navbar-collapse" >
     <i class="fas fa-user fa-2x"></i>
  
 
     <a class="align-middle"    >Daniel Martinez</a>
   </div>
-</nav>
+</nav> -->

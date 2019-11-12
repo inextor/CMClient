@@ -7,8 +7,10 @@ import { BaseComponent } from '../../pages/base/base.component'
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
-@Input() pagina:string;
+  @Input() pagina: string;
   ngOnInit() {
-      let usuario = this.rest.getUsuarioSesion();
+    let usuario = this.rest.getUsuarioSesion();
   }
+
+  isNavbarCollapsed=true;
 }
