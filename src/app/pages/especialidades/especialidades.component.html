@@ -1,17 +1,16 @@
+<!-- NAVBAR -->
 <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+<!-- FIN NAVBAR -->
 <div class="d-flex flex-wrap">
-	<div class="p-2 flex-wrap">
+	<!-- MENU -->
+	<div class="pt-2 flex-wrap">
 		<app-menu></app-menu>
 	</div>
+	<!-- FIN MENU -->
+	<!-- CONTENIDO -->
 	<div class="p-2 flex-fill flex-wrap ">
 		<div class="card p-3">
 			<h1>Especialidades</h1>
-
-			<!--MENU DE LA APLICACION-->
-
-			<!--FIN MENU DE LA APLICACION-->
-			<!--CONTENIDO DE LA APLICACION-->
-
 			<td>
 				<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
 					Agregar especialidad
@@ -29,7 +28,6 @@
 						<td>
 							<div>{{ especialidad.nombre }}</div>
 						</td>
-						<!-- 	" -->
 						<td class="acciones">
 							<button type="button" class="btn btn-sm btn-primary"
 								[routerLink]="['/editar-especialidad', especialidad.id]">
@@ -59,14 +57,12 @@
 						&lt;
 					</button>
 				</div>
-
 				<div class="btn-group mr-2" role="group" aria-label="Second group">
 					<button type="button" class="btn btn-primary" *ngFor="let page of pages"
 						[routerLink]="['/especialidades', page]">
 						{{ page + 1 }}
 					</button>
 				</div>
-
 				<div class="btn-group" role="group" aria-label="Third group">
 					<button [disabled]="currentPage >= totalPages - 1" type="button" class="btn btn-primary"
 						[routerLink]="['/especialidades', currentPage + 1]">
@@ -80,6 +76,5 @@
 			</div>
 		</div>
 	</div>
+	<!-- FIN CONTENIDO -->
 </div>
-
-<!-- FIN CONTENIDO DE LA APLICACION-->
