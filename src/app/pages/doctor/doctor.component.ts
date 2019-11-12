@@ -13,7 +13,6 @@ import { BaseComponent } from '../base/base.component';
 export class DoctorComponent extends BaseComponent implements OnInit {
 
 
-	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 	doctor:Doctor		= null;
 	is_loading:boolean	= false;
