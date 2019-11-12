@@ -1,12 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
+<div>
+  <mat-toolbar>
+      <mat-buttons slot="start">
         <ion-back-button></ion-back-button>
         </ion-buttons>
     <ion-title>agregar-proveedor</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
+  <mat-toolbar>
+</div>
+<div>
     <form>
         <ion-list lines="full" class="ion-no-margin ion-no-padding">
     
@@ -50,4 +50,4 @@
           <ion-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</ion-button>
         </div>
       </form>
-</ion-content>
+</div>

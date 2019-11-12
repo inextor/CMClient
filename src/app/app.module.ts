@@ -60,7 +60,9 @@ import { SeleccionarCentroMedicoComponent } from './components/seleccionar-centr
 import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
 import { SeleccionarDoctorComponent } from './components/seleccionar-doctor/seleccionar-doctor.component';
 import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/seleccionar-paciente.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -122,7 +124,8 @@ import { HeaderComponent } from './components/header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
 	  { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true }
