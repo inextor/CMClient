@@ -1,21 +1,133 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { ConfigurarHorarioComponent } from './pages/configurar-horario/configurar-horario.component';
+import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
+
+import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
+import { VentasComponent} from './pages/ventas/ventas.component';
+import { PacientesComponent} from './pages/pacientes/pacientes.component';
+import { PacienteComponent} from './pages/paciente/paciente.component';
+import { AgregarCitaComponent} from './pages/agregar-cita/agregar-cita.component';
+import { AgregarUsuarioComponent}       from './pages/agregar-usuario/agregar-usuario.component';
+import { ServiciosComponent            } from './pages/servicios/servicios.component';
+import { AgregarServicioComponent      } from './pages/agregar-servicio/agregar-servicio.component';
+import { AgregarServicioComponent      } from './pages/agregar-servicio/agregar-servicio.component';
+import { UsuariosComponent             } from './pages/usuarios/usuarios.component';
+import { LoginComponent                } from './pages/login/login.component';
+import { RegistroComponent             } from './pages/registro/registro.component';
+import { AgregarDoctorComponent        } from './pages/agregar-doctor/agregar-doctor.component';
+import { AgregarOrganizacionComponent  } from './pages/agregar-organizacion/agregar-organizacion.component';
+import { AgregarPacienteComponent      } from './pages/agregar-paciente/agregar-paciente.component';
+import { AgregarPacienteComponent      } from './pages/agregar-paciente/agregar-paciente.component';
+import { AgregarCentroMedicoComponent  } from './pages/agregar-centro-medico/agregar-centro-medico.component';
+import { AgregarCentroMedicoComponent  } from './pages/agregar-centro-medico/agregar-centro-medico.component';
+import { DoctoresComponent             } from './pages/doctores/doctores.component';
+import { DoctorComponent               } from './pages/doctor/doctor.component';
+import { CentrosMedicosComponent       } from './pages/centros-medicos/centros-medicos.component';
+import { EditarPreciosComponent        } from './pages/editar-precios/editar-precios.component';
+import { ModalPageComponent            } from './pages/ver-doctor/modal-page/modal-page.component';
+import { ConfigurarPreguntasComponent  } from './pages/configurar-preguntas/configurar-preguntas.component';
+import { ConfigurarPreguntasComponent  } from './pages/configurar-preguntas/configurar-preguntas.component';
+import { LlenarHistoriaClinicaComponent} from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
+import { MisCitasComponent             } from './pages/mis-citas/mis-citas.component';
+import { EditarDoctorComponent         } from './pages/editar-doctor/editar-doctor.component';
+import { PagosComponent                } from './pages/pagos/pagos.component';
+import { GastosComponent               } from './pages/gastos/gastos.component';
+import { AgregarTipoGastoComponent     } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
+import { AgregarTipoGastoComponent     } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
+import { BaseComponent                 } from './pages/base/base.component';
+import { AgregarFamiliarComponent      } from './pages/agregar-familiar/agregar-familiar.component';
+import { AgregarFamiliarComponent      } from './pages/agregar-familiar/agregar-familiar.component';
+import { AgregarGastoComponent         } from './pages/agregar-gasto/agregar-gasto.component';
+import { ConsultasComponent            } from './pages/consultas/consultas.component';
+import { ConsultaComponent             } from './pages/consulta/consulta.component';
+import { AgregarPreguntaComponent      } from './pages/agregar-pregunta/agregar-pregunta.component';
+import { AgregarPreguntaComponent      } from './pages/agregar-pregunta/agregar-pregunta.component';
+import { InventarioComponent           } from './pages/inventario/inventario.component';
+import { RequisicionesComponent        } from './pages/requisiciones/requisiciones.component';
+import { AgregarProveedorComponent     } from './pages/agregar-proveedor/agregar-proveedor.component';
+import { ProveedoresComponent          } from './pages/proveedores/proveedores.component';
+import { AgregarProveedorComponent     } from './pages/agregar-proveedor/agregar-proveedor.component';
+import { EspecialidadesComponent       } from './pages/especialidades/especialidades.component';
+import { AgregarEspecialidadComponent  } from './pages/agregar-especialidad/agregar-especialidad.component';
+import { AgregarEspecialidadComponent  } from './pages/agregar-especialidad/agregar-especialidad.component';
+import { AgregarTipoPrecioComponent    } from './pages/agregar-tipo-precio/agregar-tipo-precio.component';
+import { AgregarPrecioComponent        } from './pages/agregar-precio/agregar-precio.component';
+import { AgregarTipoPrecioComponent    } from './pages/agregar-tipo-precio/agregar-tipo-precio.component';
+import { TipoPreciosComponent          } from './pages/tipo-precios/tipo-precios.component';
+
+
+
+
 
 const routes: Routes = [
-	{
-		path: '',
-		component: LoginComponent,
-		pathMatch: 'full'
-	},
-/*
+	{ path: '', component: LoginComponent, pathMatch: 'full' },
+{ path: 'doctores/:idDoctor/centro-medico/:idCentroMedico/agendar-cita/:idPaciente', component: 'AgendarCitaComponent', pathMatch: 'full'},
+{ path: 'agendar-cita', component: 'AgendarCitaComponent', pathMatch: 'full'},
+{ path: 'ventas', component: 'VentasComponent', pathMatch: 'full'},
+{ path: 'citas', component: 'CitasComponent', pathMatch: 'full'},
+{ path: 'citas/doctor/:id_doctor', component: 'CitasComponent', pathMatch: 'full'},
+{ path: 'citas/paciente/:id_paciente', component: 'CitasComponent', pathMatch: 'full'},
+{ path: 'pacientes', component: 'PacientesComponent', pathMatch: 'full'},
+{ path: 'paciente', component: 'PacienteComponent', pathMatch: 'full'},
+{ path: 'cita', component: 'CitaComponent', pathMatch: 'full'},
+{ path: 'agregar-usuario', component: 'AgregarUsuarioComponent', pathMatch: 'full'},
+{ path: 'servicios', component: 'ServiciosComponent', pathMatch: 'full'},
+{ path: 'agregar-producto', component: 'AgregarServicioComponent', pathMatch: 'full'},
+{ path: 'editar-producto/:id', component: 'AgregarServicioComponent', pathMatch: 'full'},
+{ path: 'usuarios', component: 'UsuariosComponent', pathMatch: 'full'},
+{ path: 'login', component: 'LoginComponent', pathMatch: 'full'},
+{ path: 'registro', component: 'RegistroComponent', pathMatch: 'full'},
+{ path: 'agregar-doctor', component: 'AgregarDoctorComponent', pathMatch: 'full'},
+{ path: 'agregar-organizacion', component: 'AgregarOrganizacionComponent', pathMatch: 'full'},
+{ path: 'editar-paciente/:id_paciente', component: 'AgregarPacienteComponent', pathMatch: 'full'},
+{ path: 'agregar-paciente', component: 'AgregarPacienteComponent', pathMatch: 'full'},
+{ path: 'editar-centro-medico/:id', component: 'AgregarCentroMedicoComponent', pathMatch: 'full'},
+{ path: 'agregar-centro-medico', component: 'AgregarCentroMedicoComponent', pathMatch: 'full'},
+{ path: 'doctores', component: 'DoctoresComponent', pathMatch: 'full'},
+{ path: 'doctor/:id_usuario', component: 'DoctorComponent', pathMatch: 'full'},
+{ path: 'centros-medicos', component: 'CentrosMedicosComponent', pathMatch: 'full'},
+{ path: 'editar-precios/:id', component: 'EditarPreciosComponent', pathMatch: 'full'},
+{ path: 'modal-page', component: 'ModalPageComponent', pathMatch: 'full'},
+{ path: 'configurar-preguntas', component: 'ConfigurarPreguntasComponent', pathMatch: 'full'},
+{ path: 'configurar-especialidad/:idEspecialidad', component: 'ConfigurarPreguntasComponent', pathMatch: 'full'},
+{ path: 'llenar-historia-clinica/doctor/:idDoctor/paciente/:idPaciente', component: 'LlenarHistoriaClinicaComponent', pathMatch: 'full'},
+{ path: 'mis-citas', component: 'MisCitasComponent', pathMatch: 'full'},
+{ path: 'editar-doctor/:id', component: 'EditarDoctorComponent', pathMatch: 'full'},
+{ path: 'pagos', component: 'PagosComponent', pathMatch: 'full'},
+{ path: 'gastos', component: 'GastosComponent', pathMatch: 'full'},
+{ path: 'agregar-tipo-gasto', component: 'AgregarTipoGastoComponent', pathMatch: 'full'},
+{ path: 'editar-tipo-gasto/:id', component: 'AgregarTipoGastoComponent', pathMatch: 'full'},
+{ path: 'base', component: 'BaseComponent', pathMatch: 'full'},
+{ path: 'editar-paciente/:id_paciente', component: 'AgregarFamiliarComponent', pathMatch: 'full'},
+{ path: 'agregar-familiar/:id_usuario', component: 'AgregarFamiliarComponent', pathMatch: 'full'},
+{ path: 'agregar-gasto', component: 'AgregarGastoComponent', pathMatch: 'full'},
+{ path: 'consultas', component: 'ConsultasComponent', pathMatch: 'full'},
+{ path: 'consulta/:id_paciente/:id_doctor', component: 'ConsultaComponent', pathMatch: 'full'},
+{ path: 'agregar-pregunta', component: 'AgregarPreguntaComponent', pathMatch: 'full'},
+{ path: 'editar-pregunta/:id', component: 'AgregarPreguntaComponent', pathMatch: 'full'},
+{ path: 'inventario', component: 'InventarioComponent', pathMatch: 'full'},
+{ path: 'requisiciones', component: 'RequisicionesComponent', pathMatch: 'full'},
+{ path: 'agregar-proveedor', component: 'AgregarProveedorComponent', pathMatch: 'full'},
+{ path: 'proveedores', component: 'ProveedoresComponent', pathMatch: 'full'},
+{ path: 'editar-proveedor/:id', component: 'AgregarProveedorComponent', pathMatch: 'full'},
+{ path: 'especialidades/:page', component: 'EspecialidadesComponent', pathMatch: 'full'},
+{ path: 'agregar-especialidad', component: 'AgregarEspecialidadComponent', pathMatch: 'full'},
+{ path: 'editar-especialidad/:id', component: 'AgregarEspecialidadComponent', pathMatch: 'full'},
+{ path: 'agregar-tipo-precio', component: 'AgregarTipoPrecioComponent', pathMatch: 'full'},
+{ path: 'agregar-precio', component: 'AgregarPrecioComponent', pathMatch: 'full'},
+{ path: 'editar-tipo-precio/:id', component: 'AgregarTipoPrecioComponent', pathMatch: 'full'},
+{ path: 'tipo-precios/:page', component: 'TipoPreciosComponent', pathMatch: 'full'},
+	/*
+	{ path: 'configurar-horario/doctor/:idDoctor/centroMedico/:idCentroMedico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
+	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},
 	{ path: 'invitado', redirectTo: '/doctores', pathMatch: 'full',canActivate:[AuthGuard] },
 	{ path: '', redirectTo: '/home', pathMatch: 'full',canActivate:[AuthGuard] },
 	{ path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),canActivate:[AuthGuard] },
 	{ path: 'list', loadChildren: () => import('./list/list.module').then(m => m.ListPageModule), canActivate:[AuthGuard] },
-	/* { path: 'agregar-usuario', component: AgregarUsuarioPage, pathMatch: 'full' }, 
-	{path: 'configurar-horario/doctor/:idDoctor/centroMedico/:idCentroMedico',loadChildren:'./pages/configurar-horario/configurar-horario.module#ConfigurarHorarioPageModule'},
-	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},
+	/* { path: 'agregar-usuario', component: AgregarUsuarioPage, pathMatch: 'full' },
+	 *
 	{ path: 'doctores/:idDoctor/centro-medico/:idCentroMedico/agendar-cita/:idPaciente', loadChildren: './pages/agendar-cita/agendar-cita.module#AgendarCitaPageModule', canActivate:[AuthGuard] },
 	{ path: 'agendar-cita', loadChildren: './pages/agendar-cita/agendar-cita.module#AgendarCitaPageModule', canActivate:[AuthGuard] },
 	{ path: 'ventas', loadChildren: './pages/ventas/ventas.module#VentasPageModule',canActivate:[AuthGuard],data:{roles:[Roles.Admin]} },
