@@ -1,9 +1,15 @@
 .navbar{
     background-color: #019eb6 !important;
+    height: 60px;
 }
 
 .logoMenu{
     height: 10% !important;
     width: 10% !important;
     padding: 0% !important;
+}
+
+.iconNavBar{
+    height: 10px;
+    width: 10px;
 }
