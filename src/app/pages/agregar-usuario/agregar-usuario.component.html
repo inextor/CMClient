@@ -2,7 +2,7 @@
 
 <div class="container">
       <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <div lines="full" class="list ion-no-padding">
 
           <div class="form-group">
             <label position="stacked">Nombre<span color="danger">*</span></label>
@@ -29,12 +29,12 @@
             <label position="stacked" >Confirmar contraseña</label>
             <input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena"></input>
           </div>
-        </ion-list>
+        </div>
 
 		<app-loading *ngIf="is_loading"></app-loading>
 
         <div class="ion-padding">
-          <button type="button" expand="block" type="submit" class="ion-no-margin" (click)="registrarse()" [disabled]="is_loading">Registrarse</button>
+          <button type="button" expand="block" type="submit" class="" (click)="registrarse()" [disabled]="is_loading">Registrarse</button>
         </div>
       </form>
 </div>

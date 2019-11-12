@@ -1,49 +1,49 @@
+<app-header title="Agregar Pregunta"></app-header>
 <div>
-	<mat-toolbar>
-		<title>agregar-pregunta</title>
-	</mat-toolbar>
+	<title>agregar-pregunta</title>
 </div>
 
 <div>
 
 
-		<!-- <ion-label position="floating">Pregunta</ion-label> -->
-		<input [(ngModel)]="pregunta.pregunta"></input>
+	<!-- <label position="floating">Pregunta</label> -->
+	<input [(ngModel)]="pregunta.pregunta">
 
 
 
-<!-- 
-		<ion-label>Es Pregunta General</ion-label> -->
-		<ion-select [(ngModel)]="pregunta.tipo_pregunta" placeholder="Seleccione una opción" interface="popover">
-			<ion-select-option value="PREGUNTA_ESPECIFICA">Pregunta Especifica</ion-select-option>
-			<ion-select-option value="PREGUNTA_GENERAL">Pregunta General</ion-select-option>
-		</ion-select>
+	<!--
+	 <label>Es Pregunta General</label> -->
+	 <select [(ngModel)]="pregunta.tipo_pregunta" placeholder="Seleccione una opción" interface="popover">
+		 <option value="PREGUNTA_ESPECIFICA">Pregunta Especifica</option>
+		 <option value="PREGUNTA_GENERAL">Pregunta General</option>
+	 </select>
 
 
-	<!-- < *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'"> -->
-		<!-- <ion-label>Depende de pregunta</ion-label> -->
-		<ion-select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
-			<ion-select-option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</ion-select-option>
-		</ion-select>
+	 < *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
+	 <!-- <label>Depende de pregunta</label> -->
+	 <select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
+		 <option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</option>
+	 </select>
 
 
-	
-		<!-- <ion-label>Es Pregunta rápida (SI/NO)</ion-label> -->
-		<ion-select [(ngModel)]="pregunta.es_pregunta_binaria" placeholder="Seleccione una opción" interface="popover">
-			<ion-select-option value="SI">SI</ion-select-option>
-			<ion-select-option value="NO">NO</ion-select-option>
-		</ion-select>
-<!-- 
 
-		<ion-label>Depende del Genero?</ion-label> -->
-		<ion-select [(ngModel)]="pregunta.depende_del_genero" placeholder="Seleccione una opción" interface="popover">
-			<ion-select-option value="NO">NO</ion-select-option>
-			<ion-select-option value="FEMENINO">Femenino</ion-select-option>
-			<ion-select-option value="MASCULINO">Masculino</ion-select-option>
+	 <!-- <label>Es Pregunta rápida (SI/NO)</label> -->
+	 <select [(ngModel)]="pregunta.es_pregunta_binaria" placeholder="Seleccione una opción" interface="popover">
+		 <option value="SI">SI</option>
+		 <option value="NO">NO</option>
+	 </select>
+	 <!--
+
+	  <label>Depende del Genero?</label> -->
+	  <select [(ngModel)]="pregunta.depende_del_genero" placeholder="Seleccione una opción" interface="popover">
+		  <option value="NO">NO</option>
+		  <option value="FEMENINO">Femenino</option>
+		  <option value="MASCULINO">Masculino</option>
+	  </select>
 
 
-	<div class="ion-padding">
-		<mat-button expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</mat-button>
-	</div>
+	  <div class="ion-padding">
+		  <button expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
+	  </div>
 
 </div>

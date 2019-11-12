@@ -1,22 +1,17 @@
-<ion-header translucent>
-	<ion-toolbar>
-		<ion-title>Seleccionar Doctor</ion-title>
-		<ion-buttons slot="end">
-			<ion-button (click)="dismissModal()">Cerrar</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
-</ion-header>
-<ion-content fullscreen>
-	<ion-list *ngFor="let doctor of doctores">
-		<ion-item (click)="seleccionarDoctor(doctor)">
-			<ion-avatar slot="start">
-				<!--ion-img src="./avatar-gollum.jpg"/-->
+<app-header></app-header>
+<h1>Seleccionar Doctor</h1>
+<button type="button" (click)="dismissModal()">Cerrar</button>
+<div class="container" fullscreen>
+	<div class="list" *ngFor="let doctor of doctores">
+		<div class="form-group" (click)="seleccionarDoctor(doctor)">
+			<!-- ion-avatar slot="start">
+				<ion-img src="./avatar-gollum.jpg"/>
 				<ion-icon slot="start" name="home"></ion-icon>
-			</ion-avatar>
-			<ion-label>
+			</ion-avatar-->
+			<label>
 				<h2>{{doctor.nombre}}</h2>
 				<!--p>Sneaky little hobbitses</p-->
-			</ion-label>
-		</ion-item>
-	</ion-list>
-</ion-content>
+			</label>
+		</div>
+	</div>
+</div>

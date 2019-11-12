@@ -1,4 +1,4 @@
-<app-header title=""></app-header>
+<app-header title="Agregar Especialidad"></app-header>
 
 <img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
 <div class="container">
@@ -11,11 +11,8 @@
 		<!--CONTENIDO DE LA APLICACION-->
 		<div class="p-2 flex-fill flex-wrap ">
 			<div class="card">
-				<ion-toolbar>
-					<h1>Agregar Especialidad</h1>
-				</ion-toolbar>
 				<form>
-					<div  class="list ion-no-margin ion-no-padding">
+					<div  class="list ">
 
 						<div class="form-group">
 							<label position="stacked">Nombre Especialidad<span color="danger">*</span></label>
@@ -28,8 +25,8 @@
 
 					<app-loading *ngIf="is_loading"></app-loading>
 
-					<div class="ion-padding">
-						<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="agregar()" [disabled]="is_loading">Agregar</button>
+					<div class="">
+						<button type="button" expand="block" type="submit" class="" (click)="agregar()" [disabled]="is_loading">Agregar</button>
 					</div>
 				</form>
 			</div>
