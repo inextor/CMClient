@@ -139,6 +139,15 @@ export class RestService {
 	}
 
 
+	getCurrentCentroMedico()
+	{
+		let c_id = localStorage.getItem('id_centro_medico');
+		if( c_id !== null && c_id !== undefined )
+			return parseInt( c_id );
+
+		return null;
+	}
+
 	logout() {
 		// remove user from local storage and set current user to null
 		localStorage.clear();

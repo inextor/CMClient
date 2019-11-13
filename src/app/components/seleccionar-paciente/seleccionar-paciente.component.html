@@ -1,17 +1,14 @@
-<app-header></app-header>
-<h1>Seleccionar Paciente</h1>
-<button type="button" (click)="dismissModal()">Cerrar</button>
-<div class="container" fullscreen>
-	<div class="list" *ngFor="let paciente of pacientes">
-		<div class="form-group" (click)="seleccionarPaciente(paciente)">
-			<!--ion-avatar slot="start">
-				<ion-img src="./avatar-gollum.jpg"/>
-				<ion-icon slot="start" name="home"></ion-icon>
-			</ion-avatar-->
-			<label>
-				<h2>{{paciente.nombre}} {{paciente.apellidos}}</h2>
-				<!--p>Sneaky little hobbitses</p-->
-			</label>
+<div [ngClass]="{ 'custom-modal':true, 'd-none': !show}">
+	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
+	<div>
+		<h2>Seleccione un Paciente</h2>
+		<div>
+			<input class="form-control" type="text" placeholder="Buscar..." id="searchPaciente" (keyup)="onKeyPressed($event)">
 		</div>
+		<ul class="list-group mt-3">
+			<li *ngFor="let p of pacientes" class="list-group-item"  (click)="seleccionarPaciente( p )">
+				{{p.nombre}} {{p.apellidos}}
+			</li>
+		</ul>
 	</div>
 </div>

@@ -14,6 +14,7 @@ import {debounceTime} from 'rxjs/operators';
 export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	@Input() show:boolean;
+	@Input() showCancel:boolean;
 	@Output() selected = new EventEmitter<Centro_Medico>();
 
 

@@ -23,7 +23,7 @@
 									<ion-icon name="arrow-round-back"></ion-icon></button>
 							</buttons>
 						</div -->
-					
+
 						<table class="basica">
 							<thead>
 								<tr>
@@ -41,17 +41,11 @@
 									<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
 									<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
 									<td>
-										<button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']"
-											[appAccess]="['Paciente']">Ver</button>
-										<button type="button" *ngIf="currentUser" size="small" (click)="editarHorario(doctor)"
-											[appAccess]="['Recepcionista']">Editar Horario</button>
-										<button type="button" *ngIf="currentUser" size="small"
-											(click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista']">Agendar
-											Cita</button>
-										<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/citas','doctor',doctor.id]"
-											color="secondary" [appAccess]="['Recepcionista']">Citas</button>
-										<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/editar-doctor',doctor.id]"
-											color="secondary" [appAccess]="['Recepcionista']">Editar Doctor</button>
+										<button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</button>
+										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm mr-2" (click)="editarHorario(doctor)" [appAccess]="['Recepcionista']">Editar Horario</button>
+										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm mr-2" (click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista','admin','doctor']">Agendar Cita</button>
+										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm mr-2" [routerLink]="['/citas','doctor',doctor.id]" color="secondary" [appAccess]="['Recepcionista','admin','doctor']">Citas</button>
+										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm mr-2" [routerLink]="['/editar-doctor',doctor.id]" color="secondary" [appAccess]="['Recepcionista','admin','doctor']">Editar Doctor</button>
 									</td>
 								</tr>
 							</tbody>
@@ -64,3 +58,5 @@
 		</div>
 	</div>
 </div>
+<app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" [showCancel]="true" (selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>
+<app-seleccionar-paciente [show]="show_seleccionar_paciente" [showCancel]="true" (selected)="onSeleccionarPacienteNuevaCita($event)"></app-seleccionar-paciente>

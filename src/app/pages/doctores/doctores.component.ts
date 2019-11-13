@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario, Doctor } from '../../models/Modelos';
+import { Usuario, Doctor,Paciente,Centro_Medico } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
 import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-centro-medico/seleccionar-centro-medico.component';
 import { SeleccionarPacienteComponent } from '../../components/seleccionar-paciente/seleccionar-paciente.component';
+import { BaseComponent } from '../base/base.component';
 
 
 
@@ -13,20 +14,14 @@ import { SeleccionarPacienteComponent } from '../../components/seleccionar-pacie
   templateUrl: './doctores.component.html',
   styleUrls: ['./doctores.component.css']
 })
-export class DoctoresComponent implements OnInit {
+export class DoctoresComponent extends BaseComponent implements OnInit {
 	currentUser: Usuario;
-	constructor(
-		private rest:RestService,
-		private router:Router,
-		private route:ActivatedRoute
-	)
-	{
-		//this.rest.currentUser.subscribe(x => this.currentUser = x);
-	}
+	show_seleccionar_paciente
 
 	doctores:Doctor[] = [];
 	is_loading:boolean = false;
 	centro_medico = { id: 1 }; ///XXX sacarlo de la sesion del recepcionista
+	selectedDoctor:Doctor = null;
 
 	ngOnInit() {
 		this.currentUser = this.rest.getUsuarioSesion();
@@ -61,21 +56,6 @@ export class DoctoresComponent implements OnInit {
 			this.showError( this.rest.getErrorMessage( error ) );
 			this.is_loading = false;
 		});
-	}
-
-	async showError(message:string)
-	{
-		/*
-		const alert = await this.alertController.create
-		({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
-
-		await alert.present();
-		*/
 	}
 
 	editarHorario(doctor:Doctor)
@@ -127,47 +107,14 @@ export class DoctoresComponent implements OnInit {
 
 	seleccionarPacienteNuevaCitaCon(doctor)
 	{
-		/*
-		//Buscar doctores en base a la centro medico de la recepcion
-		let s = this.rest.getSesion();
+		this.selectedDoctor = doctor;
+		this.show_seleccionar_paciente = true;
+	}
 
-		//this.rest.getPacientes().subscribe(response=>
-		this.rest.paciente.getAll({}).subscribe(response =>
-		{
-			let pacientes = response.datos;
-
-			if( pacientes.length == 0 )
-			{
-				console.log("ESTO NUNCA DEBIO SUCEDER: por favor reportarlo, no existen pacientes medicos");
-			}
-			else
-			{
-				this.modalController.create({
-					component: SeleccionarPacienteComponent,
-					componentProps: {
-						'pacientes' : pacientes
-					},
-				}).then((modal)=>
-				{
-					console.log("A modal?",modal);
-					modal.onDidDismiss().then((d) => {
-						//navigate
-						let paciente = d.data;
-						console.log("Paciente",paciente);
-						//this.router.navigate(['/pacientes',doctor.id, 'configurar-horario',centro_medico.id]);
-						//Agendar Cita
-						this.router.navigate(['/doctores',doctor.id,'centro-medico',this.centro_medico.id,'agendar-cita',paciente.id]);
-					})
-
-					modal.present().then((result)=>{
-						console.log('Todo bien',result);
-					},(error)=>
-					{
-						console.error( 'error',error );
-					});
-				});
-			}
-		});
-		*/
+	onSeleccionarPacienteNuevaCita(paciente:Paciente)
+	{
+		let cm_id = this.rest.getCurrentCentroMedico();
+		if( cm_id )
+			this.router.navigate(['/doctores',this.selectedDoctor.id,'centro-medico',cm_id,'agendar-cita',paciente.id]);
 	}
 }

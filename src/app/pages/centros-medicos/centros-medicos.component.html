@@ -26,10 +26,8 @@
 							<tr *ngFor="let centro_medico of centros_medicos">
 								<td>{{centro_medico.nombre}}</td>
 								<td>
-									<button type="button" size="small"
-										[routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
-									<button type="button" size="small" color="secondary"
-										[routerLink]="['/servicios',centro_medico.id]">Servicios</button>
+									<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
+									<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/servicios',centro_medico.id]">Servicios</button>
 								</td>
 							</tr>
 						</tbody>
