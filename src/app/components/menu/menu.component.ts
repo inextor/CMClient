@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
-import { Observable, BehaviorSubject } from "rxjs";
 
 @Component({
   selector: "app-menu",
@@ -8,7 +7,6 @@ import { Observable, BehaviorSubject } from "rxjs";
   styleUrls: ["./menu.component.css"]
 })
 export class MenuComponent implements OnInit {
-  private currentUserSubject: BehaviorSubject<any>;
   constructor(private rest: RestService) {}
 
   ngOnInit() {}
@@ -19,6 +17,7 @@ export class MenuComponent implements OnInit {
     // localStorage.removeItem('usuario');
     // localStorage.removeItem('session_token');
     // localStorage.removeItem('id_organizacion');
-    this.currentUserSubject.next(null);
+    // this.currentUserSubject.next(null);
+    window.location.reload()
   }
 }
