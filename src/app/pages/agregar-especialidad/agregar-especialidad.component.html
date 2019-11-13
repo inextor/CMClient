@@ -1,34 +1,39 @@
 <!-- NAVBAR -->
-<app-header title="Agregar especialidades"></app-header>
-<!-- FIN NAVBAR -->
-<!-- MENU -->
-<div class="d-flex flex-wrap">
-
-	<app-menu></app-menu>
-
-	<!-- FIN MENU -->
-	<!-- CONTENIDO -->
-	<div class="p-2 flex-fill flex-wrap ">
-		<div class="card p-3">
-			<!--CONTENIDO DE LA APLICACION-->
-			<h1>Agregar especialidad</h1>
-			<form>
-				<form>
-
-					<div class="form-group">
-						<label position="stacked">Nombre Especialidad<span color="danger">*</span></label>
-						<input required type="text" class="form-control" name="nombre"
-							[(ngModel)]="especialidad.nombre">
-					</div>
-					<div class="form-group">
-						<label position="stacked">Abreviacion<span color="danger">*</span></label>
-						<input required type="text" class="form-control" name="abreviacion"
-							[(ngModel)]="especialidad.abreviacion">
-					</div>
-				</form>
-				<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
-					[disabled]="is_loading">Agregar</button>
-			</form>
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Especialidad</h1>
+					<form>
+						<form>
+					
+							<div class="form-group">
+								<label position="stacked">Nombre Especialidad<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="especialidad.nombre">
+							</div>
+							<div class="form-group">
+								<label position="stacked">Abreviacion<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="abreviacion" [(ngModel)]="especialidad.abreviacion">
+							</div>
+						</form>
+						<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+							[disabled]="is_loading">Agregar</button>
+					</form>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-		<!-- FIN CONTENIDO DE LA APLICACION-->
 	</div>
+</div>
+

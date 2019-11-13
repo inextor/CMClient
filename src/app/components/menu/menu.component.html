@@ -1,50 +1,56 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
     <div class=" list-group-flush">
-        <div class="sidebar" >
-          <a class="list-group-item list-group-item-action color1 group"><img
-                src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />Centros medicos</a>
+        <div class="sidebar">
+            <a type="button" class="btn list-group-item list-group-item-action color1 group"><img
+                    src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />Centros medicos</a>
         </div>
-        <div id="submenucentrosmedicos">
+        <div>
             <div>
-                <a href="#" [routerLink]="['/especialidades',0]" class="list-group-item list-group-item-action color1 group">Especialidades
-                </a>
-            </div>
-            <div>
-                <a [routerLink]="['/centros-medicos']" href="#" class="list-group-item list-group-item-action color1 group">Clinicas </a>
-            </div>
-            <div>
-                <a [routerLink]="['/tipo-precios',0]" href="/tipo-precios/0" class="list-group-item list-group-item-action color1 group">Precios </a>
-            </div>
-            <div>
-                <a [routerLink]="['/tipo-precios',0]" class="list-group-item list-group-item-action color1 group">Servicios</a>
-            </div>
-            <div>
-                <a href="" class="list-group-item list-group-item-action color1 group">Reportes </a>
+                <div>
+                    <a href="#" [routerLink]="['/especialidades',0]"
+                        class="list-group-item list-group-item-action color1 group">Especialidades
+                    </a>
+                </div>
+                <div>
+                    <a [routerLink]="['/centros-medicos']" href="#"
+                        class="list-group-item list-group-item-action color1 group">Clinicas </a>
+                </div>
+                <div>
+                    <a [routerLink]="['/tipo-precios',0]" href="/tipo-precios/0"
+                        class="list-group-item list-group-item-action color1 group">Precios </a>
+                </div>
+                <div>
+                    <a [routerLink]="['/tipo-precios',0]"
+                        class="list-group-item list-group-item-action color1 group">Servicios</a>
+                </div>
+                <div>
+                    <a href="" class="list-group-item list-group-item-action color1 group">Reportes </a>
+                </div>
             </div>
         </div>
         <div class="sidebar">
-			<a href="#" [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
-				<img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />Doctores
-			</a>
-		</div>
-		<div class="sidebar">
-			<a href="#" [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
-				<img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />Pacientes
-			</a>
-		</div>
-		<div class="sidebar">
-			<a href="#" class="list-group-item list-group-item-action color4 group ">
-				<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />Citas
-			</a>
-		</div>
-		<div class="sidebar">
-			<button type="button" (click)="logout()" class="list-group-item list-group-item-action color5 group">
-				<img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />Logout
+            <a href="#" [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
+                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />Doctores
+            </a>
+        </div>
+        <div class="sidebar">
+            <a href="#" [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
+                <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />Pacientes
+            </a>
+        </div>
+        <div class="sidebar">
+            <a href="#" class="list-group-item list-group-item-action color4 group ">
+                <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />Citas
+            </a>
+        </div>
+        <div class="sidebar">
+            <button type="button" (click)="logout()" class="list-group-item list-group-item-action color5 group">
+                <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />Logout
             </button>
         </div>
     </div>
-</div>s
+</div>
 <!-- /#sidebar-wrapper -->
 
 
