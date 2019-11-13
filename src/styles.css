@@ -194,5 +194,29 @@ body
 	overflow: auto;
 }
 
+.custom-modal .hidden
+{
+	display: none;
+}
+.custom-modal
+{
+	position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 499; background-color: rgba( 0,0,0,0.6); pointer-events: all;
+}
 
-
+.custom-modal > div
+{
+	color: #464646;
+	background-color: white;
+	border-radius: 5px;
+	min-width: 270px;
+	min-height: 50px;
+	padding: 15px;
+	text-align: center;
+	overflow: hidden;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 500;
+	font-size: 16px;
+}
