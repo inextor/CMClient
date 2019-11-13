@@ -60,10 +60,21 @@ const routes: Routes = [
     path:
       "doctores/:idDoctor/centro-medico/:idCentroMedico/agendar-cita/:idPaciente",
     component: AgendarCitaComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "agendar-cita", component: AgendarCitaComponent, pathMatch: "full" },
-  { path: "ventas", component: VentasComponent, pathMatch: "full" },
+  {
+    path: "agendar-cita",
+    component: AgendarCitaComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "ventas",
+    component: VentasComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   //{ path: 'citas', component: CitasComponent, pathMatch: 'full'},
   //{ path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full'},
   //{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
@@ -73,167 +84,259 @@ const routes: Routes = [
   {
     path: "agregar-usuario",
     component: AgregarUsuarioComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "servicios", component: ServiciosComponent, pathMatch: "full" },
+  {
+    path: "servicios",
+    component: ServiciosComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "agregar-producto",
     component: AgregarServicioComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "editar-producto/:id",
     component: AgregarServicioComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "usuarios",
+    component: UsuariosComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "login",
+    component: LoginComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   { path: "usuarios", component: UsuariosComponent, pathMatch: "full" },
   { path: "login", component: LoginComponent, pathMatch: "full" },
   {
     path: "agregar-doctor",
     component: AgregarDoctorComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-organizacion",
     component: AgregarOrganizacionComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   //{ path: 'editar-paciente/:id_paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
   //{ path: 'agregar-paciente', component: AgregarPacienteComponent, pathMatch: 'full'},
   {
     path: "editar-centro-medico/:id",
     component: AgregarCentroMedicoComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-centro-medico",
     component: AgregarCentroMedicoComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "doctores", component: DoctoresComponent, pathMatch: "full" },
-  { path: "doctor/:id_usuario", component: DoctorComponent, pathMatch: "full" },
+  {
+    path: "doctores",
+    component: DoctoresComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "doctor/:id_usuario",
+    component: DoctorComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "centros-medicos",
     component: CentrosMedicosComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "editar-precios/:id",
     component: EditarPreciosComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   //{ path: 'modal-page', component: ModalPageComponent, pathMatch: 'full'},
   {
     path: "configurar-preguntas",
     component: ConfigurarPreguntasComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "configurar-especialidad/:idEspecialidad",
     component: ConfigurarPreguntasComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "llenar-historia-clinica/doctor/:idDoctor/paciente/:idPaciente",
     component: LlenarHistoriaClinicaComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "mis-citas", component: MisCitasComponent, pathMatch: "full" },
+  {
+    path: "mis-citas",
+    component: MisCitasComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "editar-doctor/:id",
     component: EditarDoctorComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "pagos", component: PagosComponent, pathMatch: "full" },
-  { path: "gastos", component: GastosComponent, pathMatch: "full" },
+  {
+    path: "pagos",
+    component: PagosComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "gastos",
+    component: GastosComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "agregar-tipo-gasto",
     component: AgregarTipoGastoComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "editar-tipo-gasto/:id",
     component: AgregarTipoGastoComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "base", component: BaseComponent, pathMatch: "full" },
+  {
+    path: "base",
+    component: BaseComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "editar-paciente/:id_paciente",
     component: AgregarFamiliarComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-familiar/:id_usuario",
     component: AgregarFamiliarComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-gasto",
     component: AgregarGastoComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "consultas", component: ConsultasComponent, pathMatch: "full" },
+  {
+    path: "consultas",
+    component: ConsultasComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "consulta/:id_paciente/:id_doctor",
     component: ConsultaComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-pregunta",
     component: AgregarPreguntaComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "editar-pregunta/:id",
     component: AgregarPreguntaComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "inventario", component: InventarioComponent, pathMatch: "full" },
+  {
+    path: "inventario",
+    component: InventarioComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "requisiciones",
     component: RequisicionesComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-proveedor",
     component: AgregarProveedorComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
-  { path: "proveedores", component: ProveedoresComponent, pathMatch: "full" },
+  {
+    path: "proveedores",
+    component: ProveedoresComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
   {
     path: "editar-proveedor/:id",
     component: AgregarProveedorComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "especialidades/:page",
     component: EspecialidadesComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-especialidad",
     component: AgregarEspecialidadComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "editar-especialidad/:id",
     component: AgregarEspecialidadComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "agregar-tipo-precio",
     component: AgregarTipoPrecioComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
    {
     path: "editar-tipo-precio/:id",
     component: AgregarTipoPrecioComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "tipo-precios/:page",
     component: TipoPreciosComponent,
-    pathMatch: "full"
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   },
   {
     path: "home",
