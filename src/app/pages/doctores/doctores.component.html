@@ -1,38 +1,66 @@
-<app-header title="Doctores"></app-header>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Doctores</h1>
+					<div class="container">
+						<!-- div *ngIf="currentUser" [appAccess]="['Paciente']">
+							<button type="button"s slot="start">
+								<button type="button" size="small" slot="start" [routerLink]="['/mis-citas']" >
+									<span class="oi" data-glyph="arrow-round-back" title="icon name" aria-hidden="true"></span>
+									<ion-icon name="arrow-round-back"></ion-icon></button>
+							</buttons>
+						</div -->
+					
+						<table class="basica">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Especialidad</th>
+									<th>Telefono</th>
+									<th>Acciones </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let doctor of doctores">
+									<td>{{doctor.nombre}}</td>
+									<td>{{doctor.especialidad}}</td>
+									<td>{{doctor.telefono}}</td>
+									<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
+									<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
+									<td>
+										<button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']"
+											[appAccess]="['Paciente']">Ver</button>
+										<button type="button" *ngIf="currentUser" size="small" (click)="editarHorario(doctor)"
+											[appAccess]="['Recepcionista']">Editar Horario</button>
+										<button type="button" *ngIf="currentUser" size="small"
+											(click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista']">Agendar
+											Cita</button>
+										<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/citas','doctor',doctor.id]"
+											color="secondary" [appAccess]="['Recepcionista']">Citas</button>
+										<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/editar-doctor',doctor.id]"
+											color="secondary" [appAccess]="['Recepcionista']">Editar Doctor</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 
-<div class="container">
-	<!-- div *ngIf="currentUser" [appAccess]="['Paciente']">
-		<button type="button"s slot="start">
-			<button type="button" size="small" slot="start" [routerLink]="['/mis-citas']" >
-				<span class="oi" data-glyph="arrow-round-back" title="icon name" aria-hidden="true"></span>
-				<ion-icon name="arrow-round-back"></ion-icon></button>
-		</buttons>
-	</div -->
-
-	<table class="basica">
-		<thead>
-			<tr >
-				<th>Nombre</th>
-				<th>Especialidad</th>
-				<th>Telefono</th>
-				<th>Acciones </th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let doctor of doctores"  >
-				<td>{{doctor.nombre}}</td>
-				<td>{{doctor.especialidad}}</td>
-				<td>{{doctor.telefono}}</td>
-				<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
-				<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
-				<td>
-					<button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</button>
-					<button type="button" *ngIf="currentUser" size="small" (click)="editarHorario(doctor)" [appAccess]="['Recepcionista']">Editar Horario</button>
-					<button type="button" *ngIf="currentUser" size="small" (click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista']">Agendar Cita</button>
-					<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/citas','doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Citas</button>
-					<button type="button" *ngIf="currentUser" size="small" [routerLink]="['/editar-doctor',doctor.id]"color="secondary" [appAccess]="['Recepcionista']">Editar Doctor</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
 </div>

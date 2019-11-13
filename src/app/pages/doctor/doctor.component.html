@@ -1,53 +1,75 @@
-<app-header title="doctor"></app-header>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Doctor</h1>
+					<div class="container">
+					
+						<app-loading *ngIf="doctor==null"></app-loading>
+					
+						<div class="card" *ngIf="doctor!==null">
+							<div class="card header">
+								<div class="card subtitle">{{doctor.nombre}}</div>
+								<div class="card title">{{doctor.especialidad}}</div>
+							</div>
+					
+							<div class="card" -content>
+								Keep close to Nature's heart... and break clear away, once in awhile,
+								and climb a mountain or spend a week in the woods. Wash your spirit clean.
+							</div>
+						</div>
+					
+						<div class="card">
+							<div class="form-group">
+								<span class="oi" data-glyph="pin" title="icon name" aria-hidden="true"></span>
+								<label>ion-item in a card, icon left, button right</label>
+								<button type="button" fill="outline" slot="end">View</button>
+							</div>
+					
+							<div class="card" -content>
+								This is content, without any paragraph or header tags,
+								within an ion-card-content element.
+							</div>
+						</div>
+					
+						<!--div class="card">
+							<div class="form-group" href="#" class="activated">
+								<ion-icon name="wifi" slot="start"></ion-icon>
+								<label>Card Link Item 1 .activated</label>
+							</div>
+					
+							<div class="form-group" href="#">
+								<ion-icon name="wine" slot="start"></ion-icon>
+								<label>Card Link Item 2</label>
+							</div>
+					
+							<div class="form-group" class="activated">
+								<ion-icon name="warning" slot="start"></ion-icon>
+								<label>Card Button Item 1 .activated</label>
+							</div>
+					
+							<div class="form-group">
+								<ion-icon name="walk" slot="start"></ion-icon>
+								<label>Card Button Item 2</label>
+							</div>
+						</div -->
+					</div>
 
-<div class="container">
-
-	<app-loading *ngIf="doctor==null"></app-loading>
-
-	<div class="card" *ngIf="doctor!==null">
-		<div class="card header">
-			<div class="card subtitle">{{doctor.nombre}}</div>
-			<div class="card title">{{doctor.especialidad}}</div>
-		</div>
-
-		<div class="card"-content>
-			Keep close to Nature's heart... and break clear away, once in awhile,
-			and climb a mountain or spend a week in the woods. Wash your spirit clean.
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
-
-	<div class="card">
-		<div class="form-group">
-			<span class="oi" data-glyph="pin" title="icon name" aria-hidden="true"></span>
-			<label>ion-item in a card, icon left, button right</label>
-			<button type="button" fill="outline" slot="end">View</button>
-		</div>
-
-		<div class="card"-content>
-			This is content, without any paragraph or header tags,
-			within an ion-card-content element.
-		</div>
-	</div>
-
-	<!--div class="card">
-		<div class="form-group" href="#" class="activated">
-			<ion-icon name="wifi" slot="start"></ion-icon>
-			<label>Card Link Item 1 .activated</label>
-		</div>
-
-		<div class="form-group" href="#">
-			<ion-icon name="wine" slot="start"></ion-icon>
-			<label>Card Link Item 2</label>
-		</div>
-
-		<div class="form-group" class="activated">
-			<ion-icon name="warning" slot="start"></ion-icon>
-			<label>Card Button Item 1 .activated</label>
-		</div>
-
-		<div class="form-group">
-			<ion-icon name="walk" slot="start"></ion-icon>
-			<label>Card Button Item 2</label>
-		</div>
-	</div -->
 </div>
