@@ -1,18 +1,11 @@
-<app-header title="Seleccionar Clinica">
-	<h1>Seleccionar Clinica</h1>
-	<button type="button" (click)="dismissModal()">Cerrar</button>
-</app-header>
-<div class="container" fullscreen>
-	<div class="list" *ngFor="let centro_medico of centros">
-		<div class="form-group" (click)="seleccionarCentro(centro_medico)">
-			<!-- ion-avatar slot="start">
-				<ion-img src="./avatar-gollum.jpg"/>
-				<ion-icon slot="start" name="home"></ion-icon>
-			</ion-avatar-->
-			<label>
-				<h2>{{centro_medico.nombre}}</h2>
-				<!--p>Sneaky little hobbitses</p-->
-			</label>
+<div class="custom-modal">
+	<div class="container">
+		<div class="list" *ngFor="let centro_medico of centros">
+			<div class="form-group" (click)="seleccionarCentro(centro_medico)">
+				<label>
+					<h2>{{centro_medico.nombre}}</h2>
+				</label>
+			</div>
 		</div>
 	</div>
 </div>

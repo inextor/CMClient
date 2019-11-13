@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Centro_Medico } from '../../models/Modelos';
 
@@ -10,7 +10,7 @@ import { Centro_Medico } from '../../models/Modelos';
 })
 export class SeleccionarCentroMedicoComponent implements OnInit {
 
-	@Output selected:CentroMedico;
+	@Output() selected = new EventEmitter<Centro_Medico>();
 
 	centros:Centro_Medico[] = [];
 
@@ -18,7 +18,8 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 	{
 	}
 
-	ngOnInit() {
+	ngOnInit()
+	{
 		this.rest.centro_medico.getAll({}).subscribe((respuesta)=>
 		{
 			this.centros = respuesta.datos;
