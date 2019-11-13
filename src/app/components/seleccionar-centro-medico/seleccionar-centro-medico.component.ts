@@ -35,7 +35,7 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	onKeyPressed(evt)
 	{
-		let input = document.getElementById('searchCentroMedico');
+		let input = <HTMLInputElement>document.getElementById('searchCentroMedico');
 		console.log( input.value );
 		if( this.last === input.value.trim() )
 			return;
