@@ -17,10 +17,10 @@
 					<h1>Pacientes</h1>
 					<div class="container">
 						<td>
-							<button type="button" slot="start" size="small" [routerLink]="['/agregar-usuario']"
-								[appAccess]="['Doctor']">Agregar Paciente</button>
+							<button type="button" slot="start" class="btn btn-small btn-primary" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</button>
 						</td>
-						<input type="text" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
+						<input type="text" class="form-control" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)" placeholder="buscar">
+
 						<table class="basica">
 							<thead>
 								<tr>
@@ -36,16 +36,11 @@
 									<td>{{paciente.apellidos}}</td>
 									<td>{{paciente.telefono}}</td>
 									<td>
-										<button type="button" size="small" [routerLink]="['/editar-paciente',paciente.id]"
-											[appAccess]="['RECEPCIONISTA']">Editar</button>
-										<button type="button" size="small" [routerLink]="['/citas','paciente',paciente.id]"
-											color="secondary">Citas</button>
-										<button type="button" size="small" (click)="seleccionarDoctorNuevaCita(paciente)"
-											color="secondary">Agendar Cita</button>
-										<button type="button" size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]"
-											color="secondary">Agregar Familiar</button>
-										<button type="button" size="small" [routerLink]="['/consulta',paciente.id,doctor.id]"
-											color="secondary" [appAccess]="['Doctor']">Agregar Consulta</button>
+										<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">Editar</button>
+										<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</button>
+										<button type="button" class="btn btn-primary btn-sm mr-2" (click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar Cita</button>
+										<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar Familiar</button>
+										<button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary" [appAccess]="['Doctor']">Agregar Consulta</button>
 									</td>
 								</tr>
 							</tbody>
