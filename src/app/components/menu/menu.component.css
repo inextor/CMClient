@@ -3,7 +3,7 @@ body {
 }
 
 #sidebar-wrapper {
-  min-height: 100vh;
+
   margin-left: -15rem;
   -webkit-transition: margin .25s ease-out;
   -moz-transition: margin .25s ease-out;
@@ -54,7 +54,7 @@ body {
   width:45px;
   height:45px;
   vertical-align:middle;
-  margin-right:15px;
+  margin-right:3px;
 }
 .menuSubButtons{
   padding-left: 35px;
@@ -62,5 +62,35 @@ body {
   color: #fff;
 }
 .noPadding{
- padding: 0%;
+ padding: 0% !important;
 }
+.sidebar{
+  padding-bottom:5px !important;
+}
+.group{
+ padding: 8px !important;
+
+}
+.list-group-item{
+   color: #fff;
+}
+.color1{
+ background-color:#3e5a80;
+}
+.color2{
+ background-color:#3285c6;
+}
+.color3{
+ background-color:#aad3c7;
+}
+.color4{
+ background-color:#019eb6;
+}
+.color5{
+ background-color:#8a93a1;
+}
+
+
+
+
+
