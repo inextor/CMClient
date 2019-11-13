@@ -1,6 +1,9 @@
-.padre {
-  margin: 1rem;
-  padding: 1rem;
-  /* IMPORTANTE */
-  text-align: center;
+.logo{
+  height: 250px;
+  width: 250px;
+}
+.col-centered{
+  float: none;
+  margin: 0 auto;
+  margin-top: 25px; /* Added */
 }
