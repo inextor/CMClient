@@ -38,6 +38,10 @@ export class BaseComponent implements OnInit {
 	public pages:number[]		= [];
 	public pageSize:number		= 10;
 
+	public error_message		= null;
+	public success_message		= null;
+	public warning_message		= null;
+
 	setPages(currentPage:number,totalItems:number)
 	{
 		this.currentPage = currentPage;
@@ -73,6 +77,7 @@ export class BaseComponent implements OnInit {
 	}
 
 	async showError(message: string) {
+
 		/*
 		const alert = await this.alertController.create({
 			header: 'Error',

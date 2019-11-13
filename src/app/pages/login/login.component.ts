@@ -43,19 +43,6 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 	contrasena: string = '';
 	is_loading: boolean = false;
 
-	async showError(message: string) {
-		/*
-		const alert = await this.alertController.create({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
-
-		await alert.present();
-		*/
-	}
-
 	doLoginKeyboard(evt:Event)
 	{
 		this.doLogin();
@@ -69,10 +56,9 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 				this.is_loading = false;
 				this.router.navigate(['/home']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
-				console.log(response);
 			},
 			error => {
-				this.showError(this.rest.getErrorMessage(error));
+				this.error_message =  this.rest.getErrorMessage(error);
 				this.is_loading = false;
 			}
 		);
