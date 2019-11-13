@@ -30,13 +30,13 @@
 								<td>{{servicio.servicio.nombre}}</td>
 								<!-- 	" -->
 								<td>
-									<button type="button" size="small" [routerLink]="['/editar-producto',servicio.servicio.id]">
+									<button type="button" size="btn btn-primary btn-sm" [routerLink]="['/editar-producto',servicio.servicio.id]">
 										<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button" size="small" [routerLink]="['/editar-precios',servicio.servicio.id]">
+									<button type="button" size="btn btn-primary btn-sm" [routerLink]="['/editar-precios',servicio.servicio.id]">
 										<span class="oi" data-glyph="cash" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button" size="small" [routerLink]="['/inventario']">
+									<button type="button" size="btn btn-primary btn-sm" [routerLink]="['/inventario']">
 										<span class="oi" data-glyph="cube" title="icon name" aria-hidden="true"></span>
 									</button>
 								</td>

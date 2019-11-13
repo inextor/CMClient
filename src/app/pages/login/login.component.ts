@@ -5,10 +5,12 @@ import {
 	AfterViewInit,
 	OnDestroy
 } from '@angular/core';
+
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HeaderComponent } from '../../components/header/header.component';
+import { BaseComponent } from '../../pages/base/base.component';
 
 @Component({
   selector: 'app-login',
@@ -16,18 +18,11 @@ import { HeaderComponent } from '../../components/header/header.component';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
-	constructor(
-		private rest: RestService,
-		private router: Router,
-		private route: ActivatedRoute
-	) {
-		if(this.rest.currentUserValue){
+export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+	ngOnInit() {
+		if( this.rest.currentUserValue ){
 			this.router.navigate(['/'])
 		}
-	}
-
-	ngOnInit() {
 		//this.menuCtrl.enable(false);
 		//this.menuCtrl.swipeEnable(false);
 	}

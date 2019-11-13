@@ -7,13 +7,12 @@ import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
 import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
 import { VentasComponent} from './pages/ventas/ventas.component';
 import { PacientesComponent} from './pages/pacientes/pacientes.component';
-import { PacienteComponent} from './pages/paciente/paciente.component';
-import { AgregarCitaComponent} from './pages/agregar-cita/agregar-cita.component';
+//import { PacienteComponent} from './pages/paciente/paciente.component';
+//import { AgregarCitaComponent} from './pages/agregar-cita/agregar-cita.component';
 import { AgregarUsuarioComponent}	   from './pages/agregar-usuario/agregar-usuario.component';
 import { ServiciosComponent			} from './pages/servicios/servicios.component';
 import { AgregarServicioComponent	  } from './pages/agregar-servicio/agregar-servicio.component';
 import { UsuariosComponent			 } from './pages/usuarios/usuarios.component';
-import { RegistroComponent			 } from './pages/registro/registro.component';
 import { AgregarDoctorComponent		} from './pages/agregar-doctor/agregar-doctor.component';
 import { AgregarOrganizacionComponent  } from './pages/agregar-organizacion/agregar-organizacion.component';
 //import { AgregarPacienteComponent	  } from './pages/agregar-paciente/agregar-paciente.component';
@@ -43,7 +42,7 @@ import { ProveedoresComponent		  } from './pages/proveedores/proveedores.compone
 import { EspecialidadesComponent	   } from './pages/especialidades/especialidades.component';
 import { AgregarEspecialidadComponent  } from './pages/agregar-especialidad/agregar-especialidad.component';
 import { AgregarTipoPrecioComponent	} from './pages/agregar-tipo-precio/agregar-tipo-precio.component';
-import { AgregarPrecioComponent		} from './pages/agregar-precio/agregar-precio.component';
+//import { AgregarPrecioComponent		} from './pages/agregar-precio/agregar-precio.component';
 import { TipoPreciosComponent		  } from './pages/tipo-precios/tipo-precios.component';
 import { CitasComponent 			   } from './pages/citas/citas.component';
 import { CitaComponent 				   } from "./pages/cita/cita.component";
@@ -79,18 +78,8 @@ const routes: Routes = [
   //{ path: 'citas', component: CitasComponent, pathMatch: 'full'},
   //{ path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full'},
   //{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
-  {
-    path: "pacientes",
-    component: PacientesComponent,
-    pathMatch: "full",
-    canActivate: [AuthGuard]
-  },
-  {
-    path: "paciente",
-    component: PacienteComponent,
-    pathMatch: "full",
-    canActivate: [AuthGuard]
-  },
+  { path: "pacientes", component: PacientesComponent, pathMatch: "full" },
+  //{ path: "paciente", component: PacienteComponent, pathMatch: "full" },
   //{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
   {
     path: "agregar-usuario",
@@ -134,6 +123,8 @@ const routes: Routes = [
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
+  { path: "usuarios", component: UsuariosComponent, pathMatch: "full" },
+  { path: "login", component: LoginComponent, pathMatch: "full" },
   {
     path: "agregar-doctor",
     component: AgregarDoctorComponent,
@@ -341,13 +332,7 @@ const routes: Routes = [
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
-  {
-    path: "agregar-precio",
-    component: AgregarPrecioComponent,
-    pathMatch: "full",
-    canActivate: [AuthGuard]
-  },
-  {
+   {
     path: "editar-tipo-precio/:id",
     component: AgregarTipoPrecioComponent,
     pathMatch: "full",

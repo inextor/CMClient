@@ -14,15 +14,14 @@
 						<div class="form-group">
 							<input name="password" class="form-control" type="password" placeholder="Password" [(ngModel)]="contrasena"
 								(change)="doLoginKeyboard($event)" required />
-						
 								</div>
 								<div>
 								<button type="button" class="btn btn-primary" size="large" type="submit"
-									[disabled]="form.invalid" expand="block" (click)="doLogin()">
+									[disabled]="form.invalid || is_loading" expand="block" (click)="doLogin()">
 									Acceder
 								</button>
 							</div>
-						
+
 					</form>
 				</div>
 			</div>

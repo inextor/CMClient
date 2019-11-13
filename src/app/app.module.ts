@@ -11,15 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
 import { AgregarCentroMedicoComponent } from './pages/agregar-centro-medico/agregar-centro-medico.component';
-import { AgregarCitaComponent } from './pages/agregar-cita/agregar-cita.component';
 import { AgregarDoctorComponent } from './pages/agregar-doctor/agregar-doctor.component';
 import { AgregarEspecialidadComponent } from './pages/agregar-especialidad/agregar-especialidad.component';
 import { AgregarFamiliarComponent } from './pages/agregar-familiar/agregar-familiar.component';
 import { AgregarGastoComponent } from './pages/agregar-gasto/agregar-gasto.component';
 import { AgregarOrganizacionComponent } from './pages/agregar-organizacion/agregar-organizacion.component';
-import { AgregarPrecioComponent } from './pages/agregar-precio/agregar-precio.component';
 import { AgregarPreguntaComponent } from './pages/agregar-pregunta/agregar-pregunta.component';
-import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
 import { AgregarProveedorComponent } from './pages/agregar-proveedor/agregar-proveedor.component';
 import { AgregarServicioComponent } from './pages/agregar-servicio/agregar-servicio.component';
 import { AgregarTipoGastoComponent } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
@@ -44,11 +41,9 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
 import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
-import { PacienteComponent } from './pages/paciente/paciente.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { PagosComponent } from './pages/pagos/pagos.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
-import { RegistroComponent } from './pages/registro/registro.component';
 import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { TipoPreciosComponent } from './pages/tipo-precios/tipo-precios.component';
@@ -72,15 +67,12 @@ import { HomeComponent } from './pages/home/home.component';
     AppComponent,
     AgendarCitaComponent,
     AgregarCentroMedicoComponent,
-    AgregarCitaComponent,
     AgregarDoctorComponent,
     AgregarEspecialidadComponent,
     AgregarFamiliarComponent,
     AgregarGastoComponent,
     AgregarOrganizacionComponent,
-    AgregarPrecioComponent,
     AgregarPreguntaComponent,
-    AgregarProductoComponent,
     AgregarProveedorComponent,
     AgregarServicioComponent,
     AgregarTipoGastoComponent,
@@ -105,11 +97,9 @@ import { HomeComponent } from './pages/home/home.component';
     LlenarHistoriaClinicaComponent,
     LoginComponent,
     MisCitasComponent,
-    PacienteComponent,
     PacientesComponent,
     PagosComponent,
     ProveedoresComponent,
-    RegistroComponent,
     RequisicionesComponent,
     ServiciosComponent,
     TipoPreciosComponent,
