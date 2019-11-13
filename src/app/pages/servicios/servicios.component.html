@@ -1,18 +1,23 @@
-<app-header></app-header>
-<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-
-	<div class="container">
-		<div class="d-flex flex-wrap">
-			<!--MENU DE LA APLICACION-->
-			<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-				<!-- <app-menu></app-menu> -->
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
-			<!--FIN MENU DE LA APLICACION-->
-			<!--CONTENIDO DE LA APLICACION-->
-			<div class="p-2 flex-fill flex-wrap ">
-				<div class="card">
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
 					<h1>Productos y servicios</h1>
-					<button type="button" slot="start" size="small" [routerLink]="['/agregar-producto']">Agregar producto</button>
+					<td>
+					<button type="button"  class="btn btn-primary btn-sm" slot="start" size="small" [routerLink]="['/agregar-producto']">Agregar producto</button>
+					</td>
 					<table class="basica">
 						<thead>
 							<tr>
@@ -26,20 +31,23 @@
 								<!-- 	" -->
 								<td>
 									<button type="button" size="small" [routerLink]="['/editar-producto',servicio.servicio.id]">
-										 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+										<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
 									</button>
 									<button type="button" size="small" [routerLink]="['/editar-precios',servicio.servicio.id]">
-										 <span class="oi" data-glyph="cash" title="icon name" aria-hidden="true"></span>
+										<span class="oi" data-glyph="cash" title="icon name" aria-hidden="true"></span>
 									</button>
 									<button type="button" size="small" [routerLink]="['/inventario']">
-										 <span class="oi" data-glyph="cube" title="icon name" aria-hidden="true"></span>
+										<span class="oi" data-glyph="cube" title="icon name" aria-hidden="true"></span>
 									</button>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-			</div>
-			<!-- FIN CONTENIDO DE LA APLICACION-->
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
+</div>
+
+

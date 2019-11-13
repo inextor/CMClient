@@ -1,20 +1,43 @@
-<app-header title="Consulta"></app-header>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Consulta</h1>
+					<div class="container">
+						<td>
+							<button type="button" slot="start"
+								[routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small">Agregar
+								HISTORIAL</button>
+						</td>
+						<div class="card">
+							<div class="card" -header>
+								<div class="card" -title>Doctor: {{doctor.nombre}}</div>
+								<div class="card" -subtitle>Paciente: {{paciente.nombre}}</div>
+					
+							</div>
+					
+							<div class="card" -content>
+								Keep close to Nature's heart... and break clear away, once in awhile,
+								and climb a mountain or spend a week in the woods. Wash your spirit clean.
+							</div>
+						</div>
+					</div>
 
-<div class="container">
-	<td>
-		<button type="button" slot="start" [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small" >Agregar HISTORIAL</button>
-	</td>
-	<div class="card">
-		<div class="card"-header>
-			<div class="card"-title>Doctor: {{doctor.nombre}}</div>
-			<div class="card"-subtitle>Paciente: {{paciente.nombre}}</div>
-
-		</div>
-
-		<div class="card"-content>
-			Keep close to Nature's heart... and break clear away, once in awhile,
-			and climb a mountain or spend a week in the woods. Wash your spirit clean.
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
 </div>
-

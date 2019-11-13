@@ -1,34 +1,42 @@
-<app-header title="Centros Medicos"></app-header>
-<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-<div class="container">
-	<div class="d-flex flex-wrap">
-		<!--MENU DE LA APLICACION-->
-		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-			<!-- <app-menu></app-menu> -->
-		</div>
-		<!--FIN MENU DE LA APLICACION-->
-		<!--CONTENIDO DE LA APLICACION-->
-		<div class="p-2 flex-fill flex-wrap ">
-			<div class="card">
-				<table class="basica">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr *ngFor="let centro_medico of centros_medicos">
-							<td>{{centro_medico.nombre}}</td>
-							<td>
-								<button type="button" size="small"  [routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
-								<button type="button" size="small" color="secondary" [routerLink]="['/servicios',centro_medico.id]">Servicios</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Centros Medicos</h1>
+					<table class="basica">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let centro_medico of centros_medicos">
+								<td>{{centro_medico.nombre}}</td>
+								<td>
+									<button type="button" size="small"
+										[routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
+									<button type="button" size="small" color="secondary"
+										[routerLink]="['/servicios',centro_medico.id]">Servicios</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-		<!-- FIN CONTENIDO DE LA APLICACION-->
 	</div>
 </div>

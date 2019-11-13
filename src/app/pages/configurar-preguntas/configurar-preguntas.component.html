@@ -1,59 +1,56 @@
-<app-header title="Configurar Pregunatas"> </app-header>
-<!--	<ion-toolbar color="blue" class="customNavBar">
-		<button type="button"s slot="start">
-			<ion-menu-button (click)="activeMenu()" autoHide="false"></ion-menu-button>
-		</buttons>
-		<h1>
-			<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-		</h1>
-	</ion-toolbar>
--->
-
-<div class="container">
-	<div class="d-flex flex-wrap">
-		<!--MENU DE LA APLICACION-->
-		<div *ngIf="statusmenu" class="p-2 flex-wrap customMenu">
-			<!-- <app-menu></app-menu> -->
-		</div>
-		<!--FIN MENU DE LA APLICACION-->
-		<!--CONTENIDO DE LA APLICACION-->
-		<div class="p-2 flex-fill flex-wrap ">
-			<div class="card">
-				<table class="basica ">
-				<thead>
-					<tr>
-						<th>Pregunta</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let p of preguntasEspecialidad;let i = index">
-						<td>{{p.pregunta_historia_clinica.pregunta}} </td>
-						<td>
-							<button type="button" size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
-								Remover</button>
-							<button type="button" size="small" *ngIf="i>0"
-								(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</button>
-							<button type="button" size="small" *ngIf="i<preguntasEspecialidad.length-1"
-								(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</button>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
-				<div>
-					<input input type="text">
-				</div>
-
-				<div class="container">
-					<div *ngFor="let p of busquedaPreguntas">
-						{{p.pregunta}} <button type="button" size="small" (click)="agregarEspecialidadPregunta(p)">
-							<span class="oi" data-glyph="add-circle" title="icon add-circle" aria-hidden="true"></span>
-						</button>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Configurar Preguntas</h1>
+					<table class="basica ">
+						<thead>
+							<tr>
+								<th>Pregunta</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let p of preguntasEspecialidad;let i = index">
+								<td>{{p.pregunta_historia_clinica.pregunta}} </td>
+								<td>
+									<button type="button" size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
+										Remover</button>
+									<button type="button" size="small" *ngIf="i>0"
+										(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</button>
+									<button type="button" size="small" *ngIf="i<preguntasEspecialidad.length-1"
+										(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</button>
+								</td>
+					
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<input input type="text">
+					</div>
+					
+					<div class="container">
+						<div *ngFor="let p of busquedaPreguntas">
+							{{p.pregunta}} <button type="button" size="small" (click)="agregarEspecialidadPregunta(p)">
+								<span class="oi" data-glyph="add-circle" title="icon add-circle" aria-hidden="true"></span>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-		<!-- FIN CONTENIDO DE LA APLICACION-->
 	</div>
 </div>

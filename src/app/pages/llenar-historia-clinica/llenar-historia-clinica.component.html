@@ -1,43 +1,66 @@
-<app-header title="llena Histori Clinica"></app-header>
-<div class="container">
-	<app-loading [display]="is_loading"></app-loading>
-	<div class="container">
-		<div *ngIf="msgError" class="alert alert-danger" role="alert">{{msgError}}</div>
-		<div>
-			<div class="form-group">
-				<label for="paciente_nombre">Nombres</label>
-				<input type="text" class="form-control" id="paciente_nombre" placeholder="Nombres"
-					[value]="paciente.nombres">
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
-			<div v class="form-group">
-				<label for="paciente_apellido">Apellidos</label>
-				<input type="text" class="form-control" id="paciente_nombre" placeholder="Apellidos"
-					[value]="paciente.apellidos">
-			</div>
-			<div>
-				<div *ngFor="let p of preguntas;let i = index;">
-					<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
-						<label>{{p.pregunta.pregunta}}</label>
-						<div class="form-group">
-							<label>SI</label>
-							<input type="radio" value="SI"
-								[(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
-						</div>
-						<div class="form-group">
-							<label>NO</label>
-							<input type="radio" value="NO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
-						</div>
-						<div class="form-group">
-							<label>OTRO</label>
-							<input type="radio" value="OTRO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Historia Clinica</h1>
+					<div class="container">
+						<app-loading [display]="is_loading"></app-loading>
+						<div class="container">
+							<div *ngIf="msgError" class="alert alert-danger" role="alert">{{msgError}}</div>
+							<div>
+								<div class="form-group">
+									<label for="paciente_nombre">Nombres</label>
+									<input type="text" class="form-control" id="paciente_nombre" placeholder="Nombres"
+										[value]="paciente.nombres">
+								</div>
+								<div v class="form-group">
+									<label for="paciente_apellido">Apellidos</label>
+									<input type="text" class="form-control" id="paciente_nombre" placeholder="Apellidos"
+										[value]="paciente.apellidos">
+								</div>
+								<div>
+									<div *ngFor="let p of preguntas;let i = index;">
+										<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
+											<label>{{p.pregunta.pregunta}}</label>
+											<div class="form-group">
+												<label>SI</label>
+												<input type="radio" value="SI" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											</div>
+											<div class="form-group">
+												<label>NO</label>
+												<input type="radio" value="NO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											</div>
+											<div class="form-group">
+												<label>OTRO</label>
+												<input type="radio" value="OTRO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											</div>
+										</div>
+										<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta"
+											[(ngModel)]="preguntas[i].respuesta.respuesta">
+									</div>
+									<div>
+										<button type="button" (click)="guardar()">Guardar</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta" [(ngModel)]="preguntas[i].respuesta.respuesta">
+
 				</div>
-				<div>
-					<button type="button" (click)="guardar()">Guardar</button>
-				</div>
-			</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
 </div>

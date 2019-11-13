@@ -1,29 +1,51 @@
-<app-header title="Gastos"></app-header>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Gastos</h1>
+					<div class="container">
+						<td>
+							<button type="button" [routerLink]="['/agregar-gasto']" size="small">Agregar gasto
+							</button>
+						</td>
+						<table class="basica">
+							<thead>
+								<tr>
+									<th>id</th>
+									<th>descripcion</th>
+									<th>Usuario</th>
+									<th>Monto</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngIf="gastos.length==0" align="center">
+									<td colspan="4">No se encontraron registros</td>
+								</tr>
+								<tr *ngFor="let g of gastos">
+									<td>{{g.gasto_centro_medico.id}}</td>
+									<td>{{g.gasto_centro_medico.descripcion}}</td>
+									<td>{{g.usuario.usuario}}</td>
+									<td>{{g.gasto_centro_medico.monto| number:'.2' | currency: '$'}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 
-<div class="container">
-	<td>
-		<button type="button" [routerLink]="['/agregar-gasto']" size="small"  >Agregar gasto
-		</button>
-	</td>
-	<table class="basica">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>descripcion</th>
-				<th>Usuario</th>
-				<th>Monto</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngIf="gastos.length==0" align="center">
-				<td colspan="4">No se encontraron registros</td>
-			</tr>
-			<tr *ngFor="let g of gastos">
-				<td>{{g.gasto_centro_medico.id}}</td>
-				<td>{{g.gasto_centro_medico.descripcion}}</td>
-				<td>{{g.usuario.usuario}}</td>
-				<td>{{g.gasto_centro_medico.monto| number:'.2' | currency: '$'}}</td>
-			</tr>
-		</tbody>
-	</table>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
 </div>

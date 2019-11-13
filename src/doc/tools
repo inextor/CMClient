@@ -1,3 +1,4 @@
+/*-------------------------ESTRUCTURA-PAGINA------------------------------------*/
 <!-- NAVBAR -->
 <div class="page">
 	<header>
@@ -14,28 +15,12 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h1>Usuarios</h1>
-					<div class="container">
-						<table>
-							<thead>
-								<tr>
-									<th>Id</th>
-									<th>Pacientes</th>
-									<th>Editar</th>
-							</thead>
-							<tbody>
-								<tr *ngFor="let usuario of usuarios">
-									<div>Telefono</div>
-									<div>Correo Electrónico</div>
-									<div>Editar</div>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-
+                <h1>PEGAR TITULO AQUI</h1>
+                <!-- PEGAR CODIGO AQUI -->
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
 </div>
+/*-------------------------------------------------------------------------------*/

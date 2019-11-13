@@ -1,31 +1,60 @@
-<app-header title="Pacientes"></app-header>
-<div class="container">
-	<td>
-		<button type="button" slot="start" size="small" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</button>
-	</td>
-	<input  type="text" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
-	<table class="basica">
-		<thead>
-			<tr>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Telefono</th>
-				<th>Acciones</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let paciente of pacientes">
-				<td>{{paciente.nombre}}</td>
-				<td>{{paciente.apellidos}}</td>
-				<td>{{paciente.telefono}}</td>
-				<td>
-					<button type="button" size="small" [routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">Editar</button>
-					<button type="button" size="small" [routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</button>
-					<button type="button" size="small" (click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar Cita</button>
-					<button type="button" size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar Familiar</button>
-					<button type="button" size="small" [routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary" [appAccess]="['Doctor']">Agregar Consulta</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Pacientes</h1>
+					<div class="container">
+						<td>
+							<button type="button" slot="start" size="small" [routerLink]="['/agregar-usuario']"
+								[appAccess]="['Doctor']">Agregar Paciente</button>
+						</td>
+						<input type="text" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
+						<table class="basica">
+							<thead>
+								<tr>
+									<th>Nombres</th>
+									<th>Apellidos</th>
+									<th>Telefono</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let paciente of pacientes">
+									<td>{{paciente.nombre}}</td>
+									<td>{{paciente.apellidos}}</td>
+									<td>{{paciente.telefono}}</td>
+									<td>
+										<button type="button" size="small" [routerLink]="['/editar-paciente',paciente.id]"
+											[appAccess]="['RECEPCIONISTA']">Editar</button>
+										<button type="button" size="small" [routerLink]="['/citas','paciente',paciente.id]"
+											color="secondary">Citas</button>
+										<button type="button" size="small" (click)="seleccionarDoctorNuevaCita(paciente)"
+											color="secondary">Agendar Cita</button>
+										<button type="button" size="small" [routerLink]="['/agregar-familiar',paciente.id_usuario]"
+											color="secondary">Agregar Familiar</button>
+										<button type="button" size="small" [routerLink]="['/consulta',paciente.id,doctor.id]"
+											color="secondary" [appAccess]="['Doctor']">Agregar Consulta</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
 </div>

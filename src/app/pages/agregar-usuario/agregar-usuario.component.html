@@ -1,40 +1,63 @@
-<app-header tile="Agregar Usuario"></app-header>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Usuario</h1>
+					<div class="container">
+						<form>
+							<div lines="full" class="list ion-no-padding">
+					
+								<div class="form-group">
+									<label position="stacked">Nombre<span color="danger">*</span></label>
+									<input required type="text" name="nombre" [(ngModel)]="paciente.nombre">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Apellido<span color="danger">*</span></label>
+									<input required type="text" name="nombre" [(ngModel)]="paciente.apellidos">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+									<input required type="text" name="correo_electronico" [(ngModel)]="usuario.correo_electronico">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Usuario<span color="danger">*</span></label>
+									<input required type="text" name="usuario" [(ngModel)]="usuario.usuario">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Contraseña</label>
+									<input placeholder="" type="password" name="contrasena" [(ngModel)]="usuario.contrasena">
+								</div>
+					
+								<div class="form-group">
+									<label position="stacked">Confirmar contraseña</label>
+									<input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena">
+								</div>
+							</div>
+					
+							<app-loading *ngIf="is_loading"></app-loading>
+					
+							<div class="ion-padding">
+								<button type="button" expand="block" type="submit" class="" (click)="registrarse()"
+									[disabled]="is_loading">Registrarse</button>
+							</div>
+						</form>
+					</div>
 
-<div class="container">
-	<form>
-		<div lines="full" class="list ion-no-padding">
-
-			<div class="form-group">
-				<label position="stacked">Nombre<span color="danger">*</span></label>
-				<input required type="text" name="nombre" [(ngModel)]="paciente.nombre">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Apellido<span color="danger">*</span></label>
-				<input required type="text" name="nombre" [(ngModel)]="paciente.apellidos">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-				<input required type="text"  name="correo_electronico" [(ngModel)]="usuario.correo_electronico">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Usuario<span color="danger">*</span></label>
-				<input required type="text" name="usuario" [(ngModel)]="usuario.usuario">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Contraseña</label>
-				<input placeholder="" type="password" name="contrasena" [(ngModel)]="usuario.contrasena">
-			</div>
-
-			<div class="form-group">
-				<label position="stacked" >Confirmar contraseña</label>
-				<input placeholder="" type="password" name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena">
-			</div>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-
-		<app-loading *ngIf="is_loading"></app-loading>
-
-		<div class="ion-padding">
-			<button type="button" expand="block" type="submit" class="" (click)="registrarse()" [disabled]="is_loading">Registrarse</button>
-		</div>
-	</form>
+	</div>
 </div>

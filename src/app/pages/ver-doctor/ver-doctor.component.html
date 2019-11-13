@@ -1,25 +1,47 @@
-<app-header title="Perfil Doctor"></app-header>
-
-<div class="container">
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
 	<div>
-		<button type="button" slot="start" size="default" (click)="presentAlertConfirm()">Confirmar cita</button>
-		<div>
-			<!-- full-calendar
-				#calendar
-				[header]="header"
-				[columnHeaderText]="columnHeaderText"
-				[firstDay]="1"
-				[editable]="true"
-				[eventSources]="eventSources"
-				(eventResize)="eventResize($event)"
-				(eventDrop)="eventDrop($event)"
-				(dateClick)="dateClick($event)"
-				(eventClick)="eventClick($event)"
-				defaultView="timeGridWeek"
-				[plugins]="calendarPlugins"
-				[weekends]="true"
-				[height]="650"
-				></full-calendar -->
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Ver doctor</h1>
+					<div class="container">
+						<div>
+							<button type="button" slot="start" size="default" (click)="presentAlertConfirm()">Confirmar cita</button>
+							<div>
+								<!-- full-calendar
+									#calendar
+									[header]="header"
+									[columnHeaderText]="columnHeaderText"
+									[firstDay]="1"
+									[editable]="true"
+									[eventSources]="eventSources"
+									(eventResize)="eventResize($event)"
+									(eventDrop)="eventDrop($event)"
+									(dateClick)="dateClick($event)"
+									(eventClick)="eventClick($event)"
+									defaultView="timeGridWeek"
+									[plugins]="calendarPlugins"
+									[weekends]="true"
+									[height]="650"
+									></full-calendar -->
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
 </div>

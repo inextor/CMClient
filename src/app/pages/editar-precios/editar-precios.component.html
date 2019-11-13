@@ -1,28 +1,51 @@
-<app-header title="editar precios"></app-header>
-
-<div class="container">
-	<div *ngIf="servicio !== null">
-		<div *ngFor="let sucursal of servicio.centro_medico">
-			<div>
-			<b>{{sucursal.centro_medico.nombre}}</b>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Editar Precios</h1>
+					<div class="container">
+						<div *ngIf="servicio !== null">
+							<div *ngFor="let sucursal of servicio.centro_medico">
+								<div>
+									<b>{{sucursal.centro_medico.nombre}}</b>
+								</div>
+					
+								<table class="basica">
+									<thead>
+										<tr>
+											<th>Tipo de Precio</th>
+											<th>Precio</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let precio of sucursal.precios">
+											<td>{{precio.tipo_precio.nombre}}</td>
+											<td><input type="text"
+													value="{{precio.precio_servicio !== null ? precio.precio_servicio.precio : '' }}"></td>
+											<td>Guardar</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
-			<table class="basica">
-				<thead>
-					<tr>
-						<th>Tipo de Precio</th>
-						<th>Precio</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let precio of sucursal.precios">
-						<td>{{precio.tipo_precio.nombre}}</td>
-						<td><input type="text" value="{{precio.precio_servicio !== null ? precio.precio_servicio.precio : '' }}"></td>
-						<td>Guardar</td>
-					</tr>
-				</tbody>
-			</table>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
 </div>
