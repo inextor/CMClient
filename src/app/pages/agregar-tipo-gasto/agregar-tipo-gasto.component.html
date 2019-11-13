@@ -1,16 +1,40 @@
-<app-header title="agregar-tipo-gasto"></app-header>
-<div class="container">
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Tipo Gasto</h1>
+					<div class="container">
+					
+						<div lines="full" class="list ion-no-margin ion-no-padding">
+							<div class="form-group">
+								<label position="stacked">Nombre<span color="danger">*</span></label>
+								<input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre">
+							</div>
+						</div>
+					
+						<app-loading *ngIf="is_loading"></app-loading>
+					
+						<div class="ion-padding">
+							<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()"
+								[disabled]="is_loading">Guardar</button>
+						</div>
+					</div>
 
-	<div lines="full" class="list ion-no-margin ion-no-padding">
-		<div class="form-group">
-			<label position="stacked">Nombre<span color="danger">*</span></label>
-			<input required type="text" name="nombre" [(ngModel)]="tipoGasto.nombre">
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-	</div>
-
-	<app-loading *ngIf="is_loading"></app-loading>
-
-	<div class="ion-padding">
-		<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 	</div>
 </div>

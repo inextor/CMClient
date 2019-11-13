@@ -1,49 +1,68 @@
-<app-header title="Agregar Pregunta"></app-header>
-<div>
-	<title>agregar-pregunta</title>
-</div>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Pregunta</h1>
+					<div>
+					
+					
+						<!-- <label position="floating">Pregunta</label> -->
+						<input [(ngModel)]="pregunta.pregunta">
+					
+					
+					
+						<!--
+						 <label>Es Pregunta General</label> -->
+						<select [(ngModel)]="pregunta.tipo_pregunta" placeholder="Seleccione una opción" interface="popover">
+							<option value="PREGUNTA_ESPECIFICA">Pregunta Especifica</option>
+							<option value="PREGUNTA_GENERAL">Pregunta General</option>
+						</select>
+					
+					
+						< *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
+							<!-- <label>Depende de pregunta</label> -->
+							<select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
+								<option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</option>
+							</select>
+					
+					
+					
+							<!-- <label>Es Pregunta rápida (SI/NO)</label> -->
+							<select [(ngModel)]="pregunta.es_pregunta_binaria" placeholder="Seleccione una opción" interface="popover">
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+							</select>
+							<!--
+					
+						  <label>Depende del Genero?</label> -->
+							<select [(ngModel)]="pregunta.depende_del_genero" placeholder="Seleccione una opción" interface="popover">
+								<option value="NO">NO</option>
+								<option value="FEMENINO">Femenino</option>
+								<option value="MASCULINO">Masculino</option>
+							</select>
+					
+					
+							<div class="ion-padding">
+								<button expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
+							</div>
+					
+					</div>
 
-<div>
-
-
-	<!-- <label position="floating">Pregunta</label> -->
-	<input [(ngModel)]="pregunta.pregunta">
-
-
-
-	<!--
-	 <label>Es Pregunta General</label> -->
-	 <select [(ngModel)]="pregunta.tipo_pregunta" placeholder="Seleccione una opción" interface="popover">
-		 <option value="PREGUNTA_ESPECIFICA">Pregunta Especifica</option>
-		 <option value="PREGUNTA_GENERAL">Pregunta General</option>
-	 </select>
-
-
-	 < *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
-	 <!-- <label>Depende de pregunta</label> -->
-	 <select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
-		 <option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</option>
-	 </select>
-
-
-
-	 <!-- <label>Es Pregunta rápida (SI/NO)</label> -->
-	 <select [(ngModel)]="pregunta.es_pregunta_binaria" placeholder="Seleccione una opción" interface="popover">
-		 <option value="SI">SI</option>
-		 <option value="NO">NO</option>
-	 </select>
-	 <!--
-
-	  <label>Depende del Genero?</label> -->
-	  <select [(ngModel)]="pregunta.depende_del_genero" placeholder="Seleccione una opción" interface="popover">
-		  <option value="NO">NO</option>
-		  <option value="FEMENINO">Femenino</option>
-		  <option value="MASCULINO">Masculino</option>
-	  </select>
-
-
-	  <div class="ion-padding">
-		  <button expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
-	  </div>
-
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
 </div>

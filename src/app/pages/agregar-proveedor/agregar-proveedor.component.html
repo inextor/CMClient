@@ -1,46 +1,69 @@
-<app-header title="Agregar Proveedor"></app-header>
-<div>
-	<form>
-		<div lines="full" class="list ion-no-margin ion-no-padding">
-
-			<div class="form-group">
-				<label position="stacked">Nombre<span color="danger">*</span></label>
-				<input required type="text" name="nombre" [(ngModel)]="proveedor.nombre">
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
-			<div class="form-group">
-				<label position="stacked">Telefono<span color="danger">*</span></label>
-				<input required type="text" name="telefono" [(ngModel)]="proveedor.telefono">
-			</div>
-			<div class="form-group">
-				<label position="stacked">RFC<span color="danger">*</span></label>
-				<input required type="text" name="rfc" [(ngModel)]="proveedor.rfc">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Direccion<span color="danger">*</span></label>
-				<input required type="text" name="direccion" [(ngModel)]="proveedor.direccion">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Contacto<span color="danger">*</span></label>
-				<input required type="text" name="contacto" [(ngModel)]="proveedor.contacto">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Cuenta Bancaria<span color="danger">*</span></label>
-				<input required type="text" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Dias Credito<span color="danger">*</span></label>
-				<input required type="text" name="dias_credito" [(ngModel)]="proveedor.dias_credito">
-			</div>
-			<div class="form-group">
-				<label position="stacked">Nota<span color="danger">*</span></label>
-				<input required type="text" name="nota" [(ngModel)]="proveedor.nota">
-			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Proveedor</h1>
+					<div>
+						<form>
+							<div lines="full" class="list ion-no-margin ion-no-padding">
+					
+								<div class="form-group">
+									<label position="stacked">Nombre<span color="danger">*</span></label>
+									<input required type="text" name="nombre" [(ngModel)]="proveedor.nombre">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Telefono<span color="danger">*</span></label>
+									<input required type="text" name="telefono" [(ngModel)]="proveedor.telefono">
+								</div>
+								<div class="form-group">
+									<label position="stacked">RFC<span color="danger">*</span></label>
+									<input required type="text" name="rfc" [(ngModel)]="proveedor.rfc">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Direccion<span color="danger">*</span></label>
+									<input required type="text" name="direccion" [(ngModel)]="proveedor.direccion">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Contacto<span color="danger">*</span></label>
+									<input required type="text" name="contacto" [(ngModel)]="proveedor.contacto">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Cuenta Bancaria<span color="danger">*</span></label>
+									<input required type="text" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Dias Credito<span color="danger">*</span></label>
+									<input required type="text" name="dias_credito" [(ngModel)]="proveedor.dias_credito">
+								</div>
+								<div class="form-group">
+									<label position="stacked">Nota<span color="danger">*</span></label>
+									<input required type="text" name="nota" [(ngModel)]="proveedor.nota">
+								</div>
+							</div>
+					
+							<app-loading *ngIf="is_loading"></app-loading>
+					
+							<div class="ion-padding">
+								<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()"
+									[disabled]="is_loading">Guardar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
 		</div>
-
-		<app-loading *ngIf="is_loading"></app-loading>
-
-		<div class="ion-padding">
-			<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()" [disabled]="is_loading">Guardar</button>
-		</div>
-	</form>
+	</div>
 </div>
