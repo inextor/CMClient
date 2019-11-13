@@ -25,15 +25,14 @@
 							</div>
 							<div class="form-group">
 								<label>Nombre<span color="danger">*</span></label>
-								<!-- input type="text" name="nombre" [(ngModel)]="centro_medico.nombre" required-->
+								<input class="form-control" type="text" name="nombre" [(ngModel)]="centro_medico.nombre" required>
 							</div>
 						</div>
-					
+
 						<app-loading *ngIf="is_loading"></app-loading>
-					
+
 						<div class="ion-padding">
-							<button type="button" expand="block" type="submit" class="" (click)="guardar()"
-								[disabled]="is_loading">Guardar</button>
+							<button type="button" class="btn btn-primary" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 						</div>
 					</form>
 				</div>
