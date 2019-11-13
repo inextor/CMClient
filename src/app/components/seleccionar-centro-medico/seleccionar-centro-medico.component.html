@@ -1,17 +1,17 @@
-<app-header></app-header>
-<h1>Seleccionar Clinica</h1>
-<button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button>
-<div class="container">
-	<div class="list" *ngFor="let centro_medico of centros">
-		<div class="form-group" (click)="seleccionarCentro(centro_medico)">
-			<!-- ion-avatar slot="start">
-				<ion-img src="./avatar-gollum.jpg"/>
-				<ion-icon slot="start" name="home"></ion-icon>
-			</ion-avatar -->
-			<label>
-				<h2>{{centro_medico.nombre}}</h2>
-				<!--p>Sneaky little hobbitses</p-->
-			</label>
+<div>
+	<button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button>
+	<div class="container">
+		<div class="list" *ngFor="let centro_medico of centros">
+			<div class="form-group" (click)="seleccionarCentro(centro_medico)">
+				<!-- ion-avatar slot="start">
+					<ion-img src="./avatar-gollum.jpg"/>
+					<ion-icon slot="start" name="home"></ion-icon>
+				</ion-avatar -->
+				<label>
+					<h2>{{centro_medico.nombre}}</h2>
+					<!--p>Sneaky little hobbitses</p-->
+				</label>
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Centro_Medico } from '../../models/Modelos';
+
 
 @Component({
   selector: 'app-seleccionar-centro-medico',
@@ -9,13 +10,20 @@ import { Centro_Medico } from '../../models/Modelos';
 })
 export class SeleccionarCentroMedicoComponent implements OnInit {
 
-	constructor(private rest:RestService) {
-//		this.centros = navParams.get('centros');
-	}
+	@Output selected:CentroMedico;
 
 	centros:Centro_Medico[] = [];
-	idOrganizacion = localStorage.getItem('id_organizacion')
-	ngOnInit() {}
+
+	constructor(private rest:RestService)
+	{
+	}
+
+	ngOnInit() {
+		this.rest.centro_medico.getAll({}).subscribe((respuesta)=>
+		{
+			this.centros = respuesta.datos;
+		});
+	}
 
 	dismissModal()
 	{
@@ -24,6 +32,6 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	seleccionarCentro(centro_medico:Centro_Medico)
 	{
-//		this.modalCtrl.dismiss(centro_medico);
+		this.selected.emit( centro_medico );
 	}
 }
