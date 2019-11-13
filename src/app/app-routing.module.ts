@@ -117,12 +117,6 @@ const routes: Routes = [
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
-  {
-    path: "registro",
-    component: RegistroComponent,
-    pathMatch: "full",
-    canActivate: [AuthGuard]
-  },
   { path: "usuarios", component: UsuariosComponent, pathMatch: "full" },
   { path: "login", component: LoginComponent, pathMatch: "full" },
   {
