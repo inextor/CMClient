@@ -60,7 +60,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
 					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion}),
-					this.rest.precio_servicio.getAll({ id_servicio: id })
+					this.rest.precio_servicio.getAll({ id_servicio: this.id })
 				])
 				.subscribe((valores)=>
 				{
