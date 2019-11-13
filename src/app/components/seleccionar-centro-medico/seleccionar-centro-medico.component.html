@@ -1,17 +1,14 @@
-<div>
-	<button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button>
-	<div class="container">
-		<div class="list" *ngFor="let centro_medico of centros">
-			<div class="form-group" (click)="seleccionarCentro(centro_medico)">
-				<!-- ion-avatar slot="start">
-					<ion-img src="./avatar-gollum.jpg"/>
-					<ion-icon slot="start" name="home"></ion-icon>
-				</ion-avatar -->
-				<label>
-					<h2>{{centro_medico.nombre}}</h2>
-					<!--p>Sneaky little hobbitses</p-->
-				</label>
-			</div>
+<div [ngClass]="{ 'custom-modal':true, 'd-none': !show}">
+	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
+	<div>
+		<h2>Seleccione un centro Medico</h2>
+		<div>
+			<input class="form-control" type="text" placeholder="Buscar..." id="searchCentroMedico" (keyup)="onKeyPressed($event)">
 		</div>
+		<ul class="list-group mt-3">
+			<li *ngFor="let centro_medico of centros" class="list-group-item"  (click)="seleccionarCentro(centro_medico)">
+				{{centro_medico.nombre}}
+			</li>
+		</ul>
 	</div>
 </div>
