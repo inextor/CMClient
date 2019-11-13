@@ -1,31 +1,44 @@
-<div>
-	<title>Especialidades</title>
-</div>
-
-<img class="menuLogo" src="../../../assets/logo/Mehr-Software-16.png">
-<div class="container">
-	<div class="card">
-		<form>
-			<div lines="full" class="list  ion-no-padding">
-				<div *ngIf="centro_medico.id_imagen">
-					<img [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen">
-				</div>
-				<div class="form-group">
-					<input type="file" (change)="uploadImage($event)" name="image">
-				</div>
-				<div class="form-group">
-					<label>Nombre<span color="danger">*</span></label>
-					<!-- input type="text" name="nombre" [(ngModel)]="centro_medico.nombre" required-->
-				</div>
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
 			</div>
-
-			<app-loading *ngIf="is_loading"></app-loading>
-
-			<div class="ion-padding">
-				<button type="button" expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
-			</div>
-		</form>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h1>Agregar Centro Medico</h1>
+					<form>
+						<div lines="full" class="list  ion-no-padding">
+							<div *ngIf="centro_medico.id_imagen">
+								<img [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen">
+							</div>
+							<div class="form-group">
+								<input type="file" (change)="uploadImage($event)" name="image">
+							</div>
+							<div class="form-group">
+								<label>Nombre<span color="danger">*</span></label>
+								<!-- input type="text" name="nombre" [(ngModel)]="centro_medico.nombre" required-->
+							</div>
+						</div>
+					
+						<app-loading *ngIf="is_loading"></app-loading>
+					
+						<div class="ion-padding">
+							<button type="button" expand="block" type="submit" class="" (click)="guardar()"
+								[disabled]="is_loading">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
 	</div>
 </div>
-<!-- FIN CONTENIDO DE LA APLICACION-->
-
