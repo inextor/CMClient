@@ -26,23 +26,24 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	precio_servicios:Precio_Servicio[] = [];
 	centros_medicos:Centro_Medico[] = [];
 	precios	= {};
+	id:number = null;
 
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
 		{
-			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
+			this.id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			let user = this.rest.getUsuarioSesion();
 			this.servicio_recurso.servicio.id_organizacion = user.id_organizacion;
 
 			this.is_loading = true;
-			if( id )
+			if( this.id )
 			{
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
 					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion}),
-					this.rest.precio_servicio.getAll({},{ id_servicio: id }),
-					this.rest.servicio_recurso.get( id )
+					this.rest.precio_servicio.getAll({},{ id_servicio: this.id }),
+					this.rest.servicio_recurso.get( this.id )
 				])
 				.subscribe((valores)=>
 				{

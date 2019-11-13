@@ -14,27 +14,35 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h1>Agregar Servicio</h1>
+					<h1>{{ id ? 'Editar': 'Agregar' }} Servicio</h1>
 					<div class="container">
 						<form>
-							<input type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">
-							<select name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
-								<option value="">Seleccione uno</option>
-								<option value="SERVICIO">Servicio</option>
-								<option value="PRODUCTO_FISICO">Producto Fisico</option>
-							</select>
+
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<input class="form-control" type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">
+								</div>
+								<div class="form-group col-md-6">
+									<select name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
+										<option value="">Seleccione uno</option>
+										<option value="SERVICIO">Servicio</option>
+										<option value="PRODUCTO_FISICO">Producto Fisico</option>
+									</select>
+								</div>
+							</div>
 						</form>
 						<table class="basica">
 							<tr>
 								<td>Centro Medico</td>
 								<td *ngFor="let tipo_precio of tipo_precios">{{tipo_precio.nombre}}</td>
 							</tr>
-					
-					
+
+
 							<tr *ngFor="let centro_medico of centros_medicos; index as i">
 								<td><b>{{centro_medico.nombre}}</b></td>
-								<td *ngFor="let tipo_precio of tipo_precios; index as j"><input type="number" [name]="i+'-'+j"
-										[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio"></td>
+								<td *ngFor="let tipo_precio of tipo_precios; index as j">
+									<input type="number" class="form-control" [name]="i+'-'+j" [(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
+								</td>
 							</tr>
 						</table>
 						<div>
