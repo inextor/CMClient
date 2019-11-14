@@ -20,6 +20,7 @@ export class ServiciosComponent implements OnInit {
 		this.is_loading = true;
 		this.rest.searchServicio.getAll({}).subscribe((respuesta)=>
 		{
+			this.is_loading = false;
 			this.servicios = respuesta.datos;
 			console.log(this.servicios)
 		}, (error) => {

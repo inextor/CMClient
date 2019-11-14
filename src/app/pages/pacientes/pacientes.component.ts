@@ -36,7 +36,7 @@ export class PacientesComponent implements OnInit {
 	//Usuario tiene que tener id_organizacion si es admin,Doctor,Recepcionista ó Asistente
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
-
+		this.is_loading = true;
 		// this.rest.doctor.get({}).subscribe((respuesta)=>
 		// {this.doctor = respuesta.datos;});
 		//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
@@ -55,7 +55,9 @@ export class PacientesComponent implements OnInit {
 			this.rest.paciente.getAll({},{id_organizacion: usuario.id_organizacion }).subscribe((respuesta)=>
 			{
 				this.pacientes = respuesta.datos;
+				this.is_loading = false;
 			});
+	
 		}
 		else
 		{
