@@ -3,6 +3,7 @@ import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { Servicio,Tipo_Precio,Centro_Medico,Precio_Servicio } from '../../models/Modelos';
 import { Servicio_Recurso } from '../../models/Respuestas';
+import { from } from 'rxjs';
 
 
 @Component({
@@ -57,10 +58,10 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			}
 			else
 			{
+					//this.rest.precio_servicio.getAll({ id_servicio: this.id })
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
-					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion}),
-					this.rest.precio_servicio.getAll({ id_servicio: this.id })
+					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion})
 				])
 				.subscribe((valores)=>
 				{
@@ -81,10 +82,16 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		console.log( valores );
 		this.tipo_precios = valores[0].datos;
 		this.centros_medicos = valores[1].datos;
-		this.precio_servicios = valores[2].datos;
 
 		if( valores.length ==  4 )
-			this.servicio_recurso= valores[3];
+		{
+			this.precio_servicios = valores[2].datos;
+			this.servicio_recurso = valores[3];
+		}
+		else
+		{
+			this.precio_servicios = [];
+		}
 
 		this.centros_medicos.forEach( i=> this.precios[i.id] = {});
 
@@ -126,33 +133,52 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 	guardar()
 	{
-
-
-		this.rest.servicio_recurso.update( this.servicio_recurso ).subscribe((asdf)=>
+		if( this.servicio_recurso.servicio.id )
 		{
-			this.servicio_recurso = asdf;
-
-			let nprecios:Precio_Servicio[] = [];
-
-			for(let i in this.precios )
+			this.rest.servicio_recurso.update( this.servicio_recurso ).subscribe((asdf)=>
 			{
-				for(let j in this.precios[i])
-				{
-					if( this.precios[i][j].precio )
-					{
-						nprecios.push( this.precios[i][j] );
-					}
-				}
-			}
-
-			this.rest.precio_servicio.batchUpdate( nprecios ).subscribe((result)=>
-			{
-				//this.success_message = 'Hell Yeah';
+				this.servicio_recurso = asdf;
+				this.updatePrecios();
 			}
 			,(error)=>
 			{
 				this.showError( error );
 			});
+		}
+		else
+		{
+			this.rest.servicio_recurso.create( this.servicio_recurso ).subscribe((asdf)=>
+			{
+				this.servicio_recurso = asdf;
+				this.updatePrecios();
+			},
+			(error)=>{
+				this.showError( error );
+			})
+
+		}
+	}
+	updatePrecios()
+	{
+
+		let nprecios:Precio_Servicio[] = [];
+
+		console.log("precios",this.precios );
+		for(let i in this.precios )
+		{
+			for(let j in this.precios[i])
+			{
+				this.precios[i][j].id_servicio = this.servicio_recurso.servicio.id;
+				if( this.precios[i][j].precio )
+				{
+					nprecios.push( this.precios[i][j] );
+				}
+			}
+		}
+
+		this.rest.precio_servicio.batchUpdate( nprecios ).subscribe((result)=>
+		{
+			//this.success_message = 'Hell Yeah';
 			this.router.navigate(['/servicios']);
 		}
 		,(error)=>
