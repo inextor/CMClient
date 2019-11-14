@@ -34,7 +34,13 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 		//this.rest.getCentrosMedicosPorOrganizacion( this.currentUser.id_organizacion )
 		this.rest.centro_medico.getAll({ id_organizacion: this.currentUser.id_organizacion }).subscribe((respuesta)=>
 		{
+			this.is_loading = false;
 			this.centros_medicos = respuesta.datos;
+		}
+		,(error)=>
+		{
+			this.is_loading = false;
+			this.showError( error );
 		});
 
 		this.route.paramMap.subscribe( params =>
@@ -45,12 +51,14 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			this.rest.tipo_gasto.getAll({ id_organizacion:this.currentUser.id_organizacion}).subscribe((respTipoGasto)=>
 			{
 				this.tiposGasto = respTipoGasto.datos;
-
+				this.is_loading = false;
 				if( this.id_gasto )
 				{
+					this.is_loading = true;
 					//this.rest.getGastoCentroMedico(this.id_gasto).subscribe((gasto)=>
 					this.rest.gasto_centro_medico.get( this.id_gasto ).subscribe((gasto)=>
 					{
+						this.is_loading = false;
 						this.gasto_centro_medico =	gasto;
 					}
 					,(error)=>
@@ -59,6 +67,11 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 						console.log( msg );
 					});
 				}
+			},
+			(error)=>
+			{
+				this.is_loading = false;
+				this.showError( error );
 			});
 		});
 	}
@@ -86,6 +99,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			//this.rest.agregarGastoCentroMedico( this.gasto_centro_medico ).subscribe((gasto)=>
 			this.rest.gasto_centro_medico.create(this.gasto_centro_medico).subscribe((gast)=>
 			{
+				this.is_loading = false;
 				this.location.back();
 			});
 		}
