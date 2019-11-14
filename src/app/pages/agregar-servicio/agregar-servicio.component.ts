@@ -38,6 +38,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			this.servicio_recurso.servicio.id_organizacion = user.id_organizacion;
 
 			this.is_loading = true;
+
 			if( this.id )
 			{
 				forkJoin([
@@ -48,6 +49,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				])
 				.subscribe((valores)=>
 				{
+					this.is_loading = false;
 					this.initValores( valores );
 				}
 				,(error)=>
@@ -65,6 +67,8 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				])
 				.subscribe((valores)=>
 				{
+				this.is_loading = false;
+
 					this.initValores( valores );
 				},
 				(error)=>
@@ -133,15 +137,20 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 	guardar()
 	{
+	this.is_loading = true;
+
 		if( this.servicio_recurso.servicio.id )
 		{
 			this.rest.servicio_recurso.update( this.servicio_recurso ).subscribe((asdf)=>
 			{
 				this.servicio_recurso = asdf;
-				this.updatePrecios();
+				this.updatePrecios(); this.is_loading = false;
+
 			}
 			,(error)=>
 			{
+			this.is_loading = false;
+
 				this.showError( error );
 			});
 		}
@@ -150,10 +159,12 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			this.rest.servicio_recurso.create( this.servicio_recurso ).subscribe((asdf)=>
 			{
 				this.servicio_recurso = asdf;
-				this.updatePrecios();
+				this.updatePrecios(); this.is_loading = false;
+
 			},
 			(error)=>{
-				this.showError( error );
+				this.showError(error); this.is_loading = false;
+
 			})
 
 		}
@@ -175,14 +186,18 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				}
 			}
 		}
+		this.is_loading = true;
 
 		this.rest.precio_servicio.batchUpdate( nprecios ).subscribe((result)=>
 		{
 			//this.success_message = 'Hell Yeah';
-			this.router.navigate(['/servicios']);
+			this.router.navigate(['/servicios']); this.is_loading = false;
+
 		}
 		,(error)=>
 		{
+		this.is_loading = false;
+
 			this.showError( error );
 		});
 	}

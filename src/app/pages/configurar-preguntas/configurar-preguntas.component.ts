@@ -13,7 +13,7 @@ import { Especialidad_Pregunta_Accion } from '../../models/Respuestas';
   styleUrls: ['./configurar-preguntas.component.css']
 })
 export class ConfigurarPreguntasComponent implements OnInit {
-
+    is_loading:boolean = false;
 	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
 
@@ -28,13 +28,17 @@ export class ConfigurarPreguntasComponent implements OnInit {
 		{
 			this.id_especialidad = parseInt (params.get('idEspecialidad') )
 			console.log("Especialidad",this.id_especialidad);
-
+			this.is_loading = true;
 			///TODO FIXME debe de pasar algun tipo de parametro
 			// ANTERIO TAMBIEN ESTABA MAL this.rest.getPreguntas().subscribe((respuesta)=>
 			this.rest.pregunta_historia_clinica.getAll({}).subscribe((respuesta)=>
-			{
+			{	this.is_loading = false ;
 				this.preguntas = respuesta.datos;
 				this.actualizarPreguntas();
+			},(error) => {
+				console.log("QUE PASO");
+				this.showError(this.rest.getErrorMessage(error));
+				this.is_loading = false;
 			});
 		});
 	}
@@ -45,6 +49,22 @@ export class ConfigurarPreguntasComponent implements OnInit {
 		{
 			return p.pregunta.toLowerCase().indexOf(term) > -1;
 		});
+	}
+
+
+	async showError(message: string) {
+
+		/*
+		const alert = await this.alertController.create({
+			header: 'Error',
+			//subHeader: 'Subtitle',
+			message: message,
+			buttons: ['OK']
+		});
+
+		await alert.present();
+		this.is_loading = false;
+		*/
 	}
 
 		/*
@@ -60,17 +80,24 @@ export class ConfigurarPreguntasComponent implements OnInit {
 
 	actualizarPreguntas()
 	{
+		this.is_loading = true;
 		this.rest.getPreguntasEspecialidad( this.id_especialidad ).subscribe((preguntas)=>
-		{
+		{	
 			this.preguntasEspecialidad	= preguntas.datos;
 			this.busquedaPreguntas = this.preguntas.filter((i)=>{
 				return !this.preguntasEspecialidad.some(j=>j.pregunta_historia_clinica.id == i.id);
-			});
+			}); 
+			this.is_loading = false;
+		}, (error) => {
+			console.log("QUE PASO");
+			this.showError(this.rest.getErrorMessage(error));
+			this.is_loading = false;
 		});
 	}
 
 	mover(especialidadPregunta:Especialidad_Pregunta,accion:string)
 	{
+		this.is_loading = true;
 		let e:Especialidad_Pregunta_Accion = {accion};
 
 		for(let i in especialidadPregunta)
@@ -79,10 +106,12 @@ export class ConfigurarPreguntasComponent implements OnInit {
 		//this.rest.editEspecialidadPregunta( especialidadPregunta, accion ).subscribe((foo)=>
 		this.rest.especialidad_pregunta.update( e ).subscribe((foo)=>
 		{
+			this.is_loading = false;
 			console.log('FOOO');
 			this.actualizarPreguntas();
 		},(error)=>
 		{
+			this.is_loading = false;
 			console.log("OCurrio un error",error);
 		});
 	}

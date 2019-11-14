@@ -14,6 +14,8 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
+					<h1>Agregar Organizacion</h1>
+					<app-loading [display]="is_loading"></app-loading>
 					<form>
 						<div lines="full" class="list  ">
 							<div class="form-group">
@@ -21,8 +23,6 @@
 								<input required type="text" name="nombre" [(ngModel)]="organizacion.nombre">
 							</div>
 						</div>
-
-						<app-loading *ngIf="is_loading"></app-loading>
 
 						<div class="">
 							<button type="button" expand="block" type="submit" class="" (click)="agregar()" [disabled]="is_loading">Agregar</button>

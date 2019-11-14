@@ -23,6 +23,7 @@ export class TipoPreciosComponent  extends BaseComponent implements OnInit {
 
 			this.rest.tipo_precio.getAll({},{page:this.currentPage, page_size: 10}).subscribe((respuesta) =>
 			{
+				this.is_loading = false;
 				this.tiposPrecio = respuesta.datos;
 				console.log(this.tiposPrecio)
 				this.setPages( this.currentPage, respuesta.total );
@@ -31,6 +32,7 @@ export class TipoPreciosComponent  extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.showError(error);
+				
 			});
 		});
   }

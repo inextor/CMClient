@@ -15,7 +15,8 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Ver doctor</h1>
-					<div class="container">
+					<app-loading [display]="is_loading"></app-loading>
+					<div class="container">e
 						<div>
 							<button type="button" slot="start" size="default" (click)="presentAlertConfirm()">Confirmar cita</button>
 							<div>

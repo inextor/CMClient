@@ -15,9 +15,8 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Agregar Pregunta</h1>
-					<app-loading [is_loading]="is_loading"></app-loading>
-					<div *ngIf="!is_loading">
-
+					<app-loading [display]="is_loading"></app-loading>
+					<div>
 
 						<!-- <label position="floating">Pregunta</label> -->
 						<input [(ngModel)]="pregunta.pregunta">

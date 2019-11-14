@@ -44,7 +44,15 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.tipo_busqueda = 'fecha'
 				this.crequest.id_paciente = id_paciente;
 				//this.rest.getPaciente( id_paciente ).subscribe(paciente=> this.paciente = paciente);
-				this.rest.paciente.get( id_paciente ).subscribe(paciente=> this.paciente = paciente);
+				this.is_loading= true;
+				this.rest.paciente.get( id_paciente ).subscribe((paciente)=> {
+					this.is_loading=false;
+					this.paciente = paciente
+				}, (error) => {
+					console.log("QUE PASO");
+					this.showError(this.rest.getErrorMessage(error));
+					this.is_loading = false;
+				});
 			}
 
 			let id_doctor  = params.get('id_doctor') == null ? null : parseInt(params.get('id_doctor') );
@@ -54,7 +62,14 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.tipo_busqueda = 'fecha'
 				this.crequest.id_doctor = id_doctor;
 				//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
-				this.rest.doctor.get( id_doctor ).subscribe(doctor=> this.doctor = doctor);
+				this.rest.doctor.get( id_doctor ).subscribe((doctor)=> {
+					this.is_loading = false ;
+					this.doctor = doctor
+				}, (error) => {
+					console.log("QUE PASO");
+					this.showError(this.rest.getErrorMessage(error));
+					this.is_loading = false;
+				});
 			}
 
 			if( !this.crequest.id_paciente && !this.crequest.id_doctor )

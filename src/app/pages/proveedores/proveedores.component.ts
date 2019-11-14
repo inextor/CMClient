@@ -19,7 +19,11 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
 	this.is_loading = false;
       this.proveedores = respuesta.datos;
       console.log(this.proveedores)
-		});
+    }, (error) => {
+      console.log("QUE PASO");
+      this.showError(this.rest.getErrorMessage(error));
+      this.is_loading = false;
+    });
   }
 
 }

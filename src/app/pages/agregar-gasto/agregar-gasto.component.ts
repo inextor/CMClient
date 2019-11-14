@@ -73,10 +73,12 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			//this.rest.updateGastoCentroMedico( this.gasto_centro_medico ).subscribe((gasto_centro_medico)=>
 			this.rest.gasto_centro_medico.update( this.gasto_centro_medico ).subscribe((gasto_centro_medico)=>
 			{
+				this.is_loading = false;
 				this.location.back();
 			},(error)=>
 			{
 				this.showError( error );
+				this.is_loading = false;
 			});
 		}
 		else

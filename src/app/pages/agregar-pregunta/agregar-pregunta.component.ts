@@ -34,6 +34,9 @@ export class AgregarPreguntaComponent extends BaseComponent implements OnInit {
 					this.is_loading				= false;
 					this.pregunta				= response[0];
 					this.preguntas_generales	= response[1].datos;
+				},(error) => {
+					this.showError(this.rest.getErrorMessage(error));
+					this.is_loading = false;
 				});
 			}
 			else

@@ -15,6 +15,7 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Gastos</h1>
+					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
 						<td>
 							<button type="button" [routerLink]="['/agregar-gasto']" size="small">Agregar gasto
