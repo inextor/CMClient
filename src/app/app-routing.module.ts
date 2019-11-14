@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
 	  path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente",
-    component: LoginComponent,
+    component: HorarioDoctorComponent,
     pathMatch: "full"
   },
   {
