@@ -31,7 +31,7 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 	ngOnInit() {
 
 		let usuario = this.rest.getUsuarioSesion();
-
+		this.is_loading = false;
 		if( usuario !== null )
 		{
 			this.usuario.id_organizacion = usuario.id_organizacion;
