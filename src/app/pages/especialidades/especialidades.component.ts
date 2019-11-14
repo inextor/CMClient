@@ -28,11 +28,12 @@ especialidades:Especialidad[]=[];
 			{
 				this.especialidades = respuesta.datos;
 				console.log(this.especialidades)
-
+				this.is_loading = false;
 				this.setPages( this.currentPage, respuesta.total );
 			},(error)=>
 			{
 				this.showError(error);
+				this.is_loading = false;
 			});
 		});
 	}

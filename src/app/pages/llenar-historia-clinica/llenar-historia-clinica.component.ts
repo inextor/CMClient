@@ -43,7 +43,6 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 				console.log("doctor y paciente",response );
 				this.doctor = response[0];
 				this.paciente = response[1];
-
 				//If id_especialidad is null then 1
 				//
 
@@ -83,6 +82,7 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 			this.showError( error );
 			//this.msgError = this.rest.getErrorMessage( error );
 			//console.log( this.msgError );
+			this.is_loading = false;
 		});
 	}
 

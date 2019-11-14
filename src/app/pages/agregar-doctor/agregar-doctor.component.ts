@@ -40,8 +40,10 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
 	agregar()
 	{
+		this.is_loading = true;
 		this.rest.agregarUsuarioDoctor(this.usuario,this.doctor).subscribe((doctor)=>
 		{
+			this.is_loading = false;
 			this.router.navigate(['/home']);
 		},
 		(error)=>

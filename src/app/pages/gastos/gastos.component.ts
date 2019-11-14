@@ -20,7 +20,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
-
+ this.is_loading = true;
 		forkJoin
 		(
 			[
@@ -41,7 +41,9 @@ export class GastosComponent extends BaseComponent implements OnInit {
 			}
 			,(error)=>
 			{
+				
 				this.showError( error );
+				this.is_loading = false ;
 			}
 		);
 	}

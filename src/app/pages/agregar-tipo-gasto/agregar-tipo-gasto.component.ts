@@ -17,6 +17,7 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 	};
 
 	ngOnInit() {
+		this.is_loading = true;
 		this.route.paramMap.subscribe( params =>
 		{
 			this.id_tipo_gasto = params.get('id') == null ? null : parseInt( params.get('id') );
@@ -25,12 +26,14 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 				//this.rest.getTipoGasto(this.id_tipo_gasto).subscribe((tipoGasto)=>
 				this.rest.tipo_gasto.get(this.id_tipo_gasto).subscribe((tipoGasto)=>
 				{
+					this.is_loading = false;
 					this.tipoGasto =  tipoGasto;
 				}
 				,(error)=>
 				{
 					let msg = this.rest.getErrorMessage( error );
 					console.log( msg );
+					this.is_loading = false;
 				});
 			}
 		});
@@ -38,23 +41,26 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 
 	guardar()
 	{
+		this.is_loading = true;
 		console.log("Guardando");
 		if( this.id_tipo_gasto )
 		{
 			//this.rest.updateTipoGasto( this.tipoGasto ).subscribe(()=>
 			this.rest.tipo_gasto.update( this.tipoGasto ).subscribe((tipo_gasto)=>
 			{
-
+				this.is_loading = false;
 			},(error)=>
 			{
 				this.showError( error );
+				this.is_loading = false;
 			});
 		}
 		else
 		{
+			this.is_loading= false;
 			//this.rest.agregarTipoGasto( this.tipoGasto ).subscribe((tipo_gasto)=>
 			this.rest.tipo_gasto.create( this.tipoGasto ).subscribe((tipo_gasto)=>
-			{
+			{ 
 				this.location.back();
 			});
 		}

@@ -186,7 +186,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				}
 			}
 		}
-		this.is_loading = false;
+		this.is_loading = true;
 
 		this.rest.precio_servicio.batchUpdate( nprecios ).subscribe((result)=>
 		{

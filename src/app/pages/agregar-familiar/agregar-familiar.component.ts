@@ -40,6 +40,9 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 					console.log("WTF");
 					this.is_loading = false;
 					this.paciente = paciente;
+				},(error) => {
+					this.showError(this.rest.getErrorMessage(error));
+					this.is_loading = false;
 				});
 			}
 			else
@@ -59,7 +62,6 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 
-		console.log
 
 		if( this.paciente.id )
 		{
@@ -73,7 +75,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			{
 				console.log("error")
 				// this.showError( this.rest.getErrorMessage( error ) );
-				// this.is_loading = false;
+				this.is_loading = false;
 			});
 
 		}
@@ -89,7 +91,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			{
 				console.log("error")
 				// this.showError( this.rest.getErrorMessage( error ) );
-				// this.is_loading = false;
+				this.is_loading = false;
 			});
 		}
 	}

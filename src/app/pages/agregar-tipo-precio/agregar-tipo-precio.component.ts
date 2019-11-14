@@ -37,6 +37,9 @@ export class AgregarTipoPrecioComponent implements OnInit {
 				{
 					this.is_loading = false;
 					this.tipoPrecio = tipoPrecio;
+				}, (error) => {
+					this.showError(error);
+					this.is_loading = false;
 				});
 			}
 		});
@@ -61,6 +64,21 @@ export class AgregarTipoPrecioComponent implements OnInit {
 				this.router.navigate(['/tipo-precios/0']);
 			});
 		}
+	}
+
+	async showError(message: string) {
+
+		/*
+		const alert = await this.alertController.create({
+			header: 'Error',
+			//subHeader: 'Subtitle',
+			message: message,
+			buttons: ['OK']
+		});
+
+		await alert.present();
+		this.is_loading = false;
+		*/
 	}
 
 }

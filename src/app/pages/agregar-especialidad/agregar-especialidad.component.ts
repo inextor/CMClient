@@ -35,7 +35,10 @@ export class AgregarEspecialidadComponent implements OnInit {
 				{
 					this.is_loading = false;
 					this.especialidad = especialidad;
-				});
+				}, (error) => {
+						this.showError(this.rest.getErrorMessage(error));
+						this.is_loading = false;
+					});
 			}
 		});
 	}
@@ -60,5 +63,20 @@ export class AgregarEspecialidadComponent implements OnInit {
 				this.router.navigate(['/especialidades/0']);
 			});
 		}
+	}
+
+	async showError(message: string) {
+
+		/*
+		const alert = await this.alertController.create({
+			header: 'Error',
+			//subHeader: 'Subtitle',
+			message: message,
+			buttons: ['OK']
+		});
+
+		await alert.present();
+		this.is_loading = false;
+		*/
 	}
 }

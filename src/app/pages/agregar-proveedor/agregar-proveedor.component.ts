@@ -49,6 +49,9 @@ export class AgregarProveedorComponent implements OnInit {
 			this.rest.proveedor.update( this.proveedor ).subscribe((proveedor)=>{
 				this.is_loading = false;
 				this.router.navigate(['/proveedores']);
+			}, (error) => {
+				this.showError(this.rest.getErrorMessage(error));
+				this.is_loading = false;
 			});
 		}
 		else
@@ -57,8 +60,25 @@ export class AgregarProveedorComponent implements OnInit {
 			this.rest.proveedor.create( this.proveedor ).subscribe((proveedor)=>{
 				this.is_loading = false;
 				this.router.navigate(['/proveedores']);
+			}, (error) => {
+				this.showError(this.rest.getErrorMessage(error));
+				this.is_loading = false;
 			});
 		}
 	}
 
+	async showError(message: string) {
+
+		/*
+		const alert = await this.alertController.create({
+			header: 'Error',
+			//subHeader: 'Subtitle',
+			message: message,
+			buttons: ['OK']
+		});
+
+		await alert.present();
+		this.is_loading = false;
+		*/
+	}
 }
