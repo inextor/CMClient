@@ -1,0 +1,69 @@
+digraph G {
+
+  inicio_session_administrador[label="Inicio Session" style="filled"]
+  inicio_session_administrador->home_administracion[color="green"]
+  
+  
+  home_administracion[label="Home Administracion" color="0.603 0.258 1.000" style=filled]
+  home_administracion -> usuarios
+  //agregar_usuario
+  productos_y_servicios [label="Productos y Servicios" color="0.603 0.258 1.000" style=filled]
+  home_administracion -> productos_y_servicios[color="green"]
+  home_administracion -> centros_medicos[color="green"]
+  home_administracion -> "Reportes" [color="green"]
+  home_administracion -> Especialidades[color="green"]
+
+
+  Especialidades[label="Especialidades" color="0.603 0.258 1.000" style=filled]
+  agregar_especialidad[label="Agregar" color="0.603 0.258 1.000" style=filled]
+  Especialidades -> agregar_especialidad[color="green"]
+
+  editar_especialidad[label="Editar" color="0.603 0.258 1.000" style=filled]
+  Especialidades -> editar_especialidad[color="green"]
+  Especialidades -> configurar_historia_clinica[color="green"]
+  configurar_historia_clinica[label="Configurar Historia Clinica" color="0.603 0.258 1.000" style=filled]
+  agregar_pregunta[label="Agregar Pregunta" color="0.603 0.258 1.000" style=filled]
+  configurar_historia_clinica -> agregar_pregunta[color="green"]
+
+  usuarios[label="Usuarios" color="0.603 0.258 1.000" style=filled]
+
+  usuarios->agregar_usuario_administrador
+  usuarios->agregar_usuario_recepcion;
+  usuarios->agregar_usuario_asistente
+  usuarios->agregar_usuario_doctor;
+
+
+
+  editar_usuario[label="Editar Usuario"]
+  usuarios->editar_usuario;
+
+  agregar_usuario_administrador[label="Agregar Administrador" color="0.603 0.258 1.000" style=filled]
+  agregar_usuario_recepcion[label="Agregar Recepcionista" color="0.603 0.258 1.000" style=filled]
+  agregar_usuario_doctor[label="Agregar Doctor" color="0.603 0.258 1.000" style=filled]
+  agregar_usuario_asistente[label="Agregar Asistente" color="0.603 0.258 1.000" style=filled]
+
+  //agregar_usuario[label="agregar usuario"]
+  //agregar_usuario -> agregar_usuario_administrador
+  //agregar_usuario -> agregar_usuario_recepcion
+  //agregar_usuario -> agregar_usuario_asistente
+
+  centros_medicos [label="Centros Medicos" color="0.603 0.258 1.000" style=filled]
+  editar_centro_medico[label="Editar Centro medico" color="0.603 0.258 1.000" style=filled]
+  centros_medicos -> editar_centro_medico[color="green"]
+  agregar_centro_medico[label="agregar" color="0.603 0.258 1.000" style="filled"]
+  centros_medicos -> agregar_centro_medico[color="green"]
+
+
+  productos_y_servicios -> "Editar Productos y Servicios"
+  productos_y_servicios -> "Agregar Productos y Servicio"
+  productos_y_servicios -> "Editar Precios"
+  productos_y_servicios -> "Ajuste de Inventario"
+  Precios [label="Precios" color="0.603 0.258 1.000" style=filled]
+  agregar_tipo_precio [label="Agregar tipo precio" color="0.603 0.258 1.000" style=filled]
+  editar_tipo_precio [label="Editar tipo precio" color="0.603 0.258 1.000" style=filled]
+  Precios -> agregar_tipo_precio [color="green"]
+  Precios -> editar_tipo_precio [color="green"]
+  home_administracion -> Precios [color="green"]
+
+ // lista_doctores [label="lista doctores"];
+}

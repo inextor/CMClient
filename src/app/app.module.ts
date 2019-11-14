@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
 import { FormsModule } from '@angular/forms';
 import { AccessModule } from './modules/access/access.module';
-
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,6 +60,8 @@ import { SeleccionarPacienteComponent } from './components/seleccionar-paciente/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AgendarCitaInnerComponent } from './pages/agendar-cita-inner/agendar-cita-inner.component';
+import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 
 
 @NgModule({
@@ -114,13 +116,16 @@ import { HomeComponent } from './pages/home/home.component';
     SeleccionarDoctorComponent,
     SeleccionarPacienteComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    AgendarCitaInnerComponent,
+    HorarioDoctorComponent
   ],
   imports: [
     AccessModule,
     BrowserModule,
     AppRoutingModule,
    HttpClientModule,
+	  FullCalendarModule,
     FormsModule,
     BrowserAnimationsModule,
 	  FormsModule

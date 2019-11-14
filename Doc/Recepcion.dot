@@ -1,0 +1,77 @@
+digraph G {
+	//node [style=filled color="white"];
+	login [label="Inicio Sesion" color="0.603 0.258 1.000" style=filled]
+	usuario_recepcion[label="Usuario Recepcion" style=filled shape="rectangle"]
+	usuario_recepcion->login
+	//"Listo" [color="0.603 0.258 1.000" fontcolor="0.603 0.258 1.000"]
+	home_recepcion [label="Home Recepcion" color="0.603 0.258 1.000" style=filled]
+
+	lista_paciente [label="Lista Pacientes" color="0.603 0.258 1.000" style=filled];
+	home_recepcion -> lista_paciente [color="green"]
+	lista_paciente -> citas_paciente [label="Seleccionar Paciente" color="green"]
+	lista_paciente -> lista_doctores_paciente [label="Agendar Cita" color="green"]
+	citas_paciente [label="Citas Paciente"	color="0.603 0.258 1.000" style=filled];
+	citas_paciente ->	cancelar_cita[color="green"]
+	citas_paciente -> confirmar_cita_paciente[color="green"]
+	citas_paciente -> calendario_cita [label="Re-Agendar Cita"]
+
+	cancelar_cita_paciente [label="Cancelar Cita" color="0.603 0.258 1.000" style=filled];
+	calendario_doctor	[label="Calendario Doctor"	color="0.603 0.258 1.000" style=filled];
+	editar_info_doctor [label="Editar Info Doctor" color="0.603 0.258 1.000" style=filled];
+	configurar_horario [label="Configurar Horario"	 color="0.603 0.258 1.000" style=filled];
+
+	citas_doctor [label="Citas Doctor"	color="0.603 0.258 1.000" style=filled];
+
+	home_recepcion -> pagos[color="green"]
+	home_recepcion -> gastos[color="green"]
+	pagos [label="Pagos"]
+	gastos [label="Gastos" color="0.603 0.258 1.000" style=filled]
+
+
+
+	login -> home_recepcion
+
+
+
+
+	//cita_paciente [label="Cita Paciente"	 color="0.603 0.258 1.000" style=filled];
+	confirmar_cita_paciente [label="Confirmar Cita Paciente" color="0.603 0.258 1.000" style=filled];
+	confirmar_cita_doctor[label="Confirmar Cita Doctor" color="0.603 0.258 1.000" style=filled];
+
+	calendario_cita	[label="Calendario Cita"	color="0.603 0.258 1.000" style=filled];
+	//cita_paciente -> calendario_cita [label="Re-Agendar cita"]
+	lista_doctores_paciente -> calendario_cita [label="Seleccionar Doctor" color="green"]
+	lista_doctores_paciente [label="Lista Doctores" color="0.603 0.258 1.000" style=filled];
+
+
+
+
+
+	cancelar_cita [label="Cancelar Cita"	 color="0.603 0.258 1.000" style=filled];
+
+	//cita_paciente -> "Cancelar Cita Paciente"
+
+
+	cancelar_cita_doctor[label="Cancelar Cita" color="0.603 0.258 1.000" style=filled];
+
+	citas_doctor -> cancelar_cita_doctor[color="green"]
+	citas_doctor -> confirmar_cita_doctor[color="green"]
+
+	home_recepcion -> lista_de_citas [color="green"];
+	lista_de_citas [label="Lista de Citas"	color="0.603 0.258 1.000" style=filled];
+	lista_de_citas -> confirmar_cita_paciente [color="green"];
+	lista_de_citas -> confirmar_cita_doctor [color="green"];
+	lista_de_citas -> "Aceptar Cita"
+	lista_de_citas -> cancelar_cita_paciente[color="green"]
+
+	lista_de_citas -> calendario_cita [label="Re-Agendar Cita"]
+
+	lista_doctores [label="Lista Doctores" color="0.603 0.258 1.000" style=filled];
+	lista_doctores -> calendario_doctor [label="Agendar Cita" color="green"]
+	lista_doctores -> editar_info_doctor[color="green"]
+	lista_doctores -> configurar_horario[color="green"]
+	lista_doctores -> citas_doctor [label="Citas" color="green"]
+	home_recepcion -> lista_doctores [color="green"]
+
+	//citas_paciente -> lista_doctores_paciente [label="Agendar Cita"];
+}

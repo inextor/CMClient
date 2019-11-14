@@ -1,0 +1,36 @@
+digraph G {
+  Login [label="Login" color="0.603 0.258 1.000" style=filled]
+  Home_Doctor [label="Home Doctor" color="0.603 0.258 1.000" style=filled]
+  Citas [label="Citas" color="0.603 0.258 1.000" style=filled]
+  Confirmar_Doctor [label="Confirmar Doctor"  style=filled]
+  Confirmar_Paciente [label="Confirmar Paciente" style=filled]
+  Configurar_Horario [label="Configurar Horario"  color="0.603 0.258 1.000"  style=filled]
+
+  Perfil [label="Perfil" color="0.603 0.258 1.000" style=filled]
+  Pacientes [label="Pacientes" color="0.603 0.258 1.000"  style=filled]
+  Agendar_Cita [label="Agendar Cita" color="0.603 0.258 1.000" style=filled]
+  Citas_Pacientes [label="Citas Pacientes" color="0.603 0.258 1.000"  style=filled]
+  Calendario_Doctor [label="Calendario Doctor"  style=filled]
+  Seguimiento_Citas [label="Seguimiento Citas"  style=filled]  
+  Citas_Pendientes [label="Citas Pendientes"  style=filled]
+  Historia_Clinica [label="Confirmar Doctor"  style=filled]
+
+  Login->Home_Doctor
+  Home_Doctor -> Citas [color="green"]
+  Home_Doctor -> Configurar_Horario
+  Home_Doctor -> Perfil [color="green"]
+  Home_Doctor -> Pacientes [color="green"]
+  
+  Citas -> Seguimiento_Citas
+  Citas -> Citas_Pendientes  
+  Citas->Confirmar_Doctor
+  Citas->Confirmar_Paciente
+  Configurar_Horario -> Calendario_Doctor  
+
+  Pacientes -> Agendar_Cita [color="green"]
+  Pacientes -> Citas_Pacientes [color="green"]
+  Pacientes -> Historia_Clinica[color="green"]
+
+  Historia_Clinica -> Consulta[color="green"]
+  Historia_Clinica -> Agregar_Archivo
+}

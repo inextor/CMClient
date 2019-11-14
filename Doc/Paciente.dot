@@ -1,0 +1,20 @@
+digraph G {
+  Home_Paciente [label="Home Paciente" color="0.603 0.258 1.000" style=filled]
+  Mis_Citas [label="Mis Citas" color="0.603 0.258 1.000" style=filled]
+  Mis_Doctores 
+  Perfil 
+  Solicitar_Cita [label="Solicitar Cita" style=filled]
+  Doctores [label="Doctores" style=filled]
+  Ver_Doctor [label="Ver doctor "Horario"" style=filled]
+  Confirmar_Cita [label="Confirmar Cita" style=filled]
+
+  Home_Paciente -> Mis_Citas [color="green"]
+  Home_Paciente -> Mis_Doctores
+  Home_Paciente -> Perfil
+
+  Mis_Citas -> Solicitar_Cita [color="green"]
+
+  Solicitar_Cita -> Doctores [color="green"]
+  Doctores -> Ver_Doctor [color="green"]
+  Doctores -> Confirmar_Cita [color="green"]
+}

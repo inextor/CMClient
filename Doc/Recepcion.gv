@@ -1,0 +1,41 @@
+digraph G {
+  
+ 
+ lista_doctores [label="lista doctores"];
+ "Home Recepcion" -> "Pagos"
+ "Home Recepcion" -> "Gastos"
+
+ 
+
+
+  lista_doctores_paciente [label="lista doctores"];
+  "Login" -> "Home Recepcion"
+   "Home Recepcion" -> "Lista Pacientes"
+  "Home Recepcion" -> lista_doctores
+  lista_doctores -> "Calendario Doctor" [label="Ver Calendario"]
+  lista_doctores -> "Editar Info Doctor"
+  "Calendario Doctor" -> "Cita Doctor" [label="Seleccionar Cita"]
+  "Calendario Doctor" -> "Seleccionar Paciente"
+  "Seleccionar Paciente" -> "Calendario Cita";
+
+  lista_doctores -> "Configurar Horario" 
+  lista_doctores -> "Citas Doctor" [label="Ver Citas"]
+
+  "Cita Doctor"-> "Cancelar Cita"
+  "Cita Doctor"-> "Calendario Cita" [label="Re-Agendar Cita"]
+
+ 
+  "Citas Doctor" -> "Cita Doctor" [label="Seleccionar Cita"]
+  "Lista Pacientes" -> "Citas Paciente" [label="Seleccionar Paciente"]
+  "Citas Paciente" -> "Cita Paciente" [label="Seleccionar cita"]
+  "Citas Paciente" -> lista_doctores_paciente [label="Agendar Cita"];
+
+  "Cita Paciente" -> "Cancelar Cita Paciente"
+  "Cita Paciente" -> "Calendario Cita" [label="Re-Agendar cita"]
+  lista_doctores_paciente -> "Calendario Cita" [label="Seleccionar Doctor"] 
+ "Home Recepcion" -> "Lista de Citas"
+ "Lista de Citas" -> "Confirmar Cita Paciente"
+ "Lista de Citas" -> "Confirmar Cita Doctor"
+ "Lista de Citas" -> "Aceptar Cita"
+ "Lista de Citas" -> "Calendario Cita" [label="Re-Agendar Cita"]
+}

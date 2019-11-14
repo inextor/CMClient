@@ -48,11 +48,17 @@ import { CitasComponent 			   } from './pages/citas/citas.component';
 import { CitaComponent 				   } from "./pages/cita/cita.component";
 import { HomeComponent } 				 from './pages/home/home.component';
 import { AuthGuard } from "./../app/classes/";
+import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 
 
 const routes: Routes = [
   {
     path: "",
+    component: LoginComponent,
+    pathMatch: "full"
+  },
+  {
+	  path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente",
     component: LoginComponent,
     pathMatch: "full"
   },

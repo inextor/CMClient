@@ -1,0 +1,11 @@
+    <full-calendar 
+    #calendar
+    [plugins]="calendarPlugins"
+    defaultView="timeGridWeek"
+    [weekends]="true"
+    [eventSources]="eventSources"
+    [firstDay]="1"
+    [height]="650"
+    [events]="calendarEvents"
+    (dateClick)="dateClick($event)"
+    ></full-calendar>
