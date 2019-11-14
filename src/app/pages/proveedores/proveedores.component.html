@@ -15,6 +15,9 @@
             <main class="p-2">
                 <div class="card p-3">
                     <h1>Proveedores</h1>
+					<div>
+						<button [routerLink]="['/agregar-proveedor']" type="button" class="btn btn-sm btn-primary">Agregar Proveedor</button>
+					</div>
 					<table class="basica">
 						<thead>
 							<tr>
@@ -26,7 +29,7 @@
 							<tr *ngFor="let proveedor of proveedores">
 								<td>{{proveedor.nombre}}</td>
 								<td>
-									<button class="btn btn-sm"  [routerLink]="['/editar-proveedor',proveedor.id]">Add</button>
+									<button class="btn btn-sm btn-primary"  [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
 								</td>
 							</tr>
 						</tbody>
