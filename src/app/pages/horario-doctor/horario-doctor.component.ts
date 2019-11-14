@@ -36,6 +36,8 @@ export class HorarioDoctorComponent implements OnInit {
 		{ id: "disponibilidad", events: [] },
 		{ id: "horario", events: [] }
 	]
+	is_mobile:boolean				= false;
+	show_modal:boolean				= false;
 
 	private idDoctor:number;
 	private idPaciente:number;
@@ -43,8 +45,7 @@ export class HorarioDoctorComponent implements OnInit {
 
 	ngOnInit()
 	{
-
-		this.is_mobile = this.restService.isMobile();
+		this.is_mobile= this.restService.isMobile();
 
 		this.route.paramMap.subscribe( params =>
 		{

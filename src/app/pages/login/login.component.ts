@@ -43,9 +43,10 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 	contrasena: string = '';
 	is_loading: boolean = false;
 
-	doLoginKeyboard(evt:Event)
+	doLoginKeyboard(evt:KeyboardEvent)
 	{
-		this.doLogin();
+		if( evt.keyCode == 13 )
+			this.doLogin();
 	}
 
 	doLogin() {

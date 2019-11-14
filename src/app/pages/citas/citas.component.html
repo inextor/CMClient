@@ -51,19 +51,19 @@
 								<td>{{i.doctor? i.doctor.nombre : ''}}</td>
 								<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
 								<td>
-									<button type="button"  size="small" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'" (click)="confirmarPaciente(i.cita.id)">
+									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'" (click)="confirmarPaciente(i.cita.id)">
 										 <span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button"  size="small" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'" (click)="confirmarDoctor(i.cita.id)">
+									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'" (click)="confirmarDoctor(i.cita.id)">
 										 <span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button"  size="small" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="cancelar(i.cita.id)">
+									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="cancelar(i.cita.id)">
 										 <span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button"  size="small" *ngIf="i.cita.estatus == 'CANCELADA'" (click)="activar(i.cita.id)">
+									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'CANCELADA'" (click)="activar(i.cita.id)">
 										 <span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span>
 									</button>
-									<button type="button"  size="small" [routerLink]="['/agregar-centro-medico',i.cita.id]">
+									<button type="button"  class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]">
 										 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
 									</button>
 								</td>

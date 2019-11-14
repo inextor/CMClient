@@ -8,12 +8,10 @@
 					<form #form="ngForm">
 						<div class="form-group">
 							<h3>Iniciar Sesión</h3>
-							<input name="email" class="form-control" type="text" placeholder="usuario@email.com" [(ngModel)]="usuario"
-								required />
+							<input name="email" class="form-control" type="text" placeholder="usuario@email.com" [(ngModel)]="usuario" required />
 						</div>
 						<div class="form-group">
-							<input name="password" class="form-control" type="password" placeholder="Password" [(ngModel)]="contrasena"
-								(change)="doLoginKeyboard($event)" required />
+							<input name="password" class="form-control" type="password" placeholder="Password" [(ngModel)]="contrasena" (keyup)="doLoginKeyboard($event)" required />
 								</div>
 								<div>
 								<button type="button" class="btn btn-primary" size="large" type="submit"
