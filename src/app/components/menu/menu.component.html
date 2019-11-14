@@ -2,10 +2,10 @@
 <div id="sidebar-wrapper">
     <div class=" list-group-flush">
         <div class="sidebar">
-            <a type="button" class="btn list-group-item list-group-item-action color1 group"><img
+            <a type="button" (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
                     src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />Centros medicos</a>
         </div>
-        <div>
+        <div *ngIf="showCentros">
             <div>
                 <div>
                     <a href="#" [routerLink]="['/especialidades',0]"
@@ -13,19 +13,19 @@
                     </a>
                 </div>
                 <div>
-                    <a [routerLink]="['/centros-medicos']" href="#"
+                    <a [routerLink]="['/centros-medicos']" 
                         class="list-group-item list-group-item-action color1 group">Clinicas </a>
                 </div>
                 <div>
-                    <a [routerLink]="['/tipo-precios',0]" href="/tipo-precios/0"
+                    <a [routerLink]="['/tipo-precios',0]" 
                         class="list-group-item list-group-item-action color1 group">Precios </a>
                 </div>
                 <div>
-                    <a [routerLink]="['/tipo-precios',0]"
+                    <a [routerLink]="['/servicios']"
                         class="list-group-item list-group-item-action color1 group">Servicios</a>
                 </div>
                 <div>
-                    <a href="" class="list-group-item list-group-item-action color1 group">Reportes </a>
+                    <a class="list-group-item list-group-item-action color1 group">Reportes </a>
                 </div>
             </div>
         </div>

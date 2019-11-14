@@ -49,7 +49,7 @@ export class AgregarEspecialidadComponent implements OnInit {
 			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.especialidad.update( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
-				this.router.navigate(['/especialidades']);
+				this.router.navigate(['/especialidades/0']);
 			});
 		}
 		else
@@ -57,7 +57,7 @@ export class AgregarEspecialidadComponent implements OnInit {
 			//this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.especialidad.create( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
-				this.router.navigate(['/especialidades']);
+				this.router.navigate(['/especialidades/0']);
 			});
 		}
 	}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-menu",
@@ -7,8 +8,8 @@ import { RestService } from 'src/app/services/rest.service';
   styleUrls: ["./menu.component.css"]
 })
 export class MenuComponent implements OnInit {
-  constructor(private rest: RestService) {}
-
+  constructor(private rest: RestService, public router: Router ) {}
+  showCentros:boolean = false;
   ngOnInit() {}
 
   logout() {
@@ -18,6 +19,6 @@ export class MenuComponent implements OnInit {
     // localStorage.removeItem('session_token');
     // localStorage.removeItem('id_organizacion');
     // this.currentUserSubject.next(null);
-    window.location.reload()
+    this.router.navigate(['/login']);
   }
 }
