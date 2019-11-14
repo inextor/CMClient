@@ -15,6 +15,7 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Especialidades</h1>
+					<app-loading [display]="is_loading"></app-loading>
 					<td>
 						<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
 							Agregar especialidad

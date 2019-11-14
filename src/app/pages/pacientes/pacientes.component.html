@@ -15,6 +15,7 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Pacientes</h1>
+					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
 						<td>
 							<button type="button" slot="start" class="btn btn-small btn-primary" [routerLink]="['/agregar-usuario']" [appAccess]="['Doctor']">Agregar Paciente</button>
