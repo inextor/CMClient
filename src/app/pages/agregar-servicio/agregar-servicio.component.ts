@@ -153,6 +153,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			{
 				this.showError( error );
 			});
+			this.router.navigate(['/servicios']);
 		}
 		,(error)=>
 		{
