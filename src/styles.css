@@ -172,7 +172,7 @@ body
 	overflow: hidden;
 }
 
-.page_content div:first-child
+.page_content>div:first-child
 {
     -webkit-order: 0;
     -ms-flex-order: 0;
@@ -186,7 +186,7 @@ body
 	overflow: auto;
 }
 
-.page_content main
+.page_content>main
 {
     -webkit-order: 0;
     -ms-flex-order: 0;
@@ -198,6 +198,7 @@ body
     -ms-flex-item-align: stretch;
     align-self: stretch;
 	overflow: auto;
+	width: 100%;
 }
 
 .custom-modal .hidden
@@ -227,7 +228,4 @@ body
 	font-size: 16px;
 }
 
-main
-{
 
-}

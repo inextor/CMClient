@@ -13,18 +13,21 @@
 			</div>
 			<!-- FIN MENU -->
 			<!-- CONTENIDO -->
-			<main class="p-2 position-relative">
-				<full-calendar
-					#calendar
-					[plugins]="calendarPlugins"
-					defaultView="timeGridWeek"
-					[weekends]="true"
-					[eventSources]="eventSources"
-					[firstDay]="1"
-					[height]="650"
-					[events]="calendarEvents"
-					(dateClick)="dateClick($event)"
-				></full-calendar>
+			<main class="p-3  position-relative">
+				<!-- [height]=650 -->
+				<div class="card p-3 m-3">
+					<full-calendar
+						#calendar
+						[plugins]="calendarPlugins"
+						defaultView="timeGridWeek"
+						[weekends]="true"
+						[eventSources]="eventSources"
+						[firstDay]="1"
+						[events]="calendarEvents"
+						(dateClick)="dateClick($event)"
+						(eventRender)="eventRender($event)"
+						></full-calendar>
+				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
 		</div>

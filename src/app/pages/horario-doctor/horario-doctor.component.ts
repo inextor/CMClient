@@ -39,9 +39,9 @@ export class HorarioDoctorComponent implements OnInit {
 	is_mobile:boolean				= false;
 	show_modal:boolean				= false;
 
-	private idDoctor:number;
-	private idPaciente:number;
-	private idCentroMedico:number;
+	private id_doctor:number;
+	private id_paciente:number;
+	private id_centro_medico:number;
 
 	ngOnInit()
 	{
@@ -49,9 +49,9 @@ export class HorarioDoctorComponent implements OnInit {
 
 		this.route.paramMap.subscribe( params =>
 		{
-			this.idDoctor		= parseInt(params.get('id_doctor'));
-			this.idPaciente		= parseInt(params.get('id_paciente'));
-			this.idCentroMedico	= parseInt(params.get('id_centro_medico'));
+			this.id_doctor		= parseInt(params.get('id_doctor'));
+			this.id_paciente		= parseInt(params.get('id_paciente'));
+			this.id_centro_medico	= parseInt(params.get('id_centro_medico'));
 		});
 	}
 
@@ -68,7 +68,7 @@ export class HorarioDoctorComponent implements OnInit {
 				calendarAPI.removeAllEventSources();
 		}
 
-		//this.citasService.getDisponibilidadDoctor(this.idDoctor, this.idCentroMedico).subscribe( events => {
+		//this.citasService.getDisponibilidadDoctor(this.id_doctor, this.id_centro_medico).subscribe( events => {
 		//	const disponibilidad = events.datos.map( d=> {
 		//		const id = this.counterId;
 		//		this.counterId += 1;
@@ -87,7 +87,7 @@ export class HorarioDoctorComponent implements OnInit {
 		//	calendarAPI.addEventSource(disponibilidad);
 		//});
 
-		this.restService.horario_doctor.getAll({ id_centro_medico:this.idCentroMedico },{id_doctor:this.idDoctor}).subscribe( respuesta =>
+		this.restService.horario_doctor.getAll({ id_centro_medico:this.id_centro_medico },{id_doctor:this.id_doctor}).subscribe( respuesta =>
 		{
 			let calendarEvents = [];
 
@@ -106,7 +106,7 @@ export class HorarioDoctorComponent implements OnInit {
 		});
 
 
-		this.citasService.getHorarioDoctor(this.idDoctor, this.idCentroMedico).subscribe(
+		this.citasService.getHorarioDoctor(this.id_doctor, this.id_centro_medico).subscribe(
 			events => {
 				const calendarEvents = [];
 				events.datos.map(event => {
@@ -126,20 +126,18 @@ export class HorarioDoctorComponent implements OnInit {
 		)
 	}
 
-	//dateClick(info)
-	//{
 
-	//}
 
 	async dateClick(info)
 	{
+		console.log( info );
 		//const modal = await this.modalController.create({
 		//	component: AgendarCitaComponent,
 		//	componentProps: {
 		//		'fecha': info.date,
-		//		'idPaciente': this.idPaciente,
-		//		'idDoctor': this.idDoctor,
-		//		'idCentroMedico': this.idCentroMedico
+		//		'id_paciente': this.id_paciente,
+		//		'id_doctor': this.id_doctor,
+		//		'id_centro_medico': this.id_centro_medico
 		//	},
 		//});
 		//modal.onDidDismiss().then(() =>
@@ -147,7 +145,7 @@ export class HorarioDoctorComponent implements OnInit {
 		//	this.getDisponibilidadDoctor();
 		//})
 		//return await modal.present();
-		this.show_modal=true;
+		//this.show_modal=true;
 	}
 
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
@@ -166,9 +164,9 @@ export class HorarioDoctorComponent implements OnInit {
 	aceptarCita()
 	{
 		this.citasService.setCitaDoctor({
-			id_centro_medico	: this.idCentroMedico,
-			id_doctor			: this.idDoctor,
-			id_paciente			: this.idPaciente,
+			id_centro_medico	: this.id_centro_medico,
+			id_doctor			: this.id_doctor,
+			id_paciente			: this.id_paciente,
 			inicio				: this.cita.fecha + " " + this.cita.horaInicio,
 			fin					: this.cita.fecha + " " + this.cita.horaFin,
 			nota				: this.cita.nota
@@ -180,5 +178,9 @@ export class HorarioDoctorComponent implements OnInit {
 	dismissModal()
 	{
 		this.show_modal = false;
+	}
+	eventRender(info)
+	{
+		console.log( info );
 	}
 }
