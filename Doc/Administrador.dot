@@ -20,10 +20,21 @@ digraph G {
 
   editar_especialidad[label="Editar" color="0.603 0.258 1.000" style=filled]
   Especialidades -> editar_especialidad[color="green"]
-  Especialidades -> configurar_historia_clinica[color="green"]
-  configurar_historia_clinica[label="Configurar Historia Clinica" color="0.603 0.258 1.000" style=filled]
+  Especialidades -> configurar_especialidad[color="green"]
+  configurar_especialidad[label="Configurar Especialidad" color="0.603 0.258 1.000" style=filled]
+  listar_preguntas [label="Listar preguntas" color="0.603 0.258 1.000" style=filled]
   agregar_pregunta[label="Agregar Pregunta" color="0.603 0.258 1.000" style=filled]
-  configurar_historia_clinica -> agregar_pregunta[color="green"]
+  remover_pregunta[label="Remover Pregunta"  style=filled]
+  mover_arriba[label="Mover Arriba" color="0.603 0.258 1.000" style=filled]
+  mover_abajo[label="Mover Abajo" color="0.603 0.258 1.000" style=filled]
+  configurar_especialidad -> listar_preguntas[color="green"]
+  listar_preguntas -> agregar_pregunta [color="green"]
+
+  listar_preguntas-> remover_pregunta
+listar_preguntas-> mover_arriba[color="green"]
+listar_preguntas-> mover_abajo[color="green"]
+
+
 
   usuarios[label="Usuarios" color="0.603 0.258 1.000" style=filled]
 
@@ -52,12 +63,15 @@ digraph G {
   centros_medicos -> editar_centro_medico[color="green"]
   agregar_centro_medico[label="agregar" color="0.603 0.258 1.000" style="filled"]
   centros_medicos -> agregar_centro_medico[color="green"]
+  
+  ////////////////////////PRODUCTOS Y SERVICIOS /////////////////////////
+  editar_producto [label="Editar Producto" style=filled]
+  agregar_producto [label="Agregar Producto" color="0.603 0.258 1.000" style=filled]
 
-
-  productos_y_servicios -> "Editar Productos y Servicios"
-  productos_y_servicios -> "Agregar Productos y Servicio"
-  productos_y_servicios -> "Editar Precios"
-  productos_y_servicios -> "Ajuste de Inventario"
+  productos_y_servicios -> editar_producto[color="green"]
+  productos_y_servicios -> agregar_producto[color="green"]
+  productos_y_servicios -> "Editar Precios"[color="green"]
+  productos_y_servicios -> "Ajuste de Inventario"[color="green"]
   Precios [label="Precios" color="0.603 0.258 1.000" style=filled]
   agregar_tipo_precio [label="Agregar tipo precio" color="0.603 0.258 1.000" style=filled]
   editar_tipo_precio [label="Editar tipo precio" color="0.603 0.258 1.000" style=filled]

@@ -51,6 +51,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.centro_medico.update( this.centro_medico ).subscribe((centro_medico)=>{
 				this.is_loading = false;
+				this.router.navigate(['/centros-medicos']);
 				
 			});
 		}
