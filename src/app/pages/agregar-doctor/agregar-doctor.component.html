@@ -17,50 +17,53 @@
 					<h1>Agregar Doctor</h1>
 					<app-loading [display]="is_loading"></app-loading>
 					<form>
-						<div lines="full" class="list ion-no-margin ion-no-padding">
+						<!-- <div class="form-group">
+							<label position="stacked">Nombre Especialidad<span color="danger">*</span></label>
+							<input required type="text" class="form-control" name="nombre" [(ngModel)]="especialidad.nombre">
+						</div> -->
 					
 							<div *ngIf="usuario.id_imagen">
 								<img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<input type="file" (change)="uploadImage($event)" name="image">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Nombre<span color="danger">*</span></label>
-								<input required type="text" name="especialidad" [(ngModel)]="doctor.nombre">
+								<input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.nombre">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Telefono<span color="danger">*</span></label>
-								<input required type="text" name="telefono" [(ngModel)]="doctor.telefono">
+								<input required type="text" class="form-control" name="telefono" [(ngModel)]="doctor.telefono">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-								<input required type="text" name="correo_electronico" [(ngModel)]="doctor.correo_electronico">
+								<input required type="text" class="form-control" name="correo_electronico" [(ngModel)]="doctor.correo_electronico">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Especialidad<span color="danger">*</span></label>
-								<input required type="text" name="especialidad" [(ngModel)]="doctor.especialidad">
+								<input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.especialidad">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Usuario</label>
-								<input type="text" name="usuario" [(ngModel)]="usuario.usuario">
+								<input type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
 							</div>
 					
-							<div class="item">
+							<div class="form-group">
 								<label position="stacked">Contraseña<span color="danger"></span></label>
-								<input type="text" name="contrasena" [(ngModel)]="usuario.contrasena">
+								<input type="text" class="form-control" name="contrasena" [(ngModel)]="usuario.contrasena">
 							</div>
 					
-						</div>
-						<div class="ion-padding">
-							<button expand="block" type="submit" class="ion-no-margin" (click)="agregar()"
-								[disabled]="is_loading">Registrarse</button>
+				
+						<div class="">
+							<button expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+								[disabled]="is_loading">Registrar</button>
 						</div>
 					</form>
 				</div>
