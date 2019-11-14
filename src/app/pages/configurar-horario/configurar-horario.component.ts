@@ -25,6 +25,7 @@ export class ConfigurarHorarioComponent implements OnInit {
 	{
 		this.idCentroMedico = parseInt(this.activatedRoute.snapshot.paramMap.get('idCentroMedico'));
 		//XXX Para que queremos el centro medico????
+		
 		this.restService.centro_medico.get( this.idCentroMedico ).subscribe( centroMedico =>
 		{
 			this.centroMedico = centroMedico;
