@@ -30,9 +30,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngIf="gastos.length==0" align="center">
+								<tr *ngIf="gastos.length==0 && !is_loading" class="text-center">
 									<td colspan="4">No se encontraron registros</td>
 								</tr>
+								<tr *ngIf="is_loading">
+									<td colspan="2">
+										<app-loading [is_loading]="is_loading"></app-loading>
+									</td>
+								</tr>
+
 								<tr *ngFor="let g of gastos">
 									<td>{{g.gasto_centro_medico.id}}</td>
 									<td>{{g.gasto_centro_medico.descripcion}}</td>

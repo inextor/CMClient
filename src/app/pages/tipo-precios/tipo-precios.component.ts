@@ -25,10 +25,11 @@ export class TipoPreciosComponent  extends BaseComponent implements OnInit {
 			{
 				this.tiposPrecio = respuesta.datos;
 				console.log(this.tiposPrecio)
-
 				this.setPages( this.currentPage, respuesta.total );
+				this.is_loading = false;
 			},(error)=>
 			{
+				this.is_loading = false;
 				this.showError(error);
 			});
 		});

@@ -28,6 +28,11 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr *ngIf="is_loading">
+								<td colspan="2">
+									<app-loading [is_loading]="is_loading"></app-loading>
+								</td>
+							</tr>
 							<tr *ngFor="let centro_medico of centros_medicos">
 								<td>
 									<img *ngIf="centro_medico.id_imagen" [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" class="image_icon">

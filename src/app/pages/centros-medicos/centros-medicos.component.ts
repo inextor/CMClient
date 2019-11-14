@@ -2,6 +2,7 @@ import	{	Component,	OnInit	}	from	'@angular/core';
 import	{	RestService	}	from	'../../services/rest.service';
 import	{	Usuario,Doctor,Centro_Medico	}	from	'../../models/Modelos';
 import	{Router,ActivatedRoute}	from	"@angular/router"
+import { BaseComponent } from '../base/base.component';
 
 
 
@@ -10,20 +11,22 @@ import	{Router,ActivatedRoute}	from	"@angular/router"
   templateUrl: './centros-medicos.component.html',
   styleUrls: ['./centros-medicos.component.css']
 })
-export class CentrosMedicosComponent implements OnInit {
 
-	constructor(private	rest:RestService,private	router:Router,private	route:ActivatedRoute)	{	}
+export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
-	is_loading:boolean 	= false;
+
 	centros_medicos:Centro_Medico[]		= [];
 
 	ngOnInit()	{
-		// TODO agarrar id organizacion de la sesion
-
-		//this.rest.getCentrosMedicosPorOrganizacion(1).subscribe((respuesta)=>
+		this.is_loading = true;
 		this.rest.centro_medico.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
 		{
+			this.is_loading = false;
 			this.centros_medicos = respuesta.datos;
+		},
+		(error)=>
+		{
+			this.showError( error );
 		});
 	}
 }

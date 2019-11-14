@@ -118,7 +118,7 @@ import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.co
     HeaderComponent,
     HomeComponent,
     AgendarCitaInnerComponent,
-    HorarioDoctorComponent
+    HorarioDoctorComponent,
   ],
   imports: [
     AccessModule,

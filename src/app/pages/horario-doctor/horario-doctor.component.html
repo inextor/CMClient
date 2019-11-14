@@ -1,11 +1,67 @@
-    <full-calendar 
-    #calendar
-    [plugins]="calendarPlugins"
-    defaultView="timeGridWeek"
-    [weekends]="true"
-    [eventSources]="eventSources"
-    [firstDay]="1"
-    [height]="650"
-    [events]="calendarEvents"
-    (dateClick)="dateClick($event)"
-    ></full-calendar>
+
+<!-- NAVBAR -->
+<div class="page">
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2 position-relative">
+				<full-calendar
+					#calendar
+					[plugins]="calendarPlugins"
+					defaultView="timeGridWeek"
+					[weekends]="true"
+					[eventSources]="eventSources"
+					[firstDay]="1"
+					[height]="650"
+					[events]="calendarEvents"
+					(dateClick)="dateClick($event)"
+				></full-calendar>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
+</div>
+
+<div class="custom-modal" *ngIf="show_modal">
+	<div>
+		<form >
+
+			<div *ngIf="is_mobile">
+				<div class="form-group">
+					<label>Fecha y Hora</label>
+					<input class="form-control" type="datetime-local" [(ngModel)]="cita.fecha" name="fecha" placeholder="Select Date" >
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<label>Fecha</label>
+					<input type="date" class="form-control" [(ngModel)]="cita.fecha" name="fecha" placeholder="Fecha" >
+				</div>
+
+				<div class="form-group">
+					<label>Hora Inicio</label>
+					<input type="time" class="form-control" [(ngModel)]="cita.horaInicio" name="horaInicio" display-format="h:mm A" picker-format="h:mm A" placeholder="Hora">
+				</div>
+				<!--div class="form-group">
+					<label>Hora Fin</label>
+					<input type="date" [(ngModel)]="cita.horaFin" name="horaFin" display-format="h:mm A" picker-format="h:mm A" placeholder="Select Date"></ion-datetime>
+				</div-->
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" [(ngModel)]="cita.nota" name="nota" placeholder="Notas..."></textarea>
+			</div>
+		</form>
+		<button type="button" (click)="aceptarCita()" class="btn btn-primary">
+			Acceptar
+		</button>
+	</div>
+</div>

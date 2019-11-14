@@ -26,10 +26,12 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 				this.rest.tipo_gasto.get(this.id_tipo_gasto).subscribe((tipoGasto)=>
 				{
 					this.tipoGasto =  tipoGasto;
+					this.is_loading = false;
 				}
 				,(error)=>
 				{
 					let msg = this.rest.getErrorMessage( error );
+					this.is_loading = false;
 					console.log( msg );
 				});
 			}
@@ -44,10 +46,11 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 			//this.rest.updateTipoGasto( this.tipoGasto ).subscribe(()=>
 			this.rest.tipo_gasto.update( this.tipoGasto ).subscribe((tipo_gasto)=>
 			{
-
+				this.is_loading = false;
 			},(error)=>
 			{
 				this.showError( error );
+				this.is_loading = false;
 			});
 		}
 		else
@@ -55,6 +58,7 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 			//this.rest.agregarTipoGasto( this.tipoGasto ).subscribe((tipo_gasto)=>
 			this.rest.tipo_gasto.create( this.tipoGasto ).subscribe((tipo_gasto)=>
 			{
+				this.is_loading = false;
 				this.location.back();
 			});
 		}
