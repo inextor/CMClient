@@ -104,7 +104,7 @@ app-header+div
     align-items: flex-start;
 }
 
-.page header
+.page>header
 {
     -webkit-order: 0;
     -ms-flex-order: 0;
@@ -116,6 +116,7 @@ app-header+div
     -ms-flex-item-align: stretch;
     align-self: stretch;
 }
+
 .page>div:nth-child(2)
 {
 	position: relative;
@@ -177,9 +178,9 @@ body
     -webkit-order: 0;
     -ms-flex-order: 0;
     order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
     -webkit-align-self: stretch;
     -ms-flex-item-align: stretch;
     align-self: stretch;
