@@ -145,7 +145,7 @@ export class HorarioDoctorComponent implements OnInit {
 		//	this.getDisponibilidadDoctor();
 		//})
 		//return await modal.present();
-		//this.show_modal=true;
+		this.show_modal=true;
 	}
 
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
