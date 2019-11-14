@@ -63,7 +63,7 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: "doctores/:idDoctor/centro-medico/:idCentroMedico/agendar-cita/:idPaciente", component: HorarioDoctorComponent, pathMatch: "full",
+    path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full",
     canActivate: [AuthGuard]
   },
   {
