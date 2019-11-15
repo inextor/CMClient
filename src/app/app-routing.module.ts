@@ -201,7 +201,7 @@ const routes: Routes = [
   },
   {
     path: "editar-doctor/:id",
-    component: EditarDoctorComponent,
+    component: AgregarDoctorComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
   },

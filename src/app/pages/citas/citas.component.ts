@@ -185,14 +185,14 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	cancelar(infoCita:SearchCitaResponse)
 	{
 		this.rest.cita.update({
-			id: cita_info.cita.id
+			id: infoCita.cita.id
 			,estatus: 'CANCELADA'
 		}).subscribe((cita)=>
 		{
-			console.log( id_cita );
+			console.log( infoCita );
 			this.showConfirmCancelar = false;
 			this.is_loading = false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  cita_info.cita.id );
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;
 		},
@@ -207,12 +207,12 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	activar(infoCita:SearchCitaResponse)
 	{
 		this.rest.cita.update({
-			id: id_cita
+			id: infoCita.cita.id
 			,estatus: 'ACTIVA'
 		}).subscribe((cita)=>
 		{
 			this.showConfirmActivar = false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  cita_info.id );
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
 			this.is_loading = false;
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;
