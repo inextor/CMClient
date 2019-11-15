@@ -31,7 +31,6 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 
 		this.gasto_centro_medico.id_usuario = this.currentUser.id;
 
-		//this.rest.getCentrosMedicosPorOrganizacion( this.currentUser.id_organizacion )
 		this.rest.centro_medico.getAll({ id_organizacion: this.currentUser.id_organizacion }).subscribe((respuesta)=>
 		{
 			this.is_loading = false;
@@ -51,11 +50,8 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			this.rest.tipo_gasto.getAll({ id_organizacion:this.currentUser.id_organizacion}).subscribe((respTipoGasto)=>
 			{
 				this.tiposGasto = respTipoGasto.datos;
-				this.is_loading = false;
 				if( this.id_gasto )
 				{
-					this.is_loading = true;
-					//this.rest.getGastoCentroMedico(this.id_gasto).subscribe((gasto)=>
 					this.rest.gasto_centro_medico.get( this.id_gasto ).subscribe((gasto)=>
 					{
 						this.is_loading = false;
@@ -63,6 +59,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 					}
 					,(error)=>
 					{
+						this.is_loading = false;
 						let msg = this.rest.getErrorMessage( error );
 						console.log( msg );
 					});
@@ -83,24 +80,26 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 
 		if( this.id_tipo_gasto )
 		{
-			//this.rest.updateGastoCentroMedico( this.gasto_centro_medico ).subscribe((gasto_centro_medico)=>
 			this.rest.gasto_centro_medico.update( this.gasto_centro_medico ).subscribe((gasto_centro_medico)=>
 			{
 				this.is_loading = false;
 				this.location.back();
 			},(error)=>
 			{
-				this.showError( error );
 				this.is_loading = false;
+				this.showError( error );
 			});
 		}
 		else
 		{
-			//this.rest.agregarGastoCentroMedico( this.gasto_centro_medico ).subscribe((gasto)=>
 			this.rest.gasto_centro_medico.create(this.gasto_centro_medico).subscribe((gast)=>
 			{
 				this.is_loading = false;
 				this.location.back();
+			},(error)=>
+			{
+				this.is_loading = false;
+				this.showError( error );
 			});
 		}
 	}

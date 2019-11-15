@@ -21,6 +21,13 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	paciente:Paciente = {};
 	doctor:Doctor = {};
 
+	currentInfoCita:SearchCitaResponse = null;
+
+	showConfirmDoctor:boolean = false;
+	showConfirmPaciente:boolean = false;
+	showConfirmCancelar:boolean = false;
+	showConfirmActivar:boolean = false;
+
 	crequest:SearchCitaRequest = {
 
 	};
@@ -123,203 +130,97 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		//Esperando que funcione la siguiente linea
 		this.rest.searchCita.getAll( this.crequest ).subscribe((respuesta)=>
 		{
+			this.is_loading = false;
 			this.info_citas = respuesta.datos;
-			this.is_loading = false;
 		},
-		()=>
+		(error)=>
 		{
 			this.is_loading = false;
+			this.showError( error );
+		});
+	}
+
+	confirmarDoctor(infoCita:SearchCitaResponse)
+	{
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			,confirmado_por_doctor: 'SI'
+		}).subscribe((cita)=>
+		{
+			this.is_loading = false;
+			this.showConfirmDoctor = false;
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
+			if( index >= 0 )
+				this.info_citas[ index ].cita = cita;
+		},
+		(error)=>
+		{
+			this.showConfirmDoctor = false;
+			this.is_loading = false;
+			this.showError( error );
+		});
+	}
+
+	confirmarPaciente(infoCita:SearchCitaResponse)
+	{
+		this.is_loading = true;
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			,confirmado_por_paciente : 'SI'
+		}).subscribe((cita)=>
+		{
+			this.is_loading = false;
+			this.showConfirmPaciente= false;
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id);
+			if( index >= 0 )
+				this.info_citas[ index ].cita = cita;
+		},(error)=>
+		{
+			this.is_loading = false;
+			this.showConfirmPaciente= false;
+			this.showError( error );
+		});
+	}
+
+	cancelar(infoCita:SearchCitaResponse)
+	{
+		this.rest.cita.update({
+			id: cita_info.cita.id
+			,estatus: 'CANCELADA'
+		}).subscribe((cita)=>
+		{
+			console.log( id_cita );
+			this.showConfirmCancelar = false;
+			this.is_loading = false;
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  cita_info.cita.id );
+			if( index >= 0 )
+				this.info_citas[ index ].cita = cita;
+		},
+		(error)=>
+		{
+			this.is_loading = false;
+			this.showConfirmCancelar = false;
+			this.showError(error)
+		});
+	}
+
+	activar(infoCita:SearchCitaResponse)
+	{
+		this.rest.cita.update({
+			id: id_cita
+			,estatus: 'ACTIVA'
+		}).subscribe((cita)=>
+		{
+			this.showConfirmActivar = false;
+			let index = this.info_citas.findIndex(i=> i.cita.id ==  cita_info.id );
+			this.is_loading = false;
+			if( index >= 0 )
+				this.info_citas[ index ].cita = cita;
 		}
-		);
-	}
-
-	confirmarDoctor(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Confirmar doctor',
-			message: 'El doctor ha confirmado la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,confirmado_por_doctor: 'SI'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id == id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-						console.log("OK");
-					}
-				}
-			]
-		}).then((alert)=>
+		,(error)=>
 		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
-			});
+			this.is_loading = false;
+			this.showConfirmActivar = false;
 		});
-		*/
 	}
-
-	confirmarPaciente(id_cita:number)
-	{
-		/*
-		let alert = this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Confirmar paciente',
-			message: 'El paciente ha confirmado la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						console.log("OK");
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,confirmado_por_paciente : 'SI'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-
-					}
-				}
-			]
-		}).then((alert)=>
-		{
-			alert.present().catch((error)=>{
-				console.log('Ocurrio un error',error);
-			});
-		});
-		*/
-	}
-
-	cancelar(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Cancelar la cita',
-			message: 'Esta seguro que desea cancelar la cita?',
-			buttons: [
-				{
-					text: 'No',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Si',
-					handler: (result)=>
-					{
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,estatus: 'CANCELADA'
-						}).subscribe((cita)=>
-						{
-							console.log( id_cita );
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-
-					}
-				}
-			]
-		}).then((alert)=>
-		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
-			});
-		});
-		*/
-	}
-
-	activar(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Activar la cita',
-			message: 'Esta seguro que desea activar la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						console.log("OK");
-
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,estatus: 'ACTIVA'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-					}
-				}
-			]
-
-		}).then((alert)=>
-		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
-			});
-		});
-		*/
-	}
-
-
 }

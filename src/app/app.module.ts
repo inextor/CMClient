@@ -64,6 +64,7 @@ import { AgendarCitaInnerComponent } from './pages/agendar-cita-inner/agendar-ci
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 import { RecepcionistasComponent } from './pages/recepcionistas/recepcionistas.component';
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -123,6 +124,7 @@ import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agr
     HorarioDoctorComponent,
     RecepcionistasComponent,
     AgregarRecepcionistaComponent,
+    ModalComponent,
   ],
   imports: [
     AccessModule,

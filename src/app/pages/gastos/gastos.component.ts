@@ -17,10 +17,12 @@ export class GastosComponent extends BaseComponent implements OnInit {
 
 	tipos_gasto:Tipo_Gasto[] = [];
 	gastos:SearchGastoCentroMedicoResponse[] = [];
+	tipo_gastos_dic:any = {};
+
 
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
- this.is_loading = true;
+		this.is_loading = true;
 		forkJoin
 		(
 			[
@@ -34,14 +36,14 @@ export class GastosComponent extends BaseComponent implements OnInit {
 			(response:any[])=>
 			{
 				console.log("gastos",response);
-
 				this.tipos_gasto = response[0].datos;
+				this.tipos_gasto.forEach(i=> this.tipo_gastos_dic[ i.id ] =  i);
 				this.gastos	= response[1].datos;//TODO Cambiar al usaurio de la sesion
 				this.is_loading = false;
 			}
 			,(error)=>
 			{
-				
+
 				this.showError( error );
 				this.is_loading = false ;
 			}
