@@ -19,27 +19,28 @@
 					<div class="container">
 					
 						<app-loading [display]="is_loading"></app-loading>
-						<div lines="full" class="list  ion-no-padding">
+						<div lines="full" class="">
+r
 							<div class="form-group">
 								<label position="stacked">Cantidad<span color="danger">*</span></label>
-								<input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.monto">
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.monto">
 							</div>
 					
 							<div class="form-group">
 								<label position="stacked">Referencia<span color="danger">*</span></label>
-								<input required type="text" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
 							</div>
 					
 							<div class="form-group">
 								<label>Centro Medico</label>
-								<select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
+								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
 									<option *ngFor="let centro of centros_medicos" value="tipo.id">{{centro.nombre}}</option>
 								</select>
 							</div>
 					
 							<div class="form-group">
 								<label>Tipo Gasto</label>
-								<select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
+								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
 									<option *ngFor="let tipo of tiposGasto" value="tipo.id">{{tipo.nombre}}</option>
 								</select>
 							</div>
@@ -49,7 +50,7 @@
 						<app-loading *ngIf="is_loading"></app-loading>
 					
 						<div class="ion-padding">
-							<button type="button" expand="block" type="submit" class="" (click)="guardar()"
+							<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
 								[disabled]="is_loading">Guardar</button>
 						</div>
 					</div>

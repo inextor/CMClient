@@ -41,22 +41,26 @@ listar_preguntas-> mover_abajo[color="green"]
   usuarios->agregar_usuario_administrador
   usuarios->agregar_usuario_recepcion;
   usuarios->agregar_usuario_asistente
-  usuarios->agregar_usuario_doctor;
+  usuarios->agregar_usuario_doctor[color="green"]
+  usuarios->agregar_usuario_paciente[color="green"]
 
 
 
-  editar_usuario[label="Editar Usuario"]
+
+  editar_usuario[label="Editar Usuarios" color="0.603 0.258 1.000" style=filled]
   usuarios->editar_usuario;
 
   agregar_usuario_administrador[label="Agregar Administrador" color="0.603 0.258 1.000" style=filled]
   agregar_usuario_recepcion[label="Agregar Recepcionista" color="0.603 0.258 1.000" style=filled]
   agregar_usuario_doctor[label="Agregar Doctor" color="0.603 0.258 1.000" style=filled]
   agregar_usuario_asistente[label="Agregar Asistente" color="0.603 0.258 1.000" style=filled]
-
-  //agregar_usuario[label="agregar usuario"]
+  agregar_usuario_paciente[label="Agregar Paciente" color="0.603 0.258 1.000" style=filled]
+  
+//agregar_usuario[label="agregar usuario"]
   //agregar_usuario -> agregar_usuario_administrador
   //agregar_usuario -> agregar_usuario_recepcion
   //agregar_usuario -> agregar_usuario_asistente
+    //agregar_usuario -> agregar_usuario_paciente
 
   centros_medicos [label="Centros Medicos" color="0.603 0.258 1.000" style=filled]
   editar_centro_medico[label="Editar Centro medico" color="0.603 0.258 1.000" style=filled]
