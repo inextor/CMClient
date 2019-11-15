@@ -25,14 +25,14 @@
 						<span class="sr-only">Loading...</span>
 					</div>
 				</div>
-				<input type="text"  (change)="changeSearch($event)" ionInput="changeSearch($event)">
+				<input type="text" (change)="changeSearch($event)" ionInput="changeSearch($event)">
 				<select (change)="segmentChanged($event)">
-						<option  value="dogs">
-						  <label>Pendientes</label>
-						</option>
-						<option  value="cats">
-						  <label>Cats</label>
-						</option>
+					<option value="dogs">
+					<label>Pendientes</label>
+					</option>
+					<option value="cats">
+					<label>Cats</label>
+					</option>
 				</select>
 				<table class="basica">
 					<thead>
@@ -45,29 +45,34 @@
 						</tr>
 					</thead>
 					<tbody>
-							<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
-								<td>{{i.cita.inicio| date: 'short' }}</td>
-								<td>{{i.paciente.nombre}}</td>
-								<td>{{i.doctor? i.doctor.nombre : ''}}</td>
-								<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
-								<td>
-									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'" (click)="confirmarPaciente(i.cita.id)">
-										 <span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span>
-									</button>
-									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'" (click)="confirmarDoctor(i.cita.id)">
-										 <span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span>
-									</button>
-									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="cancelar(i.cita.id)">
-										 <span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span>
-									</button>
-									<button type="button"  class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'CANCELADA'" (click)="activar(i.cita.id)">
-										 <span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span>
-									</button>
-									<button type="button"  class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]">
-										 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-									</button>
-								</td>
-							</tr>
+						<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+							<td>{{i.cita.inicio| date: 'short' }}</td>
+							<td>{{i.paciente.nombre}}</td>
+							<td>{{i.doctor? i.doctor.nombre : ''}}</td>
+							<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'" (click)="currentInfoCita=i;showConfirmPaciente=true;">
+									 <!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
+									 <i class="material-icons">perm_identity</i>
+								</button>
+								<button type="button" class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'" (click)="currentInfoCita=i;showConfirmDoctor=true">
+									 <!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
+									 <i class="material-icons">person</i>
+								</button>
+								<button type="button" class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="currentInfoCita=i;showConfirmCancelar=true">
+									 <!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
+									 <i class="material-icons">cancel</i>
+								</button>
+								<button type="button" class="btn btn-primary btn-sm mr-2" *ngIf="i.cita.estatus == 'ACTIVA'" (click)="currentInfoCita=i;showConfirmActivar=true">
+									 <!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
+									 <i class="material-icons">done</i>
+								</button>
+								<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
+									 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+									 <i class="material-icons">create</i>
+								</button-->
+							</td>
+						</tr>
 					</tbody>
 				</table>
 
@@ -76,3 +81,47 @@
 		</div>
 	</div>
 </div>
+<app-modal [show]="showConfirmDoctor">
+	<div class="card p-3" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Confirmar Doctor</h5>
+			<p class="card-text">Desea confirmar la asistencia del doctor</p>
+			<a class="btn text-light mr-3 btn-secondary" (click)="showConfirmDoctor=false" >Cancelar</a>
+			<a class="btn text-light ml-3 btn-primary" (click)="confirmarDoctor(currentInfoCita)" >Aceptar</a>
+		</div>
+	</div>
+</app-modal>
+
+<app-modal [show]="showConfirmPaciente">
+	<div class="card p-3" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Confirmar Paciente</h5>
+			<p class="card-text">Desea confirmar la asistencia del paciente</p>
+			<a class="btn text-light mr-3 btn-secondary" (click)="showConfirmPaciente=false" >Cancelar</a>
+			<a class="btn text-light ml-3 btn-primary" (click)="confirmarPaciente(currentInfoCita)" >Aceptar</a>
+		</div>
+	</div>
+</app-modal>
+
+<app-modal [show]="showConfirmCancelar">
+	<div class="card p-3" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Cancelar Cita</h5>
+			<p class="card-text">Desea cancelar la cita</p>
+			<a class="btn text-light mr-3 btn-secondary" (click)="showConfirmCancelar=false" >Cancelar</a>
+			<a class="btn text-light ml-3 btn-danger" (click)="cancelar(currentInfoCita)" >Aceptar</a>
+		</div>
+	</div>
+</app-modal>
+
+<app-modal [show]="showConfirmActivar">
+	<div class="card p-3" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Cancelar Cita</h5>
+			<p class="card-text">Desea cancelar la cita</p>
+			<a class="btn text-light mr-3 btn-secondary" (click)="showConfirmActivar=false" >Cancelar</a>
+			<a class="btn text-light ml-3 btn-danger" (click)="activar(currentInfoCita)" >Aceptar</a>
+		</div>
+	</div>
+</app-modal>
+

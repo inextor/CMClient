@@ -14,52 +14,59 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h1>Agregar Doctor</h1>
+					<h1>{{this.usuario.id ? 'Editar':'Agregar'}} Doctor</h1>
 					<app-loading [display]="is_loading"></app-loading>
 					<form>
-						
-					
-							<div *ngIf="usuario.id_imagen">
-								<img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
-							</div>
-					
-							<div class="form-group">
-								<input type="file" (change)="uploadImage($event)" name="image">
-							</div>
-					
-							<div class="form-group">
+
+						<div *ngIf="usuario.id_imagen">
+							<img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
+						</div>
+
+						<div class="form-group">
+							<input type="file" (change)="uploadImage($event)" name="image">
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
 								<label position="stacked">Nombre<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.nombre">
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="doctor.nombre">
 							</div>
-					
-							<div class="form-group">
+							<div class="form-group col-md-6">
 								<label position="stacked">Telefono<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="telefono" [(ngModel)]="doctor.telefono">
 							</div>
-					
-							<div class="form-group">
-								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="correo_electronico" [(ngModel)]="doctor.correo_electronico">
-							</div>
-							
-							<div class="form-group">
-								<label position="stacked">Especialidad<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.especialidad">
-							</div>
-							<div class="form-group">
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
 								<label position="stacked">Usuario</label>
 								<input type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
 							</div>
-					
-							<div class="form-group">
+							<div class="form-group col-md-6">
 								<label position="stacked">Contraseña<span color="danger"></span></label>
 								<input type="text" class="form-control" name="contrasena" [(ngModel)]="usuario.contrasena">
 							</div>
-					
-				
-						<div class="">
-							<button expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
-								[disabled]="is_loading">Registrar</button>
+						</div>
+
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="correo_electronico" [(ngModel)]="doctor.correo_electronico">
+							</div>
+							<div class="form-group col-md-6">
+								<label position="stacked">Especialidad<span color="danger">*</span></label>
+								<!-- input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.especialidad" -->
+								<select name="especialidad" [(ngModel)]="doctor.id_especialidad">
+									<option *ngFor="let especialidad of especialidades" [ngValue]="especialidad.id">{{especialidad.nombre}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<button type="submit" class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="is_loading">
+								{{this.usuario.id ? 'Guardar':'Agregar'}}
+							</button>
 						</div>
 					</form>
 				</div>

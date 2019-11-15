@@ -16,10 +16,30 @@
 				<div class="card p-3">
 					<h1>Gastos</h1>
 					<app-loading [display]="is_loading"></app-loading>
+
+					<!--div d-flex>
+							<div class="form-group">
+								<label position="stacked">Referencia<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
+							</div>
+
+							<div class="form-group">
+								<label>Centro Medico</label>
+								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
+									<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label>Tipo Gasto</label>
+								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
+									<option *ngFor="let tipo of tiposGasto" [value]="tipo.id">{{tipo.nombre}}</option>
+								</select>
+							</div>
+					</div-->
 					<div class="container">
 						<td>
-							<button type="button" [routerLink]="['/agregar-gasto']" size="small">Agregar gasto
-							</button>
+							<button type="button" class="btn btn-primary" [routerLink]="['/agregar-gasto']" size="small">Agregar gasto</button>
 						</td>
 						<table class="basica">
 							<thead>
@@ -42,9 +62,9 @@
 
 								<tr *ngFor="let g of gastos">
 									<td>{{g.gasto_centro_medico.id}}</td>
-									<td>{{g.gasto_centro_medico.descripcion}}</td>
+									<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
 									<td>{{g.usuario.usuario}}</td>
-									<td>{{g.gasto_centro_medico.monto| number:'.2' | currency: '$'}}</td>
+									<td>{{g.gasto_centro_medico.monto | currency: '$'}}</td>
 								</tr>
 							</tbody>
 						</table>
