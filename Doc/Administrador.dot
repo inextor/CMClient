@@ -65,12 +65,11 @@ listar_preguntas-> mover_abajo[color="green"]
   centros_medicos -> agregar_centro_medico[color="green"]
   
   ////////////////////////PRODUCTOS Y SERVICIOS /////////////////////////
-  editar_producto [label="Editar Producto" style=filled]
-  agregar_producto [label="Agregar Producto" color="0.603 0.258 1.000" style=filled]
+  editar_producto_y_precio[label="Editar Producto y Precio" color="0.603 0.258 1.000" style=filled]
+  agregar_producto_y_precio[label="Agregar Producto y Precio" color="0.603 0.258 1.000" style=filled]
 
-  productos_y_servicios -> editar_producto[color="green"]
-  productos_y_servicios -> agregar_producto[color="green"]
-  productos_y_servicios -> "Editar Precios"[color="green"]
+  productos_y_servicios -> editar_producto_y_precio[color="green"]
+  productos_y_servicios -> agregar_producto_y_precio[color="green"]
   productos_y_servicios -> "Ajuste de Inventario"[color="green"]
   Precios [label="Precios" color="0.603 0.258 1.000" style=filled]
   agregar_tipo_precio [label="Agregar tipo precio" color="0.603 0.258 1.000" style=filled]
