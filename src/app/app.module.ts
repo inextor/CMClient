@@ -62,7 +62,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AgendarCitaInnerComponent } from './pages/agendar-cita-inner/agendar-cita-inner.component';
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
-import { RecepcionistasComponent } from './pages/recepcionistas/recepcionistas.component';
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
 
 
@@ -121,8 +120,8 @@ import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agr
     HomeComponent,
     AgendarCitaInnerComponent,
     HorarioDoctorComponent,
-    RecepcionistasComponent,
     AgregarRecepcionistaComponent,
+   
   ],
   imports: [
     AccessModule,
