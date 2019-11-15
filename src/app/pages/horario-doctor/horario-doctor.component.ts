@@ -15,19 +15,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HorarioDoctorComponent implements OnInit {
 
-
-	constructor(
-		private citasService:CitasService,
-		public restService:RestService,
-		public route:ActivatedRoute
-	)
-	{
-
-	}
-
-		//public modalController: ModalController,
-	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
-
 	counterId				= 0;
 	disponibilidadDoctor	= [];
 	horarioDoctor			= [];
@@ -42,6 +29,19 @@ export class HorarioDoctorComponent implements OnInit {
 	private id_doctor:number;
 	private id_paciente:number;
 	private id_centro_medico:number;
+
+	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
+
+	constructor(
+		private citasService:CitasService,
+		public restService:RestService,
+		public route:ActivatedRoute
+	)
+	{
+
+	}
+
+		//public modalController: ModalController,
 
 	ngOnInit()
 	{
@@ -64,9 +64,9 @@ export class HorarioDoctorComponent implements OnInit {
 	{
 		const calendarAPI = this.calendarComponent.getApi();
 
-		if(calendarAPI){
-				calendarAPI.removeAllEventSources();
-		}
+		//if(calendarAPI){
+		//		calendarAPI.removeAllEventSources();
+		//}
 
 		//this.citasService.getDisponibilidadDoctor(this.id_doctor, this.id_centro_medico).subscribe( events => {
 		//	const disponibilidad = events.datos.map( d=> {
@@ -94,13 +94,15 @@ export class HorarioDoctorComponent implements OnInit {
 			let eventsArray = respuesta.datos.map( i=>{
 				let id = this.counterId+1;
 				this.counterId++;
-				return {
+				calendarEvents.push
+				({
 					id,
+					tipo: "disponibilidad",
 					rendering: 'background',
 					startTime: i.hora_inicio,
 					endTime: i.hora_final,
 					daysOfWeek: [i.dia_semana]
-				};
+				});
 			});
 			calendarAPI.addEventSource({ id: 'disponibilidad', events: calendarEvents });
 		});

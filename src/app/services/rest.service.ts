@@ -410,7 +410,7 @@ export class RestService {
 
 	guardarHorarioDoctor(idDoctor:number, idCentroMedico:number, horarios:Horario_Doctor[]):Observable<any>
 	{
-		return this.http.post('horario_doctor.php', { id_doctor: idDoctor, id_centro_medico: idCentroMedico, horarios });
+		return this.http.post(`${this.urlBase}/horario_doctor.php`, { id_doctor: idDoctor, id_centro_medico: idCentroMedico, horarios },{ headers: this.getSessionHeaders()});
 	}
 
 	isMobile()

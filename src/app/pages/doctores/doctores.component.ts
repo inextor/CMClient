@@ -7,8 +7,6 @@ import { SeleccionarPacienteComponent } from '../../components/seleccionar-pacie
 import { BaseComponent } from '../base/base.component';
 
 
-
-
 @Component({
   selector: 'app-doctores',
   templateUrl: './doctores.component.html',
@@ -16,7 +14,9 @@ import { BaseComponent } from '../base/base.component';
 })
 export class DoctoresComponent extends BaseComponent implements OnInit {
 	currentUser: Usuario;
-	show_seleccionar_paciente
+	selected_doctor:Doctor = null;
+	show_seleccionar_paciente:boolean = false;
+	show_seleccionar_centro_medico:boolean = false;
 
 	doctores:Doctor[] = [];
 	is_loading:boolean = false;
@@ -60,6 +60,9 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 
 	editarHorario(doctor:Doctor)
 	{
+		console.log("FOOO seleccionar horario", doctor );
+		this.selected_doctor = doctor;
+		this.show_seleccionar_centro_medico = true;
 		/*
 		//XXX Centro Medico A MANO cambiar PLEASE
 
@@ -103,6 +106,12 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 			}
 		});
 		*/
+	}
+
+	onSeleccionarCentroMedico(centro_medico:Centro_Medico)
+	{
+		console.log('FOOOO seleccionar centro medico');
+		this.router.navigate(['/configurar-horario','doctor',this.selected_doctor.id, 'centro-medico',centro_medico.id]);
 	}
 
 	seleccionarPacienteNuevaCitaCon(doctor)

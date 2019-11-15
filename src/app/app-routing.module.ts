@@ -62,6 +62,7 @@ const routes: Routes = [
     component: HorarioDoctorComponent,
     pathMatch: "full"
   },
+{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
   {
     path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full",
     canActivate: [AuthGuard]
@@ -349,7 +350,6 @@ const routes: Routes = [
     /*canActivate:[AuthGuard]*/
   }
   /*
-	{ path: 'configurar-horario/doctor/:idDoctor/centroMedico/:idCentroMedico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
 	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},
 	{ path: 'invitado', redirectTo: '/doctores', pathMatch: 'full',canActivate:[AuthGuard] },
 	{ path: '', redirectTo: '/home', pathMatch: 'full',canActivate:[AuthGuard] },
