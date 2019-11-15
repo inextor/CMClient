@@ -17,15 +17,16 @@
 					<h1>Agregar Tipo de Precio</h1>
 					<app-loading [display]="is_loading"></app-loading>
 					<form>
-						<div class="list  ion-no-padding">
+
+						<div class="">
 							<div class="form-group">
 								<label position="stacked">Nombre Precio<span color="danger">*</span></label>
-								<input required type="text" name="nombre" [(ngModel)]="tipoPrecio.nombre">
+								<input required type="text" class="form-control" name="nombre" [(ngModel)]="tipoPrecio.nombre">
 							</div>
 						</div>
 						<app-loading *ngIf="is_loading"></app-loading>
 						<div class="ion-padding">
-							<button type="button" expand="block" type="submit" class="" (click)="agregar()"
+							<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
 								[disabled]="is_loading">Agregar</button>
 						</div>
 					</form>
