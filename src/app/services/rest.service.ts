@@ -69,6 +69,7 @@ export class RestService {
 	public searchGastoCentroMedico:SearchRest<Gasto_Centro_Medico,SearchGastoCentroMedicoResponse>;
 	public searchServicio:SearchRest<Servicio,ServicioResponseItem>;
 	public servicio_recurso:ObjRest<Servicio_Recurso>;
+
 	
 	//End vars
 

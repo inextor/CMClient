@@ -15,21 +15,38 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h1>Usuarios</h1>
-					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
-						<table>
+						<div class="pt-2 flex-wrap">
+							<td>
+								<button type="button" class="btn btn-primary btn-sm"
+									[routerLink]="['/agregar-usuario']">
+									Agregar usuario
+								</button>
+							</td>
+						</div>
+						<div class="pt-2 flex-wrap">
+							<input type="text" class="form-control" position="floating" (change)="changeSearch($event)"
+								ionInput="changeSearch($event)" placeholder="buscar">
+						</div>
+						<table class="basica">
 							<thead>
 								<tr>
-									<th>Id</th>
-									<th>Pacientes</th>
-									<th>Editar</th>
+									<th>Usuario</th>
+									<th>Correo</th>
+									<th>Telefono</th>
+									<th>Acciones</th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let usuario of usuarios">
-									<div>Telefono</div>
-									<div>Correo Electrónico</div>
-									<div>Editar</div>
-								</tr>
+									<td>{{usuario.usuario}}</td>
+									<td>{{usuario.correo_electronico}}</td>
+									<td>{{usuario.telefono}}</td>
+									<!-- <td>
+										<button type="button" class="btn btn-primary btn-sm mr-2"
+											[routerLink]="['/editar-usuario',usuario.id]">Editar</button>
+										
+									</td> -->
 							</tbody>
 						</table>
 					</div>
