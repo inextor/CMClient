@@ -70,6 +70,7 @@ export class RestService {
 	public searchServicio:SearchRest<Servicio,ServicioResponseItem>;
 	public servicio_recurso:ObjRest<Servicio_Recurso>;
 
+	
 	//End vars
 
 
@@ -372,8 +373,7 @@ export class RestService {
 		console.log( "HEADERS",this.getSessionHeaders() );
 		return this.http.post<AgregarUsuarioResponse>(`${this.urlBase}/usuario.php`,{usuario,doctor},{ headers: this.getSessionHeaders(),withCredentials:true});
 	}
-
-
+	
 	getPreguntasEspecialidad(idEspecialidad:number):Observable<Respuesta<PreguntasHistoriaClinicaResponse>>
 	{
 		let params = new HttpParams();

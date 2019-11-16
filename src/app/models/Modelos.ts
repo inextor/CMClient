@@ -364,14 +364,13 @@ export interface Paciente{
   tiempo_actualizacion?:Date;
 
 };
+
 export interface Recepcionista {
   id?: number;
   id_usuario?: number;
   id_imagen?: number;
   nombre?: string;
   apellidos?: string;
-  fecha_nacimiento?: string;
-  sexo?: string;
   telefono?: string;
   tiempo_creacion?: Date;
   tiempo_actualizacion?: Date;
