@@ -6,9 +6,6 @@ import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { HeaderComponent } from '../../components/header/header.component';
 
-
-
-
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
@@ -36,7 +33,7 @@ export class BaseComponent implements OnInit {
 	public totalItems: number 	= 0;
 	public currentPage:number	= 0;
 	public pages:number[]		= [];
-	public pageSize:number		= 10;
+	public pageSize:number		= 20;
 
 	public error_message		= null;
 	public success_message		= null;

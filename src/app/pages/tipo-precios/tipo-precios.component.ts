@@ -21,18 +21,17 @@ export class TipoPreciosComponent  extends BaseComponent implements OnInit {
 		{
 			this.currentPage = params.get('page') == null ? 0 : parseInt(params.get('page') );
 
-			this.rest.tipo_precio.getAll({},{page:this.currentPage, page_size: 10}).subscribe((respuesta) =>
+			this.rest.tipo_precio.getAll({},{page:this.currentPage, page_size: this.page}).subscribe((respuesta) =>
 			{
 				this.is_loading = false;
 				this.tiposPrecio = respuesta.datos;
-				console.log(this.tiposPrecio)
 				this.setPages( this.currentPage, respuesta.total );
 				this.is_loading = false;
 			},(error)=>
 			{
 				this.is_loading = false;
 				this.showError(error);
-				
+
 			});
 		});
   }
