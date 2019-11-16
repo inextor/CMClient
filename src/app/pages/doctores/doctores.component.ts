@@ -42,21 +42,27 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 			}
 		); */
 
+		this.route.paramMap.subscribe( params =>
+		{
+			this.is_loading = true;
+			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
 
-		this.is_loading = true;
-		this.rest.doctor.getAll({})
-		//this.rest.getDoctores()
-		.subscribe( respuesta =>
-		{
-			this.is_loading = false;
-			this.doctores = respuesta.datos;
-		},
-		(error)=>
-		{
-			this.showError( this.rest.getErrorMessage( error ) );
-			this.is_loading = false;
+			this.rest.doctor.getAll({},{limite:this.pageSize,pagina:this.currentPage})
+			//this.rest.getDoctores()
+			.subscribe( respuesta =>
+			{
+				this.is_loading = false;
+				this.doctores = respuesta.datos;
+				this.setPages( this.currentPage, respuesta.total );
+			},
+			(error)=>
+			{
+				this.showError( this.rest.getErrorMessage( error ) );
+				this.is_loading = false;
+			});
 		});
 	}
+
 
 	editarHorario(doctor:Doctor)
 	{

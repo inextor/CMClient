@@ -83,6 +83,7 @@ const routes: Routes = [
   { path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full'},
   { path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
   //{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
+  { path: "pacientes/:pagina", component: PacientesComponent, pathMatch: "full" },
   { path: "pacientes", component: PacientesComponent, pathMatch: "full" },
   //{ path: "paciente", component: PacienteComponent, pathMatch: "full" },
   //{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
@@ -147,6 +148,12 @@ const routes: Routes = [
   {
     path: "agregar-centro-medico",
     component: AgregarCentroMedicoComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+	path: "doctores/:pagina",
+    component: DoctoresComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
   },
@@ -308,7 +315,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "especialidades/:page",
+    path: "especialidades/:pagina",
     component: EspecialidadesComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
@@ -338,7 +345,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "tipo-precios/:page",
+    path: "tipo-precios/:pagina",
     component: TipoPreciosComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]

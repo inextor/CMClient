@@ -22,7 +22,7 @@ especialidades:Especialidad[]=[];
 
 		this.route.paramMap.subscribe( params =>
 		{
-			this.currentPage = params.get('page') == null ? 0 : parseInt(params.get('page') );
+			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
 
 			this.rest.especialidad.getAll({},{page:this.currentPage, page_size: 10}).subscribe((respuesta) =>
 			{

@@ -31,6 +31,8 @@
 						<tbody>
 							<tr>
 								<td colspan=2>
+									<app-paginacion [path]="'/tipo-precio'"  [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+									<!--
 									<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"
 										*ngIf="totalPages>1">
 										<div class="btn-group mr-2" role="group" aria-label="First group">
@@ -53,6 +55,7 @@
 												[routerLink]="['/tipo-precio',this.totalPages]">&gt;</button>
 										</div>
 									</div>
+									-->
 								</td>
 							</tr>
 							<tr *ngIf="is_loading">

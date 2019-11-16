@@ -4,22 +4,16 @@ import { SearchPacienteResponse,SearchPacienteRequest } from '../../models/Respu
 import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { SeleccionarDoctorComponent } from '../../components/seleccionar-doctor/seleccionar-doctor.component';
+import { BaseComponent } from '../../pages/base/base.component';
 
 @Component({
   selector: 'app-pacientes',
   templateUrl: './pacientes.component.html',
   styleUrls: ['./pacientes.component.css']
 })
-export class PacientesComponent implements OnInit {
-
-	constructor(
-		private rest:RestService,
-		private router:Router,
-		private route:ActivatedRoute,
-	) { }
+export class PacientesComponent extends BaseComponent implements OnInit {
 
 	pacientes:Paciente[] = [];
-	is_loading:boolean = false;
 	info_pacientes:SearchPacienteResponse[] = [];
 	tipo_busqueda = 'nombre';
 	orderBy = 'Fecha';
@@ -45,34 +39,26 @@ export class PacientesComponent implements OnInit {
 			this.rest.doctor.get( usuario.id ).subscribe(doctor=> this.doctor = doctor);
 		}
 
-
-
-		if( usuario )
+		this.route.paramMap.subscribe( params =>
 		{
+			this.is_loading = true;
+			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
+
 			this.usuario = usuario;
-			//this.rest.getPacientes(usuario.id_organizacion).subscribe((respuesta)=>
-			//FIX THIS
-			this.rest.paciente.getAll({},{id_organizacion: usuario.id_organizacion }).subscribe((respuesta)=>
+			console.log("FOOOO");
+
+			this.rest.paciente.getAll({id_organizacion: usuario.id_organizacion },{pagina:this.currentPage,limite:this.pageSize}).subscribe((respuesta)=>
 			{
 				this.pacientes = respuesta.datos;
 				this.is_loading = false;
-			});
-	
-		}
-		else
-		{
-			this.rest.currentUser.subscribe(user=>
+				this.setPages( this.currentPage, respuesta.total );
+			},
+			(error)=>
 			{
-				this.usuario = user;
-
-				//FIX THIS
-				//this.rest.getPacientes(usuario.id_organizacion).subscribe((respuesta)=>
-				this.rest.paciente.getAll({},{ id_organizacion: usuario.id_organizacion }).subscribe((respuesta)=>
-				{
-					this.pacientes = respuesta.datos;
-				});
+				this.is_loading = false;
+				this.showError( error );
 			});
-		}
+		});
 	}
 
 	seleccionarDoctorNuevaCita(paciente)
