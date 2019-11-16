@@ -53,16 +53,16 @@ export class AgregarRecepcionistaComponent extends BaseComponent implements OnIn
 
   registrarse() {
 
-    this.is_loading = true;
-    this.rest.agregarUsuarioRecepcionista(this.usuario, this.recepcionista).subscribe((recepcionista) => {
-      this.is_loading = false;
-      this.router.navigate(['/recepcionistas/0']);
-    },
-      (error) => {
-        console.log("Error al registrar recepcionista");
-        this.showError(this.rest.getErrorMessage(error));
-        this.is_loading = false;
-      });
+    // this.is_loading = true;
+    // this.rest.agregarUsuarioRecepcionista(this.usuario, this.recepcionista).subscribe((recepcionista) => {
+    //   this.is_loading = false;
+    //   this.router.navigate(['/recepcionistas/0']);
+    // },
+    //   (error) => {
+    //     console.log("Error al registrar recepcionista");
+    //     this.showError(this.rest.getErrorMessage(error));
+    //     this.is_loading = false;
+    //   });
   }
 
 
