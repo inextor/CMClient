@@ -42,7 +42,7 @@ export class AgregarUsuarioComponent extends BaseComponent implements OnInit {
 
 		this.is_loading = true;
 
-		this.rest.agregarUsuario( this.usuario, this.paciente ).subscribe((usuario)=>
+		this.rest.agregarUsuario( this.usuario ).subscribe((usuario)=>
 		{
 			this.is_loading = false;
 			this.router.navigate(['/home']);

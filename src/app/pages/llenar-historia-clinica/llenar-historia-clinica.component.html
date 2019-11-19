@@ -18,7 +18,6 @@
 					<div class="container">
 						<app-loading [display]="is_loading"></app-loading>
 						<div class="container">
-							<div *ngIf="msgError" class="alert alert-danger" role="alert">{{msgError}}</div>
 							<div>
 								<div class="form-group">
 									<label for="paciente_nombre">Nombres</label>
@@ -50,8 +49,9 @@
 										<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta"
 											[(ngModel)]="preguntas[i].respuesta.respuesta">
 									</div>
+									<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_messsage}}</div>
 									<div>
-										<button type="button" (click)="guardar()">Guardar</button>
+										<button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
 									</div>
 								</div>
 							</div>

@@ -21,7 +21,8 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 
 	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
 		super( rest,router,route,location);
-	  }
+	}
+
 	preguntas:RespuestaPreguntaHistoriaClinica[] = [];
 	doctor:Doctor = {};
 	usuario:Usuario = null;

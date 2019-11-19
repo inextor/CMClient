@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
+import { Usuario , Paciente } from '../../models/Modelos';
 
 @Component({
   selector: 'app-agregar-paciente',
