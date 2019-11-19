@@ -18,18 +18,18 @@
 					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
 						<td>
-							<button type="button" slot="start"
+							<button type="button"
 								[routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]" size="small">Agregar
 								HISTORIAL</button>
 						</td>
 						<div class="card">
-							<div class="card" -header>
-								<div class="card" -title>Doctor: {{doctor.nombre}}</div>
-								<div class="card" -subtitle>Paciente: {{paciente.nombre}}</div>
-					
+							<div class="card">
+								<div class="card">Doctor: {{doctor.nombre}}</div>
+								<div class="card">Paciente: {{paciente.nombre}}</div>
+
 							</div>
-					
-							<div class="card" -content>
+
+							<div class="card">
 								Keep close to Nature's heart... and break clear away, once in awhile,
 								and climb a mountain or spend a week in the woods. Wash your spirit clean.
 							</div>
