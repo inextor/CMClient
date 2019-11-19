@@ -20,9 +20,9 @@ import { BaseComponent } from '../../pages/base/base.component';
 
 export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
 	ngOnInit() {
-		if( this.rest.currentUserValue ){
+		if (this.rest.getUsuarioSesion){
 			this.router.navigate(['/'])
-		}
+		}else{this.router.navigate(['/login'])}
 		//this.menuCtrl.enable(false);
 		//this.menuCtrl.swipeEnable(false);
 	}

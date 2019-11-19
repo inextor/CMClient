@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../../services/rest.service';
-import { Usuario , Paciente } from '../../models/Modelos';
-import {Router,ActivatedRoute} from "@angular/router"
+import { RestService } from 'src/app/services/rest.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario, Paciente } from 'src/app/models/Modelos';
+import { BaseComponent } from '../base/base.component';
 
 
 
@@ -10,31 +11,32 @@ import {Router,ActivatedRoute} from "@angular/router"
   templateUrl: './agregar-usuario.component.html',
   styleUrls: ['./agregar-usuario.component.css']
 })
-export class AgregarUsuarioComponent implements OnInit {
-
-	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
-
-	usuario:Usuario = {
+export class AgregarUsuarioComponent extends BaseComponent implements OnInit {
+	usuario: Usuario = {
 		id_organizacion: 1,
+		usuario: '',
 		contrasena: '',
-		correo_electronico:'',
-		tipo: 'PACIENTE'
+		correo_electronico: '',
+		tipo: 'RECEPCIONISTA',
+		id_imagen: null
 	};
-	paciente:Paciente = {
-		nombre:'',
-		apellidos:''
+	recepcionista: Paciente = {
+		nombre: '',
+		apellidos: '',
+		telefono: ''
 	};
-	is_loading:boolean = false;
+	is_loading: boolean = false;
 
-	confirmar_contrasena:string = '';
-
-	ngOnInit()
-	{
-
+	confirmar_contrasena: string = '';
+	ngOnInit() {
+		let usuario = this.rest.getUsuarioSesion();
+		this.is_loading = false;
+		if (usuario !== null) {
+			this.usuario.id_organizacion = usuario.id_organizacion;
+		}
 	}
 
-	async showError(message:string)
-	{
+	async showError(message: string) {
 		/*
 		const alert = await this.alertController.create
 		({
@@ -48,20 +50,37 @@ export class AgregarUsuarioComponent implements OnInit {
 		*/
 	}
 
-	registrarse()
-	{
-
+	registrarse() {
+		console.log("Guardando");
 		this.is_loading = true;
-		this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
-		{
-			this.is_loading = false;
-			this.router.navigate(['/home']);
-		},
-		(error)=>
-		{
-			console.log("QUE PASO");
-			 this.showError( this.rest.getErrorMessage( error ) );
-			this.is_loading = false;
-		});
+
+		if (this.usuario) {
+			this.rest.usuario.update(this.usuario).subscribe((usuario) => {
+				this.is_loading = false;
+				this.location.back();
+			}, (error) => {
+				this.is_loading = false;
+				this.showError(error);
+			});
+		}
+		else {
+			this.rest.usuario.create(this.usuario).subscribe((usuario) => {
+				this.is_loading = false;
+				this.location.back();
+			}, (error) => {
+				this.is_loading = false;
+				this.showError(error);
+			});
+		}
+	}
+	
+
+
+	uploadImage(evt) {
+		if (evt.target.files.length) {
+			this.rest.uploadImage(evt.target.files[0], false).subscribe((imageData) => {
+				this.usuario.id_imagen = imageData.id;
+			});
+		}
 	}
 }
