@@ -47,15 +47,19 @@
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/editar-paciente',paciente.id]"
 											[appAccess]="['RECEPCIONISTA']">Editar</button>
+
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/citas','paciente',paciente.id]"
 											color="secondary">Citas</button>
+
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											(click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar
 											Cita</button>
+
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/agregar-familiar',paciente.id_usuario]"
 											color="secondary">Agregar Familiar</button>
+
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary"
 											[appAccess]="['Doctor']">Agregar Consulta</button>

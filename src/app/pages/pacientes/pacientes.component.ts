@@ -39,23 +39,23 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 	//Usuario tiene que tener id_organizacion si es admin,Doctor,Recepcionista ó Asistente
 	ngOnInit() {
-		let usuario = this.rest.getUsuarioSesion();
-		this.is_loading = true;
 		// this.rest.doctor.get({}).subscribe((respuesta)=>
 		// {this.doctor = respuesta.datos;});
 		//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
-		if(usuario.tipo=="DOCTOR")
-		{
-			this.rest.doctor.get( usuario.id ).subscribe(doctor=> this.doctor = doctor);
-		}
 
 		this.route.paramMap.subscribe( params =>
 		{
+
+			let usuario = this.rest.getUsuarioSesion();
+			if(usuario.tipo=="DOCTOR")
+			{
+				this.rest.doctor.get( usuario.id ).subscribe(doctor=> this.doctor = doctor);
+			}
+
 			this.is_loading = true;
 			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
 
 			this.usuario = usuario;
-			console.log("FOOOO");
 
 			this.rest.paciente.getAll({},{pagina:this.currentPage,limite:this.pageSize,id_organizacion: usuario.id_organizacion}).subscribe((respuesta)=>
 			{
@@ -73,6 +73,14 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 	seleccionarDoctorNuevaCita(paciente)
 	{
+		let usuario = this.rest.getUsuarioSesion();
+
+		if( usuario.tipo == 'DOCTOR' )
+		{
+			this.router.navigate(['/doctores',usuario.id,'centro-medico',this.centro_medico.id,'agendar-cita',paciente.id]);
+			return;
+		}
+
 		let s = this.rest.getSesion();
 
 		//this.rest.getDoctores().subscribe(response=>
