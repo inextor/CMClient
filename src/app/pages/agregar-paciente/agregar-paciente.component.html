@@ -18,19 +18,26 @@
 					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
 						<form>
+
+							<div class="form-group">
+								<label position="stacked">Nombre<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="nombre"
+									[(ngModel)]="paciente.nombre">
+							</div>
+							<div class="form-group">
+								<label position="stacked">Apellido<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="nombre"
+									[(ngModel)]="paciente.apellidos">
+							</div>
+							<div class="form-group">
+								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+								<input required type="text" class="form-control" name="correo_electronico"
+									[(ngModel)]="usuario.correo_electronico">
+							</div>
 							<div class="form-group">
 								<label position="stacked">Usuario<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="usuario"
 									[(ngModel)]="usuario.usuario">
-							</div>
-
-							<div class="form-group">
-								<label position="stacked">Tipo<span color="danger">*</span></label>
-								<select class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
-									<option value="ADMIN">Admin</option>
-									<option value="RECEPCIONISTA">recepcionista</option>
-									<option value="ASISTENTE">Asistente</option>
-								</select>
 							</div>
 
 							<div class="form-group">
@@ -45,11 +52,6 @@
 									[(ngModel)]="confirmar_contrasena">
 							</div>
 
-							<div>
-								<div *ngIf="error_message" class="alert alert-danger" role="alert">
-									{{error_message}}
-								</div>
-							</div>
 							<div class="">
 								<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
 									(click)="registrarse()" [disabled]="is_loading">Registrar</button>

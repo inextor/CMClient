@@ -66,6 +66,7 @@ const routes: Routes = [
   { path: "pacientes", component: PacientesComponent, pathMatch: "full" },
   //{ path: "paciente", component: PacienteComponent, pathMatch: "full" },
   //{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
+  { path: "agregar-paciente", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "servicios", component: ServiciosComponent, pathMatch: "full", canActivate: [AuthGuard] },

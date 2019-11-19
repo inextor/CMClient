@@ -51,7 +51,7 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
 			if( id )
 			{
-				forkJoin([this.rest.usuario.get( id ), this.rest.doctor.get( id ),this.rest.especialidad.getAll({},{limit:200})] ).subscribe((response)=>
+				forkJoin([this.rest.usuario.get( id ), this.rest.doctor.get( id ),this.rest.especialidad.getAll({},{limit:1000})] ).subscribe((response)=>
 				{
 					this.is_loading = false;
 					this.usuario = response[0];
@@ -65,6 +65,11 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 			}
 			else
 			{
+				this.rest.especialidad.getAll({},{limit:1000}).subscribe((response)=>
+				{
+					this.especialidades = response.datos;
+				},error=>console.log(error));
+
 				this.doctor = {
 					'nombre':'',
 					'especialidad':'',
@@ -75,7 +80,8 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 					'usuario':'',
 					'contrasena':'',
 					'tipo':'DOCTOR',
-					'id_imagen': null
+					'id_imagen': null,
+					'id_organizacion' : usuario.id_organizacion
 				};
 			}
 		});

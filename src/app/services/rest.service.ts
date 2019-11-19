@@ -382,6 +382,12 @@ export class RestService {
 		return this.http.post<AgregarUsuarioResponse>(`${this.urlBase}/usuario.php`,{usuario,doctor},{ headers: this.getSessionHeaders(),withCredentials:true});
 	}
 
+	agregarUsuario(usuario:Usuario):Observable<AgregarUsuarioResponse>
+	{
+		console.log( "HEADERS",this.getSessionHeaders() );
+		return this.http.post<AgregarUsuarioResponse>(`${this.urlBase}/usuario.php`,{usuario},{ headers: this.getSessionHeaders(),withCredentials:true});
+	}
+
 	getPreguntasEspecialidad(idEspecialidad:number):Observable<Respuesta<PreguntasHistoriaClinicaResponse>>
 	{
 		let params = new HttpParams();
