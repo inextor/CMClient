@@ -281,7 +281,7 @@ export interface Historial_Inventario{
   id_servicio?:number;
   id_centro_medico?:number;
   id_usuario?:number;
-  id_tipo_movimiento?:number;
+  tipo_movimiento?:string;
   cantidad_anterior?:number;
   cantidad_movimiento?:number;
   cantidad_actual?:number;
@@ -331,6 +331,7 @@ export interface Inventario{
   id?:number;
   id_centro_medico?:number;
   id_servicio?:number;
+  cantidad?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 };
@@ -365,18 +366,6 @@ export interface Paciente{
 
 };
 
-export interface Recepcionista {
-  id?: number;
-  id_usuario?: number;
-  id_imagen?: number;
-  nombre?: string;
-  apellidos?: string;
-  telefono?: string;
-  tiempo_creacion?: Date;
-  tiempo_actualizacion?: Date;
-
-};
-
 export interface Pago{
   id?:number;
   id_venta?:number;
@@ -405,6 +394,7 @@ export interface Precio_Servicio{
   precio?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Pregunta_Historia_Clinica{
@@ -491,6 +481,7 @@ export interface Respuesta_Historia_Clinica{
 export interface Servicio{
   id?:number;
   id_organizacion?:number;
+  id_imagen?:number;
   codigo?:string;
   tipo?:string;
   nombre?:string;
@@ -515,6 +506,8 @@ export interface Tipo_Gasto{
   id_organizacion?:number;
   nombre?:string;
   tiempo_creacion?:Date;
+
+
 };
 
 export interface Tipo_Precio{
@@ -523,6 +516,7 @@ export interface Tipo_Precio{
   id_organizacion?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Usuario{
