@@ -7,6 +7,7 @@ import { AgendarCitaComponent } from '../agendar-cita/agendar-cita.component';
 import { RestService } from '../../services/rest.service';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from	'@angular/common';
 
 @Component({
 	selector: 'app-horario-doctor',

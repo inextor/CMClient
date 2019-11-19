@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Gasto_Centro_Medico,Tipo_Gasto } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
-import { Location } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
+import { Location } from	'@angular/common';
 
 @Component({
 	selector: 'app-gastos',
@@ -14,6 +14,9 @@ import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 })
 export class GastosComponent extends BaseComponent implements OnInit {
 
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	}
 
 	tipos_gasto:Tipo_Gasto[] = [];
 	gastos:SearchGastoCentroMedicoResponse[] = [];

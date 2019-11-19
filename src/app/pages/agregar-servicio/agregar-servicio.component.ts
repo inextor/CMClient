@@ -4,7 +4,9 @@ import { BaseComponent } from '../base/base.component';
 import { Servicio,Tipo_Precio,Centro_Medico,Precio_Servicio } from '../../models/Modelos';
 import { Servicio_Recurso } from '../../models/Respuestas';
 import { from } from 'rxjs';
-
+import { Location } from	'@angular/common';
+import { RestService } from '../../services/rest.service';
+import {Router,ActivatedRoute} from "@angular/router"
 
 @Component({
   selector: 'app-agregar-servicio',
@@ -28,7 +30,9 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	centros_medicos:Centro_Medico[] = [];
 	precios	= {};
 	id:number = null;
-
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>

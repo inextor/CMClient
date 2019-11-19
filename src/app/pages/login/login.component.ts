@@ -11,6 +11,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HeaderComponent } from '../../components/header/header.component';
 import { BaseComponent } from '../../pages/base/base.component';
+import { Location } from	'@angular/common';
+
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,11 @@ import { BaseComponent } from '../../pages/base/base.component';
 })
 
 export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+	
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	  super( rest,router,route,location);
+	}
+
 	ngOnInit() {
 		if (this.rest.getUsuarioSesion){
 			this.router.navigate(['/'])
@@ -57,11 +64,7 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 				this.is_loading = false;
 				this.router.navigate(['/home']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
-			},
-			error => {
-				this.error_message =  this.rest.getErrorMessage(error);
-				this.is_loading = false;
-			}
+			}, this.showError
 		);
 	}
 }

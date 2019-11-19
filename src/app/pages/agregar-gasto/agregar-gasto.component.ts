@@ -36,11 +36,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			this.is_loading = false;
 			this.centros_medicos = respuesta.datos;
 		}
-		,(error)=>
-		{
-			this.is_loading = false;
-			this.showError( error );
-		});
+		,(error)=> this.showError( error ));
 
 		this.route.paramMap.subscribe( params =>
 		{
@@ -57,23 +53,13 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 						this.is_loading = false;
 						this.gasto_centro_medico =	gasto;
 					}
-					,(error)=>
-					{
-						this.is_loading = false;
-						let msg = this.rest.getErrorMessage( error );
-						console.log( msg );
-					});
+					,error=>this.showError(error));
 				}
-			},
-			(error)=>
-			{
-				this.is_loading = false;
-				this.showError( error );
-			});
+			},error=>this.showError(error));
 		});
 	}
 
-	guardar()
+	guardar():void
 	{
 		console.log("Guardando");
 		this.is_loading = true;
@@ -84,11 +70,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.location.back();
-			},(error)=>
-			{
-				this.is_loading = false;
-				this.showError( error );
-			});
+			},error=>this.showError(error));
 		}
 		else
 		{
@@ -96,12 +78,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.location.back();
-			},(error)=>
-			{
-				this.is_loading = false;
-				this.showError( error );
-			});
+			},error=>{this.showError(error);});
 		}
 	}
-
 }

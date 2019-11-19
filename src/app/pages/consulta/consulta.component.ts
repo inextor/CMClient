@@ -4,6 +4,8 @@ import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos
 import {Router,ActivatedRoute,ParamMap} from "@angular/router"
 import { Route } from '@angular/compiler/src/core';
 import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
+
 
 @Component({
   selector: 'app-consulta',
@@ -13,7 +15,11 @@ import { BaseComponent } from '../base/base.component';
 export class ConsultaComponent extends BaseComponent implements OnInit {
 
 	paciente:Paciente = {};
-	doctor:Doctor = {};
+  doctor:Doctor = {};
+  
+  constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	  super( rest,router,route,location);
+	}
 
   ngOnInit() {
     let usuario = this.rest.getUsuarioSesion();

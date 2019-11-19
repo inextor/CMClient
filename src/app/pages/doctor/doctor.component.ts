@@ -4,6 +4,7 @@ import { Usuario,Doctor } from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Horario_Doctor,Cita } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 @Component({
   selector: 'app-doctor',
@@ -18,7 +19,9 @@ export class DoctorComponent extends BaseComponent implements OnInit {
 	is_loading:boolean	= false;
 	horario_doctor:Horario_Doctor[] = [];
 	citas:Cita[] = [];
-
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	ngOnInit()
 	{
 		this.is_loading = true;
@@ -31,12 +34,7 @@ export class DoctorComponent extends BaseComponent implements OnInit {
 			{
 				this.doctor = doctor;
 				this.is_loading = false;
-			},
-			(error)=>
-			{
-				this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 
 			let date = new Date();
 
@@ -46,7 +44,7 @@ export class DoctorComponent extends BaseComponent implements OnInit {
 			this.rest.cita.getAll({ id_doctor: id_usuario }).subscribe((respuesta)=>
 			{
 				this.citas = respuesta.datos;
-			});
+			},error=>this.showError(error));
 		});
 	}
 }

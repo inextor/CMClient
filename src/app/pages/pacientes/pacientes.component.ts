@@ -5,6 +5,8 @@ import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos
 import {Router,ActivatedRoute} from "@angular/router"
 import { SeleccionarDoctorComponent } from '../../components/seleccionar-doctor/seleccionar-doctor.component';
 import { BaseComponent } from '../../pages/base/base.component';
+import { Location } from	'@angular/common';
+
 
 @Component({
   selector: 'app-pacientes',
@@ -25,6 +27,14 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	crequest:SearchPacienteRequest = {};
 	usuario:Usuario = {};
 
+	constructor(
+		public rest:RestService,
+		public router:Router,
+		public route:ActivatedRoute,
+		public location: Location
+	) {
+	  super( rest,router,route,location);
+	}
 	//TODO agregar Paginación,Busqueda ó filtros segun sea necesario
 
 	//Usuario tiene que tener id_organizacion si es admin,Doctor,Recepcionista ó Asistente
@@ -47,7 +57,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 			this.usuario = usuario;
 			console.log("FOOOO");
 
-			this.rest.paciente.getAll({id_organizacion: usuario.id_organizacion },{pagina:this.currentPage,limite:this.pageSize}).subscribe((respuesta)=>
+			this.rest.paciente.getAll({},{pagina:this.currentPage,limite:this.pageSize,id_organizacion: usuario.id_organizacion}).subscribe((respuesta)=>
 			{
 				this.pacientes = respuesta.datos;
 				this.is_loading = false;

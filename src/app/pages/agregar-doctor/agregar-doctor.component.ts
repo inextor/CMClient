@@ -6,13 +6,18 @@ import { BaseComponent } from '../base/base.component';
 import { Location } from  '@angular/common';
 import { forkJoin } from 'rxjs';
 
-
 @Component({
 	selector: 'app-agregar-doctor',
 	templateUrl: './agregar-doctor.component.html',
 	styleUrls: ['./agregar-doctor.component.css'],
 })
+
 export class AgregarDoctorComponent extends BaseComponent implements OnInit {
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location)
+	{
+		super( rest,router,route,location);
+    }
 
 
 	doctor:Doctor = {
@@ -27,6 +32,7 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 		'tipo':'DOCTOR',
 		'id_imagen': null
 	};
+
 
 	especialidades:Especialidad[] = [];
 
@@ -54,12 +60,11 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 				},(error)=>
 				{
 					this.is_loading = false;
-					console.error('Ocurrio un error',this.rest.getErrorMessage( error ));
+					this.showError( error );
 				});
 			}
 			else
 			{
-
 				this.doctor = {
 					'nombre':'',
 					'especialidad':'',
@@ -92,15 +97,8 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 					this.is_loading = false;
 					this.location.back();
 				}
-				,(error)=>{
-					this.is_loading = false;
-				});
-			}
-			,(error)=>
-			{
-				this.is_loading = false;
-				this.showError( error );
-			});
+				,error=>this.showError(error));
+			},error=>this.showError(error));
 		}
 		else
 		{
@@ -109,12 +107,7 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.router.navigate(['/home']);
-			},
-			(error)=>
-			{
-				this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
-			});
+			},error=>this.showError(error) );
 		}
 	}
 
@@ -125,7 +118,7 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
 			{
 				this.usuario.id_imagen = imageData.id;
-			});
+			},error=>this.showError(error) );
 		}
 	}
 }

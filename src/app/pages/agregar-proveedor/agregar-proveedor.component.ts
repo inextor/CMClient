@@ -2,20 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Proveedor } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
 
 @Component({
   selector: 'app-agregar-proveedor',
   templateUrl: './agregar-proveedor.component.html',
   styleUrls: ['./agregar-proveedor.component.css']
 })
-export class AgregarProveedorComponent implements OnInit {
-  is_loading:boolean  = false;
+export class AgregarProveedorComponent extends BaseComponent implements OnInit {
 
 	proveedor:Proveedor = {
 		nombre: ''
 	};
-
-  constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.proveedor = {
@@ -34,12 +32,12 @@ export class AgregarProveedorComponent implements OnInit {
 				{
 					this.is_loading = false;
 					this.proveedor = proveedor;
-				});
+				},error=>this.showError(error));
 			}
 		});
 	}
 
-  guardar()
+ 	 guardar()
 	{
 		this.is_loading = true;
 
@@ -49,10 +47,7 @@ export class AgregarProveedorComponent implements OnInit {
 			this.rest.proveedor.update( this.proveedor ).subscribe((proveedor)=>{
 				this.is_loading = false;
 				this.router.navigate(['/proveedores']);
-			}, (error) => {
-				this.showError(this.rest.getErrorMessage(error));
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 		}
 		else
 		{
@@ -60,25 +55,7 @@ export class AgregarProveedorComponent implements OnInit {
 			this.rest.proveedor.create( this.proveedor ).subscribe((proveedor)=>{
 				this.is_loading = false;
 				this.router.navigate(['/proveedores']);
-			}, (error) => {
-				this.showError(this.rest.getErrorMessage(error));
-				this.is_loading = false;
-			});
+			},error=>this.showError(error) );
 		}
-	}
-
-	async showError(message: string) {
-
-		/*
-		const alert = await this.alertController.create({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
-
-		await alert.present();
-		this.is_loading = false;
-		*/
 	}
 }

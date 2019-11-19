@@ -42,7 +42,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 				this.is_loading = false;
 			}, (error) => {
 				console.log('error',error)
-				this.showError(this.rest.getErrorMessage(error));
+				this.showError(error);
 				this.is_loading = false;
 			});
 		});

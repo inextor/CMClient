@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
-import {Router,ActivatedRoute} from "@angular/router"
+import { Router,ActivatedRoute} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { HeaderComponent } from '../../components/header/header.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-base',
@@ -14,20 +15,6 @@ import { HeaderComponent } from '../../components/header/header.component';
 
 export class BaseComponent implements OnInit {
 
-
-	constructor(
-		public rest:RestService,
-		public router:Router,
-		public route:ActivatedRoute,
-		public location: Location
-	) {
-
-		//this.rest.getNetworkMonitor().subscribe((is_loading)=>
-		//{
-		//	console.log('is_loading');
-		//});
-	}
-
 	public is_loading:boolean	= false;
 	public totalPages:number	= 0;
 	public totalItems: number 	= 0;
@@ -35,9 +22,14 @@ export class BaseComponent implements OnInit {
 	public pages:number[]		= [];
 	public pageSize:number		= 20;
 
-	public error_message		= null;
-	public success_message		= null;
-	public warning_message		= null;
+	public error_message:string		= null;
+	public success_message:string	= null;
+	public warning_message:string	= null;
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location)
+	{
+		console.log("Init base");
+	}
 
 	setPages(currentPage:number,totalItems:number)
 	{
@@ -73,18 +65,30 @@ export class BaseComponent implements OnInit {
 		//this.rest.getNetworkMonitor().subscribe((is_loading)=>
 	}
 
-	async showError(message: string) {
+	showError(error:any) {
 
-		/*
-		const alert = await this.alertController.create({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
+		this.is_loading =false;
+		console.log('displaying error', error );
+		this.error_message = this.getErrorMessage( error );
+	}
 
-		await alert.present();
-		this.is_loading = false;
-		*/
+	getErrorMessage( error:any )
+	{
+		if( error == null || error === undefined)
+			return 'Error desconocido';
+
+		if( typeof( error.error ) === "string" )
+			return error.error;
+
+		console.log( error );
+
+		if( 'error' in error &&  typeof(error.error) !== "string" && 'error' in error.error )
+		{
+			 return error.error.error;
+		}
+		else if( error instanceof HttpErrorResponse )
+		{
+			return error.statusText;
+		}
 	}
 }

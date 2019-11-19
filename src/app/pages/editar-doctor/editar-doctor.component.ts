@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Doctor } from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
-import { Location } from  '@angular/common';
 import { forkJoin } from 'rxjs';
+import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 
 @Component({
@@ -11,15 +12,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './editar-doctor.component.html',
   styleUrls: ['./editar-doctor.component.css']
 })
-export class EditarDoctorComponent implements OnInit {
-
-	constructor(private rest:RestService,
-		private router:Router,
-		private route:ActivatedRoute,
-		private location: Location
-	) {
-
-	}
+export class EditarDoctorComponent extends BaseComponent implements OnInit {
 
 	is_loading:boolean = false;
 	usuario:Usuario = {
@@ -30,6 +23,11 @@ export class EditarDoctorComponent implements OnInit {
 
 
 	};
+
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	{
+		super( rest,router,route,location);
+	}
 
 	ngOnInit()
 	{
@@ -44,11 +42,7 @@ export class EditarDoctorComponent implements OnInit {
 				this.is_loading = false;
 				this.usuario = response[0];
 				this.doctor = response[1];
-			},(error)=>
-			{
-				this.is_loading = false;
-				console.error('Ocurrio un error',this.rest.getErrorMessage( error ));
-			});
+			},error=>this.showError(error));
 		});
 	}
 
@@ -65,10 +59,7 @@ export class EditarDoctorComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.location.back();
-			}
-			,(error)=>{
-				this.is_loading = false;
-			});
+			},error=>this.showError(error) );
 		});
 	}
 
@@ -79,7 +70,7 @@ export class EditarDoctorComponent implements OnInit {
 			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
 			{
 				this.usuario.id_imagen = imageData.id;
-			});
+			},error=> this.showError( error ));
 		}
 	}
 

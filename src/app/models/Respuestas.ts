@@ -1,6 +1,6 @@
 /////
 //
-import {Usuario,Sesion,Doctor,Paciente,Cita,Centro_Medico,Tipo_Precio,Servicio,Precio_Servicio,Recurso, Recepcionista} from './Modelos';
+import {Usuario,Sesion,Doctor,Paciente,Cita,Centro_Medico,Tipo_Precio,Servicio,Precio_Servicio,Recurso} from './Modelos';
 import {Especialidad_Pregunta,Pregunta_Historia_Clinica,Respuesta_Historia_Clinica} from './Modelos';
 import { Gasto_Centro_Medico,Tipo_Gasto } from './Modelos';
 
@@ -84,7 +84,6 @@ export interface AgregarUsuarioResponse{
 	Usuario:Usuario;
 	paciente?:Paciente;
 	doctor?:Doctor;
-	recepecionista?:Recepcionista;
 }
 
 export interface SearchCitaResponse{
