@@ -31,23 +31,24 @@
 								</div>
 								<div>
 									<div *ngFor="let p of preguntas;let i = index;">
+
+										<label>{{p.pregunta.pregunta}}</label>
+
 										<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
-											<label>{{p.pregunta.pregunta}}</label>
-											<div class="form-group">
-												<label>SI</label>
-												<input type="radio" value="SI" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											<div class="form-check form-check-inline">
+												<input type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
+												<label class="form-check-label">SI</label>
 											</div>
-											<div class="form-group">
-												<label>NO</label>
-												<input type="radio" value="NO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											<div class="form-check form-check-inline">
+												<input type="radio" value="NO" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
+												<label class="form-check-label">NO</label>
 											</div>
-											<div class="form-group">
-												<label>OTRO</label>
-												<input type="radio" value="OTRO" [(ngModel)]="preguntas[i].respuesta.respuesta_binaria">
+											<div class="form-check form-check-inline">
+												<input type="radio" value="OTRO" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
+												<label class="form-check-label">OTRO</label>
 											</div>
 										</div>
-										<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta"
-											[(ngModel)]="preguntas[i].respuesta.respuesta">
+										<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
 									</div>
 									<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_messsage}}</div>
 									<div>
