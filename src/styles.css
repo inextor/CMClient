@@ -18,6 +18,10 @@ table.basica,.basica td,.basica th{
 	border-collapse: collapse;
     border-color: #edf2f6;
     border-style: solid;
+    font-size: 1.2em;
+}
+th{
+  color:white;
 }
 
 .basica td, .basica th {
@@ -54,8 +58,6 @@ table.basica {
   margin: 0 10px;
   height: 35px;
   line-height: 35px;
-  font-size: 20px;
-  font-weight: normal;
 }
 
 .basica tr:nth-child(odd) td
@@ -238,6 +240,31 @@ h1,h2,h3,h4,h5{
   font-family: 'lato-bold', 'arial', sans-serif;
 }
 
+td,th{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'lato-thin', 'arial', sans-serif;
+}
+
+button{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'lato-light', 'arial', sans-serif;
+}
+button{
+  font-size: 1.1em !important;
+}
+
 @font-face{
   font-family: lato-bold;
   src: url(./assets/font/custom/Lato-Bold.ttf) format("opentype");}
+
+  @font-face{
+  font-family: lato-thin;
+  src: url(./assets/font/custom/Lato-Thin.ttf) format("opentype");}
+
+@font-face{
+  font-family: lato-light;
+  src: url(./assets/font/custom/Lato-Light.ttf) format("opentype");}
