@@ -18,7 +18,7 @@ table.basica,.basica td,.basica th{
 	border-collapse: collapse;
     border-color: #edf2f6;
     border-style: solid;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 th{
   color:white;
@@ -28,7 +28,11 @@ th{
     border-width: 0;
     line-height: 1.5;
     padding: 5px;
-    text-align: left;
+    text-align: center;
+
+
+  font-family: 'lato-light', 'arial', sans-serif;
+   color: #898989;
 }
 table.basica {
     border-width: 0;
@@ -240,18 +244,19 @@ h1,h2,h3,h4,h5{
   font-family: 'lato-bold', 'arial', sans-serif;
 }
 
-td,th{
+/* td,th{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'lato-thin', 'arial', sans-serif;
-}
+  font-family: 'lato-light', 'arial', sans-serif;
+  color: #898989;
+} */
 
 button{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'lato-light', 'arial', sans-serif;
+  font-family: 'lato-light', 'arial', sans-serif !important;
 }
 button{
   font-size: 1.1em !important;
