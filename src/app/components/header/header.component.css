@@ -9,12 +9,35 @@
     padding: 0% !important;
 }
 .logoUser{
-    height: 40px !important;
-    width: 40px !important;
+    height: 50px !important;
+    width: 50px !important;
     padding: 0% !important;
 }
 
+.padnull{
+padding: 0% !important;
+}
 .iconNavBar{
     height: 10px;
     width: 10px;
 }
+
+a{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;  
+  vertical-align: middle;
+  font-size: 1.30em;
+  font-family: 'lato-bold', 'arial', sans-serif;
+}
+
+.menuFont{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'lato-bold', 'arial', sans-serif;
+}
+
+@font-face{
+  font-family: lato-light;
+  src: url(../../../assets/font/custom/Lato-Bold.ttf) format("opentype");}
