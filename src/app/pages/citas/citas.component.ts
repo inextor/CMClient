@@ -5,6 +5,7 @@ import { SearchCitaResponse,SearchCitaRequest } from '../../models/Respuestas';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Cita } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 @Component({
   selector: 'app-citas',
@@ -32,7 +33,9 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 	};
 
-
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	ngOnInit() {
 
 		let d = new Date();
@@ -55,11 +58,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.rest.paciente.get( id_paciente ).subscribe((paciente)=> {
 					this.is_loading=false;
 					this.paciente = paciente
-				}, (error) => {
-					console.log("QUE PASO");
-					this.showError(this.rest.getErrorMessage(error));
-					this.is_loading = false;
-				});
+				}, this.showError );
 			}
 
 			let id_doctor  = params.get('id_doctor') == null ? null : parseInt(params.get('id_doctor') );
@@ -72,11 +71,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.rest.doctor.get( id_doctor ).subscribe((doctor)=> {
 					this.is_loading = false ;
 					this.doctor = doctor
-				}, (error) => {
-					console.log("QUE PASO");
-					this.showError(this.rest.getErrorMessage(error));
-					this.is_loading = false;
-				});
+				}, this.showError );
 			}
 
 			if( !this.crequest.id_paciente && !this.crequest.id_doctor )
@@ -132,12 +127,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.info_citas = respuesta.datos;
-		},
-		(error)=>
-		{
-			this.is_loading = false;
-			this.showError( error );
-		});
+		}, this.showError );
 	}
 
 	confirmarDoctor(infoCita:SearchCitaResponse)
@@ -221,6 +211,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.showConfirmActivar = false;
+			this.showError( error );
 		});
 	}
 }

@@ -56,12 +56,6 @@ export class AgregarUsuarioComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.router.navigate(['/home']);
-		},
-		(error)=>
-		{
-			console.log("QUE PASO");
-			 this.showError( this.rest.getErrorMessage( error ) );
-			this.is_loading = false;
-		});
+		}, error=> this.showError );
 	}
 }

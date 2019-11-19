@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router"
 import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-centro-medico/seleccionar-centro-medico.component';
 import { SeleccionarPacienteComponent } from '../../components/seleccionar-paciente/seleccionar-paciente.component';
 import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 
 @Component({
@@ -13,6 +14,10 @@ import { BaseComponent } from '../base/base.component';
   styleUrls: ['./doctores.component.css']
 })
 export class DoctoresComponent extends BaseComponent implements OnInit {
+
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	currentUser: Usuario;
 	selected_doctor:Doctor = null;
 	show_seleccionar_paciente:boolean = false;
@@ -54,12 +59,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 				this.is_loading = false;
 				this.doctores = respuesta.datos;
 				this.setPages( this.currentPage, respuesta.total );
-			},
-			(error)=>
-			{
-				this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
-			});
+			},error => this.showError );
 		});
 	}
 

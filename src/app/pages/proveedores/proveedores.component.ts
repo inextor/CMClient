@@ -3,6 +3,7 @@ import	{	RestService	}	from	'../../services/rest.service';
 import	{	Usuario,Doctor,Centro_Medico, Proveedor	}	from	'../../models/Modelos';
 import	{Router,ActivatedRoute}	from	"@angular/router"
 import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 @Component({
   selector: 'app-proveedores',
@@ -11,6 +12,14 @@ import { BaseComponent } from '../base/base.component';
 })
 export class ProveedoresComponent extends BaseComponent implements OnInit {
 
+	constructor(
+		public rest:RestService,
+		public router:Router,
+		public route:ActivatedRoute,
+		public location: Location
+	) {
+	  super( rest,router,route,location);
+	}
 	proveedores: Proveedor[]		= [];
   ngOnInit() {
     this.is_loading = true;
@@ -19,11 +28,6 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
 	this.is_loading = false;
       this.proveedores = respuesta.datos;
       console.log(this.proveedores)
-    }, (error) => {
-      console.log("QUE PASO");
-      this.showError(this.rest.getErrorMessage(error));
-      this.is_loading = false;
-    });
+    }, (error) => this.showError );
   }
-
 }

@@ -4,6 +4,7 @@ import { Usuario,Servicio,Especialidad,Centro_Medico} from '../../models/Modelos
 import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
+import { Location } from	'@angular/common';
 
 
 
@@ -14,7 +15,9 @@ import { HeaderComponent } from "../../components/header/header.component";
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 
-
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	show_seleccionar_centro_medico:boolean = false;
 
 	ngOnInit() {

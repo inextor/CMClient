@@ -3,6 +3,7 @@ import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Centro_Medico } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
+import { Location } from    '@angular/common';
 
 
 
@@ -18,6 +19,15 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 	centro_medico:Centro_Medico = {
 		nombre: ''
 	};
+	constructor(
+        public rest:RestService,
+        public router:Router,
+        public route:ActivatedRoute,
+        public location: Location
+    ) {
+		super( rest,router,route,location);
+    }
+
 
 	ngOnInit()
 	{

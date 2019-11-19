@@ -40,10 +40,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 					console.log("WTF");
 					this.is_loading = false;
 					this.paciente = paciente;
-				},(error) => {
-					this.showError(this.rest.getErrorMessage(error));
-					this.is_loading = false;
-				});
+				},error=>this.showError(error));
 			}
 			else
 			{
@@ -70,13 +67,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.router.navigate(['/home']);
-			},
-			(error)=>
-			{
-				console.log("error")
-				// this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 
 		}
 		else
@@ -86,13 +77,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			{
 				this.is_loading = false;
 				this.router.navigate(['/home']);
-			},
-			(error)=>
-			{
-				console.log("error")
-				// this.showError( this.rest.getErrorMessage( error ) );
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 		}
 	}
 
@@ -103,23 +88,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
 			{
 				this.usuario.id_imagen = imageData.id;
-			});
+			},error=>this.showError(error));
 		}
 	}
-
-
-
-	// async showError(message:string)
-	// {
-	// 	const alert = await this.alertController.create
-	// 	({
-	// 		header: 'Error',
-	// 		//subHeader: 'Subtitle',
-	// 		message: message,
-	// 		buttons: ['OK']
-	// 	});
-
-	// 	await alert.present();
-	// }
-
 }

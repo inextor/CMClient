@@ -31,11 +31,12 @@
 						</select>
 
 
-						< *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
-							<!-- <label>Depende de pregunta</label> -->
+						<!-- div *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
+							<label>Depende de pregunta</label>
 							<select [(ngModel)]="pregunta.depende_de" placeholder="Seleccione una opción">
 								<option *ngFor="let p of preguntas_generales" [value]="p.id">{{p.pregunta}}</option>
 							</select>
+						</div -->
 
 
 

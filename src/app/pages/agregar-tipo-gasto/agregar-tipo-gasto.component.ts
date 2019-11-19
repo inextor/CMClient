@@ -29,14 +29,7 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 					this.is_loading = false;
 					this.tipoGasto =  tipoGasto;
 					this.is_loading = false;
-				}
-				,(error)=>
-				{
-					let msg = this.rest.getErrorMessage( error );
-					this.is_loading = false;
-					console.log( msg );
-					this.is_loading = false;
-				});
+				},error=>this.showError(error));
 			}
 		});
 	}
@@ -51,11 +44,7 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 			this.rest.tipo_gasto.update( this.tipoGasto ).subscribe((tipo_gasto)=>
 			{
 				this.is_loading = false;
-			},(error)=>
-			{
-				this.showError( error );
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 		}
 		else
 		{
@@ -65,7 +54,7 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 			{
 				this.is_loading = false;
 				this.location.back();
-			});
+			},error=>this.showError(error));
 		}
 	}
 }

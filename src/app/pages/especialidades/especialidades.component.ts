@@ -4,6 +4,8 @@ import { Usuario,Servicio,Especialidad} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
+import { Location } from	'@angular/common';
+
 @Component({
   selector: 'app-especialidades',
   templateUrl: './especialidades.component.html',
@@ -11,7 +13,11 @@ import { HeaderComponent } from "../../components/header/header.component";
 })
 export class EspecialidadesComponent extends BaseComponent implements OnInit {
 
-especialidades:Especialidad[]=[];
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	}
+
+	especialidades:Especialidad[]=[];
 	public statusmenu: boolean;
 	ngOnInit()
 	{
@@ -30,11 +36,7 @@ especialidades:Especialidad[]=[];
 				console.log(this.especialidades)
 				this.is_loading = false;
 				this.setPages( this.currentPage, respuesta.total );
-			},(error)=>
-			{
-				this.showError(error);
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 		});
 	}
 	activeMenu(){

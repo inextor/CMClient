@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import TimeGrid from '@fullcalendar/timegrid';
 import { CitasService } from 'src/app/services/citas.service';
 import { RestService } from '../../services/rest.service';
+import { BaseComponent } from '../base/base.component';
 
 
 @Component({
@@ -13,15 +14,7 @@ import { RestService } from '../../services/rest.service';
   templateUrl: './ver-doctor.component.html',
   styleUrls: ['./ver-doctor.component.css']
 })
-export class VerDoctorComponent implements OnInit {
-
-	constructor(
-		private router: Router,
-		private rest:RestService,
-		private citasService:CitasService,
-		private activatedRoute: ActivatedRoute )
-	{ }
-
+export class VerDoctorComponent extends BaseComponent implements OnInit {
 
 	counterId = 1;
 	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
@@ -32,27 +25,33 @@ export class VerDoctorComponent implements OnInit {
 		//
 		//XXX Desde donde se ve esta pagina
 		let idCentroMedico = 1;
-		let idDoctor = this.activatedRoute.snapshot.paramMap.get('idDoctor')
 
-		return this.rest.horario_doctor.getAll({ id_centro_medico:idCentroMedico },{id_doctor:idDoctor}).subscribe( respuesta =>
-		{
-			let disponibilidad = [];
-			respuesta.datos.forEach( i=>
+
+		this.route.paramMap.subscribe( params =>{
+			let idDoctor = params.get('idDoctor')
+			return this.rest.horario_doctor.getAll({ id_centro_medico:idCentroMedico },{id_doctor:idDoctor}).subscribe( respuesta =>
 			{
-				disponibilidad.push({
-					id : ++this.counterId,
-					tipo: "disponibilidad",
-					rendering: "background",
-					startTime: i.hora_inicio,
-					endTime: i.hora_final,
-					daysOfWeek: [i.dia_semana]
+				let disponibilidad = [];
+				respuesta.datos.forEach( i=>
+				{
+					disponibilidad.push({
+						id : ++this.counterId,
+						tipo: "disponibilidad",
+						rendering: "background",
+						startTime: i.hora_inicio,
+						endTime: i.hora_final,
+						daysOfWeek: [i.dia_semana]
+					});
 				});
+
+				let calendarAPI = this.calendarComponent.getApi();
+				calendarAPI.addEventSource({ id: 'disponibilidad', events: disponibilidad });
+				calendarAPI.render();
 			});
 
-			let calendarAPI = this.calendarComponent.getApi();
-			calendarAPI.addEventSource({ id: 'disponibilidad', events: disponibilidad });
-			calendarAPI.render();
 		});
+
+
 		//	this.citasService.getDisponibilidadDoctor(this.activatedRoute.snapshot.paramMap.get('idUsuarioDoctor'), 1).subscribe(
 			//	thhorario_doctor=> {
 

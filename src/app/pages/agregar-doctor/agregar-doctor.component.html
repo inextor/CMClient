@@ -50,10 +50,10 @@
 
 
 						<div class="form-row">
-							<div class="form-group col-md-6">
+							<!--div class="form-group col-md-6">
 								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="correo_electronico" [(ngModel)]="doctor.correo_electronico">
-							</div>
+							</div-->
 							<div class="form-group col-md-6">
 								<label position="stacked">Especialidad<span color="danger">*</span></label>
 								<!-- input required type="text" class="form-control" name="especialidad" [(ngModel)]="doctor.especialidad" -->
@@ -63,6 +63,11 @@
 							</div>
 						</div>
 
+						<div *ngIf="error_message">
+							<div class="alert alert-info" role="alert">
+								{{error_message}}
+							</div>
+						</div>
 						<div>
 							<button type="submit" class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="is_loading">
 								{{this.usuario.id ? 'Guardar':'Agregar'}}

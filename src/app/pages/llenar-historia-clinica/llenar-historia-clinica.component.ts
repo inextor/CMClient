@@ -10,6 +10,7 @@ import { BaseComponent } from '../base/base.component';
 import { RespuestaPreguntaHistoriaClinica } from '../../models/Respuestas';
 import { Respuesta } from '../../models/Respuestas';
 import { Respuesta_Historia_Clinica } from '../../models/Modelos';
+import { Location } from	'@angular/common';
 
 @Component({
   selector: 'app-llenar-historia-clinica',
@@ -18,6 +19,9 @@ import { Respuesta_Historia_Clinica } from '../../models/Modelos';
 })
 export class LlenarHistoriaClinicaComponent  extends BaseComponent implements OnInit {
 
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+		super( rest,router,route,location);
+	  }
 	preguntas:RespuestaPreguntaHistoriaClinica[] = [];
 	doctor:Doctor = {};
 	usuario:Usuario = null;
@@ -50,8 +54,7 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 			}),
 			catchError(error=>
 			{
-				this.is_loading = false;
-				this.msgError = this.rest.getErrorMessage( error );
+				this.showError( error );
 				return null;
 			})
 		).subscribe((response:Respuesta<RespuestaPreguntaHistoriaClinica>)=>
@@ -77,13 +80,7 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 			this.preguntas = response.datos;
 			this.is_loading = false;
 
-		},(error)=>
-		{
-			this.showError( error );
-			//this.msgError = this.rest.getErrorMessage( error );
-			//console.log( this.msgError );
-			this.is_loading = false;
-		});
+		},error=>this.showError(error));
 	}
 
 	guardar()
@@ -94,11 +91,7 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 		this.rest.guardarRespuestasHistoriaClinica( respuestas ).subscribe((respuestas)=>
 		{
 			this.is_loading = false;
-		}
-		,(error)=>
-		{
-			this.showError( error );
-			this.is_loading = false;
-		});
+		},this.showError );
+
 	}
 }

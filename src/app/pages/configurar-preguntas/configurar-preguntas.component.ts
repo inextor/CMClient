@@ -35,11 +35,7 @@ export class ConfigurarPreguntasComponent implements OnInit {
 			{	this.is_loading = false ;
 				this.preguntas = respuesta.datos;
 				this.actualizarPreguntas();
-			},(error) => {
-				console.log("QUE PASO");
-				this.showError(this.rest.getErrorMessage(error));
-				this.is_loading = false;
-			});
+			},error=>this.showError(error));
 		});
 	}
 
@@ -82,17 +78,13 @@ export class ConfigurarPreguntasComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.rest.getPreguntasEspecialidad( this.id_especialidad ).subscribe((preguntas)=>
-		{	
+		{
 			this.preguntasEspecialidad	= preguntas.datos;
 			this.busquedaPreguntas = this.preguntas.filter((i)=>{
 				return !this.preguntasEspecialidad.some(j=>j.pregunta_historia_clinica.id == i.id);
-			}); 
+			});
 			this.is_loading = false;
-		}, (error) => {
-			console.log("QUE PASO");
-			this.showError(this.rest.getErrorMessage(error));
-			this.is_loading = false;
-		});
+		}, error=>this.showError(error));
 	}
 
 	mover(especialidadPregunta:Especialidad_Pregunta,accion:string)
@@ -109,11 +101,7 @@ export class ConfigurarPreguntasComponent implements OnInit {
 			this.is_loading = false;
 			console.log('FOOO');
 			this.actualizarPreguntas();
-		},(error)=>
-		{
-			this.is_loading = false;
-			console.log("OCurrio un error",error);
-		});
+		},error=>this.showError(error));
 	}
 
 	agregarEspecialidadPregunta(pregunta:Pregunta_Historia_Clinica)
@@ -122,7 +110,7 @@ export class ConfigurarPreguntasComponent implements OnInit {
 		return this.rest.especialidad_pregunta.create({ id_pregunta_historia_clinica: pregunta.id, id_especialidad:this.id_especialidad}).subscribe((ep)=>
 		{
 			this.actualizarPreguntas();
-		});
+		},error=>this.showError(error));
 	}
 
 	deleteEspecialidadPregunta(especialidadPregunta)
@@ -132,6 +120,6 @@ export class ConfigurarPreguntasComponent implements OnInit {
 		return this.rest.especialidad_pregunta.delete(especialidadPregunta.id).subscribe((response)=>
 		{
 			this.actualizarPreguntas();
-		});
+		},error=>this.showError(error));
 	}
 }

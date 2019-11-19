@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import {Router,ActivatedRoute} from "@angular/router";
+import { Router,ActivatedRoute } from "@angular/router";
 import { Especialidad } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
+import { Location } from	'@angular/common';
 
 @Component({
 	selector: 'app-agregar-especialidad',
 	templateUrl: './agregar-especialidad.component.html',
 	styleUrls: ['./agregar-especialidad.component.css'],
 })
-export class AgregarEspecialidadComponent implements OnInit {
+export class AgregarEspecialidadComponent extends BaseComponent implements OnInit {
 	is_loading:boolean	= false;
 
 	especialidad:Especialidad = {
 		nombre: '',
 		abreviacion: ''
 	};
-	constructor(private rest:RestService,private router:Router,private route:ActivatedRoute) { }
+
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	{
+		super( rest,router,route,location);
+	}
+
 
 	ngOnInit() {
 		this.especialidad = {
@@ -35,10 +42,7 @@ export class AgregarEspecialidadComponent implements OnInit {
 				{
 					this.is_loading = false;
 					this.especialidad = especialidad;
-				}, (error) => {
-						this.showError(this.rest.getErrorMessage(error));
-						this.is_loading = false;
-					});
+				}, error=>this.showError(error));
 			}
 		});
 	}
@@ -53,7 +57,7 @@ export class AgregarEspecialidadComponent implements OnInit {
 			this.rest.especialidad.update( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
 				this.router.navigate(['/especialidades/0']);
-			});
+			},error=>this.showError(error));
 		}
 		else
 		{
@@ -61,22 +65,7 @@ export class AgregarEspecialidadComponent implements OnInit {
 			this.rest.especialidad.create( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
 				this.router.navigate(['/especialidades/0']);
-			});
+			},error=>this.showError(error));
 		}
-	}
-
-	async showError(message: string) {
-
-		/*
-		const alert = await this.alertController.create({
-			header: 'Error',
-			//subHeader: 'Subtitle',
-			message: message,
-			buttons: ['OK']
-		});
-
-		await alert.present();
-		this.is_loading = false;
-		*/
 	}
 }
