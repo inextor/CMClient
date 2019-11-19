@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { ConfigurarHorarioComponent } from './pages/configurar-horario/configurar-horario.component';
 import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
-
 import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
@@ -49,6 +48,7 @@ import { CitaComponent } from "./pages/cita/cita.component";
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from "./../app/classes/";
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
+import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
 
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
 const routes: Routes = [
@@ -115,6 +115,7 @@ const routes: Routes = [
   { path: "editar-tipo-precio/:id", component: AgregarTipoPrecioComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "tipo-precios/:pagina", component: TipoPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-recepcionista", component: AgregarRecepcionistaComponent, pathMatch: "full", canActivate: [AuthGuard] },
+  { path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
 
 

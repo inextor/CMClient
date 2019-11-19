@@ -14,7 +14,7 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h1>Usuarios</h1>
+					<h5>USUARIOS</h5>
 					<div class="container">
 						<div class="pt-2 flex-wrap">
 							<td>
@@ -35,6 +35,7 @@
 									<th>Usuario</th>
 									<th>Correo</th>
 									<th>Telefono</th>
+									<th>Tipo</th>
 									<th>Acciones</th>
 								</tr>
 							</thead>
@@ -43,6 +44,7 @@
 									<td>{{usuario.usuario}}</td>
 									<td>{{usuario.correo_electronico}}</td>
 									<td>{{usuario.telefono}}</td>
+									<td>{{usuario.tipo}}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/editar-usuario',usuario.id]">Editar</button>

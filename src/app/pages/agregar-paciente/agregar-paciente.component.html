@@ -1,67 +1,67 @@
 <!-- NAVBAR -->
 <div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-					<h1>Agregar Usuario</h1>
-					<app-loading [display]="is_loading"></app-loading>
-					<div class="container">
-						<form>
+    <header>
+        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+    </header>
+    <!-- FIN NAVBAR -->
+    <div>
+        <div class="page_content">
+            <!-- MENU -->
+            <div class="pt-2 flex-wrap justify-content-start">
+                <app-menu></app-menu>
+            </div>
+            <!-- FIN MENU -->
+            <!-- CONTENIDO -->
+            <main class="p-2">
+                <div class="card p-3">
+                    <h5>AGREGAR PACIENTE</h5>
+                    <app-loading [display]="is_loading"></app-loading>
+                    <div class="container">
+                        <form>
 
-							<div class="form-group">
-								<label position="stacked">Nombre<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="nombre"
-									[(ngModel)]="paciente.nombre">
-							</div>
-							<div class="form-group">
-								<label position="stacked">Apellido<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="nombre"
-									[(ngModel)]="paciente.apellidos">
-							</div>
-							<div class="form-group">
-								<label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="correo_electronico"
-									[(ngModel)]="usuario.correo_electronico">
-							</div>
-							<div class="form-group">
-								<label position="stacked">Usuario<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="usuario"
-									[(ngModel)]="usuario.usuario">
-							</div>
+                            <div class="form-group">
+                                <label position="stacked">Nombre<span color="danger">*</span></label>
+                                <input required type="text" class="form-control" name="nombre"
+                                    [(ngModel)]="paciente.nombre">
+                            </div>
+                            <div class="form-group">
+                                <label position="stacked">Apellido<span color="danger">*</span></label>
+                                <input required type="text" class="form-control" name="nombre"
+                                    [(ngModel)]="paciente.apellidos">
+                            </div>
+                            <div class="form-group">
+                                <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+                                <input required type="text" class="form-control" name="correo_electronico"
+                                    [(ngModel)]="usuario.correo_electronico">
+                            </div>
+                            <div class="form-group">
+                                <label position="stacked">Usuario<span color="danger">*</span></label>
+                                <input required type="text" class="form-control" name="usuario"
+                                    [(ngModel)]="usuario.usuario">
+                            </div>
 
-							<div class="form-group">
-								<label position="stacked">Contraseña</label>
-								<input placeholder="" type="password" class="form-control" name="contrasena"
-									[(ngModel)]="usuario.contrasena">
-							</div>
+                            <div class="form-group">
+                                <label position="stacked">Contraseña</label>
+                                <input placeholder="" type="password" class="form-control" name="contrasena"
+                                    [(ngModel)]="usuario.contrasena">
+                            </div>
 
-							<div class="form-group">
-								<label position="stacked">Confirmar contraseña</label>
-								<input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
-									[(ngModel)]="confirmar_contrasena">
-							</div>
+                            <div class="form-group">
+                                <label position="stacked">Confirmar contraseña</label>
+                                <input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
+                                    [(ngModel)]="confirmar_contrasena">
+                            </div>
 
-							<div class="">
-								<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-									(click)="registrarse()" [disabled]="is_loading">Registrar</button>
-							</div>
-						</form>
-					</div>
+                            <div class="">
+                                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
+                                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
+                            </div>
+                        </form>
+                    </div>
 
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
-		</div>
-	</div>
+                </div>
+            </main>
+            <!-- FIN CONTENIDO -->
+        </div>
+    </div>
 </div>
