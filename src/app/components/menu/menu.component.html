@@ -3,63 +3,63 @@
     <div class=" list-group-flush">
         <div class="sidebar">
             <a type="button" (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
-                    src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />Centros medicos</a>
+                    src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
         </div>
         <div *ngIf="showCentros">
             <div>
                 <div class="menuSubButtons">
                     <a href="#" [routerLink]="['/especialidades',0]"
-                        class="list-group-item list-group-item-action color1 ">Especialidades
+                        class="list-group-item list-group-item-action color1 ">ESPECIALIDADES
                     </a>
                 </div>
                 <div class="menuSubButtons">
                     <a [routerLink]="['/centros-medicos']"
-                        class="list-group-item list-group-item-action color1 ">Clinicas </a>
+                        class="list-group-item list-group-item-action color1 ">CLINICAS</a>
                 </div>
                 <div class="menuSubButtons">
                     <a [routerLink]="['/tipo-precios',0]"
-                        class="list-group-item list-group-item-action color1 ">Precios </a>
+                        class="list-group-item list-group-item-action color1 ">PRECIOS</a>
                 </div>
                 <div class="menuSubButtons">
                     <a [routerLink]="['/servicios']"
-                        class="list-group-item list-group-item-action color1 ">Servicios</a>
+                        class="list-group-item list-group-item-action color1 ">SERVICIOS</a>
                 </div>
                 <div class="menuSubButtons">
-                    <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">Gastos </a>
+                    <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
                 </div>
                 <div [routerLink]="['/pagos']" class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">Pagos </a>
+                    <a class="list-group-item list-group-item-action color1 ">PAGOS </a>
                 </div>
                 <div [routerLink]="['/proveedores']" class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">Proveedores </a>
+                    <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
                 </div>
 				<div class="menuSubButtons" >
-                    <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">Usuarios</a>
+                    <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">USUARIOS</a>
                 </div>
 
                 <div class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">Reportes </a>
+                    <a class="list-group-item list-group-item-action color1 ">REPORTES </a>
                 </div>
             </div>
         </div>
         <div class="sidebar">
             <a href="#" [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
-                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />Doctores
+                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
             </a>
         </div>
         <div class="sidebar">
             <a href="#" [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
-                <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />Pacientes
+                <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
             </a>
         </div>
         <div class="sidebar">
             <a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
-                <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />Citas
+                <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
             </a>
         </div>
         <div class="sidebar">
             <button type="button" (click)="logout()" class="list-group-item list-group-item-action color5 group">
-                <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />Logout
+                <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
             </button>
         </div>
     </div>
