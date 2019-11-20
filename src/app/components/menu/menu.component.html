@@ -42,9 +42,9 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar">
+        <div class="sidebar" [appAccess]="['ADMIN']">
             <a href="#" [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
-                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
+                <img src="../../../assets/icon/Mehr-Software-18.png"  class="menuIcons" />DOCTORES
             </a>
         </div>
         <div class="sidebar">

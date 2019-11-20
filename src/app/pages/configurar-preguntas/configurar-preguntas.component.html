@@ -32,20 +32,17 @@
 							<tr *ngFor="let p of preguntasEspecialidad;let i = index">
 								<td>{{p.pregunta_historia_clinica.pregunta}} </td>
 								<td>
-									<button type="button" size="small" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
+									<button type="button" size="small" class="btn btn-primary btn-sm" (click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
 										Remover</button>
-									<button type="button" size="small" *ngIf="i>0"
+									<button type="button" size="small" class="btn btn-primary btn-sm"  *ngIf="i>0"
 										(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover Arriba</button>
-									<button type="button" size="small" *ngIf="i<preguntasEspecialidad.length-1"
+									<button type="button" size="small" class="btn btn-primary btn-sm" *ngIf="i<preguntasEspecialidad.length-1"
 										(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</button>
 								</td>
 					
 							</tr>
 						</tbody>
 					</table>
-					<div>
-						<input input type="text">
-					</div>
 					
 					<div class="container">
 						<div *ngFor="let p of busquedaPreguntas">

@@ -18,7 +18,9 @@
           <app-loading [display]="is_loading"></app-loading>
           <div class="container">
             <form>
+
               <div lines="full" class="list  ">
+                <label position="stacked">Imagen<span color="danger">*</span></label>
                 <div *ngIf="usuario.id_imagen">
                   <img [src]="this.rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
                 </div>
@@ -27,32 +29,32 @@
                 </div>
                 <div class="form-group">
                   <label position="stacked">Nombre<span color="danger">*</span></label>
-                  <input required type="text" name="nombre" [(ngModel)]="paciente.nombre">
+                  <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
                 </div>
                 <div class="form-group">
                   <label position="stacked">Apellidos<span color="danger">*</span></label>
-                  <input required type="text" name="apellidos" [(ngModel)]="paciente.apellidos">
+                  <input required type="text" class="form-control" name="apellidos" [(ngModel)]="paciente.apellidos">
                 </div>
                 <div class="form-group">
                   <label position="stacked">Sexo<span color="danger">*</span></label>
-                  <input required type="text" name="sexo" [(ngModel)]="paciente.sexo">
+                  <input required type="text" class="form-control" name="sexo" [(ngModel)]="paciente.sexo">
                 </div>
                 <div class="form-group">
                   <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
                   <!--input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></input-->
-                  <input type="date" displayFormat="YYYY-MM-DD" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento">
+                  <input type="date" displayFormat="YYYY-MM-DD" class="form-control" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento">
                 </div>
           
                 <div class="form-group">
                   <label position="stacked">Telefono<span color="danger">*</span></label>
-                  <input required type="text" name="telefono" [(ngModel)]="paciente.telefono">
+                  <input required type="text" class="form-control" name="telefono" [(ngModel)]="paciente.telefono">
                 </div>
               </div>
           
               <app-loading *ngIf="is_loading"></app-loading>
           
               <div class="">
-                <button type="button" expand="block" type="submit" class="" (click)="guardarPaciente()"
+                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardarPaciente()"
                   [disabled]="is_loading">Guardar Paciente</button>
               </div>
           

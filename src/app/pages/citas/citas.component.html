@@ -19,22 +19,16 @@
 					<input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
 					ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date
 				</div> -->
-
+					<div class="card p-3">
+<h5>CITAS</h5>
 				<div *ngIf="is_loading">
 					<div class="spinner-border" role="status">
 						<span class="sr-only">Loading...</span>
 					</div>
 				</div>
 				<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
-				<input type="text">
-				<select >
-					<option value="dogs">
-					<label>Pendientes</label>
-					</option>
-					<option value="cats">
-					<label>Cats</label>
-					</option>
-				</select>
+			
+			
 				<table class="basica">
 					<thead>
 						<tr>
@@ -76,7 +70,7 @@
 						</tr>
 					</tbody>
 				</table>
-
+</div>
 			</main>
 			<!-- FIN CONTENIDO -->
 		</div>
