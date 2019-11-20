@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
     // localStorage.removeItem('usuario');
     // localStorage.removeItem('session_token');
     // localStorage.removeItem('id_organizacion');
-    // this.currentUserSubject.next(null);
+    this.rest.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
 }

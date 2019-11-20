@@ -3,9 +3,8 @@ digraph G {
   inicio_session_administrador[label="Inicio Session" style="filled"]
   inicio_session_administrador->home_administracion[color="green"]
   
-  
   home_administracion[label="Home Administracion" color="0.603 0.258 1.000" style=filled]
-  home_administracion -> usuarios
+  home_administracion -> usuarios [color="green"]
   //agregar_usuario
   productos_y_servicios [label="Productos y Servicios" color="0.603 0.258 1.000" style=filled]
   home_administracion -> productos_y_servicios[color="green"]
@@ -34,21 +33,16 @@ digraph G {
 listar_preguntas-> mover_arriba[color="green"]
 listar_preguntas-> mover_abajo[color="green"]
 
-
-
   usuarios[label="Usuarios" color="0.603 0.258 1.000" style=filled]
 
-  usuarios->agregar_usuario_administrador
-  usuarios->agregar_usuario_recepcion;
-  usuarios->agregar_usuario_asistente
+  usuarios->agregar_usuario_administrador[color="green"]
+  usuarios->agregar_usuario_recepcion[color="green"]
+  usuarios->agregar_usuario_asistente[color="green"]
   usuarios->agregar_usuario_doctor[color="green"]
   usuarios->agregar_usuario_paciente[color="green"]
 
-
-
-
   editar_usuario[label="Editar Usuarios" color="0.603 0.258 1.000" style=filled]
-  usuarios->editar_usuario;
+  usuarios->editar_usuario [color="green"]
 
   agregar_usuario_administrador[label="Agregar Administrador" color="0.603 0.258 1.000" style=filled]
   agregar_usuario_recepcion[label="Agregar Recepcionista" color="0.603 0.258 1.000" style=filled]

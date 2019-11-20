@@ -24,7 +24,7 @@ Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Pr
 })
 
 export class RestService {
-	private currentUserSubject: BehaviorSubject<any>;
+	public currentUserSubject: BehaviorSubject<any>;
 	public currentUser: Observable<any>;
 	urlBase:string = '';
 
