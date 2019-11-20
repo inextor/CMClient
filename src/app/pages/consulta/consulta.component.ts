@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../services/rest.service'
-import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos';
+import { Doctor,Cita, Usuario,Paciente,Centro_Medico,Consulta} from '../../models/Modelos';
 import {Router,ActivatedRoute,ParamMap} from "@angular/router"
 import { Route } from '@angular/compiler/src/core';
 import { BaseComponent } from '../base/base.component';
@@ -33,11 +33,11 @@ export class ConsultaComponent extends BaseComponent implements OnInit {
 			if( id )
 			{
 				this.consulta ={
-					motivo		: '',
-					diagnostico	: '',
-					tratamiento	: '',
-					id_paciente	: id_paciente,
-					id_doctor	: id_doctor,
+					motivo_consulta	: '',
+					diagnostico		: '',
+					tratamiento		: '',
+					id_paciente		: null,
+					id_doctor		: null,
 				};
 
 				this.is_loading = true;
@@ -66,11 +66,11 @@ export class ConsultaComponent extends BaseComponent implements OnInit {
 
 
 				this.consulta ={
-					motivo		: '',
-					diagnostico	: '',
-					tratamiento	: '',
-					id_paciente	: id_paciente,
-					id_doctor	: id_doctor,
+					motivo_consulta	: '',
+					diagnostico		: '',
+					tratamiento		: '',
+					id_paciente		: id_paciente,
+					id_doctor		: usuario.id,
 				};
 			}
 		});
@@ -79,11 +79,14 @@ export class ConsultaComponent extends BaseComponent implements OnInit {
 	guardar()
 	{
 		this.is_loading	= true;
-		let observable	= this.consulta.id ? this.consulta.update( this.consulta ) : this.consulta.post( this.consulta );
+		let observable	= this.consulta.id ? this.rest.consulta.update( this.consulta ) : this.rest.consulta.create( this.consulta );
 
 		observable.subscribe
 		(
-			consulta	=> this.consulta = consulta
+			consulta	=>{
+				this.consulta = consulta
+				this.is_loading = false;
+			}
 			,error 		=> this.showError( error )
 		);
 	}

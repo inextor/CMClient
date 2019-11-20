@@ -35,7 +35,6 @@ export class RestService {
 	public comision_por_servios:ObjRest<Comision_Por_Servios>;
 	public comisiones_doctor:ObjRest<Comisiones_Doctor>;
 	public configuracion:ObjRest<Configuracion>;
-	public consulta:ObjRest<Consulta>;
 	public consultorio:ObjRest<Consultorio>;
 	public consultorio_doctor:ObjRest<Consultorio_Doctor>;
 	public detalle_venta:ObjRest<Detalle_Venta>;
@@ -69,6 +68,7 @@ export class RestService {
 	public searchGastoCentroMedico:SearchRest<Gasto_Centro_Medico,SearchGastoCentroMedicoResponse>;
 	public searchServicio:SearchRest<Servicio,ServicioResponseItem>;
 	public servicio_recurso:ObjRest<Servicio_Recurso>;
+	public consulta:ObjRest<Consulta>;
 
 
 	//End vars
@@ -137,6 +137,7 @@ export class RestService {
 		this.searchGastoCentroMedico		= new SearchRest<Gasto_Centro_Medico,SearchGastoCentroMedicoResponse>(`${this.urlBase}/searchGastosCentroMedico.php`,http);
 		this.searchServicio					= new SearchRest<Servicio,ServicioResponseItem>(`${this.urlBase}/searchServicio.php`,http);
 		this.especialidad					= new ObjRest<Especialidad>						(`${this.urlBase}/especialidad.php`,http);
+		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 	}
 
 
