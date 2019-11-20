@@ -5,8 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router"
 import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-centro-medico/seleccionar-centro-medico.component';
 import { SeleccionarPacienteComponent } from '../../components/seleccionar-paciente/seleccionar-paciente.component';
 import { BaseComponent } from '../base/base.component';
-import { Location } from	'@angular/common';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-doctores',
