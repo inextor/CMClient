@@ -16,7 +16,7 @@
 				<div class="card p-3">
 					<div class="container">
 					<h5>PACIENTES</h5>
-					
+
 						<div class="pt-2 flex-wrap">
 							<td>
 								<button type="button" class="btn btn-primary btn-sm"
@@ -53,7 +53,7 @@
 											color="secondary">Citas</button>
 
 										<button type="button" class="btn btn-primary btn-sm mr-2"
-											(click)="seleccionarDoctorNuevaCita(paciente)" color="secondary">Agendar
+											(click)="seleccionarDoctorNuevaCita(paciente)">Agendar
 											Cita</button>
 
 										<button type="button" class="btn btn-primary btn-sm mr-2"
@@ -61,12 +61,12 @@
 											color="secondary">Agregar Familiar</button>
 
 										<button type="button" class="btn btn-primary btn-sm mr-2"
-											[routerLink]="['/consulta',paciente.id,doctor.id]" color="secondary"
-											[appAccess]="['Doctor']">Agregar Consulta</button>
+											[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
+											[appAccess]="['Doctor']">Consultas</button>
 
-										<!--button type="button" class="btn btn-primary btn-sm mr-2"
-											[routerLink]="['/ver-historia-medico',paciente.id,doctor.id]" color="secondary"
-											[appAccess]="['Doctor']">Agregar Consulta</button -->
+										<button type="button" class="btn btn-primary btn-sm mr-2"
+											[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+											[appAccess]="['Doctor']">Historia Medica</button>
 									</td>
 								</tr>
 							</tbody>

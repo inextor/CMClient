@@ -68,7 +68,7 @@ import { HistoriaMedicaComponent } from './pages/historia-medica/historia-medica
 import { ToastErrorComponent } from './components/toast-error/toast-error.component';
 import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consulta.component';
-
+import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 
 
 @NgModule({
@@ -133,7 +133,7 @@ import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consu
     ToastErrorComponent,
     IngresosComponent,
     AgregarConsultaComponent,
-
+    VerConsultasComponent,
   ],
   imports: [
     AccessModule,

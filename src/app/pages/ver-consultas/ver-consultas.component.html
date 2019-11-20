@@ -1,0 +1,36 @@
+<div>
+</div>
+
+<!-- NAVBAR -->
+<div class="page">
+    <header>
+        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+    </header>
+    <!-- FIN NAVBAR -->
+    <div>
+        <div class="page_content">
+            <!-- MENU -->
+            <div class="pt-2 flex-wrap justify-content-start">
+                <app-menu></app-menu>
+            </div>
+            <!-- FIN MENU -->
+            <!-- CONTENIDO -->
+            <main class="p-2">
+                <div>
+                    <h5>Consultas</h5>
+                    <app-loading [display]="is_loading"></app-loading>
+					<div *ngFor="let consulta of consultas" class="card mt-3 mb-3 p-3">
+						<div><b>Fecha:</b>{{consulta.tiempo_creacion | date:'medium'}}</div>
+						<p *ngIf="consulta.motivo_consulta && consulta.motivo_consulta.trim() !== ''"><strong>Motivo Consulta:</strong> {{consulta.motivo_consulta}}</p>
+						<p *ngIf="consulta.diagnostico && consulta.diagnostico.trim() !== ''"><strong>Diagnostico:</strong> {{consulta.diagnostico}}</p>
+						<p *ngIf="consulta.medicamento && consulta.medicamento.trim() !== ''"><strong>Tratamiento:</strong> {{consulta.medicamento}}</p>
+						<div>
+							<button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm">Editar</button>
+						</div>
+					</div>
+                </div>
+            </main>
+            <!-- FIN CONTENIDO -->
+        </div>
+    </div>
+</div>

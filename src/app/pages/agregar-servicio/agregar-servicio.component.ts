@@ -9,9 +9,9 @@ import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 
 @Component({
-  selector: 'app-agregar-servicio',
-  templateUrl: './agregar-servicio.component.html',
-  styleUrls: ['./agregar-servicio.component.css']
+	selector: 'app-agregar-servicio',
+	templateUrl: './agregar-servicio.component.html',
+	styleUrls: ['./agregar-servicio.component.css']
 })
 export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
@@ -30,9 +30,12 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	centros_medicos:Centro_Medico[] = [];
 	precios	= {};
 	id:number = null;
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	{
 		super( rest,router,route,location);
-	  }
+	}
+
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
@@ -91,7 +94,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		this.tipo_precios = valores[0].datos;
 		this.centros_medicos = valores[1].datos;
 
-		if( valores.length ==  4 )
+		if( valores.length ==	4 )
 		{
 			this.precio_servicios = valores[2].datos;
 			this.servicio_recurso = valores[3];
@@ -127,7 +130,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 		console.log( 'precios',this.precios );
 
-		this.servicio_recurso= valores.length == 4  ? valores[3] : {
+		this.servicio_recurso= valores.length == 4	? valores[3] : {
 			servicio:{
 				'id': null,
 				'nombre': '',
