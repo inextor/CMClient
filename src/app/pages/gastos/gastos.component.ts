@@ -25,6 +25,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
+		console.log(usuario)
 		this.is_loading = true;
 		forkJoin
 		(
@@ -32,7 +33,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 				//getTiposGastos({id_organizacion: usuario.id_organizacion}),
 				//this.rest.getGastos({ id_centro_medico: 1 })
 				this.rest.tipo_gasto.getAll({id_organizacion: usuario.id_organizacion}),
-				this.rest.searchGastoCentroMedico.getAll({ id_centro_medico: 1 }) //TODO FIX ponerlo de la session o seleccionarlo
+				this.rest.searchGastoCentroMedico.getAll(usuario.id_organizacion) //TODO FIX ponerlo de la session o seleccionarlo
 			]
 		).subscribe
 		(
