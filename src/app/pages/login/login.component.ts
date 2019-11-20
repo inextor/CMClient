@@ -21,7 +21,7 @@ import { Location } from	'@angular/common';
 })
 
 export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
-	
+
 	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
 	  super( rest,router,route,location);
 	}
@@ -64,7 +64,6 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 				this.is_loading = false;
 				this.router.navigate(['/home']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
-			}, this.showError
-		);
+			}, error=>this.showError(error ));
 	}
 }
