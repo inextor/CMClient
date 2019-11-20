@@ -1,3 +1,10 @@
+
+@media print {
+  #sidebar-wrapper,.menuButtons{
+      display: none;
+  }
+}
+
 body {
   overflow-x: hidden;
 }

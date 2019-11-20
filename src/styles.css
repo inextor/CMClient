@@ -214,6 +214,45 @@ body
 	width: 100%;
 }
 
+@media print {
+	body
+	{
+		overflow: auto;
+	}
+	.page
+	{
+		position: static! important;
+	}
+	.page_content {
+		position: static !important;
+	}
+
+	.page_content>div:first-child
+	{
+		display: none;
+	}
+
+	.page_content>main
+	{
+		position: static !important;
+		overflow: auto;
+	}
+	input[type="text"],input[type="number"]{
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+	}
+
+	button[type="button"]{
+		display: none;
+	}
+	.card
+	{
+		border: 0;
+	}
+}
+
+
 .custom-modal .hidden
 {
 	display: none;
