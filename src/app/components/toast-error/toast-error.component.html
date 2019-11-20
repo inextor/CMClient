@@ -1,0 +1,5 @@
+<div *ngIf="show && message_error" [ngClass]="{'alert-modal':true,'hightlight':hightlight}" (click)="show=false">
+	<div class="alert alert-danger" role="alert">
+		{{message_error}}
+	</div>
+</div>

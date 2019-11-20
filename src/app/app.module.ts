@@ -66,6 +66,7 @@ import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agr
 import { ModalComponent } from './components/modal/modal.component';
 import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
 import { HistoriaMedicaComponent } from './pages/historia-medica/historia-medica.component';
+import { ToastErrorComponent } from './components/toast-error/toast-error.component';
 
 
 @NgModule({
@@ -127,6 +128,7 @@ import { HistoriaMedicaComponent } from './pages/historia-medica/historia-medica
     ModalComponent,
     AgregarPacienteComponent,
     HistoriaMedicaComponent,
+    ToastErrorComponent,
   ],
   imports: [
     AccessModule,

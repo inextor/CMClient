@@ -26,6 +26,10 @@ Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Pr
 export class RestService {
 	public currentUserSubject: BehaviorSubject<any>;
 	public currentUser: Observable<any>;
+
+	public errorBehaviorSubject: BehaviorSubject<string>;
+	public errorObservable:Observable<string>;
+
 	urlBase:string = '';
 
 	public bitacora:ObjRest<Bitacora>;
@@ -91,6 +95,11 @@ export class RestService {
 
 		this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('usuario')));
 		this.currentUser = this.currentUserSubject.asObservable();
+
+
+		this.errorBehaviorSubject = new BehaviorSubject<string>(null);
+		this.errorObservable = this.errorBehaviorSubject.asObservable();
+
 		//this.doctor = new DoctorRest(http,this.urlBase);
 		this.bitacora						= new ObjRest<Bitacora>                         (`${this.urlBase}/bitacora.php`,http);
 		this.centro_medico					= new ObjRest<Centro_Medico>                    (`${this.urlBase}/centro_medico.php`,http);
@@ -432,5 +441,10 @@ export class RestService {
 	{
 		window.navigator.userAgent
 		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
+	}
+
+	showError(error:string)
+	{
+		this.errorBehaviorSubject.next( error );
 	}
 }
