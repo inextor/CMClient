@@ -28,26 +28,28 @@ th{
   color:white;
 }
 
-.basica td, .basica th {
-    border-width: 0;
-    line-height: 1.5;
-    padding: 5px;
+.basica th
+{
     text-align: center;
+}
 
-
-  font-family: 'lato-light', 'arial', sans-serif;
-   color: #898989;
+.basica td, .basica th {
+	border-width: 0;
+	line-height: 1.5;
+	padding: 5px;
+	font-family: 'lato-light', 'arial', sans-serif;
+	color: #898989;
 }
 table.basica {
     border-width: 0;
     font-size: 13px;
     margin: 1em 0;
     overflow-x: auto;
-    width: 100%;
+	width: 100%;
 	font-family: 'Lato',"Helvetica Neue",sans-serif;
 	color: #000000;
-  background-color: white;
-  border: 2px white solid;
+	background-color: white;
+	border: 2px white solid;
 }
 
 .basica thead tr{
@@ -282,3 +284,9 @@ button{
 {
 	border-radius: 0px;
 }
+
+.doctores
+{
+	--primary-color: #3684C1
+}
+
