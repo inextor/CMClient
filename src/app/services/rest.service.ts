@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse } from '@angular/c
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
-import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso} from '../models/Respuestas';
+import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
 import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
@@ -27,8 +27,8 @@ export class RestService {
 	public currentUserSubject: BehaviorSubject<any>;
 	public currentUser: Observable<any>;
 
-	public errorBehaviorSubject: BehaviorSubject<string>;
-	public errorObservable:Observable<string>;
+	public errorBehaviorSubject: BehaviorSubject<ErrorMensaje>;
+	public errorObservable:Observable<ErrorMensaje>;
 
 	urlBase:string = '';
 
@@ -97,7 +97,7 @@ export class RestService {
 		this.currentUser = this.currentUserSubject.asObservable();
 
 
-		this.errorBehaviorSubject = new BehaviorSubject<string>(null);
+		this.errorBehaviorSubject = new BehaviorSubject<ErrorMensaje>(null);
 		this.errorObservable = this.errorBehaviorSubject.asObservable();
 
 		//this.doctor = new DoctorRest(http,this.urlBase);
@@ -443,8 +443,8 @@ export class RestService {
 		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
 	}
 
-	showError(error:string)
+	showError(error:ErrorMensaje)
 	{
-		this.errorBehaviorSubject.next( error );
+		this.errorBehaviorSubject.next( error);
 	}
 }

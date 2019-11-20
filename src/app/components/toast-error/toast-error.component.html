@@ -1,5 +1,6 @@
-<div *ngIf="show && message_error" [ngClass]="{'alert-modal':true,'hightlight':hightlight}" (click)="show=false">
-	<div class="alert alert-danger" role="alert">
-		{{message_error}}
+<div *ngIf="show && message" [ngClass]="{'alert-modal':true,'hightlight':hightlight}" (click)="show=false">
+	<div class="alert alert-danger" [class]="'alert '+ message.tipo"  role="alert">
+		{{message.mensaje}}
 	</div>
 </div>
+<!-- [ngClass]="{aler:true,'alert-danger':message.tipo=='alert-danger','alert-success':message.tipo=='alert.success'}" -->

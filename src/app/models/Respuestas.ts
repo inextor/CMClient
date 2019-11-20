@@ -97,6 +97,10 @@ export interface SearchPacienteResponse{
 	doctor:Doctor;
 	paciente:Paciente;
 }
+export interface ErrorMensaje{
+	mensaje:string;
+	tipo:string;
+}
 
 
 

@@ -33,7 +33,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 				//getTiposGastos({id_organizacion: usuario.id_organizacion}),
 				//this.rest.getGastos({ id_centro_medico: 1 })
 				this.rest.tipo_gasto.getAll({id_organizacion: usuario.id_organizacion}),
-				this.rest.searchGastoCentroMedico.getAll(usuario.id_organizacion) //TODO FIX ponerlo de la session o seleccionarlo
+				// this.rest.searchGastoCentroMedico.getAll(usuario.id_organizacion) //TODO FIX ponerlo de la session o seleccionarlo
 			]
 		).subscribe
 		(

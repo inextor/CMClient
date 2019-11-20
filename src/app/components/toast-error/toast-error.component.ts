@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
+import { ErrorMensaje } from 'src/app/models/Respuestas';
 
 @Component({
   selector: 'app-toast-error',
@@ -10,7 +11,7 @@ export class ToastErrorComponent implements OnInit {
 
 	show:boolean			= false;
 	hightlight:boolean		= false;
-	message_error:string	= null;
+	message:ErrorMensaje	= null;
 
 	constructor(private restService:RestService)
 	{
@@ -22,19 +23,20 @@ export class ToastErrorComponent implements OnInit {
 		this.restService.errorObservable.subscribe((error)=>
 		{
 			console.log("error",error);
-			this.message_error	= error;
+			this.message	= error;
 			this.show			= true;
 			this.hightlight		= true;
 
 			setTimeout(()=>{
 				this.hightlight = false;
-			},1500);
+				// this.show = false;
+			},3500);
 		});
 	}
 
 	clicked()
 	{
-		this.message_error = null;
+		this.message = null;
 		this.show = false;
 		this.hightlight = false;
 	}
