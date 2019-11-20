@@ -32,7 +32,7 @@ import { BaseComponent } from './pages/base/base.component';
 import { AgregarFamiliarComponent } from './pages/agregar-familiar/agregar-familiar.component';
 import { AgregarGastoComponent } from './pages/agregar-gasto/agregar-gasto.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
-import { ConsultaComponent } from './pages/consulta/consulta.component';
+import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consulta.component';
 import { AgregarPreguntaComponent } from './pages/agregar-pregunta/agregar-pregunta.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
@@ -49,8 +49,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from "./../app/classes/";
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
-
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
+import { IngresosComponent } from './pages/ingresos/ingresos.component';
 const routes: Routes = [
   { path: "", component: LoginComponent, pathMatch: "full" },
   { path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
@@ -98,7 +98,7 @@ const routes: Routes = [
   { path: "agregar-familiar/:id_usuario", component: AgregarFamiliarComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-gasto", component: AgregarGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "consultas", component: ConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "consulta/:id_paciente/:id_doctor", component: ConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
+  { path: "agregar-consulta/:id_paciente/:id_doctor", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-pregunta", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-pregunta/:id", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "inventario", component: InventarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -114,8 +114,8 @@ const routes: Routes = [
   { path: "tipo-precios/:pagina", component: TipoPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-recepcionista", component: AgregarRecepcionistaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
-
+  { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
+  { path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 
   /*
 	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},
