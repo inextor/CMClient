@@ -66,6 +66,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
 import { HistoriaMedicaComponent } from './pages/historia-medica/historia-medica.component';
 import { ToastErrorComponent } from './components/toast-error/toast-error.component';
+import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 
 
@@ -129,6 +130,7 @@ import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.compo
     AgregarPacienteComponent,
     HistoriaMedicaComponent,
     ToastErrorComponent,
+    IngresosComponent,
     VerConsultasComponent,
   ],
   imports: [
