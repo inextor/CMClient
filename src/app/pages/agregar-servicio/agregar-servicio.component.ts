@@ -13,7 +13,6 @@ import {Router,ActivatedRoute} from "@angular/router"
 	templateUrl: './agregar-servicio.component.html',
 	styleUrls: ['./agregar-servicio.component.css']
 })
-
 export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
  	servicio_recurso:Servicio_Recurso= {
@@ -32,7 +31,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	precios	= {};
 	id:number = null;
 
-	constructor(public rest:restservice,public router:router,public route:activatedroute,public location: location)
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
 	{
 		super( rest,router,route,location);
 	}
@@ -145,7 +144,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 	guardar()
 	{
-		this.is_loading = true;
+	this.is_loading = true;
 
 		if( this.servicio_recurso.servicio.id )
 		{
