@@ -69,7 +69,9 @@ export class BaseComponent implements OnInit {
 
 		this.is_loading =false;
 		console.log('displaying error', error );
-		this.error_message = this.getErrorMessage( error );
+		//this.error_message =
+		let str_error = this.getErrorMessage( error );
+		this.rest.showError({ mensaje: str_error, tipo:'alert-danger' });
 	}
 
 	getErrorMessage( error:any )
