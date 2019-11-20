@@ -258,15 +258,18 @@ h1,h2,h3,h4,h5{
   color: #898989;
 } */
 
+/*
 button{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'lato-light', 'arial', sans-serif !important;
 }
+
 button{
+  font-family: 'lato-light', 'arial', sans-serif !important;
   font-size: 1.1em !important;
 }
+*/
 
 @font-face{
   font-family: lato-bold;
@@ -280,13 +283,4 @@ button{
   font-family: lato-light;
   src: url(./assets/font/custom/Lato-Light.ttf) format("opentype");}
 
-.btn
-{
-	border-radius: 0px;
-}
-
-.doctores
-{
-	--primary-color: #3684C1
-}
 
