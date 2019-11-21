@@ -11,13 +11,17 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	usuario:Usuario = {
 		id_organizacion: 1,
+id_imagen: null,
 		contrasena: '',
 		correo_electronico:'',
 		tipo: 'PACIENTE'
 	};
 	paciente:Paciente = {
 		nombre:'',
-		apellidos:''
+		apellidos:'',
+		sexo:'',
+		fecha_nacimiento:'',
+		telefono:'',
 	};
 
 	confirmar_contrasena:string = '';
@@ -28,7 +32,15 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
 		{
 			this.is_loading = false;
-			this.router.navigate(['/home']);
+			this.router.navigate(['/pacientes']);
 		}, error=> this.showError );
+	}
+
+	uploadImage(evt) {
+		if (evt.target.files.length) {
+			this.rest.uploadImage(evt.target.files[0], false).subscribe((imageData) => {
+				this.usuario.id_imagen = imageData.id;
+			}, error => this.showError(error));
+		}
 	}
 }
