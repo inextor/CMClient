@@ -18,9 +18,8 @@ export class IngresoComponent extends BaseComponent implements OnInit {
     super(rest, router, route, location);
   }
   // ingreso : Ingreso[]= [];
-  id_ingreso: number = null;
   ingreso: Ingreso = {
-    monto: null, 
+    monto:null,
   };
 
 
@@ -31,22 +30,22 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 
   }
   
-  guardar(): void {
-    console.log("Guardando");
+  guardar(){
     this.is_loading = true;
 
-    if (this.id_ingreso) {
-      this.ingreso.update(this.ingreso).subscribe((gasto_centro_medico) => {
+    if (this.ingreso.id) {
+      //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+      this.rest.ingreso.update(this.ingreso).subscribe((response) => {
         this.is_loading = false;
-        this.location.back();
+        this.router.navigate(['/ingresos']);
       }, error => this.showError(error));
     }
     else {
-      this.ingreso.create(this.ingreso).subscribe((gast) => {
+      //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+      this.rest.ingreso.create(this.ingreso).subscribe((response) => {
         this.is_loading = false;
-        this.location.back();
-      }, error => { this.showError(error); });
+        this.router.navigate(['/ingresos']);
+      }, error => this.showError(error));
     }
   }
-
 }
