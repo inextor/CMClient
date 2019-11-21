@@ -19,13 +19,13 @@ export class IngresoComponent extends BaseComponent implements OnInit {
   }
   // ingreso : Ingreso[]= [];
   ingreso: Ingreso = {
+    id:null,
     monto:null,
   };
 
 
   ngOnInit() {
     this.ingreso = {
-      id: null,
       monto:null,
     };
     let usuario = this.rest.getUsuarioSesion();
