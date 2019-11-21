@@ -14,32 +14,38 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h5>AGREGAR GASTO</h5>
+				
 					<div class="container">
+							<h5>AGREGAR GASTO</h5>
 						<app-loading [display]="is_loading"></app-loading>
 						<div lines="full" class="">
-							<div class="form-group">
+							<div class="form-row">
+
+							<div class="form-group col-md-6">
 								<label position="stacked">Cantidad<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.monto">
 							</div>
 
-							<div class="form-group">
+							<div class="form-group col-md-6">
 								<label position="stacked">Referencia<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
 							</div>
-
-							<div class="form-group">
+					
+					
+							<div class="form-group col-md-6">
 								<label>Centro Medico</label>
 								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_centro_medico">
 									<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 								</select>
 							</div>
 
-							<div class="form-group">
+							<div class="form-group col-md-6">
 								<label>Tipo Gasto</label>
 								<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss" [(ngModel)]="gasto_centro_medico.id_tipo_gasto">
 									<option *ngFor="let tipo of tiposGasto" [value]="tipo.id">{{tipo.nombre}}</option>
 								</select>
+						
+							</div>
 							</div>
 							<div class="form-group">
 								<label>Nota</label>
