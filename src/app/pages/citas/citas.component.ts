@@ -6,11 +6,14 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { Cita } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
+import { SearchObject } from '../../models/Respuestas';
+import { forkJoin } from 'rxjs';
+import { empty } from 'rxjs';
 
 @Component({
-  selector: 'app-citas',
-  templateUrl: './citas.component.html',
-  styleUrls: ['./citas.component.css']
+	selector: 'app-citas',
+	templateUrl: './citas.component.html',
+	styleUrls: ['./citas.component.css']
 })
 export class CitasComponent extends BaseComponent implements OnInit {
 
@@ -21,6 +24,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	tipo_busqueda = 'nombre';
 	paciente:Paciente = {};
 	doctor:Doctor = {};
+	citas:Cita[] = [];
 
 	currentInfoCita:SearchCitaResponse = null;
 
@@ -29,70 +33,90 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	showConfirmCancelar:boolean = false;
 	showConfirmActivar:boolean = false;
 
-	crequest:SearchCitaRequest = {
+	id_paciente:number;
+	id_doctor:number;
+	fecha_inicio:string;
+	nombre:string;
+	pagina:number;
+
+	cita_search:SearchObject<Cita> = {
 
 	};
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	{
 		super( rest,router,route,location);
-	  }
-	ngOnInit() {
+	}
 
+	ngOnInit()
+	{
 		let d = new Date();
 		d.setHours( d.getHours() - 3 );
 		let z = (i)=> i<10 ? '0'+i : i;
 
-
-		this.route.paramMap.subscribe( params =>
+		this.route.queryParams.subscribe( params =>
 		{
 
-			let id_paciente	= params.get('id_paciente') ==null ? null : parseInt(params.get('id_paciente') );
+		//this.route.paramMap.subscribe( params =>
+		//{
+			this.cita_search = {
+				eq: {},
+				ge: {},
+				le: {}
+			};
 
-			if( id_paciente )
+			console.log("Nueva pagina");
+
+			console.log( params );
+
+			this.id_paciente	= 'id_paciente' in params ? params.id_paciente:null;
+			this.id_doctor		= 'id_paciente' in params ? params.id_doctor:null;
+			this.pagina			= 'id_paciente' in params ? params.pagina:0;
+			this.fecha_inicio	= 'id_paciente' in params ? params.fecha_inicio:null;
+
+			let currentDate = new Date();
+
+			if( this.fecha_inicio == null )
+				this.fecha_inicio = ''+currentDate.getFullYear()+'-'+z(currentDate.getMonth()+1)+'-'+z(currentDate.getDate())+' '+z(currentDate.getHours())+':'+z(currentDate.getMinutes())+':00';
+
+			this.cita_search.ge.inicio		= this.fecha_inicio;
+			this.cita_search.eq.id_paciente	= this.id_paciente;
+			this.cita_search.eq.id_doctor	= this.id_doctor;
+			this.cita_search.limite			= this.pageSize;
+			this.cita_search.pagina			= this.pagina;
+
+			let rjoinObj:any = {};
+			let fjarray = [];
+			console.log("MMMMMM");
+			forkJoin([
+				this.rest.searchCita.search( this.cita_search )
+				,this.id_paciente ? this.rest.paciente.get( this.id_paciente ) : empty()
+				,this.id_doctor ? this.rest.doctor.get( this.id_doctor ) : empty()
+			]).subscribe((result)=>
 			{
-				console.log("PACIENTE FOOOOO No paso NADA");
-				this.tipo_busqueda = 'fecha'
-				this.crequest.id_paciente = id_paciente;
-				//this.rest.getPaciente( id_paciente ).subscribe(paciente=> this.paciente = paciente);
-				this.is_loading= true;
-				this.rest.paciente.get( id_paciente ).subscribe((paciente)=> {
-					this.is_loading=false;
-					this.paciente = paciente
-				}, this.showError );
-			}
-
-			let id_doctor  = params.get('id_doctor') == null ? null : parseInt(params.get('id_doctor') );
-
-			if( id_doctor )
-			{
-				this.tipo_busqueda = 'fecha'
-				this.crequest.id_doctor = id_doctor;
-				//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
-				this.rest.doctor.get( id_doctor ).subscribe((doctor)=> {
-					this.is_loading = false ;
-					this.doctor = doctor
-				}, this.showError );
-			}
-
-			if( !this.crequest.id_paciente && !this.crequest.id_doctor )
-			{
-			  let fecha_inicio:string = ''+d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+' '+z(d.getHours())+':'+z(d.getMinutes())+':00';
-			  this.crequest.fecha_inicio = fecha_inicio;
-			}
-
-			console.log("crequest",this.crequest );
-
-			this.search('');
-			//this.rest.searchCitas( this.crequest ).subscribe( respuesta => {
-			//	console.log( respuesta.datos );
-			//	this.info_citas = respuesta.datos;
-			//	this.is_loading = false;
-			//},
-			//()=>
-			//{
-			//	this.is_loading = false;
-			//});
+				console.log("WTF");
+				this.setPages( this.cita_search.pagina, result[0].total );
+				this.info_citas = result[0].datos;
+				this.paciente = result[ 1 ];
+				this.doctor = result[ 2];
+				this.setPages( this.currentPage, result[0].total );
+			},error=>this.showError( error ));
 		});
+	}
+
+	getPathFromSearchObj()
+	{
+	}
+
+	buscar()
+	{
+		//this.cita.search( this.cita_search );
+		this.rest.searchCita.search(this.cita_search).subscribe((citaResponse)=>
+		{
+			console.log( citaResponse );
+			this.setPages( this.cita_search.pagina, citaResponse.total );
+			this.info_citas = citaResponse.datos;
+		},error=>this.showError( error ));
 	}
 
 	changeSearch( evt )
@@ -116,18 +140,20 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 	search(nombre)
 	{
-		if( nombre.trim() )
-			this.crequest.nombre = nombre.trim();
-		else
-			this.crequest.nombre = '';
+
+		this.router.navigate(['/citas/',{ fecha_inicio:this.fecha_inicio,nombre:this.nombre,id_paciente:this.id_paciente,id_doctor:this.id_doctor}]);
+		//if( nombre.trim() )
+		//	this.crequest.nombre = nombre.trim();
+		//else
+		//	this.crequest.nombre = '';
 
 		//this.rest.searchCitas( this.crequest ).subscribe((respuesta)=>
 		//Esperando que funcione la siguiente linea
-		this.rest.searchCita.getAll( this.crequest ).subscribe((respuesta)=>
-		{
-			this.is_loading = false;
-			this.info_citas = respuesta.datos;
-		}, this.showError );
+		//this.rest.searchCita.getAll( this.crequest ).subscribe((respuesta)=>
+		//{
+		//	this.is_loading = false;
+		//	this.info_citas = respuesta.datos;
+		//}, this.showError );
 	}
 
 	confirmarDoctor(infoCita:SearchCitaResponse)
@@ -139,7 +165,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.showConfirmDoctor = false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
+			let index = this.info_citas.findIndex(i=> i.cita.id ==	infoCita.cita.id );
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;
 		},
@@ -161,7 +187,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.showConfirmPaciente= false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id);
+			let index = this.info_citas.findIndex(i=> i.cita.id ==	infoCita.cita.id);
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;
 		},(error)=>
@@ -182,7 +208,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			console.log( infoCita );
 			this.showConfirmCancelar = false;
 			this.is_loading = false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
+			let index = this.info_citas.findIndex(i=> i.cita.id ==	infoCita.cita.id );
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;
 		},
@@ -202,7 +228,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		}).subscribe((cita)=>
 		{
 			this.showConfirmActivar = false;
-			let index = this.info_citas.findIndex(i=> i.cita.id ==  infoCita.cita.id );
+			let index = this.info_citas.findIndex(i=> i.cita.id ==	infoCita.cita.id );
 			this.is_loading = false;
 			if( index >= 0 )
 				this.info_citas[ index ].cita = cita;

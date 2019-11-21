@@ -20,7 +20,7 @@ export class BaseComponent implements OnInit {
 	public totalItems: number 	= 0;
 	public currentPage:number	= 0;
 	public pages:number[]		= [];
-	public pageSize:number		= 20;
+	public pageSize:number		= 10;
 
 	public error_message:string		= null;
 	public success_message:string	= null;

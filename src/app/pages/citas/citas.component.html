@@ -23,8 +23,51 @@
 							<div class="container">
 <h5>CITAS</h5>
 				<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
-			
-			
+
+				<div>
+					<div>
+					<select [(ngModel)]="search.estatus">
+						<option value="ACTIVA">Activa</option>
+						<option value="ACTIVA">Canceladas</option>
+					</select>
+					</div>
+					<div>
+						<input type="checkbox">
+						Confirmada por doctor
+
+						<input type="checkbox">
+						Confirmada por paciente
+					</div>
+
+					<div>
+						<select [(ngModel)]="search.id_centro_medico">
+							<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+						</select>
+					</div>
+
+					<div>
+						<select [(ngModel)]="search.id_centro_medico">
+							<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+						</select>
+					</div>
+					<div>
+						Fecha Inicio
+						<input type="date">
+						<input type="time">
+					</div>
+					<div>
+						Fecha Fin
+						<input type="date">
+						<input type="time">
+					</div>
+					<div>
+						<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+					</div>
+				</div>
+
+				<div>
+					<app-paginacion [path]="'/citas'" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+				</div>
 				<table class="basica">
 					<thead>
 						<tr>
