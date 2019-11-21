@@ -151,7 +151,6 @@ export class RestService {
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
 		}
 
-
 	getCurrentCentroMedico()
 	{
 		let c_id = localStorage.getItem('id_centro_medico');

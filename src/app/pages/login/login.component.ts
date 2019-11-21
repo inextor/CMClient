@@ -27,9 +27,15 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 	}
 
 	ngOnInit() {
-		if (this.rest.getUsuarioSesion==null){
-			this.router.navigate(['/login'])
-		}else{this.router.navigate(['/home'])}
+
+		this.route.params.subscribe(params => {
+			
+			if (this.rest.getUsuarioSesion() != null) {
+				this.router.navigate(['/home'])
+			}
+
+		})
+		
 		//this.menuCtrl.enable(false);
 		//this.menuCtrl.swipeEnable(false);
 	}
