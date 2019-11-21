@@ -5,12 +5,14 @@
 	</div>
 
 	<div class="btn-group mr-2" role="group" aria-label="Second group" >
-		<button *ngFor="let page of pages" type="button" class="btn btn-primary" disabled>{{page+1}}</button>
+		<button *ngFor="let page of pages" type="button" class="btn btn-primary" [disabled]="page==currentPage" [routerLink]="[path]" [queryParams]="{page:page+1}" mergeQueryParams>{{page+1}}</button>
 	</div>
 
 	<div class="btn-group" role="group" aria-label="Third group">
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path,currentPage+1]" [queryParams]="{page:currentPage+1}" mergeQueryParams>&gt;</button>
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path,this.totalPages-1]" [queryParams]="{page:totalPages-1}" mergeQueryParams>&gt;&gt;</button>
+		<!--button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path,currentPage+1]" [queryParams]="{page:currentPage+1}" mergeQueryParams>&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path,this.totalPages-1]" [queryParams]="{page:totalPages-1}" mergeQueryParams>&gt;&gt;</button -->
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path]" [queryParams]="{page:currentPage+1}" mergeQueryParams>&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path]" [queryParams]="{page:totalPages-1}" mergeQueryParams>&gt;&gt;</button>
 	</div>
 </div>
 
