@@ -24,12 +24,19 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit() {
+    this.ingreso = {
+      id: null,
+      monto:null,
+    };
     let usuario = this.rest.getUsuarioSesion();
     console.log(usuario)
     this.is_loading = true;
 
   }
-  
+  tempfunction() {
+    this.router.navigate(['/ingresos']);
+  }
+
   guardar(){
     this.is_loading = true;
 
