@@ -41,7 +41,6 @@ import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/
 import { LoginComponent } from './pages/login/login.component';
 import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
-import { PagosComponent } from './pages/pagos/pagos.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
 import { ServiciosComponent } from './pages/servicios/servicios.component';
@@ -108,7 +107,6 @@ import { IngresosComponent } from './pages/ingresos/ingresos.component';
     LoginComponent,
     MisCitasComponent,
     PacientesComponent,
-    PagosComponent,
     ProveedoresComponent,
     RequisicionesComponent,
     ServiciosComponent,

@@ -25,7 +25,6 @@ import { ConfigurarPreguntasComponent } from './pages/configurar-preguntas/confi
 import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
 import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
 import { EditarDoctorComponent } from './pages/editar-doctor/editar-doctor.component';
-import { PagosComponent } from './pages/pagos/pagos.component';
 import { GastosComponent } from './pages/gastos/gastos.component';
 import { AgregarTipoGastoComponent } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
 import { BaseComponent } from './pages/base/base.component';
@@ -92,7 +91,6 @@ const routes: Routes = [
   { path: "ver-consultas/doctor/:id_doctor/paciente/:id_paciente", component: VerConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "mis-citas", component: MisCitasComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-doctor/:id", component: AgregarDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "pagos", component: PagosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "gastos", component: GastosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-tipo-gasto", component: AgregarTipoGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-tipo-gasto/:id", component: AgregarTipoGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
