@@ -1,0 +1,58 @@
+<p>ingresos works!</p>
+<!-- NAVBAR -->
+<div class="page">
+    <header>
+        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+    </header>
+    <!-- FIN NAVBAR -->
+    <div>
+        <div class="page_content">
+            <!-- MENU -->
+            <div class="pt-2 flex-wrap justify-content-start">
+                <app-menu></app-menu>
+            </div>
+            <!-- FIN MENU -->
+            <!-- CONTENIDO -->
+            <main class="p-2">
+                <div class="card p-3">
+                    <div class="container">
+                        <h5>INGRESOS</h5>
+
+
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="showAddIngreso=true;" 
+                                size="small">Agregar Ingreso</button>
+                        </td>
+                        <table class="basica">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="ingresos.length==0 && !is_loading" class="text-center">
+                                    <td colspan="4">No se encontraron registros</td>
+                                </tr>
+                                <tr *ngIf="is_loading">
+                                    <td colspan="2">
+                                        <app-loading [is_loading]="is_loading"></app-loading>
+                                    </td>
+                                </tr>
+
+                                <tr *ngFor="let ingreso of ingresos">
+                                    <td>{{ingreso.id}}</td>
+                                    <td>{{ingreso.monto}}</td>
+ 
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <app-modal [show]="showAddIngreso"><app-ingreso></app-ingreso></app-modal>
+                </div>
+            </main>
+        
+            <!-- FIN CONTENIDO -->
+        </div>
+    </div>
+</div>
