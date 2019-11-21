@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router"
 import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
-import { Location } from	'@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-gastos',

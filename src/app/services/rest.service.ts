@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
-import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion } from '../models/Modelos';
+import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
@@ -17,7 +17,7 @@ Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio
 Detalle_Venta, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
  Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
-	Usuario, Venta, Proveedor } from	'../models/Modelos';
+	Usuario, Venta, Proveedor,} from	'../models/Modelos';
 
 @Injectable({
 	providedIn: 'root'
@@ -73,6 +73,7 @@ export class RestService {
 	public searchServicio:SearchRest<Servicio,ServicioResponseItem>;
 	public servicio_recurso:ObjRest<Servicio_Recurso>;
 	public consulta:ObjRest<Consulta>;
+	public ingreso:ObjRest<Ingreso>;
 
 
 	//End vars
@@ -147,7 +148,8 @@ export class RestService {
 		this.searchServicio					= new SearchRest<Servicio,ServicioResponseItem>(`${this.urlBase}/searchServicio.php`,http);
 		this.especialidad					= new ObjRest<Especialidad>						(`${this.urlBase}/especialidad.php`,http);
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
-	}
+		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
+		}
 
 
 	getCurrentCentroMedico()

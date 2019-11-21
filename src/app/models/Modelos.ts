@@ -244,6 +244,13 @@ export interface Gasto_Centro_Medico{
 
 };
 
+export interface Ingreso{
+  id?:number;
+  id_doctor?:number;
+  id_paciente?:number;
+  monto?:number;
+}
+
 export interface Gasto_Doctor{
   id?:number;
   id_usuario_doctor?:number;
