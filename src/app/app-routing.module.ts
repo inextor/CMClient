@@ -59,9 +59,14 @@ const routes: Routes = [
   { path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agendar-cita", component: AgendarCitaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "ventas", component: VentasComponent, pathMatch: "full", canActivate: [AuthGuard] },
+
   { path: 'citas', component: CitasComponent, pathMatch: 'full' },
+  /*
   { path: 'citas/doctor/:id_doctor', component: CitasComponent, pathMatch: 'full' },
   { path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full' },
+  */
+  //{ path: 'citas/:id_doctor/:id_paciente/:fecha_inicio/:fecha_final
+
   //{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
   { path: "pacientes/:pagina", component: PacientesComponent, pathMatch: "full" },
   { path: "pacientes", component: PacientesComponent, pathMatch: "full" },
@@ -116,7 +121,8 @@ const routes: Routes = [
   { path: "tipo-precios/:pagina", component: TipoPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-recepcionista", component: AgregarRecepcionistaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+  //{ path: "home/**", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+  { path: 'home',  component: HomeComponent, children: [ { path: '**', component: HomeComponent } ] }
 
 
   /*
