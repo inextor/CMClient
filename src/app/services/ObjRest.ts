@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse } from '@angular/common/http';
 import { Respuesta } from '../models/Respuestas';
+import { SearchObject } from '../models/Respuestas';
 
 export class ObjRest<T>{
 	private urlBase:string;
@@ -45,6 +46,65 @@ export class ObjRest<T>{
 			if( search[i ] )
 				params = params.set(i,''+search[i]);
 		}
+		return this.http.get<Respuesta<T>>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+/*
+export interface SearchObject<T>
+{
+	eq?:T; //Equals to
+	gt?:T; //Great than
+	lt?:T; //Less than
+	ge?:T; //Great or equal than
+	le?:T; //less or equal than
+	lk?:T; //like
+}
+*/
+
+	search(searchObj:SearchObject<T>)
+	{
+		let params = new HttpParams();
+
+		for(let i in searchObj.eq )
+			if( searchObj.eq[i] )
+				params = params.set(i+'=',''+searchObj.eq[i] );
+
+		for(let i in searchObj.gt )
+			if( searchObj.gt[i] )
+				params = params.set(i+'>',''+searchObj.gt[i] );
+
+		for(let i in searchObj.lt )
+			if( searchObj.lt[i] )
+				params = params.set(i+'<',''+searchObj.lt[i] );
+
+		for(let i in searchObj.ge )
+			if( searchObj.ge[i] )
+				params = params.set(i+'>~',''+searchObj.ge[i] );
+
+		for(let i in searchObj.le )
+			if( searchObj.le[i] )
+				params = params.set(i+'<~',''+searchObj.le[i] );
+
+		for(let i in searchObj.lk )
+			if( searchObj.lk[i] )
+				params = params.set(i+'~~',''+searchObj.lk[i] );
+
+		if( searchObj.ids && searchObj.ids.length > 0 )
+			params = params.set( 'ids', searchObj.ids.join(',') );
+
+		if( searchObj.idss && searchObj.idss.length > 0 )
+			params = params.set( 'ids', searchObj.ids.join(',') );
+
+		if( searchObj.pagina )
+		{
+			params = params.set( 'pagina', ''+searchObj.pagina );
+		}
+
+		if( searchObj.limite )
+		{
+			params = params.set( 'limite', ''+searchObj.limite );
+		}
+
 		return this.http.get<Respuesta<T>>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
 	}
 

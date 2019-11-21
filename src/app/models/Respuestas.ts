@@ -4,9 +4,37 @@ import {Usuario,Sesion,Doctor,Paciente,Cita,Centro_Medico,Tipo_Precio,Servicio,P
 import {Especialidad_Pregunta,Pregunta_Historia_Clinica,Respuesta_Historia_Clinica} from './Modelos';
 import { Gasto_Centro_Medico,Tipo_Gasto } from './Modelos';
 
+
 export interface Respuesta<T>{
 	total:number;
 	datos:T[];
+}
+
+/*
+ * From perl operators except lk = LIKE
+ * Several comparison operators impose string contexts upon their operands.
+ * These are string equality (eq),
+ * string inequality (ne),
+ * greater than (gt),
+ * less than (lt),
+ * greater than or equal to (ge),
+ * less than or equal to (le),
+ */
+
+export interface SearchObject<T>
+{
+	ids?:number[];
+	idss?:string[];
+
+	pagina?:number;
+	limite?:number;
+
+	eq?:T; //Equals to
+	gt?:T; //Great than
+	lt?:T; //Less than
+	ge?:T; //Great or equal than
+	le?:T; //less or equal than
+	lk?:T; //like
 }
 
 export interface Recurso_Response{

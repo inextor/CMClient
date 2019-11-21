@@ -5,6 +5,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Location } from	'@angular/common';
+import { UrlSegment } from '@angular/router';
 
 
 
@@ -17,7 +18,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
 	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
 		super( rest,router,route,location);
-	  }
+	}
 	show_seleccionar_centro_medico:boolean = false;
 
 	ngOnInit() {
@@ -27,6 +28,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
 		{
 			this.show_seleccionar_centro_medico = true;
 		}
+
+		this.route.paramMap.subscribe(params=>console.log(params.keys) );
+		this.route.data.subscribe(data=>console.log( data ));
+    	this.route.url.subscribe((segments:UrlSegment[]) => {
+    	    for(var i = 0; i < segments.length; i++){
+    	        console.log("param: " + segments[i]);
+    	    }
+    	});
 	}
 
 	onSeleccionarCentroMedico(centro_medico:Centro_Medico)
