@@ -33,8 +33,8 @@ export class IngresoComponent extends BaseComponent implements OnInit {
     this.is_loading = true;
 
   }
-  tempfunction() {
-    this.router.navigate(['/ingresos']);
+  reload() {
+    window.location.reload()
   }
 
   guardar(){
@@ -44,15 +44,16 @@ export class IngresoComponent extends BaseComponent implements OnInit {
       //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
       this.rest.ingreso.update(this.ingreso).subscribe((response) => {
         this.is_loading = false;
-        this.router.navigate(['/ingresos']);
+        this.reload();
       }, error => this.showError(error));
     }
     else {
       //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
       this.rest.ingreso.create(this.ingreso).subscribe((response) => {
         this.is_loading = false;
-        this.router.navigate(['/ingresos']);
+        this.reload();
       }, error => this.showError(error));
     }
   }
+
 }
