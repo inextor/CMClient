@@ -14,22 +14,27 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
+					<div class="container">
 					<h5>AGREGAR PREGUNTA</h5>
 					<app-loading [display]="is_loading"></app-loading>
 					<div>
 
 						<!-- <label position="floating">Pregunta</label> -->
-						<input [(ngModel)]="pregunta.pregunta">
-
+							<div class="form-group">
+						<input class="form-control" [(ngModel)]="pregunta.pregunta">
+</div>
 
 
 						<!--
 						 <label>Es Pregunta General</label> -->
-						<select [(ngModel)]="pregunta.tipo_pregunta" placeholder="Seleccione una opción" interface="popover">
+						<div class="form-group">
+							<label>Tipo de pregunta</label>
+						<select class="form-control" [(ngModel)]="pregunta.tipo_pregunta"  interface="popover">
+							<option>Seleccione una opcion</option>
 							<option value="PREGUNTA_ESPECIFICA">Pregunta Especifica</option>
 							<option value="PREGUNTA_GENERAL">Pregunta General</option>
 						</select>
-
+</div>
 
 						<!-- div *ngIf="pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA'">
 							<label>Depende de pregunta</label>
@@ -41,26 +46,33 @@
 
 
 							<!-- <label>Es Pregunta rápida (SI/NO)</label> -->
-							<select [(ngModel)]="pregunta.es_pregunta_binaria" placeholder="Seleccione una opción" interface="popover">
+							<div class="form-group">
+								<label>Pregunta rapida?</label>
+							<select class="form-control" [(ngModel)]="pregunta.es_pregunta_binaria"  interface="popover">
+								<option>Seleccione una opcion</option>
 								<option value="SI">SI</option>
 								<option value="NO">NO</option>
 							</select>
+							</div>
 							<!--
 
 						  <label>Depende del Genero?</label> -->
-							<select [(ngModel)]="pregunta.depende_del_genero" placeholder="Seleccione una opción" interface="popover">
+						<div class="form-group">
+							<label>Genero en especifico</label>
+							<select class="form-control" [(ngModel)]="pregunta.depende_del_genero"  interface="popover">
+								<option>Seleccione una opcion</option>
 								<option value="NO">NO</option>
 								<option value="FEMENINO">Femenino</option>
 								<option value="MASCULINO">Masculino</option>
 							</select>
-
+</div>
 
 							<div class="ion-padding">
-								<button expand="block" type="submit" class="" (click)="guardar()" [disabled]="is_loading">Guardar</button>
+								<button expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 							</div>
 
 					</div>
-
+					</div>
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->

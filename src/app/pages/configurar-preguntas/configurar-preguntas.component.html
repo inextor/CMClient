@@ -14,6 +14,7 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
+					<div class="container">
 					<h5>CONFIGURAR PREGUNTAS</h5>
 					<td>
 						<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-pregunta']">
@@ -42,13 +43,24 @@
 							</tr>
 						</tbody>
 					</table>
+					<table class="basica">
+<thead>
+	<tr>
+		<th>Listado de preguntas</th>
+		<th>Acciones</th>
+	</tr>
+</thead>
+<tbody>
+						<tr *ngFor="let p of busquedaPreguntas">
+							<td>{{p.pregunta}} </td>
+							
+							<td><button type="button" size="small" class="btn btn-primary btn-sm" (click)="agregarEspecialidadPregunta(p)">
+								Agregar
+							</button></td>
 					
-					<div class="container">
-						<div *ngFor="let p of busquedaPreguntas">
-							{{p.pregunta}} <button type="button" size="small" (click)="agregarEspecialidadPregunta(p)">
-								<span class="oi" data-glyph="add-circle" title="icon add-circle" aria-hidden="true"></span>
-							</button>
-						</div>
+						</tr>
+					</tbody>
+				</table>
 					</div>
 				</div>
 			</main>
