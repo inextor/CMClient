@@ -3,72 +3,77 @@
     <i class="fas fa-bars fa-lg"></i>
   </div> -->
   <div class="pl-4 bd-highlight ">
-      <i class="fas fa-bars fa-lg collapse navbar-collapse "></i>
+    <i class="fas fa-bars fa-lg collapse navbar-collapse "></i>
   </div>
   <div class=" pl-4 bd-highlight ">
-   <img src="../../../assets/logo/Mehr-Software-16.png" class="logoMenu" alt="Sample image" /> 
+    <img src="../../../assets/logo/Mehr-Software-16.png" class="logoMenu" alt="Sample image" />
   </div>
-<div class="d-flex bd-highlight ml-auto">
-    <div class="p-1 bd-highlight collapse navbar-collapse"><img src="../../../assets/icon/Mehr-Software-34.png" class="logoUser"  /></div>
+  <div class="d-flex bd-highlight ml-auto">
+    <div class="p-1 bd-highlight collapse navbar-collapse"><img src="../../../assets/icon/Mehr-Software-34.png"
+        class="logoUser" /></div>
     <div class="p-2 bd-highlight  alling collapse navbar-collapse"><a>Daniel Martinez</a></div>
-  <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
-    data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button></div>
-  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show hiddeSubMenu" id="navbarsDefault">
-    <ul class="navbar-nav mr-auto">
+    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show " id="navbarsDefault">
+
+    <ul class="navbar-nav mr-auto hiddeSubMenu">
       <li class="nav-item" ngbDropdown>
-        <a type="button" class="nav-link navbarMenu" (click)="showCentros = !showCentros">Centro Medico</a>
+        <a type="button" class="nav-link navbarMenu active" (click)="showCentros = !showCentros">Centro
+          Medico</a>
       </li>
       <div *ngIf="showCentros">
-    
-<li>
-  <a href="#" [routerLink]="['/especialidades',0]" class="nav-link subMenu" >Especialidades
-  </a>
-</li>  
-<li>
-<a [routerLink]="['/centros-medicos']" class="nav-link subMenu" >Clinicas</a>
-</li>  
-<li>
-<a [routerLink]="['/tipo-precios',0]" class="nav-link subMenu" >Precios</a>
-</li>  
-<li>
-<a [routerLink]="['/servicios']" class="nav-link subMenu" >Servicios</a>
-</li>  
-<li>
-  <a [routerLink]="['/gastos']" class="nav-link subMenu" >Gastos</a>
-</li>  
-<li>
-  <a [routerLink]="['/proveedores']" class="nav-link subMenu" >Proveedores </a>
-</li>  
-<li>
-  <a [routerLink]="['/usuarios']" class="nav-link subMenu" >Usuarios</a>
-</li>  
-<li>
-  <a [routerLink]="['/ingresos']" class="nav-link subMenu" >Ingresos</a>
-</li>  
 
-<li>
-  <a class="nav-link" >Reportes </a>
-</li>  
+        <li>
+          <a href="#" [routerLink]="['/especialidades',0]" class="nav-link subMenu">Especialidades
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/centros-medicos']" class="nav-link subMenu">Clinicas</a>
+        </li>
+        <li>
+          <a [routerLink]="['/tipo-precios',0]" class="nav-link subMenu">Precios</a>
+        </li>
+        <li>
+          <a [routerLink]="['/servicios']" class="nav-link subMenu">Servicios</a>
+        </li>
+        <li>
+          <a [routerLink]="['/gastos']" class="nav-link subMenu">Gastos</a>
+        </li>
+        <li>
+          <a [routerLink]="['/proveedores']" class="nav-link subMenu">Proveedores </a>
+        </li>
+        <li>
+          <a [routerLink]="['/usuarios']" class="nav-link subMenu">Usuarios</a>
+        </li>
+        <li>
+          <a [routerLink]="['/ingresos']" class="nav-link subMenu">Ingresos</a>
+        </li>
+
+        <li>
+          <a class="nav-link subMenu">Reportes </a>
+        </li>
 
 
       </div>
-      <li class="nav-item" ngbDropdown>
+      <li class="nav-item active" ngbDropdown>
         <a class="nav-link navbarMenu" [routerLink]="['/doctores']">Doctores</a>
       </li>
-      <li class="nav-item" ngbDropdown>
+      <li class="nav-item active" ngbDropdown>
         <a class="nav-link navbarMenu" [routerLink]="['/pacientes']">Pacientes</a>
       </li>
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link navbarMenu" [routerLink]="['/citas']">citas</a>
+      <li class="nav-item active" ngbDropdown>
+        <a class="nav-link navbarMenu" [routerLink]="['/citas']">Citas</a>
       </li>
-      <li class="nav-item" ngbDropdown>
-        <a class="nav-link navbarMenu" (click)="logout()" >Log out</a>
+      <li class="nav-item active" ngbDropdown>
+        <a class="nav-link navbarMenu" (click)="logout()">Log out</a>
       </li>
     </ul>
+    
   </div>
- 
+
 </nav>
 
 

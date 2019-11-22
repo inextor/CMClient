@@ -25,7 +25,7 @@ padding: 0% !important;
 }
 .navbarMenu{
   padding-left: 5px;
-  border-bottom: solid 1px white;
+  /* border-bottom: solid 0.5px white; */
   color: white;
 }
 .subMenu{
@@ -60,3 +60,20 @@ a{
 @font-face{
   font-family: lato-light;
   src: url(../../../assets/font/custom/Lato-Bold.ttf) format("opentype");}
+
+  /* COLORES MENU */
+  .color1{
+ background-color:#3e5a80;
+}
+.color2{
+ background-color:#3285c6;
+}
+.color3{
+ background-color:#aad3c7;
+}
+.color4{
+ background-color:#019eb6;
+}
+.color5{
+ background-color:#8a93a1;
+}
