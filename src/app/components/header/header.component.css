@@ -23,12 +23,16 @@ padding: 0% !important;
     height: 10px;
     width: 10px;
 }
-
+.navbarMenu{
+  padding-left: 5px;
+  border-bottom: solid 1px white;
+  color: white;
+}
 .subMenu{
-  padding-left: 25px;}
+  padding-left: 30px;}
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 767px) {
   .hiddeSubMenu{
   display: none;
   }

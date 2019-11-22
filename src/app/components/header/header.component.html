@@ -15,10 +15,10 @@
     data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button></div>
-  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show " id="navbarsDefault">
+  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show hiddeSubMenu" id="navbarsDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" ngbDropdown>
-        <a type="button" class="nav-link" (click)="showCentros = !showCentros">Centro Medico</a>
+        <a type="button" class="nav-link navbarMenu" (click)="showCentros = !showCentros">Centro Medico</a>
       </li>
       <div *ngIf="showCentros">
     
@@ -55,16 +55,16 @@
 
       </div>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" [routerLink]="['/doctores']">Doctores</a>
+        <a class="nav-link navbarMenu" [routerLink]="['/doctores']">Doctores</a>
       </li>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" [routerLink]="['/pacientes']">Pacientes</a>
+        <a class="nav-link navbarMenu" [routerLink]="['/pacientes']">Pacientes</a>
       </li>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" [routerLink]="['/citas']">citas</a>
+        <a class="nav-link navbarMenu" [routerLink]="['/citas']">citas</a>
       </li>
       <li class="nav-item" ngbDropdown>
-        <a class="nav-link" (click)="logout()" >Log out</a>
+        <a class="nav-link navbarMenu" (click)="logout()" >Log out</a>
       </li>
     </ul>
   </div>
