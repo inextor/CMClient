@@ -42,7 +42,7 @@
 								<tr *ngFor="let paciente of pacientes">
 									<td>{{paciente.nombre}}</td>
 									<td>{{paciente.apellidos}}</td>
-									<td>{{paciente.telefono}}</td>
+									<td>{{paciente.telefono_casa}}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/editar-paciente',paciente.id]"

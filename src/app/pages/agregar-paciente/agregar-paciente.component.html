@@ -49,9 +49,17 @@
                                         [(ngModel)]="paciente.fecha_nacimiento">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label position="stacked">Telefono<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="nombre"
-                                        [(ngModel)]="paciente.telefono">
+                                    <label position="stacked">Telefono(casa)<span color="danger">*</span></label>
+                                    <input required type="text" class="form-control" name="telefono_casa"
+                                        [(ngModel)]="paciente.telefono_casa">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label position="stacked">Telefono(celular)<span color="danger">*</span></label>
+                                    <input required type="text" class="form-control" name="telefono_celular" [(ngModel)]="paciente.telefono_celular">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label position="stacked">Domicilio<span color="danger">*</span></label>
+                                    <input required type="text" class="form-control" name="domicilio" [(ngModel)]="paciente.domicilio">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label position="stacked">Correo Electrónico<span color="danger">*</span></label>

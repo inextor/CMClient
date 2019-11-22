@@ -352,7 +352,6 @@ export interface Organizacion{
   nombre?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
-
 };
 
 export interface Paciente{
@@ -363,10 +362,11 @@ export interface Paciente{
   apellidos?:string;
   fecha_nacimiento?:string;
   sexo?:string;
-  telefono?:string;
+  telefono_casa?:string;
+  telefono_celular?:string;
+  domicilio?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
-
 };
 
 export interface Pago{

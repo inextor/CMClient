@@ -21,7 +21,9 @@ id_imagen: null,
 		apellidos:'',
 		sexo:'',
 		fecha_nacimiento:'',
-		telefono:'',
+		telefono_celular:'',
+		telefono_casa: '',
+		domicilio: '',
 	};
 
 	confirmar_contrasena:string = '';
