@@ -30,6 +30,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
     else if (usuario.tipo = "PACIENTE"){
       this.rest.paciente.get(usuario.id).subscribe(params =>{
         this.usuario= params
+
       })
     }
   }
