@@ -1,5 +1,4 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"

@@ -49,9 +49,14 @@ export class SearchRest<U,T>{
 		return this.http.get<Respuesta<T>>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
 	}
 
-	search(searchObj:SearchObject<U>):Observable<Respuesta<T>>
+	search(searchObj:SearchObject<U>,extraParams:Object={}):Observable<Respuesta<T>>
 	{
 		let params = new HttpParams();
+
+		for( let i in extraParams )
+		{
+			params = params.set(i,extraParams[''+i]);
+		}
 
 		for(let i in searchObj.eq )
 		{
