@@ -8,7 +8,6 @@ import { BaseComponent } from '../../pages/base/base.component'
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   @Input() pagina: string;
-  showCentros: boolean = false;
   ngOnInit() {
     let usuario = this.rest.getUsuarioSesion();
   }
