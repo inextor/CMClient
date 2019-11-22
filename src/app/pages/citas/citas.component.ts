@@ -67,12 +67,12 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 			console.log("Nueva pagina");
 
-			console.log( params );
+			console.log("Parametros", params );
 
 			this.id_paciente	= 'id_paciente' in params ? params.id_paciente:null;
-			this.id_doctor		= 'id_paciente' in params ? params.id_doctor:null;
-			this.pagina			= 'id_paciente' in params ? params.pagina:0;
-			this.fecha_inicio	= 'id_paciente' in params ? params.fecha_inicio:null;
+			this.id_doctor		= 'id_doctor' in params ? params.id_doctor:null;
+			this.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
+			this.fecha_inicio	= 'fecha_inicio' in params ? params.fecha_inicio:null;
 
 			let currentDate = new Date();
 
@@ -85,22 +85,24 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			this.cita_search.limite			= this.pageSize;
 			this.cita_search.pagina			= this.pagina;
 
+			console.log('Search', this.cita_search );
+
 			let rjoinObj:any = {};
 			let fjarray = [];
-			console.log("MMMMMM");
-			forkJoin([
-				this.rest.searchCita.search( this.cita_search )
-				,this.id_paciente ? this.rest.paciente.get( this.id_paciente ) : empty()
-				,this.id_doctor ? this.rest.doctor.get( this.id_doctor ) : empty()
-			]).subscribe((result)=>
-			{
-				console.log("WTF");
-				this.setPages( this.cita_search.pagina, result[0].total );
-				this.info_citas = result[0].datos;
-				this.paciente = result[ 1 ];
-				this.doctor = result[ 2];
-				this.setPages( this.currentPage, result[0].total );
-			},error=>this.showError( error ));
+			this.buscar();
+			//forkJoin([
+			//	this.rest.searchCita.search( this.cita_search )
+			//	,this.id_paciente ? this.rest.paciente.get( this.id_paciente ) : empty()
+			//	,this.id_doctor ? this.rest.doctor.get( this.id_doctor ) : empty()
+			//]).subscribe((result)=>
+			//{
+			//	console.log("WTF");
+			//	this.setPages( this.cita_search.pagina, result[0].total );
+			//	this.info_citas = result[0].datos;
+			//	this.paciente = result[ 1 ];
+			//	this.doctor = result[ 2];
+			//	this.setPages( this.currentPage, result[0].total );
+			//},error=>{console.log( error );this.showError( error )});
 		});
 	}
 
@@ -113,7 +115,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		//this.cita.search( this.cita_search );
 		this.rest.searchCita.search(this.cita_search).subscribe((citaResponse)=>
 		{
-			console.log( citaResponse );
+			this.setPages( this.cita_search.pagina, citaResponse.total );
 			this.setPages( this.cita_search.pagina, citaResponse.total );
 			this.info_citas = citaResponse.datos;
 		},error=>this.showError( error ));

@@ -1,18 +1,18 @@
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="totalPages>1">
+<div class="btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups" *ngIf="totalPages>1">
 	<div class="btn-group mr-2" role="group" aria-label="First group">
-		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary" [routerLink]="[path]"  [queryParams]="{page:0}" mergeQueryParams>&lt;&lt;</button>
-		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"  [routerLink]="[path]" [queryParams]="{page:currentPage-1}" mergeQueryParams>&lt;</button>
+		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary" [routerLink]="[path]"  [queryParams]="{pagina:0}" queryParamsHandling="merge">&lt;&lt;</button>
+		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"  [routerLink]="[path]" [queryParams]="{pagina:currentPage-1}" queryParamsHandling="merge">&lt;</button>
 	</div>
 
 	<div class="btn-group mr-2" role="group" aria-label="Second group" >
-		<button *ngFor="let page of pages" type="button" class="btn btn-primary" [disabled]="page==currentPage" [routerLink]="[path]" [queryParams]="{page:page+1}" mergeQueryParams>{{page+1}}</button>
+		<button *ngFor="let page of pages" type="button" class="btn btn-primary" [routerLink]="[path]" [disabled]="page==currentPage" [queryParams]="{pagina:page}" queryParamsHandling="merge">{{page+1}}</button>
 	</div>
 
 	<div class="btn-group" role="group" aria-label="Third group">
 		<!--button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path,currentPage+1]" [queryParams]="{page:currentPage+1}" mergeQueryParams>&gt;</button>
 		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path,this.totalPages-1]" [queryParams]="{page:totalPages-1}" mergeQueryParams>&gt;&gt;</button -->
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path]" [queryParams]="{page:currentPage+1}" mergeQueryParams>&gt;</button>
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path]" [queryParams]="{page:totalPages-1}" mergeQueryParams>&gt;&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary"  [routerLink]="[path]" [queryParams]="{pagina:currentPage+1}"  queryParamsHandling="merge">&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" [routerLink]="[path]" [queryParams]="{pagina:totalPages-1}" queryParamsHandling="merge">&gt;&gt;</button>
 	</div>
 </div>
 

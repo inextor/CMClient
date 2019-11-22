@@ -68,7 +68,9 @@ import { ToastErrorComponent } from './components/toast-error/toast-error.compon
 import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consulta.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
+import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component'
+
 
 @NgModule({
   declarations: [
@@ -133,6 +135,7 @@ import {IngresoComponent} from './components/ingreso/ingreso.component'
     IngresosComponent,
     AgregarConsultaComponent,
     VerConsultasComponent,
+    DateTimeComponent,
   ],
   imports: [
     AccessModule,
