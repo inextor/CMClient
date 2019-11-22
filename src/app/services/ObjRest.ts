@@ -65,9 +65,10 @@ export interface SearchObject<T>
 	{
 		let params = new HttpParams();
 
+		console.log('eq', searchObj.eq );
 		for(let i in searchObj.eq )
 			if( searchObj.eq[i] )
-				params = params.set(i+'=',''+searchObj.eq[i] );
+				params = params.set(i,''+searchObj.eq[i] );
 
 		for(let i in searchObj.gt )
 			if( searchObj.gt[i] )
