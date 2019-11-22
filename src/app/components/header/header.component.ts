@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   @Input() pagina: string;
-  showCentros =true;
+  showCentros =false;
   ngOnInit() {
     let usuario = this.rest.getUsuarioSesion();
   }
