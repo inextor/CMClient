@@ -47,9 +47,9 @@
 												<label class="form-check-label">OTRO</label>
 											</div>
 										</div>
-										<input type="text" [name]="'a'+p.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
+										<input type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
 									</div>
-									<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_messsage}}</div>
+									<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_message}}</div>
 									<div>
 										<button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
 									</div>

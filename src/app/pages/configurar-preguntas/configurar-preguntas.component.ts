@@ -117,7 +117,7 @@ export class ConfigurarPreguntasComponent implements OnInit {
 	{
 		//return this.rest.deleteEspecialidadPregunta(especialidadPregunta.id).subscribe((response)=>
 		console.log("REMOVE",especialidadPregunta);
-		return this.rest.especialidad_pregunta.delete(especialidadPregunta.id).subscribe((response)=>
+		return this.rest.especialidad_pregunta.delete(especialidadPregunta).subscribe((response)=>
 		{
 			this.actualizarPreguntas();
 		},error=>this.showError(error));
