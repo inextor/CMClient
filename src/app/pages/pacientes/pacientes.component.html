@@ -40,8 +40,8 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let paciente of pacientes">
-									<td>{{paciente.nombre}}</td>
-									<td>{{paciente.apellidos}}</td>
+									<td>{{paciente.nombre | titlecase }}</td>
+									<td>{{paciente.apellidos| titlecase}}</td>
 									<td>{{paciente.telefono_casa}}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-sm mr-2"
