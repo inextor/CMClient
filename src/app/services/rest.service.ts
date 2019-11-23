@@ -133,8 +133,8 @@ export class RestService {
 		this.pregunta_historia_clinica		= new ObjRest<Pregunta_Historia_Clinica>        (`${this.urlBase}/pregunta_historia_clinica.php`,http);
 		this.recepcionista_doctor			= new ObjRest<Recepcionista_Doctor>             (`${this.urlBase}/recepcionista_doctor.php`,http);
 		this.respuesta_historia_clinica		= new ObjRest<Respuesta_Historia_Clinica>       (`${this.urlBase}/respuesta_historia_clinica.php`,http);
-		//this.servicio						= new ObjRest<Servicio>                         (`${this.urlBase}/servicio.php`,http);
-		this.servicio_recurso				= new ObjRest<Servicio_Recurso>					(`${this.urlBase}/servicio_recurso.php`,http);
+		this.servicio						= new ObjRest<Servicio>                         (`${this.urlBase}/servicio.php`,http); //NO SOPORTA POST
+		this.servicio_recurso				= new ObjRest<Servicio_Recurso>					(`${this.urlBase}/servicio_recurso.php`,http); //PARA dar de alta el servicio
 
 		//this.sesion						= new ObjRest<Sesion>                           (`${this.urlBase}/sesion.php`,http);
 		this.tipo_gasto						= new ObjRest<Tipo_Gasto>                       (`${this.urlBase}/tipo_gasto.php`,http);

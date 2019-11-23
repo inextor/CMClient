@@ -1,45 +1,37 @@
 <!-- NAVBAR -->
 <div class="page">
-  <header>
-    <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-  </header>
-  <!-- FIN NAVBAR -->
-  <div>
-    <div class="page_content">
-      <!-- MENU -->
-      <div class="pt-2 flex-wrap justify-content-start">
-        <app-menu></app-menu>
-      </div>
-      <!-- FIN MENU -->
-      <!-- CONTENIDO -->
-      <main class="p-2">
-        <div class="card p-3">
-          <h5>INVENTARIO</h5>
-          <!-- app-loading [display]="is_loading"></app-loading -->
-          <div class="container">
-            <div class="list">
-              <div class="list-header">
-                <label>Resources</label>
-              </div>
-              <div class="form-group" [routerLink]="['/requisiciones']">
-
-                <span class="oi" data-glyph="contacts" title="contacts" aria-hidden="true"></span>
-                <label>Requisicion</label>
-              </div>
-              <div class="form-group" [routerLink]="['/agregar-producto']">
-                <span class="oi" data-glyph="md-calendar" title="contacts" aria-hidden="true"></span>
-                <label>Agregar Producto</label>
-              </div>
-              <div class="form-group" [routerLink]="['/proveedores']">
-                <span class="oi" data-glyph="medkit" title="contacts" aria-hidden="true"></span>
-                <label>proveedores</label>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </main>
-      <!-- FIN CONTENIDO -->
-    </div>
-  </div>
+	<header>
+		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	</header>
+	<!-- FIN NAVBAR -->
+	<div>
+		<div class="page_content">
+			<!-- MENU -->
+			<div class="pt-2 flex-wrap justify-content-start">
+				<app-menu></app-menu>
+			</div>
+			<!-- FIN MENU -->
+			<!-- CONTENIDO -->
+			<main class="p-2">
+				<div class="card p-3">
+					<h5>INVENTARIO</h5>
+					<app-loading [display]="is_loading"></app-loading>
+					<div class="container">
+						<div *ngFor="let is of inventarioServicios">
+							<div class="form-group-row row mt-2 mb-2">
+								<label class="col-form-label col-sm-10" [for]="'is'+is.servicio.id">{{is.servicio.nombre | titlecase }}</label>
+								<div class="col-sm-2">
+									<input type="number" class="form-control form-inline"  [id]="'is'+is.servicio.id" [name]="'is'+is.servicio.id" [(ngModel)]="is.inventario.cantidad">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
+					</div>
+				</div>
+			</main>
+			<!-- FIN CONTENIDO -->
+		</div>
+	</div>
 </div>
