@@ -55,10 +55,10 @@
 						</select>
 					</div-->
 					<div>
-						Fecha Inicio <input type="date" (change)="dateInicioChange($event.target.value)" [(ngModel)]="cita_search.ge.inicio" [value]="cita_search.ge.inicio">
+						Fecha Inicio <input type="date" (change)="dateInicioChange($event.target.value)" [value]="cita_search.ge.inicio">
 					</div>
 					<div>
-						Fecha Fin <input type="date" (change)="dateFinChange($event.target.value)">
+						Fecha Fin <input type="date" (change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
 					</div>
 					<div>
 						<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
