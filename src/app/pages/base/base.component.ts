@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
-import { Router,ActivatedRoute} from "@angular/router"
+import { Router,ActivatedRoute,Params} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { HeaderComponent } from '../../components/header/header.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
+import { forkJoin,of } from 'rxjs';
+import { mergeMap,catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-base',
@@ -66,11 +70,8 @@ export class BaseComponent implements OnInit {
 	}
 
 	showError(error:any) {
-
-		this.is_loading =false;
-		console.log('displaying error', error );
-		//this.error_message =
-		let str_error = this.getErrorMessage( error );
+		this.is_loading	= false;
+		let str_error	= this.getErrorMessage( error );
 		this.rest.showError({ mensaje: str_error, tipo:'alert-danger' });
 	}
 
@@ -79,10 +80,11 @@ export class BaseComponent implements OnInit {
 		if( error == null || error === undefined)
 			return 'Error desconocido';
 
+		if( typeof error === "string" )
+			return error;
+
 		if( typeof( error.error ) === "string" )
 			return error.error;
-
-		console.log( error );
 
 		if( 'error' in error &&  typeof(error.error) !== "string" && 'error' in error.error )
 		{
