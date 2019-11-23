@@ -11,7 +11,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	usuario:Usuario = {
 		id_organizacion: 1,
-id_imagen: null,
+		id_imagen: null,
 		contrasena: '',
 		correo_electronico:'',
 		tipo: 'PACIENTE'
