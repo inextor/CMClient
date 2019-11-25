@@ -111,7 +111,7 @@ const routes: Routes = [
   { path: "agregar-proveedor", component: AgregarProveedorComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "proveedores", component: ProveedoresComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-proveedor/:id", component: AgregarProveedorComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "especialidades/:pagina", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
+  { path: "especialidades", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-especialidad", component: AgregarEspecialidadComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-especialidad/:id", component: AgregarEspecialidadComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-tipo-precio", component: AgregarTipoPrecioComponent, pathMatch: "full", canActivate: [AuthGuard] },

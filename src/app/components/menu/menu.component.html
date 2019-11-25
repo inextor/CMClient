@@ -8,7 +8,7 @@
         <div *ngIf="showCentros">
             <div>
                 <div class="menuSubButtons">
-                    <a href="#" [routerLink]="['/especialidades',0]"
+                    <a [routerLink]="['/especialidades']"
                         class="list-group-item list-group-item-action color1 ">ESPECIALIDADES
                     </a>
                 </div>
@@ -17,17 +17,13 @@
                         class="list-group-item list-group-item-action color1 ">CLINICAS</a>
                 </div>
                 <div class="menuSubButtons">
-                    <a [routerLink]="['/tipo-precios',0]"
-                        class="list-group-item list-group-item-action color1 ">PRECIOS</a>
-                </div>
-                <div class="menuSubButtons">
                     <a [routerLink]="['/servicios']"
                         class="list-group-item list-group-item-action color1 ">SERVICIOS</a>
                 </div>
                 <div class="menuSubButtons">
                     <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
                 </div>
-                <div [routerLink]="['/proveedores']" class="menuSubButtons">
+                <div [routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
                 </div>
 				<div class="menuSubButtons" >
