@@ -32,7 +32,7 @@ export class BaseComponent implements OnInit {
 	public success_message:string	= null;
 	public warning_message:string	= null;
 
-	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title)
 	{
 		console.log("Init base");
 	}

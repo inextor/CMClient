@@ -12,19 +12,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HeaderComponent } from '../../components/header/header.component';
 import { BaseComponent } from '../../pages/base/base.component';
 import { Location } from	'@angular/common';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent extends BaseComponent implements OnInit {
 
-export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
-
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//  super( rest,router,route,location);
-	//}
+	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title)
+	{
+	 super( rest,router,route,location,titleService);
+	}
 
 	ngOnInit() {
 
@@ -35,21 +35,6 @@ export class LoginComponent extends BaseComponent implements OnInit, AfterConten
 			}
 
 		})
-
-		//this.menuCtrl.enable(false);
-		//this.menuCtrl.swipeEnable(false);
-	}
-	ngAfterContentInit() {
-		//this.menuCtrl.enable(true);
-		//this.menuCtrl.swipeEnable(true);
-	}
-	ngAfterViewInit() {
-		//this.menuCtrl.enable(false);
-		//this.menuCtrl.swipeEnable(false);
-	}
-	ngOnDestroy() {
-		//this.menuCtrl.enable(true);
-		//this.menuCtrl.swipeEnable(true);
 	}
 
 	usuario: string = '';

@@ -34,6 +34,4 @@ export class IngresosComponent extends BaseComponent implements OnInit {
         })
         }
 
-
-
 }

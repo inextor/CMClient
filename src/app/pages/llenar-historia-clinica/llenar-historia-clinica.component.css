@@ -1,0 +1,10 @@
+.bloqueDoctor{
+    display: none;
+}
+
+
+@media print {
+  #sidebar-wrapper,.menuButtons{
+      display: block;
+  }
+}
