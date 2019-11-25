@@ -17,9 +17,9 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
 
 	centros_medicos:Centro_Medico[]		= [];
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-		super( rest,router,route,location);
-	  }
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	//	super( rest,router,route,location);
+	//  }
 	ngOnInit()	{
 		this.titleService.setTitle('Clinicas');
 		// TODO agarrar id organizacion de la sesion

@@ -19,9 +19,9 @@ export class DoctorComponent extends BaseComponent implements OnInit {
 	is_loading:boolean	= false;
 	horario_doctor:Horario_Doctor[] = [];
 	citas:Cita[] = [];
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-		super( rest,router,route,location);
-	  }
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	//	super( rest,router,route,location);
+	//  }
 	ngOnInit()
 	{
 		this.is_loading = true;

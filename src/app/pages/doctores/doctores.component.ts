@@ -14,9 +14,9 @@ import { Location } from '@angular/common';
 })
 export class DoctoresComponent extends BaseComponent implements OnInit {
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-		super( rest,router,route,location);
-	  }
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	//	super( rest,router,route,location);
+	//  }
 	currentUser: Usuario;
 	selected_doctor:Doctor = null;
 	show_seleccionar_paciente:boolean = false;

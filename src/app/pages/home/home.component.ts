@@ -16,9 +16,9 @@ import { UrlSegment } from '@angular/router';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-		super( rest,router,route,location);
-	}
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	//	super( rest,router,route,location);
+	//}
 	show_seleccionar_centro_medico:boolean = false;
 
 	ngOnInit() {
