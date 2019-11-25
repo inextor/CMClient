@@ -82,19 +82,30 @@ export class BaseComponent implements OnInit {
 		if( error == null || error === undefined)
 			return 'Error desconocido';
 
+
+
 		if( typeof error === "string" )
 			return error;
 
-		if( typeof( error.error ) === "string" )
-			return error.error;
-
-		if( 'error' in error &&  typeof(error.error) !== "string" && 'error' in error.error )
+		if( 'error' in error )
 		{
-			 return error.error.error;
+			if( typeof( error.error ) === "string" )
+				return error.error;
+
+			console.log('Test ',error.error );
+
+			if( error.error && 'error' in error.error &&  typeof(error.error.error ) === "string" )
+			{
+				 return error.error.error;
+			}
 		}
-		else if( error instanceof HttpErrorResponse )
+		if( error instanceof HttpErrorResponse )
 		{
 			return error.statusText;
+		}
+		else
+		{
+			return 'Error desconocido';
 		}
 	}
 
