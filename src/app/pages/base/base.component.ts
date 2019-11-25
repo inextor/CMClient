@@ -97,13 +97,9 @@ export class BaseComponent implements OnInit {
 			return error.statusText;
 		}
 	}
-<<<<<<< HEAD
-	
-	setTitle(newTitle: string) {
-=======
+
 
 	public setTitle(newTitle: string) {
->>>>>>> 62765ea9edbfd269251495ab0109896129012908
 		this.titleService.setTitle(newTitle);
 	}
 }
