@@ -6,6 +6,7 @@ import { SeleccionarCentroMedicoComponent } from '../../components/seleccionar-c
 import { SeleccionarPacienteComponent } from '../../components/seleccionar-paciente/seleccionar-paciente.component';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-doctores',
@@ -14,9 +15,7 @@ import { Location } from '@angular/common';
 })
 export class DoctoresComponent extends BaseComponent implements OnInit {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//  }
+
 	currentUser: Usuario;
 	selected_doctor:Doctor = null;
 	show_seleccionar_paciente:boolean = false;
@@ -27,6 +26,10 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 	centro_medico = { id: 1 }; ///XXX sacarlo de la sesion del recepcionista
 	selectedDoctor:Doctor = null;
 
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 	ngOnInit() {
 		this.titleService.setTitle('Doctores');
 		this.currentUser = this.rest.getUsuarioSesion();

@@ -4,6 +4,7 @@ import	{	Usuario,Doctor,Centro_Medico, Proveedor	}	from	'../../models/Modelos';
 import	{Router,ActivatedRoute}	from	"@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-proveedores',
@@ -12,15 +13,12 @@ import { Location } from	'@angular/common';
 })
 export class ProveedoresComponent extends BaseComponent implements OnInit {
 
-	//constructor(
-	//	public rest:RestService,
-	//	public router:Router,
-	//	public route:ActivatedRoute,
-	//	public location: Location
-	//) {
-	//  super( rest,router,route,location);
-	//}
-	proveedores: Proveedor[]= [];
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
+
+	proveedores: Proveedor[]		= [];
   ngOnInit() {
 	this.titleService.setTitle('Proveedores');
     this.is_loading = true;

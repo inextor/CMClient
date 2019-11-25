@@ -21,9 +21,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
-	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title)
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
-	 super( rest,router,route,location,titleService);
+		super( rest,router,route,location,titleService);
 	}
 
 	ngOnInit() {

@@ -5,6 +5,7 @@ import { Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from  '@angular/common';
 import { forkJoin } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-agregar-doctor',
@@ -14,10 +15,6 @@ import { forkJoin } from 'rxjs';
 
 export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
-	//constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location)
-	//{
-	//	super( rest,router,route,location);
-    //}
 
 
 	doctor:Doctor = {
@@ -35,6 +32,11 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
 
 	especialidades:Especialidad[] = [];
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	ngOnInit() {
 

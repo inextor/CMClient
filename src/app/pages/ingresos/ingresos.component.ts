@@ -6,6 +6,7 @@ import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-ingresos',
   templateUrl: './ingresos.component.html',
@@ -13,12 +14,12 @@ import { Location } from '@angular/common';
 })
 export class IngresosComponent extends BaseComponent implements OnInit {
   showAddIngreso: boolean = false;
-  //constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
-  //  super(rest, router, route, location);
-  //}
   ingresos: Ingreso[] = [];
 
-
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
   ngOnInit() {
     this.titleService.setTitle('Ingresos');
     let usuario = this.rest.getUsuarioSesion();

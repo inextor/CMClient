@@ -11,6 +11,7 @@ import { RespuestaPreguntaHistoriaClinica } from '../../models/Respuestas';
 import { Respuesta } from '../../models/Respuestas';
 import { Respuesta_Historia_Clinica } from '../../models/Modelos';
 import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-llenar-historia-clinica',
@@ -19,9 +20,10 @@ import { Location } from	'@angular/common';
 })
 export class LlenarHistoriaClinicaComponent  extends BaseComponent implements OnInit {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//}
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	preguntas:RespuestaPreguntaHistoriaClinica[] = [];
 	doctor:Doctor = {};

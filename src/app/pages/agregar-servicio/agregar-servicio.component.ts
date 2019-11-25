@@ -7,6 +7,8 @@ import { from } from 'rxjs';
 import { Location } from	'@angular/common';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
 	selector: 'app-agregar-servicio',
@@ -31,10 +33,10 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	precios	= {};
 	id:number = null;
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
-	//{
-	//	super( rest,router,route,location);
-	//}
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	ngOnInit()
 	{

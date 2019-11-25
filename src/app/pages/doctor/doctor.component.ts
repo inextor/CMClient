@@ -5,6 +5,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { Horario_Doctor,Cita } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-doctor',
@@ -19,9 +20,12 @@ export class DoctorComponent extends BaseComponent implements OnInit {
 	is_loading:boolean	= false;
 	horario_doctor:Horario_Doctor[] = [];
 	citas:Cita[] = [];
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//  }
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+			super( rest,router,route,location,titleService);
+	}
+
 	ngOnInit()
 	{
 		this.is_loading = true;

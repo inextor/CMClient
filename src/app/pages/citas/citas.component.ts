@@ -9,6 +9,7 @@ import { Location } from	'@angular/common';
 import { SearchObject } from '../../models/Respuestas';
 import { forkJoin } from 'rxjs';
 import { of } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-citas',
@@ -41,11 +42,10 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 	};
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
-	//{
-	//	super( rest,router,route,location);
-	//}
-
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 	ngOnInit()
 	{
 		let d = new Date();

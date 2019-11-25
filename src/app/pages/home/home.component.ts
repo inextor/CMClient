@@ -6,7 +6,7 @@ import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Location } from	'@angular/common';
 import { UrlSegment } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -16,11 +16,12 @@ import { UrlSegment } from '@angular/router';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//}
 	show_seleccionar_centro_medico:boolean = false;
 
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 	ngOnInit() {
 
 		let c = localStorage.getItem('id_centro_medico');

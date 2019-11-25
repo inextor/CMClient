@@ -6,7 +6,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { SeleccionarDoctorComponent } from '../../components/seleccionar-doctor/seleccionar-doctor.component';
 import { BaseComponent } from '../../pages/base/base.component';
 import { Location } from	'@angular/common';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pacientes',
@@ -27,16 +27,12 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	crequest:SearchPacienteRequest = {};
 	usuario:Usuario = {};
 
-	//constructor(
-	//	public rest:RestService,
-	//	public router:Router,
-	//	public route:ActivatedRoute,
-	//	public location: Location
-	//) {
-	//  super( rest,router,route,location);
-	//}
 	//TODO agregar Paginación,Busqueda ó filtros segun sea necesario
 
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 	//Usuario tiene que tener id_organizacion si es admin,Doctor,Recepcionista ó Asistente
 	ngOnInit() {
 		// this.rest.doctor.get({}).subscribe((respuesta)=>
