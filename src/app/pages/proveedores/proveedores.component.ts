@@ -20,8 +20,9 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
 	//) {
 	//  super( rest,router,route,location);
 	//}
-	proveedores: Proveedor[]		= [];
+	proveedores: Proveedor[]= [];
   ngOnInit() {
+	this.titleService.setTitle('Proveedores');
     this.is_loading = true;
     this.rest.proveedor.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
 		{

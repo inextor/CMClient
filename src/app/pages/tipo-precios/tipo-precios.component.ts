@@ -13,6 +13,7 @@ export class TipoPreciosComponent  extends BaseComponent implements OnInit {
   tiposPrecio:Tipo_Precio[]=[];
 
   ngOnInit() {
+	this.titleService.setTitle('Precios');
     this.is_loading = true;
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
