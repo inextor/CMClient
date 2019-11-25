@@ -2,7 +2,7 @@
 <div id="sidebar-wrapper">
     <div class=" list-group-flush">
         <div class="sidebar">
-            <a type="button" (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
+            <a  (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
                     src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
         </div>
         <div *ngIf="showCentros">
@@ -42,22 +42,22 @@
             </div>
         </div>
         <div class="sidebar" [appAccess]="['ADMIN']">
-            <a href="#" [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
+            <a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
                 <img src="../../../assets/icon/Mehr-Software-18.png"  class="menuIcons" />DOCTORES
             </a>
         </div>
         <div class="sidebar">
-            <a href="#" [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
+            <a  [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
                 <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
             </a>
         </div>
         <div class="sidebar">
-            <a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
+            <a  [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
                 <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
             </a>
         </div>
         <div class="sidebar">
-            <a type="button" (click)="logout()" class="list-group-item list-group-item-action color5 group">
+            <a  (click)="logout()" class="list-group-item list-group-item-action color5 group">
                 <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
             </a>
         </div>
