@@ -68,7 +68,6 @@ const routes: Routes = [
   //{ path: 'citas/:id_doctor/:id_paciente/:fecha_inicio/:fecha_final
 
   //{ path: 'citas/paciente/:id_paciente', component: CitasComponent, pathMatch: 'full'},
-  { path: "pacientes/:pagina", component: PacientesComponent, pathMatch: "full" },
   { path: "pacientes", component: PacientesComponent, pathMatch: "full" },
   //{ path: "paciente", component: PacienteComponent, pathMatch: "full" },
   //{ path: 'cita', component: CitaComponent, pathMatch: 'full'},
