@@ -98,7 +98,7 @@ export class BaseComponent implements OnInit {
 		}
 	}
 	
-	public setTitle(newTitle: string) {
+	setTitle(newTitle: string) {
 		this.titleService.setTitle(newTitle);
 	}
 }
