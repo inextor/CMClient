@@ -14,9 +14,9 @@ import { Location } from '@angular/common';
 })
 export class IngresoComponent extends BaseComponent implements OnInit {
 
-  constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
-    super(rest, router, route, location);
-  }
+  //constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
+  //  super(rest, router, route, location);
+  //}
   // ingreso : Ingreso[]= [];
   ingreso: Ingreso = {
     id:null,
