@@ -38,7 +38,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 		// this.rest.doctor.get({}).subscribe((respuesta)=>
 		// {this.doctor = respuesta.datos;});
 		//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
-
+		this.titleService.setTitle('Pacientes');
 		this.route.paramMap.subscribe( params =>
 		{
 

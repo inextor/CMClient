@@ -21,6 +21,7 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 		super( rest,router,route,location,titleService);
 	}
   ngOnInit() {
+    this.titleService.setTitle('Ingresos');
     let usuario = this.rest.getUsuarioSesion();
     console.log(usuario)
     this.is_loading = true;

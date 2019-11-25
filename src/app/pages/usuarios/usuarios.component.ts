@@ -25,6 +25,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 
 	ngOnInit()
 	{
+		this.titleService.setTitle('Usuarios');
 		this.route.paramMap.subscribe( params =>
 		{
 

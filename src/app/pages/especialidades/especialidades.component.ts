@@ -23,6 +23,7 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 	public statusmenu: boolean;
 	ngOnInit()
 	{
+		this.titleService.setTitle('Especialidades');
 		this.statusmenu = this.rest.statusMenu();
 		this.is_loading = true;
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>

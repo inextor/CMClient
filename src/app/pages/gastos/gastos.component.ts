@@ -27,6 +27,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 
 
 	ngOnInit() {
+		this.titleService.setTitle('Gastos');
 		let usuario = this.rest.getUsuarioSesion();
 		console.log(usuario)
 		this.is_loading = true;

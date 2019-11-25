@@ -24,6 +24,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 	is_loading:boolean = false;
 
 	ngOnInit() {
+		this.titleService.setTitle('Servicios');
 		this.is_loading = true;
 		this.rest.searchServicio.getAll({}).subscribe((respuesta)=>
 		{

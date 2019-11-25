@@ -31,6 +31,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 		super( rest,router,route,location,titleService);
 	}
 	ngOnInit() {
+		this.titleService.setTitle('Doctores');
 		this.currentUser = this.rest.getUsuarioSesion();
 		if(this.currentUser==null){
 			this.rest.currentUser.subscribe( usuario => {
