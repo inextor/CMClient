@@ -10,6 +10,8 @@ import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
 import { mergeMap,catchError } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-base',
@@ -30,7 +32,7 @@ export class BaseComponent implements OnInit {
 	public success_message:string	= null;
 	public warning_message:string	= null;
 
-	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location)
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, private titleService:Title)
 	{
 		console.log("Init base");
 	}
@@ -94,5 +96,9 @@ export class BaseComponent implements OnInit {
 		{
 			return error.statusText;
 		}
+	}
+	
+	public setTitle(newTitle: string) {
+		this.titleService.setTitle(newTitle);
 	}
 }

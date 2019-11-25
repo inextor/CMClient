@@ -35,7 +35,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.router.navigate(['/pacientes']);
-		}, error=> this.showError );
+		}, error=> this.showError(error) );
 	}
 
 	uploadImage(evt) {
