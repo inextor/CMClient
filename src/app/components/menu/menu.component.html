@@ -23,6 +23,9 @@
                 <div class="menuSubButtons">
                     <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
                 </div>
+                <div [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
+                    <a class="list-group-item list-group-item-action color1 ">INVENTARIO </a>
+                </div>
                 <div [routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
                 </div>
