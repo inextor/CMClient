@@ -34,7 +34,7 @@ export class BaseComponent implements OnInit {
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
-		console.log("Init base");
+		//	super( rest,router,route,location,titleService);
 	}
 
 	setPages(currentPage:number,totalItems:number)

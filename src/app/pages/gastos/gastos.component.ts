@@ -6,6 +6,7 @@ import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-gastos',
@@ -14,9 +15,11 @@ import { Location } from '@angular/common';
 })
 export class GastosComponent extends BaseComponent implements OnInit {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//}
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		//import { Title } from '@angular/platform-browser';
+		super( rest,router,route,location,titleService);
+	}
 
 	tipos_gasto:Tipo_Gasto[] = [];
 	gastos:SearchGastoCentroMedicoResponse[] = [];

@@ -4,7 +4,7 @@ import { Usuario,Doctor,Centro_Medico	}	from	'../../models/Modelos';
 import { Router,ActivatedRoute}	from	"@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
-
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,9 +17,13 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
 
 	centros_medicos:Centro_Medico[]		= [];
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//  }
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		//import { Title } from '@angular/platform-browser';
+		super( rest,router,route,location,titleService);
+	}
+
 	ngOnInit()	{
 		this.titleService.setTitle('Clinicas');
 		// TODO agarrar id organizacion de la sesion

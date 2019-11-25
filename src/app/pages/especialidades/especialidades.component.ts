@@ -5,6 +5,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-especialidades',
@@ -13,10 +14,10 @@ import { Location } from '@angular/common';
 })
 export class EspecialidadesComponent extends BaseComponent implements OnInit {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//	super( rest,router,route,location);
-	//}
-
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	especialidades:Especialidad[]=[];
 	public statusmenu: boolean;

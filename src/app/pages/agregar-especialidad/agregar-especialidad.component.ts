@@ -4,6 +4,7 @@ import { Router,ActivatedRoute } from "@angular/router";
 import { Especialidad } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-agregar-especialidad',
@@ -18,11 +19,10 @@ export class AgregarEspecialidadComponent extends BaseComponent implements OnIni
 		abreviacion: ''
 	};
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
-	//{
-	//	super( rest,router,route,location);
-	//}
-
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	ngOnInit() {
 		this.especialidad = {

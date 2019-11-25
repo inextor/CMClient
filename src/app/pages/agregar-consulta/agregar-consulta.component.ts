@@ -6,6 +6,7 @@ import { Route } from '@angular/compiler/src/core';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { forkJoin } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-agregar-consulta',
@@ -20,10 +21,10 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
   doctor: Doctor = {};
   consulta: Consulta = {};
 
-  //constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
-  //  super(rest, router, route, location);
-  //}
-
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

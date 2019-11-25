@@ -9,7 +9,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BaseComponent } from '../base/base.component';
 import { forkJoin } from 'rxjs';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-historia-medica',
@@ -19,12 +19,10 @@ import { forkJoin } from 'rxjs';
 
 export class HistoriaMedicaComponent extends BaseComponent implements OnInit {
 
- 	//constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location)
-	//{
-	//	this.super(rest,router,route,location);
-	//}
-
-
+ 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 	ngOnInit() {
 
 		//this.route.paramMap.subscribe( params =>{

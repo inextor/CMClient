@@ -33,6 +33,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			let id_usuario = params.get('id_usuario') == null ? null : parseInt( params.get('id_usuario') );
 			if( id_paciente )
 			{
+				this.titleService.setTitle('Editar Familiar');
 				this.is_loading = true;
 				//this.rest.getPaciente( id_paciente ).subscribe((paciente)=>
 				this.rest.paciente.get(id_paciente ).subscribe((paciente)=>
@@ -44,6 +45,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			}
 			else
 			{
+				this.titleService.setTitle('Agregar Familiar');
 				this.paciente ={
 					nombre:'',
 					id_usuario,

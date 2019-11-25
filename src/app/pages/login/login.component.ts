@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HeaderComponent } from '../../components/header/header.component';
 import { BaseComponent } from '../../pages/base/base.component';
 import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,9 +23,10 @@ import { Location } from	'@angular/common';
 
 export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
 
-	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	//  super( rest,router,route,location);
-	//}
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
 
 	ngOnInit() {
 
