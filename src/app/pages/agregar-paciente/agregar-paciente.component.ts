@@ -18,11 +18,16 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 	};
 	paciente:Paciente = {
 		nombre:'',
+		nombre_tutor: '',
 		apellidos:'',
 		sexo:'',
 		fecha_nacimiento:'',
 		telefono_celular:'',
 		telefono_casa: '',
+		telefono_casa_tutor: '',
+		telefono_celular_tutor:'',
+		telefono_trabajo_tutor:'',
+		correo_electronico_tutor:'',
 		domicilio: '',
 	};
 

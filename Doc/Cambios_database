@@ -1,0 +1,5 @@
+ALTER TABLE `paciente` ADD `nombre_tutor` VARCHAR(120) NOT NULL ;
+ALTER TABLE `paciente` ADD `telefono_casa_tutor` VARCHAR(20) NOT NULL ;
+ALTER TABLE `paciente` ADD `telefono_trabajo_tutor` VARCHAR(20) NOT NULL ;
+ALTER TABLE `paciente` ADD `telefono_celular_tutor` VARCHAR(20) NOT NULL ;
+ALTER TABLE `paciente` ADD `correo_electronico_tutor` VARCHAR(60) NOT NULL ;
