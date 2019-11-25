@@ -21,12 +21,13 @@
 				</div> -->
 				<div class="card p-3">
 					<div class="container">
-						<h5>CITAS</h5>
+						<h4 class="mb-3">CITAS</h4>
+
 						<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
 
 						<div>
-							<div class="row">
-								<div class="col">
+							<div class="d-flex flex-row">
+								<div class="pr-2">
 									<label>Estado de cita</label>
 									<select class="form-control" [(ngModel)]="cita_search.eq.estatus">
 										<option value="">Todas</option>
@@ -35,43 +36,49 @@
 									</select>
 								</div>
 
-								<div class="col">
+								<div class="pr-2">
+									<label>
+										Confirmado:
+									</label>
 									<div>
+	
 										<input type="checkbox" value="SI"
 											[checked]="cita_search.eq.confirmado_por_doctor=='SI'"
 											(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
-										Confirmada por doctor
+										Por doctor
 									</div>
 
 									<div>
 										<input type="checkbox" value="SI"
 											[checked]="cita_search.eq.confirmado_por_paciente=='SI'"
 											(change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
-										Confirmada por paciente
+										Por paciente
 									</div>
 								</div>
 
-								<div class="col">
+								<div class="pr-2">
 									<label>Clinica</label>
-									<select class="form-control" [(ngModel)]="cita_search.eq.id_centro_medico" >
+									<select class="form-control" [(ngModel)]="cita_search.eq.id_centro_medico">
 										<option value="">Todas</option>
 										<option *ngFor="let centro of centros_medicos" [value]="centro.id">
 											{{centro.nombre}}</option>
 									</select>
 								</div>
-								<div class="col">
-									<label>Fecha Inicio</label> <input  class="form-control" type="date" (change)="dateInicioChange($event.target.value)"
+								<div class="pr-2">
+									<label>Fecha Inicio</label> <input class="form-control" type="date"
+										(change)="dateInicioChange($event.target.value)"
 										[value]="cita_search.ge.inicio">
 								</div>
-								<div class="col">
-									<label>Fecha Fin</label><input type="date" class="form-control" (change)="dateFinChange($event.target.value)"
-										[value]="cita_search.le.inicio">
+								<div class="pr-2">
+									<label>Fecha Fin</label><input type="date" class="form-control"
+										(change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
 								</div>
-								<div class="col ">
+								<div class="d-flex align-self-end justify-content-center p-2">
 									<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 								</div>
 							</div>
 						</div>
+
 
 						<div>
 							<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages"
