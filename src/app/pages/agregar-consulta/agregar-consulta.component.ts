@@ -20,9 +20,9 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
   doctor: Doctor = {};
   consulta: Consulta = {};
 
-  constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
-    super(rest, router, route, location);
-  }
+  //constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
+  //  super(rest, router, route, location);
+  //}
 
 
   ngOnInit() {

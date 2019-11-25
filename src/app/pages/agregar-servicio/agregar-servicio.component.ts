@@ -31,10 +31,10 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 	precios	= {};
 	id:number = null;
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
-	{
-		super( rest,router,route,location);
-	}
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	//{
+	//	super( rest,router,route,location);
+	//}
 
 	ngOnInit()
 	{

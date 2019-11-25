@@ -19,14 +19,14 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 	centro_medico:Centro_Medico = {
 		nombre: ''
 	};
-	constructor(
-        public rest:RestService,
-        public router:Router,
-        public route:ActivatedRoute,
-        public location: Location
-    ) {
-		super( rest,router,route,location);
-    }
+	//constructor(
+    //    public rest:RestService,
+    //    public router:Router,
+    //    public route:ActivatedRoute,
+    //    public location: Location
+    //) {
+	//	super( rest,router,route,location);
+    //}
 
 
 	ngOnInit()
@@ -62,7 +62,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			this.rest.centro_medico.update( this.centro_medico ).subscribe((centro_medico)=>{
 				this.is_loading = false;
 				this.router.navigate(['/centros-medicos']);
-				
+
 			});
 		}
 		else

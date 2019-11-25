@@ -24,9 +24,9 @@ export class AgregarRecepcionistaComponent extends BaseComponent implements OnIn
   is_loading: boolean = false;
 
   confirmar_contrasena: string = '';
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-		super( rest,router,route,location);
-	  }
+//	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+//		super( rest,router,route,location);
+//	  }
 
 
   ngOnInit() {

@@ -22,20 +22,20 @@ import { Location } from	'@angular/common';
 
 export class LoginComponent extends BaseComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
-	  super( rest,router,route,location);
-	}
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location) {
+	//  super( rest,router,route,location);
+	//}
 
 	ngOnInit() {
 
 		this.route.params.subscribe(params => {
-			
+
 			if (this.rest.getUsuarioSesion() != null) {
 				this.router.navigate(['/home'])
 			}
 
 		})
-		
+
 		//this.menuCtrl.enable(false);
 		//this.menuCtrl.swipeEnable(false);
 	}

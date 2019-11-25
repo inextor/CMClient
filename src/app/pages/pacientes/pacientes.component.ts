@@ -27,14 +27,14 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	crequest:SearchPacienteRequest = {};
 	usuario:Usuario = {};
 
-	constructor(
-		public rest:RestService,
-		public router:Router,
-		public route:ActivatedRoute,
-		public location: Location
-	) {
-	  super( rest,router,route,location);
-	}
+	//constructor(
+	//	public rest:RestService,
+	//	public router:Router,
+	//	public route:ActivatedRoute,
+	//	public location: Location
+	//) {
+	//  super( rest,router,route,location);
+	//}
 	//TODO agregar Paginación,Busqueda ó filtros segun sea necesario
 
 	//Usuario tiene que tener id_organizacion si es admin,Doctor,Recepcionista ó Asistente

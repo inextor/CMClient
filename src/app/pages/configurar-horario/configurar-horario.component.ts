@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Location } from	'@angular/common';
 import { Router } from "@angular/router"
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-configurar-horario',
@@ -34,9 +35,10 @@ export class ConfigurarHorarioComponent extends BaseComponent implements OnInit 
 		public router:Router,
 		public route:ActivatedRoute,
 		public location: Location,
+		public titleService: Title,
 		private citasService:CitasService,
 	) {
-		super( rest,router,route,location);
+		super( rest,router,route,location,titleService );
 		//this.rest.getNetworkMonitor().subscribe((is_loading)=>
 		//{
 		//	console.log('is_loading');

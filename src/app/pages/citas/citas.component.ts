@@ -41,10 +41,10 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 	};
 
-	constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
-	{
-		super( rest,router,route,location);
-	}
+	//constructor(public rest:RestService,public router:Router,public route:ActivatedRoute,public location: Location)
+	//{
+	//	super( rest,router,route,location);
+	//}
 
 	ngOnInit()
 	{
@@ -67,6 +67,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 			console.log("Parametros", params );
 
+			this.titleService.setTitle('Citas');
 
 			let currentDate = new Date();
 
@@ -77,6 +78,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			this.cita_search.eq.id_paciente	= 'id_paciente' in params ? params.id_paciente:null;
 			this.cita_search.eq.id_doctor	= 'id_doctor' in params ? params.id_doctor:null;
 			this.cita_search.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : null;
+			this.cita_search.eq.estatus		= 'estatus' in params ? params.estatus : null;
 
 			this.cita_search.eq.confirmado_por_doctor = 'confirmado_por_doctor' in params ? params.confirmado_por_doctor : null;
 			this.cita_search.eq.confirmado_por_paciente = 'confirmado_por_paciente' in params ? params.confirmado_por_paciente: null;
@@ -131,7 +133,9 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.cita_search.pagina = 0;
+		console.log('Buscando',this.getParams());
 		this.router.navigate(['/citas'],{queryParams: this.getParams()});
+
 
 		//this.rest.searchCita.search(this.cita_search,{nombre:this.nombre}).subscribe((citaResponse)=>
 		//{
@@ -254,7 +258,8 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			'id_centro_medico'	: this.cita_search.eq.id_centro_medico,
 			'confirmado_por_doctor' : this.cita_search.eq.confirmado_por_doctor,
 			'confirmado_por_paciente' : this.cita_search.eq.confirmado_por_paciente,
-			'nombre'	: this.nombre
+			'nombre'	: this.nombre,
+			'estatus'	: this.cita_search.eq.estatus
 		};
 	}
 

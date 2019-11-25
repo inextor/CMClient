@@ -25,43 +25,38 @@
 				<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
 
 				<div>
-					<div>
-					<!--select [(ngModel)]="search.estatus">
-						<option value="ACTIVA">Activa</option>
-						<option value="ACTIVA">Canceladas</option>
-					</select-->
-					</div>
-					<div>
-						<input type="checkbox" value="SI" [checked]="cita_search.eq.confirmado_por_doctor=='SI'" (change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
-						Confirmada por doctor
-						{{cita_search.eq.confirmado_por_doctor}}
+					<div class="row">
+						<div class="col">
+							<select [(ngModel)]="cita_search.eq.estatus">
+								<option value="">Todas</option>
+								<option value="ACTIVA">Activa</option>
+								<option value="CANCELADA">Canceladas</option>
+							</select>
+						</div>
 
-						<input type="checkbox" value="SI" [checked]="cita_search.eq.confirmado_por_paciente=='SI'" (change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
-						Confirmada por paciente
-						{{cita_search.eq.confirmado_por_paciente}}
+						<div class="col">
+							<input type="checkbox" value="SI" [checked]="cita_search.eq.confirmado_por_doctor=='SI'" (change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
+							Confirmada por doctor
 
-					</div>
+							<input type="checkbox" value="SI" [checked]="cita_search.eq.confirmado_por_paciente=='SI'" (change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
+							Confirmada por paciente
 
-					<div>
-						<select [(ngModel)]="cita_search.eq.id_centro_medico">
-							<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
-						</select>
-					</div>
-					{{cita_search.eq.id_centro_medico}}
+						</div>
 
-					<!--div>
-						<select [(ngModel)]="search.id_centro_medico">
-							<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
-						</select>
-					</div-->
-					<div>
-						Fecha Inicio <input type="date" (change)="dateInicioChange($event.target.value)" [value]="cita_search.ge.inicio">
-					</div>
-					<div>
-						Fecha Fin <input type="date" (change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
-					</div>
-					<div>
-						<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+						<div class="col">
+							<select [(ngModel)]="cita_search.eq.id_centro_medico">
+								<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+							</select>
+						</div>
+						<div class="col">
+							Fecha Inicio <input type="date" (change)="dateInicioChange($event.target.value)" [value]="cita_search.ge.inicio">
+						</div>
+						<div class="col">
+							Fecha Fin <input type="date" (change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
+						</div>
+						<div class="col">
+							<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+						</div>
 					</div>
 				</div>
 
