@@ -31,8 +31,8 @@
 								<div>
 									<div *ngFor="let p of preguntas;let i = index;">
 										
-										<label>{{p.pregunta.pregunta}}</label>
-
+										<label *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' ">{{p.pregunta.pregunta}}</label>
+										<h5 class="pt-2" *ngIf="p.pregunta.tipo_pregunta == 'SECCION_PREGUNTAS' ">{{p.pregunta.pregunta}}</h5>
 										<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
 											<div class="form-check form-check-inline">
 												<input  type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
