@@ -15,7 +15,7 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<div class="container">
-					<h5>PACIENTES</h5>
+					<h4 class="mb-3">PACIENTES</h4>
 
 						<div class="pt-2 flex-wrap">
 							<td>
@@ -42,7 +42,7 @@
 								<tr *ngFor="let paciente of pacientes">
 									<td>{{paciente.nombre | titlecase }}</td>
 									<td>{{paciente.apellidos| titlecase}}</td>
-									<td>{{paciente.telefono_casa}}</td>
+									<td>{{paciente.telefono}}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-sm mr-2"
 											[routerLink]="['/editar-paciente',paciente.id]"

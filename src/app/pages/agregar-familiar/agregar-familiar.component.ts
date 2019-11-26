@@ -23,7 +23,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 		nombre:'',
 		apellidos:'',
 		fecha_nacimiento: '',
-		telefono_casa: ''
+		telefono: ''
 	};
 
 	ngOnInit() {
@@ -51,7 +51,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 					id_usuario,
 					apellidos:'',
 					fecha_nacimiento: '',
-					telefono_casa: '',
+					telefono: '',
 				};
 			}
 		});

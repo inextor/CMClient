@@ -363,11 +363,8 @@ export interface Paciente{
   apellidos?:string;
   fecha_nacimiento?:string;
   sexo?:string;
-  telefono_casa?:string;
-  telefono_celular?:string;
-  telefono_casa_tutor?: string;
-  telefono_trabajo_tutor?:string;
-  telefono_celular_tutor?: string;
+  telefono?:string;
+  telefono_tutor?:string;
   correo_electronico_tutor?: string;
   domicilio?:string;
   tiempo_creacion?:Date;
