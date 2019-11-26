@@ -47,7 +47,9 @@
 												<label class="form-check-label">OTRO</label>
 											</div>
 										</div>
+										<div>
 										<input *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' " type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
+										</div>
 									</div>
 
 								<div class="pt-4 bloqueDoctor print">
