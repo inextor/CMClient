@@ -14,13 +14,12 @@
             <!-- CONTENIDO -->
             <main class="p-2">
                 <div class="card p-3">
-                    <h5>CONSULTA</h5>
                     <div class="container">
-                        <div>
+                    	<h4 class="mt-3 mb-3">CONSULTA</h4>
+                        <div class="mb-3">
                             <button type="button"
                                 [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-                                class="btn btn-primary">Agregar
-                                HISTORIAL</button>
+                                class="btn btn-primary">Ver Historial</button>
                         </div>
                         <div>
                             <div>
@@ -40,13 +39,13 @@
                             <label class="">Tratamiento</label>
                             <textarea class="form-control" [(ngModel)]="consulta.tratamiento"></textarea>
                         </div>
-                    </div>
-                    <div *ngIf="error_message">
-                        <div class="alert alert-danger" role="alert">{{error_message}}</div>
-                    </div>
-                    <div>
-                        <button type="button" [disabled]="is_loading" (click)="guardar()"
-                            class="btn btn-primary">Guardar</button>
+						<div *ngIf="error_message">
+                    	    <div class="alert alert-danger" role="alert">{{error_message}}</div>
+                    	</div>
+                    	<div>
+                    	    <button type="button" [disabled]="is_loading" (click)="guardar()"
+                    	        class="btn btn-primary">Guardar</button>
+                    	</div>
                     </div>
                 </div>
             </main>
