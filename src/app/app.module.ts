@@ -69,7 +69,8 @@ import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consulta.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { DateTimeComponent } from './components/date-time/date-time.component';
-import {IngresoComponent} from './components/ingreso/ingreso.component'
+import {IngresoComponent} from './components/ingreso/ingreso.component';
+import { ConfirmacionLoginComponent } from './components/confirmacion-login/confirmacion-login.component'
 
 
 @NgModule({
@@ -136,6 +137,7 @@ import {IngresoComponent} from './components/ingreso/ingreso.component'
     AgregarConsultaComponent,
     VerConsultasComponent,
     DateTimeComponent,
+    ConfirmacionLoginComponent,
   ],
   imports: [
     AccessModule,
