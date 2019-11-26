@@ -2,9 +2,12 @@
     display: none;
 }
 
-
 @media print {
-  #sidebar-wrapper,.menuButtons{
-      display: block;
+  #sidebar-wrapper,.menuButtons,header,.no-print{
+      display: none !important;
   }
+  .print{
+  display: block !important;
+  }
+  
 }

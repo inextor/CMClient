@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+	<header class="no-print">
+		<app-header  title="Especialidades" [pagina]="'jjj'"></app-header>
 	</header>
 	<!-- FIN NAVBAR -->
 	<div>
@@ -14,17 +14,17 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h5>HISTORIA CLINICA</h5>
+					<h5 class="no-print">HISTORIA CLINICA</h5>
 					<div class="container">
 						<div class="container">
 							<div>
 								<div class="form-group">
-									<label for="paciente_nombre">Nombres</label>
+									<label for="paciente_nombre">Nombre</label>
 									<input type="text" class="form-control" id="paciente_nombre" placeholder="Nombres"
 										[value]="paciente.nombre">
 								</div>
 								<div v class="form-group">
-									<label for="paciente_apellido">Apellidos</label>
+									<label for="paciente_apellido">Apellido</label>
 									<input type="text" class="form-control" id="paciente_nombre" placeholder="Apellidos"
 										[value]="paciente.apellidos">
 								</div>
@@ -35,7 +35,7 @@
 
 										<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
 											<div class="form-check form-check-inline">
-												<input type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
+												<input  type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input" [name]="'pregunta'+i">
 												<label class="form-check-label">SI</label>
 											</div>
 											<div class="form-check form-check-inline">
@@ -49,6 +49,23 @@
 										</div>
 										<input type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
 									</div>
+
+								<div class="pt-4 bloqueDoctor print">
+									<div class="grid">
+										<div class="row">
+									<label>Firma del paciente: _______________________</label> <label class="pl-4">Fecha: _______________________</label>
+
+										</div>
+										<div class=row>
+											<p class="text-justify">La información que presento es verdadera y legitima, la cual se mantendrá confidencial y bajo el resguardo de
+												Clinica Smiler Ortho Center. Informare a la clínica sobre la existencia de algun cambio en la salud del paciente. 
+												Y autorizo a Clínica Smile Ortho Center y a su resonsable del Dr. Luis Eduardo Perez Madrigal, El realizar el tratamiento de Ortodoncia
+												o Dental sugerido por el responsable.
+											</p>
+										</div>
+									</div>
+									
+								</div>
 									<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_message}}</div>
 									<div>
 										<button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>

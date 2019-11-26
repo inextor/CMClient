@@ -30,7 +30,6 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 	usuario:Usuario = null;
 	paciente:Paciente = {};
 	msgError:string = null;
-
 	ngOnInit() {
 		this.is_loading = true;
 		this.route.paramMap.pipe(
@@ -85,6 +84,7 @@ export class LlenarHistoriaClinicaComponent  extends BaseComponent implements On
 
 		},error=>this.showError(error));
 	}
+
 
 	guardar()
 	{
