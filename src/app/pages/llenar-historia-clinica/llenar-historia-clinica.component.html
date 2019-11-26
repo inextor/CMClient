@@ -30,7 +30,7 @@
 								</div>
 								<div>
 									<div *ngFor="let p of preguntas;let i = index;">
-
+										
 										<label>{{p.pregunta.pregunta}}</label>
 
 										<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
@@ -47,7 +47,7 @@
 												<label class="form-check-label">OTRO</label>
 											</div>
 										</div>
-										<input type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
+										<input *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' " type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta" [(ngModel)]="p.respuesta.respuesta">
 									</div>
 
 								<div class="pt-4 bloqueDoctor print">
