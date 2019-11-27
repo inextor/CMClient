@@ -33,18 +33,11 @@
 								<td>
 									<div>{{ especialidad.nombre }}</div>
 								</td>
-								<td class="acciones">
-									<button type="button" class="btn btn-sm btn-primary"
-										[routerLink]="['/editar-especialidad', especialidad.id]">
-										<!--icon name="create"></ion-icon-->
-										<i class="material-icons">create</i>
-									</button>
-									<button type="button" class="ml-2 btn btn-sm btn-primary"
-										[routerLink]="['/configurar-especialidad', especialidad.id]">
-										<!-- mat-icon name="construct"></mat-icon -->
-										<span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-										<i class="material-icons">settings</i>
-									</button>
+					
+								<td>
+									<button class="m-2 btn btn-sm btn-primary" [routerLink]="['/editar-especialidad', especialidad.id]" >Editar</button>
+								
+									<button class="m-2 btn btn-sm btn-primary" [routerLink]="['/configurar-especialidad', especialidad.id]">Configurar preguntas</button>
 								</td>
 							</tr>
 						</tbody>
