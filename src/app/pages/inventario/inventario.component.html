@@ -14,23 +14,24 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h4 class="mb-3">INVENTARIO</h4>
+					<div class="container">
+					<h4 class="mb-3 mt-3">INVENTARIO</h4>
 					<div class="row">
 						<div class="col">
-							<label></label>
-							<select name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
-								<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+							<label>Centro medico*</label>
+							<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
+								<option  *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 							</select>
 						</div>
 						<div class="col">
-							<label>Nombre</label>
-							<input type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
+							<label>Nombre*</label>
+							<input class="form-control" type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
 						</div>
-						<div class="col">
-							<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+						<div class="p-2 mt-4">
+							<button  type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 						</div>
 					</div>
-					<div class="container">
+				
 						<app-loading [display]="is_loading"></app-loading>
 						<div *ngFor="let is of inventarioServicios">
 							<div class="form-group-row row mt-2 mb-2">
@@ -40,10 +41,11 @@
 								</div>
 							</div>
 						</div>
+							<div>
+								<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
+							</div>
 					</div>
-					<div>
-						<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
-					</div>
+				
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->

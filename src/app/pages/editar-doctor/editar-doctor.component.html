@@ -14,11 +14,12 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h5>EDITAR DOCTOR</h5>
+				
 					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
-						<form>
-							<div class="list" lines="full">
+							<h4 class="mb-2 mt-2">EDITAR DOCTOR</h4>
+				
+						
 								<div *ngIf="usuario.id_imagen">
 									<img [src]="this.rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
 								</div>
@@ -62,8 +63,8 @@
 								<button type="button" expand="block" type="submit" class="ion-no-margin" (click)="guardar()"
 									[disabled]="is_loading">Guardar</button>
 							</div>
-						</form>
-					</div>
+					
+					
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
