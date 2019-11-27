@@ -13,23 +13,27 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 	@Input() pagina: string;
 	showCentros =false;
 	usuario=null
-	ngOnInit() {
-		let usuario = this.rest.getUsuarioSesion();
-		if (usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE"){
-			this.rest.usuario.get(usuario.id).subscribe(params=>{
-				this.usuario=params
-			});
-		}
-		else if (usuario.tipo = "DOCTOR"){
-			this.rest.doctor.get(usuario.id).subscribe(params => {
-				this.usuario = params
 
-			});
-		}
-		else if (usuario.tipo = "PACIENTE"){
-			this.rest.paciente.get(usuario.id).subscribe(params =>{
-				this.usuario= params
-			})
+	ngOnInit()
+	{
+		let usuario = this.rest.getUsuarioSesion();
+		if( usuario )
+		{
+			if ( usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE" ){
+				this.rest.usuario.get(usuario.id).subscribe(params=>{
+					this.usuario=params
+				});
+			}
+			else if (usuario.tipo = "DOCTOR"){
+				this.rest.doctor.get(usuario.id).subscribe(params => {
+					this.usuario = params
+				});
+			}
+			else if (usuario.tipo = "PACIENTE"){
+				this.rest.paciente.get(usuario.id).subscribe(params =>{
+					this.usuario= params
+				})
+			}
 		}
 	}
 
