@@ -14,7 +14,8 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h5>AGREGAR ESPECIALIDAD</h5>
+					<div class="container">
+					<h4 class="mb-3 mt-3 ">AGREGAR ESPECIALIDAD</h4>
 					<app-loading [display]="is_loading"></app-loading>
 					<form>
 						<form>
@@ -28,9 +29,11 @@
 								<input required type="text" class="form-control" name="abreviacion" [(ngModel)]="especialidad.abreviacion">
 							</div>
 						</form>
-						<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
-							[disabled]="is_loading">Agregar</button>
+						
 					</form>
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+						[disabled]="is_loading">Agregar</button>
+				</div>
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
