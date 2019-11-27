@@ -10,6 +10,10 @@ export interface Respuesta<T>{
 	datos:T[];
 }
 
+export interface CsvArray{
+	 [key: string]: any[];
+}
+
 /*
  * From perl operators except lk = LIKE
  * Several comparison operators impose string contexts upon their operands.
@@ -35,6 +39,7 @@ export interface SearchObject<T>
 	ge?:T; //Great or equal than
 	le?:T; //less or equal than
 	lk?:T; //like
+	csv?:CsvArray;
 }
 
 export interface Recurso_Response{
