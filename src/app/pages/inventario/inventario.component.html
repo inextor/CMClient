@@ -15,8 +15,23 @@
 			<main class="p-2">
 				<div class="card p-3">
 					<h4 class="mb-3">INVENTARIO</h4>
-					<app-loading [display]="is_loading"></app-loading>
+					<div class="row">
+						<div class="col">
+							<label></label>
+							<select name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
+								<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+							</select>
+						</div>
+						<div class="col">
+							<label>Nombre</label>
+							<input type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
+						</div>
+						<div class="col">
+							<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+						</div>
+					</div>
 					<div class="container">
+						<app-loading [display]="is_loading"></app-loading>
 						<div *ngFor="let is of inventarioServicios">
 							<div class="form-group-row row mt-2 mb-2">
 								<label class="col-form-label col-sm-10" [for]="'is'+is.servicio.id">{{is.servicio.nombre | titlecase }}</label>
