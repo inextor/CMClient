@@ -86,6 +86,10 @@ export interface SearchObject<T>
 			if( searchObj.le[i] )
 				params = params.set(i+'<~',''+searchObj.le[i] );
 
+		for(let i in searchObj.csv )
+			if( searchObj.csv[i].length )
+				params = params.set(i+',',''+searchObj.csv[i].join(','));
+
 		for(let i in searchObj.lk )
 			if( searchObj.lk[i] )
 				params = params.set(i+'~~',''+searchObj.lk[i] );
@@ -95,6 +99,7 @@ export interface SearchObject<T>
 
 		if( searchObj.idss && searchObj.idss.length > 0 )
 			params = params.set( 'ids', searchObj.ids.join(',') );
+
 
 		if( searchObj.pagina )
 		{
