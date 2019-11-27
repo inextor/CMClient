@@ -14,9 +14,10 @@
 			<!-- CONTENIDO -->
 			<main class="p-3">
 				<div class="card p-3">
-					<h5>{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h5>
+					
 					<app-loading [display]="is_loading"></app-loading>
 					<div class="container">
+						<h4 class="mb-3 mt-3">{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
 						<form>
 
 							<div class="form-row">

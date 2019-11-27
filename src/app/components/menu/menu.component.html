@@ -2,7 +2,7 @@
 <div id="sidebar-wrapper">
     <div class=" list-group-flush">
         <div class="sidebar">
-            <a  (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
+            <a (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
                     src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
         </div>
         <div *ngIf="showCentros">
@@ -29,7 +29,7 @@
                 <div [routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
                 </div>
-				<div class="menuSubButtons" >
+                <div class="menuSubButtons">
                     <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">USUARIOS</a>
                 </div>
                 <div class="menuSubButtons">
@@ -43,26 +43,47 @@
         </div>
         <div class="sidebar" [appAccess]="['ADMIN']">
             <a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
-                <img src="../../../assets/icon/Mehr-Software-18.png"  class="menuIcons" />DOCTORES
+                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
             </a>
         </div>
         <div class="sidebar">
-            <a  [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
+            <a [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
                 <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
             </a>
         </div>
         <div class="sidebar">
-            <a  [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
+            <a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
                 <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
             </a>
         </div>
         <div class="sidebar">
-            <a  (click)="logout()" class="list-group-item list-group-item-action color5 group">
+            <a (click)="showLogoutModal()" class="list-group-item list-group-item-action color5 group">
                 <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
             </a>
         </div>
     </div>
 </div>
+
+
+<app-modal [show]="show_logout">
+    <!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
+
+            <div class="modal-content">
+                <h4 class="modal-title">Logout <i class="fa fa-lock"></i></h4>
+                <div class="modal-body">
+                    <p>Seguro que quieres salir del sistema?</p>
+                </div>
+                <div class="modal-footer">
+
+                    <button class="btn btn-primary btn-sm" (click)="logout()">Confirmar</button>
+
+                    <button class="btn btn-primary btn-sm" (click)="show_logout=false">Cancelar</button>
+                </div>
+            </div>
+  
+</app-modal>
+
+
 <!-- /#sidebar-wrapper -->
 
 

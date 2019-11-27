@@ -14,7 +14,8 @@
 			<!-- CONTENIDO -->
 			<main class="p-2">
 				<div class="card p-3">
-					<h5>AGREGAR CENTRO MEDICO</h5>
+					<div class="container">
+					<h4 class="mb-3 mt-3">AGREGAR CENTRO MEDICO</h4>
 					<app-loading [display]="is_loading"></app-loading>
 					<form>
 						<div lines="full" class="list  ion-no-padding">
@@ -32,10 +33,11 @@
 
 						<app-loading *ngIf="is_loading"></app-loading>
 
-						<div class="ion-padding">
+						<div >
 							<button type="button" class="btn btn-primary" (click)="guardar()" [disabled]="is_loading">Guardar</button>
 						</div>
 					</form>
+				</div>
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
