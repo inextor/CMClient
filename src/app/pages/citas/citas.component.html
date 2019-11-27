@@ -105,25 +105,25 @@
 									<td>{{i.doctor? i.doctor.nombre : ''}}</td>
 									<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
 									<td>
-										<button type="button" class="btn btn-primary btn-sm mr-2"
+										<button type="button" class="btn btn-primary btn-sm m-1"
 											*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
 											(click)="currentInfoCita=i;showConfirmPaciente=true;">
 											<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
 											<i class="material-icons">perm_identity</i>
 										</button>
-										<button type="button" class="btn btn-primary btn-sm mr-2"
+										<button type="button" class="btn btn-primary btn-sm m-1"
 											*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
 											(click)="currentInfoCita=i;showConfirmDoctor=true">
 											<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
 											<i class="material-icons">person</i>
 										</button>
-										<button type="button" class="btn btn-primary btn-sm mr-2"
+										<button type="button" class="btn btn-primary btn-sm m-1"
 											*ngIf="i.cita.estatus == 'ACTIVA'"
 											(click)="currentInfoCita=i;showConfirmCancelar=true">
 											<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
 											<i class="material-icons">cancel</i>
 										</button>
-										<button type="button" class="btn btn-primary btn-sm mr-2"
+										<button type="button" class="btn btn-primary btn-sm m-1"
 											*ngIf="i.cita.estatus == 'ACTIVA'"
 											(click)="currentInfoCita=i;showConfirmActivar=true">
 											<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
