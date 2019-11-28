@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MisCitasComponent } from './mis-citas.component';
+import { AgregarRequisicionComponent } from './agregar-requisicion.component';
 
-describe('MisCitasComponent', () => {
-  let component: MisCitasComponent;
-  let fixture: ComponentFixture<MisCitasComponent>;
+describe('AgregarRequisicionComponent', () => {
+  let component: AgregarRequisicionComponent;
+  let fixture: ComponentFixture<AgregarRequisicionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MisCitasComponent ]
+      declarations: [ AgregarRequisicionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MisCitasComponent);
+    fixture = TestBed.createComponent(AgregarRequisicionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

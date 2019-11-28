@@ -23,7 +23,6 @@ import { EditarPreciosComponent } from './pages/editar-precios/editar-precios.co
 // import { ModalPageComponent			} from './pages/ver-doctor/modal-page/modal-page.component';
 import { ConfigurarPreguntasComponent } from './pages/configurar-preguntas/configurar-preguntas.component';
 import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
-import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
 import { EditarDoctorComponent } from './pages/editar-doctor/editar-doctor.component';
 import { GastosComponent } from './pages/gastos/gastos.component';
 import { AgregarTipoGastoComponent } from './pages/agregar-tipo-gasto/agregar-tipo-gasto.component';
@@ -55,6 +54,8 @@ import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.compo
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
+import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
+
 // import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -97,7 +98,6 @@ const routes: Routes = [
   { path: "configurar-especialidad/:idEspecialidad", component: ConfigurarPreguntasComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "historia-clinica/doctor/:idDoctor/paciente/:idPaciente", component: LlenarHistoriaClinicaComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "ver-consultas/doctor/:id_doctor/paciente/:id_paciente", component: VerConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
-  { path: "mis-citas", component: MisCitasComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "editar-doctor/:id", component: AgregarDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "gastos", component: GastosComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "agregar-tipo-gasto", component: AgregarTipoGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -126,6 +126,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+  { path: "citas-paciente", component: CitasPacienteComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   
 
   /*

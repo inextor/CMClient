@@ -17,18 +17,14 @@
                     <div class="container">
                         <h4 class="mb-3 mt-3">FAMILIARES</h4>
 
-                        <div class="pt-2 flex-wrap">
+                        <!-- <div class="pt-2 flex-wrap">
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm"
                                     [routerLink]="['/agregar-paciente']">
                                     Agregar Familiar
                                 </button>
                             </td>
-                        </div>
-                        <div class="pt-2 flex-wrap">
-                            <input type="text" class="form-control" position="floating" (change)="changeSearch($event)"
-                                ionInput="changeSearch($event)" placeholder="buscar">
-                        </div>
+                        </div> -->
                         <table class="basica">
                             <thead>
                                 <tr>
@@ -44,35 +40,11 @@
                                     <td>{{familiar.apellidos| titlecase}}</td>
                                     <td>{{familiar.telefono}}</td>
                                     <td>
-                                        <!-- <button type="button" class="btn btn-primary btn-sm m-1"
-                                            [routerLink]="['/editar-paciente',paciente.id]"
-                                            [appAccess]="['RECEPCIONISTA']">Editar</button>
-
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            [routerLink]="['/citas','paciente',paciente.id]"
+                                        <button type="button" class="btn btn-primary btn-sm m-1"[routerLink]="['/citas','familiar',familiar.id]" 
                                             color="secondary">Citas</button>
-
                                         <button type="button" class="btn btn-primary btn-sm m-1"
-                                            (click)="seleccionarDoctorNuevaCita(paciente)">Agendar
+                                            >Agendar
                                             Cita</button>
-
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            [routerLink]="['/agregar-familiar',paciente.id_usuario]"
-                                            color="secondary">Agregar Familiar</button>
-
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            [routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
-                                            [appAccess]="['Doctor']">Consultas</button>
-
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            [routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
-                                            [appAccess]="['Doctor']">Agregar Consulta</button>
-
-
-
-                                        <button type="button" class="btn btn-primary btn-sm mr-2"
-                                            [routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-                                            [appAccess]="['Doctor']">Historia Medica</button> -->
                                     </td>
                                 </tr>
                             </tbody>

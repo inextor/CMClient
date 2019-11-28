@@ -22,8 +22,6 @@ export class FamiliaresComponent extends BaseComponent implements OnInit {
             console.log(params.datos)
           }
         );
-      
-    
   }
 
 }
