@@ -71,7 +71,7 @@ import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.compo
 import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component';
 import { ConfirmacionLoginComponent } from './components/confirmacion-login/confirmacion-login.component';
-import { HomePacientesComponent } from './pages/home-pacientes/home-pacientes.component'
+import { FamiliaresComponent } from './pages/familiares/familiares.component';
 
 
 @NgModule({
@@ -139,7 +139,7 @@ import { HomePacientesComponent } from './pages/home-pacientes/home-pacientes.co
     VerConsultasComponent,
     DateTimeComponent,
     ConfirmacionLoginComponent,
-    HomePacientesComponent,
+    FamiliaresComponent,
   ],
   imports: [
     AccessModule,
