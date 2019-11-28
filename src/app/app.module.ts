@@ -69,7 +69,6 @@ import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consu
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component';
-import { ConfirmacionLoginComponent } from './components/confirmacion-login/confirmacion-login.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
 
@@ -137,7 +136,6 @@ import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.co
     AgregarConsultaComponent,
     VerConsultasComponent,
     DateTimeComponent,
-    ConfirmacionLoginComponent,
     FamiliaresComponent,
     CitasPacienteComponent,
   ],
