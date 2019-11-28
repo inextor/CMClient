@@ -46,6 +46,8 @@ import { CitasComponent } from './pages/citas/citas.component';
 import { CitaComponent } from "./pages/cita/cita.component";
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from "./../app/classes/";
+import { RoleGuard } from "./../app/classes/";
+
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
@@ -53,9 +55,10 @@ import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.compo
 import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { IngresosComponent} from './pages/ingresos/ingresos.component';
 import {HomePacientesComponent} from './pages/home-pacientes/home-pacientes.component'
-import { access } from 'fs';
+// import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
+
   { path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
   { path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
   { path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
