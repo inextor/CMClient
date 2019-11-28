@@ -53,7 +53,8 @@ import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-pacie
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
-import { IngresosComponent} from './pages/ingresos/ingresos.component';
+import { IngresosComponent } from './pages/ingresos/ingresos.component';
+import { FamiliaresComponent } from './pages/familiares/familiares.component';
 // import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -124,6 +125,7 @@ const routes: Routes = [
   { path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+  { path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   
 
   /*

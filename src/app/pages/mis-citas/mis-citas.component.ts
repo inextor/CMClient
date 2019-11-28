@@ -1,255 +1,252 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario,Doctor,Paciente } from '../../models/Modelos';
+import { Usuario,Doctor,Paciente, Centro_Medico } from '../../models/Modelos';
 import { SearchCitaResponse } from '../../models/Respuestas';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Cita } from '../../models/Modelos';
+import { BaseComponent } from '../base/base.component';
+
 @Component({
   selector: 'app-mis-citas',
   templateUrl: './mis-citas.component.html',
   styleUrls: ['./mis-citas.component.css']
 })
-export class MisCitasComponent implements OnInit {
+export class MisCitasComponent extends BaseComponent implements OnInit {
 
-  constructor(
-		private rest:RestService,
-		private router:Router,
-		private route:ActivatedRoute,
-	) { }
-
-	cita:Cita = {};
-	info_citas:SearchCitaResponse[] = [];
+	cita: Cita = {};
+	info_citas: SearchCitaResponse[] = [];
 	orderBy = 'Fecha';
-	orderDirection='ASC';
+	orderDirection = 'ASC';
+	tipo_busqueda = 'nombre';
+	paciente: Paciente = {};
+	doctor: Doctor = {};
+	citas: Cita[] = [];
+	centros_medicos: Centro_Medico[] = [];
+
+
+	currentInfoCita: SearchCitaResponse = null;
+
+	showConfirmDoctor: boolean = false;
+	showConfirmPaciente: boolean = false;
+	showConfirmCancelar: boolean = false;
+	showConfirmActivar: boolean = false;
+
+	nombre: string;
+
+	cita_search: SearchObject<Cita> = {
+
+	};
+
 
 	ngOnInit() {
 		let d = new Date();
-		d.setHours( d.getHours() - 3 );
-		let z = (i)=> i<10 ? '0'+i : i;
+		d.setHours(d.getHours() - 3);
+		let z = (i) => i < 10 ? '0' + i : i;
 
-		//this.rest.searchCitas({fecha_inicio: d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+' '+z(d.getHours())+':'+z(d.getMinutes())+':00'}).subscribe((respuesta)=>
-		this.rest.searchCita.getAll({fecha_inicio: d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+' '+z(d.getHours())+':'+z(d.getMinutes())+':00'}).subscribe((respuesta)=>
-		{
-			console.log( respuesta.datos );
-			this.info_citas = respuesta.datos;
+		this.route.queryParams.subscribe(params => {
+
+			//this.route.paramMap.subscribe( params =>
+			//{
+			this.cita_search = {
+				eq: {},
+				ge: {},
+				le: {}
+			};
+
+			console.log("Nueva pagina");
+
+			console.log("Parametros", params);
+
+			this.titleService.setTitle('Citas');
+
+			let currentDate = new Date();
+
+			let fecha_inicio = '' + currentDate.getFullYear() + '-' + z(currentDate.getMonth() + 1) + '-' + z(currentDate.getDate()) + ' ' + z(currentDate.getHours()) + ':' + z(currentDate.getMinutes()) + ':00';
+
+			this.cita_search.ge.inicio = 'inicio' in params ? params.inicio : fecha_inicio;
+			this.cita_search.le.inicio = 'fin' in params ? params.fin : null;
+			this.cita_search.eq.id_paciente = 'id_paciente' in params ? params.id_paciente : null;
+			this.cita_search.eq.id_doctor = 'id_doctor' in params ? params.id_doctor : null;
+			this.cita_search.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : null;
+			this.cita_search.eq.estatus = 'estatus' in params ? params.estatus : null;
+
+			this.cita_search.eq.confirmado_por_doctor = 'confirmado_por_doctor' in params ? params.confirmado_por_doctor : null;
+			this.cita_search.eq.confirmado_por_paciente = 'confirmado_por_paciente' in params ? params.confirmado_por_paciente : null;
+
+			this.cita_search.limite = this.pageSize;
+			this.cita_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
+			this.nombre = 'nombre' in params ? params.nombre : '';
+
+			console.log('Search', this.cita_search);
+
+			let rjoinObj: any = {};
+			let fjarray = [];
+
+
+			this.is_loading = true;
+
+			forkJoin([
+				this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
+				, this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
+				, this.rest.centro_medico.getAll({ id_organizacion: this.rest.getUsuarioOrganizacion() })
+				, this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
+			]).subscribe((result) => {
+				this.paciente = result[0];
+				this.doctor = result[1];
+				this.centros_medicos = result[2].datos;
+				this.info_citas = result[3].datos;
+				this.setPages(this.cita_search.pagina, result[3].total);
+			}, error => {
+				console.log(error);
+				this.showError(error);
+			});
 		});
 	}
 
-	changeSearch( evt )
-	{
-		console.log("FOOOOO make a search", evt);
-		this.search( evt.target.value );
+	dateInicioChange(value: string) {
+		this.cita_search.ge.inicio = value;
 	}
 
-	ordenar(item)
-	{
-		if( this.orderBy === item )
-		{
+	dateFinChange(value: string) {
+		this.cita_search.le.inicio = value;
+	}
+
+	getPathFromSearchObj() {
+	}
+
+	buscar() {
+		this.is_loading = true;
+		this.cita_search.pagina = 0;
+		console.log('Buscando', this.getParams());
+		this.router.navigate(['/citas'], { queryParams: this.getParams() });
+
+
+		//this.rest.searchCita.search(this.cita_search,{nombre:this.nombre}).subscribe((citaResponse)=>
+		//{
+		//	this.setPages( this.cita_search.pagina, citaResponse.total );
+		//	this.setPages( this.cita_search.pagina, citaResponse.total );
+		//	this.info_citas = citaResponse.datos;
+		//},error=>this.showError( error ));
+	}
+
+	changeSearch(evt) {
+		console.log("FOOOOO make a search", evt);
+		this.search(evt.target.value);
+	}
+
+	ordenar(item) {
+		if (this.orderBy === item) {
 			this.orderDirection == 'ASC' ? 'DESC' : 'ASC';
 		}
-		else
-		{
+		else {
 			this.orderBy = item;
 			this.orderDirection = 'ASC';
 		}
 	}
 
-	search(nombre)
-	{
-		//this.rest.searchCitas({ nombre }).subscribe((respuesta)=>
-		this.rest.searchCita.getAll({ nombre }).subscribe((respuesta)=>
-		{
-			this.info_citas = respuesta.datos;
-		});
+
+	search(nombre) {
+
+		this.router.navigate(['/citas/', this.getParams()]);
+		//if( nombre.trim() )
+		//	this.crequest.nombre = nombre.trim();
+		//else
+		//	this.crequest.nombre = '';
+
+		//this.rest.searchCitas( this.crequest ).subscribe((respuesta)=>
+		//Esperando que funcione la siguiente linea
+		//this.rest.searchCita.getAll( this.crequest ).subscribe((respuesta)=>
+		//{
+		//	this.is_loading = false;
+		//	this.info_citas = respuesta.datos;
+		//}, this.showError );
 	}
 
-	confirmarDoctor(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Confirmar doctor',
-			message: 'El doctor ha confirmado la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,confirmado_por_doctor: 'SI'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-						console.log("OK");
-					}
-				}
-			]
-		}).then((alert)=>
-		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
+	confirmarDoctor(infoCita: SearchCitaResponse) {
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			, confirmado_por_doctor: 'SI'
+		}).subscribe((cita) => {
+			this.is_loading = false;
+			this.showConfirmDoctor = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+		},
+			(error) => {
+				this.showConfirmDoctor = false;
+				this.is_loading = false;
+				this.showError(error);
 			});
-		});
-		*/
 	}
 
-	confirmarPaciente(id_cita:number)
-	{
-		/*
-		let alert = this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Confirmar paciente',
-			message: 'El paciente ha confirmado la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						console.log("OK");
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,confirmado_por_paciente : 'SI'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
+	confirmarPaciente(infoCita: SearchCitaResponse) {
+		this.is_loading = true;
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			, confirmado_por_paciente: 'SI'
+		}).subscribe((cita) => {
+			this.is_loading = false;
+			this.showConfirmPaciente = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+		}, (error) => {
+			this.is_loading = false;
+			this.showConfirmPaciente = false;
+			this.showError(error);
+		});
+	}
 
-					}
-				}
-			]
-		}).then((alert)=>
-		{
-			alert.present().catch((error)=>{
-				console.log('Ocurrio un error',error);
+	cancelar(infoCita: SearchCitaResponse) {
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			, estatus: 'CANCELADA'
+		}).subscribe((cita) => {
+			console.log(infoCita);
+			this.showConfirmCancelar = false;
+			this.is_loading = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+		},
+			(error) => {
+				this.is_loading = false;
+				this.showConfirmCancelar = false;
+				this.showError(error)
 			});
-		});
-		*/
 	}
 
-	cancelar(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Cancelar la cita',
-			message: 'Esta seguro que desea cancelar la cita?',
-			buttons: [
-				{
-					text: 'No',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Si',
-					handler: (result)=>
-					{
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,estatus: 'CANCELADA'
-						}).subscribe((cita)=>
-						{
-							console.log( id_cita );
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
+	getParams() {
+		return {
+			'inicio': this.cita_search.ge.inicio,
+			'fin': this.cita_search.le.inicio,
+			'id_paciente': this.cita_search.eq.id_paciente,
+			'id_doctor': this.cita_search.eq.id_doctor,
+			'pagina': this.cita_search.pagina,
+			'id_centro_medico': this.cita_search.eq.id_centro_medico,
+			'confirmado_por_doctor': this.cita_search.eq.confirmado_por_doctor,
+			'confirmado_por_paciente': this.cita_search.eq.confirmado_por_paciente,
+			'nombre': this.nombre,
+			'estatus': this.cita_search.eq.estatus
+		};
+	}
 
-					}
-				}
-			]
-		}).then((alert)=>
-		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
+	activar(infoCita: SearchCitaResponse) {
+		this.rest.cita.update({
+			id: infoCita.cita.id
+			, estatus: 'ACTIVA'
+		}).subscribe((cita) => {
+			this.showConfirmActivar = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+			this.is_loading = false;
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+		}
+			, (error) => {
+				this.is_loading = false;
+				this.showConfirmActivar = false;
+				this.showError(error);
 			});
-		});
-		*/
 	}
-
-	activar(id_cita:number)
-	{
-		/*
-		this.alertController.create({
-			header: 'Alerta',
-			subHeader: 'Activar la cita',
-			message: 'Esta seguro que desea activar la cita?',
-			buttons: [
-				{
-					text: 'Cancelar',
-					role:'cancel',
-					handler:(result)=>
-					{
-						console.log("Cancelar");
-					}
-				},
-				{
-					text: 'Ok',
-					handler: (result)=>
-					{
-						console.log("OK");
-
-						//this.rest.updateCita({
-						this.rest.cita.update({
-							id: id_cita
-							,estatus: 'ACTIVA'
-						}).subscribe((cita)=>
-						{
-							let index = this.info_citas.findIndex(i=> i.cita.id ==  id_cita );
-							if( index >= 0 )
-								this.info_citas[ index ].cita = cita;
-						});
-					}
-				}
-			]
-
-		}).then((alert)=>
-		{
-			alert.present().then((result)=>
-			{
-				console.log( result );
-			},
-			(error)=>{
-				console.log('Ocurrio un error',error);
-			});
-
-		});
-		*/
-	}
-
 }
