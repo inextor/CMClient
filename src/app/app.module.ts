@@ -71,6 +71,7 @@ import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
+import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
 
 
 @NgModule({
@@ -138,6 +139,7 @@ import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.co
     DateTimeComponent,
     FamiliaresComponent,
     CitasPacienteComponent,
+    AgregarRequisicionComponent,
   ],
   imports: [
     AccessModule,
