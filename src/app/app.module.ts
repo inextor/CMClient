@@ -69,10 +69,10 @@ import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consu
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component';
+import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component'
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
 import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
-
 
 @NgModule({
   declarations: [
@@ -137,6 +137,7 @@ import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar
     AgregarConsultaComponent,
     VerConsultasComponent,
     DateTimeComponent,
+    PuntoVentaComponent,
     FamiliaresComponent,
     CitasPacienteComponent,
     AgregarRequisicionComponent,
