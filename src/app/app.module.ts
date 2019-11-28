@@ -39,7 +39,6 @@ import { HelpersComponent } from './pages/helpers/helpers.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { LlenarHistoriaClinicaComponent } from './pages/llenar-historia-clinica/llenar-historia-clinica.component';
 import { LoginComponent } from './pages/login/login.component';
-import { MisCitasComponent } from './pages/mis-citas/mis-citas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
@@ -72,6 +71,7 @@ import { DateTimeComponent } from './components/date-time/date-time.component';
 import {IngresoComponent} from './components/ingreso/ingreso.component';
 import { ConfirmacionLoginComponent } from './components/confirmacion-login/confirmacion-login.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
+import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
 
 
 @NgModule({
@@ -108,7 +108,6 @@ import { FamiliaresComponent } from './pages/familiares/familiares.component';
     InventarioComponent,
     LlenarHistoriaClinicaComponent,
     LoginComponent,
-    MisCitasComponent,
     PacientesComponent,
     ProveedoresComponent,
     RequisicionesComponent,
@@ -140,6 +139,7 @@ import { FamiliaresComponent } from './pages/familiares/familiares.component';
     DateTimeComponent,
     ConfirmacionLoginComponent,
     FamiliaresComponent,
+    CitasPacienteComponent,
   ],
   imports: [
     AccessModule,
