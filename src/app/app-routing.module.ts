@@ -46,7 +46,7 @@ import { CitasComponent } from './pages/citas/citas.component';
 import { CitaComponent } from "./pages/cita/cita.component";
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from "./../app/classes/";
-import { RoleGuard } from "./../app/classes/";
+
 
 import { HorarioDoctorComponent } from './pages/horario-doctor/horario-doctor.component';
 import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-paciente.component';
