@@ -45,6 +45,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
     super(rest, router, route, location, titleService);
   }
   ngOnInit() {
+    let usuario = this.rest.getUsuarioSesion();
     let d = new Date();
     d.setHours(d.getHours() - 3);
     let z = (i) => i < 10 ? '0' + i : i;
@@ -95,7 +96,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
         this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
         , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
         , this.rest.centro_medico.getAll({ id_organizacion: this.rest.getUsuarioOrganizacion() })
-        , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
+        , this.rest.searchCita.search(this.cita_search, { id: usuario.id })
       ]).subscribe((result) => {
         this.paciente = result[0];
         this.doctor = result[1];

@@ -115,22 +115,10 @@
                                             <i class="material-icons">perm_identity</i>
                                         </button>
                                         <button type="button" class="btn btn-primary btn-sm m-1"
-                                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
-                                            (click)="currentInfoCita=i;showConfirmDoctor=true">
-                                            <!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
-                                            <i class="material-icons">person</i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
                                             *ngIf="i.cita.estatus == 'ACTIVA'"
                                             (click)="currentInfoCita=i;showConfirmCancelar=true">
                                             <!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
                                             <i class="material-icons">cancel</i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            *ngIf="i.cita.estatus == 'ACTIVA'"
-                                            (click)="currentInfoCita=i;showConfirmActivar=true">
-                                            <!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
-                                            <i class="material-icons">done</i>
                                         </button>
                                         <!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
 									 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
@@ -147,21 +135,11 @@
         </div>
     </div>
 </div>
-<app-modal [show]="showConfirmDoctor">
-    <div class="card p-3" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Confirmar Doctor</h5>
-            <p class="card-text">Desea confirmar la asistencia del doctor</p>
-            <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmDoctor=false">Cancelar</a>
-            <a class="btn text-light ml-3 btn-primary" (click)="confirmarDoctor(currentInfoCita)">Aceptar</a>
-        </div>
-    </div>
-</app-modal>
 
 <app-modal [show]="showConfirmPaciente">
     <div class="card p-3" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title">Confirmar Paciente</h5>
+            <h5 class="card-title">Confirmar </h5>
             <p class="card-text">Desea confirmar la asistencia del paciente</p>
             <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmPaciente=false">Cancelar</a>
             <a class="btn text-light ml-3 btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
