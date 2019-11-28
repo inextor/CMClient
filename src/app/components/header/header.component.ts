@@ -12,27 +12,31 @@ import { ThrowStmt } from '@angular/compiler';
 export class HeaderComponent extends BaseComponent implements OnInit {
 	@Input() pagina: string;
 	showCentros =false;
-	usuario=null
-
+	usuario: Usuario=null
+	nombre:string=null
 	ngOnInit()
-	{
+	{ 
+		
 		let usuario = this.rest.getUsuarioSesion();
 		if( usuario )
 		{
+			this.nombre=usuario.usuario;
 			if ( usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE" ){
 				this.rest.usuario.get(usuario.id).subscribe(params=>{
 					this.usuario=params
 				});
 			}
-			else if (usuario.tipo = "DOCTOR"){
+			else if(usuario.tipo == "DOCTOR"){
 				this.rest.doctor.get(usuario.id).subscribe(params => {
-					this.usuario = params
+					this.nombre = params.nombre
 				});
 			}
-			else if (usuario.tipo = "PACIENTE"){
-				this.rest.paciente.get(usuario.id).subscribe(params =>{
-					this.usuario= params
-				})
+			else if(usuario.tipo == "PACIENTE"){
+				this.rest.paciente.getAll({id_usuario:usuario.id}).subscribe(params =>{
+					if(params.total == 1){
+						this.nombre = params.datos[0].nombre
+					}
+				});
 			}
 		}
 	}

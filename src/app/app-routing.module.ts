@@ -51,7 +51,9 @@ import { AgregarPacienteComponent } from './pages/agregar-paciente/agregar-pacie
 import { AgregarRecepcionistaComponent } from './pages/agregar-recepcionista/agregar-recepcionista.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { IngresoComponent } from './components/ingreso/ingreso.component';
-import { IngresosComponent} from './pages/ingresos/ingresos.component'
+import { IngresosComponent} from './pages/ingresos/ingresos.component';
+import {HomePacientesComponent} from './pages/home-pacientes/home-pacientes.component'
+import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
@@ -121,7 +123,8 @@ const routes: Routes = [
   { path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
   { path: "home", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
-
+  
+  { path: "home-pacientes", component: HomePacientesComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
 
   /*
 	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},

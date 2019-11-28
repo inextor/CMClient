@@ -3,3 +3,9 @@ ALTER TABLE `paciente` ADD `telefono_casa_tutor` VARCHAR(20) NOT NULL ;
 ALTER TABLE `paciente` ADD `telefono_trabajo_tutor` VARCHAR(20) NOT NULL ;
 ALTER TABLE `paciente` ADD `telefono_celular_tutor` VARCHAR(20) NOT NULL ;
 ALTER TABLE `paciente` ADD `correo_electronico_tutor` VARCHAR(60) NOT NULL ;
+
+ALTER TABLE `ingreso` ADD `id_usuario` INT NOT NULL AFTER `monto`;
+ALTER TABLE `ingreso` ADD `id_centro_medico` INT NOT NULL AFTER `id_usuario`;
+ALTER TABLE `ingreso` ADD `nota` TEXT NULL DEFAULT NULL AFTER `monto`;
+
+ALTER TABLE `cita` CHANGE `estatus` `estatus` ENUM('ACTIVA','CANCELADA','PENDIENTE') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
