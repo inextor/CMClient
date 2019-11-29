@@ -569,7 +569,7 @@ export interface Venta{
   pendiente?:number;
   comprobante?:string;
   promocion_desc?:number;
-  tipo_cliente?:number;
+  tipo_precio?:number;
   folio?:number;
   UUID?:string;
   porcentaje_desc?:number;

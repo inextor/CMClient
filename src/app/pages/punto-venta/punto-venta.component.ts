@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario,Tipo_Gasto } from '../../models/Modelos';
+import { Usuario,Tipo_Precio} from '../../models/Modelos';
 import { Router,ActivatedRoute,Params} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
 import { mergeMap,catchError } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
-import { Servicio} from '../../models/Modelos';
+import { Servicio,Pago} from '../../models/Modelos';
 import { Detalle_Venta,Venta} from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 
@@ -40,13 +40,33 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		super( rest,router,route,location,titleService);
 	}
 
-	nombre_servicio				= '';
+	busqueda:string				= '';
 	servicios:Servicio[]		= [];
 	search_servicios:Servicio[]	= [];
 	busquedas:OldSearch			= {};
 	todos_servicios:[] 			= [];
+	detalle_servicios:ServicioDetalle[]	= [];
+	total						= 0;
+	tipo_precios:Tipo_Precio[]	= [];
+	show_modal_pago				= false;
+	show_name_input				= false;
+
+	venta:Venta = {
+
+	};
+	pago:Pago = {
+
+	};
 
 	ngOnInit()
+	{
+		this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion }).subscribe((response)=>
+		{
+			this.tipo_precios = response.datos;
+		});
+	}
+
+	cargarVenta(id_venta)
 	{
 
 	}
@@ -64,7 +84,34 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	agregarServicio(servicio:Servicio)
 	{
-		this.servicios.push( servicio );
-		this.nombre_servicio = '';
+		let s = this.detalle_servicios.find(i=>i.servicio.id == servicio.id );
+		if( s )
+		{
+			this.busqueda = '';
+			this.aumentar( s );
+			return;
+		}
+
+		this.detalle_servicios.push({
+			servicio
+			,detalle_venta:{
+				id_servicio: servicio.id
+				,cantidad: 1
+			}
+		});
+
+		this.busqueda = '';
+		this.search_servicios = [];
+	}
+
+	aumentar(detalle_servicio)
+	{
+		detalle_servicio.detalle_venta.cantidad++;
+	}
+
+
+	calcularTotal()
+	{
+
 	}
 }
