@@ -55,7 +55,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	tipo_precios:Tipo_Precio[]	= [];
 	show_modal_pago				= false;
 	show_name_input				= false;
-	precios_info:Info_Precio = {};
+	precios_info:Info_Precio	= {};
+	procesando_pago:boolean		= false;
 	venta:Venta = {
 	};
 	pago:Pago = {
@@ -73,7 +74,15 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			}
 		});
 	}
-
+	changeTipoCliente(value)
+	{
+		if( this.venta.cliente == '' || this.tipo_precios.some((i)=>i.nombre == this.venta.cliente ))
+		{
+			let find = this.tipo_precios.find(i=>i.id == value );
+			if( find )
+				this.venta.cliente = find.nombre;
+		}
+	}
 	cargarVenta(id_venta)
 	{
 

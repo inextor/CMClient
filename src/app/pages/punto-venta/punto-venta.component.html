@@ -13,22 +13,19 @@
 			<!-- FIN MENU -->
 			<!-- CONTENIDO -->
 			<main class="p-2">
-				<div class="card pt-3 pb-3">
-
-					<div class="container p-0">
-						<h5>Punto Venta</h5>
-					</div>
+				<div class="pt-3 pb-3">
 					<div class="container card mt-3 mb-3 pt-3 pb-2">
+						<h5 class="mt-3 mb-3">Punto Venta</h5>
 						<app-loading *ngIf="is_loading"></app-loading>
 
 						<div class="form-row">
 							<div [ngClass]="{'block':show_name_input,'col-7':true}">
 								<label>Cliente</label>
-								<input type="" [(ngModel)]="venta.cliente" class="form-control">
+								<input type="" [(ngModel)]="venta.cliente" class="form-control" placeholder="PUBLICO GENERAL">
 							</div>
 							<div class="col">
 								<label>Tipo Cliente</label>
-								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col">
+								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col" (change)="changeTipoCliente($event.target.value)">
 									<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id">{{tipo_precio.nombre |  uppercase}}</option>
 								</select>
 							</div>
@@ -36,13 +33,13 @@
 
 						<div class="dropdown mb-3">
 							<div class="mt-3">
-								<input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
+								<input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
 							</div>
 							<div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
 								<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
 									<div *ngIf="i>0" class="dropdown-divider"></div>
 									<div class="dropdown-item">
-										{{servicio.nombre}}
+										{{servicio.nombre|uppercase}}
 									</div>
 								</div>
 							</div>
@@ -50,42 +47,67 @@
 					</div>
 
 					<div class="container card mt-3 mb-3 pt-3 pb-3">
-						<div *ngFor="let sd of detalle_servicios">
-							<div *ngIf="sd.detalle_venta.cantidad>0">
-								<label>{{sd.servicio.nombre | titlecase}}</label>
-								<input type="number" [(ngModel)]="sd.detalle_venta.cantidad" step="1" min=0>
-							</div>
-						</div>
+						<ul class="list-group">
+							<li class="list-group-item" *ngFor="let sd of detalle_servicios">
+								<div class="form-row">
+									<label class="col-form-label col-sm-10">{{sd.servicio.nombre | titlecase}}</label>
+									<div class="col-sm-1">
+										<button class="col btn btn-primary btn-sm">+</button>
+									</div>
+									<div class="col-sm-1">
+										<input type="number" [(ngModel)]="sd.detalle_venta.cantidad" step="1" min=0 class="form-control">
+									</div>
+									<div class="col-sm-1">
+										<button class="col btn btn-primary btn-sm">+</button>
+									</div>
+								</div>
+							</li>
+						</ul>
 						<div>
 							total {{total}}
 							{{show_modal_pago?'YES':'NO'}}
-							<button type="button" (click)="pagarVenta()">Pagar</button>
 						</div>
 					</div>
 				</div>
 			</main>
-			<app-modal [(show)]="show_modal_pago">
-				<div class="p-3 m-3 border-box">
-					<div class="form-group row">
-						<label class="col-form-label m-1">Efectivo: </label>
-						<div class="m-1">
-							<input type="text" class="form-control">
-						</div>
-					</div>
-
-					<div class="form-group row">
-						<label class="col-form-label m-1">Cheques: </label>
-						<div class="m-1">
-							<input type="text" class="form-control">
-						</div>
-					</div>
-
-					<div>
-						<button type="button" class="btn btn-primary">Pagar</button>
-					</div>
-				</div>
-			</app-modal>
 			<!-- FIN CONTENIDO -->
 		</div>
 	</div>
+	<footer class="card w-100">
+		<div class="row">
+			<div class="col">{{venta.total}}</div>
+			<div class="col"></div>
+			<div class="col">{{venta.subtotal}}</div>
+			<div class="col">{{venta.iva}}</div>
+			<div class="col text-center mt-3 mb-3">
+				<button type="button" class="btn btn-primary btn-lg  w-75" (click)="pagarVenta()">Pagar</button>
+			</div>
+		</div>
+	</footer>
 </div>
+
+<app-modal [(show)]="show_modal_pago">
+	<div class="p-3 m-3 border-box">
+		<div class="form-group row">
+			<label class="col-form-label m-1">Efectivo: </label>
+			<div class="m-1">
+				<input type="text" class="form-control" name="efectivo" [(ngModel)="pago.efectivo">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-form-label m-1">Cheques: </label>
+			<div class="m-1">
+				<input type="text" class="form-control" name="cheques" [(ngModel)="pago.efectivo">
+			</div>
+		</div>
+		<div class="m-auto text-center">
+			<div class="spinner-border text-success" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+		<div>
+			<button type="button" class="btn btn-primary" [disabled]="procesando_pago">Pagar</button>
+		</div>
+	</div>
+</app-modal>
+
