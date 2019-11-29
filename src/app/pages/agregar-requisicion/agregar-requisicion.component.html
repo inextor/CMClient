@@ -59,11 +59,9 @@
                                 
                                 <input data-live-search="true" type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
                                 <div class="dropdown-menu show">
-    
-                                            <a *ngFor="let servicio of search_servicios">
-                                                {{servicio.nombre}} <button type="button" class="btn btn-primary" (click)="agregarServicio(servicio)">+</button>
-                                            </a>
-                                
+                                <a *ngFor="let servicio of search_servicios">
+                                    {{servicio.nombre}} <button type="button" class="btn btn-primary" (click)="agregarServicio(servicio)">+</button>
+                                    </a>
                                 </div>   
                                 </div>
 
