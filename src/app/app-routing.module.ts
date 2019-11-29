@@ -56,6 +56,8 @@ import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
 import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
+import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component';
+
 // import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -129,6 +131,8 @@ const routes: Routes = [
   { path: "citas-paciente", component: CitasPacienteComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "agregar-requisicion", component: AgregarRequisicionComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   
+    { path: "punto-venta", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+
 
   /*
 	{path: 'doctores/:idDoctor/ver-doctor',loadChildren:'./pages/ver-doctor/ver-doctor.module#VerDoctorPageModule'},

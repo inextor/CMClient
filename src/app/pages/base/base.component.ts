@@ -14,9 +14,9 @@ import { Title } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.css']
+	selector: 'app-base',
+	templateUrl: './base.component.html',
+	styleUrls: ['./base.component.css']
 })
 
 export class BaseComponent implements OnInit {
@@ -43,7 +43,7 @@ export class BaseComponent implements OnInit {
 		this.pages.splice(0,this.pages.length);
 		this.totalItems = totalItems;
 
-		console.log('Calculo con el pie derecho',this.totalPages, this.totalItems,  (this.totalPages % this.totalItems) );
+		console.log('Calculo con el pie derecho',this.totalPages, this.totalItems,	(this.totalPages % this.totalItems) );
 		if( ( this.totalItems % this.pageSize ) > 0 )
 		{
 			this.totalPages = Math.floor(this.totalItems/this.pageSize)+1;
@@ -94,7 +94,7 @@ export class BaseComponent implements OnInit {
 
 			console.log('Test ',error.error );
 
-			if( error.error && 'error' in error.error &&  typeof(error.error.error ) === "string" )
+			if( error.error && 'error' in error.error &&	typeof(error.error.error ) === "string" )
 			{
 				 return error.error.error;
 			}
