@@ -84,7 +84,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     this.search_servicios = [];
   }
   aumentar(detalle_servicio) {
-    detalle_servicio.detalle_venta.cantidad++;
+    detalle_servicio.detalle_requisicion.cantidad++;
   }
 
   guardar() {
