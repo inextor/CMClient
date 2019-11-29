@@ -50,12 +50,9 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	tipo_precios:Tipo_Precio[]	= [];
 	show_modal_pago				= false;
 	show_name_input				= false;
-
 	venta:Venta = {
-
 	};
 	pago:Pago = {
-
 	};
 
 	ngOnInit()
@@ -74,7 +71,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	buscar(evt:any)
 	{
 		let x = this.rest.servicio.search({
-			lk:{ nombre: evt.target.value }
+			lk:{ nombre: evt.target.value },
+			// eq:{tipo:'PRODUCTO_FISICO'}
 		}).subscribe((response)=>
 		{
 			this.search_servicios = response.datos;
