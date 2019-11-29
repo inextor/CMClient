@@ -32,19 +32,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   detalle_servicios: ServicioDetalle[] = [];
 
   requisicion : Requisicion={
-    id:null,
-    id_centro_medico:null,
-    id_usuario_solicito:null,
-    id_usuario_recibio:null,
-    id_proveedor:null,
-    nota:'',
-    flete:null,
-    importacion:null,
-    total_articulos:null,
-    pedimento:'',
-    estatus:'',
-    total:null,
-    tiempo_entrega: null,
   };
   Articulos: Articulo={
     codigo: null,
