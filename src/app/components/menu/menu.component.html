@@ -71,7 +71,7 @@
         <a class="list-group-item list-group-item-action color4 group ">
             <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> MIS DOCTORES
         </a>
-    </div>  
+    </div>
     <div [appAccess]="['PACIENTE']" class="sidebar">
         <a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color4 group ">
             <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> FAMILIARES
@@ -90,16 +90,14 @@
 <app-modal [show]="show_logout">
     <!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
 
-            <div class="modal-content">
-                <h4 class="modal-title pt-2">Logout <i class="fa fa-lock"></i></h4>
+            <div class="modal-content text-center p-3">
+                <h4 class="modal-title pt-2">Logout <i class="fa fa-lock ml-3"></i></h4>
                 <div class="modal-body">
                     <p>Seguro que quieres salir del sistema?</p>
                 </div>
                 <div class="modal-footer">
-    <button class="btn btn-secondary btn-md" (click)="show_logout=false">Cancelar</button>
+					<button class="btn btn-secondary btn-md" (click)="show_logout=false">Cancelar</button>
                     <button class="btn btn-danger btn-md" (click)="logout()">Confirmar</button>
-
-              
                 </div>
             </div>
 </app-modal>

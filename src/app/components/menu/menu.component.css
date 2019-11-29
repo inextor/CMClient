@@ -116,3 +116,12 @@ margin-right: 10px;
   font-family: 'lato-bold', 'arial', sans-serif;
 }
 
+.modal-footer
+{
+	border: none;
+}
+
+app-modal .modal-content
+{
+	font-size: 18px;
+}
