@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute } from "@angular/router"
-import { Proveedor, Requisicion, Articulo, Servicio, Detalle_Venta } from '../../models/Modelos';
+import { Proveedor, Requisicion, Articulo, Servicio, Detalle_Venta , Detalle_Requisicion } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
@@ -11,7 +11,7 @@ interface OldSearch {
 }
 
 interface ServicioDetalle {
-  detalle_venta: Detalle_Venta;
+  detalle_requisicion: Detalle_Requisicion;
   servicio: Servicio;
 }
 
@@ -74,7 +74,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 
     this.detalle_servicios.push({
       servicio
-      , detalle_venta: {
+      , detalle_requisicion: {
         id_servicio: servicio.id
         , cantidad: 1
       }
@@ -84,7 +84,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     this.search_servicios = [];
   }
   aumentar(detalle_servicio) {
-    detalle_servicio.detalle_venta.cantidad++;
+    detalle_servicio.detalle_requisicion.cantidad++;
   }
 
   guardar() {

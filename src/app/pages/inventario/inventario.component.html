@@ -20,7 +20,7 @@
 						<div class="col">
 							<label>Centro medico*</label>
 							<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
-								<option  *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+								<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 							</select>
 						</div>
 						<div class="col">

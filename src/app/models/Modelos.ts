@@ -110,7 +110,7 @@ export interface Consultorio_Doctor{
 export interface Detalle_Requisicion{
   id?:number;
   id_requisicion?:number;
-  id_articulo?:number;
+  id_servicio?: number;
   cantidad?:number;
   costo?:number;
   nota?:string;
@@ -131,6 +131,7 @@ export interface Detalle_Venta{
   tiempo_actualizacion?:Date;
 
 };
+
 
 export interface Doctor{
   id?:number;
