@@ -54,13 +54,12 @@
                             <div class="form-row">
                                 
                             <div class="form-group col-md-6">
-                                    <label>Articulo*</label>
-                                    <select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
-                                        <option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
-                                    </select>
-                                <!-- <label position="stacked">Articulo<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="dias_credito"
-                                    [(ngModel)]="requisicion.total_articulos"> -->
+                                <label position="stacked">Articulo<span color="danger">*</span></label>
+                      
+                                    <input data-live-search="true" type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
+                                    <option *ngFor="let servicio of search_servicios">
+                                    {{servicio.nombre}} <button type="button" class="btn btn-primary" (click)="agregarServicio(servicio)">+</button>
+                                    </option>
                             </div>
                             <div class="form-group col-md-6">
                                 <label position="stacked">Cantidad<span color="danger">*</span></label>
@@ -75,7 +74,7 @@
                                     [disabled]="is_loading">Agregar</button>
                             </div>
                         </div>
-
+<!-- 
 <div class="form-row" *ngIf="articulos!=null">
     <table class="basica">
         <thead>
@@ -90,7 +89,7 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div> -->
                         <div class="">
                             <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
                                 (click)="guardar()" [disabled]="is_loading">Guardar</button>
