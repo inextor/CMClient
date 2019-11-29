@@ -14,8 +14,30 @@
             <!-- CONTENIDO -->
             <main class="p-2">
                 <div class="card p-3">
-                    <h1>Requisiciones</h1>
-                    <!-- PEGAR CODIGO AQUI -->
+                    <div class="container">
+                    <h4 class="mb-3 mt-3">REQUISICIONES</h4>
+                    <div>
+                        <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-md btn-primary">Agregar Requisicion</button>
+                    </div>
+                    <table class="basica">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let proveedor of proveedores">
+                                <td>{{proveedor.nombre}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary m-1"
+                                        [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    </div>
                 </div>
             </main>
             <!-- FIN CONTENIDO -->

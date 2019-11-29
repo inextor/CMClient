@@ -55,7 +55,7 @@ import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
-
+import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
 // import { access } from 'fs';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -127,6 +127,7 @@ const routes: Routes = [
   { path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   { path: "citas-paciente", component: CitasPacienteComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
+  { path: "agregar-requisicion", component: AgregarRequisicionComponent, pathMatch: "full", canActivate: [AuthGuard]/*canActivate:[AuthGuard]*/ },
   
 
   /*
