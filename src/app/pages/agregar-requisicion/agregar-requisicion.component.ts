@@ -30,6 +30,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   busqueda: string = '';
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
+
   requisicion : Requisicion={
     id:null,
     id_centro_medico:null,
@@ -50,17 +51,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      let id = params.get('id') == null ? null : parseInt(params.get('id'));
-      if (id != null) {
-        this.is_loading = true;
-        //this.rest.getCentroMedico( id ).subscribe((centro_medico)=>
-        this.rest.proveedor.get(id).subscribe((proveedor) => {
-          this.is_loading = false;
-          this.requisicion = proveedor;
-        }, error => this.showError(error));
-      }
-    });
+ 
   }
 
   buscar(evt: any) {
