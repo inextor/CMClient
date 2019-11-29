@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario,Tipo_Precio} from '../../models/Modelos';
+import { Usuario,Tipo_Precio,Precio_Servicio} from '../../models/Modelos';
 import { Router,ActivatedRoute,Params} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
@@ -23,8 +23,13 @@ interface OldSearch{
 interface ServicioDetalle{
 	detalle_venta:Detalle_Venta;
 	servicio:Servicio;
+	precio_servicio?:Precio_Servicio;
 }
 
+interface Info_Precio
+{
+	[key:number]:Precio_Servicio[];
+}
 
 
 @Component({
@@ -50,6 +55,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	tipo_precios:Tipo_Precio[]	= [];
 	show_modal_pago				= false;
 	show_name_input				= false;
+	precios_info:Info_Precio = {};
 	venta:Venta = {
 	};
 	pago:Pago = {
@@ -60,6 +66,11 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion }).subscribe((response)=>
 		{
 			this.tipo_precios = response.datos;
+			if( response.datos )
+			{
+				///this.venta.id_tipo_precio = response.datos[0].id;
+				this.venta.cliente	= response.datos[0].nombre;
+			}
 		});
 	}
 
@@ -80,9 +91,15 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
+	pagarVenta()
+	{
+		this.show_modal_pago = true;
+	}
+
 	agregarServicio(servicio:Servicio)
 	{
 		let s = this.detalle_servicios.find(i=>i.servicio.id == servicio.id );
+
 		if( s )
 		{
 			this.busqueda = '';
@@ -90,13 +107,57 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			return;
 		}
 
+		let precio_servicio = null;
+
+		if( servicio.id in this.precios_info )
+		{
+			precio_servicio = this.precios_info[ servicio.id ].find((p)=>p == this.venta.id_tipo_precio );
+		}
+		else
+		{
+			let id_centro_medico	= this.rest.getCurrentCentroMedico();
+
+			this.rest.precio_servicio.search
+			({
+				eq:
+				{
+					id_servicio			: servicio.id
+					,id_centro_medico	: id_centro_medico
+				}
+			}).subscribe((response)=>
+			{
+				this.precios_info[ servicio.id ] = response.datos;
+			},(error)=>
+			{
+				console.log('Solo imprimimos el error en la consola');
+			});
+		}
+
+
 		this.detalle_servicios.push({
 			servicio
+			,precio_servicio
 			,detalle_venta:{
 				id_servicio: servicio.id
 				,cantidad: 1
 			}
 		});
+
+		if( servicio.id in this.precios_info )
+		{
+			this.rest.precio_servicio.search
+			({
+				eq:
+				{
+					id_servicio			: servicio.id
+					,id_centro_medico	: this.venta.id_centro_medico
+				}
+			}).subscribe((response)=>
+			{
+				this.precios_info[ servicio.id ] = response.datos;
+			});
+		}
+
 
 		this.busqueda = '';
 		this.search_servicios = [];

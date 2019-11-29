@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject,forkJoin } from 'rxjs';
+import { Observable, BehaviorSubject,forkJoin, fromEvent} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
@@ -19,6 +19,7 @@ Detalle_Venta, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gas
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
 	Usuario, Venta, Proveedor,} from	'../models/Modelos';
 
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -29,6 +30,8 @@ export class RestService {
 
 	public errorBehaviorSubject: BehaviorSubject<ErrorMensaje>;
 	public errorObservable:Observable<ErrorMensaje>;
+	public keyUpObserver:Observable<KeyboardEvent>;
+
 
 	urlBase:string = '';
 
@@ -98,6 +101,8 @@ export class RestService {
 		this.currentUser = this.currentUserSubject.asObservable();
 
 
+		this.keyUpObserver = fromEvent<KeyboardEvent>( window.document.body, 'keyup' );
+
 		this.errorBehaviorSubject = new BehaviorSubject<ErrorMensaje>(null);
 		this.errorObservable = this.errorBehaviorSubject.asObservable();
 
@@ -149,7 +154,7 @@ export class RestService {
 		this.especialidad					= new ObjRest<Especialidad>						(`${this.urlBase}/especialidad.php`,http);
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
-		}
+	}
 
 	getCurrentCentroMedico()
 	{

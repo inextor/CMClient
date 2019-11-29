@@ -561,7 +561,7 @@ export interface Venta{
   tipo_cambio?:number;
   id_usuario_recepcionista?:number;
   cupon_desc?:number;
-  sucursal?:number;
+  id_centro_medico?:number;
   fecha?:string;
   redondeo?:number;
   nombre?:string;
@@ -569,7 +569,7 @@ export interface Venta{
   pendiente?:number;
   comprobante?:string;
   promocion_desc?:number;
-  tipo_precio?:number;
+  id_tipo_precio?:number;
   folio?:number;
   UUID?:string;
   porcentaje_desc?:number;

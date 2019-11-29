@@ -18,6 +18,7 @@ export class ModalComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
 		this.rest.keyUpObserver.subscribe((e)=>
 		{
 			if( e.keyCode == 27 )
