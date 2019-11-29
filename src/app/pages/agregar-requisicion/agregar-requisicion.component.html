@@ -79,7 +79,7 @@
                         <div class="form-row " >
 
                                 <div class="container card mt-3 mb-3 pt-3 pb-3">
-                                    <table class="basica">
+                                    <table  class="basica">
                                         <thead>
                                             <tr>
                                                 <th>Articulo</th>
@@ -92,12 +92,10 @@
 
                                             <tr *ngFor="let sd of detalle_servicios">
                                                 <th>
-                                                         
-                                                                <label>{{sd.servicio.nombre | titlecase}}</label>
+                                                <label>{{sd.servicio.nombre | titlecase}}</label>
                                                 </th>
-                                      
                                                 <th>
-                                                <input type="number" [(ngModel)]="sd.detalle_venta.cantidad" step="1" min=0 >
+                                                <input type="number" [(ngModel)]="sd.detalle_requisicion.cantidad" step="1" min=0 >
                                                 </th>
                                                 <th>
                                                    <button class="btn btn-secondary ">
