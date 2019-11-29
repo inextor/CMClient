@@ -66,7 +66,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   buscar(evt: any) {
     let x = this.rest.servicio.search({
       lk: { nombre: evt.target.value },
-      // eq:{tipo:'PRODUCTO_FISICO'}
+      eq:{tipo:'PRODUCTO_FISICO'}
     }).subscribe((response) => {
       this.search_servicios = response.datos;
       x.unsubscribe();
