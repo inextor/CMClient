@@ -22,47 +22,75 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-6">
-                                <label position="stacked">Nombre<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="nombre" [(ngModel)]="proveedor.nombre">
+                                <label position="stacked">Proveedor<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="nombre" [(ngModel)]="requisicion.id_proveedor">
                             </div>
                             <div class="form-group col-md-6">
-                                <label position="stacked">Telefono<span color="danger">*</span></label>
+                                <label position="stacked">Tiempo de entrega<span color="danger">*</span></label>
                                 <input type="text" class="form-control" name="telefono"
-                                    [(ngModel)]="proveedor.telefono">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">RFC<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="rfc" [(ngModel)]="proveedor.rfc">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Direccion<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="direccion"
-                                    [(ngModel)]="proveedor.direccion">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Contacto<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="contacto"
-                                    [(ngModel)]="proveedor.contacto">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Cuenta Bancaria<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="cuenta_bancaria"
-                                    [(ngModel)]="proveedor.cuenta_bancaria">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Dias Credito<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="dias_credito"
-                                    [(ngModel)]="proveedor.dias_credito">
+                                    [(ngModel)]="requisicion.tiempo_entrega">
                             </div>
                             <div class="form-group col-md-6">
                                 <label position="stacked">Nota<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="nota" [(ngModel)]="proveedor.nota">
+                                <input type="text" class="form-control" name="rfc" [(ngModel)]="requisicion.nota">
                             </div>
-
-
-
+                            <div class="form-group col-md-6">
+                                <label position="stacked">Costo de flete<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="direccion"
+                                    [(ngModel)]="requisicion.flete">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label position="stacked">Costo de importacion<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="contacto"
+                                    [(ngModel)]="requisicion.importacion">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label position="stacked">No. Pedimento<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="cuenta_bancaria"
+                                    [(ngModel)]="requisicion.pedimento">
+                            </div>
+                        </div>
+                        
+                            <div class="form-row">
+                                
+                            <div class="form-group col-md-6">
+                                    <label>Articulo*</label>
+                                    <select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
+                                        <option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+                                    </select>
+                                <!-- <label position="stacked">Articulo<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="dias_credito"
+                                    [(ngModel)]="requisicion.total_articulos"> -->
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label position="stacked">Cantidad<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="nota">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label position="stacked">Costo<span color="danger">*</span></label>
+                                <input type="text" class="form-control" name="nota" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm mt-3" (click)="guardar()"
+                                    [disabled]="is_loading">Agregar</button>
+                            </div>
                         </div>
 
+<div class="form-row" *ngIf="articulos!=null">
+    <table class="basica">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let articulo of articulos">
+                <td>{{articulo.nombre}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
                         <div class="">
                             <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
                                 (click)="guardar()" [disabled]="is_loading">Guardar</button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute } from "@angular/router"
-import { Proveedor, Requisicion } from '../../models/Modelos';
+import { Proveedor, Requisicion, Articulo } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
@@ -24,7 +24,11 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     pedimento:'',
     estatus:'',
     total:null,
+    tiempo_entrega: null,
   };
+  Articulos: Articulo={
+    codigo: null,
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
