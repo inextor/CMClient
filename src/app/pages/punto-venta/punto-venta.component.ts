@@ -57,6 +57,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	show_name_input				= false;
 	precios_info:Info_Precio	= {};
 	procesando_pago:boolean		= false;
+	show_creando_venta:boolean 	= false;
 	venta:Venta = {
 	};
 	pago:Pago = {
@@ -102,7 +103,37 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	pagarVenta()
 	{
-		this.show_modal_pago = true;
+		if( this.venta.id )
+		{
+			this.show_modal_pago = true;
+			forkJoin([
+				this.rest.pago.search({'eq':{ id_venta: this.venta.id }})
+
+				//Pagos venta
+			]).subscribe((respuestas)=>
+			{
+
+			});
+		}
+		else
+		{
+			this.show_creando_venta = true;
+			this.rest.venta.create(venta).pipe
+			(
+				flatMap((venta)=>
+				{
+					this.venta = venta;
+					this.detalle_servicios.forEach((d)=>d.id_venta= venta.id );
+					return this.rest.detalle_venta.batchCreate(detalle_servicios);
+				})
+			).subscribe((detalle_servicios)=>
+			{
+				this.show_modal_pago = true;
+			},(error)=>
+			{
+				this.showError( error );
+			});
+		}
 	}
 
 	agregarServicio(servicio:Servicio)
