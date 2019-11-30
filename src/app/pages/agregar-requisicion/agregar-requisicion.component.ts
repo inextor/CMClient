@@ -32,7 +32,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   busqueda: string = '';
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
-  proveedores: Proveedor[] = [];
+  proveedores: Proveedor[] = []
   requisicion : Requisicion={
   };
   Articulos: Articulo={
@@ -46,7 +46,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     forkJoin([
       this.rest.proveedor.search({ eq: { id_organizacion: this.rest.getUsuarioOrganizacion() } }),
     ]).subscribe((respuestas) => {
-      this.proveedores = respuestas.datos;
+      this.proveedores = respuestas[0].datos;
     }, (error) => this.showError(error));
 
     }

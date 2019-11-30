@@ -24,6 +24,7 @@
                             <div class="form-group col-md-6">
                                 <label position="stacked">Proveedor<span color="danger">*</span></label>
                                 <select class="form-control" name="foo" >
+                                    <option value='' selected disabled hidden>Seleccione un proveedor</option>
                                     <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
                                 </select>
                             
