@@ -23,7 +23,10 @@
 
                             <div class="form-group col-md-6">
                                 <label position="stacked">Proveedor<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="nombre" [(ngModel)]="requisicion.id_proveedor">
+                                <select class="form-control" name="foo" >
+                                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
+                                </select>
+                            
                             </div>
                             <div class="form-group col-md-6">
                                 <label position="stacked">Tiempo de entrega<span color="danger">*</span></label>

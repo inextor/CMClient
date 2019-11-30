@@ -5,6 +5,8 @@ import { Proveedor, Requisicion, Articulo, Servicio, Detalle_Venta , Detalle_Req
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { SearchObject } from '../../models/Respuestas';
+import { forkJoin } from 'rxjs';
 
 interface OldSearch {
   [key: string]: Servicio[];
@@ -30,16 +32,25 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   busqueda: string = '';
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
-
+  proveedores: Proveedor[] = [];
   requisicion : Requisicion={
   };
   Articulos: Articulo={
     codigo: null,
   }
+  prove: Proveedor={
+    nombre: ''
+  }
 
   ngOnInit() {
- 
-  }
+    forkJoin([
+      this.rest.proveedor.search({ eq: { id_organizacion: this.rest.getUsuarioOrganizacion() } }),
+    ]).subscribe((respuestas) => {
+      this.proveedores = respuestas.datos;
+    }, (error) => this.showError(error));
+
+    }
+   
 
   buscar(evt: any) {
     let x = this.rest.servicio.search({

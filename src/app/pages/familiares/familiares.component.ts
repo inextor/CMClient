@@ -19,7 +19,6 @@ export class FamiliaresComponent extends BaseComponent implements OnInit {
 
         this.rest.paciente.getAll({ id_usuario: usuario.id }).subscribe(params => {
             this.familiares = params.datos
-            console.log(params.datos)
           }
         );
   }
