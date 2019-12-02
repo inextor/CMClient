@@ -25,7 +25,7 @@
 							</div>
 							<div class="col">
 								<label>Tipo Cliente</label>
-								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col" (change)="changeTipoCliente($event.target.value)">
+								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col" (change)="changeTipoCliente($event.target.value)" [(ngModel)]="venta.id_tipo_precio">
 									<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id">{{tipo_precio.nombre |  uppercase}}</option>
 								</select>
 							</div>
