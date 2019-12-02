@@ -124,8 +124,7 @@ export interface SearchObject<T>
 		return this.http.put<T>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
 	}
 
-	batchCreate(obj:T):Observable<T>
-	{
+	batchCreate(obj:T[]):Observable<T[]> {
 		return this.http.post<T[]>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
 	}
 
