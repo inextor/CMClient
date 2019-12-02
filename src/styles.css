@@ -334,4 +334,12 @@ button{
   font-family: lato-light;
   src: url(./assets/font/custom/Lato-Light.ttf) format("opentype");}
 
+.no-selectable-text
+{
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+}
+
 
