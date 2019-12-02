@@ -25,7 +25,7 @@
 							</div>
 							<div class="col">
 								<label>Tipo Cliente</label>
-								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col" (change)="changeTipoCliente($event.target.value)">
+								<select [(ngModel)]="venta.id_tipo_precio" class="form-control col" (change)="changeTipoCliente($event.target.value)" [(ngModel)]="venta.id_tipo_precio">
 									<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id">{{tipo_precio.nombre |  uppercase}}</option>
 								</select>
 							</div>
@@ -48,17 +48,16 @@
 
 					<div class="container card mt-3 mb-3 pt-3 pb-3">
 						<ul class="list-group">
-							<li class="list-group-item" *ngFor="let sd of detalle_servicios">
-								<div class="form-row">
-									<label class="col-form-label col-sm-10">{{sd.servicio.nombre | titlecase}}</label>
-									<div class="col-sm-1">
-										<button class="col btn btn-primary btn-sm">+</button>
-									</div>
-									<div class="col-sm-1">
+							<li class="list-group-item"  *ngFor="let sd of detalle_servicios">
+								<div class="row">
+									<label class="col form-check-label">{{sd.servicio.nombre | titlecase}}</label>
+									<div class="col input-group">
 										<input type="number" [(ngModel)]="sd.detalle_venta.cantidad" step="1" min=0 class="form-control">
-									</div>
-									<div class="col-sm-1">
-										<button class="col btn btn-primary btn-sm">+</button>
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary btn-primary color-primary pr-3 pl-3">-</button>
+											<button class="btn btn-outline-secondary btn-secondary color-primary pr-3 pl-3">+</button>
+											<button class="btn btn-outline-secondary btn-danger color-primary pr-3 pl-3">x</button>
+										</div>
 									</div>
 								</div>
 							</li>
@@ -74,13 +73,19 @@
 		</div>
 	</div>
 	<footer class="card w-100">
+		<div class="m-auto text-center" *ngIf="procesando_pago">
+			<div class="spinner-border text-success" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col">{{venta.total}}</div>
 			<div class="col"></div>
 			<div class="col">{{venta.subtotal}}</div>
 			<div class="col">{{venta.iva}}</div>
 			<div class="col text-center mt-3 mb-3">
-				<button type="button" class="btn btn-primary btn-lg  w-75" (click)="pagarVenta()">Pagar</button>
+				<button type="button" class="btn btn-primary btn-lg  w-75" (click)="pagarVenta()" [disabled]="show_creando_venta">Pagar</button>
 			</div>
 		</div>
 	</footer>
@@ -91,20 +96,23 @@
 		<div class="form-group row">
 			<label class="col-form-label m-1">Efectivo: </label>
 			<div class="m-1">
-				<input type="text" class="form-control" name="efectivo" [(ngModel)="pago.efectivo">
+				<input type="text" class="form-control" name="efectivo" [(ngModel)]="pago.efectivo">
 			</div>
 		</div>
+
 		<div class="form-group row">
 			<label class="col-form-label m-1">Cheques: </label>
 			<div class="m-1">
-				<input type="text" class="form-control" name="cheques" [(ngModel)="pago.efectivo">
+				<input type="text" class="form-control" name="cheques" [(ngModel)]="pago.efectivo">
 			</div>
 		</div>
-		<div class="m-auto text-center">
+
+		<div class="m-auto text-center" *ngIf="procesando_pago">
 			<div class="spinner-border text-success" role="status">
 				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
+		<div>venta.total</div>
 		<div>
 			<button type="button" class="btn btn-primary" [disabled]="procesando_pago">Pagar</button>
 		</div>

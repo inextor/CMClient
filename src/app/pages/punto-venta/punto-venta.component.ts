@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
-import { mergeMap,catchError } from 'rxjs/operators';
+import { mergeMap,catchError,flatMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { Servicio,Pago} from '../../models/Modelos';
 import { Detalle_Venta,Venta} from '../../models/Modelos';
@@ -57,6 +57,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	show_name_input				= false;
 	precios_info:Info_Precio	= {};
 	procesando_pago:boolean		= false;
+	show_creando_venta:boolean 	= false;
 	venta:Venta = {
 	};
 	pago:Pago = {
@@ -102,7 +103,47 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	pagarVenta()
 	{
-		this.show_modal_pago = true;
+		if( this.venta.id )
+		{
+			this.show_modal_pago = true;
+			forkJoin([
+				this.rest.pago.search({'eq':{ id_venta: this.venta.id }})
+
+				//Pagos venta
+			]).subscribe((respuestas)=>
+			{
+
+			});
+		}
+		else
+		{
+			this.show_creando_venta = true;
+			this.rest.venta.create(this.venta).pipe
+			(
+				flatMap((venta)=>
+				{
+					this.venta = venta;
+					this.detalle_servicios.forEach((d)=>d.detalle_venta.id_venta= venta.id );
+					let detalles_venta = this.detalle_servicios.map(i=>i.detalle_venta );
+
+					return this.rest.detalle_venta.batchCreate( detalles_venta );
+				})
+			).subscribe((detalle_ventas)=>
+			{
+				let dv_dic = {};
+				detalle_ventas.forEach( i=> dv_dic[i.id_servicio ] = i);
+				this.detalle_servicios.forEach((ds)=>
+				{
+					if( ds.servicio.id in dv_dic )
+						ds.detalle_venta = dv_dic[ ds.servicio.id ];
+				});
+
+				this.show_modal_pago = true;
+			},(error)=>
+			{
+				this.showError( error );
+			});
+		}
 	}
 
 	agregarServicio(servicio:Servicio)
@@ -142,7 +183,6 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			});
 		}
 
-
 		this.detalle_servicios.push({
 			servicio
 			,precio_servicio
@@ -167,7 +207,6 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			});
 		}
 
-
 		this.busqueda = '';
 		this.search_servicios = [];
 	}
@@ -176,7 +215,6 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	{
 		detalle_servicio.detalle_venta.cantidad++;
 	}
-
 
 	calcularTotal()
 	{
