@@ -45,11 +45,6 @@
 			</div>
 
 			<div class="pr-2">
-				<label>cupon</label>
-				<input type="text" [(ngModel)]="venta_search.eq.cupon">
-			</div>
-
-			<div class="pr-2">
 				<label>efectivo desc</label>
 				<input type="text" [(ngModel)]="venta_search.eq.efectivo_desc">
 			</div>
@@ -75,8 +70,8 @@
 			</div>
 
 			<div class="pr-2">
-				<label>sucursal</label>
-				<input type="text" [(ngModel)]="venta_search.eq.sucursal">
+				<label>id centro medico</label>
+				<input type="text" [(ngModel)]="venta_search.eq.id_centro_medico">
 			</div>
 
 			<div class="pr-2">
@@ -100,6 +95,11 @@
 			</div>
 
 			<div class="pr-2">
+				<label>activa</label>
+				<input type="text" [(ngModel)]="venta_search.eq.activa">
+			</div>
+
+			<div class="pr-2">
 				<label>pendiente</label>
 				<input type="text" [(ngModel)]="venta_search.eq.pendiente">
 			</div>
@@ -115,8 +115,8 @@
 			</div>
 
 			<div class="pr-2">
-				<label>tipo cliente</label>
-				<input type="text" [(ngModel)]="venta_search.eq.tipo_cliente">
+				<label>id tipo precio</label>
+				<input type="text" [(ngModel)]="venta_search.eq.id_tipo_precio">
 			</div>
 
 			<div class="pr-2">
@@ -170,21 +170,21 @@
 <th>iva</th>
 <th>total</th>
 <th>cambio</th>
-<th>cupon</th>
 <th>efectivo desc</th>
 <th>dolares desc</th>
 <th>tipo cambio</th>
 <th>id usuario recepcionista</th>
 <th>cupon desc</th>
-<th>sucursal</th>
+<th>id centro medico</th>
 <th>fecha</th>
 <th>redondeo</th>
 <th>nombre</th>
 <th>estatus</th>
+<th>activa</th>
 <th>pendiente</th>
 <th>comprobante</th>
 <th>promocion desc</th>
-<th>tipo cliente</th>
+<th>id tipo precio</th>
 <th>folio</th>
 <th>UUID</th>
 <th>porcentaje desc</th>
@@ -195,7 +195,35 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let i of TEMPLATE_TABLE_NAMEs">
-						<td>{{id}}</td>,<td>{{id_usuario_cliente}}</td>,<td>{{facturado}}</td>,<td>{{cliente}}</td>,<td>{{subtotal}}</td>,<td>{{iva}}</td>,<td>{{total}}</td>,<td>{{cambio}}</td>,<td>{{cupon}}</td>,<td>{{efectivo_desc}}</td>,<td>{{dolares_desc}}</td>,<td>{{tipo_cambio}}</td>,<td>{{id_usuario_recepcionista}}</td>,<td>{{cupon_desc}}</td>,<td>{{sucursal}}</td>,<td>{{fecha}}</td>,<td>{{redondeo}}</td>,<td>{{nombre}}</td>,<td>{{estatus}}</td>,<td>{{pendiente}}</td>,<td>{{comprobante}}</td>,<td>{{promocion_desc}}</td>,<td>{{tipo_cliente}}</td>,<td>{{folio}}</td>,<td>{{UUID}}</td>,<td>{{porcentaje_desc}}</td>,<td>{{fecha_facturacion}}</td>,<td>{{tiempo_creacion}}</td>,<td>{{tiempo_actualizacion}}</td>
+						<td>{{venta.id}}</td>
+<td>{{venta.id_usuario_cliente}}</td>
+<td>{{venta.facturado}}</td>
+<td>{{venta.cliente}}</td>
+<td>{{venta.subtotal}}</td>
+<td>{{venta.iva}}</td>
+<td>{{venta.total}}</td>
+<td>{{venta.cambio}}</td>
+<td>{{venta.efectivo_desc}}</td>
+<td>{{venta.dolares_desc}}</td>
+<td>{{venta.tipo_cambio}}</td>
+<td>{{venta.id_usuario_recepcionista}}</td>
+<td>{{venta.cupon_desc}}</td>
+<td>{{venta.id_centro_medico}}</td>
+<td>{{venta.fecha}}</td>
+<td>{{venta.redondeo}}</td>
+<td>{{venta.nombre}}</td>
+<td>{{venta.estatus}}</td>
+<td>{{venta.activa}}</td>
+<td>{{venta.pendiente}}</td>
+<td>{{venta.comprobante}}</td>
+<td>{{venta.promocion_desc}}</td>
+<td>{{venta.id_tipo_precio}}</td>
+<td>{{venta.folio}}</td>
+<td>{{venta.UUID}}</td>
+<td>{{venta.porcentaje_desc}}</td>
+<td>{{venta.fecha_facturacion}}</td>
+<td>{{venta.tiempo_creacion}}</td>
+<td>{{venta.tiempo_actualizacion}}</td>
 					</tr>
 				</tbody>
 			</table>
