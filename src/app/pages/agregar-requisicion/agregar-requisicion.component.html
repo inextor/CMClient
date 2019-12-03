@@ -38,12 +38,12 @@
 
                             <div class="form-group col-md-4">
                                 <label position="stacked">Costo de flete<span color="danger">*</span></label>
-                                <input type="number" class="form-control" name="direccion"
+                                <input min=0 type="number" class="form-control" name="direccion"
                                     [(ngModel)]="requisicion.flete">
                             </div>
                             <div class="form-group col-md-4">
                                 <label position="stacked">Costo de importacion<span color="danger">*</span></label>
-                                <input type="number" class="form-control" name="contacto"
+                                <input min=0 type="number" class="form-control" name="contacto"
                                     [(ngModel)]="requisicion.importacion">
                             </div>
                             <div class="form-group col-md-4">
