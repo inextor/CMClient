@@ -25,7 +25,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		telefono:'',
 		telefono_tutor: '',
 		correo_electronico_tutor:'',
-		domicilio: '',
+//		domicilio: '',
 	};
 
 	confirmar_contrasena:string = '';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute } from "@angular/router"
-import { Proveedor, Requisicion, Articulo, Servicio, Detalle_Venta , Detalle_Requisicion } from '../../models/Modelos';
+import { Proveedor, Requisicion,  Servicio, Detalle_Venta , Detalle_Requisicion } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
@@ -35,9 +35,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   proveedores: Proveedor[] = []
   requisicion : Requisicion={
   };
-  Articulos: Articulo={
-    codigo: null,
-  }
   prove: Proveedor={
     nombre: ''
   }
@@ -50,7 +47,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     }, (error) => this.showError(error));
 
     }
-   
+
 
   buscar(evt: any) {
     let x = this.rest.servicio.search({

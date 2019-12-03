@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
 import { mergeMap,catchError,flatMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
-import { Servicio,Pago} from '../../models/Modelos';
+import { Servicio,Pago,Centro_Medico} from '../../models/Modelos';
 import { Detalle_Venta,Venta} from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 
@@ -31,6 +31,15 @@ interface Info_Precio
 	[key:number]:Precio_Servicio[];
 }
 
+interface InfoPago
+{
+	cambio				: number;
+	total_venta			: number;
+	total_pagado		: number;
+	total_a_pagar		: number;
+	total_cantidades	: number;
+}
+
 
 @Component({
 	selector: 'app-punto-venta',
@@ -48,6 +57,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	busqueda:string				= '';
 	servicios:Servicio[]		= [];
 	search_servicios:Servicio[]	= [];
+	centro_medico:Centro_Medico	= {};
 	busquedas:OldSearch			= {};
 	todos_servicios:[] 			= [];
 	detalle_servicios:ServicioDetalle[]	= [];
@@ -60,7 +70,15 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	procesando_pago:boolean		= false;
 	show_creando_venta:boolean 	= false;
 	feria						= 0;
-	cantidad_a_pagar			= 0;
+
+	infoPago:InfoPago			= {
+		total_venta 	: 0
+		,total_pagado	: 0
+		,total_a_pagar	: 0
+		,cambio			: 0
+		,total_cantidades: 0
+
+	};
 
 	venta:Venta = {
 
@@ -68,20 +86,33 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	pago:Pago = {
 		efectivo	: 0.0
+		,total		: 0.0
+		,dolares	: 0.0
 		,tarjeta	: 0.0
 		,cheque		: 0.0
+		,deposito	: 0.0
+		,cambio		: 0.0
+		,tipo_cambio_dolares : 0.0
 	};
 
 	ngOnInit()
 	{
-		this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion }).subscribe((response)=>
+		forkJoin
+		([
+			this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
+			,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
+		])
+		.subscribe((response)=>
 		{
-			this.tipo_precios = response.datos;
-			if( response.datos )
+			let response_precios	= response[0];
+			this.centro_medico		= response[1];
+			this.tipo_precios		= response[0].datos;
+
+			if( response_precios.datos.length )
 			{
-				this.venta.cliente	= response.datos[0].nombre;
-				this.venta.id_tipo_precio = response.datos[0].id;
-				this.venta.id_centro_medico = this.rest.getCurrentCentroMedico();
+				this.venta.cliente			= response[0].datos[0].nombre;
+				this.venta.id_tipo_precio	= response[0].datos[0].id;
+				this.venta.id_centro_medico	= this.rest.getCurrentCentroMedico();
 			}
 		});
 	}
@@ -122,7 +153,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				//Pagos venta
 			]).subscribe((respuestas)=>
 			{
-
+				this.calcularTotalVenta();
 			}
 			,(error)=>
 			{
@@ -133,13 +164,17 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		else
 		{
 			this.show_creando_venta = true;
+			this.calcularTotalVenta();
 			this.rest.venta.create(this.venta).pipe
 			(
 				flatMap((venta)=>
 				{
-					this.venta = venta;
+					this.venta			= venta;
+					this.pago.id_venta	= venta.id;
+
 					this.detalle_servicios.forEach((d)=>d.detalle_venta.id_venta= venta.id );
-					let detalles_venta = this.detalle_servicios.map(i=>i.detalle_venta );
+					let detalles_venta	= this.detalle_servicios.map(i=>i.detalle_venta );
+					this.calcularTotalVenta();
 
 					return this.rest.detalle_venta.batchCreate( detalles_venta );
 				})
@@ -153,13 +188,14 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 						ds.detalle_venta = dv_dic[ ds.servicio.id ];
 				});
 
-				this.show_creando_venta = false
-				this.show_modal_pago = true;
-				this.calcularTotal();
+				this.calcularTotalVenta();
+
+				this.show_creando_venta	= false
+				this.show_modal_pago	= true;
 			},(error)=>
 			{
-				this.show_creando_venta = false
-				this.show_modal_pago = false;
+				this.show_creando_venta	= false
+				this.show_modal_pago	= false;
 				this.showError( error );
 			});
 		}
@@ -205,9 +241,10 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		this.detalle_servicios.push({
 			servicio
 			,precio_servicio
-			,detalle_venta:{
-				id_servicio: servicio.id
-				,cantidad: 1
+			,detalle_venta:
+			{
+				id_servicio	: servicio.id
+				,cantidad	: 1
 			}
 		});
 
@@ -232,8 +269,15 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	pagarVenta()
 	{
-		this.show_loading_payment = true;
-		this.rest.pago.post(this.pago);
+		this.rest.pago.create(this.pago).subscribe((response)=>
+		{
+			this.is_loading = false;
+		}
+		,(error)=>
+		{
+			this.is_loading = false;
+			this.showError(error);
+		});
 	}
 
 	aumentar(detalle_servicio)
@@ -241,24 +285,32 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		detalle_servicio.detalle_venta.cantidad++;
 	}
 
-	clacularCantidadPagada()
+	calcularTotalVenta()
 	{
-		let total = this.pago.efectivo
-			+(this.pago.dolares*this.tipo_cambio_dolares)
-			+this.tarjeta
-			+this.cheque
-			+this.deposito
+		let total				= this.detalle_servicios.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
+		let pagos_hechos		= this.pagos.reduce((a,b)=>{ return a+b.total},0);
 
-		this.pago.cantidad_pagada = total > this.
+		this.pago.tipo_cambio_dolares = this.centro_medico.tipo_cambio_dolares;
+
+		this.infoPago.total_venta	= this.detalle_servicios.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
+		this.infoPago.total_pagado	= pagos_hechos;
+		this.infoPago.total_a_pagar	= total-pagos_hechos;
+		this.infoPago.cambio		= 0 ;
+
+		this.calcularCantidades();
 	}
 
-	calcularTotal()
+	calcularCantidades()
 	{
-		console.log( this.detalle_servicios );
+		this.pago.total = this.infoPago.total_a_pagar;
+		this.pago.tipo_cambio_dolares	= this.centro_medico.tipo_cambio_dolares;
 
-		this.total				= this.detalle_servicios.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
-		this.pagos_hechos		= this.pagos.reduce((a,b)=>{ return a+b.cantidad_pagada},0);
-		this.cantidad_a_pagar	= this.total-this.pagos_hechos;
-		console.log('TOTAL IS ',this.total );
+		this.infoPago.total_cantidades = this.pago.efectivo
+				+(this.pago.dolares*this.pago.tipo_cambio_dolares)
+				+this.pago.tarjeta
+				+this.pago.cheque
+				+this.pago.deposito;
+
+		this.pago.cambio		= this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
 	}
 }
