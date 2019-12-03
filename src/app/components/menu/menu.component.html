@@ -1,62 +1,62 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
     <div  class=" list-group-flush">
-        <div [appAccess]="['ADMIN']" class="sidebar">
+        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
             <a (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
                     src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
         </div>
         <div *ngIf="showCentros">
             <div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/especialidades']"
                         class="list-group-item list-group-item-action color1 ">ESPECIALIDADES
                     </a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/centros-medicos']"
                         class="list-group-item list-group-item-action color1 ">CLINICAS</a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/servicios']"
                         class="list-group-item list-group-item-action color1 ">SERVICIOS</a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
                 </div>
-                <div [appAccess]="['ADMIN']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">INVENTARIO </a>
                 </div>
-                <div  [appAccess]="['ADMIN']"[routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div  [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']"[routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">USUARIOS</a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/ingresos']" class="list-group-item list-group-item-action color1 ">INGRESOS</a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
                 </div>
-   <div [appAccess]="['ADMIN']" class="menuSubButtons">
+   <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">Punto De Venta</a>
                 </div>
-                <div [appAccess]="['ADMIN']" class="menuSubButtons">
+                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
                     <a class="list-group-item list-group-item-action color1 ">REPORTES </a>
                 </div>
             </div>
         </div>
-        <div [appAccess]="['ADMIN']" class="sidebar" [appAccess]="['ADMIN']">
+        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar" [appAccess]="['ADMIN']">
             <a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
                 <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
             </a>
         </div>
-        <div [appAccess]="['ADMIN']" class="sidebar">
+        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
             <a [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
                 <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
             </a>
         </div>
-        <div [appAccess]="['ADMIN']" class="sidebar">
+        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
             <a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
                 <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
             </a>

@@ -1,0 +1,23 @@
+.bloqueDoctor{
+    display: none;
+}
+
+@media print {
+  #sidebar-wrapper,.menuButtons,header,.no-print{
+      display: none !important;
+  }
+  .print{
+  display: block !important;
+  }
+  
+}
+
+th{
+    text-align: center;
+    padding: 0;
+    color: #000;
+}
+td{
+    padding: 0;
+    text-align: center;
+}
