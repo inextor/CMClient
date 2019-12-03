@@ -334,8 +334,8 @@ export interface Ingreso{
   id?:number;
   id_usuario?:number;
   id_centro_medico?:number;
-  monto?:number;
   nota?:string;
+  monto?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 };
