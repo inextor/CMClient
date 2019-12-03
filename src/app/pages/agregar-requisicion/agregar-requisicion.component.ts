@@ -13,8 +13,8 @@ interface OldSearch {
 }
 
 interface ServicioDetalle {
-  detalle_requisicion: Detalle_Requisicion;
   servicio: Servicio;
+  requisicion:Requisicion
 }
 
 @Component({
@@ -33,11 +33,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
   proveedores: Proveedor[] = []
-  requisicion : Requisicion={
-  };
-  prove: Proveedor={
-    nombre: ''
-  }
 
   ngOnInit() {
     forkJoin([
@@ -45,7 +40,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     ]).subscribe((respuestas) => {
       this.proveedores = respuestas[0].datos;
     }, (error) => this.showError(error));
-
     }
 
 
@@ -66,14 +60,14 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
       this.aumentar(s);
       return;
     }
-
-    this.detalle_servicios.push({
-      servicio
-      , detalle_requisicion: {
-        id_servicio: servicio.id
-        , cantidad: 1
-      }
-    });
+//no funciona :)
+    // this.detalle_servicios.push({
+    //   servicio
+    //   , requisicion
+    
+      
+    // });
+  
 
     this.busqueda = '';
     this.search_servicios = [];
@@ -82,23 +76,23 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     detalle_servicio.detalle_requisicion.cantidad++;
   }
 
-  guardar() {
-    this.is_loading = true;
+  // guardar() {
+  //   this.is_loading = true;
 
-    if (this.requisicion.id) {
-      //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.proveedor.update(this.requisicion).subscribe((proveedor) => {
-        this.is_loading = false;
-        this.router.navigate(['/proveedores']);
-      }, error => this.showError(error));
-    }
-    else {
-      //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.proveedor.create(this.requisicion).subscribe((proveedor) => {
-        this.is_loading = false;
-        this.router.navigate(['/proveedores']);
-      }, error => this.showError(error));
-    }
-  }
+  //   if (this.requisicion) {
+  //     //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+  //     this.rest.proveedor.update(this.requisicion).subscribe((requisicion) => {
+  //       this.is_loading = false;
+  //       this.router.navigate(['/requisiciones']);
+  //     }, error => this.showError(error));
+  //   }
+  //   else {
+  //     //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+  //     this.rest.requisicion.create(this.requisicion).subscribe((requisicion) => {
+  //       this.is_loading = false;
+  //       this.router.navigate(['/requisiciones']);
+  //     }, error => this.showError(error));
+  //   }
+  // }
 
 }

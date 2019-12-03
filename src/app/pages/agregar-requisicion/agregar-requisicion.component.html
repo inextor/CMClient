@@ -26,7 +26,7 @@
                                 <label position="stacked">Proveedor<span color="danger">*</span></label>
                                 <select class="form-control" name="foo">
                                     <option value='' selected disabled hidden>Seleccione un proveedor</option>
-                                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                                    <option  *ngFor="let proveedor of proveedores" [value]="proveedor.id">
                                         {{proveedor.nombre}}</option>
                                 </select>
                             </div>
@@ -106,11 +106,11 @@
                                                 <label>{{sd.servicio.nombre | titlecase}}</label>
                                             </th>
                                             <th>
-                                                <input type="number" [(ngModel)]="sd.detalle_requisicion.cantidad"
+                                                <input type="number" [(ngModel)]="sd.requisicion.total_articulos"
                                                     step="1" min=0>
                                             </th>
                                             <th>
-                                                    <input type="number" [(ngModel)]="sd.detalle_requisicion.costo"
+                                                    <input type="number" [(ngModel)]="sd.requisicion.total"
                                                         step="1" min=0>
                                                 </th>
                                             <th>
