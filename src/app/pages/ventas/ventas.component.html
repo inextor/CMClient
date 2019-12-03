@@ -1,24 +1,205 @@
-<!-- NAVBAR -->
-<div class="page">
-    <header>
-        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-    </header>
-    <!-- FIN NAVBAR -->
-    <div>
-        <div class="page_content">
-            <!-- MENU -->
-            <div class="pt-2 flex-wrap justify-content-start">
-                <app-menu></app-menu>
-            </div>
-            <!-- FIN MENU -->
-            <!-- CONTENIDO -->
-            <main class="p-2">
-                <div class="card p-3">
-                    <h5>Ventas</h5>
-                    <!-- PEGAR CODIGO AQUI -->
-                </div>
-            </main>
-            <!-- FIN CONTENIDO -->
-        </div>e
-    </div>
-</div>
+<main class="p-2">
+	<div class="card p-3">
+		<div class="container">
+			<h1 class="mb-3">TEMPLATE_TABLE_NAME</h1>
+			<div>
+				<div class="d-flex flex-row">
+								<div class="pr-2">
+				<label>id</label>
+				<input type="text" [(ngModel)]="venta_search.eq.id">
+			</div>
+
+			<div class="pr-2">
+				<label>id usuario cliente</label>
+				<input type="text" [(ngModel)]="venta_search.eq.id_usuario_cliente">
+			</div>
+
+			<div class="pr-2">
+				<label>facturado</label>
+				<input type="text" [(ngModel)]="venta_search.eq.facturado">
+			</div>
+
+			<div class="pr-2">
+				<label>cliente</label>
+				<input type="text" [(ngModel)]="venta_search.eq.cliente">
+			</div>
+
+			<div class="pr-2">
+				<label>subtotal</label>
+				<input type="text" [(ngModel)]="venta_search.eq.subtotal">
+			</div>
+
+			<div class="pr-2">
+				<label>iva</label>
+				<input type="text" [(ngModel)]="venta_search.eq.iva">
+			</div>
+
+			<div class="pr-2">
+				<label>total</label>
+				<input type="text" [(ngModel)]="venta_search.eq.total">
+			</div>
+
+			<div class="pr-2">
+				<label>cambio</label>
+				<input type="text" [(ngModel)]="venta_search.eq.cambio">
+			</div>
+
+			<div class="pr-2">
+				<label>cupon</label>
+				<input type="text" [(ngModel)]="venta_search.eq.cupon">
+			</div>
+
+			<div class="pr-2">
+				<label>efectivo desc</label>
+				<input type="text" [(ngModel)]="venta_search.eq.efectivo_desc">
+			</div>
+
+			<div class="pr-2">
+				<label>dolares desc</label>
+				<input type="text" [(ngModel)]="venta_search.eq.dolares_desc">
+			</div>
+
+			<div class="pr-2">
+				<label>tipo cambio</label>
+				<input type="text" [(ngModel)]="venta_search.eq.tipo_cambio">
+			</div>
+
+			<div class="pr-2">
+				<label>id usuario recepcionista</label>
+				<input type="text" [(ngModel)]="venta_search.eq.id_usuario_recepcionista">
+			</div>
+
+			<div class="pr-2">
+				<label>cupon desc</label>
+				<input type="text" [(ngModel)]="venta_search.eq.cupon_desc">
+			</div>
+
+			<div class="pr-2">
+				<label>sucursal</label>
+				<input type="text" [(ngModel)]="venta_search.eq.sucursal">
+			</div>
+
+			<div class="pr-2">
+				<label>fecha</label>
+				<input type="text" [(ngModel)]="venta_search.eq.fecha">
+			</div>
+
+			<div class="pr-2">
+				<label>redondeo</label>
+				<input type="text" [(ngModel)]="venta_search.eq.redondeo">
+			</div>
+
+			<div class="pr-2">
+				<label>nombre</label>
+				<input type="text" [(ngModel)]="venta_search.eq.nombre">
+			</div>
+
+			<div class="pr-2">
+				<label>estatus</label>
+				<input type="text" [(ngModel)]="venta_search.eq.estatus">
+			</div>
+
+			<div class="pr-2">
+				<label>pendiente</label>
+				<input type="text" [(ngModel)]="venta_search.eq.pendiente">
+			</div>
+
+			<div class="pr-2">
+				<label>comprobante</label>
+				<input type="text" [(ngModel)]="venta_search.eq.comprobante">
+			</div>
+
+			<div class="pr-2">
+				<label>promocion desc</label>
+				<input type="text" [(ngModel)]="venta_search.eq.promocion_desc">
+			</div>
+
+			<div class="pr-2">
+				<label>tipo cliente</label>
+				<input type="text" [(ngModel)]="venta_search.eq.tipo_cliente">
+			</div>
+
+			<div class="pr-2">
+				<label>folio</label>
+				<input type="text" [(ngModel)]="venta_search.eq.folio">
+			</div>
+
+			<div class="pr-2">
+				<label>UUID</label>
+				<input type="text" [(ngModel)]="venta_search.eq.UUID">
+			</div>
+
+			<div class="pr-2">
+				<label>porcentaje desc</label>
+				<input type="text" [(ngModel)]="venta_search.eq.porcentaje_desc">
+			</div>
+
+			<div class="pr-2">
+				<label>fecha facturacion</label>
+				<input type="text" [(ngModel)]="venta_search.eq.fecha_facturacion">
+			</div>
+
+			<div class="pr-2">
+				<label>tiempo creacion</label>
+				<input type="text" [(ngModel)]="venta_search.eq.tiempo_creacion">
+			</div>
+
+			<div class="pr-2">
+				<label>tiempo actualizacion</label>
+				<input type="text" [(ngModel)]="venta_search.eq.tiempo_actualizacion">
+			</div>
+
+					<div class="d-flex align-self-end justify-content-center p-2">
+						<button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<app-paginacion [path]="'/list-TEMPLATE_TABLE_NAME'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+			</div>
+
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>id</th>
+<th>id usuario cliente</th>
+<th>facturado</th>
+<th>cliente</th>
+<th>subtotal</th>
+<th>iva</th>
+<th>total</th>
+<th>cambio</th>
+<th>cupon</th>
+<th>efectivo desc</th>
+<th>dolares desc</th>
+<th>tipo cambio</th>
+<th>id usuario recepcionista</th>
+<th>cupon desc</th>
+<th>sucursal</th>
+<th>fecha</th>
+<th>redondeo</th>
+<th>nombre</th>
+<th>estatus</th>
+<th>pendiente</th>
+<th>comprobante</th>
+<th>promocion desc</th>
+<th>tipo cliente</th>
+<th>folio</th>
+<th>UUID</th>
+<th>porcentaje desc</th>
+<th>fecha facturacion</th>
+<th>tiempo creacion</th>
+<th>tiempo actualizacion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let i of TEMPLATE_TABLE_NAMEs">
+						<td>{{id}}</td>,<td>{{id_usuario_cliente}}</td>,<td>{{facturado}}</td>,<td>{{cliente}}</td>,<td>{{subtotal}}</td>,<td>{{iva}}</td>,<td>{{total}}</td>,<td>{{cambio}}</td>,<td>{{cupon}}</td>,<td>{{efectivo_desc}}</td>,<td>{{dolares_desc}}</td>,<td>{{tipo_cambio}}</td>,<td>{{id_usuario_recepcionista}}</td>,<td>{{cupon_desc}}</td>,<td>{{sucursal}}</td>,<td>{{fecha}}</td>,<td>{{redondeo}}</td>,<td>{{nombre}}</td>,<td>{{estatus}}</td>,<td>{{pendiente}}</td>,<td>{{comprobante}}</td>,<td>{{promocion_desc}}</td>,<td>{{tipo_cliente}}</td>,<td>{{folio}}</td>,<td>{{UUID}}</td>,<td>{{porcentaje_desc}}</td>,<td>{{fecha_facturacion}}</td>,<td>{{tiempo_creacion}}</td>,<td>{{tiempo_actualizacion}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</main>
+
