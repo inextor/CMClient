@@ -127,6 +127,9 @@ export interface Detalle_Venta{
   id_servicio?:number;
   precio?:number;
   cantidad?:number;
+  subtotal?:number;
+  iva?:number;
+  total?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
@@ -376,6 +379,16 @@ export interface Paciente{
 export interface Pago{
   id?:number;
   id_venta?:number;
+  efectivo?:number;
+  dolares?:number;
+  tarjeta?:number;
+  cheque?:number;
+  deposito?:number;
+  tipo_cambio_dolares?:number;
+  total_pago?:number;
+  tipo_tarjeta?:string;
+  terminacion_tarjeta?:string;
+  referencia_cheque?:string;
   tipo_pago?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;

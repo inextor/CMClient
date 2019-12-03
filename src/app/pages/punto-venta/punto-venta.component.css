@@ -1,3 +1,14 @@
 /*.
   dropdown-menu {     background-color: #e7e7e7;  }
  * */
+
+.dropdown-item.search
+{
+	min-height: 30px;
+	line-height: 30px;
+}
+
+.dropdown-item.search:not(:first-child)
+{
+	border-top: 1px solid #eeeeee;
+}
