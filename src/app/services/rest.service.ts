@@ -14,10 +14,10 @@ import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
 import {   Centro_Medico, Cita,
 Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
-Detalle_Venta, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
+Detalle_Venta, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
  Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
-	Usuario, Venta, Proveedor,} from	'../models/Modelos';
+	Usuario, Venta, Proveedor, Requisicion} from	'../models/Modelos';
 
 
 @Injectable({
@@ -77,6 +77,7 @@ export class RestService {
 	public servicio_recurso:ObjRest<Servicio_Recurso>;
 	public consulta:ObjRest<Consulta>;
 	public ingreso:ObjRest<Ingreso>;
+	public detalle_requisicion:ObjRest<Detalle_Requisicion>;
 
 
 	//End vars
@@ -84,6 +85,7 @@ export class RestService {
 
 	// usuario_centro_medico:ObjRest<Usuario_Centro_Medico>;
 	venta:ObjRest<Venta>;
+	public requisicion:ObjRest<Requisicion>;
 
 
 	constructor(private http: HttpClient)
@@ -154,6 +156,7 @@ export class RestService {
 		this.especialidad					= new ObjRest<Especialidad>						(`${this.urlBase}/especialidad.php`,http);
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
+		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
 	}
 
 	getCurrentCentroMedico()
@@ -270,6 +273,14 @@ export class RestService {
 			return null
 
 		let user_data = this.transformJson(user_org);
+	}
+
+	getUsuarioCentroMedico(){
+		let user_cm = localStorage.getItem('id_centro_medico')
+		if( user_cm == null)
+			return null
+
+		let user_data = this.transformJson(user_cm);
 	}
 
 	getUsuarioSesion():Usuario
