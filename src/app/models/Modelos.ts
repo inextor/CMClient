@@ -1,11 +1,4 @@
 
-export interface Articulo{
-  id?:number;
-  codigo?:number;
-  tiempo_creacion?:Date;
-  tiempo_actualizacion?:Date;
-};
-
 export interface Bitacora{
   id?:number;
   titulo?:string;
@@ -13,6 +6,7 @@ export interface Bitacora{
   fecha?:Date;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Centro_Medico{
@@ -22,6 +16,8 @@ export interface Centro_Medico{
   id_imagen?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+  iva?:number;
+  tipo_cambio_dolares?:number;
 
 };
 
@@ -39,6 +35,7 @@ export interface Cita{
   confirmado_por_paciente?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Comision_Por_Servios{
@@ -83,6 +80,9 @@ export interface Consulta{
   diagnostico?:string;
   tratamiento?:string;
   medicamento?:string;
+  analisis?:string;
+  subjetivo?:string;
+  objetivo?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
@@ -110,7 +110,7 @@ export interface Consultorio_Doctor{
 export interface Detalle_Requisicion{
   id?:number;
   id_requisicion?:number;
-  id_servicio?: number;
+  id_servicio?:number;
   cantidad?:number;
   costo?:number;
   nota?:string;
@@ -125,8 +125,8 @@ export interface Detalle_Venta{
   id?:number;
   id_venta?:number;
   id_servicio?:number;
-  precio?:number;
   cantidad?:number;
+  precio?:number;
   subtotal?:number;
   iva?:number;
   total?:number;
@@ -134,7 +134,6 @@ export interface Detalle_Venta{
   tiempo_actualizacion?:Date;
 
 };
-
 
 export interface Doctor{
   id?:number;
@@ -163,6 +162,7 @@ export interface Especialidad{
   abreviacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Especialidad_Pregunta{
@@ -173,6 +173,8 @@ export interface Especialidad_Pregunta{
   orden?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
 
 export interface Expediente{
@@ -210,6 +212,7 @@ export interface Factura{
   MensajeError?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Fondo_Caja{
@@ -247,14 +250,6 @@ export interface Gasto_Centro_Medico{
   tiempo_actualizacion?:Date;
 
 };
-
-export interface Ingreso{
-  id?:number;
-  id_usuario?:number;
-  id_centro_medico?:number;
-  nota?:string;
-  monto?:number;
-}
 
 export interface Gasto_Doctor{
   id?:number;
@@ -335,6 +330,16 @@ export interface Imagen_Usuario{
 
 };
 
+export interface Ingreso{
+  id?:number;
+  id_usuario?:number;
+  id_centro_medico?:number;
+  monto?:number;
+  nota?:string;
+  tiempo_creacion?:Date;
+  tiempo_actualizacion?:Date;
+};
+
 export interface Inventario{
   id?:number;
   id_centro_medico?:number;
@@ -342,6 +347,7 @@ export interface Inventario{
   cantidad?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Notificacion{
@@ -357,6 +363,7 @@ export interface Organizacion{
   nombre?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Paciente{
@@ -364,16 +371,18 @@ export interface Paciente{
   id_usuario?:number;
   id_imagen?:number;
   nombre?:string;
-  nombre_tutor?:string;
   apellidos?:string;
   fecha_nacimiento?:string;
   sexo?:string;
   telefono?:string;
-  telefono_tutor?:string;
-  correo_electronico_tutor?: string;
-  domicilio?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+  nombre_tutor?:string;
+  telefono_tutor?:string;
+  telefono_trabajo_tutor?:string;
+  telefono_celular_tutor?:string;
+  correo_electronico_tutor?:string;
+
 };
 
 export interface Pago{
@@ -385,11 +394,13 @@ export interface Pago{
   cheque?:number;
   deposito?:number;
   tipo_cambio_dolares?:number;
-  total_pago?:number;
+  total?:number;
+  cambio?:number;
   tipo_tarjeta?:string;
   terminacion_tarjeta?:string;
-  referencia_cheque?:string;
   tipo_pago?:string;
+  referencia_deposito?:string;
+  referencia_cheque?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
@@ -484,6 +495,7 @@ export interface Requisicion{
   tiempo_creacion?:Date;
   tiempo_entrega?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Respuesta_Historia_Clinica{
@@ -551,6 +563,8 @@ export interface Usuario{
   correo_electronico?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
 
 export interface Usuario_Centro_Medico{
@@ -559,6 +573,8 @@ export interface Usuario_Centro_Medico{
   id_centro_medico?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
 
 export interface Venta{
@@ -570,7 +586,6 @@ export interface Venta{
   iva?:number;
   total?:number;
   cambio?:number;
-  cupon?:number;
   efectivo_desc?:number;
   dolares_desc?:number;
   tipo_cambio?:number;
@@ -581,6 +596,7 @@ export interface Venta{
   redondeo?:number;
   nombre?:string;
   estatus?:string;
+  activa?:string;
   pendiente?:number;
   comprobante?:string;
   promocion_desc?:number;
@@ -591,4 +607,7 @@ export interface Venta{
   fecha_facturacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
+

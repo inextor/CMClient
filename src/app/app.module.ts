@@ -73,6 +73,8 @@ import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component'
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
 import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
+import { ClientesComponent } from './pages/clientes/clientes.component';
+import { VentasUsuarioComponent } from './pages/ventas-usuario/ventas-usuario.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +143,8 @@ import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar
     FamiliaresComponent,
     CitasPacienteComponent,
     AgregarRequisicionComponent,
+    ClientesComponent,
+    VentasUsuarioComponent,
   ],
   imports: [
     AccessModule,
