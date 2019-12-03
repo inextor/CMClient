@@ -19,7 +19,7 @@
 					<div class="row">
 						<div class="col">
 							<label>Centro medico*</label>
-							<select class="form-control" name="foo" [(ngModel)]="prove.nombre">
+							<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
 								<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 							</select>
 						</div>
@@ -31,7 +31,7 @@
 							<button  type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 						</div>
 					</div>
-				
+
 						<app-loading [display]="is_loading"></app-loading>
 						<div *ngFor="let is of inventarioServicios">
 							<div class="form-group-row row mt-2 mb-2">
@@ -45,7 +45,7 @@
 								<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
 							</div>
 					</div>
-				
+
 				</div>
 			</main>
 			<!-- FIN CONTENIDO -->
