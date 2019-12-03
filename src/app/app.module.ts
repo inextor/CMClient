@@ -75,6 +75,8 @@ import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.co
 import { AgregarRequisicionComponent } from './pages/agregar-requisicion/agregar-requisicion.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { VentasUsuarioComponent } from './pages/ventas-usuario/ventas-usuario.component';
+import { TicketAbonoComponent } from './components/ticket-abono/ticket-abono.component';
+import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +147,8 @@ import { VentasUsuarioComponent } from './pages/ventas-usuario/ventas-usuario.co
     AgregarRequisicionComponent,
     ClientesComponent,
     VentasUsuarioComponent,
+    TicketAbonoComponent,
+    TicketVentaComponent,
   ],
   imports: [
     AccessModule,

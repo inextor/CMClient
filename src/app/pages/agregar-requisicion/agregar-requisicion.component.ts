@@ -33,6 +33,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
   proveedores: Proveedor[] = []
+  requisicion: Requisicion[]=[]
 
   ngOnInit() {
     forkJoin([
