@@ -384,6 +384,7 @@ export interface Pago{
   tarjeta?:number;
   cheque?:number;
   deposito?:number;
+  tipo_cambio_dolares?:number;
   total_pago?:number;
   tipo_tarjeta?:string;
   terminacion_tarjeta?:string;
