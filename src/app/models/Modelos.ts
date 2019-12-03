@@ -473,6 +473,7 @@ export interface Requisicion{
   id_usuario_solicito?:number;
   id_usuario_recibio?:number;
   id_proveedor?:number;
+  id_servicio?: number;
   nota?:string;
   flete?:number;
   importacion?:number;

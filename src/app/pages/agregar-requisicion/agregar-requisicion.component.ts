@@ -13,7 +13,6 @@ interface OldSearch {
 }
 
 interface ServicioDetalle {
-  detalle_requisicion: Detalle_Requisicion;
   servicio: Servicio;
 }
 
@@ -33,8 +32,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   todos_servicios: [] = [];
   detalle_servicios: ServicioDetalle[] = [];
   proveedores: Proveedor[] = []
-  requisicion : Requisicion={
-  };
+  requisicion : Requisicion[]=[]
   Articulos: Articulo={
     codigo: null,
   }
@@ -72,10 +70,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 
     this.detalle_servicios.push({
       servicio
-      , detalle_requisicion: {
-        id_servicio: servicio.id
-        , cantidad: 1
-      }
+    });
+    this.requisicion.push({
+      requisicion
     });
 
     this.busqueda = '';
@@ -88,18 +85,18 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   guardar() {
     this.is_loading = true;
 
-    if (this.requisicion.id) {
+    if (this.requisicion) {
       //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.proveedor.update(this.requisicion).subscribe((proveedor) => {
+      this.rest.proveedor.update(this.requisicion).subscribe((requisicion) => {
         this.is_loading = false;
-        this.router.navigate(['/proveedores']);
+        this.router.navigate(['/requisiciones']);
       }, error => this.showError(error));
     }
     else {
       //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.proveedor.create(this.requisicion).subscribe((proveedor) => {
+      this.rest.requisicion.create(this.requisicion).subscribe((requisicion) => {
         this.is_loading = false;
-        this.router.navigate(['/proveedores']);
+        this.router.navigate(['/requisiciones']);
       }, error => this.showError(error));
     }
   }
