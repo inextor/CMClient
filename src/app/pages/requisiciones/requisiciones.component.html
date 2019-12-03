@@ -37,8 +37,8 @@
                                     <td>{{requisicion.id}}</td>
                                     <td>{{requisicion.estatus}}</td>
                                     <td>{{requisicion.id_proveedor}}</td>
-                                    <td>{{requisicion.tiempo_creacion}}</td>
-                                    <td>{{requisicion.tiempo_entrega}}</td>
+                                    <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
+                                    <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
                                     <td>{{requisicion.pedimento}}</td>
                                     <td>{{requisicion.total}}</td>
                                     <td>
