@@ -24,8 +24,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   busqueda: string = '';
   todos_servicios: [] = [];
   requisiciones: Requisicion[] = []
-  requisicion : Requisicion={
-  };
+
 
   ngOnInit() {
     forkJoin([

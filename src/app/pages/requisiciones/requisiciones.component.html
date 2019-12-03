@@ -22,13 +22,25 @@
                         <table class="basica">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th>Orden</th>
+                                    <th>Estatus</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha Creacion</th>
+                                    <th>Fecha Entrega</th>
+                                    <th>No. Pedimento</th>
+                                    <th>Total</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let requisicion of requisiciones">
-                                    <td>{{requisicion.cantidad}}</td>
+                                    <td>{{requisicion.id}}</td>
+                                    <td>{{requisicion.estatus}}</td>
+                                    <td>{{requisicion.id_proveedor}}</td>
+                                    <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
+                                    <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
+                                    <td>{{requisicion.pedimento}}</td>
+                                    <td>{{requisicion.total}}</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary m-1" >Editar</button>
                                     </td>
