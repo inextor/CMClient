@@ -24,14 +24,14 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   }
 
   busqueda: string = '';
-  venta: Venta[]=[]
+  venta: Venta=null;
   vent={
     id:null
   };
   user={
     nombre:''
   }
-  usuario: Usuario[]=[]
+  usuario: Usuario[]=[];
   todayDate : Date = new Date();
   ngOnInit() {
     // forkJoin([
@@ -56,13 +56,13 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
     forkJoin([
       this.rest.venta.search({ eq: { id: this.vent.id} }),
     ]).subscribe((respuestas) => {
-      this.venta = respuestas;
+      this.venta = respuestas[0];
       console.log(this.venta)
     }, (error) => this.showError(error));
-    // no corresponde con el id recepcionista con los usuarios
-    // this.rest.usuario.search({eq: {id: this.venta[0].id_usuario_recepcionista}}).subscribe((respuestas)=>{
-    //   this.usuario = respuestas.datos;
-    //   console.log(this.usuario)
-    // },(error) => this.showError(error));
+    //no corresponde con el id recepcionista con los usuarios
+    this.rest.usuario.getAll({id:this.venta.id_usuario_recepcionista}).subscribe((respuestas)=>{
+      this.usuario = respuestas.datos;
+      console.log(this.usuario)
+    },(error) => this.showError(error));
   }
 }

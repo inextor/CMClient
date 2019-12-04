@@ -9,21 +9,22 @@
         </form>
             <p class="card-text">Desea imprimir?</p>
             
-            <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a>
+            <!-- <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a> -->
             <a class="btn text-light ml-3 btn-primary" type="submit" (click)="buscar()">Aceptar</a>
          
         </div>
     </div>
 
-<div class="container print" [ngClass]="{'d-block':show,'app-modal':true}">
-    <div class="row">
-        <div class="  align-self-center">
-            <div class="card">
-                    <h4 class="mb-3 mt-3 centered">VENTA</h4>
-                    <a>Cliente: {{venta[0].cliente}}</a>
-                    <a>Le atendio: </a>
-                    <a>Fecha y Hora: {{todayDate | date:'short'}}</a>
-
+<div *ngIf="venta" class="bgColor print">
+                    <div>
+                      <h4 class="mb-3 mt-3 centered">VENTA</h4>
+                    </div>
+                   <div> <a>Cliente: {{venta.cliente}}</a></div>
+                   <div>
+                    <a>Le atendio:  </a>
+                   </div>
+                    <div><a>Fecha y Hora: {{todayDate | date:'short'}}</a></div>
+                    
                     <div class="mt-2">
                             <table class="table">
                                     <thead >
@@ -35,7 +36,7 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr >
+                                      <tr>
                                         <td >1</td>
                                         <td>Mark</td> 
                                         <td>Otto</td>
@@ -43,21 +44,29 @@
                                       </tr>
                                       <tr>
                                           <td>Total</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+
                                       </tr>
                                     </tbody>
                                   </table>
                     </div>
-                        <a> SUBTOTAL: {{venta[0].subtotal}}</a>
-                        <a>IVA: {{venta[0].iva}}</a>
-                        <a>TOTAL: {{venta[0].total}}</a>
-                        <a>Efectivo: {{venta[0].efectivo_desc}}</a>
-                        <a>Pendiente: {{venta[0].pendiente}}</a>
-
-                        <a>Gracias por su preferencia!</a>
-                        <a>:^)</a>
                     
-            </div>
-        </div>
+                       <div> <a> SUBTOTAL: {{venta.subtotal}}</a></div> 
+                       <div> <a>IVA: {{venta.iva}}</a></div>
+                        <div><a>TOTAL: {{venta.total}}</a></div>
+                        
+                        <div><a>Efectivo: {{venta.efectivo_desc}}</a></div>
+                        
+                        <div><a>Pendiente: {{venta.pendiente}}</a></div>
+                        
+                        <div><a>Gracias por su preferencia!</a></div>
 
-    </div>
+                        
+                        <div><a>:^)</a></div>
+                        
+                    
+      
+
 </div>

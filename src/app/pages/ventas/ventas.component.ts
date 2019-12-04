@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { SearchObject } from '../../services/ObjRest';
-import { Venta } from '../../models/RestModels';
+
+import { Venta } from '../../models/Modelos';
 import { Router,ActivatedRoute } from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
 import { forkJoin } from 'rxjs';
 import { of } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import {Usuario} from '../../models/RestModels'
+import {Usuario} from '../../models/Modelos';
+import { SearchObject } from 'src/app/models/Respuestas';
+
 
 @Component({
   selector: 'app-ventas',
@@ -19,17 +21,19 @@ import {Usuario} from '../../models/RestModels'
 export class VentasComponent extends BaseComponent implements OnInit {
 
 
+	
+
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
+
 	ventas:Venta[] = [];
 	usuario_list:Usuario[] = [];
 
 	venta_search:SearchObject<Venta> = {
 
 	};
-
-	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
-	{
-		super( rest,router,route,location,titleService);
-	}
 
 	ngOnInit()
 	{
