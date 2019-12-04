@@ -37,9 +37,13 @@ export class VentasComponent extends BaseComponent implements OnInit {
 		{
 
 			this.venta_search = {
-				eq: {},
-				ge: {},
-				le: {}
+				lt: {}
+				,eq: {}
+				,ge: {}
+				,gt: {}
+				,le: {}
+				,lk: {}
+				,csv: {}
 			};
 
 			this.titleService.setTitle('venta');
@@ -227,13 +231,13 @@ export class VentasComponent extends BaseComponent implements OnInit {
 
 
 			this.is_loading = true;
-			this.venta_search.pagina= params['pagina') ? parseInt( params['pagina') ) : 0;
+			this.venta_search.pagina= params['pagina'] ? parseInt( params['pagina'] ) : 0;
 
 			this.rest.venta.search( this.venta_search )
 			.subscribe((result)=>
 			{
 				this.ventas = result.datos;
-				this.setPages( this.venta_search.pagina, result[0].total );
+				this.setPages( this.venta_search.pagina, result.total );
 				//{{table_constraints_arrays_assigns}}
 			},error=>
 			{
