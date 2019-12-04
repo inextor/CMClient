@@ -19,16 +19,15 @@
     <div class="row">
         <div class="  align-self-center">
             <div class="card">
-                    <h4 class="mb-3 mt-3 centered">ABONO</h4>
+                    <h4 class="mb-3 mt-3 centered">VENTA</h4>
                     <a>Cliente: {{venta[0].cliente}}</a>
-                    <a>Le atendio: Daniel</a>
-                    <a>Fecha: {{Date.Now}}</a>
-                    <a>Hora: 01:18 PM</a>
+                    <a>Le atendio: </a>
+                    <a>Fecha y Hora: {{todayDate | date:'short'}}</a>
 
                     <div class="mt-2">
                             <table class="table">
                                     <thead >
-                                      <tr >
+                                      <tr>
                                         <th >Venta</th>
                                         <th >Adeudo</th>
                                         <th >Abono</th>
@@ -48,11 +47,11 @@
                                     </tbody>
                                   </table>
                     </div>
-                        <a> SUBTOTAL: {{venta.subtotal}}</a>
-                        <a>IVA: {{venta.iva}}</a>
-                        <a>TOTAL: {{venta.total}}</a>
-                        <a>Efectivo: {{venta.efectivo_desc}}</a>
-                        <a>Pendiente: {{venta.pendiente}}</a>
+                        <a> SUBTOTAL: {{venta[0].subtotal}}</a>
+                        <a>IVA: {{venta[0].iva}}</a>
+                        <a>TOTAL: {{venta[0].total}}</a>
+                        <a>Efectivo: {{venta[0].efectivo_desc}}</a>
+                        <a>Pendiente: {{venta[0].pendiente}}</a>
 
                         <a>Gracias por su preferencia!</a>
                         <a>:^)</a>

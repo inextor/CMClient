@@ -1,7 +1,7 @@
 import { Component, OnInit, Input,Output,EventEmitter  } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Observable, BehaviorSubject,forkJoin } from 'rxjs';
-import { Requisicion, Venta } from 'src/app/models/Modelos';
+import { Requisicion, Venta, Usuario } from 'src/app/models/Modelos';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
@@ -27,7 +27,12 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   venta: Venta[]=[]
   vent={
     id:null
+  };
+  user={
+    nombre:''
   }
+  usuario: Usuario[]=[]
+  todayDate : Date = new Date();
   ngOnInit() {
     // forkJoin([
     //   this.rest.venta.search({ eq: { id: this.vent.id} }),
@@ -54,5 +59,10 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
       this.venta = respuestas;
       console.log(this.venta)
     }, (error) => this.showError(error));
+    // no corresponde con el id recepcionista con los usuarios
+    // this.rest.usuario.search({eq: {id: this.venta[0].id_usuario_recepcionista}}).subscribe((respuestas)=>{
+    //   this.usuario = respuestas.datos;
+    //   console.log(this.usuario)
+    // },(error) => this.showError(error));
   }
 }
