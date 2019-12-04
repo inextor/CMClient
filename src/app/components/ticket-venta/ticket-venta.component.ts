@@ -31,7 +31,7 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   user={
     nombre:''
   }
-  usuario: Usuario[]=[];
+  usuario: Usuario=null;
   todayDate : Date = new Date();
   ngOnInit() {
     // forkJoin([
@@ -58,11 +58,14 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
     ]).subscribe((respuestas) => {
       this.venta = respuestas[0];
       console.log(this.venta)
-    }, (error) => this.showError(error));
+      this.rest.usuario.get(this.venta.id_usuario_recepcionista).subscribe((respuestas)=>{
+        this.usuario = respuestas;
+        console.log(this.usuario)
+      },(error) => this.showError(error));
+    }, (error) => this.showError(error))
+  
+
     //no corresponde con el id recepcionista con los usuarios
-    // this.rest.usuario.getAll({id:this.venta.id_usuario_recepcionista}).subscribe((respuestas)=>{
-    //   this.usuario = respuestas.datos;
-    //   console.log(this.usuario)
-    // },(error) => this.showError(error));
+    
   }
 }
