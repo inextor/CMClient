@@ -60,9 +60,9 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
       console.log(this.venta)
     }, (error) => this.showError(error));
     //no corresponde con el id recepcionista con los usuarios
-    this.rest.usuario.getAll({id:this.venta.id_usuario_recepcionista}).subscribe((respuestas)=>{
-      this.usuario = respuestas.datos;
-      console.log(this.usuario)
-    },(error) => this.showError(error));
+    // this.rest.usuario.getAll({id:this.venta.id_usuario_recepcionista}).subscribe((respuestas)=>{
+    //   this.usuario = respuestas.datos;
+    //   console.log(this.usuario)
+    // },(error) => this.showError(error));
   }
 }
