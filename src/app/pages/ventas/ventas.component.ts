@@ -250,6 +250,19 @@ export class VentasComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.venta_search.pagina= 0;
-		this.router.navigate(['/list-venta',{queryParams: this.venta_search }]);
+		let search = {};
+		let array = ['eq','le','lt','ge','gt','csv','lk'];
+		for(let i in this.venta_search )
+		{
+			console.log( 'i',i,array.indexOf( i ) );
+			if(array.indexOf( i ) > -1 )
+			{
+				for(let j in this.venta_search[i])
+					search[i+'.'+j] = this.venta_search[i][j];
+			}
+		}
+		console.log('search',this.venta_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['/ventas'],{queryParams: search });
 	}
 }
