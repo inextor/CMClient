@@ -28,10 +28,8 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   vent={
     id:null
   };
-  user={
-    nombre:''
-  }
-  usuario: Usuario=null;
+
+  usuario=null;
   todayDate : Date = new Date();
   ngOnInit() {
     // forkJoin([
@@ -52,15 +50,14 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
 			}
 		});
   }
+
   buscar(){
     forkJoin([
       this.rest.venta.search({ eq: { id: this.vent.id} }),
     ]).subscribe((respuestas) => {
       this.venta = respuestas[0];
-      console.log(this.venta)
-      this.rest.usuario.get(this.venta.id_usuario_recepcionista).subscribe((respuestas)=>{
+      this.rest.usuario.search({eq:{id:this.venta.id_usuario_recepcionista}}).subscribe((respuestas)=>{
         this.usuario = respuestas;
-        console.log(this.usuario)
       },(error) => this.showError(error));
     }, (error) => this.showError(error))
   
