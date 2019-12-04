@@ -20,7 +20,7 @@
                       <h4 class="mb-3 mt-3 centered">VENTA</h4>
                     </div>
                    <div> <a>Cliente: {{venta.cliente}}</a></div>
-                   <div>
+                   <div *ngIf="usuario">
                     <a>Le atendio: {{usuario.nombre}} </a>
                    </div>
                     <div><a>Fecha y Hora: {{todayDate | date:'short'}}</a></div>
