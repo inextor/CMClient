@@ -1,7 +1,7 @@
 import { Component, OnInit, Input,Output,EventEmitter  } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Observable, BehaviorSubject,forkJoin } from 'rxjs';
-import { Requisicion, Venta, Usuario } from 'src/app/models/Modelos';
+import { Requisicion, Venta, Usuario, Pago } from 'src/app/models/Modelos';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
@@ -28,8 +28,8 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   vent={
     id:null
   };
-
   usuario=null;
+  pagos: Pago[]=[];
   todayDate : Date = new Date();
   ngOnInit() {
     // forkJoin([
@@ -56,8 +56,12 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
       this.rest.venta.search({ eq: { id: this.vent.id} }),
     ]).subscribe((respuestas) => {
       this.venta = respuestas[0];
-      this.rest.usuario.search({eq:{id:this.venta.id_usuario_recepcionista}}).subscribe((respuestas)=>{
-        this.usuario = respuestas;
+      forkJoin([
+        this.rest.usuario.search({eq:{id:this.venta.id_usuario_recepcionista}}),
+        this.rest.detalle_venta.search({eq:{id_venta:this.venta.id}})
+      ]).subscribe((respuestas)=>{
+        this.usuario = respuestas[0];
+        console.log(this.usuario);
       },(error) => this.showError(error));
     }, (error) => this.showError(error))
   
