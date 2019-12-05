@@ -53,6 +53,7 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
   }
 
   buscar(){
+
     forkJoin([
       this.rest.venta.search({ eq: { id: this.vent.id} }),
     ]).subscribe((respuestas) => {
@@ -66,14 +67,12 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
         
         this.rest.servicio.search({eq:{id:this.detalle_ventas[0].id_servicio}}).subscribe((respuestas)=>{
           this.servicio = respuestas;
-
-          window.print();
-        }),(error)=>this.showError(error);
+          
+       
+        }  ),(error)=>this.showError(error);
       },(error) => this.showError(error));
     }, (error) => this.showError(error))
-  
-   
     //no corresponde con el id recepcionista con los usuarios
-    
   }
+
 }

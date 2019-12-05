@@ -13,18 +13,26 @@
 }
 
 th{
+    width: 40px;
+    max-width: 40px;
     text-align: center;
     padding: 0;
     margin: 0;
     color: #000;
 }
 td{
+    width: 40px;
+    max-width: 40px;
     padding: 0;
     margin: 0;
     text-align: center;
 }
 .bgColor{
     background-color: white;
+}
+.ticket {
+    width: 500px;
+    max-width: 500px;
 }
 .fullwidth{
     padding: 0;

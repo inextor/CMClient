@@ -13,20 +13,20 @@
 
   </div>
 </div>
-<div *ngIf="venta" class="bgColor print">
+<div *ngIf="venta" class="bgColor print ticket">
 
   <div>
     <h4 class="mb-3 mt-3 centered">VENTA</h4>
   </div>
   <div class="row justify-content-center">
-    <div class="col-5 text-center">
+    <div class="col-8 text-center">
       <div><a>{{centro_medico.direccion}}</a></div>
       <div><a>{{centro_medico.telefono}}</a></div>
       <div><a>{{centro_medico.rfc}}</a></div>
     </div>
   </div>
   <div class="row justify-content-left">
-    <div class="col-4">
+    <div class="col-6">
       <div> <a>Cliente: {{venta.cliente}}</a></div>
       <div *ngIf="usuario">
         <a>Le atendio: {{usuario.nombre}} </a>
