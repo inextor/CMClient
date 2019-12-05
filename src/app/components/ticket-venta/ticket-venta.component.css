@@ -15,10 +15,12 @@
 th{
     text-align: center;
     padding: 0;
+    margin: 0;
     color: #000;
 }
 td{
     padding: 0;
+    margin: 0;
     text-align: center;
 }
 .bgColor{
@@ -26,5 +28,12 @@ td{
 }
 .fullwidth{
     padding: 0;
-    width: 100%;
+
+}
+
+table.basica,.basica td,.basica th{
+	border-collapse: collapse;
+    border-color: #edf2f6;
+    border-style: solid;
+    font-size: 1.2em;
 }

@@ -11,3 +11,14 @@ ALTER TABLE `ingreso` ADD `nota` TEXT NULL DEFAULT NULL AFTER `monto`;
 ALTER TABLE `cita` CHANGE `estatus` `estatus` ENUM('ACTIVA','CANCELADA','PENDIENTE') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
 
 ALTER TABLE `pago` CHANGE `tarjeta_credito` `tarjeta` DECIMAL(10,2) NOT NULL DEFAULT '0.00';
+
+
+
+
+//nuevos campos para la tabla de centros medicos
+
+ALTER TABLE `centro_medico` ADD `id_imagen_ticket` INT(11) NULL DEFAULT NULL AFTER `id_imagen`;
+ALTER TABLE `centro_medico` ADD `telefono` VARCHAR(16) NOT NULL AFTER `nombre`;
+ALTER TABLE `centro_medico` ADD `rfc` VARCHAR(50) NOT NULL AFTER `telefono`; 
+ALTER TABLE `centro_medico` ADD `direccion` VARCHAR(100) NOT NULL AFTER `rfc`;
+ALTER TABLE `centro_medico` ADD `saludo_ticket` TEXT NOT NULL AFTER `id_imagen_ticket`;
