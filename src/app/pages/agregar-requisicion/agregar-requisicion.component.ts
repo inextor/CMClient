@@ -12,9 +12,11 @@ interface OldSearch {
   [key: string]: Servicio[];
 }
 
-interface ServicioDetalle {
-  servicio: Servicio;
-  requisicion:Requisicion
+interface requisicionDetalle {
+  servicio:Servicio;
+  requisicion:Requisicion;
+  detalles_requisicion: Detalle_Requisicion;
+
 }
 
 @Component({
@@ -31,9 +33,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   search_servicios: Servicio[] = [];
   busqueda: string = '';
   todos_servicios: [] = [];
-  detalle_servicios: ServicioDetalle[] = [];
-  proveedores: Proveedor[] = []
-  requisicion: Requisicion[]=[]
+  detalle_requisiciones: requisicionDetalle[] = [];
+  proveedores: Proveedor[] = [];
+  requisicion: Requisicion[]=[];
 
   ngOnInit() {
     forkJoin([
@@ -55,26 +57,27 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   }
 
   agregarServicio(servicio: Servicio) {
-    let s = this.detalle_servicios.find(i => i.servicio.id == servicio.id);
+    let s = this.detalle_requisiciones.find(i => i.servicio.id == servicio.id);
     if (s) {
       this.busqueda = '';
       this.aumentar(s);
       return;
     }
-//no funciona :)
-    // this.detalle_servicios.push({
-    //   servicio
-    //   , requisicion
-    
-      
-    // });
+
+    this.detalle_requisiciones.push({servicio,requisicion:{
+    },detalles_requisicion:{
+      id_servicio	: servicio.id,
+      cantidad	: 1,
+    } 
+    });
   
 
     this.busqueda = '';
     this.search_servicios = [];
   }
-  aumentar(detalle_servicio) {
-    detalle_servicio.detalle_requisicion.cantidad++;
+
+  aumentar(detalle_requisiciones) {
+    detalle_requisiciones.detalles_requisicion.cantidad++;
   }
 
   // guardar() {

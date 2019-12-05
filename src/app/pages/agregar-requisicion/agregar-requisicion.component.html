@@ -101,16 +101,16 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr *ngFor="let sd of detalle_servicios">
+                                        <tr *ngFor="let sd of detalle_requisiciones">
                                             <th>
                                                 <label>{{sd.servicio.nombre | titlecase}}</label>
                                             </th>
                                             <th>
-                                                <input type="number" [(ngModel)]="sd.requisicion.total_articulos"
+                                                <input type="number" [(ngModel)]="sd.detalles_requisicion.cantidad"
                                                     step="1" min=0>
                                             </th>
                                             <th>
-                                                    <input type="number" [(ngModel)]="sd.requisicion.total"
+                                                    <input type="number" [(ngModel)]="sd.detalles_requisicion.costo"
                                                         step="1" min=0>
                                                 </th>
                                             <th>
