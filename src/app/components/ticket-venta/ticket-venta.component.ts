@@ -62,18 +62,17 @@ export class TicketVentaComponent extends BaseComponent implements OnInit {
         this.rest.detalle_venta.search({eq:{id_venta:this.venta.id}}),
       ]).subscribe((respuestas)=>{
         this.usuario = respuestas[0];
-        console.log(this.usuario);
         this.detalle_ventas = respuestas[1].datos;
-        console.log(this.detalle_ventas);
         
         this.rest.servicio.search({eq:{id:this.detalle_ventas[0].id_servicio}}).subscribe((respuestas)=>{
           this.servicio = respuestas;
-          console.log(this.servicio)
+
+          window.print();
         }),(error)=>this.showError(error);
       },(error) => this.showError(error));
     }, (error) => this.showError(error))
   
-
+   
     //no corresponde con el id recepcionista con los usuarios
     
   }
