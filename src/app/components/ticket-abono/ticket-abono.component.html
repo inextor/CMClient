@@ -1,64 +1,82 @@
 <div class="card p-3 no-print" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Imprimit Ticket Abono</h5>
-            <form>
-            <div class="form-group">
-                <label position="stacked">Abono<span color="danger">*</span></label>
-                <input required type="text" class="form-control" name="monto" [(ngModel)]="ingreso.monto">
-            </div>
-        </form>
-            <p class="card-text">Desea imprimir?</p>
-            
-            <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a>
-            <a class="btn text-light ml-3 btn-primary" type="submit" (click)="guardar()">Aceptar</a>
-         
-        </div>
+  <div class="card-body">
+    <h5 class="card-title">Imprimit Ticket Abono</h5>
+    <form>
+      <div class="form-group">
+        <label position="stacked">Abono<span color="danger">*</span></label>
+        <input required type="text" class="form-control" name="id" [(ngModel)]="vent.id">
+      </div>
+    </form>
+    <p class="card-text">Desea imprimir?</p>
+    <!-- <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a> -->
+    <a class="btn text-light ml-3 btn-primary" type="submit" (click)="buscar()">Aceptar</a>
+
+  </div>
+</div>
+<div *ngIf="venta" class="bgColor print ticket">
+
+  <div>
+    <h4 class="mb-3 mt-3 centered">VENTA</h4>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 text-center">
+      <div><a>{{centro_medico.direccion}}</a></div>
+      <div><a>{{centro_medico.telefono}}</a></div>
+      <div><a>{{centro_medico.rfc}}</a></div>
+    </div>
+  </div>
+  <div class="row justify-content-left">
+    <div class="col-6">
+      <div> <a>Cliente: {{venta.cliente}}</a></div>
+      <div *ngIf="usuario">
+        <a>Le atendio: {{usuario.nombre}} </a>
+      </div>
+      <div><a>Fecha y Hora: {{todayDate | date:'short'}}</a></div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Cantidad</th>
+          <th>Servicio</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle_venta of detalle_ventas">
+          <td>{{detalle_venta.cantidad}}</td>
+          <td *ngIf="servicio">{{servicio.nombre}}</td>
+          <td>{{detalle_venta.precio}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-2 text-right pb-2">
+
+      <div><a>SUBTOTAL:</a></div>
+      <div><a>IVA:</a></div>
+      <div><a>TOTAL:</a></div>
+      <div><a>Efectivo:</a></div>
+      <div><a>Pendiente:</a></div>
+
+    </div>
+    <div class="col-2 text-right pb-2">
+
+      <div> <a> {{venta.subtotal}}</a></div>
+      <div> <a>{{venta.iva}}</a></div>
+      <div><a>{{venta.total}}</a></div>
+      <div><a>{{venta.efectivo_desc}}</a></div>
+      <div><a>{{venta.pendiente}}</a></div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4 text-center">
+      <div><a>{{centro_medico.saludo_ticket}}</a></div>
+      <div><a>:^)</a></div>
     </div>
 
-<div class="container print bloqueAbono" [ngClass]="{'d-block':show,'app-modal':true}">
-    <div class="row">
-        <div class="  align-self-center">
-            <div class="card">
-                    <h4 class="mb-3 mt-3 centered">ABONO</h4>
-                    <a>Cliente: Daniel</a>
-                    <a>Le atendio: Daniel</a>
-                    <a>Fecha: dd/mm/aaaa</a>
-                    <a>Hora: 01:18 PM</a>
+  </div>
 
-                    <div class="mt-2">
-                            <table class="table">
-                                    <thead >
-                                      <tr >
-                                        <th >Venta</th>
-                                        <th >Adeudo</th>
-                                        <th >Abono</th>
-                                        <th >No. Adeudo</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr >
-                                        <td >1</td>
-                                        <td>Mark</td> 
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                      </tr>
-                                      <tr>
-                                          <td>Total</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                    </div>
-                        <a> SUBTOTAL: 1</a>
-                        <a>IVA: 2</a>
-                        <a>TOTAL:</a>
-                        <a>Efectivo:</a>
-                        <a>Pendiente: </a>
-
-                        <a>Gracias por su preferencia!</a>
-                        <a></a>
-                    
-            </div>
-        </div>
-
-    </div>
 </div>

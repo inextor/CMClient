@@ -14,6 +14,14 @@ export interface Centro_Medico{
   id_organizacion?:number;
   nombre?:string;
   id_imagen?:number;
+  id_imagen_ticket?:number;
+  rfc?:string;
+  telefono?:string;
+  ciudad?:string;
+  estado?:string;
+  direccion?:string;
+  codigo_postal?:number;
+  saludo_ticket?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
   iva?:number;
