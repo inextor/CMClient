@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../../services/rest.service';
+import { RestService,DetalleServicio  } from '../../services/rest.service';
 import { Usuario,Tipo_Precio,Precio_Servicio} from '../../models/Modelos';
 import { Router,ActivatedRoute,Params} from "@angular/router"
 import { Location } from	'@angular/common';
@@ -20,11 +20,7 @@ interface OldSearch{
 	[key:string]:Servicio[];
 }
 
-interface ServicioDetalle{
-	detalle_venta:Detalle_Venta;
-	servicio:Servicio;
-	precio_servicio?:Precio_Servicio;
-}
+
 
 interface Info_Precio
 {
@@ -60,7 +56,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	centro_medico:Centro_Medico	= {};
 	busquedas:OldSearch			= {};
 	todos_servicios:[] 			= [];
-	detalle_servicios:ServicioDetalle[]	= [];
+	detalle_servicios:DetalleServicio[]	= [];
 	total						= 0;
 	pagos:Pago[]				= [];
 	tipo_precios:Tipo_Precio[]	= [];
@@ -97,23 +93,44 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	ngOnInit()
 	{
-		forkJoin
-		([
-			this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
-			,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
-		])
-		.subscribe((response)=>
-		{
-			let response_precios	= response[0];
-			this.centro_medico		= response[1];
-			this.tipo_precios		= response[0].datos;
 
-			if( response_precios.datos.length )
+		this.route.paramMap.subscribe( params =>
+		{
+			let id =  params.get('id') ? parseInt( params.get('id' ) ): null;
+
+			let subscription = null;
+
+			if( id )
 			{
-				this.venta.cliente			= response[0].datos[0].nombre;
-				this.venta.id_tipo_precio	= response[0].datos[0].id;
-				this.venta.id_centro_medico	= this.rest.getCurrentCentroMedico();
+				subscription= forkJoin
+				([
+					this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
+					,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
+				]);
 			}
+			else
+			{
+				subscription = forkJoin
+				([
+					this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
+					,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
+				]);
+			}
+
+
+			subscription.subscribe((response)=>
+			{
+				let response_precios	= response[0];
+				this.centro_medico		= response[1];
+				this.tipo_precios		= response[0].datos;
+
+				if( response_precios.datos.length )
+				{
+					this.venta.cliente			= response[0].datos[0].nombre;
+					this.venta.id_tipo_precio	= response[0].datos[0].id;
+					this.venta.id_centro_medico	= this.rest.getCurrentCentroMedico();
+				}
+			});
 		});
 	}
 	changeTipoCliente(value)
@@ -313,4 +330,6 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 		this.pago.cambio		= this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
 	}
+
+
 }

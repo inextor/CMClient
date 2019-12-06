@@ -21,7 +21,7 @@ import { SearchObject } from 'src/app/models/Respuestas';
 export class VentasComponent extends BaseComponent implements OnInit {
 
 
-	
+
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
@@ -119,12 +119,12 @@ export class VentasComponent extends BaseComponent implements OnInit {
 			this.venta_search.ge.tipo_cambio	= "ge.tipo_cambio" in params ?params["ge.tipo_cambio"]:null;
 			this.venta_search.gt.tipo_cambio	= "gt.tipo_cambio" in params ?params["gt.tipo_cambio"]:null;
 			this.venta_search.lk.tipo_cambio	= "lk.tipo_cambio" in params ?params["lk.tipo_cambio"]:null;
-			this.venta_search.eq.id_usuario_recepcionista	= "eq.id_usuario_recepcionista" in params ?params["eq.id_usuario_recepcionista"]:null;
-			this.venta_search.le.id_usuario_recepcionista	= "le.id_usuario_recepcionista" in params ?params["le.id_usuario_recepcionista"]:null;
-			this.venta_search.lt.id_usuario_recepcionista	= "lt.id_usuario_recepcionista" in params ?params["lt.id_usuario_recepcionista"]:null;
-			this.venta_search.ge.id_usuario_recepcionista	= "ge.id_usuario_recepcionista" in params ?params["ge.id_usuario_recepcionista"]:null;
-			this.venta_search.gt.id_usuario_recepcionista	= "gt.id_usuario_recepcionista" in params ?params["gt.id_usuario_recepcionista"]:null;
-			this.venta_search.lk.id_usuario_recepcionista	= "lk.id_usuario_recepcionista" in params ?params["lk.id_usuario_recepcionista"]:null;
+			this.venta_search.eq.id_usuario_atendio	= "eq.id_usuario_atendio" in params ?params["eq.id_usuario_atendio"]:null;
+			this.venta_search.le.id_usuario_atendio	= "le.id_usuario_atendio" in params ?params["le.id_usuario_atendio"]:null;
+			this.venta_search.lt.id_usuario_atendio	= "lt.id_usuario_atendio" in params ?params["lt.id_usuario_atendio"]:null;
+			this.venta_search.ge.id_usuario_atendio	= "ge.id_usuario_atendio" in params ?params["ge.id_usuario_atendio"]:null;
+			this.venta_search.gt.id_usuario_atendio	= "gt.id_usuario_atendio" in params ?params["gt.id_usuario_atendio"]:null;
+			this.venta_search.lk.id_usuario_atendio	= "lk.id_usuario_atendio" in params ?params["lk.id_usuario_atendio"]:null;
 			this.venta_search.eq.cupon_desc	= "eq.cupon_desc" in params ?params["eq.cupon_desc"]:null;
 			this.venta_search.le.cupon_desc	= "le.cupon_desc" in params ?params["le.cupon_desc"]:null;
 			this.venta_search.lt.cupon_desc	= "lt.cupon_desc" in params ?params["lt.cupon_desc"]:null;
