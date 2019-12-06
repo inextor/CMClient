@@ -22,3 +22,5 @@ ALTER TABLE `centro_medico` ADD `telefono` VARCHAR(16) NOT NULL AFTER `nombre`;
 ALTER TABLE `centro_medico` ADD `rfc` VARCHAR(50) NOT NULL AFTER `telefono`; 
 ALTER TABLE `centro_medico` ADD `direccion` VARCHAR(100) NOT NULL AFTER `rfc`;
 ALTER TABLE `centro_medico` ADD `saludo_ticket` TEXT NOT NULL AFTER `id_imagen_ticket`;
+ALTER TABLE `centro_medico` ADD `ciudad` VARCHAR(60) NULL DEFAULT NULL AFTER `rfc`;
+ALTER TABLE `centro_medico` ADD `estado` VARCHAR(60) NULL DEFAULT NULL AFTER `ciudad`, ADD `codigo_postal` INT(20) NOT NULL AFTER `estado`;
