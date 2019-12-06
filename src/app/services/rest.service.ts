@@ -33,6 +33,7 @@ export interface DatosVenta
 	detalles		: DetalleServicio[];
 	cliente			?: Usuario;
 	atendio			: Usuario;
+	pagos			: Pago[];
 };
 
 @Injectable({
@@ -519,14 +520,16 @@ export class RestService {
 
 		return forkJoin
 		([
-			this.venta.get( id_venta ),
-			this.detalle_venta.search({ eq:{ id_venta: id_venta}, limite:10000})
+			this.venta.get( id_venta )
+			,this.detalle_venta.search({ eq:{ id_venta: id_venta}, limite:10000})
+			,this.pago.search({ eq:{ id_venta: id_venta}, limite: 10000})
 		]).pipe
 		(
 			flatMap((responses)=>
 			{
 				let venta:Venta						= responses[0];
 				let detalles_venta:Detalle_Venta[]	= responses[1].datos;
+				let pagos:Pago[]					= responses[2].datos;
 
 				let ids			= detalles_venta.map( dv=>dv.id_servicio );
 
@@ -534,6 +537,7 @@ export class RestService {
 				([
 					of(venta)
 					,of(detalles_venta)
+					,of(pagos)
 					,this.servicio.search({csv:{ 'id':ids }})
 					,this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
 					,this.centro_medico.get( venta.id_centro_medico )
@@ -545,11 +549,12 @@ export class RestService {
 			{
 				let venta:Venta							= responses[0];
 				let detalles_venta:Detalle_Venta[]		= responses[1];
-				let servicios:Servicio[]				= responses[2].datos;
-				let precios_servicios:Precio_Servicio[]	= responses[3].datos;
-				let centro_medico:Centro_Medico			= responses[4];
-				let atendio:Usuario						= responses[5];
-				let cliente:Usuario						= responses[6];
+				let pagos:Pago[]						= responses[2];
+				let servicios:Servicio[]				= responses[3].datos;
+				let precios_servicios:Precio_Servicio[]	= responses[4].datos;
+				let centro_medico:Centro_Medico			= responses[5];
+				let atendio:Usuario						= responses[6];
+				let cliente:Usuario						= responses[7];
 
 				//getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
 				let detalles:DetalleServicio[] = this.getDetalleServicios( servicios, detalles_venta, precios_servicios );
@@ -560,6 +565,7 @@ export class RestService {
 					,detalles
 					,cliente
 					,atendio
+					,pagos
 				};
 
 				return of( dato );
