@@ -41,7 +41,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
 	onSeleccionarCentroMedico(centro_medico:Centro_Medico)
 	{
-		localStorage.setItem('id_centro_medico', ''+centro_medico.id );
+		localStorage.setItem("centro_medico",JSON.stringify(centro_medico));
 		this.show_seleccionar_centro_medico = false;
 	}
 }

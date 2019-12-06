@@ -30,16 +30,18 @@ td{
 .bgColor{
     background-color: white;
 }
-.ticket {
-    width: 500px;
-    max-width: 500px;
-}
+
 .fullwidth{
     padding: 0;
-
+    width: 100%;
+}
+.ticket{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .ticket-imagen{
-    width: 90%;
+    width: 100%;
 
 }
 table.basica,.basica td,.basica th{

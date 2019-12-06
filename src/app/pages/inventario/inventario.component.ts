@@ -49,10 +49,10 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 			this.searchServicio.eq.tipo		= 'PRODUCTO_FISICO';
 			this.searchServicio.lk.nombre	= 'nombre' in params ? params.nombre : '';
 			this.searchServicio.pagina		= 'pagina' in params ? params.pagina : 0;
-
+			let usuario = this.rest.getUsuarioSesion();
 			forkJoin([
 				this.rest.servicio.search( this.searchServicio ),
-				this.rest.centro_medico.search({eq:{ id_organizacion: this.rest.getUsuarioOrganizacion() }}),
+				this.rest.centro_medico.search({eq:{ id_organizacion: usuario.id_organizacion }}),
 			]).subscribe((respuestas)=>
 			{
 				let respuestaServicios  =respuestas[0];

@@ -176,11 +176,11 @@ export class RestService {
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
 	}
 
-	getCurrentCentroMedico()
+	getCurrentCentroMedico():Centro_Medico
 	{
-		let c_id = localStorage.getItem('id_centro_medico');
+		let c_id = localStorage.getItem('centro_medico');
 		if( c_id !== null && c_id !== undefined )
-			return parseInt( c_id );
+			return JSON.parse( c_id );
 
 		return null;
 	}
@@ -214,20 +214,7 @@ export class RestService {
 		return result;
 	}
 
-	activeMenu(){
-		if(this.isLoggedIn){
-			if(localStorage.getItem('activate_menu')!=null){
-				if(localStorage.getItem('activate_menu')=='true'){
-					localStorage.setItem('activate_menu', 'false')
-				}else{
-					localStorage.setItem('activate_menu', 'true')
-				}
-			}else{
-				localStorage.setItem("activate_menu", 'true');
-			}
-		}
-	}
-	statusMenu(){
+	statusMenu():boolean{
 		if(this.isLoggedIn){
 			if(localStorage.getItem("activate_menu")=='true'){
 				return true
@@ -258,12 +245,7 @@ export class RestService {
 		}
 		return true;
 	}
-
-	getOrganizacion()
-	{
-		return 1;
-	}
-	getSessionHeaders()
+	getSessionHeaders():HttpHeaders
 	{
 		if( localStorage.getItem('session_token') == null )
 		{
@@ -275,7 +257,7 @@ export class RestService {
 		return headers;
 	}
 
-	isLoggedIn()
+	isLoggedIn():boolean
 	{
 		let token = localStorage.getItem('session_token');
 		if( token )
@@ -284,20 +266,12 @@ export class RestService {
 		return false;
 	}
 
-	getUsuarioOrganizacion(){
+	getUsuarioOrganizacion():Organizacion{
 		let user_org = localStorage.getItem('id_organizacion')
 		if( user_org == null)
 			return null
 
 		let user_data = this.transformJson(user_org);
-	}
-
-	getUsuarioCentroMedico(){
-		let user_cm = localStorage.getItem('id_centro_medico')
-		if( user_cm == null)
-			return null
-
-		let user_data = this.transformJson(user_cm);
 	}
 
 	getUsuarioSesion():Usuario
@@ -337,7 +311,7 @@ export class RestService {
 		});
 	}
 
-	getLocalDateFromMysqlString(str:string)
+	getLocalDateFromMysqlString(str:string):Date
 	{
 		let components = str.split(/-|:|\s/g);
 		let d = new Date(parseInt( components[0] ), //Year
@@ -391,7 +365,7 @@ export class RestService {
 		return event_string;
 	}
 
-	getErrorMessage( error )
+	getErrorMessage( error ):string
 	{
 		if( error == null || error === undefined)
 			return 'Error desconocido';
@@ -471,7 +445,7 @@ export class RestService {
 		return this.http.post(`${this.urlBase}/horario_doctor.php`, { id_doctor: idDoctor, id_centro_medico: idCentroMedico, horarios },{ headers: this.getSessionHeaders()});
 	}
 
-	isMobile()
+	isMobile():boolean
 	{
 		window.navigator.userAgent
 		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);

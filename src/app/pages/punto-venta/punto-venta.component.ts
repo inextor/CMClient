@@ -93,7 +93,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	ngOnInit()
 	{
-
+		let centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.paramMap.subscribe( params =>
 		{
 			let id =  params.get('id') ? parseInt( params.get('id' ) ): null;
@@ -105,7 +105,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				subscription= forkJoin
 				([
 					this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
-					,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
+					,this.rest.centro_medico.get( centro_medico.id )
 				]);
 			}
 			else
@@ -113,7 +113,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				subscription = forkJoin
 				([
 					this.rest.tipo_precio.getAll({ id_organizacion: this.rest.getUsuarioSesion().id_organizacion })
-					,this.rest.centro_medico.get( this.rest.getCurrentCentroMedico() )
+					,this.rest.centro_medico.get( centro_medico.id )
 				]);
 			}
 
@@ -128,7 +128,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				{
 					this.venta.cliente			= response[0].datos[0].nombre;
 					this.venta.id_tipo_precio	= response[0].datos[0].id;
-					this.venta.id_centro_medico	= this.rest.getCurrentCentroMedico();
+					this.venta.id_centro_medico	= centro_medico.id
 				}
 			});
 		});
@@ -221,7 +221,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	agregarServicio(servicio:Servicio)
 	{
 		let s = this.detalle_servicios.find(i=>i.servicio.id == servicio.id );
-
+		
 		if( s )
 		{
 			this.busqueda = '';
@@ -237,14 +237,14 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		}
 		else
 		{
-			let id_centro_medico	= this.rest.getCurrentCentroMedico();
+			let centro_medico = this.rest.getCurrentCentroMedico();
 
 			this.rest.precio_servicio.search
 			({
 				eq:
 				{
 					id_servicio			: servicio.id
-					,id_centro_medico	: id_centro_medico
+					,id_centro_medico	: centro_medico.id
 				}
 			}).subscribe((response)=>
 			{

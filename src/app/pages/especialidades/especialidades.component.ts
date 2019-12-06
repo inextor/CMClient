@@ -42,8 +42,4 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 			},error=>this.showError(error));
 		});
 	}
-	activeMenu(){
-		this.rest.activeMenu();
-		this.statusmenu = this.rest.statusMenu();
-	}
 }

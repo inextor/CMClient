@@ -38,8 +38,10 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   requisicion: Requisicion[]=[];
 
   ngOnInit() {
+    let usuario=this.rest.getUsuarioSesion();
     forkJoin([
-      this.rest.proveedor.search({ eq: { id_organizacion: this.rest.getUsuarioOrganizacion() } }),
+      
+      this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
     ]).subscribe((respuestas) => {
       this.proveedores = respuestas[0].datos;
     }, (error) => this.showError(error));

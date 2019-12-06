@@ -30,11 +30,11 @@ export class TicketAbonoComponent extends BaseComponent implements OnInit {
 	servicio = null;
 	centro_medico = null;
 	todayDate: Date = new Date();
-
 	pago = null;
 	ngOnInit() {
-
-		this.rest.centro_medico.search({ eq: { id: this.rest.getCurrentCentroMedico() } }).subscribe((respuestas) => {
+		let centro_medico=this.rest.getCurrentCentroMedico();
+		console.log(centro_medico)
+		this.rest.centro_medico.search({ eq: { id: centro_medico.id } }).subscribe((respuestas) => {
 			this.centro_medico = respuestas;
 			console.log(this.centro_medico)
 		}, (error) => this.showError(error));

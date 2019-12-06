@@ -22,7 +22,7 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 	}
   ngOnInit() {
     this.titleService.setTitle('Ingresos');
-    let usuario = this.rest.getUsuarioSesion();
+    let usuario = this.rest.getUsuarioSesion().id;
     console.log(usuario)
     this.is_loading = true;
 

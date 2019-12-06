@@ -27,8 +27,9 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit() {
+    let centro_medico = this.rest.getCurrentCentroMedico();
     forkJoin([
-      this.rest.requisicion.search({ eq: { id_centro_medico: this.rest.getCurrentCentroMedico() } }),
+      this.rest.requisicion.search({ eq: { id_centro_medico: centro_medico.id } }),
     ]).subscribe((respuestas) => {
       this.requisiciones = respuestas[0].datos;
       console.log(this.requisiciones)
