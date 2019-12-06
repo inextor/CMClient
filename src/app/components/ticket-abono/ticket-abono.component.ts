@@ -55,7 +55,7 @@ export class TicketAbonoComponent extends BaseComponent implements OnInit {
 		]).subscribe((respuestas) => {
 			this.venta = respuestas[0];
 			forkJoin([
-				this.rest.usuario.search({ eq: { id: this.venta.id_usuario_recepcionista } }),
+				this.rest.usuario.search({ eq: { id: this.venta.id_usuario_atendio } }),
 				this.rest.detalle_venta.search({ eq: { id_venta: this.venta.id } }),
 				this.rest.pago.search({ eq: { id_venta: this.venta.id } })
 			]).subscribe((respuestas) => {
