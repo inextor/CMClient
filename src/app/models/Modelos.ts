@@ -182,7 +182,6 @@ export interface Especialidad_Pregunta{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
-
 };
 
 export interface Expediente{
@@ -483,7 +482,6 @@ export interface Recurso{
   estatus?:string;
   fecha_creacion?:Date;
 
-
 };
 
 export interface Requisicion{
@@ -492,7 +490,6 @@ export interface Requisicion{
   id_usuario_solicito?:number;
   id_usuario_recibio?:number;
   id_proveedor?:number;
-  id_servicio?: number;
   nota?:string;
   flete?:number;
   importacion?:number;
@@ -529,7 +526,6 @@ export interface Servicio{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
-
 };
 
 export interface Sesion{
@@ -547,7 +543,6 @@ export interface Tipo_Gasto{
   nombre?:string;
   tiempo_creacion?:Date;
 
-
 };
 
 export interface Tipo_Precio{
@@ -562,6 +557,7 @@ export interface Tipo_Precio{
 export interface Usuario{
   id?:number;
   usuario?:string;
+  nombre?:string;
   id_organizacion?:number;
   id_imagen?:number;
   tipo?:string;
@@ -572,7 +568,6 @@ export interface Usuario{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
-
 };
 
 export interface Usuario_Centro_Medico{
@@ -581,7 +576,6 @@ export interface Usuario_Centro_Medico{
   id_centro_medico?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
-
 
 };
 
@@ -597,7 +591,7 @@ export interface Venta{
   efectivo_desc?:number;
   dolares_desc?:number;
   tipo_cambio?:number;
-  id_usuario_recepcionista?:number;
+  id_usuario_atendio?:number;
   cupon_desc?:number;
   id_centro_medico?:number;
   fecha?:string;

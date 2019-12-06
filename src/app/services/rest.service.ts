@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject,forkJoin, fromEvent} from 'rxjs';
+import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
+import { catchError,flatMap } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
 import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
@@ -19,6 +19,21 @@ Detalle_Venta, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gas
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
 	Usuario, Venta, Proveedor, Requisicion} from	'../models/Modelos';
 
+
+export interface DetalleServicio {
+	detalle_venta:Detalle_Venta;
+	servicio:Servicio;
+	precio_servicio?:Precio_Servicio;
+}
+
+export interface DatosVenta
+{
+	venta			: Venta;
+	centro_medico	: Centro_Medico;
+	detalles		: DetalleServicio[];
+	cliente			?: Usuario;
+	atendio			: Usuario;
+};
 
 @Injectable({
 	providedIn: 'root'
@@ -463,5 +478,100 @@ export class RestService {
 	showError(error:ErrorMensaje)
 	{
 		this.errorBehaviorSubject.next( error);
+	}
+
+	getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
+	{
+		let servicios_by_id						= {};
+		let precios_by_id_servicio 				= {};
+		let detalleServicios:DetalleServicio[]	= [];
+
+		servicios.forEach((i)=>{ servicios_by_id[ i.id ] = i;});
+		precios_servicios.forEach((i)=> precios_by_id_servicio[ i.id_servicio ] = i );
+
+		detalles_venta.forEach((detalle_venta)=>
+		{
+			if( !( detalle_venta.id_servicio in servicios_by_id ) )
+				console.error('No se encontro el servicio dentro detalle_venta');
+
+			if( !( detalle_venta.id_servicio in precios_by_id_servicio ) )
+				console.error('No se encontro el servicio dentro precio_servicios');
+
+			let servicio		= servicios_by_id[ detalle_venta.id_servicio ];
+			let precio_servicio	= precios_by_id_servicio[ detalle_venta.id_servicio ];
+
+			detalleServicios.push
+			({
+				servicio
+				,precio_servicio
+				,detalle_venta
+			});
+		});
+
+		return detalleServicios;
+	}
+
+	getDatosVenta(id_venta:number):Observable<DatosVenta>
+	{
+		let venta				:Venta				= null;
+		let servicios			:Servicio[] 		= [];
+		let precio_servicios	:Precio_Servicio[]	= [];
+
+		return forkJoin
+		([
+			this.venta.get( id_venta ),
+			this.detalle_venta.search({ eq:{ id_venta: id_venta}, limite:10000})
+		]).pipe
+		(
+			flatMap((responses)=>
+			{
+				let venta:Venta						= responses[0];
+				let detalles_venta:Detalle_Venta[]	= responses[1].datos;
+
+				let ids			= detalles_venta.map( dv=>dv.id_servicio );
+
+				return forkJoin
+				([
+					of(venta)
+					,of(detalles_venta)
+					,this.servicio.search({csv:{ 'id':ids }})
+					,this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
+					,this.centro_medico.get( venta.id_centro_medico )
+					,this.usuario.get( venta.id_usuario_atendio )
+					,venta.id_usuario_cliente ? this.usuario.get( venta.id_usuario_cliente ) : of( null )
+				])
+  			})
+			,flatMap((responses)=>
+			{
+				let venta:Venta							= responses[0];
+				let detalles_venta:Detalle_Venta[]		= responses[1];
+				let servicios:Servicio[]				= responses[2].datos;
+				let precios_servicios:Precio_Servicio[]	= responses[3].datos;
+				let centro_medico:Centro_Medico			= responses[4];
+				let atendio:Usuario						= responses[5];
+				let cliente:Usuario						= responses[6];
+
+				//getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
+				let detalles:DetalleServicio[] = this.getDetalleServicios( servicios, detalles_venta, precios_servicios );
+
+				let dato:DatosVenta = {
+					venta
+					,centro_medico
+					,detalles
+					,cliente
+					,atendio
+				};
+
+				return of( dato );
+
+				//return of({
+				//	venta: venta
+				//	,centro_medico: centro_medico
+				//	,detalles: detalles
+				//	,cliente: cliente
+				//	,atendio: atendio
+				//});
+			})
+		);
 	}
 }
