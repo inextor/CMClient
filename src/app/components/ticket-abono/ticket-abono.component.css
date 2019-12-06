@@ -38,7 +38,10 @@ td{
     padding: 0;
 
 }
+.ticket-imagen{
+    width: 90%;
 
+}
 table.basica,.basica td,.basica th{
 	border-collapse: collapse;
     border-color: #edf2f6;

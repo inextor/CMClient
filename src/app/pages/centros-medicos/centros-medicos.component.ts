@@ -16,7 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
 
-	centros_medicos:Centro_Medico[]		= [];
+	centros_medicos:Centro_Medico[]= [];
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{

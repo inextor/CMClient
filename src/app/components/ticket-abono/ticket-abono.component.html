@@ -13,20 +13,30 @@
 
   </div>
 </div>
-<div *ngIf="venta" class="bgColor print ticket">
 
-  <div>
-    <h4 class="mb-3 mt-3 centered">VENTA</h4>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-8 text-center">
-      <div><a>{{centro_medico.direccion}}</a></div>
-      <div><a>{{centro_medico.telefono}}</a></div>
-      <div><a>{{centro_medico.rfc}}</a></div>
+<div *ngIf="venta" class="bgColor print ticket p-0 m-0">
+  <div class="row justify-content-center ">
+    <div class="col-md-6 text-center mt-2 mb-2">
+      <img *ngIf="centro_medico.id_imagen" src="../assets/logo/Mehr-Software-08.png" class="image_icon ticket-imagen">
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-9 text-center">
+      <div>
+        <a>{{centro_medico.direccion}},&nbsp;{{centro_medico.codigo_postal}},&nbsp;{{centro_medico.ciudad}},&nbsp;{{centro_medico.estado}}</a>
+      </div>
+      <div><a>Teléfono: {{centro_medico.telefono}}</a></div>
+      <div><a>RFC: {{centro_medico.rfc}}</a></div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+      <div class="text-center">
+          <h4 class="mb-3 mt-3 centered">ABONOS</h4>
+        </div>
+  </div>
+  
   <div class="row justify-content-left">
-    <div class="col-6">
+    <div class="col-7">
       <div> <a>Cliente: {{venta.cliente}}</a></div>
       <div *ngIf="usuario">
         <a>Le atendio: {{usuario.nombre}} </a>
@@ -38,16 +48,18 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Cantidad</th>
-          <th>Servicio</th>
-          <th>Precio</th>
+          <th>Venta</th>
+          <th>Adeudo</th>
+          <th>Abono</th>
+          <th>N.Adeudo</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let detalle_venta of detalle_ventas">
-          <td>{{detalle_venta.cantidad}}</td>
-          <td *ngIf="servicio">{{servicio.nombre}}</td>
-          <td>{{detalle_venta.precio}}</td>
+          <td>Folio: {{detalle_venta.id}}</td>
+          <td>{{detalle_venta.total}}</td>
+          <td>{{pago.total}}</td>
+          <td>{{venta.pendiente}}</td>
         </tr>
       </tbody>
     </table>
@@ -64,8 +76,8 @@
     </div>
     <div class="col-2 text-right pb-2">
 
-      <div> <a> {{venta.subtotal}}</a></div>
-      <div> <a>{{venta.iva}}</a></div>
+      <div><a>{{venta.subtotal}}</a></div>
+      <div><a>{{venta.iva}}</a></div>
       <div><a>{{venta.total}}</a></div>
       <div><a>{{venta.efectivo_desc}}</a></div>
       <div><a>{{venta.pendiente}}</a></div>
