@@ -26,10 +26,11 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 
 
   ngOnInit() {
+    let centro_medico=this.rest.getCurrentCentroMedico()
     this.ingreso = {
       monto:null,
       nota:null,
-      id_centro_medico:this.rest.getCurrentCentroMedico()
+      id_centro_medico: centro_medico.id
     };
     let usuario = this.rest.getUsuarioSesion();
     console.log(usuario)

@@ -92,10 +92,11 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
 
       this.is_loading = true;
       console.log(this.nombre)
+      let usuario= this.rest.getUsuarioSesion();
       forkJoin([
         this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
         , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
-        , this.rest.centro_medico.getAll({ id_organizacion: this.rest.getUsuarioOrganizacion() })
+        , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })
         , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
       ]).subscribe((result) => {
         this.paciente = result[0];
