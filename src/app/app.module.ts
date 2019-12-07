@@ -77,6 +77,9 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { VentasUsuarioComponent } from './pages/ventas-usuario/ventas-usuario.component';
 import { TicketAbonoComponent } from './components/ticket-abono/ticket-abono.component';
 import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.component';
+import { ShellComponent } from './components/shell/shell.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -149,6 +152,9 @@ import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.com
     VentasUsuarioComponent,
     TicketAbonoComponent,
     TicketVentaComponent,
+    ShellComponent,
+    DashboardComponent,
+
   ],
   imports: [
     AccessModule,

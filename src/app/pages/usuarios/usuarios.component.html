@@ -1,61 +1,39 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-					<div class="container">
-					<h4 class="mb-3 mt-3">USUARIOS</h4>
-					
-						<div class="pt-2 flex-wrap">
-							<td>
-								<button type="button" class="btn btn-primary btn-sm"
-									[routerLink]="['/agregar-usuario']">
-									Agregar usuario
-								</button>
-							</td>
-						</div>
-						<div class="pt-2 flex-wrap">
-							<!-- (change)="changeSearch($event)" -->
-							<input type="text" class="form-control" position="floating"
-								ionInput="changeSearch($event)" placeholder="buscar">
-						</div>
-						<table class="basica">
-							<thead>
-								<tr>
-									<th>Usuario</th>
-									<th>Correo</th>
-									<th>Telefono</th>
-									<th>Tipo</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let usuario of usuarios">
-									<td>{{usuario.usuario}}</td>
-									<td>{{usuario.correo_electronico}}</td>
-									<td>{{usuario.telefono}}</td>
-									<td>{{usuario.tipo}}</td>
-									<td>
-										<button type="button" class="btn btn-primary btn-sm m-1"
-											[routerLink]="['/editar-usuario',usuario.id]">Editar</button>
-									</td>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3">USUARIOS</h4>
+		<div class="pt-2 flex-wrap">
+			<td>
+				<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-usuario']">
+					Agregar usuario
+				</button>
+			</td>
 		</div>
+		<div class="pt-2 flex-wrap">
+			<!-- (change)="changeSearch($event)" -->
+			<input type="text" class="form-control" position="floating" ionInput="changeSearch($event)"
+				placeholder="buscar">
+		</div>
+		<table class="basica">
+			<thead>
+				<tr>
+					<th>Usuario</th>
+					<th>Correo</th>
+					<th>Telefono</th>
+					<th>Tipo</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let usuario of usuarios">
+					<td>{{usuario.usuario}}</td>
+					<td>{{usuario.correo_electronico}}</td>
+					<td>{{usuario.telefono}}</td>
+					<td>{{usuario.tipo}}</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-usuario',usuario.id]">Editar</button>
+					</td>
+			</tbody>
+		</table>
 	</div>
 </div>

@@ -1,23 +1,8 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-						<div class="container">
-					<h4 class="mb-3 mt-3">GASTOS</h4>
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3">GASTOS</h4>
 
-					<!--div d-flex>
+		<!--div d-flex>
 							<div class="form-group">
 								<label position="stacked">Referencia<span color="danger">*</span></label>
 								<input required type="text" class="form-control" name="nombre" [(ngModel)]="gasto_centro_medico.referencia">
@@ -37,42 +22,37 @@
 								</select>
 							</div>
 					</div-->
-				
-						<td>
-							<button type="button" class="btn btn-primary" [routerLink]="['/agregar-gasto']" size="small">Agregar gasto</button>
-						</td>
-						<table class="basica">
-							<thead>
-								<tr>
-									<th>id</th>
-									<th>descripcion</th>
-									<th>Usuario</th>
-									<th>Monto</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngIf="gastos.length==0 && !is_loading" class="text-center">
-									<td colspan="4">No se encontraron registros</td>
-								</tr>
-								<tr *ngIf="is_loading">
-									<td colspan="2">
-										<app-loading [is_loading]="is_loading"></app-loading>
-									</td>
-								</tr>
 
-								<tr *ngFor="let g of gastos">
-									<td>{{g.gasto_centro_medico.id}}</td>
-									<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
-									<td>{{g.usuario.usuario}}</td>
-									<td>{{g.gasto_centro_medico.monto | currency: '$'}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+		<td>
+			<button type="button" class="btn btn-primary" [routerLink]="['/agregar-gasto']" size="small">Agregar
+				gasto</button>
+		</td>
+		<table class="basica">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>descripcion</th>
+					<th>Usuario</th>
+					<th>Monto</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="gastos.length==0 && !is_loading" class="text-center">
+					<td colspan="4">No se encontraron registros</td>
+				</tr>
+				<tr *ngIf="is_loading">
+					<td colspan="2">
+						<app-loading [is_loading]="is_loading"></app-loading>
+					</td>
+				</tr>
 
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
-		</div>
+				<tr *ngFor="let g of gastos">
+					<td>{{g.gasto_centro_medico.id}}</td>
+					<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
+					<td>{{g.usuario.usuario}}</td>
+					<td>{{g.gasto_centro_medico.monto | currency: '$'}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

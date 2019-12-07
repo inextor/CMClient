@@ -1,56 +1,39 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-								<div class="container">
-					<h4 class="mb-3 mt-3">CENTROS MEDICOS</h4>
-					<td>
-						<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-centro-medico']">
-							Agregar Clinica
-						</button>
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3">CENTROS MEDICOS</h4>
+		<td>
+			<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-centro-medico']">
+				Agregar Clinica
+			</button>
+		</td>
+		<table class="basica">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="is_loading">
+					<td colspan="2">
+						<app-loading [is_loading]="is_loading"></app-loading>
 					</td>
-					<table class="basica">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngIf="is_loading">
-								<td colspan="2">
-									<app-loading [is_loading]="is_loading"></app-loading>
-								</td>
-							</tr>
-							<tr *ngFor="let centro_medico of centros_medicos">
-								<td>
-									<img *ngIf="centro_medico.id_imagen" [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" class="image_icon">
-									<img *ngIf="!centro_medico.id_imagen" src="/assets/hospital_icon.png" class="image_icon">
-									{{centro_medico.nombre}}
-								</td>
-								<td>
-									<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
-									<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/servicios',centro_medico.id]">Servicios</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
-		</div>
+				</tr>
+				<tr *ngFor="let centro_medico of centros_medicos">
+					<td>
+						<img *ngIf="centro_medico.id_imagen"
+							[src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" class="image_icon">
+						<img *ngIf="!centro_medico.id_imagen" src="/assets/hospital_icon.png" class="image_icon">
+						{{centro_medico.nombre}}
+					</td>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-centro-medico',centro_medico.id]">Editar</button>
+						<button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/servicios',centro_medico.id]">Servicios</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

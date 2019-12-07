@@ -1,22 +1,27 @@
+
 <!-- NAVBAR -->
 <div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<button class="btn btn-primary" (click)="rest.showError({mensaje:'FOOOOOOOOOOOO',tipo:'alert-success'})">Display Error</button>
-			</main>
-			<!-- FIN CONTENIDO -->
-		</div>
-	</div>
-</div>
+        <header>
+            <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
+        </header>
+        <!-- FIN NAVBAR -->
+        <div>
+            <div class="page_content">
+                <!-- MENU -->
+                <div class="pt-2 flex-wrap justify-content-start">
+                    <app-menu></app-menu>
+                </div>
+                <!-- FIN MENU -->
+                <!-- CONTENIDO -->
+                <main class="p-2">
+                    <div class="container">
+							<router-outlet></router-outlet>
+                    </div>
+                       
+                </main>
+                <!-- FIN CONTENIDO -->
+            </div>
+        </div>
+    </div>
+
 <app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" (selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>

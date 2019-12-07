@@ -1,57 +1,37 @@
-<!-- NAVBAR -->
-<div class="page">
-        <header>
-            <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-        </header>
-        <!-- FIN NAVBAR -->
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3">REQUISICIONES</h4>
         <div>
-            <div class="page_content">
-                <!-- MENU -->
-                <div class="pt-2 flex-wrap justify-content-start">
-                    <app-menu></app-menu>
-                </div>
-                <!-- FIN MENU -->
-                <!-- CONTENIDO -->
-                <main class="p-2">
-                    <div class="card p-3">
-                        <div class="container">
-                        <h4 class="mb-3 mt-3">REQUISICIONES</h4>
-                        <div>
-                            <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-sm btn-primary">Agregar Requisicion</button>
-                        </div>
-                        <table class="basica">
-                            <thead>
-                                <tr>
-                                    <th>Orden</th>
-                                    <th>Estatus</th>
-                                    <th>Proveedor</th>
-                                    <th>Fecha Creacion</th>
-                                    <th>Fecha Entrega</th>
-                                    <th>No. Pedimento</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let requisicion of requisiciones">
-                                    <td>{{requisicion.id}}</td>
-                                    <td>{{requisicion.estatus}}</td>
-                                    <td>{{requisicion.id_proveedor}}</td>
-                                    <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
-                                    <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
-                                    <td>{{requisicion.pedimento}}</td>
-                                    <td>{{requisicion.total}}</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary m-1" >Editar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    
-                        </div>
-                    </div>
-                </main>
-                <!-- FIN CONTENIDO -->
-            </div>
+            <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-sm btn-primary">Agregar
+                Requisicion</button>
         </div>
+        <table class="basica">
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Estatus</th>
+                    <th>Proveedor</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Entrega</th>
+                    <th>No. Pedimento</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let requisicion of requisiciones">
+                    <td>{{requisicion.id}}</td>
+                    <td>{{requisicion.estatus}}</td>
+                    <td>{{requisicion.id_proveedor}}</td>
+                    <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
+                    <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
+                    <td>{{requisicion.pedimento}}</td>
+                    <td>{{requisicion.total}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary m-1">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>

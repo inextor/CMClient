@@ -1,45 +1,26 @@
-<!-- NAVBAR -->
-<div class="page">
-    <header>
-        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-    </header>
-    <!-- FIN NAVBAR -->
-    <div>
-        <div class="page_content">
-            <!-- MENU -->
-            <div class="pt-2 flex-wrap justify-content-start">
-                <app-menu></app-menu>
-            </div>
-            <!-- FIN MENU -->
-            <!-- CONTENIDO -->
-            <main class="p-2">
-                <div class="card p-3">
-                    <div class="container">
-                    <h4 class="mb-3 mt-3">PROVEEDORES</h4>
-					<div>
-						<button [routerLink]="['/agregar-proveedor']" type="button" class="btn btn-sm btn-primary">Agregar Proveedor</button>
-					</div>
-					<table class="basica">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let proveedor of proveedores">
-								<td>{{proveedor.nombre}}</td>
-								<td>
-									<button class="btn btn-sm btn-primary m-1"  [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-                    </div>
-                </div>
-            </main>
-            <!-- FIN CONTENIDO -->
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3">PROVEEDORES</h4>
+        <div>
+            <button [routerLink]="['/agregar-proveedor']" type="button" class="btn btn-sm btn-primary">Agregar
+                Proveedor</button>
         </div>
+        <table class="basica">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proveedor of proveedores">
+                    <td>{{proveedor.nombre}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary m-1"
+                            [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

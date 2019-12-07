@@ -1,116 +1,85 @@
-<!-- NAVBAR -->
-<div class="page">
-    <header>
-        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-    </header>
-    <!-- FIN NAVBAR -->
-    <div>
-        <div class="page_content">
-            <!-- MENU -->
-            <div class="pt-2 flex-wrap justify-content-start">
-                <app-menu></app-menu>
+<div class="card p-3">
+    <app-loading [display]="is_loading"></app-loading>
+    <div class="container">
+        <h5>AGREGAR PACIENTE</h5>
+        <form>
+            <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
+            <div *ngIf="usuario.id_imagen">
+                <img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
             </div>
-            <!-- FIN MENU -->
-            <!-- CONTENIDO -->
-            <main class="p-2">
-                <div class="card p-3">
-
-                    <app-loading [display]="is_loading"></app-loading>
-                    <div class="container">
-                        <h5>AGREGAR PACIENTE</h5>
-                        <form>
-                            <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
-                            <div *ngIf="usuario.id_imagen">
-                                <img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
-                            </div>
-
-                            <input type="file" (change)="uploadImage($event)" name="image">
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Nombre<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="nombre"
-                                        [(ngModel)]="paciente.nombre">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Apellido<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="nombre"
-                                        [(ngModel)]="paciente.apellidos">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Sexo<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="nombre"
-                                        [(ngModel)]="paciente.sexo">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
-
-                                    <input required type="date" class="form-control" name="nombre"
-                                        [(ngModel)]="paciente.fecha_nacimiento">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Telefono(celular)<span color="danger">*</span></label>
-                                    <input required type="tel" class="form-control" name="telefono_celular"
-                                        [(ngModel)]="paciente.telefono">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Domicilio<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="domicilio"
-                                        [(ngModel)]="paciente.domicilio">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="correo_electronico"
-                                        [(ngModel)]="usuario.correo_electronico">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Usuario<span color="danger">*</span></label>
-                                    <input required type="text" class="form-control" name="usuario"
-                                        [(ngModel)]="usuario.usuario">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Contraseña</label>
-                                    <input placeholder="" type="password" class="form-control" name="contrasena"
-                                        [(ngModel)]="usuario.contrasena">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Confirmar contraseña</label>
-                                    <input placeholder="" type="password" class="form-control"
-                                        name="confirmar_contrasena" [(ngModel)]="confirmar_contrasena">
-                                </div>
-
-                            </div>
-                            <label>*Informacion de padres o responsable del paciente</label>
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Nombre Tutor</label>
-                                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                                        [(ngModel)]="paciente.nombre_tutor">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Correo Electronico</label>
-                                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                                        [(ngModel)]="paciente.correo_electronico_tutor">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label position="stacked">Telefono</label>
-                                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                                        [(ngModel)]="paciente.telefono_tutor">
-                                </div>
-
-                            </div>
-                            <div class="">
-                                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
-                            </div>
-                        </form>
-                    </div>
-
+            <input type="file" (change)="uploadImage($event)" name="image">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label position="stacked">Nombre<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
                 </div>
-            </main>
-            <!-- FIN CONTENIDO -->
-        </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Apellido<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.apellidos">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Sexo<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.sexo">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
+
+                    <input required type="date" class="form-control" name="nombre"
+                        [(ngModel)]="paciente.fecha_nacimiento">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Telefono(celular)<span color="danger">*</span></label>
+                    <input required type="tel" class="form-control" name="telefono_celular"
+                        [(ngModel)]="paciente.telefono">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Domicilio<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="domicilio" [(ngModel)]="paciente.domicilio">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="correo_electronico"
+                        [(ngModel)]="usuario.correo_electronico">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Usuario<span color="danger">*</span></label>
+                    <input required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Contraseña</label>
+                    <input placeholder="" type="password" class="form-control" name="contrasena"
+                        [(ngModel)]="usuario.contrasena">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Confirmar contraseña</label>
+                    <input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
+                        [(ngModel)]="confirmar_contrasena">
+                </div>
+            </div>
+            <label>*Informacion de padres o responsable del paciente</label>
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label position="stacked">Nombre Tutor</label>
+                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
+                        [(ngModel)]="paciente.nombre_tutor">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Correo Electronico</label>
+                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
+                        [(ngModel)]="paciente.correo_electronico_tutor">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Telefono</label>
+                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
+                        [(ngModel)]="paciente.telefono_tutor">
+                </div>
+            </div>
+            <div class="">
+                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
+                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
+            </div>
+        </form>
     </div>
+
 </div>

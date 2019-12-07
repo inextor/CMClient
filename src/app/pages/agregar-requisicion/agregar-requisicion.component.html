@@ -1,136 +1,98 @@
-<!-- NAVBAR -->
-<div class="page">
-    <header>
-        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-    </header>
-    <!-- FIN NAVBAR -->
-    <div>
-        <div class="page_content">
-            <!-- MENU -->
-            <div class="pt-2 flex-wrap justify-content-start">
-                <app-menu></app-menu>
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3">AGREGAR REQUISICION</h4>
+        <app-loading [display]="is_loading"></app-loading>
+        <div class="container card mt-3 mb-3 pt-3 ">
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label position="stacked">Proveedor<span color="danger">*</span></label>
+                    <select class="form-control" name="foo">
+                        <option value='' selected disabled hidden>Seleccione un proveedor</option>
+                        <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                            {{proveedor.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
+                    <input type="date" class="form-control" name="telefono" [(ngModel)]="requisicion.tiempo_entrega">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label position="stacked">Costo de flete<span color="danger">*</span></label>
+                    <input min=0 type="number" class="form-control" name="direccion" [(ngModel)]="requisicion.flete">
+                </div>
+                <div class="form-group col-md-4">
+                    <label position="stacked">Costo de importacion<span color="danger">*</span></label>
+                    <input min=0 type="number" class="form-control" name="contacto"
+                        [(ngModel)]="requisicion.importacion">
+                </div>
+                <div class="form-group col-md-4">
+                    <label position="stacked">No. Pedimento<span color="danger">*</span></label>
+                    <input type="text" class="form-control" name="cuenta_bancaria" [(ngModel)]="requisicion.pedimento">
+                </div>
             </div>
-            <!-- FIN MENU -->
-            <!-- CONTENIDO -->
-            <main class="p-2">
-                <div class="card p-3">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label position="stacked">Nota<span color="danger">*</span></label>
+                    <textarea type="text" class="form-control" name="rfc" [(ngModel)]="requisicion.nota"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="container card mt-3 mb-3 pt-3 ">
+            <h5 class="mb-3 mt-3">*AGREGAR PRODUCTOS</h5>
+            <div class="form-row">
 
-
-                    <div class="container">
-                        <h4 class="mb-3 mt-3">AGREGAR REQUISICION</h4>
-                        <app-loading [display]="is_loading"></app-loading>
-                        <div class="container card mt-3 mb-3 pt-3 ">
-                        <div class="form-row">
-
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Proveedor<span color="danger">*</span></label>
-                                <select class="form-control" name="foo">
-                                    <option value='' selected disabled hidden>Seleccione un proveedor</option>
-                                    <option  *ngFor="let proveedor of proveedores" [value]="proveedor.id">
-                                        {{proveedor.nombre}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
-                                <input type="date" class="form-control" name="telefono"
-                                    [(ngModel)]="requisicion.tiempo_entrega">
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label position="stacked">Costo de flete<span color="danger">*</span></label>
-                                <input min=0 type="number" class="form-control" name="direccion"
-                                    [(ngModel)]="requisicion.flete">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label position="stacked">Costo de importacion<span color="danger">*</span></label>
-                                <input min=0 type="number" class="form-control" name="contacto"
-                                    [(ngModel)]="requisicion.importacion">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label position="stacked">No. Pedimento<span color="danger">*</span></label>
-                                <input type="text" class="form-control" name="cuenta_bancaria"
-                                    [(ngModel)]="requisicion.pedimento">
-                            </div>
+                <div class="form-group col-md-6">
+                    <div class="dropdown">
+                        <div class="">
+                            <label position="stacked">Articulo<span color="danger">*</span></label>
+                            <input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
                         </div>
-                        <div class="form-row">
-                                <div class="form-group col-md-12">
-                                        <label position="stacked">Nota<span color="danger">*</span></label>
-                                        <textarea type="text" class="form-control" name="rfc"
-                                            [(ngModel)]="requisicion.nota"></textarea>
-                                    </div>
-                            </div>
-                        
-                        </div>
-                        <div class="container card mt-3 mb-3 pt-3 ">
-                            <h5 class="mb-3 mt-3">*AGREGAR PRODUCTOS</h5>
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <div class="dropdown">
-                                        <div class="">
-                                            <label position="stacked">Articulo<span color="danger">*</span></label>
-                                            <input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda"
-                                                class="form-control">
-                                        </div>
-                                        <div *ngIf="search_servicios.length && busqueda != ''"
-                                            class="dropdown-menu show w-100">
-                                            <div *ngFor="let servicio of search_servicios;let i=index"
-                                                (click)="agregarServicio(servicio)">
-                                                <div *ngIf="i>0" class="dropdown-divider"></div>
-                                                <div class="dropdown-item">
-                                                    {{servicio.nombre}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
+                            <div *ngFor="let servicio of search_servicios;let i=index"
+                                (click)="agregarServicio(servicio)">
+                                <div *ngIf="i>0" class="dropdown-divider"></div>
+                                <div class="dropdown-item">
+                                    {{servicio.nombre}}
                                 </div>
-                               
                             </div>
-                            <div class="container card p-0 mb-3 ">
-
-
-                                <table class="basica p-0 m-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Articulo</th>
-                                            <th>Cantidad</th>
-                                            <th>Costo</th>
-                                            <th>Acciones</th>
-                                        </tr>
-
-                                    </thead>
-                                    <tbody>
-
-                                        <tr *ngFor="let sd of detalle_requisiciones">
-                                            <th>
-                                                <label>{{sd.servicio.nombre | titlecase}}</label>
-                                            </th>
-                                            <th>
-                                                <input type="number" [(ngModel)]="sd.detalles_requisicion.cantidad"
-                                                    step="1" min=0>
-                                            </th>
-                                            <th>
-                                                    <input type="number" [(ngModel)]="sd.detalles_requisicion.costo"
-                                                        step="1" min=0>
-                                                </th>
-                                            <th>
-                                                <button class="btn btn-secondary btn-sm">
-                                                    x
-                                                </button>
-                                            </th>
-
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-
-
-                            </div>
-
                         </div>
-
-
-                        <!--                              
+                    </div>
+                </div>
+            </div>
+            <div class="container card p-0 mb-3 ">
+                <table class="basica p-0 m-0">
+                    <thead>
+                        <tr>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Costo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sd of detalle_requisiciones">
+                            <th>
+                                <label>{{sd.servicio.nombre | titlecase}}</label>
+                            </th>
+                            <th>
+                                <input type="number" [(ngModel)]="sd.detalles_requisicion.cantidad" step="1" min=0>
+                            </th>
+                            <th>
+                                <input type="number" [(ngModel)]="sd.detalles_requisicion.costo" step="1" min=0>
+                            </th>
+                            <th>
+                                <button class="btn btn-secondary btn-sm">
+                                    x
+                                </button>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--                              
 <div class="form-row" *ngIf="articulos!=null">
     <table class="basica">
         <thead>
@@ -146,14 +108,9 @@
         </tbody>
     </table>
 </div> -->
-                        <div class="">
-                            <button type="button" expand="block" type="submit" class="btn btn-primary btn-md"
-                                (click)="guardar()" [disabled]="is_loading">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <!-- FIN CONTENIDO -->
+        <div class="">
+            <button type="button" expand="block" type="submit" class="btn btn-primary btn-md" (click)="guardar()"
+                [disabled]="is_loading">Guardar</button>
         </div>
     </div>
 </div>

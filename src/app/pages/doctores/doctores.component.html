@@ -1,72 +1,62 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-					
-					<div class="container">
-						<h4 class="mb-3 mt-3">DOCTORES</h4>
-						<!-- div *ngIf="currentUser" [appAccess]="['Paciente']">
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3">DOCTORES</h4>
+		<!-- div *ngIf="currentUser" [appAccess]="['Paciente']">
 							<button type="button"s slot="start">
 								<button type="button" size="small" slot="start" [routerLink]="['/mis-citas']" >
 									<span class="oi" data-glyph="arrow-round-back" title="icon name" aria-hidden="true"></span>
 									<ion-icon name="arrow-round-back"></ion-icon></button>
 							</buttons>
 						</div -->
-						<div>
-							<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-doctor']">
-								Agregar Doctor
-							</button>
-						</div>
-						<table class="basica">
-							<thead>
-								<tr>
-									<th>Nombre</th>
-									<th>Especialidad</th>
-									<th>Telefono</th>
-									<th>Acciones </th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let doctor of doctores">
-									<td>{{doctor.nombre}}</td>
-									<td>{{doctor.especialidad}}</td>
-									<td>{{doctor.telefono}}</td>
-									<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
-									<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
-									<td>
-										<button type="button"  class="btn btn-primary btn-sm m-1" [routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</button>
-										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1" (click)="seleccionarPacienteNuevaCitaCon(doctor)" [appAccess]="['Recepcionista','admin','doctor']">Agendar Cita</button>
-										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1" [routerLink]="['/citas','doctor',doctor.id]" [appAccess]="['Recepcionista','admin','doctor']">Citas</button>
-										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1" [routerLink]="['/editar-doctor',doctor.id]" [appAccess]="['Recepcionista','admin','doctor']">Editar Doctor</button>
-										<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1" (click)="editarHorario(doctor)" [appAccess]="['Recepcionista','admin']">Editar Horario</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="mt-3 mb-3 text-right">
-							<div class="inline-block">
-								<app-paginacion [path]="'/doctores'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
+		<div>
+			<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-doctor']">
+				Agregar Doctor
+			</button>
+		</div>
+		<table class="basica">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Especialidad</th>
+					<th>Telefono</th>
+					<th>Acciones </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let doctor of doctores">
+					<td>{{doctor.nombre}}</td>
+					<td>{{doctor.especialidad}}</td>
+					<td>{{doctor.telefono}}</td>
+					<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
+					<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
+					<td>
+						<button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/doctores',doctor.id, 'ver-doctor']" [appAccess]="['Paciente']">Ver</button>
+						<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1"
+							(click)="seleccionarPacienteNuevaCitaCon(doctor)"
+							[appAccess]="['Recepcionista','admin','doctor']">Agendar Cita</button>
+						<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/citas','doctor',doctor.id]"
+							[appAccess]="['Recepcionista','admin','doctor']">Citas</button>
+						<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-doctor',doctor.id]"
+							[appAccess]="['Recepcionista','admin','doctor']">Editar Doctor</button>
+						<button type="button" *ngIf="currentUser" class="btn btn-primary btn-sm m-1"
+							(click)="editarHorario(doctor)" [appAccess]="['Recepcionista','admin']">Editar
+							Horario</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="mt-3 mb-3 text-right">
+			<div class="inline-block">
+				<app-paginacion [path]="'/doctores'" [pages]="pages" [totalPages]="totalPages"
+					[currentPage]="currentPage"></app-paginacion>
+			</div>
 		</div>
 	</div>
 </div>
-<app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" [showCancel]="true" (selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>
-<app-seleccionar-paciente [show]="show_seleccionar_paciente" [showCancel]="true" (selected)="onSeleccionarPacienteNuevaCita($event)"></app-seleccionar-paciente>
+<app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" [showCancel]="true"
+	(selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>
+<app-seleccionar-paciente [show]="show_seleccionar_paciente" [showCancel]="true"
+	(selected)="onSeleccionarPacienteNuevaCita($event)"></app-seleccionar-paciente>

@@ -13,6 +13,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { BaseComponent } from '../../pages/base/base.component';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
+import { WindowScrollController } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-login',
@@ -27,11 +28,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		this.route.params.subscribe(params => {
 
 			if (this.rest.getUsuarioSesion() != null) {
-				this.router.navigate(['/home'])
+				this.router.navigate(['/dashboard'])
 			}
 
 		})
@@ -53,7 +53,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 		this.rest.doLogin(this.usuario, this.contrasena).subscribe(
 			response => {
 				this.is_loading = false;
-				this.router.navigate(['/home']);
+				this.router.navigate(['/dashboard']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
 			}, error=>this.showError(error ));
 	}

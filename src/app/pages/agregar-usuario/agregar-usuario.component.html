@@ -1,66 +1,39 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3">AGREGAR USUARIO</h4>
+		<app-loading [display]="is_loading"></app-loading>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label position="stacked">Usuario<span color="danger">*</span></label>
+				<input required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
 			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-				
-					<div class="container">
-							<h4 class="mb-3 mt-3">AGREGAR USUARIO</h4>
-							<app-loading [display]="is_loading"></app-loading>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label position="stacked">Usuario<span color="danger">*</span></label>
-								<input required type="text" class="form-control" name="usuario"
-									[(ngModel)]="usuario.usuario">
-							</div>
-							<div class="form-group col-md-6">
-								<label position="stacked">Tipo<span color="danger">*</span></label>
-								<select class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
-									<option value="ADMIN">Admin</option>
-									<option value="RECEPCIONISTA">recepcionista</option>
-									<option value="ASISTENTE">Asistente</option>
-								</select>
-							</div>
-
-							<div class="form-group col-md-6">
-								<label position="stacked">Contraseña</label>
-								<input placeholder="" type="password" class="form-control" name="contrasena"
-									[(ngModel)]="usuario.contrasena">
-							</div>
-
-							<div class="form-group col-md-6">
-								<label position="stacked">Confirmar contraseña</label>
-								<input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
-									[(ngModel)]="confirmar_contrasena">
-							</div>
-
-							<div>
-								<div *ngIf="error_message" class="alert alert-danger" role="alert">
-									{{error_message}}
-								</div>
-							</div>
-							
-						</div>
-						<div class="">
-							<button type="button" expand="block" type="submit" class="btn btn-primary" (click)="registrarse()"
-								[disabled]="is_loading">Registrar</button>
-						</div>
-					</div>
-
+			<div class="form-group col-md-6">
+				<label position="stacked">Tipo<span color="danger">*</span></label>
+				<select class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
+					<option value="ADMIN">Admin</option>
+					<option value="RECEPCIONISTA">recepcionista</option>
+					<option value="ASISTENTE">Asistente</option>
+				</select>
+			</div>
+			<div class="form-group col-md-6">
+				<label position="stacked">Contraseña</label>
+				<input placeholder="" type="password" class="form-control" name="contrasena"
+					[(ngModel)]="usuario.contrasena">
+			</div>
+			<div class="form-group col-md-6">
+				<label position="stacked">Confirmar contraseña</label>
+				<input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
+					[(ngModel)]="confirmar_contrasena">
+			</div>
+			<div>
+				<div *ngIf="error_message" class="alert alert-danger" role="alert">
+					{{error_message}}
 				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
+			</div>
+		</div>
+		<div class="">
+			<button type="button" expand="block" type="submit" class="btn btn-primary" (click)="registrarse()"
+				[disabled]="is_loading">Registrar</button>
 		</div>
 	</div>
 </div>
