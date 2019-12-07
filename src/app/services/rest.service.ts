@@ -34,6 +34,7 @@ export interface DatosVenta
 	cliente			?: Usuario;
 	atendio			: Usuario;
 	pagos			: Pago[];
+	tipo_precio		: Tipo_Precio;
 };
 
 @Injectable({
@@ -488,10 +489,6 @@ export class RestService {
 
 	getDatosVenta(id_venta:number):Observable<DatosVenta>
 	{
-		let venta				:Venta				= null;
-		let servicios			:Servicio[] 		= [];
-		let precio_servicios	:Precio_Servicio[]	= [];
-
 		return forkJoin
 		([
 			this.venta.get( id_venta )
@@ -504,7 +501,6 @@ export class RestService {
 				let venta:Venta						= responses[0];
 				let detalles_venta:Detalle_Venta[]	= responses[1].datos;
 				let pagos:Pago[]					= responses[2].datos;
-
 				let ids			= detalles_venta.map( dv=>dv.id_servicio );
 
 				return forkJoin
@@ -512,11 +508,12 @@ export class RestService {
 					of(venta)
 					,of(detalles_venta)
 					,of(pagos)
-					,this.servicio.search({csv:{ 'id':ids }})
-					,this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
+					,detalles_venta.length == 0 ? of([]) : this.servicio.search({csv:{ 'id':ids }})
+					,detalles_venta.length == 0 ? of([]) : this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
 					,this.centro_medico.get( venta.id_centro_medico )
 					,this.usuario.get( venta.id_usuario_atendio )
 					,venta.id_usuario_cliente ? this.usuario.get( venta.id_usuario_cliente ) : of( null )
+					,this.tipo_precio.get( venta.id_tipo_precio )
 				])
   			})
 			,flatMap((responses)=>
@@ -529,6 +526,7 @@ export class RestService {
 				let centro_medico:Centro_Medico			= responses[5];
 				let atendio:Usuario						= responses[6];
 				let cliente:Usuario						= responses[7];
+				let tipo_precio							= responses[8];
 
 				//getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
 				let detalles:DetalleServicio[] = this.getDetalleServicios( servicios, detalles_venta, precios_servicios );
@@ -540,17 +538,30 @@ export class RestService {
 					,cliente
 					,atendio
 					,pagos
+					,tipo_precio
 				};
 
 				return of( dato );
+			})
+		);
+	}
 
-				//return of({
-				//	venta: venta
-				//	,centro_medico: centro_medico
-				//	,detalles: detalles
-				//	,cliente: cliente
-				//	,atendio: atendio
-				//});
+	guardarDatosVenta(datosVenta:DatosVenta):Observable<DatosVenta>
+	{
+		let venta_subscription = datosVenta.venta.id ? this.venta.update( datosVenta.venta ) : this.venta.create( datosVenta.venta );
+		return venta_subscription.pipe(
+			flatMap((venta)=>
+			{
+				datosVenta.venta = venta;
+				let detalles_venta = datosVenta.detalles.map(i=>i.detalle_venta );
+				if( detalles_venta.length )
+					return forkJoin([of([]),of(venta)]);
+
+				return forkJoin([this.detalle_venta.batchUpdate(detalles_venta),of( venta )]);
+			})
+			,flatMap((responses)=>
+			{
+				return this.getDatosVenta( responses[ 1 ].id );
 			})
 		);
 	}
