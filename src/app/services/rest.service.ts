@@ -508,8 +508,8 @@ export class RestService {
 					of(venta)
 					,of(detalles_venta)
 					,of(pagos)
-					,this.servicio.search({csv:{ 'id':ids }})
-					,this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
+					,detalles_venta.length == 0 ? of([]) : this.servicio.search({csv:{ 'id':ids }})
+					,detalles_venta.length == 0 ? of([]) : this.precio_servicio.search({csv:{'id_servicio': ids }, eq:{id_centro_medico: venta.id_centro_medico}, limite:10000})
 					,this.centro_medico.get( venta.id_centro_medico )
 					,this.usuario.get( venta.id_usuario_atendio )
 					,venta.id_usuario_cliente ? this.usuario.get( venta.id_usuario_cliente ) : of( null )
@@ -542,6 +542,26 @@ export class RestService {
 				};
 
 				return of( dato );
+			})
+		);
+	}
+
+	guardarDatosVenta(datosVenta:DatosVenta):Observable<DatosVenta>
+	{
+		let venta_subscription = datosVenta.venta.id ? this.venta.update( datosVenta.venta ) : this.venta.create( datosVenta.venta );
+		return venta_subscription.pipe(
+			flatMap((venta)=>
+			{
+				datosVenta.venta = venta;
+				let detalles_venta = datosVenta.detalles.map(i=>i.detalle_venta );
+				if( detalles_venta.length )
+					return forkJoin([of([]),of(venta)]);
+
+				return forkJoin([this.detalle_venta.batchUpdate(detalles_venta),of( venta )]);
+			})
+			,flatMap((responses)=>
+			{
+				return this.getDatosVenta( responses[ 1 ].id );
 			})
 		);
 	}
