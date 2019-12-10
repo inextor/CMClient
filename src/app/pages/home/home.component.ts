@@ -24,19 +24,14 @@ export class HomeComponent extends BaseComponent implements OnInit {
 	}
 	ngOnInit() {
 
-		let c = localStorage.getItem('id_centro_medico');
-		if( c == undefined || c == null )
+		this.route.paramMap.subscribe(()=>
 		{
-			this.show_seleccionar_centro_medico = true;
-		}
-
-		this.route.paramMap.subscribe(params=>console.log(params.keys) );
-		this.route.data.subscribe(data=>console.log( data ));
-    	this.route.url.subscribe((segments:UrlSegment[]) => {
-    	    for(var i = 0; i < segments.length; i++){
-    	        console.log("param: " + segments[i]);
-    	    }
-    	});
+			let centroMedico = this.rest.getCurrentCentroMedico();
+			if( centroMedico == null || centroMedico == undefined )
+			{
+				this.show_seleccionar_centro_medico = true;
+			}
+		});
 	}
 
 	onSeleccionarCentroMedico(centro_medico:Centro_Medico)
