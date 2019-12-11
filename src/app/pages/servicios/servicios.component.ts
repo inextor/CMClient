@@ -6,6 +6,7 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
+import { SearchObject } from '../../models/Respuestas';
 
 
 @Component({
@@ -19,18 +20,67 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 	{
 		super( rest,router,route,location,titleService);
 	}
-	servicios:ServicioResponseItem[]= [];
-
+	servicios:Servicio[]= [];
 	is_loading:boolean = false;
+	servicio_search:SearchObject<Servicio>;
 
 	ngOnInit() {
-		this.titleService.setTitle('Servicios')
-		this.is_loading = true;
-		this.rest.searchServicio.getAll({}).subscribe((respuesta)=>
+
+		this.route.queryParams.subscribe( params =>
 		{
-			this.is_loading = false;
-			this.servicios = respuesta.datos;
-			console.log(this.servicios);
-		},error=> this.showError(error));
+			this.servicio_search = {
+				eq: { id_organizacion: this.rest.getUsuarioSesion().id_organizacion },
+				gt: {},
+				ge: {},
+				le: {},
+				lt: {},
+				lk: {},
+				csv: {},
+			};
+
+			this.titleService.setTitle('Servicios')
+			this.servicio_search.lk.codigo	= "lk.codigo" in params ?params["lk.codigo"]:null;
+			this.servicio_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
+			this.servicio_search.limite			= this.pageSize;
+			this.servicio_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
+			this.is_loading = true;
+
+			this.rest.servicio.search( this.servicio_search ).subscribe((respuesta)=>
+			{
+				this.is_loading = false;
+				this.servicios = respuesta.datos;
+				console.log(this.servicios);
+				this.setPages( this.servicio_search.pagina, respuesta.total );
+			},error=> this.showError(error));
+		});
+
+	}
+
+	changeSearch(nombre:string)
+	{
+	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.servicio_search.pagina= 0;
+
+		this.servicio_search.lk.codigo	= this.servicio_search.lk.nombre;
+
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+
+        for(let i in this.servicio_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.servicio_search[i])
+                    search[i+'.'+j] = this.servicio_search[i][j];
+            }
+        }
+
+		console.log( search );
+		this.router.navigate(['servicios'],{queryParams: search});
 	}
 }

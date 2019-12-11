@@ -609,7 +609,6 @@ export interface Venta{
   fecha_facturacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
-
 };
 
 

@@ -1,10 +1,23 @@
 <div class="card p-3">
 	<div class="container">
 		<h4 class="mb-3 mt-3">PRODUCTOS Y SERVICIOS</h4>
-		<td>
+		<div>
 			<button type="button" class="btn btn-primary btn-sm" slot="start" size="small"
 				[routerLink]="['/agregar-producto']">Agregar producto</button>
-		</td>
+		</div>
+
+		<div>
+			<div class="input-group mb-3">
+				<input type="text" [(ngModel)]="servicio_search.lk.nombre" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<app-paginacion [path]="'/servicios'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+		</div>
 		<table class="basica">
 			<thead>
 				<tr>
@@ -14,15 +27,15 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let servicio of servicios">
-					<td>{{servicio.servicio.nombre}}</td>
+					<td>{{servicio.nombre}}</td>
 					<!-- 	" -->
 					<td>
 						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/editar-producto',servicio.servicio.id]">
+							[routerLink]="['/editar-producto',servicio.id]">
 							Editar
 						</button>
 						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/editar-precios',servicio.servicio.id]">
+							[routerLink]="['/editar-precios',servicio.id]">
 							Editar Precio
 						</button>
 						<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/inventario']">

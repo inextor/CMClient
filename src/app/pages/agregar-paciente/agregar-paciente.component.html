@@ -19,7 +19,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Sexo<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.sexo">
+					<select  name="sexo" [(ngModel)]="paciente.sexo" class="form-control">
+						<option value="">Seleccione uno</option>
+						<option value="FEMENINO">Femenino</option>
+						<option value="MASCULINO">Masculino</option>
+					</select>
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>

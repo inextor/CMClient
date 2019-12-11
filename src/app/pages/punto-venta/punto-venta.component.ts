@@ -16,7 +16,6 @@ import { Detalle_Venta,Venta} from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { DatosVenta } from '../../services/rest.service';
 
-
 interface OldSearch{
 	[key:string]:Servicio[];
 }
@@ -69,6 +68,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		,tipo_precio	: {}
 	};
 
+	search_usuario:Usuario[]	= [];
 	search_servicios:Servicio[]	= [];
 	total						= 0;
 	show_modal_pago				= false;
@@ -103,6 +103,23 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		let centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.paramMap.subscribe( params =>
 		{
+			if( this.datosVenta.detalles.length > 0 )
+			{
+				console.log('Cambiando',this.datosVenta.detalles );
+				console.log( this.datosVenta );
+				this.rest.guardarDatosVenta( this.datosVenta ).subscribe((response)=>{
+					//Si no se subscribe no se manda a llamar
+					console.log("guardado",response);
+				},(error)=>{
+					error.log('Ocurrio un error al guardar los datos');
+				});
+				//Continue with your life
+			}
+			else
+			{
+				console.log("no vale la pena");
+			}
+
 			let id =  params.get('id') ? parseInt( params.get('id' ) ): null;
 			let usuario = this.rest.getUsuarioSesion();
 
@@ -111,13 +128,13 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 					([
 						this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
 						,this.rest.getDatosVenta(id)
-						,this.rest.venta.search({eq:{id_usuario_atendio:usuario.id, estatus: 'PENDIENTE'},limite:200})
+						,this.rest.venta.search({eq:{id_usuario_atendio:usuario.id, estatus: 'PENDIENTE',activa:'SI'},limite:200})
 					])
 					: forkJoin
 					([
 						this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
 						,of(null)
-						,this.rest.venta.search({eq:{id_usuario_atendio:usuario.id, estatus: 'PENDIENTE' } })
+						,this.rest.venta.search({eq:{id_usuario_atendio:usuario.id, estatus: 'PENDIENTE',activa:'SI' } })
 					]);
 
 			subscription.subscribe((response)=>
@@ -140,6 +157,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				}
 
 				this.ventas = response[2].datos;
+ 				this.calcularTotalVenta();
 			}
 			,(error)=>
 			{
@@ -164,6 +182,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				this.datosVenta.venta.cliente = find.nombre;
 		}
 		//Cambiar todos los precios
+
+		this.calcularTotalVenta();
 	}
 
 	ngOnDestroy()
@@ -179,6 +199,31 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				//se guardo o se perdio, in the end it does'nt even matter
 			});
 		}
+	}
+
+	buscarCliente(evt:any)
+	{
+		let x = this.rest.usuario.search({
+			eq:{ tipo: 'PACIENTE' }
+			,lk:{ nombre: evt.target.value, usuario: evt.target.value },
+		}).subscribe((response)=>
+		{
+			this.search_usuario = response.datos;
+			//x.unsubscribe();
+		},(error)=>this.showError(error));
+	}
+	selectUsuario(usuario)
+	{
+		console.log( usuario );
+		this.datosVenta.venta.id_usuario_cliente	= usuario.id;
+		this.datosVenta.venta.cliente				= usuario.usuario;
+		this.datosVenta.cliente						= usuario;
+		console.log('Cliente es', this.datosVenta.cliente );
+
+		if( usuario.id_tipo_precio )
+			this.datosVenta.venta.id_tipo_precio				= usuario.id_tipo_precio;
+
+		this.search_usuario = [];
 	}
 
 	buscar(evt:any)
@@ -205,6 +250,15 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
+	cancelarVenta()
+	{
+		this.rest.venta.update({id: this.datosVenta.venta.id, activa: 'NO' }).subscribe((venta)=>
+		{
+			this.datosVenta					= this.getNewVenta( this.tipo_precios );
+			this.router.navigate(['punto-venta']);
+		});
+	}
+
 	agregarServicio(servicio:Servicio)
 	{
 		let detalle_servicio = this.datosVenta.detalles.find(i=>i.servicio.id == servicio.id );
@@ -212,6 +266,10 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		if( detalle_servicio )
 		{
 			detalle_servicio.detalle_venta.cantidad++;
+			this.search_servicios = [];
+			this.busqueda	= '';
+			this.calcularTotalVenta();
+
 			return;
 		}
 
@@ -244,6 +302,9 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			if( response.datos.length == 0 )
 			{
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 1');
+				this.busqueda = '';
+				this.search_servicios = [];
+				this.calcularTotalVenta();
 				return;
 			}
 
@@ -258,6 +319,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			if( !precio_servicio )
 			{
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 2');
+				this.calcularTotalVenta();
 				return;
 			}
 
@@ -273,6 +335,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 			this.busqueda = '';
 			this.search_servicios = [];
+			this.calcularTotalVenta();
 		},(error)=>
 		{
 			console.log('Solo imprimimos el error en la consola');
@@ -292,21 +355,41 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
-	aumentar(detalle_servicio)
-	{
-		detalle_servicio.detalle_venta.cantidad++;
-	}
-
 	calcularTotalVenta()
 	{
-		let total				= this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
-		let pagos_hechos		= this.datosVenta.pagos.reduce((a,b)=>{ return a+b.total},0);
+		let total		= 0;
+		let subtotal	= 0;
+		let iva			= 0;
+		let centro_medico = this.rest.getCurrentCentroMedico();
+
+		for(let i of this.datosVenta.detalles )
+		{
+			console.log('D V is', i );
+			console.log( this.precios_info );
+
+			i.detalle_venta.precio		= i.precio_servicio.precio;
+			i.detalle_venta.total		= i.precio_servicio.precio*i.detalle_venta.cantidad;
+			i.detalle_venta.iva			= Math.round(i.detalle_venta.total/(centro_medico.iva+100))/100;
+			i.detalle_venta.subtotal	= i.detalle_venta.total- i.detalle_venta.iva;
+
+			total 		+= i.detalle_venta.total;
+			subtotal	+= i.detalle_venta.subtotal;
+			iva			+= i.detalle_venta.iva;
+		}
+
+		this.datosVenta.venta.total		= total;
+		this.datosVenta.venta.subtotal	= subtotal;
+		this.datosVenta.venta.iva		= iva;
+
+		//let pagos_hechos		= this.datosVenta.pagos.reduce((a,b)=>{ return a+b.total},0);
+		//this.datosVenta.venta.total = total;
+		//this.datosVenta.venta.subtotal
 
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
 
 		this.infoPago.total_venta	= this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
-		this.infoPago.total_pagado	= pagos_hechos;
-		this.infoPago.total_a_pagar	= total-pagos_hechos;
+		//this.infoPago.total_pagado	= pagos_hechos;
+		//this.infoPago.total_a_pagar	= total-pagos_hechos;
 		this.infoPago.cambio		= 0 ;
 		this.calcularCantidades();
 	}

@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: '', component: ShellComponent, children:[
     { path: "xxx", component: LoginComponent},
   ]},
-  { path: '', component: HomeComponent, 
+  { path: '', component: HomeComponent,
     children:
     [
       { path: '', redirectTo: 'dashboard', pathMatch: "full"},
@@ -120,6 +120,7 @@ const routes: Routes = [
       { path: "citas-paciente", component: CitasPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
       { path: "agregar-requisicion", component: AgregarRequisicionComponent, pathMatch: "full", canActivate: [AuthGuard] },
       { path: "punto-venta", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
+      { path: "punto-venta/:id", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
       { path: "ticket-abono", component: TicketAbonoComponent, pathMatch: "full", canActivate: [AuthGuard] },
       { path: "ticket-venta", component: TicketVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
       { path: "citas", component: CitasComponent, pathMatch: "full", canActivate: [AuthGuard]},
@@ -128,8 +129,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full"},
 ];
 // const routes: Routes = [
-  
-  
+
+
 // ];
 
 @NgModule({
