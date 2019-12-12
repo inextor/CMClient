@@ -17,7 +17,6 @@ export class ObjRest<T>{
 	{
 		if( localStorage.getItem('session_token') == null )
 		{
-			console.log("THer is no session token");
 			return new HttpHeaders();
 		}
 
@@ -65,7 +64,6 @@ export interface SearchObject<T>
 	{
 		let params = new HttpParams();
 
-		console.log('eq', searchObj.eq );
 		for(let i in searchObj.eq )
 			if( searchObj.eq[i] )
 				params = params.set(i,''+searchObj.eq[i] );
