@@ -456,14 +456,20 @@ export class RestService {
 		this.errorBehaviorSubject.next( error);
 	}
 
-	getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
+	getDetalleServicios(venta:Venta,servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
 	{
 		let servicios_by_id						= {};
 		let precios_by_id_servicio 				= {};
 		let detalleServicios:DetalleServicio[]	= [];
 
 		servicios.forEach((i)=>{ servicios_by_id[ i.id ] = i;});
-		precios_servicios.forEach((i)=> precios_by_id_servicio[ i.id_servicio ] = i );
+
+		precios_servicios.forEach((i)=>{
+			if( !(i.id_servicio in precios_by_id_servicio) )
+				precios_by_id_servicio[ i.id_servicio ] = [];
+
+			precios_by_id_servicio[ i.id_servicio ].push( i );
+		});
 
 		detalles_venta.forEach((detalle_venta)=>
 		{
@@ -474,12 +480,16 @@ export class RestService {
 				console.error('No se encontro el servicio dentro precio_servicios');
 
 			let servicio		= servicios_by_id[ detalle_venta.id_servicio ];
-			let precio_servicio	= precios_by_id_servicio[ detalle_venta.id_servicio ];
+			let precio_servicio	= precios_by_id_servicio[ detalle_venta.id_servicio ].find(i=>i.id_tipo_precio == venta.id_tipo_precio );
+			//let precio_servicio	= precios_by_id_servicio[ detalle_venta.id_servicio ];
+
+			if( !precio_servicio )
+				console.error('No se encontro el servicio dentro precio_servicios buscand: id_servicio',servicio.id,precios_by_id_servicio[ servicio.id ]);
 
 			detalleServicios.push
 			({
 				servicio
-				,precio_servicio
+				,precio_servicio : precio_servicio //Elvis operator doesnt work  in js,ts ?-(
 				,detalle_venta
 			});
 		});
@@ -528,8 +538,10 @@ export class RestService {
 				let cliente:Usuario						= responses[7];
 				let tipo_precio							= responses[8];
 
+				console.log('precios_servicios', precios_servicios );
+
 				//getDetalleServicios(servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]
-				let detalles:DetalleServicio[] = this.getDetalleServicios( servicios, detalles_venta, precios_servicios );
+				let detalles:DetalleServicio[] = this.getDetalleServicios(venta, servicios, detalles_venta, precios_servicios );
 
 				let dato:DatosVenta = {
 					venta
