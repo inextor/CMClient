@@ -1,105 +1,105 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
-    <div  class=" list-group-flush">
-        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
-            <a (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
-                    src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
-        </div>
-        <div *ngIf="showCentros">
-            <div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/especialidades']"
-                        class="list-group-item list-group-item-action color1 ">ESPECIALIDADES
-                    </a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/centros-medicos']"
-                        class="list-group-item list-group-item-action color1 ">CLINICAS</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/servicios']"
-                        class="list-group-item list-group-item-action color1 ">SERVICIOS</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">INVENTARIO </a>
-                </div>
-                <div  [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']"[routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">USUARIOS</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/ingresos']" class="list-group-item list-group-item-action color1 ">INGRESOS</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
-                </div>
+	<div  class=" list-group-flush">
+		<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
+			<a (click)="showCentros = !showCentros" class="btn list-group-item list-group-item-action color1 group"><img
+					src="../../../assets/icon/Mehr-Software-17.png" class="menuIcons" />CENTRO MEDICO</a>
+		</div>
+		<div *ngIf="showCentros">
+			<div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/especialidades']"
+						class="list-group-item list-group-item-action color1 ">ESPECIALIDADES
+					</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/centros-medicos']"
+						class="list-group-item list-group-item-action color1 ">CLINICAS</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/servicios']"
+						class="list-group-item list-group-item-action color1 ">SERVICIOS</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a class="list-group-item list-group-item-action color1 ">INVENTARIO </a>
+				</div>
+				<div  [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']"[routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a class="list-group-item list-group-item-action color1 ">PROVEEDORES </a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">USUARIOS</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/ingresos']" class="list-group-item list-group-item-action color1 ">INGRESOS</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
+				</div>
    <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">Punto De Venta</a>
-                </div>
-                <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-                    <a class="list-group-item list-group-item-action color1 ">REPORTES </a>
-                </div>
-            </div>
-        </div>
-        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar" [appAccess]="['ADMIN']">
-            <a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
-                <img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
-            </a>
-        </div>
-        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
-            <a [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
-                <img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
-            </a>
-        </div>
-        <div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
-            <a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
-                <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
-            </a>
-        </div>
-    <!-- OPCIONES PACIENTES -->
-    <div [appAccess]="['PACIENTE']" class="sidebar">
-        <a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color4 group ">
-            <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> CITAS
-        </a>
-    </div>
-    <div [appAccess]="['PACIENTE']" class="sidebar">
-        <a class="list-group-item list-group-item-action color4 group ">
-            <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> MIS DOCTORES
-        </a>
-    </div>
-    <div [appAccess]="['PACIENTE']" class="sidebar">
-        <a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color4 group ">
-            <img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> FAMILIARES
-        </a>
-    </div>
-    <!-- FIN OPCIONES PACIENTES -->
-        <div class="sidebar">
-            <a (click)="showLogoutModal()" class="list-group-item list-group-item-action color5 group">
-                <img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
-            </a>
-        </div>
-    </div>
+					<a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">Punto De Venta</a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a class="list-group-item list-group-item-action color1 ">REPORTES </a>
+				</div>
+			</div>
+		</div>
+		<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar" [appAccess]="['ADMIN']">
+			<a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
+				<img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
+			</a>
+		</div>
+		<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
+			<a [routerLink]="['/pacientes']" class="list-group-item list-group-item-action color3 group">
+				<img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" />PACIENTES
+			</a>
+		</div>
+		<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="sidebar">
+			<a [routerLink]="['/citas']" class="list-group-item list-group-item-action color4 group ">
+				<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" />CITAS
+			</a>
+		</div>
+	<!-- OPCIONES PACIENTES -->
+	<div [appAccess]="['PACIENTE']" class="sidebar">
+		<a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color4 group ">
+			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> CITAS
+		</a>
+	</div>
+	<div [appAccess]="['PACIENTE']" class="sidebar">
+		<a class="list-group-item list-group-item-action color4 group ">
+			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> MIS DOCTORES
+		</a>
+	</div>
+	<div [appAccess]="['PACIENTE']" class="sidebar">
+		<a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color4 group ">
+			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> FAMILIARES
+		</a>
+	</div>
+	<!-- FIN OPCIONES PACIENTES -->
+		<div class="sidebar">
+			<a (click)="showLogoutModal()" class="list-group-item list-group-item-action color5 group">
+				<img src="../../../assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
+			</a>
+		</div>
+	</div>
 </div>
 
 
 <app-modal [show]="show_logout">
-    <!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
+	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
 
-            <div class="modal-content text-center p-3">
-                <h4 class="modal-title pt-2">Logout <i class="fa fa-lock ml-3"></i></h4>
-                <div class="modal-body">
-                    <p>Seguro que quieres salir del sistema?</p>
-                </div>
-                <div class="modal-footer">
+			<div class="modal-content text-center p-3">
+				<h4 class="modal-title pt-2">Logout <i class="fa fa-lock ml-3"></i></h4>
+				<div class="modal-body">
+					<p>Seguro que quieres salir del sistema?</p>
+				</div>
+				<div class="modal-footer">
 					<button class="btn btn-secondary btn-md" (click)="show_logout=false">Cancelar</button>
-                    <button class="btn btn-danger btn-md" (click)="logout()">Confirmar</button>
-                </div>
-            </div>
+					<button class="btn btn-danger btn-md" (click)="logout()">Confirmar</button>
+				</div>
+			</div>
 </app-modal>
 
 
@@ -129,32 +129,32 @@
 
 
 <div class="pt-2 flex-wrap">
-    <div class="row">
-        <div class="col-3">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link " id="v-pills-home-tab"  href="#v-pills-home" role="tab"
-                    aria-controls="v-pills-home" aria-selected="true">Centros Medicos</a>
-                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                    aria-controls="v-pills-profile" aria-selected="false">Doctores</a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-                    aria-controls="v-pills-messages" aria-selected="false">Pacientes</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-                    aria-controls="v-pills-settings" aria-selected="false">Citas</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-                    aria-controls="v-pills-settings" aria-selected="false">Log out</a>
-            </div>
-        </div>
-        <div class="col-9">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                    aria-labelledby="v-pills-home-tab">...</div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                    ...</div>
-                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                    ...</div>
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                    ...</div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-3">
+			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				<a class="nav-link " id="v-pills-home-tab"  href="#v-pills-home" role="tab"
+					aria-controls="v-pills-home" aria-selected="true">Centros Medicos</a>
+				<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+					aria-controls="v-pills-profile" aria-selected="false">Doctores</a>
+				<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+					aria-controls="v-pills-messages" aria-selected="false">Pacientes</a>
+				<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+					aria-controls="v-pills-settings" aria-selected="false">Citas</a>
+				<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+					aria-controls="v-pills-settings" aria-selected="false">Log out</a>
+			</div>
+		</div>
+		<div class="col-9">
+			<div class="tab-content" id="v-pills-tabContent">
+				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+					aria-labelledby="v-pills-home-tab">...</div>
+				<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+					...</div>
+				<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+					...</div>
+				<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+					...</div>
+			</div>
+		</div>
+	</div>
 </div> -->
