@@ -1,82 +1,57 @@
-<div class="card p-3 no-print" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Imprimit Ticket Abono</h5>
-    <form>
-      <div class="form-group">
-        <label position="stacked">Abono<span color="danger">*</span></label>
-        <input required type="text" class="form-control" name="id" [(ngModel)]="vent.id">
-      </div>
-    </form>
-    <p class="card-text">Desea imprimir?</p>
-    <!-- <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a> -->
-    <a class="btn text-light ml-3 btn-primary" type="submit" (click)="buscar()">Aceptar</a>
-
-  </div>
-</div>
-<div *ngIf="venta" class="bgColor print ticket">
-
+<div class="bgColor print ticket w-100 p-3" *ngIf="_datosVenta!=null">
   <div>
-    <h4 class="mb-3 mt-3 centered">VENTA</h4>
+	  <h4 class="mb-3 mt-3 text-center">{{_datosVenta.centro_medico.nombre}}</h4>
   </div>
   <div class="row justify-content-center">
+	<div>
+      <img [src]="this.rest.urlBase+'/imagen.php?id='+_datosVenta.centro_medico.id_imagen" class="image_icon ticket-imagen">
+	</div>
     <div class="col-8 text-center">
-      <div><a>{{centro_medico.direccion}}</a></div>
-      <div><a>{{centro_medico.telefono}}</a></div>
-      <div><a>{{centro_medico.rfc}}</a></div>
+      <div>{{_datosVenta.centro_medico.direccion}}</div>
+      <div>{{_datosVenta.centro_medico.telefono}}</div>
+      <div>{{_datosVenta.centro_medico.rfc}}</div>
     </div>
   </div>
   <div class="row justify-content-left">
     <div class="col-6">
-      <div> <a>Cliente: {{venta.cliente}}</a></div>
-      <div *ngIf="usuario">
-        <a>Le atendio: {{usuario.nombre}} </a>
+		<div>Cliente: <b>{{_datosVenta.venta.cliente}}</b></div>
+      <div>
+		  Le atendio: <b>{{_datosVenta.atendio.nombre}}</b>
       </div>
-      <div><a>Fecha y Hora: {{todayDate | date:'short'}}</a></div>
+	  <div>Fecha y Hora: <b>{{_datosVenta.pagos[0].tiempo_creacion | date:'dd/MM/yyyy, h:mm a'}} {{_datosVenta.pagos[0].tiempo_creacion}}</b></div>
     </div>
   </div>
-  <div class="mt-2">
+  <div class="mt-3">
     <table class="table">
-      <thead>
-        <tr>
-          <th>Cantidad</th>
-          <th>Servicio</th>
-          <th>Precio</th>
-        </tr>
-      </thead>
       <tbody>
-        <tr *ngFor="let detalle_venta of detalle_ventas">
-          <td>{{detalle_venta.cantidad}}</td>
-          <td *ngIf="servicio">{{servicio.nombre}}</td>
-          <td>{{detalle_venta.precio}}</td>
+        <tr *ngFor="let dv of _datosVenta.detalles">
+          <td>{{dv.servicio.nombre}}</td>
+          <td class="text-center">{{dv.detalle_venta.cantidad}}x{{dv.detalle_venta.precio | currency}}</td>
+		  <td class="text-right">{{dv.detalle_venta.total | currency}}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="row justify-content-end">
-    <div class="col-2 text-left pb-2">
-      <div><a> DESCUENTO:</a></div>
-      <div><a> SUBTOTAL:</a></div>
-      <div><a>IVA:</a></div>
-      <div><a>TOTAL:</a></div>
-      <div><a>Efectivo:</a></div>
-      <div><a>Cambio:</a></div>
-
-    </div>
-    <div class="col-2 text-left pb-2">
-      <div> <a> {{venta.efectivo_desc}}</a></div>
-      <div> <a> {{venta.subtotal}}</a></div>
-      <div> <a>{{venta.iva}}</a></div>
-      <div><a>{{venta.total}}</a></div>
-      <div><a>{{venta.dolares_desc}}</a></div>
-      <div><a>{{venta.cambio}}</a></div>
-    </div>
+	  <table class="w-100 text-right">
+		  <tr>
+			  <td>Total</td><td>{{_datosVenta.pagos[0].total | currency }}</td>
+		  </tr>
+		  <tr>
+			  <td>Efectivo</td><td>{{_datosVenta.pagos[0].efectivo| currency }}</td>
+		  </tr>
+		  <tr>
+			  <td><b>Cambio</b></td><td><b>{{_datosVenta.pagos[0].cambio | currency }}</b></td>
+		  </tr>
+	  </table>
+  </div>
+  <hr>
+  <div>
+	  <b># transaccion {{_datosVenta.venta.id}}</b>
   </div>
   <div class="row justify-content-center">
     <div class="col-4 text-center">
-      <div><a>{{centro_medico.saludo_ticket}}</a></div>
-      <div><a>:^)</a></div>
+      <div>{{_datosVenta.centro_medico.saludo_ticket}}</div>
     </div>
-
   </div>
-
 </div>
