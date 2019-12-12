@@ -54,6 +54,8 @@ import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.com
 import { ShellComponent } from './components/shell/shell.component';
 import {HomeComponent} from './pages/home/home.component';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {ImprimirTicketComponent} from './pages/imprimir-ticket/imprimir-ticket.component';
+
 const routes: Routes = [
   { path: '', component: ShellComponent, children:[
     { path: "xxx", component: LoginComponent},
@@ -123,6 +125,7 @@ const routes: Routes = [
       { path: "punto-venta/:id", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
       { path: "ticket-abono", component: TicketAbonoComponent, pathMatch: "full", canActivate: [AuthGuard] },
       { path: "ticket-venta", component: TicketVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
+      { path: "imprimir-ticket-venta/:id", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
       { path: "citas", component: CitasComponent, pathMatch: "full", canActivate: [AuthGuard]},
     ]
   },

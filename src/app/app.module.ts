@@ -79,6 +79,7 @@ import { TicketAbonoComponent } from './components/ticket-abono/ticket-abono.com
 import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket.component';
 
 
 @NgModule({
@@ -154,6 +155,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     TicketVentaComponent,
     ShellComponent,
     DashboardComponent,
+    ImprimirTicketComponent,
 
   ],
   imports: [
