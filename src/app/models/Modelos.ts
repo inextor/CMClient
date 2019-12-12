@@ -13,14 +13,14 @@ export interface Centro_Medico{
   id?:number;
   id_organizacion?:number;
   nombre?:string;
-  id_imagen?:number;
-  id_imagen_ticket?:number;
-  rfc?:string;
   telefono?:string;
+  rfc?:string;
   ciudad?:string;
   estado?:string;
-  direccion?:string;
   codigo_postal?:number;
+  direccion?:string;
+  id_imagen?:number;
+  id_imagen_ticket?:number;
   saludo_ticket?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
@@ -181,6 +181,7 @@ export interface Especialidad_Pregunta{
   orden?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 
 };
 
@@ -386,9 +387,8 @@ export interface Paciente{
   tiempo_actualizacion?:Date;
   nombre_tutor?:string;
   telefono_tutor?:string;
-  telefono_trabajo_tutor?:string;
-  telefono_celular_tutor?:string;
   correo_electronico_tutor?:string;
+  domicilio?:string;
 
 };
 
@@ -401,6 +401,8 @@ export interface Pago{
   cheque?:number;
   deposito?:number;
   tipo_cambio_dolares?:number;
+  iva?:number;
+  subtotal?:number;
   total?:number;
   cambio?:number;
   tipo_tarjeta?:string;
@@ -482,6 +484,7 @@ export interface Recurso{
   estatus?:string;
   fecha_creacion?:Date;
 
+
 };
 
 export interface Requisicion{
@@ -526,6 +529,7 @@ export interface Servicio{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
+
 };
 
 export interface Sesion{
@@ -542,6 +546,7 @@ export interface Tipo_Gasto{
   id_organizacion?:number;
   nombre?:string;
   tiempo_creacion?:Date;
+
 
 };
 
@@ -568,6 +573,7 @@ export interface Usuario{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
+
 };
 
 export interface Usuario_Centro_Medico{
@@ -576,6 +582,7 @@ export interface Usuario_Centro_Medico{
   id_centro_medico?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 
 };
 
@@ -586,6 +593,7 @@ export interface Venta{
   cliente?:string;
   subtotal?:number;
   iva?:number;
+  porcentaje_iva?:number;
   total?:number;
   cambio?:number;
   efectivo_desc?:number;
@@ -609,6 +617,7 @@ export interface Venta{
   fecha_facturacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 
