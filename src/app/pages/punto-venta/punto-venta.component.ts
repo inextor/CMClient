@@ -30,6 +30,8 @@ interface Info_Precio
 interface InfoPago
 {
 	cambio				: number;
+	iva					: number;
+	subtotal			: number;
 	total_venta			: number;
 	total_pagado		: number;
 	total_a_pagar		: number;
@@ -52,6 +54,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	busqueda:string				= '';
 	tipo_precios:Tipo_Precio[]	= [];
 	ventas:Venta[]				= [];
+	search_loading:boolean		= false;
 
 	datosVenta:DatosVenta		= {
 		venta			: {
@@ -80,11 +83,12 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	infoPago:InfoPago			= {
 		total_venta 	: 0
+		,iva			: 0
+		,subtotal		: 0
 		,total_pagado	: 0
 		,total_a_pagar	: 0
 		,cambio			: 0
 		,total_cantidades: 0
-
 	};
 
 	pago:Pago = {
@@ -101,27 +105,23 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	ngOnInit()
 	{
 		let centro_medico = this.rest.getCurrentCentroMedico();
+
 		this.route.paramMap.subscribe( params =>
 		{
 			if( this.datosVenta.detalles.length > 0 )
 			{
-				console.log('Cambiando',this.datosVenta.detalles );
-				console.log( this.datosVenta );
+				this.is_loading = true;
 				this.rest.guardarDatosVenta( this.datosVenta ).subscribe((response)=>{
 					//Si no se subscribe no se manda a llamar
-					console.log("guardado",response);
 				},(error)=>{
 					error.log('Ocurrio un error al guardar los datos');
 				});
-				//Continue with your life
-			}
-			else
-			{
-				console.log("no vale la pena");
 			}
 
 			let id =  params.get('id') ? parseInt( params.get('id' ) ): null;
 			let usuario = this.rest.getUsuarioSesion();
+
+			this.is_loading = true;
 
 			let subscription = id
 					? forkJoin
@@ -144,20 +144,18 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				{
 					//Venta Nueva
 					this.datosVenta					= this.getNewVenta( this.tipo_precios );
-					console.log("datosVenta Nuevo",this.datosVenta );
 					this.datosVenta.tipo_precio		= this.tipo_precios[0];
 					this.datosVenta.venta.id_tipo_precio =this.tipo_precios[0].id;
 				}
 				else
 				{
-					//Venta existente
 					let response_precios	= response[0];
 					this.datosVenta			= response[1];
-					//this.changeTipoCliente( response[1].datosVenta.id_tipo_precio );
 				}
 
 				this.ventas = response[2].datos;
  				this.calcularTotalVenta();
+				this.is_loading = false;
 			}
 			,(error)=>
 			{
@@ -166,29 +164,9 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
-	changeTipoCliente(value)
-	{
-		let some = this.tipo_precios.some
-		(
-			i =>{
-				return i.nombre == this.datosVenta.venta.cliente
-			}
-		);
-
-		if( this.datosVenta.venta.cliente == '' || some )
-		{
-			let find = this.tipo_precios.find(i=>i.id == value );
-			if( find )
-				this.datosVenta.venta.cliente = find.nombre;
-		}
-		//Cambiar todos los precios
-
-		this.calcularTotalVenta();
-	}
-
 	ngOnDestroy()
 	{
-		if( this.datosVenta.detalles.length > 0 )
+		if( this.datosVenta.detalles.length > 0 && this.datosVenta.venta.estatus == 'PENDIENTE' )
 		{
 			this.rest.guardarDatosVenta(this.datosVenta).subscribe(()=>
 			{
@@ -201,13 +179,40 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		}
 	}
 
+	changeTipoPrecio(id_tipo_precio:number)
+	{
+		this.datosVenta.venta.id_tipo_precio = id_tipo_precio;
+		if( this.datosVenta.detalles.length  > 0 )
+		{
+			this.is_loading = true;
+			this.rest.venta.update( this.datosVenta.venta ).pipe(
+				flatMap((venta)=>
+				{
+					return this.rest.getDatosVenta( venta.id );
+				})
+			)
+			.subscribe((datosVenta)=>
+			{
+				this.is_loading = false;
+				this.datosVenta = datosVenta;
+				this.calcularTotalVenta();
+			}
+			,(error)=>
+			{
+				this.showError( error );
+			});
+		}
+	}
+
 	buscarCliente(evt:any)
 	{
+		this.is_loading = true;
 		let x = this.rest.usuario.search({
 			eq:{ tipo: 'PACIENTE' }
 			,lk:{ nombre: evt.target.value, usuario: evt.target.value },
 		}).subscribe((response)=>
 		{
+			this.is_loading = false;
 			this.search_usuario = response.datos;
 			//x.unsubscribe();
 		},(error)=>this.showError(error));
@@ -228,11 +233,13 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	buscar(evt:any)
 	{
+		this.search_loading = true;
 		let x = this.rest.servicio.search({
 			lk:{ nombre: evt.target.value },
 			// eq:{tipo:'PRODUCTO_FISICO'}
 		}).subscribe((response)=>
 		{
+			this.search_loading = false;
 			this.search_servicios = response.datos;
 			x.unsubscribe();
 		},(error)=>this.showError(error));
@@ -240,9 +247,12 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	guardarVenta()
 	{
+		this.is_loading = true;
 		this.rest.guardarDatosVenta( this.datosVenta ).subscribe((datosVenta)=>
 		{
+			this.is_loading = false;
 			this.datosVenta = datosVenta;
+			this.calcularCantidades();
 			this.show_modal_pago = true;
 		},(error)=>
 		{
@@ -252,8 +262,10 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	cancelarVenta()
 	{
+		this.is_loading = true;
 		this.rest.venta.update({id: this.datosVenta.venta.id, activa: 'NO' }).subscribe((venta)=>
 		{
+			this.is_loading = false;
 			this.datosVenta					= this.getNewVenta( this.tipo_precios );
 			this.router.navigate(['punto-venta']);
 		});
@@ -275,6 +287,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 		let precio_servicio = null;
 
+
+		this.is_loading = true;
 		of(true).pipe
 		(
 			flatMap((x)=>
@@ -299,11 +313,12 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		)
 		.subscribe((response)=>
 		{
+			this.is_loading = false;
 			if( response.datos.length == 0 )
 			{
-				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 1');
 				this.busqueda = '';
 				this.search_servicios = [];
+				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 1');
 				this.calcularTotalVenta();
 				return;
 			}
@@ -318,6 +333,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 			if( !precio_servicio )
 			{
+				this.busqueda = '';
+				this.search_servicios = [];
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 2');
 				this.calcularTotalVenta();
 				return;
@@ -342,11 +359,37 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
+	calcularCambio(pago):number
+	{
+		let cambio = ((0+pago.efectivo
+						+(pago.dolares*pago.tipo_cambio_dolares)
+						+pago.tarjeta
+						+pago.cheque
+						+pago.deposito - pago.total )> 0 ?
+						(
+							(0+pago.efectivo
+							+(pago.dolares*pago.tipo_cambio_dolares)
+							+pago.tarjeta
+							+pago.cheque
+							+pago.deposito
+							- pago.total)
+						)
+						: 0 );
+
+		pago.cambio = cambio;
+		pago.cambio_en_dolares = cambio/this.datosVenta.centro_medico.tipo_cambio_dolares;
+		return cambio;
+	}
+
 	pagarVenta()
 	{
+		this.pago.id_venta 	= this.datosVenta.venta.id;
+
 		this.rest.pago.create(this.pago).subscribe((response)=>
 		{
 			this.is_loading = false;
+			this.datosVenta.venta.estatus = 'PROCESADA';
+			this.router.navigate(['imprimir-ticket-venta',this.datosVenta.venta.id]);
 		}
 		,(error)=>
 		{
@@ -355,6 +398,45 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
+	disminuir(sd)
+	{
+		console.log('Disminuir');
+		if( sd.detalle_venta.cantidad  <= 1 )
+		{
+			console.log("try to remove");
+			let index = this.datosVenta.detalles.findIndex(i=>i.servicio.id == sd.servicio.id );
+			if( index > -1 )
+				this.datosVenta.detalles.splice(index,1);
+			else
+				console.log("No se envio");
+
+			this.calcularTotalVenta();
+			return;
+		}
+		else
+		{
+			console.log('cantidad >= 2 ');
+		}
+
+		sd.detalle_venta.cantidad--;
+		this.calcularTotalVenta();
+	}
+	aumentar(sd)
+	{
+		sd.detalle_venta.cantidad++;
+		this.calcularTotalVenta();
+	}
+
+	eliminar(sd)
+	{
+		let index = this.datosVenta.detalles.findIndex(i=>i.servicio.id == sd.servicio.id );
+		if( index > -1 )
+			this.datosVenta.detalles.splice(index,1);
+		else
+			console.log("No se envio");
+
+		this.calcularTotalVenta();
+	}
 	calcularTotalVenta()
 	{
 		let total		= 0;
@@ -362,41 +444,48 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		let iva			= 0;
 		let centro_medico = this.rest.getCurrentCentroMedico();
 
+		let prices = [];
+
 		for(let i of this.datosVenta.detalles )
 		{
-			console.log('D V is', i );
-			console.log( this.precios_info );
-
 			i.detalle_venta.precio		= i.precio_servicio.precio;
 			i.detalle_venta.total		= i.precio_servicio.precio*i.detalle_venta.cantidad;
-			i.detalle_venta.iva			= Math.round(i.detalle_venta.total/(centro_medico.iva+100))/100;
-			i.detalle_venta.subtotal	= i.detalle_venta.total- i.detalle_venta.iva;
+			i.detalle_venta.subtotal 	= i.detalle_venta.total/(1+(centro_medico.iva*0.01));
+			i.detalle_venta.iva			= i.detalle_venta.total- i.detalle_venta.subtotal;
 
 			total 		+= i.detalle_venta.total;
 			subtotal	+= i.detalle_venta.subtotal;
 			iva			+= i.detalle_venta.iva;
 		}
 
+		console.log('Precios', prices );
+
 		this.datosVenta.venta.total		= total;
 		this.datosVenta.venta.subtotal	= subtotal;
 		this.datosVenta.venta.iva		= iva;
 
-		//let pagos_hechos		= this.datosVenta.pagos.reduce((a,b)=>{ return a+b.total},0);
+		let pagos_hechos		= this.datosVenta.pagos.reduce((a,b)=>{ return a+b.total},0);
 		//this.datosVenta.venta.total = total;
 		//this.datosVenta.venta.subtotal
 
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
 
-		this.infoPago.total_venta	= this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
-		//this.infoPago.total_pagado	= pagos_hechos;
-		//this.infoPago.total_a_pagar	= total-pagos_hechos;
+		this.infoPago.iva			= iva;
+		this.infoPago.subtotal		= subtotal;
+		this.infoPago.total_venta	= total;//this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
+		this.infoPago.total_pagado	= pagos_hechos;
+		this.infoPago.total_a_pagar	= total-pagos_hechos;
 		this.infoPago.cambio		= 0 ;
 		this.calcularCantidades();
 	}
 
 	calcularCantidades()
 	{
-		this.pago.total = this.infoPago.total_a_pagar;
+
+		this.pago.total		= this.infoPago.total_a_pagar;
+		this.pago.subtotal	= this.infoPago.subtotal;
+		this.pago.iva		= this.infoPago.iva;
+
 		this.pago.tipo_cambio_dolares	= this.datosVenta.centro_medico.tipo_cambio_dolares;
 
 		this.infoPago.total_cantidades = this.pago.efectivo
@@ -414,20 +503,20 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		let usuario:Usuario				= this.rest.getUsuarioSesion();
 
 		return {
-				venta			: {
-					id_centro_medico 	: centro_medico.id
-					,id_usuario_atendio	: usuario.id
-					,iva				: centro_medico.iva
-					,total				: 0
-					,cliente			: tipo_precios[0].nombre
-					,id_tipo_precio		: tipo_precios[0].id
-				}
-				,centro_medico
-				,detalles		: []
-				,cliente		: null
-				,atendio		: this.rest.getUsuarioSesion()
-				,pagos			: []
-				,tipo_precio	: tipo_precios[0]
+			venta			: {
+				id_centro_medico 	: centro_medico.id
+				,id_usuario_atendio	: usuario.id
+				,iva				: centro_medico.iva
+				,total				: 0
+				,cliente			: tipo_precios[0].nombre
+				,id_tipo_precio		: tipo_precios[0].id
+			}
+			,centro_medico
+			,detalles		: []
+			,cliente		: null
+			,atendio		: this.rest.getUsuarioSesion()
+			,pagos			: []
+			,tipo_precio	: tipo_precios[0]
 		}
 	}
 	cambiarVenta(id)
