@@ -1,79 +1,71 @@
 <nav class="navbar d-flex flex-row navbar-expand-md navbar-dark bg-primary padnull">
-  <!-- <div class="collapse navbar-collapse ">
-    <i class="fas fa-bars fa-lg"></i>
-  </div> -->
-  <div class="pl-4 bd-highlight ">
-    <i class="fas fa-bars fa-lg collapse navbar-collapse "></i>
-  </div>
-  <div class=" pl-4 bd-highlight ">
-    <img src="../../../assets/logo/Mehr-Software-16.png" class="logoMenu" alt="Sample image" />
-  </div>
-  <div class="d-flex bd-highlight ml-auto">
-    <div class="p-1 bd-highlight collapse navbar-collapse"><img src="../../../assets/icon/Mehr-Software-34.png"
-        class="logoUser" /></div>
-    <div class="p-2 bd-highlight  alling collapse navbar-collapse"><a >{{nombre}}</a></div>
-    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
-      data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-  <div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show " id="navbarsDefault">
+	<div class=" pl-4 bd-highlight ">
+		<img src="../../../assets/logo/Mehr-Software-16.png" class="logoMenu" alt="Sample image" />
+	</div>
+	<div class="d-flex bd-highlight ml-auto">
+		<div class="p-1 bd-highlight collapse navbar-collapse"><img src="../../../assets/icon/Mehr-Software-34.png"
+				class="logoUser" /></div>
+		<div class="p-2 bd-highlight	alling collapse navbar-collapse"><a >{{nombre}}</a></div>
+		<button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+			data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+	<div *ngIf="isNavbarCollapsed" class="collapse navbar-collapse show " id="navbarsDefault">
 
-    <ul class="navbar-nav mr-auto hiddeSubMenu">
-      <li [appAccess]="['ADMIN']" class="nav-item" ngbDropdown>
-        <a class="nav-link navbarMenu active" (click)="showCentros = !showCentros">Centro
-          Medico</a>
-      </li>
-      <div *ngIf="showCentros">
+		<ul class="navbar-nav mr-auto hiddeSubMenu">
+			<li [appAccess]="['ADMIN']" class="nav-item" ngbDropdown>
+				<a class="nav-link navbarMenu active" (click)="showCentros = !showCentros">Centro
+					Medico</a>
+			</li>
+			<div *ngIf="showCentros">
 
-        <li [appAccess]="['ADMIN']" >
-          <a href="#" [routerLink]="['/especialidades']" class="nav-link subMenu">Especialidades
-          </a>
-        </li>
-        <li [appAccess]="['ADMIN']" >
-          <a [routerLink]="['/centros-medicos']" class="nav-link subMenu">Clinicas</a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/tipo-precios',0]" class="nav-link subMenu">Precios</a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/servicios']" class="nav-link subMenu">Servicios</a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/gastos']" class="nav-link subMenu">Gastos</a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/proveedores']" class="nav-link subMenu">Proveedores </a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/usuarios']" class="nav-link subMenu">Usuarios</a>
-        </li>
-        <li [appAccess]="['ADMIN']">
-          <a [routerLink]="['/ingresos']" class="nav-link subMenu">Ingresos</a>
-        </li>
+				<li [appAccess]="['ADMIN']" >
+					<a href="#" [routerLink]="['/especialidades']" class="nav-link subMenu">Especialidades
+					</a>
+				</li>
+				<li [appAccess]="['ADMIN']" >
+					<a [routerLink]="['/centros-medicos']" class="nav-link subMenu">Clinicas</a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/tipo-precios',0]" class="nav-link subMenu">Precios</a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/servicios']" class="nav-link subMenu">Servicios</a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/gastos']" class="nav-link subMenu">Gastos</a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/proveedores']" class="nav-link subMenu">Proveedores </a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/usuarios']" class="nav-link subMenu">Usuarios</a>
+				</li>
+				<li [appAccess]="['ADMIN']">
+					<a [routerLink]="['/ingresos']" class="nav-link subMenu">Ingresos</a>
+				</li>
 
-        <li [appAccess]="['ADMIN']">
-          <a class="nav-link subMenu">Reportes </a>
-        </li>
+				<li [appAccess]="['ADMIN']">
+					<a class="nav-link subMenu">Reportes </a>
+				</li>
 
 
-      </div>
-      <li [appAccess]="['ADMIN']" class="nav-item active" ngbDropdown>
-        <a class="nav-link navbarMenu" [routerLink]="['/doctores']">Doctores</a>
-      </li>
-      <li  [appAccess]="['ADMIN']"class="nav-item active" ngbDropdown>
-        <a class="nav-link navbarMenu" [routerLink]="['/pacientes']">Pacientes</a>
-      </li>
-      <li  [appAccess]="['ADMIN']" class="nav-item active" ngbDropdown>
-        <a class="nav-link navbarMenu" [routerLink]="['/citas']">Citas</a>
-      </li>
-      <li class="nav-item active" ngbDropdown>
-        <a class="nav-link navbarMenu" (click)="logout()">Log out</a>
-      </li>
-    </ul>
-
-  </div>
-
+			</div>
+			<li [appAccess]="['ADMIN']" class="nav-item active" ngbDropdown>
+				<a class="nav-link navbarMenu" [routerLink]="['/doctores']">Doctores</a>
+			</li>
+			<li	[appAccess]="['ADMIN']"class="nav-item active" ngbDropdown>
+				<a class="nav-link navbarMenu" [routerLink]="['/pacientes']">Pacientes</a>
+			</li>
+			<li	[appAccess]="['ADMIN']" class="nav-item active" ngbDropdown>
+				<a class="nav-link navbarMenu" [routerLink]="['/citas']">Citas</a>
+			</li>
+			<li class="nav-item active" ngbDropdown>
+				<a class="nav-link navbarMenu" (click)="logout()">Log out</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 
 
@@ -83,31 +75,31 @@
 <a class="nav-link dropdown-toggle dropdown-toggle" id="id03" ngbDropdownToggle>Citas</a>
 <a class="nav-link dropdown-toggle dropdown-toggle" id="id04" ngbDropdownToggle>Logout</a>
 <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-  <a class="dropdown-item" href="#">submenu1</a>
-  <a class="dropdown-item" href="#">submenu2</a>
-  <a class="dropdown-item" href="#">submenu3</a> </div>-->
+	<a class="dropdown-item" href="#">submenu1</a>
+	<a class="dropdown-item" href="#">submenu2</a>
+	<a class="dropdown-item" href="#">submenu3</a> </div>-->
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
-    Brand
-  </a>
+	<a class="navbar-brand" href="#">
+		Brand
+	</a>
 
-  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
 
-  <div class="collapse navbar-collapse show" [ngClass]="{ 'show': navbarOpen }" >
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Item 1</a>
-      </li>
+	<div class="collapse navbar-collapse show" [ngClass]="{ 'show': navbarOpen }" >
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="#">Item 1</a>
+			</li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Item 2</a>
-      </li>
-    </ul>
-  </div>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Item 2</a>
+			</li>
+		</ul>
+	</div>
 </nav>
 
  -->
@@ -115,37 +107,37 @@
 
 <!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light {{pagina}}">
-  <div class="collapse navbar-collapse ">
-    <i class="fas fa-bars fa-lg"></i>
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+	<div class="collapse navbar-collapse ">
+		<i class="fas fa-bars fa-lg"></i>
+	</div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-  <div class="collapse navbar-collapse">
-    <img
-      src="../../../assets/logo/Mehr-Software-16.png"
-      class="logoMenu"
-      alt="Sample image"
-    />
-  </div>
-  <div>
-  <ul class="navbar-nav ml-auto nav-flex-icons">
-    <li class="nav-item avatar dropdown" dropdown>
-      <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-        <img src="../../../assets/icon/Mehr-Software-34.png4" alt=""
-          class="img-fluid rounded-circle z-depth-0"></a>
-      <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-        <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
-        <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
-      </div>
-    </li>
-  </ul>
-  </div> -->
+	<div class="collapse navbar-collapse">
+		<img
+			src="../../../assets/logo/Mehr-Software-16.png"
+			class="logoMenu"
+			alt="Sample image"
+		/>
+	</div>
+	<div>
+	<ul class="navbar-nav ml-auto nav-flex-icons">
+		<li class="nav-item avatar dropdown" dropdown>
+			<a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+				<img src="../../../assets/icon/Mehr-Software-34.png4" alt=""
+					class="img-fluid rounded-circle z-depth-0"></a>
+			<div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+				<a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
+				<a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+			</div>
+		</li>
+	</ul>
+	</div> -->
 <!-- <div class="collapse navbar-collapse" >
-    <i class="fas fa-user fa-2x"></i>
+		<i class="fas fa-user fa-2x"></i>
 
 
-    <a class="align-middle"    >Daniel Martinez</a>
-  </div>
+		<a class="align-middle"		>Daniel Martinez</a>
+	</div>
 </nav> -->
