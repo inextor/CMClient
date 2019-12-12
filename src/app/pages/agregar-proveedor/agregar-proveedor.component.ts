@@ -5,9 +5,9 @@ import { Proveedor } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 
 @Component({
-  selector: 'app-agregar-proveedor',
-  templateUrl: './agregar-proveedor.component.html',
-  styleUrls: ['./agregar-proveedor.component.css']
+	selector: 'app-agregar-proveedor',
+	templateUrl: './agregar-proveedor.component.html',
+	styleUrls: ['./agregar-proveedor.component.css']
 })
 export class AgregarProveedorComponent extends BaseComponent implements OnInit {
 
@@ -15,8 +15,8 @@ export class AgregarProveedorComponent extends BaseComponent implements OnInit {
 		nombre: ''
 	};
 
-  ngOnInit() {
-    this.proveedor = {
+	ngOnInit() {
+		this.proveedor = {
 			id: null,
 			nombre:''
 		};
@@ -37,11 +37,11 @@ export class AgregarProveedorComponent extends BaseComponent implements OnInit {
 		});
 	}
 
- 	 guardar()
+	guardar()
 	{
 		this.is_loading = true;
 
-		if( this.proveedor.id  )
+		if( this.proveedor.id	)
 		{
 			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.proveedor.update( this.proveedor ).subscribe((proveedor)=>{
