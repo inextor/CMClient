@@ -21,6 +21,7 @@ export class VerConsultasComponent extends BaseComponent implements OnInit {
 	id_paciente:number = null;
 	id_doctor:number = null;
 	consultas:Consulta[] = [];
+	paciente:Paciente = {};
 
 	ngOnInit()
 	{
@@ -29,6 +30,11 @@ export class VerConsultasComponent extends BaseComponent implements OnInit {
 			this.id_paciente = params.get('id_paciente') ==null ? null : parseInt(params.get('id_paciente') );
 			this.id_paciente = params.get('id_doctor') ==null ? null : parseInt(params.get('id_doctor') );
 			this.is_loading = true;
+
+			this.rest.paciente.get( this.id_paciente ).subscribe((paciente)=>
+			{
+				this.paciente = paciente;
+			});
 
 			this.rest.consulta.getAll({ id_paciente:this.id_paciente,id_doctor:this.id_doctor }).subscribe((consultas)=>
 			{

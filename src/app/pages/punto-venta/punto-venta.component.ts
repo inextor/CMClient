@@ -36,6 +36,7 @@ interface InfoPago
 	total_pagado		: number;
 	total_a_pagar		: number;
 	total_cantidades	: number;
+	cantidad_faltante	: number;
 }
 
 @Component({
@@ -55,6 +56,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	tipo_precios:Tipo_Precio[]	= [];
 	ventas:Venta[]				= [];
 	search_loading:boolean		= false;
+	debug:boolean				= true;
 
 	datosVenta:DatosVenta		= {
 		venta			: {
@@ -89,6 +91,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		,total_a_pagar	: 0
 		,cambio			: 0
 		,total_cantidades: 0
+		,cantidad_faltante	: 0
 	};
 
 	pago:Pago = {
@@ -166,7 +169,8 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 	ngOnDestroy()
 	{
-		if( this.datosVenta.detalles.length > 0 && this.datosVenta.venta.estatus == 'PENDIENTE' )
+		console.log('Saving???',this.datosVenta );
+		if( this.datosVenta.detalles.length > 0 && (this.datosVenta.venta.estatus == 'PENDIENTE' || this.datosVenta.venta.status == '') )
 		{
 			this.rest.guardarDatosVenta(this.datosVenta).subscribe(()=>
 			{
@@ -207,6 +211,13 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	buscarCliente(evt:any)
 	{
 		this.is_loading = true;
+		if( evt.target.value == '' )
+		{
+			this.search_usuario = [];
+			this.is_loading = false;
+			return;
+		}
+
 		let x = this.rest.usuario.search({
 			eq:{ tipo: 'PACIENTE' }
 			,lk:{ nombre: evt.target.value, usuario: evt.target.value },
@@ -282,6 +293,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			this.busqueda	= '';
 			this.calcularTotalVenta();
 
+			document.querySelector('#busqueda').focus();
 			return;
 		}
 
@@ -295,11 +307,9 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			{
 				if(  servicio.id in this.precios_info)
 				{
-					console.log("HERE IN CHECK IN");
 					return of({total: this.precios_info[ servicio.id ].length, datos: this.precios_info[ servicio.id ]});
 				}
 				//Else
-				console.log("HERE IN CHECK WS");
 				let centro_medico = this.rest.getCurrentCentroMedico();
 				return this.rest.precio_servicio.search
 				({
@@ -320,6 +330,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				this.search_servicios = [];
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 1');
 				this.calcularTotalVenta();
+				document.querySelector('#busqueda').focus();
 				return;
 			}
 
@@ -337,6 +348,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				this.search_servicios = [];
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 2');
 				this.calcularTotalVenta();
+				document.querySelector('#busqueda').focus();
 				return;
 			}
 
@@ -353,6 +365,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			this.busqueda = '';
 			this.search_servicios = [];
 			this.calcularTotalVenta();
+			document.querySelector('#busqueda').focus();
 		},(error)=>
 		{
 			console.log('Solo imprimimos el error en la consola');
@@ -389,7 +402,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		{
 			this.is_loading = false;
 			this.datosVenta.venta.estatus = 'PROCESADA';
-			this.router.navigate(['imprimir-ticket-venta',this.datosVenta.venta.id]);
+			this.router.navigate(['/ticket-venta',this.datosVenta.venta.id,1]);
 		}
 		,(error)=>
 		{
@@ -508,6 +521,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				,id_usuario_atendio	: usuario.id
 				,iva				: centro_medico.iva
 				,total				: 0
+				,estatus			: 'PENDIENTE'
 				,cliente			: tipo_precios[0].nombre
 				,id_tipo_precio		: tipo_precios[0].id
 			}

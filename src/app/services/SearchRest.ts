@@ -84,11 +84,9 @@ export class SearchRest<U,T>{
 			if( searchObj.lk[i] )
 				params = params.set(i+'~~',''+searchObj.lk[i] );
 
-		if( searchObj.ids && searchObj.ids.length > 0 )
-			params = params.set( 'ids', searchObj.ids.join(',') );
-
-		if( searchObj.idss && searchObj.idss.length > 0 )
-			params = params.set( 'ids', searchObj.ids.join(',') );
+		for(let i in searchObj.csv )
+			if( searchObj.csv[i].length )
+				params = params.set(i+',',''+searchObj.csv[i].join(','));
 
 		if( searchObj.pagina )
 		{

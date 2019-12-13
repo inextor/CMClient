@@ -1,263 +1,247 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
+<main class="p-2">
+	<div class="card p-3">
+		<div class="container">
+			<h3 class="mb-3">Ventas</h3>
+			<div>
 
 
-			<main class="p-2">
-				<div class="card p-3">
-					<div class="container">
-						<h3 class="mb-3">Ventas</h3>
-						<div>
+					<div class="form-row">
 
+						<!--div class="pr-2">
+<label>id</label>
+<input type="text" [(ngModel)]="venta_search.eq.id">
+</div-->
 
-								<div class="form-row">
-
-									<!--div class="pr-2">
-			<label>id</label>
-			<input type="text" [(ngModel)]="venta_search.eq.id">
-			</div-->
-
-									<div class="form-group col-md-3">
-										<label>Id Cliente</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.id_usuario_cliente">
-									</div>
-
-									<div class="form-group col-md-3">
-										<label>Facturado</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.facturado">
-									</div>
-
-									<div class="form-group col-md-3">
-										<label>Cliente</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.cliente">
-									</div>
-
-									<!--div class="pr-2">
-		   <label>subtotal</label>
-		   <input type="text" [(ngModel)]="venta_search.eq.subtotal">
-		   </div-->
-
-									<!--div class="pr-2">
-			<label>iva</label>
-			<input type="text" [(ngModel)]="venta_search.eq.iva">
-			</div>
-
-			<div class="pr-2">
-			<label>total</label>
-			<input type="text" [(ngModel)]="venta_search.eq.total">
-			</div>
-
-			<div class="pr-2">
-			<label>cambio</label>
-			<input type="text" [(ngModel)]="venta_search.eq.cambio">
-			</div>
-
-			<div class="pr-2">
-			<label>efectivo desc</label>
-			<input type="text" [(ngModel)]="venta_search.eq.efectivo_desc">
-			</div>
-
-			<div class="pr-2">
-			<label>dolares desc</label>
-			<input type="text" [(ngModel)]="venta_search.eq.dolares_desc">
-			</div>
-
-			<div class="pr-2">
-			<label>tipo cambio</label>
-			<input type="text" [(ngModel)]="venta_search.eq.tipo_cambio">
-			</div-->
-
-									<div class="form-group col-md-3">
-										<label>id usuario recepcionista</label>
-										<input type="text" [(ngModel)]="venta_search.eq.id_usuario_atendio">
-									</div>
-
-									<!--div class="pr-2">
-		  <label>cupon desc</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.cupon_desc">
-		  </div -->
-
-									<div class="form-group col-md-3">
-										<label>Id Centro Medico</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.id_centro_medico">
-									</div>
-
-									<div class="form-group col-md-3">
-										<label>Fecha</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.fecha">
-									</div>
-
-									<!--div class="pr-2">
-		   <label>redondeo</label>
-		   <input type="text" [(ngModel)]="venta_search.eq.redondeo">
-		   </div-->
-
-									<div class="form-group col-md-3">
-										<label>Nombre</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.nombre">
-									</div>
-
-									<div class="form-group col-md-3">
-										<label>Estatus</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.estatus">
-									</div>
-
-									<div class="form-group col-md-3">
-										<label>Activa</label>
-										<input class="form-control" type="text" [(ngModel)]="venta_search.eq.activa">
-									</div>
-
-									<!--div class="pr-2">
-			<label>pendiente</label>
-			<input type="text" [(ngModel)]="venta_search.eq.pendiente">
-			</div-->
-
-									<!--div class="pr-2">
-		  <label>comprobante</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.comprobante">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>promocion desc</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.promocion_desc">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>id tipo precio</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.id_tipo_precio">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>folio</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.folio">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>UUID</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.UUID">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>porcentaje desc</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.porcentaje_desc">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>fecha facturacion</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.fecha_facturacion">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>tiempo creacion</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.tiempo_creacion">
-		  </div>
-
-		  <div class="pr-2">
-		  <label>tiempo actualizacion</label>
-		  <input type="text" [(ngModel)]="venta_search.eq.tiempo_actualizacion">
-		  </div-->
-
-
-		  <div class="d-flex col align-self-center justify-content-end pr-2">
-				<button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
-			</div>
-
-
-								</div>
-
-
-
+						<div class="form-group col-md-3">
+							<label>Id Cliente</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.id_usuario_cliente">
 						</div>
 
-						<div>
-							<app-paginacion [path]="'/list-TEMPLATE_TABLE_NAME'" [pages]="pages"
-								[totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+						<div class="form-group col-md-3">
+							<label>Facturado</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.facturado">
 						</div>
 
-						<table class="basica">
-							<thead>
-								<tr>
-									<th>id</th>
-									<th>id usuario cliente</th>
-									<th>facturado</th>
-									<th>cliente</th>
-									<th>subtotal</th>
-									<th>iva</th>
-									<th>total</th>
-									<!--th>cambio</th>
-			<th>efectivo desc</th>
-			<th>dolares desc</th>
-			<th>tipo cambio</th>
-			<th>id usuario recepcionista</th>
-			<th>cupon desc</th>
-			<th>id centro medico</th>
-			<th>fecha</th>
-			<th>redondeo</th>
-			<th>nombre</th>
-			<th>estatus</th>
-			<th>activa</th>
-			<th>pendiente</th>
-			<th>comprobante</th>
-			<th>promocion desc</th>
-			<th>id tipo precio</th>
-			<th>folio</th>
-			<th>UUID</th>
-			<th>porcentaje desc</th>
-			<th>fecha facturacion</th>
-			<th>tiempo creacion</th>
-			<th>tiempo actualizacion</th-->
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let venta of ventas">
-									<td>{{venta.id}}</td>
-									<td>{{venta.id_usuario_cliente}}</td>
-									<td>{{venta.facturado}}</td>
-									<td>{{venta.cliente}}</td>
-									<td>{{venta.subtotal}}</td>
-									<td>{{venta.iva}}</td>
-									<td>{{venta.total}}</td>
-									<!--td>{{venta.cambio}}</td>
-			<td>{{venta.efectivo_desc}}</td>
-			<td>{{venta.dolares_desc}}</td>
-			<td>{{venta.tipo_cambio}}</td>
-			<td>{{venta.id_usuario_recepcionista}}</td>
-			<td>{{venta.cupon_desc}}</td>
-			<td>{{venta.id_centro_medico}}</td>
-			<td>{{venta.fecha}}</td>
-			<td>{{venta.redondeo}}</td>
-			<td>{{venta.nombre}}</td>
-			<td>{{venta.estatus}}</td>
-			<td>{{venta.activa}}</td>
-			<td>{{venta.pendiente}}</td>
-			<td>{{venta.comprobante}}</td>
-			<td>{{venta.promocion_desc}}</td>
-			<td>{{venta.id_tipo_precio}}</td>
-			<td>{{venta.folio}}</td>
-			<td>{{venta.UUID}}</td>
-			<td>{{venta.porcentaje_desc}}</td>
-			<td>{{venta.fecha_facturacion}}</td>
-			<td>{{venta.tiempo_creacion}}</td>
-			<td>{{venta.tiempo_actualizacion}}</td -->
-								</tr>
-							</tbody>
-						</table>
+						<div class="form-group col-md-3">
+							<label>Cliente</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.cliente">
+						</div>
+
+						<!--div class="pr-2">
+   <label>subtotal</label>
+   <input type="text" [(ngModel)]="venta_search.eq.subtotal">
+   </div-->
+
+						<!--div class="pr-2">
+<label>iva</label>
+<input type="text" [(ngModel)]="venta_search.eq.iva">
+</div>
+
+<div class="pr-2">
+<label>total</label>
+<input type="text" [(ngModel)]="venta_search.eq.total">
+</div>
+
+<div class="pr-2">
+<label>cambio</label>
+<input type="text" [(ngModel)]="venta_search.eq.cambio">
+</div>
+
+<div class="pr-2">
+<label>efectivo desc</label>
+<input type="text" [(ngModel)]="venta_search.eq.efectivo_desc">
+</div>
+
+<div class="pr-2">
+<label>dolares desc</label>
+<input type="text" [(ngModel)]="venta_search.eq.dolares_desc">
+</div>
+
+<div class="pr-2">
+<label>tipo cambio</label>
+<input type="text" [(ngModel)]="venta_search.eq.tipo_cambio">
+</div-->
+
+						<div class="form-group col-md-3" >
+							<label>Atendio:</label>
+							<select name="usuarios_atendio"  [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
+								<option value="">Seleccione</option>
+								<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">{{usuario.nombre|titlecase}}</option>
+							</select>
+						</div>
+
+						<!--div class="pr-2">
+  <label>cupon desc</label>
+  <input type="text" [(ngModel)]="venta_search.eq.cupon_desc">
+  </div -->
+
+						<div class="form-group col-md-3">
+							<label>Centro Medico:</label>
+							<select name="centro_medico"   [(ngModel)]="venta_search.eq.id_centro_medico" class="form-control">
+								<option value="">Seleccione</option>
+								<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">{{centro_medico.nombre|titlecase}}</option>
+							</select>
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Fecha</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.fecha">
+						</div>
+
+						<!--div class="pr-2">
+   <label>redondeo</label>
+   <input type="text" [(ngModel)]="venta_search.eq.redondeo">
+   </div-->
+
+						<div class="form-group col-md-3">
+							<label>Nombre</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.nombre">
+						</div>
+
+						<div class="form-group col-md-3">
+							<label>Estatus</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.estatus">
+						</div>
+
+						<!--div class="form-group col-md-3">
+							<label>Activa</label>
+							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.activa">
+						</div-->
+
+						<!--div class="pr-2">
+<label>pendiente</label>
+<input type="text" [(ngModel)]="venta_search.eq.pendiente">
+</div-->
+
+						<!--div class="pr-2">
+  <label>comprobante</label>
+  <input type="text" [(ngModel)]="venta_search.eq.comprobante">
+  </div>
+
+  <div class="pr-2">
+  <label>promocion desc</label>
+  <input type="text" [(ngModel)]="venta_search.eq.promocion_desc">
+  </div>
+
+  <div class="pr-2">
+  <label>id tipo precio</label>
+  <input type="text" [(ngModel)]="venta_search.eq.id_tipo_precio">
+  </div>
+
+  <div class="pr-2">
+  <label>folio</label>
+  <input type="text" [(ngModel)]="venta_search.eq.folio">
+  </div>
+
+  <div class="pr-2">
+  <label>UUID</label>
+  <input type="text" [(ngModel)]="venta_search.eq.UUID">
+  </div>
+
+  <div class="pr-2">
+  <label>porcentaje desc</label>
+  <input type="text" [(ngModel)]="venta_search.eq.porcentaje_desc">
+  </div>
+
+  <div class="pr-2">
+  <label>fecha facturacion</label>
+  <input type="text" [(ngModel)]="venta_search.eq.fecha_facturacion">
+  </div>
+
+  <div class="pr-2">
+  <label>tiempo creacion</label>
+  <input type="text" [(ngModel)]="venta_search.eq.tiempo_creacion">
+  </div>
+
+  <div class="pr-2">
+  <label>tiempo actualizacion</label>
+  <input type="text" [(ngModel)]="venta_search.eq.tiempo_actualizacion">
+  </div-->
+
+
+  <div class="d-flex col align-self-center justify-content-end pr-2">
+	<button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
+</div>
+
+
 					</div>
-				</div>
-			</main>
 
-			<!-- FIN CONTENIDO -->
+
+
+			</div>
+
+			<div>
+				<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+			</div>
+
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>id usuario cliente</th>
+						<th>facturado</th>
+						<th>cliente</th>
+						<th>subtotal</th>
+						<th>iva</th>
+						<th>total</th>
+						<!--th>cambio</th>
+<th>efectivo desc</th>
+<th>dolares desc</th>
+<th>tipo cambio</th>
+<th>id usuario recepcionista</th>
+<th>cupon desc</th>
+<th>id centro medico</th>
+<th>fecha</th>
+<th>redondeo</th>
+<th>nombre</th>
+<th>estatus</th>
+<th>activa</th>
+<th>pendiente</th>
+<th>comprobante</th>
+<th>promocion desc</th>
+<th>id tipo precio</th>
+<th>folio</th>
+<th>UUID</th>
+<th>porcentaje desc</th>
+<th>fecha facturacion</th>
+<th>tiempo creacion</th>
+<th>tiempo actualizacion</th-->
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let venta of ventas">
+						<td><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td>
+						<td class="text-center">{{venta.id_usuario_cliente}}</td>
+						<td>{{venta.facturado}}</td>
+						<td class="text-center">{{venta.cliente}}</td>
+						<td class="text-right">{{venta.subtotal|currency}}</td>
+						<td class="text-right">{{venta.iva | currency}}</td>
+						<td class="text-right">{{venta.total| currency}}</td>
+						<!--td>{{venta.cambio}}</td>
+<td>{{venta.efectivo_desc}}</td>
+<td>{{venta.dolares_desc}}</td>
+<td>{{venta.tipo_cambio}}</td>
+<td>{{venta.id_usuario_recepcionista}}</td>
+<td>{{venta.cupon_desc}}</td>
+<td>{{venta.id_centro_medico}}</td>
+<td>{{venta.fecha}}</td>
+<td>{{venta.redondeo}}</td>
+<td>{{venta.nombre}}</td>
+<td>{{venta.estatus}}</td>
+<td>{{venta.activa}}</td>
+<td>{{venta.pendiente}}</td>
+<td>{{venta.comprobante}}</td>
+<td>{{venta.promocion_desc}}</td>
+<td>{{venta.id_tipo_precio}}</td>
+<td>{{venta.folio}}</td>
+<td>{{venta.UUID}}</td>
+<td>{{venta.porcentaje_desc}}</td>
+<td>{{venta.fecha_facturacion}}</td>
+<td>{{venta.tiempo_creacion}}</td>
+<td>{{venta.tiempo_actualizacion}}</td -->
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-</div>
+</main>

@@ -29,7 +29,8 @@ export class ImprimirTicketComponent extends BaseComponent implements OnInit {
 		super( rest,router, route, location, titleService );
 	}
 
-	datosVenta:DatosVenta = null;
+	datosVenta:DatosVenta	= null;
+	imprimir:number = false;
 
 	ngOnInit()
 	{
@@ -37,12 +38,21 @@ export class ImprimirTicketComponent extends BaseComponent implements OnInit {
 		{
 			let id_venta	= parseInt( params.get('id') );
 			this.is_loading = true;
+			this.imprimir	= parseInt( params.get('imprimir') | 0 );
 			this.rest.getDatosVenta( id_venta ).subscribe((datosVenta)=>
 			{
 				this.is_loading = false;
 				this.datosVenta = datosVenta;
-				console.log('FOOOO');
-			});
+				if( this.imprimir>0 )
+				{
+					setTimeout(()=>
+					{
+						window.print();
+						this.router.navigate(['/punto-venta']);
+					},1000);
+				}
+			},
+			(error)=>this.showError(error));
 		});
 	}
 }

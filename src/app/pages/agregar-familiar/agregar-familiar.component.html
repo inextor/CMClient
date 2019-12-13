@@ -1,70 +1,51 @@
-<!-- NAVBAR -->
-<div class="page">
-  <header>
-    <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-  </header>
-  <!-- FIN NAVBAR -->
-  <div>
-    <div class="page_content">
-      <!-- MENU -->
-      <div class="pt-2 flex-wrap justify-content-start">
-        <app-menu></app-menu>
-      </div>
-      <!-- FIN MENU -->
-      <!-- CONTENIDO -->
-      <main class="p-2">
-        <div class="card p-3">
-          <h5>AGREGAR FAMILIAR</h5>
-          <app-loading [display]="is_loading"></app-loading>
-          <div class="container">
-            <form>
+<main class="p-2">
+	<div class="card p-3">
+		<h5>AGREGAR FAMILIAR</h5>
+		<app-loading [display]="is_loading"></app-loading>
+		<div class="container">
+			<form>
 
-              <div lines="full" class="list  ">
-                <label position="stacked">Imagen<span color="danger">*</span></label>
-                <div *ngIf="paciente.id_imagen">
-                  <img [src]="this.rest.urlBase+'/imagen.php?id='+paciente.id_imagen">
-                </div>
-                <div class="form-group">
-                  <input type="file" (change)="uploadImage($event)" name="image">
-                </div>
-                <div class="form-group">
-                  <label position="stacked">Nombre<span color="danger">*</span></label>
-                  <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
-                </div>
-                <div class="form-group">
-                  <label position="stacked">Apellidos<span color="danger">*</span></label>
-                  <input required type="text" class="form-control" name="apellidos" [(ngModel)]="paciente.apellidos">
-                </div>
-                <div class="form-group">
-                  <label position="stacked">Sexo<span color="danger">*</span></label>
-                  <input required type="text" class="form-control" name="sexo" [(ngModel)]="paciente.sexo">
-                </div>
-                <div class="form-group">
-                  <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
-                  <!--input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></input-->
-                  <input type="date" displayFormat="YYYY-MM-DD" class="form-control" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento">
-                </div>
-          
-                <div class="form-group">
-                  <label position="stacked">Telefono<span color="danger">*</span></label>
-                  <input required type="text" class="form-control" name="telefono_casa" [(ngModel)]="paciente.telefono">
-                </div>
-              </div>
-          
-              <app-loading *ngIf="is_loading"></app-loading>
-          
-              <div class="">
-                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardarPaciente()"
-                  [disabled]="is_loading">Guardar Paciente</button>
-              </div>
-          
-            </form>
-          </div>
+				<div lines="full" class="list	">
+					<label position="stacked">Imagen<span color="danger">*</span></label>
+					<div *ngIf="paciente.id_imagen">
+						<img [src]="this.rest.urlBase+'/imagen.php?id='+paciente.id_imagen">
+					</div>
+					<div class="form-group">
+						<input type="file" (change)="uploadImage($event)" name="image">
+					</div>
+					<div class="form-group">
+						<label position="stacked">Nombre<span color="danger">*</span></label>
+						<input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
+					</div>
+					<div class="form-group">
+						<label position="stacked">Apellidos<span color="danger">*</span></label>
+						<input required type="text" class="form-control" name="apellidos" [(ngModel)]="paciente.apellidos">
+					</div>
+					<div class="form-group">
+						<label position="stacked">Sexo<span color="danger">*</span></label>
+						<input required type="text" class="form-control" name="sexo" [(ngModel)]="paciente.sexo">
+					</div>
+					<div class="form-group">
+						<label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
+						<!--input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></input-->
+						<input type="date" displayFormat="YYYY-MM-DD" class="form-control" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento">
+					</div>
 
-        </div>
-      </main>
-      <!-- FIN CONTENIDO -->
-    </div>
-  </div>
-</div>
+					<div class="form-group">
+						<label position="stacked">Telefono<span color="danger">*</span></label>
+						<input required type="text" class="form-control" name="telefono_casa" [(ngModel)]="paciente.telefono">
+					</div>
+				</div>
 
+				<app-loading *ngIf="is_loading"></app-loading>
+
+				<div class="">
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardarPaciente()"
+						[disabled]="is_loading">Guardar Paciente</button>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+</main>

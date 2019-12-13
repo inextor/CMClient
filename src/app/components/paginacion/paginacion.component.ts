@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"
@@ -16,10 +16,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class PaginacionComponent implements OnInit {
 
-	@Input() path:string;
+	@Input() path:string = null;
 	@Input() totalPages:number;
 	@Input() currentPage:number;
 	@Input() pages:number[];
+	@Output() selectedPage = new EventEmitter<number>();
 
 	/*
 	@Input('total') set allowDay(value: boolean) {
@@ -43,4 +44,17 @@ export class PaginacionComponent implements OnInit {
 		});
 	}
 
+	gotoPage(page:number)
+	{
+		if( this.path !== null )
+		{
+			this.selectedPage.emit( page );
+		}
+		else
+		{
+			let params = { pagina: page }
+			this.router.navigate([this.path],{queryParams: params,  queryParamsHandling:"merge"});
+		}
+		//[routerLink]="[path]" [queryParams]="{pagina:totalPages-1}" queryParamsHandling="merge"
+	}
 }

@@ -81,4 +81,14 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			});
 		}
 	}
+	uploadImageTicket(evt)
+	{
+		if( evt.target.files.length )
+		{
+			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
+			{
+				this.centro_medico.id_imagen_ticket = imageData.id;
+			});
+		}
+	}
 }

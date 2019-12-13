@@ -9,8 +9,14 @@
 			</td>
 		</div>
 		<div class="pt-2 flex-wrap">
-			<input type="text" class="form-control" position="floating" (change)="changeSearch($event)"
-				ionInput="changeSearch($event)" placeholder="buscar">
+			<div class="row">
+				<div class="col-sm-6 col-md-9">
+					<input type="text" class="form-control" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)" placeholder="buscar">
+				</div>
+				<div class="col-sm-6 col-md-3 text-right">
+					<button class="btn btn-primary w-100">Buscar</button>
+				</div>
+			</div>
 		</div>
 		<table class="basica">
 			<thead>

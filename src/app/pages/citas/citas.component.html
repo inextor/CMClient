@@ -41,7 +41,7 @@
 										Confirmado:
 									</label>
 									<div>
-	
+
 										<input type="checkbox" value="SI"
 											[checked]="cita_search.eq.confirmado_por_doctor=='SI'"
 											(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
@@ -81,8 +81,7 @@
 
 
 						<div>
-							<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages"
-								[currentPage]="currentPage"></app-paginacion>
+							<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
 						</div>
 						<table class="basica">
 							<thead>

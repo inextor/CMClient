@@ -120,6 +120,10 @@ export interface Detalle_Requisicion{
   id_requisicion?:number;
   id_servicio?:number;
   cantidad?:number;
+  precio?:number;
+  subtotal?:number;
+  iva?:number;
+  total?:number;
   costo?:number;
   nota?:string;
   recibido?:number;
@@ -405,6 +409,7 @@ export interface Pago{
   subtotal?:number;
   total?:number;
   cambio?:number;
+  cambio_en_dolares?:number;
   tipo_tarjeta?:string;
   terminacion_tarjeta?:string;
   tipo_pago?:string;

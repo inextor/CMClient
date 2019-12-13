@@ -54,9 +54,6 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe( params =>
 		{
-
-		//this.route.paramMap.subscribe( params =>
-		//{
 			this.cita_search = {
 				eq: {},
 				ge: {},
@@ -83,7 +80,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			this.cita_search.eq.confirmado_por_paciente = 'confirmado_por_paciente' in params ? params.confirmado_por_paciente: null;
 
 
-			
+
 			this.cita_search.limite			= this.pageSize;
 			this.cita_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 			this.nombre						= 'nombre' in params ? params.nombre : '';
@@ -136,14 +133,6 @@ export class CitasComponent extends BaseComponent implements OnInit {
 		this.cita_search.pagina = 0;
 		console.log('Buscando',this.getParams());
 		this.router.navigate(['/citas'],{queryParams: this.getParams()});
-
-
-		//this.rest.searchCita.search(this.cita_search,{nombre:this.nombre}).subscribe((citaResponse)=>
-		//{
-		//	this.setPages( this.cita_search.pagina, citaResponse.total );
-		//	this.setPages( this.cita_search.pagina, citaResponse.total );
-		//	this.info_citas = citaResponse.datos;
-		//},error=>this.showError( error ));
 	}
 
 	changeSearch( evt )

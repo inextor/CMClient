@@ -92,13 +92,6 @@ export interface SearchObject<T>
 			if( searchObj.lk[i] )
 				params = params.set(i+'~~',''+searchObj.lk[i] );
 
-		if( searchObj.ids && searchObj.ids.length > 0 )
-			params = params.set( 'ids', searchObj.ids.join(',') );
-
-		if( searchObj.idss && searchObj.idss.length > 0 )
-			params = params.set( 'ids', searchObj.ids.join(',') );
-
-
 		if( searchObj.pagina )
 		{
 			params = params.set( 'pagina', ''+searchObj.pagina );

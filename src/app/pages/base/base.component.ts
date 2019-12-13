@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
-import { Router,ActivatedRoute,Params} from "@angular/router"
+import { Router,ActivatedRoute,Params, ParamMap} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
 import { mergeMap,catchError } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { SearchObject } from '../../models/Respuestas';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { Title } from '@angular/platform-browser';
 export class BaseComponent implements OnInit {
 
 	public is_loading:boolean	= false;
+
 	public totalPages:number	= 0;
 	public totalItems: number 	= 0;
 	public currentPage:number	= 0;
@@ -112,4 +114,5 @@ export class BaseComponent implements OnInit {
 	public setTitle(newTitle: string) {
 		this.titleService.setTitle(newTitle);
 	}
+
 }

@@ -69,7 +69,6 @@ const routes: Routes = [
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
 			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agendar-cita", component: AgendarCitaComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "ventas", loadChildren:() => import('./pages/ventas/ventas.component'), canActivate: [AuthGuard] },
 			{ path: 'citas', loadChildren:() => import('./pages/citas/citas.component')},
 			{ path: "pacientes", component: PacientesComponent, pathMatch: "full" },
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -85,6 +84,7 @@ const routes: Routes = [
 			{ path: "doctores/:pagina", component: DoctoresComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "doctores", component: DoctoresComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "doctor/:id_usuario", component: DoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "ver-doctor/:idDoctor", component:VerDoctorComponent, pathMatch:"full", canActivate:[AuthGuard] },
 			{ path: "centros-medicos", component: CentrosMedicosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-precios/:id", component: EditarPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "configurar-preguntas", component: ConfigurarPreguntasComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -122,9 +122,10 @@ const routes: Routes = [
 			{ path: "agregar-requisicion", component: AgregarRequisicionComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "punto-venta", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "punto-venta/:id", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
-			{ path: "ticket-abono", component: TicketAbonoComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "ticket-venta", component: TicketVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
-			{ path: "imprimir-ticket-venta/:id", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
+			/*{ path: "ticket-abono", component: TicketAbonoComponent, pathMatch: "full", canActivate: [AuthGuard] },*/
+			/*{ path: "ticket-venta", component: TicketVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},*/
+			{ path: "ticket-venta/:id", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
+			{ path: "ticket-venta/:id/:imprimir", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "citas", component: CitasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "ventas", component: VentasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 		]

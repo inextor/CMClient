@@ -131,6 +131,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 
 	onSeleccionarPacienteNuevaCita(paciente:Paciente)
 	{
+		console.log('FOOOOO aqui llego');
 		let cm_id = this.rest.getCurrentCentroMedico();
 		if( cm_id )
 			this.router.navigate(['/doctores',this.selectedDoctor.id,'centro-medico',cm_id,'agendar-cita',paciente.id]);

@@ -40,7 +40,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   ngOnInit() {
     let usuario=this.rest.getUsuarioSesion();
     forkJoin([
-      
+
       this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
     ]).subscribe((respuestas) => {
       this.proveedores = respuestas[0].datos;
@@ -70,9 +70,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     },detalles_requisicion:{
       id_servicio	: servicio.id,
       cantidad	: 1,
-    } 
+    }
     });
-  
+
 
     this.busqueda = '';
     this.search_servicios = [];
@@ -82,7 +82,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
     detalle_requisiciones.detalles_requisicion.cantidad++;
   }
 
-  // guardar() {
+   guardar() {
   //   this.is_loading = true;
 
   //   if (this.requisicion) {
@@ -99,6 +99,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
   //       this.router.navigate(['/requisiciones']);
   //     }, error => this.showError(error));
   //   }
-  // }
+  }
 
 }

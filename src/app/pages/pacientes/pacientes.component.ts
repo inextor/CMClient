@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { SearchPacienteResponse,SearchPacienteRequest } from '../../models/Respuestas';
+import { SearchPacienteResponse,SearchPacienteRequest,SearchObject } from '../../models/Respuestas';
 import { Doctor,Cita, Usuario,Paciente,Centro_Medico} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { SeleccionarDoctorComponent } from '../../components/seleccionar-doctor/seleccionar-doctor.component';
@@ -26,6 +26,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	centro_medico:Centro_Medico = { id: 1 };
 	crequest:SearchPacienteRequest = {};
 	usuario:Usuario = {};
+	paciente_search:SearchObject<Paciente> = {};
 
 	//TODO agregar Paginación,Busqueda ó filtros segun sea necesario
 
@@ -39,21 +40,48 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 		// {this.doctor = respuesta.datos;});
 		//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
 		this.titleService.setTitle('Pacientes');
-		this.route.paramMap.subscribe( params =>
+		this.route.queryParams.subscribe( params =>
 		{
+			this.paciente_search = {
+				lt: {}
+				,eq: {}
+				,ge: {}
+				,gt: {}
+				,le: {}
+				,lk: {}
+				,csv: {}
+			};
 
-			let usuario = this.rest.getUsuarioSesion();
+
+			let usuario:Usuario = this.rest.getUsuarioSesion();
+			console.log( usuario );
+
 			if(usuario.tipo=="DOCTOR")
 			{
 				this.rest.doctor.get( usuario.id ).subscribe(doctor=> this.doctor = doctor);
 			}
 
-			this.is_loading = true;
-			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
+			console.log('params', params );
+			//this.paciente_search.eq.id_organizacion = usuario.id_organizacion;
+			this.paciente_search.lk.nombre = "lk.nombre" in params ?params["lk.nombre"]:'';
+			this.paciente_search.pagina = 'pagina' in params ? parseInt(params['pagina'] ) : 0;
+			this.paciente_search.limite	= this.pageSize;
 
+			this.is_loading = true;
+			this.currentPage = this.paciente_search.pagina;
 			this.usuario = usuario;
 
-			this.rest.paciente.getAll({},{pagina:this.currentPage,limite:this.pageSize,id_organizacion: usuario.id_organizacion}).subscribe((respuesta)=>
+			let tokens = this.paciente_search.lk.nombre.trim().split(/\s+/);
+
+
+			if( tokens.length> 1 )
+			{
+				this.paciente_search.eq.nombre = tokens[0];
+				this.paciente_search.lk.nombre	= null;
+				this.paciente_search.lk.apellidos = tokens[1];
+			}
+
+			this.rest.paciente.search( this.paciente_search ).subscribe((respuesta)=>
 			{
 				this.pacientes = respuesta.datos;
 				this.is_loading = false;
@@ -125,11 +153,8 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 	changeSearch( evt )
 	{
-		this.rest.paciente.getAll({nombre: evt.target.value}).subscribe(respuesta => {
-			this.pacientes = respuesta.datos;
-		})
-		console.log("FOOOOO make a search", evt);
-		this.search( evt.target.value );
+		this.paciente_search.lk.nombre = evt.target.value;
+		this.search();
 	}
 
 	ordenar(item)
@@ -144,23 +169,30 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 			this.orderDirection = 'ASC';
 		}
 	}
-	search(nombre)
-	{
-		if( nombre.trim() )
-			this.crequest.nombre = nombre.trim();
-		else
-			this.crequest.nombre = '';
 
-		//this.rest.searchCitas( this.crequest ).subscribe((respuesta)=>
-		this.rest.searchCita.getAll( this.crequest ).subscribe((respuesta)=>
+	getParams()
+	{
+
+	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.paciente_search.pagina= 0;
+		let search = {};
+		let array = ['eq','le','lt','ge','gt','csv','lk'];
+		for(let i in this.paciente_search )
 		{
-			this.info_pacientes = respuesta.datos;
-			this.is_loading = false;
-		},
-		()=>
-		{
-			this.is_loading = false;
+			console.log( 'i',i,array.indexOf( i ) );
+			if(array.indexOf( i ) > -1 )
+			{
+				for(let j in this.paciente_search[i])
+					search[i+'.'+j] = this.paciente_search[i][j];
+			}
 		}
-		);
+		this.paciente_search.eq.id_organizacion = null;
+		console.log('search',this.paciente_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['/pacientes'],{queryParams: search });
 	}
 }

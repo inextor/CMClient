@@ -27,9 +27,6 @@ export interface CsvArray{
 
 export interface SearchObject<T>
 {
-	ids?:number[];
-	idss?:string[];
-
 	pagina?:number;
 	limite?:number;
 

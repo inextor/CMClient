@@ -1,38 +1,19 @@
-
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-3  position-relative">
-				<!-- [height]=650 -->
-				<div class="card p-3 m-3">
-					<full-calendar
-						#calendar
-						[plugins]="calendarPlugins"
-						defaultView="timeGridWeek"
-						[weekends]="true"
-						[eventSources]="eventSources"
-						[firstDay]="1"
-						[events]="calendarEvents"
-						(dateClick)="dateClick($event)"
-						(eventRender)="eventRender($event)"
-						></full-calendar>
-				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
-		</div>
+<main class="p-3  position-relative">
+	<!-- [height]=650 -->
+	<div class="card p-3 m-3">
+		<full-calendar
+			#calendar
+			[plugins]="calendarPlugins"
+			defaultView="timeGridWeek"
+			[weekends]="true"
+			[eventSources]="eventSources"
+			[firstDay]="1"
+			[events]="calendarEvents"
+			(dateClick)="dateClick($event)"
+			(eventRender)="eventRender($event)"
+			></full-calendar>
 	</div>
-</div>
+</main>
 
 <div class="custom-modal" *ngIf="show_modal">
 	<div>
