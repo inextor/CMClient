@@ -46,12 +46,15 @@ export class PaginacionComponent implements OnInit {
 
 	gotoPage(page:number)
 	{
-		if( this.path !== null )
+		console.log("Go to page ",page);
+		if( this.path == null )
 		{
+			console.log('Emitting');
 			this.selectedPage.emit( page );
 		}
 		else
 		{
+			console.log('navigate');
 			let params = { pagina: page }
 			this.router.navigate([this.path],{queryParams: params,  queryParamsHandling:"merge"});
 		}
