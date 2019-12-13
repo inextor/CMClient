@@ -29,11 +29,11 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
 
-		this.route.paramMap.subscribe( params =>
+		this.route.queryParams.subscribe( params =>
 		{
-			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
+			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 
-			this.rest.especialidad.getAll({},{page:this.currentPage, page_size: 10}).subscribe((respuesta) =>
+			this.rest.especialidad.getAll({},{pagina:this.currentPage, limite: this.pageSize}).subscribe((respuesta) =>
 			{
 				this.especialidades = respuesta.datos;
 				console.log(this.especialidades)
