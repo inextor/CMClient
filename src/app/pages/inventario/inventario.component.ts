@@ -44,7 +44,9 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe((params)=>
 		{
-			this.search_inventario.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : this.rest.getCurrentCentroMedico();
+			let centro_medico:Centro_Medico =  this.rest.getCurrentCentroMedico();
+
+			this.search_inventario.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : centro_medico.id;
 
 			this.searchServicio.eq.tipo		= 'PRODUCTO_FISICO';
 			this.searchServicio.lk.nombre	= 'nombre' in params ? params.nombre : '';
@@ -69,9 +71,13 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 					this.inventarioServicios = [];
 
 					respuestaInventario.datos.forEach((i)=>{ objInventario[ i.id_servicio ] = i});
+
 					respuestaServicios.datos.forEach((servicio)=>
 					{
-						let inventario = servicio.id in objInventario ? objInventario[ servicio.id ]: { id_servicio: servicio.id, id_centro_medico: this.search_inventario.eq.id_centro_medico, cantidad: 0  };
+						let inventario = servicio.id in objInventario ? objInventario[ servicio.id ]: {
+							id_servicio: servicio.id, id_centro_medico: this.search_inventario.eq.id_centro_medico, cantidad: 0
+						};
+						console.log( this.search_inventario.eq.id_centro_medico );
 						this.inventarioServicios.push({ servicio, inventario });
 					});
 
