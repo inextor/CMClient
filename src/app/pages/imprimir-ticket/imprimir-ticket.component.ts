@@ -30,7 +30,7 @@ export class ImprimirTicketComponent extends BaseComponent implements OnInit {
 	}
 
 	datosVenta:DatosVenta	= null;
-	imprimir:number = false;
+	imprimir:boolean		= false;
 
 	ngOnInit()
 	{
@@ -38,12 +38,12 @@ export class ImprimirTicketComponent extends BaseComponent implements OnInit {
 		{
 			let id_venta	= parseInt( params.get('id') );
 			this.is_loading = true;
-			this.imprimir	= parseInt( params.get('imprimir') | 0 );
+			this.imprimir	= !!params.get('imprimir');
 			this.rest.getDatosVenta( id_venta ).subscribe((datosVenta)=>
 			{
 				this.is_loading = false;
 				this.datosVenta = datosVenta;
-				if( this.imprimir>0 )
+				if( this.imprimir )
 				{
 					setTimeout(()=>
 					{
