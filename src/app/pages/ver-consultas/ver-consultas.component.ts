@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
-import { Consulta } from '../../models/Modelos';
+import { Consulta,Paciente } from '../../models/Modelos';
 import { Servicio_Recurso } from '../../models/Respuestas';
 import { from } from 'rxjs';
 import { Location } from	'@angular/common';
