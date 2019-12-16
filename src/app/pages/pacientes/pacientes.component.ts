@@ -190,7 +190,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 					search[i+'.'+j] = this.paciente_search[i][j];
 			}
 		}
-		this.paciente_search.eq.id_organizacion = null;
+		//this.paciente_search.eq.id_organizacion = null;
 		console.log('search',this.paciente_search );
 		console.log('Busqueda', search );
 		this.router.navigate(['/pacientes'],{queryParams: search });
