@@ -170,7 +170,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	ngOnDestroy()
 	{
 		console.log('Saving???',this.datosVenta );
-		if( this.datosVenta.detalles.length > 0 && (this.datosVenta.venta.estatus == 'PENDIENTE' || this.datosVenta.venta.status == '') )
+		if( this.datosVenta.detalles.length > 0 && (this.datosVenta.venta.estatus == 'PENDIENTE' || this.datosVenta.venta.estatus == '') )
 		{
 			this.rest.guardarDatosVenta(this.datosVenta).subscribe(()=>
 			{
@@ -282,6 +282,11 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		});
 	}
 
+	focusBusqueda()
+	{
+		let x = <HTMLInputElement>document.getElementById('busqueda');
+		x.focus();
+	}
 	agregarServicio(servicio:Servicio)
 	{
 		let detalle_servicio = this.datosVenta.detalles.find(i=>i.servicio.id == servicio.id );
@@ -292,8 +297,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			this.search_servicios = [];
 			this.busqueda	= '';
 			this.calcularTotalVenta();
-
-			document.querySelector('#busqueda').focus();
+			this.focusBusqueda();
 			return;
 		}
 
@@ -330,7 +334,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				this.search_servicios = [];
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 1');
 				this.calcularTotalVenta();
-				document.querySelector('#busqueda').focus();
+				this.focusBusqueda();
 				return;
 			}
 
@@ -348,7 +352,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 				this.search_servicios = [];
 				this.showError('El producto "'+servicio.nombre+'" no tiene asignado un precio 2');
 				this.calcularTotalVenta();
-				document.querySelector('#busqueda').focus();
+				this.focusBusqueda();
 				return;
 			}
 
@@ -365,7 +369,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			this.busqueda = '';
 			this.search_servicios = [];
 			this.calcularTotalVenta();
-			document.querySelector('#busqueda').focus();
+			this.focusBusqueda();
 		},(error)=>
 		{
 			console.log('Solo imprimimos el error en la consola');
