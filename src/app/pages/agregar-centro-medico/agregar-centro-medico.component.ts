@@ -45,7 +45,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 					this.centro_medico = centro_medico;
 				});
 			}
-		});
+		},(error)=>this.showError(error));
 	}
 
 	guardar()
@@ -59,7 +59,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 				this.is_loading = false;
 				this.router.navigate(['/centros-medicos']);
 
-			});
+			},(error)=>this.showError(error));
 		}
 		else
 		{
@@ -67,7 +67,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			this.rest.centro_medico.create( this.centro_medico ).subscribe((centro_medico)=>{
 				this.is_loading = false;
 				this.router.navigate(['/centros-medicos']);
-			});
+			},(error)=>this.showError(error));
 		}
 	}
 
@@ -78,7 +78,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
 			{
 				this.centro_medico.id_imagen = imageData.id;
-			});
+			},(error)=>this.showError(error));
 		}
 	}
 	uploadImageTicket(evt)
@@ -88,7 +88,7 @@ export class AgregarCentroMedicoComponent extends BaseComponent implements OnIni
 			this.rest.uploadImage( evt.target.files[0], false ).subscribe((imageData)=>
 			{
 				this.centro_medico.id_imagen_ticket = imageData.id;
-			});
+			},(error)=>this.showError(error));
 		}
 	}
 }
