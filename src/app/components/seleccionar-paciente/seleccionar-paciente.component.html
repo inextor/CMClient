@@ -5,7 +5,7 @@
 		<div>
 			<input class="form-control" type="text" placeholder="Buscar..." id="searchPaciente" (keyup)="onKeyPressed($event)">
 		</div>
-		<app-paginacion [pages]="pages" (onSelectedPage)="onSelectedPage($event)" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+		<app-paginacion [pages]="pages" (selectedPage)="onSelectedPage($event)" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
 		<ul class="list-group mt-3">
 			<li *ngFor="let p of pacientes" class="list-group-item"  (click)="seleccionarPaciente( p )">
 				{{p.nombre}} {{p.apellidos}}

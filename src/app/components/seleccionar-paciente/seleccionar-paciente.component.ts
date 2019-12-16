@@ -60,7 +60,7 @@ export class SeleccionarPacienteComponent implements OnInit {
 			this.totalPages = this.totalItems/this.pageSize;
 		}
 
-		console.log('TOTAL Pages',this.totalPages,'current',this.currentPage,'total items',this.totalItems );
+		//console.log('TOTAL Pages',this.totalPages,'current',this.currentPage,'total items',this.totalItems );
 
 		for(let i=this.currentPage-5;i<this.currentPage+5;i++)
 		{
@@ -83,10 +83,14 @@ export class SeleccionarPacienteComponent implements OnInit {
 		this.currentPage = 0;
 		this.onSelectedPage(0);
 	}
+
 	onSelectedPage(page)
 	{
-		this.rest.paciente.search({lk:{nombre:this.last},limite:10}).subscribe((respuesta)=>
+		console.log('ON Selected page paciente',page);
+
+		this.rest.paciente.search({lk:{nombre:this.last},limite:10,pagina:page}).subscribe((respuesta)=>
 		{
+			this.currentPage = page;
 			this.setPages( this.currentPage, respuesta.total );
 			this.pacientes = respuesta.datos;
 		});
