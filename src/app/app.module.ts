@@ -163,8 +163,9 @@ import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket
     BrowserModule,
     AppRoutingModule,
    HttpClientModule,
-	  FullCalendarModule,
     FormsModule,
+	  FullCalendarModule,
+
     BrowserAnimationsModule,
 	  FormsModule
 

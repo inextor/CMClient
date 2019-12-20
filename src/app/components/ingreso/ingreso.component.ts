@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input,Output,EventEmitter   } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario, Gasto_Centro_Medico, Tipo_Gasto, Ingreso } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
@@ -8,56 +8,58 @@ import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-ingreso',
-  templateUrl: './ingreso.component.html',
-  styleUrls: ['./ingreso.component.css']
+	selector: 'app-ingreso',
+	templateUrl: './ingreso.component.html',
+	styleUrls: ['./ingreso.component.css']
 })
+
 export class IngresoComponent extends BaseComponent implements OnInit {
 
-  //constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location) {
-  //  super(rest, router, route, location);
-  //}
-  // ingreso : Ingreso[]= [];
-  ingreso: Ingreso = {
-    id:null,
-    monto:null,
-    nota: null,
-  };
+	@Input() show:boolean = false;
+	@Output() onClose= new EventEmitter<boolean>();
 
+	ingreso: Ingreso = {
+		id:null,
+		monto:null,
+		nota: null,
+	};
 
-  ngOnInit() {
-    let centro_medico=this.rest.getCurrentCentroMedico()
-    this.ingreso = {
-      monto:null,
-      nota:null,
-      id_centro_medico: centro_medico.id
-    };
-    let usuario = this.rest.getUsuarioSesion();
-    console.log(usuario)
-    this.is_loading = true;
+	ngOnInit() {
+		let centro_medico=this.rest.getCurrentCentroMedico()
+		this.ingreso = {
+			monto:null,
+			nota:null,
+			id_centro_medico: centro_medico.id
+		};
+		let usuario = this.rest.getUsuarioSesion();
+		console.log(usuario)
+		this.is_loading = true;
 
-  }
-  reload() {
-    window.location.reload()
-  }
+	}
 
-  guardar(){
-    this.is_loading = true;
+	onCancel()
+	{
+		this.onClose.emit( false );
+	}
 
-    if (this.ingreso.id) {
-      //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.ingreso.update(this.ingreso).subscribe((response) => {
-        this.is_loading = false;
-        this.reload();
-      }, error => this.showError(error));
-    }
-    else {
-      //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-      this.rest.ingreso.create(this.ingreso).subscribe((response) => {
-        this.is_loading = false;
-        this.reload();
-      }, error => this.showError(error));
-    }
-  }
+	guardar(){
+		this.is_loading = true;
 
+		if (this.ingreso.id) {
+			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+			this.rest.ingreso.update(this.ingreso).subscribe((response) => {
+				this.is_loading = false;
+				this.show = false;
+				this.onClose.emit(true);
+			}, error => this.showError(error));
+		}
+		else {
+			//this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
+			this.rest.ingreso.create(this.ingreso).subscribe((response) => {
+				this.is_loading = false;
+				this.show = false;
+				this.onClose.emit(true);
+			}, error => this.showError(error));
+		}
+	}
 }

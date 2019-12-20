@@ -37,6 +37,12 @@ export interface DatosVenta
 	tipo_precio		: Tipo_Precio;
 };
 
+export interface RequisicionInfo
+{
+	requisicion	: Requisicion;
+	detalles_requisicion:Detalle_Requisicion[];
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -95,6 +101,7 @@ export class RestService {
 	public consulta:ObjRest<Consulta>;
 	public ingreso:ObjRest<Ingreso>;
 	public detalle_requisicion:ObjRest<Detalle_Requisicion>;
+	public requisicionInfo:ObjRest<RequisicionInfo>;
 
 
 	//End vars
@@ -174,6 +181,7 @@ export class RestService {
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
+		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico
@@ -202,10 +210,6 @@ export class RestService {
 					localStorage.setItem("usuario", JSON.stringify( response ) );
 					localStorage.setItem('session_token', response.sesion.id );
 					this.currentUserSubject.next(response)
-					// localStorage.setItem("usuario", JSON.stringify( usuario ) );
-					// localStorage.setItem('session_token', response.sesion.id );
-					// localStorage.setItem('id_organizacion', ''+response.usuario.id_organizacion );
-					// this.currentUserSubject.next(usuario)
 				}
 
 				return response;

@@ -131,6 +131,7 @@ export interface Detalle_Requisicion{
   extraviados?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Detalle_Venta{
@@ -350,6 +351,7 @@ export interface Ingreso{
   monto?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
 
 export interface Inventario{
@@ -526,6 +528,7 @@ export interface Respuesta_Historia_Clinica{
 export interface Servicio{
   id?:number;
   id_organizacion?:number;
+  id_unidad_medida?:number;
   id_imagen?:number;
   codigo?:string;
   tipo?:string;
@@ -561,6 +564,15 @@ export interface Tipo_Precio{
   id_organizacion?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+};
+
+export interface Unidad_Medida{
+  id?:number;
+  codigo?:string;
+  nombre?:string;
+  tipo?:string;
+
 
 };
 
@@ -622,6 +634,11 @@ export interface Venta{
   fecha_facturacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+  rfc?:string;
+  razon_social?:string;
+  direccion?:string;
+  codigo_postal?:string;
+  correo?:string;
 
 };
 
