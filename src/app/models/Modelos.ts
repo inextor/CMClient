@@ -544,6 +544,7 @@ export interface Venta{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
   factura_rfc?:string;
+  factura_razon_social?:string;
   factura_codigo_postal?:string;
   factura_correo_electronico?:string;
   factura_uso_cfdi?:string;
