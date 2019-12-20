@@ -55,6 +55,7 @@ import { ShellComponent } from './components/shell/shell.component';
 import {HomeComponent} from './pages/home/home.component';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {ImprimirTicketComponent} from './pages/imprimir-ticket/imprimir-ticket.component';
+import {ClientesComponent} from './pages/clientes/clientes.component';
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -65,6 +66,7 @@ const routes: Routes = [
 		[
 			{ path: '', redirectTo: 'dashboard', pathMatch: "full"},
 			{ path: 'dashboard', component:DashboardComponent },
+			{ path: 'clientes', component:ClientesComponent},
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
 			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
