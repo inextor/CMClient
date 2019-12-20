@@ -5,7 +5,8 @@ import { Router,ActivatedRoute}	from	"@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
-
+import { SearchObject } from 'src/app/models/Respuestas';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-centros-medicos',
@@ -15,25 +16,61 @@ import { Title } from '@angular/platform-browser';
 
 export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
-
-	centros_medicos:Centro_Medico[]= [];
-
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
 		//import { Title } from '@angular/platform-browser';
 		super( rest,router,route,location,titleService);
 	}
 
+
+	centros_medicos:Centro_Medico[]= [];
+	centro_medico_search:SearchObject<Centro_Medico> = {};
+	public statusmenu: boolean;
 	ngOnInit()	{
-		this.titleService.setTitle('Clinicas');
-		// TODO agarrar id organizacion de la sesion
+		this.titleService.setTitle('Especialidades');
+
 		this.is_loading = true;
-		//this.rest.getCentrosMedicosPorOrganizacion(1).subscribe((respuesta)=>
-		this.rest.centro_medico.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
+		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
+		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
+
+		this.route.queryParams.subscribe( params =>
 		{
-			this.is_loading = false;
-			this.centros_medicos = respuesta.datos;
-		}, (error) =>  this.showError );
+			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+
+			this.rest.centro_medico.getAll({},{pagina:this.currentPage, limite: this.pageSize}).subscribe((respuesta) =>
+			{
+				this.centros_medicos = respuesta.datos;
+				console.log(this.centros_medicos)
+				this.is_loading = false;
+				this.setPages( this.currentPage, respuesta.total );
+			},error=>this.showError(error));
+		});
+
+		// this.rest.centro_medico.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
+		// {
+		// 	this.is_loading = false;
+		// 	this.centros_medicos = respuesta.datos;
+		// }, (error) =>  this.showError );
 	}
-	
+
+	search()
+	{
+		this.is_loading = true;
+		this.centro_medico_search.pagina= 0;
+		let search = {};
+		let array = ['eq','le','lt','ge','gt','csv','lk'];
+		for(let i in this.centro_medico_search )
+		{
+			console.log( 'i',i,array.indexOf( i ) );
+			if(array.indexOf( i ) > -1 )
+			{
+				for(let j in this.centro_medico_search[i])
+					search[i+'.'+j] = this.centro_medico_search[i][j];
+			}
+		}
+		console.log('search',this.centro_medico_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['/centros-medicos'],{queryParams: search });
+	}
+
 }
