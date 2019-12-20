@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 
 import { Venta, Centro_Medico,Usuario } from '../../models/Modelos';
-import { SearchObject } from 'src/app/models/Respuestas';
+import { SearchObject } from '../../models/Respuestas';
 import { Router,ActivatedRoute } from "@angular/router"
 import { BaseComponent } from '../base/base.component';
-import { Location } from	'@angular/common';
+import { Location } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { of } from 'rxjs';
 import { Title } from '@angular/platform-browser';

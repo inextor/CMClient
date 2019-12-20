@@ -35,4 +35,5 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 			this.centros_medicos = respuesta.datos;
 		}, (error) =>  this.showError );
 	}
+	
 }

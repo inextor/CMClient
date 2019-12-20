@@ -23,7 +23,8 @@
 					<!-- arreglar esto mostrar la imagen con la classe imagen-icon -->
 					<!-- <img *ngIf="centro_medico.id_imagen" [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" class="image_icon">
 									<img *ngIf="!centro_medico.id_imagen" src="/assets/hospital_icon.png" class="image_icon"> -->
-					<img *ngIf="centro_medico.id_imagen" [src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen"  style="width:100%">
+					<img *ngIf="centro_medico.id_imagen"
+						[src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" style="width:100%">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Imagen</label>
