@@ -7,6 +7,7 @@ import { BaseComponent } from '../../pages/base/base.component';
 import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+
 @Component({
 	selector: 'app-ingresos',
 	templateUrl: './ingresos.component.html',
@@ -21,17 +22,38 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 		super( rest,router,route,location,titleService);
 	}
 	ngOnInit() {
-		this.titleService.setTitle('Ingresos');
-		let usuario = this.rest.getUsuarioSesion().id;
-		console.log(usuario)
-		this.is_loading = true;
 
-		this.rest.ingreso.getAll({})
+		this.route.queryParams.subscribe( params =>
+		{
+			this.titleService.setTitle('Ingresos');
+			let usuario = this.rest.getUsuarioSesion().id;
+			console.log(usuario)
+			this.is_loading = true;
+
+			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+
+			this.rest.ingreso.getAll({})
+				.subscribe(respuesta => {
+					this.is_loading = false;
+					this.ingresos = respuesta.datos;
+					console.log(this.ingresos);
+					this.setPages( this.currentPage, respuesta.total );
+				});
+		});
+	}
+
+	ingresoClosed(itChanged)
+	{
+		console.log("IT CHANGED");
+		if( itChanged )
+		{
+			this.rest.ingreso.getAll({})
 			.subscribe(respuesta => {
 				this.is_loading = false;
 				this.ingresos = respuesta.datos;
 				console.log(this.ingresos);
+				this.setPages( this.currentPage, respuesta.total );
 			})
+		}
 	}
-
 }

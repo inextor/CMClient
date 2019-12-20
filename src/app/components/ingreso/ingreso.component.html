@@ -1,21 +1,20 @@
-
-    <div class="card p-3" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Ingresar Monto</h5>
-            <form>
-            <div class="form-group">
-                <label position="stacked">Cantidad<span color="danger">*</span></label>
-                <input required type="text" class="form-control" name="monto" [(ngModel)]="ingreso.monto">
-            </div>
-            <div class="form-group">
-                <label position="stacked">Nota<span color="danger">*</span></label>
-                <input required type="text" class="form-control" name="nota" [(ngModel)]="ingreso.nota">
-            </div>
-        </form>
-            <p class="card-text">Desea confirmar el ingreso?</p>
-            
-            <a class="btn text-light mr-3 btn-secondary" (click)="reload()">Cancelar</a>
-            <a class="btn text-light ml-3 btn-primary" type="submit" (click)="guardar()">Aceptar</a>
-         
-        </div>
-    </div>
+<app-modal [show]="show">
+	<div class="card p-3" style="width: 18rem;">
+	    <div class="card-body">
+	        <h5 class="card-title">Ingresar Monto</h5>
+	        <form>
+	        	<div class="form-group">
+	        	    <label position="stacked">Cantidad<span color="danger">*</span></label>
+	        	    <input required type="text" class="form-control" name="monto" [(ngModel)]="ingreso.monto">
+	        	</div>
+	        	<div class="form-group">
+	        	    <label position="stacked">Nota<span color="danger">*</span></label>
+	        	    <input required type="text" class="form-control" name="nota" [(ngModel)]="ingreso.nota">
+	        	</div>
+	    	</form>
+	        <p class="card-text">Desea confirmar el ingreso?</p>
+	        <a class="btn text-light mr-3 btn-secondary" (click)="onCancel">Cancelar</a>
+	        <a class="btn text-light ml-3 btn-primary" type="submit" (click)="guardar()">Aceptar</a>
+	    </div>
+	</div>
+</app-modal>

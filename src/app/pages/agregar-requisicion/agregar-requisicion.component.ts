@@ -19,6 +19,10 @@ interface requisicionDetalle {
 
 }
 
+interface ServicioById {
+	[key:number]:Servicio;
+};
+
 @Component({
 	selector: 'app-agregar-requisicion',
 	templateUrl: './agregar-requisicion.component.html',
@@ -29,26 +33,38 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
-	servicios: Servicio[] = [];
-	search_servicios: Servicio[] = [];
-	busqueda: string = '';
-	todos_servicios: [] = [];
-	detalle_requisiciones: requisicionDetalle[] = [];
-	proveedores: Proveedor[] = [];
-	requisicion: Requisicion[]=[];
+	servicios: Servicio[]			= [];
+	search_servicios: Servicio[]	= [];
+	busqueda: string				= '';
+	todos_servicios: []				= [];
+	proveedores: Proveedor[]		= [];
+	requisicion: Requisicion		= {};
+	detalles_requisicion:Detalle_Requisicion[] = [];
+	servicios_by_id:ServicioById	= {};
 
-	ngOnInit() {
-		let usuario=this.rest.getUsuarioSesion();
-		forkJoin([
+	ngOnInit()
+	{
+		this.route.paramMap.subscribe( params =>
+		{
+			let usuario	=	this.rest.getUsuarioSesion();
+			let centro_medico = this.rest.getCurrentCentroMedico();
 
-			this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
-		]).subscribe((respuestas) => {
-			this.proveedores = respuestas[0].datos;
-		}, (error) => this.showError(error));
-		}
+			this.requisicion = {
+				id_usuario_solicito : usuario.id
+				,id_centro_medico	: centro_medico.id
+			}
+
+			forkJoin([
+				this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
+			]).subscribe((respuestas) => {
+				this.proveedores = respuestas[0].datos;
+			}, (error) => this.showError(error));
+		});
+	}
 
 
-	buscar(evt: any) {
+	buscar(evt: any)
+	{
 		let x = this.rest.servicio.search({
 			lk: { nombre: evt.target.value },
 			eq:{tipo:'PRODUCTO_FISICO'}
@@ -58,46 +74,54 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		});
 	}
 
-	agregarServicio(servicio: Servicio) {
-		let s = this.detalle_requisiciones.find(i => i.servicio.id == servicio.id);
+	agregarServicio(servicio: Servicio)
+	{
+		if( !( servicio.id in this.servicios_by_id ) )
+			this.servicios_by_id[ servicio.id ] = servicio;
+
+		let s = this.detalles_requisicion.find(i => i.id_servicio == servicio.id);
 		if (s) {
 			this.busqueda = '';
 			this.aumentar(s);
 			return;
 		}
 
-		this.detalle_requisiciones.push({servicio,requisicion:{
-		},detalles_requisicion:{
-			id_servicio	: servicio.id,
-			cantidad	: 1,
-		}
+		this.detalles_requisicion.push
+		({
+			id_servicio	: servicio.id, cantidad	: 1,
 		});
 
 
-		this.busqueda = '';
-		this.search_servicios = [];
+		this.busqueda			= '';
+		this.search_servicios	= [];
 	}
 
-	aumentar(detalle_requisiciones) {
-		detalle_requisiciones.detalles_requisicion.cantidad++;
+	aumentar(detalle_requisicion)
+	{
+		detalle_requisicion.cantidad++;
 	}
 
 	 guardar() {
-	//	 this.is_loading = true;
+		 this.is_loading = true;
 
-	//	 if (this.requisicion) {
-	//		 //this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-	//		 this.rest.proveedor.update(this.requisicion).subscribe((requisicion) => {
-	//			 this.is_loading = false;
-	//			 this.router.navigate(['/requisiciones']);
-	//		 }, error => this.showError(error));
-	//	 }
-	//	 else {
-	//		 //this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
-	//		 this.rest.requisicion.create(this.requisicion).subscribe((requisicion) => {
-	//			 this.is_loading = false;
-	//			 this.router.navigate(['/requisiciones']);
-	//		 }, error => this.showError(error));
-	//	 }
+		 if (this.requisicion.id) {
+			 this.rest.requisicionInfo.update({
+				 requisicion: this.requisicion
+				 ,detalles_requisicion: this.detalles_requisicion
+			}).subscribe((requisicion) => {
+				 this.is_loading = false;
+				 this.router.navigate(['/requisiciones']);
+			 }, error => this.showError(error));
+		 }
+		 else {
+			 this.rest.requisicionInfo.create
+			 ({
+				 requisicion: this.requisicion,
+				 detalles_requisicion: this.detalles_requisicion
+			 }).subscribe((requisicion) => {
+				 this.is_loading = false;
+				 this.router.navigate(['/requisiciones']);
+			 }, error => this.showError(error));
+		 }
 	}
 }
