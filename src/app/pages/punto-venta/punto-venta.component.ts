@@ -57,6 +57,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	ventas:Venta[]				= [];
 	search_loading:boolean		= false;
 	debug:boolean				= true;
+	facturar:boolean			= false;
 
 	datosVenta:DatosVenta		= {
 		venta			: {
@@ -111,6 +112,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 
 		this.route.paramMap.subscribe( params =>
 		{
+			this.facturar	= false;
 			if( this.datosVenta.detalles.length > 0 )
 			{
 				this.is_loading = true;
@@ -234,6 +236,12 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		this.datosVenta.venta.id_usuario_cliente	= usuario.id;
 		this.datosVenta.venta.cliente				= usuario.usuario;
 		this.datosVenta.cliente						= usuario;
+
+		this.datosVenta.venta.factura_rfc 					= usuario.factura_rfc;
+		this.datosVenta.venta.factura_razon_social			= usuario.factura_razon_social;
+		this.datosVenta.venta.factura_codigo_postal			= usuario.factura_codigo_postal;
+		this.datosVenta.venta.factura_correo_electronico	= usuario.factura_correo_electronico;
+
 		console.log('Cliente es', this.datosVenta.cliente );
 
 		if( usuario.id_tipo_precio )

@@ -6,7 +6,9 @@ export interface Bitacora{
   fecha?:Date;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Centro_Medico{
   id?:number;
   id_organizacion?:number;
@@ -24,7 +26,9 @@ export interface Centro_Medico{
   tiempo_actualizacion?:Date;
   iva?:number;
   tipo_cambio_dolares?:number;
+
 };
+
 export interface Cita{
   id?:number;
   id_paciente?:number;
@@ -39,7 +43,9 @@ export interface Cita{
   confirmado_por_paciente?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Comision_Por_Servios{
   id?:number;
   id_servicio?:number;
@@ -47,7 +53,9 @@ export interface Comision_Por_Servios{
   comision_doctor?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Comisiones_Doctor{
   id?:number;
   id_doctor?:number;
@@ -57,7 +65,9 @@ export interface Comisiones_Doctor{
   status?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Configuracion{
   id_centro_medico?:number;
   confirmar_dia_anterior?:number;
@@ -69,6 +79,7 @@ export interface Configuracion{
   fecha_creacion?:Date;
   fecha_actualizacion?:Date;
 };
+
 export interface Consulta{
   id?:number;
   id_paciente?:number;
@@ -82,14 +93,18 @@ export interface Consulta{
   objetivo?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Consultorio{
   id?:number;
   id_centro_medico?:number;
   nombre?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Consultorio_Doctor{
   id?:number;
   id_consultorio?:number;
@@ -99,6 +114,7 @@ export interface Consultorio_Doctor{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 };
+
 export interface Detalle_Requisicion{
   id?:number;
   id_requisicion?:number;
@@ -115,7 +131,9 @@ export interface Detalle_Requisicion{
   extraviados?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Detalle_Venta{
   id?:number;
   id_venta?:number;
@@ -128,7 +146,9 @@ export interface Detalle_Venta{
   total?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Doctor{
   id?:number;
   id_especialidad?:number;
@@ -137,7 +157,9 @@ export interface Doctor{
   especialidad?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Documento_Histora_Clinica{
   id?:number;
   id_historia_clinica?:number;
@@ -145,14 +167,18 @@ export interface Documento_Histora_Clinica{
   notes?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Especialidad{
   id?:number;
   nombre?:string;
   abreviacion?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Especialidad_Pregunta{
   id?:number;
   id_pregunta_historia_clinica?:number;
@@ -161,7 +187,10 @@ export interface Especialidad_Pregunta{
   orden?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
+
 export interface Expediente{
   id?:number;
   name?:string;
@@ -170,6 +199,7 @@ export interface Expediente{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 };
+
 export interface Factura{
   FacturaID?:number;
   NoFactura?:string;
@@ -196,7 +226,9 @@ export interface Factura{
   MensajeError?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Fondo_Caja{
   id?:number;
   id_usuario?:number;
@@ -207,7 +239,9 @@ export interface Fondo_Caja{
   hora?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Gasto_Centro_Medico{
   id?:number;
   id_tipo_gasto?:number;
@@ -228,13 +262,17 @@ export interface Gasto_Centro_Medico{
   estatus?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Gasto_Doctor{
   id?:number;
   id_usuario_doctor?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Historia_Clinica{
   id?:number;
   id_paciente?:number;
@@ -243,14 +281,18 @@ export interface Historia_Clinica{
   nota?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Historia_Horario{
   id?:number;
   id_doctor?:number;
   id_centro_medico?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Historial_Inventario{
   id?:number;
   id_servicio?:number;
@@ -262,7 +304,9 @@ export interface Historial_Inventario{
   cantidad_actual?:number;
   id_contenido?:number;
   tiempo_creacion?:string;
+
 };
+
 export interface Horario_Doctor{
   id?:number;
   id_historia_horario?:number;
@@ -273,7 +317,9 @@ export interface Horario_Doctor{
   fecha_inicio?:Date;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Imagen{
   id?:number;
   uploader_user_id?:number;
@@ -286,14 +332,18 @@ export interface Imagen{
   height?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Imagen_Usuario{
   id?:number;
   id_imagen?:number;
   id_usaurio?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Ingreso{
   id?:number;
   id_usuario?:number;
@@ -302,7 +352,9 @@ export interface Ingreso{
   monto?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Inventario{
   id?:number;
   id_centro_medico?:number;
@@ -310,7 +362,9 @@ export interface Inventario{
   cantidad?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Notificacion{
   id?:number;
   id_usuario?:number;
@@ -318,12 +372,15 @@ export interface Notificacion{
   id_cita?:number;
   tiempo_creacion?:Date;
 };
+
 export interface Organizacion{
   id?:number;
   nombre?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Paciente{
   id?:number;
   id_usuario?:number;
@@ -339,7 +396,9 @@ export interface Paciente{
   telefono_tutor?:string;
   correo_electronico_tutor?:string;
   domicilio?:string;
+
 };
+
 export interface Pago{
   id?:number;
   id_venta?:number;
@@ -361,7 +420,9 @@ export interface Pago{
   referencia_cheque?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Poliza{
   id?:number;
   id_paciente?:number;
@@ -372,6 +433,7 @@ export interface Poliza{
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 };
+
 export interface Precio_Servicio{
   id?:number;
   id_tipo_precio?:number;
@@ -380,7 +442,9 @@ export interface Precio_Servicio{
   precio?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Pregunta_Historia_Clinica{
   id?:number;
   pregunta?:string;
@@ -390,7 +454,9 @@ export interface Pregunta_Historia_Clinica{
   posibles_valores?:string;
   depende_del_genero?:string;
   tiempo_creacion?:Date;
+
 };
+
 export interface Proveedor{
   id?:number;
   id_organizacion?:number;
@@ -406,14 +472,18 @@ export interface Proveedor{
   estatus?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Recepcionista_Doctor{
   id?:number;
   id_usuario_recepcion?:number;
   id_doctor?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Recurso{
   id?:number;
   id_servicio_primario?:number;
@@ -421,7 +491,10 @@ export interface Recurso{
   cantidad?:number;
   estatus?:string;
   fecha_creacion?:Date;
+
+
 };
+
 export interface Requisicion{
   id?:number;
   id_centro_medico?:number;
@@ -438,7 +511,9 @@ export interface Requisicion{
   tiempo_creacion?:Date;
   tiempo_entrega?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Respuesta_Historia_Clinica{
   id?:number;
   id_pregunta_historia_clinica?:number;
@@ -448,7 +523,9 @@ export interface Respuesta_Historia_Clinica{
   respuesta?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Servicio{
   id?:number;
   id_organizacion?:number;
@@ -460,33 +537,46 @@ export interface Servicio{
   prestado_por?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
+
 export interface Sesion{
   id?:string;
   id_usuario?:number;
   estatus?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Tipo_Gasto{
   id?:number;
   id_organizacion?:number;
   nombre?:string;
   tiempo_creacion?:Date;
+
+
 };
+
 export interface Tipo_Precio{
   id?:number;
   nombre?:string;
   id_organizacion?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
 };
+
 export interface Unidad_Medida{
   id?:number;
   codigo?:string;
   nombre?:string;
   tipo?:string;
+
+
 };
+
 export interface Usuario{
   id?:number;
   usuario?:string;
@@ -504,14 +594,20 @@ export interface Usuario{
   factura_correo_electronico?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
+
 export interface Usuario_Centro_Medico{
   id?:number;
   id_usuario?:number;
   id_centro_medico?:number;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
+
+
 };
+
 export interface Venta{
   id?:number;
   id_usuario_cliente?:number;
@@ -548,5 +644,7 @@ export interface Venta{
   factura_codigo_postal?:string;
   factura_correo_electronico?:string;
   factura_uso_cfdi?:string;
+
 };
+
 
