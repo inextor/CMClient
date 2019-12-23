@@ -22,11 +22,18 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
   ngOnInit() {
 	this.titleService.setTitle('Proveedores');
     this.is_loading = true;
+
+    this.route.queryParams.subscribe( params =>
+      {
+        this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+  
     this.rest.proveedor.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
 		{
 	this.is_loading = false;
       this.proveedores = respuesta.datos;
       console.log(this.proveedores)
     }, (error) => this.showError );
-  }
+  
+});
+}
 }
