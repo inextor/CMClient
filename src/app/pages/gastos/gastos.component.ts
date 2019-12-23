@@ -68,7 +68,6 @@ export class GastosComponent extends BaseComponent implements OnInit {
 			}
 			,(error)=>
 			{
-
 				this.showError( error );
 				this.is_loading = false ;
 			}
