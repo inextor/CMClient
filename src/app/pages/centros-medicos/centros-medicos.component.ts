@@ -61,6 +61,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		let array = ['eq','le','lt','ge','gt','csv','lk'];
 		for(let i in this.centro_medico_search )
 		{
+			
 			console.log( 'i',i,array.indexOf( i ) );
 			if(array.indexOf( i ) > -1 )
 			{
