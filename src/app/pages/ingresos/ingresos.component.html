@@ -29,6 +29,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<div>
+			<app-paginacion [path]="'/ingresos'" [pages]="pages" [totalPages]="totalPages"
+				[currentPage]="currentPage"></app-paginacion>
+		</div>
 	</div>
 	<app-ingreso [show]="showAddIngreso" (onClose)="ingresoClosed()"></app-ingreso>
 </div>

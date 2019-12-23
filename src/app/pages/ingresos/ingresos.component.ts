@@ -32,7 +32,7 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 
 			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 
-			this.rest.ingreso.getAll({})
+			this.rest.ingreso.getAll({},{pagina:this.currentPage, limite: this.pageSize})
 				.subscribe(respuesta => {
 					this.is_loading = false;
 					this.ingresos = respuesta.datos;
