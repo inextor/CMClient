@@ -45,7 +45,7 @@ export class AgregarUsuarioComponent extends BaseComponent implements OnInit {
 		this.rest.agregarUsuario( this.usuario ).subscribe((usuario)=>
 		{
 			this.is_loading = false;
-			this.router.navigate(['/home']);
+			this.router.navigate(['/usuarios']);
 		}, error=> this.showError(error) );
 	}
 }

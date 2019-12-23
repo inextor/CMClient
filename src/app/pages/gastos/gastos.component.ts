@@ -44,7 +44,6 @@ export class GastosComponent extends BaseComponent implements OnInit {
 				let rjoinObj:any = {};
 				let fjarray = [];
 				this.gasto_search.limite = this.pageSize;
-		this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 		this.gasto_search.pagina =  'pagina' in params ? parseInt( params.pagina ) : 0;
 		this.currentPage = this.gasto_search.pagina;
 		forkJoin

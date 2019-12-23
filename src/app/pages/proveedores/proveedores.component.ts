@@ -21,16 +21,15 @@ export class ProveedoresComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Proveedores');
     let usuario = this.rest.getUsuarioSesion();
-
     this.is_loading = true;
-
     this.route.queryParams.subscribe(params => {
       this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina']);
 
       this.rest.proveedor.getAll({},{pagina:this.currentPage, limite: this.pageSize, id_organizacion: usuario.id_organizacion}).subscribe((respuesta) => {
-        this.is_loading = false;
+        
         this.proveedores = respuesta.datos;
         this.setPages( this.currentPage, respuesta.total );
+        this.is_loading = false;
       }, (error) => this.showError);
 
     });

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Paciente, Doctor, Centro_Medico, Usuario } from 'src/app/models/Modelos';
+import { Location } from '@angular/common';
 import { BaseComponent } from 'src/app/pages/base/base.component';
-
+import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'app-usuarios',
 	templateUrl: './usuarios.component.html',
@@ -12,6 +13,9 @@ import { BaseComponent } from 'src/app/pages/base/base.component';
 
 export class UsuariosComponent extends BaseComponent implements OnInit {
 
+	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
+		super(rest, router, route, location, titleService);
+	  }
 	usuarios: Usuario[]= [];
 	// info_pacientes: SearchPacienteResponse[] = [];
 	tipo_busqueda = 'nombre';
@@ -26,7 +30,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 	ngOnInit()
 	{
 		this.titleService.setTitle('Usuarios');
-		this.route.paramMap.subscribe( params =>
+		this.route.queryParams.subscribe( params =>
 		{
 
 			let usuario = this.rest.getUsuarioSesion();
@@ -36,10 +40,11 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 				this.rest.usuario.get(usuario.id).subscribe(usuario => this.usuario = usuario);
 			}
 
-
-			this.rest.usuario.getAll({}, { id_organizacion: usuario.id_organizacion }).subscribe((respuesta) => {
+			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina']);
+			this.rest.usuario.getAll({}, {pagina:this.currentPage, limite: this.pageSize, id_organizacion: usuario.id_organizacion }).subscribe((respuesta) => {
 				this.usuarios = respuesta.datos;
 				console.log('USuairo',this.usuarios)
+				this.setPages( this.currentPage, respuesta.total );
 				this.is_loading = false;
 			}, (error) => {
 				console.log('error',error)
