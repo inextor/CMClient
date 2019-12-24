@@ -13,7 +13,6 @@ interface OldSearch {
 }
 
 interface requisicionDetalle {
-	servicio:Servicio;
 	requisicion:Requisicion;
 	detalles_requisicion: Detalle_Requisicion;
 
@@ -103,7 +102,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 
 	 guardar() {
 		 this.is_loading = true;
-
 		 if (this.requisicion.id) {
 			 this.rest.requisicionInfo.update({
 				 requisicion: this.requisicion
@@ -114,8 +112,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			 }, error => this.showError(error));
 		 }
 		 else {
-			 this.rest.requisicionInfo.create
-			 ({
+			 this.rest.requisicionInfo.create({
 				 requisicion: this.requisicion,
 				 detalles_requisicion: this.detalles_requisicion
 			 }).subscribe((requisicion) => {

@@ -504,7 +504,6 @@ export interface Requisicion{
   nota?:string;
   flete?:number;
   importacion?:number;
-  total_articulos?:number;
   pedimento?:string;
   estatus?:string;
   total?:number;
