@@ -6,6 +6,7 @@ import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { SearchObject } from 'src/app/models/Respuestas';
 
 @Component({
   selector: 'app-especialidades',
@@ -20,6 +21,7 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 	}
 
 	especialidades:Especialidad[]=[];
+	especialidad_search:SearchObject<Especialidad>;
 	public statusmenu: boolean;
 	ngOnInit()
 	{
@@ -31,15 +33,52 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe( params =>
 		{
-			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+			this.especialidad_search = {
+				eq: {},
+				gt: {},
+				ge: {},
+				le: {},
+				lt: {},
+				lk: {},
+				csv: {},
+			};
 
-			this.rest.especialidad.getAll({},{pagina:this.currentPage, limite: this.pageSize}).subscribe((respuesta) =>
+			// this.especialidad_search.lk.codigo	= "lk.codigo" in params ?params["lk.codigo"]:null;
+			this.especialidad_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
+			this.especialidad_search.limite			= this.pageSize;
+			this.especialidad_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
+			// this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+			this.is_loading = true;
+			this.rest.especialidad.search(this.especialidad_search).subscribe((respuesta) =>
 			{
 				this.especialidades = respuesta.datos;
-				console.log(this.especialidades)
+				this.setPages( this.especialidad_search.pagina, respuesta.total );
 				this.is_loading = false;
-				this.setPages( this.currentPage, respuesta.total );
 			},error=>this.showError(error));
 		});
 	}
+	changeSearch(nombre:string)
+	{
+	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.especialidad_search.pagina = 0;
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+        for(let i in this.especialidad_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.especialidad_search[i])
+                    search[i+'.'+j] = this.especialidad_search[i][j];
+            }
+        }
+		console.log('search',this.especialidad_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['especialidades'],{queryParams: search});
+	}
+
 }

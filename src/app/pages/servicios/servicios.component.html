@@ -1,8 +1,8 @@
 <div class="card p-3">
 	<div class="container">
 		<h4 class="mb-3 mt-3">PRODUCTOS Y SERVICIOS</h4>
-		<div>
-			<button type="button" class="btn btn-primary btn-sm" slot="start" size="small"
+		<div class="mb-3">
+			<button type="button" class="btn btn-primary btn-md" slot="start" size="small"
 				[routerLink]="['/agregar-producto']">Agregar producto</button>
 		</div>
 
@@ -15,9 +15,6 @@
 			</div>
 		</div>
 
-		<div>
-			<app-paginacion [path]="'/servicios'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
-		</div>
 		<table class="basica">
 			<thead>
 				<tr>
@@ -45,5 +42,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<div>
+			<app-paginacion [path]="'/servicios'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+		</div>
 	</div>
 </div>
