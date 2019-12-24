@@ -24,10 +24,10 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
 
 	centros_medicos:Centro_Medico[]= [];
-	centro_medico_search:SearchObject<Centro_Medico> = {};
+	centro_medico_search:SearchObject<Centro_Medico>;
 	public statusmenu: boolean;
 	ngOnInit()	{
-		this.titleService.setTitle('Especialidades');
+		this.titleService.setTitle('Clinicas');
 
 		this.is_loading = true;
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
@@ -35,14 +35,26 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe( params =>
 		{
-			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
+			this.centro_medico_search = {
+				eq: { id_organizacion: this.rest.getUsuarioSesion().id_organizacion },
+				gt: {},
+				ge: {},
+				le: {},
+				lt: {},
+				lk: {},
+				csv: {},
+			};
 
-			this.rest.centro_medico.getAll({},{pagina:this.currentPage, limite: this.pageSize}).subscribe((respuesta) =>
+		
+			this.centro_medico_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
+			this.centro_medico_search.limite			= this.pageSize;
+			this.centro_medico_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
+			this.is_loading = true;
+			this.rest.centro_medico.search(this.centro_medico_search).subscribe((respuesta) =>
 			{
 				this.centros_medicos = respuesta.datos;
-				console.log(this.centros_medicos)
 				this.is_loading = false;
-				this.setPages( this.currentPage, respuesta.total );
+				this.setPages( this.centro_medico_search.pagina, respuesta.total );
 			},error=>this.showError(error));
 		});
 
@@ -56,7 +68,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 	search()
 	{
 		this.is_loading = true;
-		this.centro_medico_search.pagina= 0;
+		this.centro_medico_search.pagina = 0;
 		let search = {};
 		let array = ['eq','le','lt','ge','gt','csv','lk'];
 		for(let i in this.centro_medico_search )
@@ -71,6 +83,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		}
 		console.log('search',this.centro_medico_search );
 		console.log('Busqueda', search );
+		this.is_loading = false;
 		this.router.navigate(['/centros-medicos'],{queryParams: search });
 	}
 

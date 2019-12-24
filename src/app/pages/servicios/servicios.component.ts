@@ -47,10 +47,9 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 
 			this.rest.servicio.search( this.servicio_search ).subscribe((respuesta)=>
 			{
-				this.is_loading = false;
 				this.servicios = respuesta.datos;
-				console.log(this.servicios);
 				this.setPages( this.servicio_search.pagina, respuesta.total );
+				this.is_loading = false;
 			},error=> this.showError(error));
 		});
 
