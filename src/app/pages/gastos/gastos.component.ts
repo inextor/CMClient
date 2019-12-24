@@ -24,7 +24,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 	tipos_gasto:Tipo_Gasto[] = [];
 	gastos:SearchGastoCentroMedicoResponse[] = [];
 	tipo_gastos_dic:any = {};
-	gasto_search:SearchObject<Gasto_Centro_Medico> = {};
+	gasto_search:SearchObject<Gasto_Centro_Medico>;
 
 	ngOnInit() {
 		this.titleService.setTitle('Gastos')
@@ -33,7 +33,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 		this.route.queryParams.subscribe( params =>
 			{
 				this.gasto_search = {
-					eq: {},
+					eq: { id_centro_medico: this.rest.getUsuarioSesion().id_organizacion },
 					gt: {},
 					ge: {},
 					le: {},
@@ -43,8 +43,10 @@ export class GastosComponent extends BaseComponent implements OnInit {
 				};
 				let rjoinObj:any = {};
 				let fjarray = [];
-				this.gasto_search.limite = this.pageSize;
+		
+		this.gasto_search.lk.descripcion	= "lk.descripcion" in params ?params["lk.descripcion"]:null;
 		this.gasto_search.pagina =  'pagina' in params ? parseInt( params.pagina ) : 0;
+		this.gasto_search.limite = this.pageSize;
 		this.currentPage = this.gasto_search.pagina;
 		forkJoin
 		(
@@ -53,7 +55,7 @@ export class GastosComponent extends BaseComponent implements OnInit {
 				//this.rest.getGastos({ id_centro_medico: 1 })
 				
 				this.rest.tipo_gasto.getAll({id_organizacion: usuario.id_organizacion}),
-				this.rest.searchGastoCentroMedico.getAll({},{pagina:this.currentPage, limite: this.pageSize, id_organizacion: usuario.id_organizacion}) //TODO FIX ponerlo de la session o seleccionarlo
+				this.rest.searchGastoCentroMedico.search(this.gasto_search) //TODO FIX ponerlo de la session o seleccionarlo
 			]
 		).subscribe
 		(
@@ -73,6 +75,26 @@ export class GastosComponent extends BaseComponent implements OnInit {
 			}
 		);
 	});
+	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.gasto_search.pagina= 0;
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+
+        for(let i in this.gasto_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.gasto_search[i])
+                    search[i+'.'+j] = this.gasto_search[i][j];
+            }
+		}
+		this.is_loading = false;
+		this.router.navigate(['gastos'],{queryParams: search});
 	}
 
 }

@@ -23,15 +23,24 @@
 							</div>
 					</div-->
 
-		<td>
+		<div class="mb-3">
 			<button type="button" class="btn btn-primary" [routerLink]="['/agregar-gasto']" size="small">Agregar
 				gasto</button>
-		</td>
+		</div>
+		<div>
+			<div class="input-group mb-3">
+				<input type="text" [(ngModel)]="gasto_search.lk.descripcion" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
+				</div>
+			</div>
+		</div>
 		<table class="basica">
 			<thead>
 				<tr>
 					<th>id</th>
 					<th>descripcion</th>
+					
 					<th>Usuario</th>
 					<th>Monto</th>
 				</tr>
