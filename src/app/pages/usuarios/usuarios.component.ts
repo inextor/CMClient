@@ -57,9 +57,9 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 
 			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina']);
 			this.rest.usuario.search(this.usuario_search).subscribe((respuesta) => {
-				this.usuarios = respuesta.datos;
-				this.setPages( this.usuario_search.pagina, respuesta.total );
-				this.is_loading = false;
+			this.usuarios = respuesta.datos;
+			this.setPages( this.usuario_search.pagina, respuesta.total );
+			this.is_loading = false;
 			}, (error) => {
 				console.log('error',error)
 				this.showError(error);

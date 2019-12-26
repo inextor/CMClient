@@ -4,7 +4,7 @@ import { Usuario, Gasto_Centro_Medico, Tipo_Gasto, Ingreso } from '../../models/
 import { Router, ActivatedRoute } from "@angular/router"
 import { forkJoin } from 'rxjs';
 import { BaseComponent } from '../../pages/base/base.component';
-import { SearchGastoCentroMedicoResponse } from '../../models/Respuestas';
+import { SearchGastoCentroMedicoResponse, SearchObject } from '../../models/Respuestas';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
@@ -16,6 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class IngresosComponent extends BaseComponent implements OnInit {
 	showAddIngreso: boolean = false;
 	ingresos: Ingreso[] = [];
+	ingreso_search:SearchObject<Ingreso>;
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
@@ -25,19 +26,31 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe( params =>
 		{
+			this.ingreso_search = {
+				eq: {},
+				gt: {},
+				ge: {},
+				le: {},
+				lt: {},
+				lk: {},
+				csv: {},
+			};
+
 			this.titleService.setTitle('Ingresos');
 			let usuario = this.rest.getUsuarioSesion().id;
-			console.log(usuario)
+			this.ingreso_search.lk.nota	= "lk.nota" in params ?params["lk.nota"]:null;
+			this.ingreso_search.limite			= this.pageSize;
+			this.ingreso_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 			this.is_loading = true;
 
 			this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 
-			this.rest.ingreso.getAll({},{pagina:this.currentPage, limite: this.pageSize})
+			this.rest.ingreso.search(this.ingreso_search)
 				.subscribe(respuesta => {
-					this.is_loading = false;
+					
 					this.ingresos = respuesta.datos;
-					console.log(this.ingresos);
-					this.setPages( this.currentPage, respuesta.total );
+					this.setPages( this.ingreso_search.pagina, respuesta.total );
+					this.is_loading = false;
 				});
 		});
 	}
@@ -47,13 +60,34 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 		console.log("IT CHANGED");
 		if( itChanged )
 		{
-			this.rest.ingreso.getAll({})
+			this.rest.ingreso.search(this.ingreso_search)
 			.subscribe(respuesta => {
 				this.is_loading = false;
 				this.ingresos = respuesta.datos;
-				console.log(this.ingresos);
-				this.setPages( this.currentPage, respuesta.total );
+				this.setPages( this.ingreso_search.pagina, respuesta.total );
 			})
 		}
 	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.ingreso_search.pagina = 0;
+		this.ingreso_search.lk.nota	= this.ingreso_search.lk.nota;
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+        for(let i in this.ingreso_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.ingreso_search[i])
+                    search[i+'.'+j] = this.ingreso_search[i][j];
+            }
+        }
+		console.log( search );
+		this.is_loading = false;
+		this.router.navigate(['ingresos'],{queryParams: search});
+	}
+
 }
