@@ -39,17 +39,17 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
         lk: {},
         csv: {},
       };
-      let rjoinObj: any = {};
-      let fjarray = [];
+
+      this.requisiciones_search.lk.pedimento	= "lk.pedimento" in params ?params["lk.pedimento"]:null;
       this.requisiciones_search.limite = this.pageSize;
       this.requisiciones_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
-      this.currentPage = this.requisiciones_search.pagina;
+      this.is_loading = true;
       forkJoin
         (
           [
             //getTiposGastos({id_organizacion: usuario.id_organizacion}),
             //this.rest.getGastos({ id_centro_medico: 1 })
-            this.rest.requisicion.getAll({}, { pagina: this.currentPage, limite: this.requisiciones_search.limite, id_organizacion: usuario.id_organizacion }) //TODO FIX ponerlo de la session o seleccionarlo
+            this.rest.requisicion.search(this.requisiciones_search) //TODO FIX ponerlo de la session o seleccionarlo
           ]
         ).subscribe
         (
@@ -64,7 +64,26 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
           }
         );
     });
-
   }
+
+  search()
+	{
+		this.is_loading = true;
+		this.requisiciones_search.pagina = 0;
+		this.requisiciones_search.lk.pedimento	= this.requisiciones_search.lk.pedimento;
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+        for(let i in this.requisiciones_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.requisiciones_search[i])
+                    search[i+'.'+j] = this.requisiciones_search[i][j];
+            }
+        }
+		console.log( search );
+		this.router.navigate(['requisiciones'],{queryParams: search});
+	}
 
 }
