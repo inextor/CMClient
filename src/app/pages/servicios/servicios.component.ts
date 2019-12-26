@@ -8,7 +8,6 @@ import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
 import { SearchObject } from '../../models/Respuestas';
 
-
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.component.html',
@@ -37,7 +36,6 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 				lk: {},
 				csv: {},
 			};
-
 			this.titleService.setTitle('Servicios')
 			this.servicio_search.lk.codigo	= "lk.codigo" in params ?params["lk.codigo"]:null;
 			this.servicio_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
@@ -52,7 +50,6 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 				this.is_loading = false;
 			},error=> this.showError(error));
 		});
-
 	}
 
 	changeSearch(nombre:string)
@@ -63,12 +60,9 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.servicio_search.pagina= 0;
-
 		this.servicio_search.lk.codigo	= this.servicio_search.lk.nombre;
-
         let search = {};
         let array = ['eq','le','lt','ge','gt','csv','lk'];
-
         for(let i in this.servicio_search )
         {
             console.log( 'i',i,array.indexOf( i ) );
@@ -78,7 +72,6 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
                     search[i+'.'+j] = this.servicio_search[i][j];
             }
         }
-
 		console.log( search );
 		this.router.navigate(['servicios'],{queryParams: search});
 	}

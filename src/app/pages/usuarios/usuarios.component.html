@@ -1,22 +1,26 @@
 <div class="card p-3">
 	<div class="container">
 		<h4 class="mb-3 mt-3">USUARIOS</h4>
-		<div class="pt-2 flex-wrap">
+		<div class="mb-3">
 			<td>
 				<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-usuario']">
 					Agregar usuario
 				</button>
 			</td>
 		</div>
-		<div class="pt-2 flex-wrap">
-			<!-- (change)="changeSearch($event)" -->
-			<input type="text" class="form-control" position="floating" ionInput="changeSearch($event)"
-				placeholder="buscar">
+		<div>
+			<div class="input-group mb-3">
+				<input type="text" [(ngModel)]="usuario_search.lk.nombre" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
+				</div>
+			</div>
 		</div>
 		<table class="basica">
 			<thead>
 				<tr>
 					<th>Usuario</th>
+					<th>Nombre</th>
 					<th>Correo</th>
 					<th>Telefono</th>
 					<th>Tipo</th>
@@ -26,6 +30,7 @@
 			<tbody>
 				<tr *ngFor="let usuario of usuarios">
 					<td>{{usuario.usuario}}</td>
+					<td>{{usuario.nombre}}</td>
 					<td>{{usuario.correo_electronico}}</td>
 					<td>{{usuario.telefono}}</td>
 					<td>{{usuario.tipo}}</td>
