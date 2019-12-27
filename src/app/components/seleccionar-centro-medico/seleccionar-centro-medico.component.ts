@@ -40,10 +40,9 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 		console.log( input.value );
 		if( this.last === input.value.trim() )
 			return;
-
+			// ,{limit:10} dentro de search
 		this.last = input.value.trim();
-
-		this.rest.centro_medico.search({ lk:{nombre:this.last} },{limit:10}).subscribe((respuesta)=>
+		this.rest.centro_medico.search({ lk:{nombre:this.last} }).subscribe((respuesta)=>
 		{
 			this.centros = respuesta.datos;
 		});

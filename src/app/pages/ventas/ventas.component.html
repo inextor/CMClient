@@ -2,196 +2,85 @@
 	<div class="card p-3">
 		<div class="container">
 			<h3 class="mb-3">Ventas</h3>
-			<div>
+			<div class="mb-3 row">
 
-
-				<div class="form-row">
-
-					<!--div class="pr-2">
-<label>id</label>
-<input type="text" [(ngModel)]="venta_search.eq.id">
-</div-->
-
+				<div class="col-3">
+					<div class="form-check form-check-inline" >
+						<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"	
+							(change)="busquedaAvanzada=!busquedaAvanzada">&nbsp;
+						<label class="form-check-label"> Busqueda Avanzada</label>
+					</div>
+					<!-- <button (click)="busquedaAvanzada=!busquedaAvanzada">
+						busqueda Avanzada
+					</button> -->
+				</div>
+				<div class="col-9">
+					<div class="input-group mb-3" *ngIf="busquedaAvanzada==false">
+						<input type="text" [(ngModel)]="venta_search.lk.cliente" class="form-control">
+						<div class="input-group-append">
+							<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
+								(click)="search()">Buscar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container card p-0 " *ngIf="busquedaAvanzada">
+				<div class="form-row p-2" >
 					<div class="form-group col-md-3">
 						<label>Id Cliente</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.eq.id_usuario_cliente">
+						<input class="form-control" type="text" (name)="busqueda" [(ngModel)]="venta_search.eq.id">
 					</div>
-
-					<!--div class="form-group col-md-3">
-							<label>Facturado</label>
-							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.facturado">
-						</div-->
-
 					<div class="form-group col-md-3">
 						<label>Cliente</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.eq.cliente">
+						<input class="form-control" type="text" (name)="busqueda" [(ngModel)]="venta_search.lk.cliente">
 					</div>
-
-					<!--div class="pr-2">
-   <label>subtotal</label>
-   <input type="text" [(ngModel)]="venta_search.eq.subtotal">
-   </div-->
-
-					<!--div class="pr-2">
-<label>iva</label>
-<input type="text" [(ngModel)]="venta_search.eq.iva">
-</div>
-
-<div class="pr-2">
-<label>total</label>
-<input type="text" [(ngModel)]="venta_search.eq.total">
-</div>
-
-<div class="pr-2">
-<label>cambio</label>
-<input type="text" [(ngModel)]="venta_search.eq.cambio">
-</div>
-
-<div class="pr-2">
-<label>efectivo desc</label>
-<input type="text" [(ngModel)]="venta_search.eq.efectivo_desc">
-</div>
-
-<div class="pr-2">
-<label>dolares desc</label>
-<input type="text" [(ngModel)]="venta_search.eq.dolares_desc">
-</div>
-
-<div class="pr-2">
-<label>tipo cambio</label>
-<input type="text" [(ngModel)]="venta_search.eq.tipo_cambio">
-</div-->
-
 					<div class="form-group col-md-3">
 						<label>Atendio:</label>
-						<select name="usuarios_atendio" [(ngModel)]="venta_search.eq.id_usuario_atendio"
+						<select  (name)="busqueda" [(ngModel)]="venta_search.eq.id_usuario_atendio"
 							class="form-control">
-							<option value="">Seleccione</option>
+							<option value="" selected="selected" >Seleccione</option>
 							<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
 								{{usuario.nombre|titlecase}}</option>
 						</select>
 					</div>
-
-					<!--div class="pr-2">
-  <label>cupon desc</label>
-  <input type="text" [(ngModel)]="venta_search.eq.cupon_desc">
-  </div -->
-
 					<div class="form-group col-md-3">
 						<label>Centro Medico:</label>
-						<select name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico"
+						<select name="centro_medico"  (name)="busqueda" [(ngModel)]="venta_search.eq.id_centro_medico"
 							class="form-control">
-							<option value="">Seleccione</option>
+							<option value="" selected="selected" >Seleccione</option>
 							<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
 								{{centro_medico.nombre|titlecase}}</option>
 						</select>
 					</div>
-
 					<div class="form-group col-md-3">
 						<label>Fecha</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.eq.fecha">
+						<input type="date" class="form-control" (name)="busqueda" [(ngModel)]="venta_search.eq.fecha">
 					</div>
-
-					<!--div class="pr-2">
-   <label>redondeo</label>
-   <input type="text" [(ngModel)]="venta_search.eq.redondeo">
-   </div-->
-
-					<div class="form-group col-md-3">
-						<label>Nombre</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.eq.nombre">
-					</div>
-
 					<div class="form-group col-md-3">
 						<label>Estatus</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.eq.estatus">
+						<select name="estatus" class="form-control" (name)="busqueda" [(ngModel)]="venta_search.eq.estatus">
+							<option value="" selected="selected"> Seleccione</option>
+							<option value="PAGADA">PAGADA</option>
+							<option value="PENDIENTE">PENDIENTE</option>
+							<option value="PROCESADA">PROCESADA</option>
+						</select>
 					</div>
+
 					<div class="form-group col-md-3">
 						<label>&nbsp;</label>
 						<button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
 					</div>
-
-					<!--div class="form-group col-md-3">
-							<label>Activa</label>
-							<input class="form-control" type="text" [(ngModel)]="venta_search.eq.activa">
-						</div-->
-
-					<!--div class="pr-2">
-<label>pendiente</label>
-<input type="text" [(ngModel)]="venta_search.eq.pendiente">
-</div-->
-
-					<!--div class="pr-2">
-  <label>comprobante</label>
-  <input type="text" [(ngModel)]="venta_search.eq.comprobante">
-  </div>
-
-  <div class="pr-2">
-  <label>promocion desc</label>
-  <input type="text" [(ngModel)]="venta_search.eq.promocion_desc">
-  </div>
-
-  <div class="pr-2">
-  <label>id tipo precio</label>
-  <input type="text" [(ngModel)]="venta_search.eq.id_tipo_precio">
-  </div>
-
-  <div class="pr-2">
-  <label>folio</label>
-  <input type="text" [(ngModel)]="venta_search.eq.folio">
-  </div>
-
-  <div class="pr-2">
-  <label>UUID</label>
-  <input type="text" [(ngModel)]="venta_search.eq.UUID">
-  </div>
-
-  <div class="pr-2">
-  <label>porcentaje desc</label>
-  <input type="text" [(ngModel)]="venta_search.eq.porcentaje_desc">
-  </div>
-
-  <div class="pr-2">
-  <label>fecha facturacion</label>
-  <input type="text" [(ngModel)]="venta_search.eq.fecha_facturacion">
-  </div>
-
-  <div class="pr-2">
-  <label>tiempo creacion</label>
-  <input type="text" [(ngModel)]="venta_search.eq.tiempo_creacion">
-  </div>
-
-  <div class="pr-2">
-  <label>tiempo actualizacion</label>
-  <input type="text" [(ngModel)]="venta_search.eq.tiempo_actualizacion">
-  </div-->
-
-
-					<!--div class="d-flex col align-self-center justify-content-end pr-2">
-	<button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
-</div-->
-
-
 				</div>
-
-
-
 			</div>
-
-			<div>
-				<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages"
-					[currentPage]="currentPage"></app-paginacion>
-			</div>
-
 			<table class="basica">
 				<thead>
 					<tr>
-						<th>id</th>
+						<th>Id</th>
 						<th>Cliente</th>
-						<th>facturado</th>
-						<th>subtotal</th>
-						<th>iva</th>
-						<th>total</th>
+						<th>Estado</th>
+						<th>Subtotal</th>
+						<th>Iva</th>
+						<th>Total</th>
 						<th>Fecha</th>
 						<!--th>cambio</th>
 <th>efectivo desc</th>
@@ -222,7 +111,7 @@
 						<td><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td>
 						<td class="text-center">{{venta.cliente}}</td>
 						<!--td class="text-center">{{venta.id_usuario_cliente}}</td-->
-						<td>{{venta.facturado}}</td>
+						<td>{{venta.estatus}}</td>
 						<td class="text-right">{{venta.subtotal|currency}}</td>
 						<td class="text-right">{{venta.iva | currency}}</td>
 						<td class="text-right">{{venta.total| currency}}</td>
@@ -252,6 +141,10 @@
 					</tr>
 				</tbody>
 			</table>
+			<div>
+				<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages"
+					[currentPage]="currentPage"></app-paginacion>
+			</div>
 		</div>
 	</div>
 </main>

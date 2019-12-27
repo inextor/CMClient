@@ -47,6 +47,9 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 			let usuario = this.rest.getUsuarioSesion();
 			this.usuario_search.lk.usuario	= "lk.usuario" in params ?params["lk.usuario"]:null;
 			this.usuario_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
+			this.usuario_search.lk.correo_electronico	= "lk.correo_electronico" in params ?params["lk.correo_electronico"]:null;
+			this.usuario_search.lk.telefono	= "lk.telefono" in params ?params["lk.telefono"]:null;
+			this.usuario_search.lk.tipo	= "lk.tipo" in params ?params["lk.tipo"]:null;
 			this.usuario_search.limite			= this.pageSize;
 			this.usuario_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 			this.is_loading = true;
@@ -72,8 +75,11 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.usuario_search.pagina= 0;
-		this.usuario_search.lk.usuario	= this.usuario_search.lk.usuario;
-		this.usuario_search.lk.nombre	= this.usuario_search.lk.nombre;
+		// this.usuario_search.lk.usuario	= this.usuario_search.lk.usuario;
+		// this.usuario_search.lk.nombre	= this.usuario_search.lk.nombre;
+		// this.usuario_search.lk.correo_electronico	= this.usuario_search.lk.correo_electronico;
+		// this.usuario_search.lk.telefono	= this.usuario_search.lk.telefono;
+		// this.usuario_search.lk.tipo	= this.usuario_search.lk.tipo;
         let search = {};
         let array = ['eq','le','lt','ge','gt','csv','lk'];
         for(let i in this.usuario_search )

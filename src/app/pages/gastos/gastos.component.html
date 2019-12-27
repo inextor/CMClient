@@ -45,9 +45,9 @@
 			<thead>
 				<tr>
 					<th>id</th>
-					<th>descripcion</th>
-					
+					<th>Tipo</th>
 					<th>Usuario</th>
+					<th>Descripcion</th>
 					<th>Monto</th>
 				</tr>
 			</thead>
@@ -65,6 +65,7 @@
 					<td>{{g.gasto_centro_medico.id}}</td>
 					<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
 					<td>{{g.usuario.usuario}}</td>
+					<td>{{g.gasto_centro_medico.descripcion}}</td>
 					<td class="text-right">{{g.gasto_centro_medico.monto | currency: '$'}}</td>
 				</tr>
 			</tbody>

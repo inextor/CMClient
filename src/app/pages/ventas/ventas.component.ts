@@ -28,11 +28,22 @@ export class VentasComponent extends BaseComponent implements OnInit {
 	usuario_list:Usuario[] = [];
 	usuarios_atendio:Usuario[]	= [];
 	centros_medicos:Centro_Medico[] = [];
-
 	venta_search:SearchObject<Venta> = {
-
 	};
-
+	busquedaAvanzada:boolean = false;
+	//inicializa la busqueda para limpiar los forms de busqueda cada que se selecciona busqueda Avanzada
+	clearBusqueda(){
+		this.venta_search = {
+			lt: {}
+			,eq: {}
+			,ge: {}
+			,gt: {}
+			,le: {}
+			,lk: {}
+			,csv: {}
+		};
+		this.search();
+	}
 	ngOnInit()
 	{
 		this.route.queryParams.subscribe( params =>
@@ -50,22 +61,18 @@ export class VentasComponent extends BaseComponent implements OnInit {
 
 			this.titleService.setTitle('venta');
 
-
 			this.venta_search.eq.id					= "eq.id" in params ?params["eq.id"]:null;
 			this.venta_search.eq.id_usuario_cliente	= "eq.id_usuario_cliente" in params ?params["eq.id_usuario_cliente"]:null;
 			this.venta_search.eq.facturado			= "eq.facturado" in params ?params["eq.facturado"]:null;
-			this.venta_search.eq.id_usuario_atendio	= "eq.id_usuario_atendio" in params ?params["eq.id_usuario_atendio"]:'';
+			this.venta_search.eq.id_usuario_atendio	= "eq.id_usuario_atendio" in params ?params["eq.id_usuario_atendio"]:null;
 			this.venta_search.eq.id_centro_medico	= "eq.id_centro_medico" in params ?params["eq.id_centro_medico"]:null;
-			this.venta_search.eq.estatus			= "eq.estatus" in params ?params["eq.estatus"]:null;
-			this.venta_search.eq.activa				= "eq.activa" in params ?params["eq.activa"]:'SI';
+			this.venta_search.eq.activa				= "eq.activa" in params ?params["eq.activa"]:null;
 			this.venta_search.eq.id_tipo_precio		= "eq.id_tipo_precio" in params ?params["eq.id_tipo_precio"]:null;
-
 			this.venta_search.lk.nombre				= "lk.nombre" in params ?params["lk.nombre"]:null;
 			this.venta_search.lk.cliente			= "lk.cliente" in params ?params["lk.cliente"]:null;
-
 			this.venta_search.le.fecha				= "le.fecha" in params ?params["le.fecha"]:null;
 			this.venta_search.ge.fecha				= "ge.fecha" in params ?params["ge.fecha"]:null;
-			this.venta_search.csv.estatus			= "csv.estatus" in params ?[params["csv.estatus"]]:['PROCESADA','PAGADA'];
+			this.venta_search.eq.estatus			= "eq.estatus" in params ?params["eq.estatus"]:null;
 			this.venta_search.limite				= this.pageSize;
 			console.log('Search', this.venta_search);
 
@@ -78,8 +85,7 @@ export class VentasComponent extends BaseComponent implements OnInit {
 
 			forkJoin(
 				this.rest.venta.search( this.venta_search )
-				,this.rest.usuario.search
-				({
+				,this.rest.usuario.search({
 					eq:
 					{
 						id_organizacion: this.rest.getUsuarioSesion().id_organizacion
