@@ -1,6 +1,17 @@
 <div class="card p-3">
 	<div class="container">
-		<h4 class="mb-3 mt-3">GASTOS</h4>
+
+		<div class="p-0 mt-3">
+			<div class="d-flex justify-content-between flex-wrap">
+				<div class="mb-3">
+					<h4>GASTOS</h4>
+				</div>
+				<div class="mb-3">
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-gasto']" size="small">Agregar
+						gasto</button>
+				</div>
+			</div>
+		</div>
 
 		<!--div d-flex>
 							<div class="form-group">
@@ -22,16 +33,11 @@
 								</select>
 							</div>
 					</div-->
-
-		<div class="mb-3">
-			<button type="button" class="btn btn-primary" [routerLink]="['/agregar-gasto']" size="small">Agregar
-				gasto</button>
-		</div>
 		<div>
 			<div class="input-group mb-3">
 				<input type="text" [(ngModel)]="gasto_search.lk.descripcion" class="form-control">
 				<div class="input-group-append">
-					<button class="btn btn btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
+					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
 				</div>
 			</div>
 		</div>
