@@ -61,7 +61,7 @@ export class VentasComponent extends BaseComponent implements OnInit {
 
 			this.titleService.setTitle('venta');
 
-			this.venta_search.eq.id					= "eq.id" in params ?params["eq.id"]:null;
+			this.venta_search.lk.id					= "lk.id" in params ?params["lk.id"]:null;
 			this.venta_search.eq.id_usuario_cliente	= "eq.id_usuario_cliente" in params ?params["eq.id_usuario_cliente"]:null;
 			this.venta_search.eq.facturado			= "eq.facturado" in params ?params["eq.facturado"]:null;
 			this.venta_search.eq.id_usuario_atendio	= "eq.id_usuario_atendio" in params ?params["eq.id_usuario_atendio"]:null;

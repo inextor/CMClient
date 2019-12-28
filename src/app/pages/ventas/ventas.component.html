@@ -1,64 +1,59 @@
-<main class="p-2">
+<main>
 	<div class="card p-3">
 		<div class="container">
 			<h3 class="mb-3">Ventas</h3>
-			<div class="mb-3 row">
-
-				<div class="col-3">
-					<div class="form-check form-check-inline" >
-						<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"	
-							(change)="busquedaAvanzada=!busquedaAvanzada">&nbsp;
-						<label class="form-check-label"> Busqueda Avanzada</label>
-					</div>
-					<!-- <button (click)="busquedaAvanzada=!busquedaAvanzada">
-						busqueda Avanzada
-					</button> -->
-				</div>
-				<div class="col-9">
-					<div class="input-group mb-3" *ngIf="busquedaAvanzada==false">
-						<input type="text" [(ngModel)]="venta_search.lk.cliente" class="form-control">
-						<div class="input-group-append">
-							<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
-								(click)="search()">Buscar</button>
+			<div class="mb-2 d-flex flex-column justify-content-between flex-wrap">
+					<div>
+						<div class=" form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"
+								(change)="busquedaAvanzada=!busquedaAvanzada">&nbsp;
+							<label class="form-check-label"> Busqueda Avanzada</label>
 						</div>
+					</div>
+			</div>
+			<div>
+				<div class="input-group" *ngIf="busquedaAvanzada==false">
+					<input type="text" [(ngModel)]="venta_search.lk.cliente" class="form-control">
+					<div class="input-group-append">
+						<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
+							(click)="search()">Buscar</button>
 					</div>
 				</div>
 			</div>
 			<div class="container card p-0 " *ngIf="busquedaAvanzada">
-				<div class="form-row p-2" >
+				<div class="form-row p-2">
 					<div class="form-group col-md-3">
 						<label>Id Cliente</label>
-						<input class="form-control" type="text" (name)="busqueda" [(ngModel)]="venta_search.eq.id">
+						<input class="form-control" type="text" [(ngModel)]="venta_search.lk.id">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Cliente</label>
-						<input class="form-control" type="text" (name)="busqueda" [(ngModel)]="venta_search.lk.cliente">
+						<input class="form-control" type="text" [(ngModel)]="venta_search.lk.cliente">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Atendio:</label>
-						<select  (name)="busqueda" [(ngModel)]="venta_search.eq.id_usuario_atendio"
-							class="form-control">
-							<option value="" selected="selected" >Seleccione</option>
+						<select [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
+							<option value="" selected="selected">Seleccione</option>
 							<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
 								{{usuario.nombre|titlecase}}</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label>Centro Medico:</label>
-						<select name="centro_medico"  (name)="busqueda" [(ngModel)]="venta_search.eq.id_centro_medico"
+						<select  name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico"
 							class="form-control">
-							<option value="" selected="selected" >Seleccione</option>
+							<option value="" selected="selected">Seleccione</option>
 							<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
 								{{centro_medico.nombre|titlecase}}</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label>Fecha</label>
-						<input type="date" class="form-control" (name)="busqueda" [(ngModel)]="venta_search.eq.fecha">
+						<input type="date" class="form-control" [(ngModel)]="venta_search.eq.fecha">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Estatus</label>
-						<select name="estatus" class="form-control" (name)="busqueda" [(ngModel)]="venta_search.eq.estatus">
+						<select name="estatus" class="form-control" [(ngModel)]="venta_search.eq.estatus">
 							<option value="" selected="selected"> Seleccione</option>
 							<option value="PAGADA">PAGADA</option>
 							<option value="PENDIENTE">PENDIENTE</option>
