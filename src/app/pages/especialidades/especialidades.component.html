@@ -12,8 +12,9 @@
 				</div>
 			</div>
 		</div>
+
 		<div>
-			<div class="input-group mb-3">
+			<div class="input-group mb-2">
 				<input type="text" [(ngModel)]="especialidad_search.lk.nombre" class="form-control">
 				<div class="input-group-append">
 					<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
@@ -21,6 +22,8 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="card">
 		<table class="basica">
 			<thead>
 				<tr>
@@ -33,7 +36,7 @@
 					<td>
 						<div>{{ especialidad.nombre }}</div>
 					</td>
-					<td>
+					<td class="p-0">
 						<button class="m-1 btn btn-sm btn-primary"
 							[routerLink]="['/editar-especialidad', especialidad.id]">Editar</button>
 
@@ -43,7 +46,7 @@
 				</tr>
 			</tbody>
 		</table>
-
+	</div>
 		<app-paginacion [path]="'/especialidades'" [pages]="pages" [totalPages]="totalPages"
 			[currentPage]="currentPage"></app-paginacion>
 	</div>

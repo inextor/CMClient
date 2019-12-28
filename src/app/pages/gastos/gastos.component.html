@@ -2,12 +2,13 @@
 	<div class="container">
 
 		<div class="p-0 mt-3">
-			<div class="d-flex justify-content-between flex-wrap">
-				<div class="mb-3">
+			<div class="mb-3 d-flex justify-content-between flex-wrap">
+				<div>
 					<h4>GASTOS</h4>
 				</div>
-				<div class="mb-3">
-					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-gasto']" size="small">Agregar
+				<div>
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-gasto']"
+						size="small">Agregar
 						gasto</button>
 				</div>
 			</div>
@@ -33,46 +34,52 @@
 								</select>
 							</div>
 					</div-->
-		<div>
-			<div class="input-group mb-3">
+		<div class="mb-2">
+			<div class="input-group">
 				<input type="text" [(ngModel)]="gasto_search.lk.descripcion" class="form-control">
 				<div class="input-group-append">
-					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
+					<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
+						(click)="search()">Buscar</button>
 				</div>
 			</div>
 		</div>
-		<table class="basica">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>Tipo</th>
-					<th>Usuario</th>
-					<th>Descripcion</th>
-					<th>Monto</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngIf="gastos.length==0 && !is_loading" class="text-center">
-					<td colspan="4">No se encontraron registros</td>
-				</tr>
-				<tr *ngIf="is_loading">
-					<td colspan="2">
-						<app-loading [is_loading]="is_loading"></app-loading>
-					</td>
-				</tr>
 
-				<tr *ngFor="let g of gastos">
-					<td>{{g.gasto_centro_medico.id}}</td>
-					<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
-					<td>{{g.usuario.usuario}}</td>
-					<td>{{g.gasto_centro_medico.descripcion}}</td>
-					<td class="text-right">{{g.gasto_centro_medico.monto | currency: '$'}}</td>
-				</tr>
-			</tbody>
-		</table>
-		<div>
-			<app-paginacion [path]="'/gastos'" [pages]="pages" [totalPages]="totalPages"
-				[currentPage]="currentPage"></app-paginacion>
+		<div class="card">
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Tipo</th>
+						<th>Usuario</th>
+						<th>Descripcion</th>
+						<th>Monto</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngIf="gastos.length==0 && !is_loading" class="text-center">
+						<td colspan="4">No se encontraron registros</td>
+					</tr>
+					<tr *ngIf="is_loading">
+						<td colspan="2">
+							<app-loading [is_loading]="is_loading"></app-loading>
+						</td>
+					</tr>
+
+					<tr *ngFor="let g of gastos">
+						<td>{{g.gasto_centro_medico.id}}</td>
+						<td>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
+						<td>{{g.usuario.usuario}}</td>
+						<td>{{g.gasto_centro_medico.descripcion}}</td>
+						<td class="text-right">{{g.gasto_centro_medico.monto | currency: '$'}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+
+		<div>
+			<app-paginacion [path]="'/gastos'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
+			</app-paginacion>
+		</div>
+
 	</div>
 </div>

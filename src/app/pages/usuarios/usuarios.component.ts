@@ -29,7 +29,20 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 	// crequest: SearchPacienteRequest = {};
 	usuario: Usuario = {};
 	usuario_search:SearchObject<Usuario>;
-
+	busquedaAvanzada:boolean = false;
+	//inicializa la busqueda para limpiar los forms de busqueda cada que se selecciona busqueda Avanzada
+	clearBusqueda(){
+		this.usuario_search = {
+			eq: {},
+			gt: {},
+			ge: {},
+			le: {},
+			lt: {},
+			lk: {},
+			csv: {},
+		};
+		this.search();
+	}
 	ngOnInit()
 	{
 		this.titleService.setTitle('Usuarios');

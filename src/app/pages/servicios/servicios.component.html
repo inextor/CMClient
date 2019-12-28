@@ -1,18 +1,19 @@
 <div class="card p-3">
 	<div class="container">
 		<div class="p-0 mt-3">
-			<div class="d-flex justify-content-between flex-wrap">
-				<div class="mb-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div>
 					<h4>PRODUCTOS Y SERVICIOS</h4>
 				</div>
-				<div class="mb-3">
+				<div>
 					<button type="button" class="btn btn-primary btn-sm" slot="start" size="small"
 						[routerLink]="['/agregar-producto']">Agregar producto</button>
 				</div>
 			</div>
 		</div>
-		<div>
-			<div class="input-group mb-3">
+
+		<div class="mb-2">
+			<div class="input-group">
 				<input type="text" [(ngModel)]="servicio_search.lk.nombre" class="form-control">
 				<div class="input-group-append">
 					<button class="btn btn-primary btn-sm" type="button" id="button-addon1"
@@ -20,36 +21,41 @@
 				</div>
 			</div>
 		</div>
-		<table class="basica">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let servicio of servicios">
-					<td>{{servicio.nombre}}</td>
-					<!-- 	" -->
-					<td>
-						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/editar-producto',servicio.id]">
-							Editar
-						</button>
-						<!--button type="button" class="btn btn-primary btn-sm m-1"
+
+		<div class="card">
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let servicio of servicios">
+						<td>{{servicio.nombre}}</td>
+						<!-- 	" -->
+						<td class="p-0">
+							<button type="button" class="btn btn-primary btn-sm m-1"
+								[routerLink]="['/editar-producto',servicio.id]">
+								Editar
+							</button>
+							<!--button type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/editar-precios',servicio.id]">
 							Editar Precio
 						</button -->
-						<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/inventario']">
-							Inventario
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+							<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/inventario']">
+								Inventario
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 		<div>
 			<app-paginacion [path]="'/servicios'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
 			</app-paginacion>
 		</div>
+
 	</div>
 </div>

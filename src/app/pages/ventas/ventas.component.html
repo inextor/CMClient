@@ -2,7 +2,8 @@
 	<div class="card p-3">
 		<div class="container">
 			<h3 class="mb-3">Ventas</h3>
-			<div class="mb-2 d-flex flex-column justify-content-between flex-wrap">
+
+			<div class=" d-flex flex-column justify-content-between flex-wrap">
 					<div>
 						<div class=" form-check form-check-inline">
 							<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"
@@ -11,8 +12,9 @@
 						</div>
 					</div>
 			</div>
-			<div>
-				<div class="input-group" *ngIf="busquedaAvanzada==false">
+
+			<div class="mb-2" *ngIf="busquedaAvanzada==false">
+				<div class="input-group" >
 					<input type="text" [(ngModel)]="venta_search.lk.cliente" class="form-control">
 					<div class="input-group-append">
 						<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
@@ -20,7 +22,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="container card p-0 " *ngIf="busquedaAvanzada">
+
+			<div class="container card p-0 mb-2 " *ngIf="busquedaAvanzada">
 				<div class="form-row p-2">
 					<div class="form-group col-md-3">
 						<label>Id Cliente</label>
@@ -67,10 +70,12 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="card">
 			<table class="basica">
 				<thead>
-					<tr>
-						<th>Id</th>
+					<tr >
+						<th >Id</th>
 						<th>Cliente</th>
 						<th>Estado</th>
 						<th>Subtotal</th>
@@ -103,8 +108,8 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let venta of ventas">
-						<td><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td>
-						<td class="text-center">{{venta.cliente}}</td>
+						<td class="text-center"><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td>
+						<td class="text-left">{{venta.cliente}}</td>
 						<!--td class="text-center">{{venta.id_usuario_cliente}}</td-->
 						<td>{{venta.estatus}}</td>
 						<td class="text-right">{{venta.subtotal|currency}}</td>
@@ -136,10 +141,13 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+
 			<div>
 				<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages"
 					[currentPage]="currentPage"></app-paginacion>
 			</div>
+
 		</div>
 	</div>
 </main>

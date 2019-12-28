@@ -1,24 +1,27 @@
 <div class="card p-3">
     <div class="container">
         <div class="p-0 mt-3">
-			<div class="d-flex justify-content-between flex-wrap">
-				<div class="mb-3">
+			<div class="mb-3 d-flex justify-content-between flex-wrap">
+				<div >
 					<h4>PROVEEDORES</h4>
 				</div>
-				<div class="mb-3">
+				<div >
 					<button [routerLink]="['/agregar-proveedor']" type="button" class="btn btn-sm btn-primary">Agregar
                         Proveedor</button>
 				</div>
 			</div>
-		</div>
-        <div>
-			<div class="input-group mb-3">
+        </div>
+        
+        <div class="mb-2">
+			<div class="input-group">
 				<input type="text" [(ngModel)]="proveedor_search.lk.nombre" class="form-control">
 				<div class="input-group-append">
 					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
 				</div>
 			</div>
-		</div>
+        </div>
+        
+        <div class="card">
         <table class="basica">
             <thead>
                 <tr>
@@ -29,16 +32,19 @@
             <tbody>
                 <tr *ngFor="let proveedor of proveedores">
                     <td>{{proveedor.nombre}}</td>
-                    <td>
+                    <td class="p-0">
                         <button class="btn btn-sm btn-primary m-1"
                             [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+
         <div>
 			<app-paginacion [path]="'/proveedores'" [pages]="pages" [totalPages]="totalPages"
 				[currentPage]="currentPage"></app-paginacion>
-		</div>
+        </div>
+        
     </div>
 </div>

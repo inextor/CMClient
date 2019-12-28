@@ -10,7 +10,6 @@ body {
 
 table.basica
 {
-	max-width: 1200px;
 	width: 100%;
 }
 table.basica th
@@ -36,13 +35,13 @@ th{
 .basica td, .basica th {
 	border-width: 0;
 	line-height: 1.5;
-	padding: 5px;
+	padding: 2px;
 	color: #898989;
 }
 table.basica {
     border-width: 0;
     font-size: 13px;
-    margin: 1em 0;
+
     overflow-x: auto;
     	font-family: 'lato-light', 'arial', sans-serif;
 	width: 100%;

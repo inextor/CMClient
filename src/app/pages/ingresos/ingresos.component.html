@@ -2,24 +2,26 @@
 	<div class="container">
 
 		<div class="p-0 mt-3">
-			<div class="d-flex justify-content-between flex-wrap">
-				<div class="mb-3">
+			<div class="mb-3 d-flex justify-content-between flex-wrap">
+				<div >
 					<h4>INGRESOS</h4>
 				</div>
-				<div class="mb-3">
+				<div>
 					<button type="button" class="btn btn-primary btn-sm" (click)="showAddIngreso=true;" size="small">Agregar
 						Ingreso</button>
 				</div>
 			</div>
 		</div>
-		<div>
-			<div class="input-group mb-3">
+		<div class="mb-2">
+			<div class="input-group ">
 				<input type="text" [(ngModel)]="ingreso_search.lk.nota" class="form-control">
 				<div class="input-group-append">
 					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
 				</div>
 			</div>
 		</div>
+
+		<div class="card">
 		<table class="basica">
 			<thead>
 				<tr>
@@ -44,6 +46,7 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
 		<div>
 			<app-paginacion [path]="'/ingresos'" [pages]="pages" [totalPages]="totalPages"
 				[currentPage]="currentPage"></app-paginacion>
