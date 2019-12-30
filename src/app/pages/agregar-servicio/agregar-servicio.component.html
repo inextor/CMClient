@@ -6,21 +6,16 @@
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
 				<div >
-					<h4 class="mb-3 mt-3">{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
+					<h4>{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
 				</div>
 				<div >
-					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-centro-medico']">
-						Agregar Clinica
-					</button>
+					<button type="button" class="btn btn-primary btn-sm" [disabled]="is_loading" (click)="guardar()">Guardar</button>
 				</div>
 			</div>
 		</div>
 
-		
-		<div>
-			<button type="button" class="btn btn-primary" [disabled]="is_loading" (click)="guardar()">Guardar</button>
-		</div>
-		<form>
+<div>
+	
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
@@ -36,7 +31,8 @@
 					</select>
 				</div>
 			</div>
-		</form>
+	
+	</div>
 		<div class="card">
 			<table class="basica">
 				<tr>
