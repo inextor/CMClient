@@ -7,6 +7,7 @@ import { SeleccionarPacienteComponent } from '../../components/seleccionar-pacie
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { SearchObject } from 'src/app/models/Respuestas';
 
 @Component({
   selector: 'app-doctores',
@@ -25,6 +26,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 	is_loading:boolean = false;
 	centro_medico = { id: 1 }; ///XXX sacarlo de la sesion del recepcionista
 	selectedDoctor:Doctor = null;
+	doctor_search:SearchObject<Doctor>;
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
@@ -50,18 +52,29 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 			}
 		); */
 
-		this.route.paramMap.subscribe( params =>
+		this.route.queryParams.subscribe( params =>
 		{
+			this.doctor_search = {
+				eq: {},
+				gt: {},
+				ge: {},
+				le: {},
+				lt: {},
+				lk: {},
+				csv: {},
+			};
 			this.is_loading = true;
-			this.currentPage = params.get('pagina') == null ? 0 : parseInt(params.get('pagina') );
+			this.doctor_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
+			this.doctor_search.limite			= this.pageSize;
+			this.doctor_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 
-			this.rest.doctor.getAll({},{limite:this.pageSize,pagina:this.currentPage})
+			this.rest.doctor.search(this.doctor_search)
 			//this.rest.getDoctores()
 			.subscribe( respuesta =>
 			{
 				this.is_loading = false;
 				this.doctores = respuesta.datos;
-				this.setPages( this.currentPage, respuesta.total );
+				this.setPages( this.doctor_search.pagina, respuesta.total );
 			},error => this.showError );
 		});
 	}
@@ -136,4 +149,25 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 		if( cm_id )
 			this.router.navigate(['/doctores',this.selectedDoctor.id,'centro-medico',cm_id,'agendar-cita',paciente.id]);
 	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.doctor_search.pagina = 0;
+        let search = {};
+        let array = ['eq','le','lt','ge','gt','csv','lk'];
+        for(let i in this.doctor_search )
+        {
+            console.log( 'i',i,array.indexOf( i ) );
+            if(array.indexOf( i ) > -1 )
+            {
+                for(let j in this.doctor_search[i])
+                    search[i+'.'+j] = this.doctor_search[i][j];
+            }
+        }
+		console.log('search',this.doctor_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['doctores'],{queryParams: search});
+	}
+
 }
