@@ -56,15 +56,17 @@
 						<div type="button" class="btn-sm m-1"
 							[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
 							src="../../../assets/icon/Mehr Software_Agendar Familiar.png" class="menuIcons" /></div>
-						<button type="button" class="btn btn-primary btn-sm m-1"
+						<div type="button" class="btn-sm m-1"
 							[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
-							[appAccess]="['Doctor']">Consultas</button>
-						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/agregar-consulta',paciente.id,usuario.id]" [appAccess]="['Doctor']">Agregar
-							Consulta</button>
-						<button type="button" class="btn btn-primary btn-sm mr-2"
+							[appAccess]="['Doctor']">Consultas</div>
+						<div type="button" class="btn-sm m-1"
+							[routerLink]="['/agregar-consulta',paciente.id,usuario.id]" [appAccess]="['Doctor','admin']"><img
+							src="../../../assets/icon/Mehr Software_Agregar_Consultas.png" class="menuIcons" /></div>
+							<!-- historia medica o clinica -->
+						<div type="button" class=" btn-sm m-1"
 							[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-							[appAccess]="['Doctor']">Historia Medica</button>
+							[appAccess]="['Doctor','admin']"><img
+							src="../../../assets/icon/Mehr Software_Historia" class="menuIcons" /></div>
 						</div>
 					</td>
 				</tr>
