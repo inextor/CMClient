@@ -51,7 +51,6 @@
 					<th>id</th>
 					<th>usuario</th>
 					<th>nombre</th>
-					<th>tipo</th>
 					<!-- <th>contrasena</th> -->
 					<th>telefono</th>
 					<th>correo electronico</th>
@@ -61,10 +60,9 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let usuario of usuario_list">
-					<td><a [routerLink]="['/editar-usuario',usuario.id]">{{usuario.id}}</a></td>
+					<td><a [routerLink]="['/editar-cliente',usuario.id]">{{usuario.id}}</a></td>
 					<td>{{usuario.usuario}}</td>
 					<td>{{usuario.nombre}}</td>
-					<td>{{usuario.tipo}}</td>
 					<!-- <td>{{usuario.contrasena}}</td> -->
 					<td>{{usuario.telefono}}</td>
 					<td>{{usuario.correo_electronico}}</td>
@@ -76,8 +74,7 @@
 	</div>
 
 		<div>
-			<app-paginacion [path]="'/clientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
-			</app-paginacion>
+			<app-paginacion [path]="'/clientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
 		</div>
 
 	</div>
