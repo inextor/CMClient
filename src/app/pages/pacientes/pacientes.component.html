@@ -40,17 +40,22 @@
 					<td>{{paciente.apellidos| titlecase}}</td>
 					<td>{{paciente.telefono}}</td>
 					<td class="p-0">
+						<div class="d-inline-flex flex-wrap p-0">
 						<button type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/editar-paciente',paciente.id]"
 							[appAccess]="['RECEPCIONISTA']">Editar</button>
-						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/citas','paciente',paciente.id]" color="secondary">Citas</button>
-						<button type="button" class="btn btn-primary btn-sm m-1"
-							(click)="seleccionarDoctorNuevaCita(paciente)">Agendar
-							Cita</button>
-						<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary">Agregar
-							Familiar</button>
+							<!-- citas -->
+						<div type="button" class="btn-sm m-1"
+							[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
+							src="../../../assets/icon/Mehr Software_Citas.png" class="menuIcons" /></div>
+							<!-- agendar cita -->
+						<div type="button" class="btn-sm m-1"
+							(click)="seleccionarDoctorNuevaCita(paciente)"><img
+							src="../../../assets/icon/Mehr Software_Agendar Cita.png" class="menuIcons" /></div>
+							<!-- agregar familiar -->
+						<div type="button" class="btn-sm m-1"
+							[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
+							src="../../../assets/icon/Mehr Software_Agendar Familiar.png" class="menuIcons" /></div>
 						<button type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
 							[appAccess]="['Doctor']">Consultas</button>
@@ -60,6 +65,7 @@
 						<button type="button" class="btn btn-primary btn-sm mr-2"
 							[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
 							[appAccess]="['Doctor']">Historia Medica</button>
+						</div>
 					</td>
 				</tr>
 			</tbody>
@@ -70,6 +76,6 @@
 			<app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
 			</app-paginacion>
 		</div>
-		
+
 	</div>
 </div>
