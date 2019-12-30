@@ -1,39 +1,59 @@
 <div class="card p-3">
 
 	<app-loading [display]="is_loading"></app-loading>
-	<div class="container">
-		<h4 class="mb-3 mt-3">{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
-		<form>
+	<div class="container">		
 
+		<div class="p-0 mt-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div >
+					<h4 class="mb-3 mt-3">{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
+				</div>
+				<div >
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-centro-medico']">
+						Agregar Clinica
+					</button>
+				</div>
+			</div>
+		</div>
+
+		
+		<div>
+			<button type="button" class="btn btn-primary" [disabled]="is_loading" (click)="guardar()">Guardar</button>
+		</div>
+		<form>
 			<div class="form-row">
 				<div class="form-group col-md-6">
+					<label for="">Nombre del servicio*</label>
 					<input class="form-control" type="text" name="nombre"
 						[(ngModel)]="servicio_recurso.servicio.nombre">
 				</div>
 				<div class="form-group col-md-6">
-					<select name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
-						<option value="">Seleccione uno</option>
+					<label for="">Tipo de servicio*</label>
+					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
+						<option value="" selected="selected">Seleccione</option>
 						<option value="SERVICIO">Servicio</option>
 						<option value="PRODUCTO_FISICO">Producto Fisico</option>
 					</select>
 				</div>
 			</div>
 		</form>
-		<table class="basica">
-			<tr>
-				<td>Centro Medico</td>
-				<td *ngFor="let tipo_precio of tipo_precios">{{tipo_precio.nombre}}</td>
-			</tr>
-			<tr *ngFor="let centro_medico of centros_medicos; index as i">
-				<td><b>{{centro_medico.nombre}}</b></td>
-				<td *ngFor="let tipo_precio of tipo_precios; index as j">
-					<input type="number" class="form-control" [name]="i+'-'+j"
-						[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
-				</td>
-			</tr>
-		</table>
-		<div>
-			<button type="button" class="btn btn-primary" [disabled]="is_loading" (click)="guardar()">Guardar</button>
+		<div class="card">
+			<table class="basica">
+				<tr>
+					<td>Centro Medico</td>
+					<td *ngFor="let tipo_precio of tipo_precios">{{tipo_precio.nombre}}</td>
+				</tr>
+				<tr *ngFor="let centro_medico of centros_medicos; index as i">
+					<td><b>{{centro_medico.nombre}}</b></td>
+					<td *ngFor="let tipo_precio of tipo_precios; index as j">
+						<input type="number" class="form-control" [name]="i+'-'+j"
+							[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
+					</td>
+				</tr>
+			</table>
 		</div>
+
+		
+
 	</div>
 </div>

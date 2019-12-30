@@ -42,26 +42,26 @@
 						<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
 						<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
 						<td class="p-0">
-							<div class="d-flex flex-wrap">
+							<div class="d-flex flex-wrap p-1">
 							<button type="button" class="btn btn-primary btn-sm"
 								[routerLink]="['/doctores',doctor.id, 'ver-doctor']"
 								[appAccess]="['Paciente']">Ver</button>
 								<!-- agendar Cita -->
-							<div type="button" *ngIf="currentUser" class="btn-sm m-1"
+							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								(click)="seleccionarPacienteNuevaCitaCon(doctor)"
 								[appAccess]="['Recepcionista','admin','doctor']"><img
-									src="../../../assets/icon/Mehr Software_Agendar Cita.png" class="menuIcons" /></div>
+									src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div>
 									<!-- citas -->
-							<div type="button" *ngIf="currentUser" class=" btn-sm m-1"
+							<div type="button" *ngIf="currentUser" class="mr-1 icons"
 								[routerLink]="['/citas','doctor',doctor.id]"
 								[appAccess]="['Recepcionista','admin','doctor']"><img
-								src="../../../assets/icon/Mehr Software_Citas.png" class="menuIcons" /></div>
+								src="../../../assets/icon/citas.png" class="menuIcons" /></div>
 								<!-- editar doctor -->
-							<div type="button" *ngIf="currentUser" class="btn-sm m-1"
+							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								[routerLink]="['/editar-doctor',doctor.id]"
 								[appAccess]="['Recepcionista','admin','doctor']">Editar doctor</div>
 								<!-- editar horario -->
-							<div type="button" *ngIf="currentUser" class="btn-sm m-1"
+							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								(click)="editarHorario(doctor)" [appAccess]="['Recepcionista','admin']">Editar
 								Horario</div>
 							</div>
