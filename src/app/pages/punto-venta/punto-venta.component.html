@@ -111,7 +111,6 @@
 
 <app-modal [(show)]="show_modal_pago">
 	<div class="p-3 m-3 border-box row">
-
 		<div class="form-group col-md-6">
 			<div class="row mb-2">
 				<div class="col-6">
@@ -218,72 +217,78 @@
 					<label class="form-check-label" for="exampleCheck1">Check me out</label>
 				</div>
 				<div class="form-group form-check">
-					<input type="checkbox" [(ngModel)]="facturar" class="form-check-input">
-					<label class="form-check-label">Facturar</label>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<button type="button" class="btn btn-primary" [disabled]="procesando_pago" (click)="pagarVenta()">Pagar</button>
-			</div>
-		</div>
-
-		<div [ngClass]="{'row':true,'d-none':!facturar}">
-			<div>{{datosVenta.venta.factura_rfc}}</div>
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>RFC</label>
-							<input type="text" name="factura_rfc" [(ngModel)]="datosVenta.venta.factura_rfc" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Razón Social</label>
-							<input type="text" name="factura_rason_social" [(ngModel)]="datosVenta.venta.factura_razon_social" class="form-control">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Correo Electrónico</label>
-							<input type="text" name="factura_correo_electronico" [(ngModel)]="datosVenta.venta.factura_correo_electronico" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Codigo Postal</label>
-							<input type="text" name="factura_codigo_postal" [(ngModel)]="datosVenta.venta.factura_codigo_postal" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Uso CFDI</label>
-							<select [(ngModel)]="datosVenta.venta.uso_cfdi">
-								<option value="G01" selected> G01 - Adquisición de mercancias</option>
-								<option value="G03"> G03 - Gastos en general</option>
-								<option value="D01"> D01 - Honorarios médicos, dentales y gastos hospitalarios.</option>
-								<option value="D02"> D02 - Gastos médicos por incapacidad o discapacidad</option>
-								<option value="P01"> P01 - Por definir</option>
-								<option value="I02"> I02 - Mobilario y equipo de oficina por inversiones</option>
-								<option value="I04"> I04 - Equipo de computo y accesorios</option>
-								<option value="I06"> I06 - Comunicaciones telefónicas</option>
-								<option value="I08"> I08 - Otra maquinaria y equipo</option>
-								<option value="D03"> D03 - Gastos funerales.</option>
-								<option value="D04"> D04 - Donativos.</option>
-								<option value="I07"> I07 - Comunicaciones satelitales</option>
-								<option value="I03"> I03 - Equipo de transporte</option>
-								<option value="I01"> I01 - Construcciones</option>
-								<option value="I05"> I05 - Dados, troqueles, moldes, matrices y herramental</option>
-								<!--option value="D07"> D07 - Primas por seguros de gastos médicos.</option>
-								<option value="D08"> D08 - Gastos de transportación escolar obligatoria.</option>
-								<option value="D09"> D09 - Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones.</option>
-								<option value="D10"> D10 - Pagos por servicios educativos (colegiaturas)</option>
-								<option value="G02"> G02 - Devoluciones, descuentos o bonificaciones</option>
-								<option value="D05"> D05 - Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación).</option>
-								<option value="D06"> D06 - Aportaciones voluntarias al SAR.</option -->
-							</select>
-						</div>
-					</div>
+					<input type="checkbox" [(ngModel)]="facturar" id="facturar_input" class="form-check-input">
+					<label class="form-check-label" for="facturar_input">Facturar</label>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div [ngClass]="{'d-none':!facturar}">
+		<div class="p-3 m-3 border-box row">
+			<div class="row w-100">
+				<div class="col-md-12 form-group">
+					<label>RFC</label>
+					<input type="text" name="factura_rfc" [(ngModel)]="datosVenta.venta.factura_rfc" class="form-control"  (keyup)="buscarRfc($event)" id="buscarRfc" >
+					<div *ngIf="search_rfc.length" class="dropdown-menu show w-100 no-selectable-text dropdown ml-3 mr-3">
+						<div *ngFor="let usuario of search_rfc" (click)="selectRfc(usuario)">
+							<div class="dropdown-item search">
+								{{usuario.factura_rfc|uppercase}}  <i class="text-muted"> {{usuario.usuario|uppercase}}</i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row w-100">
+				<div class="col-md-6 form-group">
+					<label>Correo Electrónico</label>
+					<input type="text" name="factura_correo_electronico" [(ngModel)]="datosVenta.venta.factura_correo_electronico" class="form-control">
+				</div>
+				<div class="col-md-6 form-group">
+					<label>Uso CFDI</label>
+					<select [(ngModel)]="datosVenta.venta.uso_cfdi" class="form-control">
+						<option value="G01" selected> G01 - Adquisición de mercancias</option>
+						<option value="G03"> G03 - Gastos en general</option>
+						<option value="D01"> D01 - Honorarios médicos, dentales y gastos hospitalarios.</option>
+						<option value="D02"> D02 - Gastos médicos por incapacidad o discapacidad</option>
+						<option value="P01"> P01 - Por definir</option>
+						<option value="I02"> I02 - Mobilario y equipo de oficina por inversiones</option>
+						<option value="I04"> I04 - Equipo de computo y accesorios</option>
+						<option value="I06"> I06 - Comunicaciones telefónicas</option>
+						<option value="I08"> I08 - Otra maquinaria y equipo</option>
+						<option value="D03"> D03 - Gastos funerales.</option>
+						<option value="D04"> D04 - Donativos.</option>
+						<option value="I07"> I07 - Comunicaciones satelitales</option>
+						<option value="I03"> I03 - Equipo de transporte</option>
+						<option value="I01"> I01 - Construcciones</option>
+						<option value="I05"> I05 - Dados, troqueles, moldes, matrices y herramental</option>
+						<!--option value="D07"> D07 - Primas por seguros de gastos médicos.</option>
+						<option value="D08"> D08 - Gastos de transportación escolar obligatoria.</option>
+						<option value="D09"> D09 - Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones.</option>
+						<option value="D10"> D10 - Pagos por servicios educativos (colegiaturas)</option>
+						<option value="G02"> G02 - Devoluciones, descuentos o bonificaciones</option>
+						<option value="D05"> D05 - Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación).</option>
+						<option value="D06"> D06 - Aportaciones voluntarias al SAR.</option -->
+					</select>
+				</div>
+			</div>
+			<div class="row w-100">
+				<div class="col-md-6 form-group">
+					<label>Razón Social</label>
+					<input type="text" name="factura_rason_social" [(ngModel)]="datosVenta.venta.factura_razon_social" class="form-control">
+				</div>
+
+				<div class="col-md-6 form-group">
+					<label>Codigo Postal</label>
+					<input type="text" name="factura_codigo_postal" [(ngModel)]="datosVenta.venta.factura_codigo_postal" class="form-control">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-right w-100">
+			<button type="button" class="btn btn-primary m-3" [disabled]="procesando_pago" (click)="pagarVenta()">Pagar</button>
+		</div>
+	</div>
+
 </app-modal>
