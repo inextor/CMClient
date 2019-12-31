@@ -58,6 +58,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	search_loading:boolean		= false;
 	debug:boolean				= true;
 	facturar:boolean			= false;
+	is_loading_rfc:boolean		= false;
 
 	datosVenta:DatosVenta		= {
 		venta			: {
