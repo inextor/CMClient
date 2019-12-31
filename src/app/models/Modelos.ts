@@ -582,6 +582,7 @@ export interface Usuario{
   id?:number;
   usuario?:string;
   nombre?:string;
+  id_tipo_precio?:number;
   id_organizacion?:number;
   id_imagen?:number;
   tipo?:string;
