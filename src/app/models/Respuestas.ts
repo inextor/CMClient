@@ -36,6 +36,7 @@ export interface SearchObject<T>
 	ge?:T; //Great or equal than
 	le?:T; //less or equal than
 	lk?:T; //like
+	start?:T;
 	csv?:CsvArray;
 }
 

@@ -75,6 +75,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	};
 
 	search_usuario:Usuario[]	= [];
+	search_rfc	:Usuario[] = [];
 	search_servicios:Servicio[]	= [];
 	total						= 0;
 	show_modal_pago				= false;
@@ -188,6 +189,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	changeTipoPrecio(id_tipo_precio:number)
 	{
 		this.datosVenta.venta.id_tipo_precio = id_tipo_precio;
+
 		if( this.datosVenta.detalles.length  > 0 )
 		{
 			this.is_loading = true;
@@ -230,7 +232,42 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 			//x.unsubscribe();
 		},(error)=>this.showError(error));
 	}
-	selectUsuario(usuario)
+
+	buscarRfc(evt:any)
+	{
+		console.log( evt );
+		this.is_loading_rfc = true;
+		if( evt == undefined || evt.target.value == '' )
+		{
+			this.search_rfc = [];
+			this.is_loading_rfc = false;
+			return;
+		}
+
+		let x = this.rest.usuario.search({
+			eq:{ tipo: 'PACIENTE' }
+			,start:{ factura_rfc: evt.target.value }
+			,limit: 5
+		}).subscribe((response)=>
+		{
+			this.is_loading_rfc	= false;
+			this.search_rfc		= response.datos;
+			//x.unsubscribe();
+		},(error)=>this.is_loading_rfc = false );
+
+	}
+
+
+	selectRfc(usuario:Usuario)
+	{
+		this.datosVenta.venta.factura_rfc 					= usuario.factura_rfc;
+		this.datosVenta.venta.factura_razon_social			= usuario.factura_razon_social;
+		this.datosVenta.venta.factura_codigo_postal			= usuario.factura_codigo_postal;
+		this.datosVenta.venta.factura_correo_electronico	= usuario.factura_correo_electronico;
+		this.search_rfc = [];
+	}
+
+	selectUsuario(usuario:Usuario)
 	{
 		console.log( usuario );
 		this.datosVenta.venta.id_usuario_cliente	= usuario.id;

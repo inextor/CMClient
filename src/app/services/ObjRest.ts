@@ -92,6 +92,12 @@ export interface SearchObject<T>
 			if( searchObj.lk[i] )
 				params = params.set(i+'~~',''+searchObj.lk[i] );
 
+		for(let i in searchObj.start )
+		{
+			if( searchObj.start[i] )
+				params = params.set(i+'^',''+searchObj.start[i] );
+		}
+
 		if( searchObj.pagina )
 		{
 			params = params.set( 'pagina', ''+searchObj.pagina );
