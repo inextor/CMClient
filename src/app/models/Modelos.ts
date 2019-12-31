@@ -577,6 +577,8 @@ export interface Unidad_Medida{
 };
 
 export interface Usuario{
+
+  
   id?:number;
   usuario?:string;
   nombre?:string;

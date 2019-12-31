@@ -236,24 +236,24 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	buscarRfc(evt:any)
 	{
 		console.log( evt );
-		this.is_loading_rfc = true;
+		this.is_loading = true;
 		if( evt == undefined || evt.target.value == '' )
 		{
 			this.search_rfc = [];
-			this.is_loading_rfc = false;
+			this.is_loading = false;
 			return;
 		}
 
 		let x = this.rest.usuario.search({
 			eq:{ tipo: 'PACIENTE' }
 			,start:{ factura_rfc: evt.target.value }
-			,limit: 5
+			,limite: 5
 		}).subscribe((response)=>
 		{
-			this.is_loading_rfc	= false;
+			this.is_loading	= false;
 			this.search_rfc		= response.datos;
 			//x.unsubscribe();
-		},(error)=>this.is_loading_rfc = false );
+		},(error)=>this.is_loading = false );
 
 	}
 
