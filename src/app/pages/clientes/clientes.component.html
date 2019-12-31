@@ -95,17 +95,18 @@
 						<th>nombre</th>
 						<th>telefono</th>
 						<th>correo electronico</th>
-						<th>tiempo creacion</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let usuario of usuario_list">
-						<td><a [routerLink]="['/editar-usuario',usuario.id]">{{usuario.id}}</a></td>
+						<td><a [routerLink]="['/editar-cliente',usuario.id]">{{usuario.id}}</a></td>
 						<td>{{usuario.usuario}}</td>
 						<td>{{usuario.nombre}}</td>
 						<td>{{usuario.telefono}}</td>
 						<td>{{usuario.correo_electronico}}</td>
-						<td>{{usuario.tiempo_creacion| date: 'short' }}</td>
+						<td><button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/familiares',usuario.id]">Familiares</button></td>
 					</tr>
 				</tbody>
 			</table>

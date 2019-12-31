@@ -4,6 +4,7 @@ import { RestService } from 'src/app/services/rest.service';
 import { Router } from '@angular/router';
 import { Usuario, Paciente } from 'src/app/models/Modelos';
 import { ThrowStmt } from '@angular/compiler';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-familiares',
@@ -15,12 +16,18 @@ export class FamiliaresComponent extends BaseComponent implements OnInit {
   nombre: string = null
 
   ngOnInit() {
-    let usuario = this.rest.getUsuarioSesion();
 
-        this.rest.paciente.getAll({ id_usuario: usuario.id }).subscribe(params => {
-            this.familiares = params.datos
-          }
-        );
+    this.route.paramMap.subscribe( params =>{
+			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
+      this.is_loading = true;
+      
+      this.rest.paciente.getAll({ id_usuario: id}).subscribe(params => {
+        this.familiares = params.datos
+      }
+    );
+
+		});
+      
   }
 
 }

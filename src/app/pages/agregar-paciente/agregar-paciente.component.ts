@@ -15,17 +15,18 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		id_imagen: null,
 		contrasena: '',
 		correo_electronico:'',
+		factura_rfc:'',
+		factura_razon_social:'',
+		factura_codigo_postal:'',
+		factura_correo_electronico:'',
 		tipo: 'PACIENTE'
 	};
 	paciente:Paciente = {
 		nombre:'',
-		nombre_tutor: '',
 		apellidos:'',
 		sexo:'',
 		fecha_nacimiento:'',
 		telefono:'',
-		telefono_tutor: '',
-		correo_electronico_tutor:'',
 //		domicilio: '',
 	};
 
@@ -51,9 +52,9 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 				}
 				,(error)=>
 					this.showError(error));
-			}else{
-				this.is_loading= false;
 			}
+				this.is_loading= false;
+
 		});
 	}
 

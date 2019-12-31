@@ -1,23 +1,8 @@
-<!-- NAVBAR -->
-<div class="page">
-    <header>
-        <app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-    </header>
-    <!-- FIN NAVBAR -->
-    <div>
-        <div class="page_content">
-            <!-- MENU -->
-            <div class="pt-2 flex-wrap justify-content-start">
-                <app-menu></app-menu>
-            </div>
-            <!-- FIN MENU -->
-            <!-- CONTENIDO -->
-            <main class="p-2">
-                <div class="card p-3">
-                    <div class="container">
-                        <h4 class="mb-3 mt-3">FAMILIARES</h4>
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3">FAMILIARES</h4>
 
-                        <!-- <div class="pt-2 flex-wrap">
+        <!-- <div class="pt-2 flex-wrap">
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm"
                                     [routerLink]="['/agregar-paciente']">
@@ -25,38 +10,32 @@
                                 </button>
                             </td>
                         </div> -->
-                        <table class="basica">
-                            <thead>
-                                <tr>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Telefono</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let familiar of familiares">
-                                    <td>{{familiar.nombre | titlecase }}</td>
-                                    <td>{{familiar.apellidos| titlecase}}</td>
-                                    <td>{{familiar.telefono}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm m-1"[routerLink]="['/citas','familiar',familiar.id]" 
-                                            color="secondary">Citas</button>
-                                        <button type="button" class="btn btn-primary btn-sm m-1"
-                                            >Agendar
-                                            Cita</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="mt-3 mb-3">
-                            <app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages"
-                                [currentPage]="currentPage"></app-paginacion>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <!-- FIN CONTENIDO -->
+        <table class="basica">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Telefono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let familiar of familiares">
+                    <td>{{familiar.nombre | titlecase }}</td>
+                    <td>{{familiar.apellidos| titlecase}}</td>
+                    <td>{{familiar.telefono}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm m-1"
+                            [routerLink]="['/citas','familiar',familiar.id]" color="secondary">Citas</button>
+                        <button type="button" class="btn btn-primary btn-sm m-1">Agendar
+                            Cita</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-3 mb-3">
+            <app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
+            </app-paginacion>
         </div>
     </div>
 </div>
