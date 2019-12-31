@@ -1,6 +1,19 @@
 <div class="card p-3">
 	<div class="container">
-		<h4 class="mb-3 mt-3">AGREGAR PROVEEDOR</h4>
+
+
+		<div class="p-0 mt-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div >
+					<h4 >AGREGAR PROVEEDOR</h4>
+				</div>
+				<div >
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
+				[disabled]="is_loading">Guardar</button>
+				</div>
+			</div>
+		</div>
+		
 		<app-loading [display]="is_loading"></app-loading>
 		<div class="form-row">
 			<div class="form-group col-md-6">
@@ -36,9 +49,6 @@
 				<input type="text" class="form-control" name="nota" [(ngModel)]="proveedor.nota">
 			</div>
 		</div>
-		<div class="">
-			<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
-				[disabled]="is_loading">Guardar</button>
-		</div>
+	
 	</div>
 </div>
