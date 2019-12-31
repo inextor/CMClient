@@ -1,6 +1,18 @@
 <div class="card p-3">
-    <app-loading [display]="is_loading"></app-loading>
     <div class="container">
+
+        <div class="p-0 mt-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div>
+					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}} PACIENTE</h4>
+				</div>
+				<div>
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
+                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
+				</div>
+			</div>
+        </div>
+        
         <form>
             <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
             <div *ngIf="usuario.id_imagen">
@@ -78,10 +90,7 @@
                         [(ngModel)]="paciente.telefono_tutor">
                 </div>
             </div>
-            <div class="">
-                <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
-            </div>
+
         </form>
     </div>
 

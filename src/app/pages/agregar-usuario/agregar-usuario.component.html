@@ -4,26 +4,28 @@
 
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
-				<div >
-					<h4 >AGREGAR USUARIO</h4>
+				<div>
+					<h4>AGREGAR USUARIO</h4>
 				</div>
-				<div >
-					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="registrarse()"
-					[disabled]="is_loading">Guardar</button>
+				<div>
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
+						(click)="registrarse()" [disabled]="is_loading">Guardar</button>
 				</div>
 			</div>
 		</div>
 
 
 		<app-loading [display]="is_loading"></app-loading>
+		<label for="">Información de usuario</label>
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label position="stacked">Usuario<span color="danger">*</span></label>
-				<input required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
+				<input placeholder="Usuario" type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Tipo<span color="danger">*</span></label>
-				<select class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
+				<select value="" class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
+					<option value="" selected >Seleccionar</option>
 					<option value="ADMIN">Admin</option>
 					<option value="RECEPCIONISTA">recepcionista</option>
 					<option value="ASISTENTE">Asistente</option>
@@ -39,6 +41,35 @@
 				<input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
 					[(ngModel)]="confirmar_contrasena">
 			</div>
+			<div>
+				<div *ngIf="error_message" class="alert alert-danger" role="alert">
+					{{error_message}}
+				</div>
+			</div>
+		</div>
+		<label for="">Información de facturación</label>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label position="stacked">RFC<span color="danger">*</span></label>
+				<input  type="text" class="form-control" name="rfc" [(ngModel)]="usuario.factura_rfc">
+			</div>
+			<div class="form-group col-md-6">
+				<label position="stacked">Razon Social</label>
+				<input placeholder=""  class="form-control" name="razon_social"
+					[(ngModel)]="usuario.factura_razon_social">
+			</div>
+			<div class="form-group col-md-6">
+				<label position="stacked">Codigo Postal</label>
+				<input placeholder=""  class="form-control" name="codigo_postal"
+					[(ngModel)]="usuario.factura_codigo_postal">
+			</div>
+			<div class="form-group col-md-6">
+
+				<label position="stacked">Correo Electronico</label>
+				<input placeholder=""  class="form-control" name="correo_electronico"
+					[(ngModel)]="usuario.factura_correo_electronico">
+			</div>
+
 			<div>
 				<div *ngIf="error_message" class="alert alert-danger" role="alert">
 					{{error_message}}

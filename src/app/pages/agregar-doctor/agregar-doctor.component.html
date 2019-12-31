@@ -1,6 +1,19 @@
 <div class="card p-3">
 	<div class="container">
-		<h4 class="mb-2 mt-2">{{this.usuario.id ? 'EDITAR':'AGREGAR'}} DOCTOR</h4>
+
+		<div class="p-0 mt-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div>
+					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}} DOCTOR</h4>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="is_loading">
+						{{this.usuario.id ? 'Guardar':'Agregar'}}
+					</button>
+				</div>
+			</div>
+		</div>
+
 		<app-loading [display]="is_loading"></app-loading>
 		<form>
 			<div *ngIf="usuario.id_imagen">
@@ -43,11 +56,7 @@
 					</select>
 				</div>
 			</div>
-			<div>
-				<button type="submit" class="btn btn-primary btn-sm" (click)="agregar()" [disabled]="is_loading">
-					{{this.usuario.id ? 'Guardar':'Agregar'}}
-				</button>
-			</div>
+
 			<div *ngIf="error_message">
 				<div class="alert alert-danger" role="alert">
 					{{error_message}}
