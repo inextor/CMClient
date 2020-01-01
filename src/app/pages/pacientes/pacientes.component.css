@@ -1,9 +1,13 @@
 .menuIcons{
-    width:45px;
-    height:45px;
+    width:35px;
+    height:35px;
     vertical-align:middle;
     margin:0;
   }
 .icons{
   padding:0;
+  background-color: none;d
+}
+.btn{
+  background-color: none;
 }

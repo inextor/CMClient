@@ -39,33 +39,33 @@
 					<td>{{paciente.nombre | titlecase }}</td>
 					<td>{{paciente.apellidos| titlecase}}</td>
 					<td>{{paciente.telefono}}</td>
-					<td class="p-0">
+					<td class="p-1">
 						<div class="d-inline-flex flex-wrap p-1">
 						<div type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/editar-paciente',paciente.id]"
 							[appAccess]="['RECEPCIONISTA']">Editar</div>
 							<!-- citas -->
-						<div type="button" class="mr-1 icons"
+						<div type="button" class="btn btn-sm mr-2 icons"
 							[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
 							src="../../../assets/icon/citas.png" class="menuIcons" /></div>
 							<!-- agendar cita -->
-						<div type="button" class=" mr-1 icons"
+						<div type="button" class=" btn ml-2 mr-2 icons"
 							(click)="seleccionarDoctorNuevaCita(paciente)"><img
 							src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div>
 							<!-- agregar familiar -->
-						<div type="button" class="mr-1"
+						<div type="button" class="btn ml-2 mr-2 icons"
 							[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
 							src="../../../assets/icon/agendar-familiar.png" class="menuIcons" /></div>
 							<!-- consultas -->
-						<div type="button" class="mr-1"
+						<div type="button" class="btn ml-2 mr-2 icons"
 							[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
 							[appAccess]="['Doctor']"><img
 							src="../../../assets/icon/agendar-familiar.png" class="menuIcons" /></div>
-						<div type="button" class="mr-1"
+						<div type="button" class="btn ml-2 mr-2 icons"
 							[routerLink]="['/agregar-consulta',paciente.id,usuario.id]" [appAccess]="['Doctor','admin']"><img
 							src="../../../assets/icon/consultas.png" class="menuIcons" /></div>
 							<!-- historia medica o clinica -->
-						<div type="button" class="mr-1"
+						<div type="button" class="btn ml-2 mr-2 icons"
 							[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
 							[appAccess]="['Doctor','admin']"><img
 							src="../../../assets/icon/historia-medica.png" class="menuIcons" /></div>
