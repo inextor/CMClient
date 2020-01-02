@@ -1,6 +1,6 @@
 <div class="card p-3">
 	<div class="container">
-		<h4 class="mb-3 mt-3 ">AGREGAR ESPECIALIDAD</h4>
+		<h4 class="mb-3 mt-3 ">{{this.especialidad.id ? 'EDITAR':'AGREGAR'}} ESPECIALIDAD</h4>
 		<app-loading [display]="is_loading"></app-loading>
 		<form>
 			<form>
@@ -18,6 +18,6 @@
 
 		</form>
 		<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
-			[disabled]="is_loading">Agregar</button>
+			[disabled]="is_loading">{{this.especialidad.id ? 'Guardar':'Agregar'}}</button>
 	</div>
 </div>

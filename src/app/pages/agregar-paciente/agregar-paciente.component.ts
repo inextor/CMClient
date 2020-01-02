@@ -22,6 +22,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		tipo: 'PACIENTE'
 	};
 	paciente:Paciente = {
+		id:null,
 		nombre:'',
 		apellidos:'',
 		sexo:'',

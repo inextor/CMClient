@@ -5,11 +5,11 @@
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
 				<div>
-					<h4>AGREGAR USUARIO</h4>
+					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}} USUARIO</h4>
 				</div>
 				<div>
 					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-						(click)="registrarse()" [disabled]="is_loading">Guardar</button>
+						(click)="registrarse()" [disabled]="is_loading">{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
 		</div>

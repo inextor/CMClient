@@ -27,34 +27,20 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	};
 
 	ngOnInit() {
-		this.route.paramMap.subscribe( params =>{
-
-			let id_paciente = params.get('id_paciente') == null ? null : parseInt( params.get('id_paciente') );
-			let id_usuario = params.get('id_usuario') == null ? null : parseInt( params.get('id_usuario') );
-			if( id_paciente )
+		this.route.paramMap.subscribe( params =>
 			{
-				this.titleService.setTitle('Editar Familiar');
-				this.is_loading = true;
-				//this.rest.getPaciente( id_paciente ).subscribe((paciente)=>
-				this.rest.paciente.get(id_paciente ).subscribe((paciente)=>
+				let id = params.get('id') ==null ? null : parseInt(params.get('id') );
+				if( id != null )
 				{
-					console.log("WTF");
-					this.is_loading = false;
-					this.paciente = paciente;
-				},error=>this.showError(error));
-			}
-			else
-			{
-				this.titleService.setTitle('Agregar Familiar');
-				this.paciente ={
-					nombre:'',
-					id_usuario,
-					apellidos:'',
-					fecha_nacimiento: '',
-					telefono: '',
-				};
-			}
-		});
+					this.is_loading = true;
+					//this.rest.getCentroMedico( id ).subscribe((centro_medico)=>
+					this.rest.paciente.get( id ).subscribe((paciente)=>
+					{
+						this.is_loading = false;
+						this.paciente = paciente;
+					}, error=>this.showError(error));
+				}
+			});
 	}
 
 	guardarPaciente()

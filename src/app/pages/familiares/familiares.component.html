@@ -26,8 +26,11 @@
                     <td>{{familiar.telefono}}</td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm m-1"
+                            [routerLink]="['/editar-familiar',familiar.id]" color="secondary">Editar</button>
+                        <button type="button" class="btn btn-primary btn-sm m-1"
+                        [appAccess]="['paciente']"
                             [routerLink]="['/citas','familiar',familiar.id]" color="secondary">Citas</button>
-                        <button type="button" class="btn btn-primary btn-sm m-1">Agendar
+                        <button type="button" [appAccess]="['paciente']" class="btn btn-primary btn-sm m-1">Agendar
                             Cita</button>
                     </td>
                 </tr>

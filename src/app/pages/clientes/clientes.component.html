@@ -100,12 +100,14 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let usuario of usuario_list">
-						<td><a [routerLink]="['/editar-cliente',usuario.id]">{{usuario.id}}</a></td>
+						<td><a >{{usuario.id}}</a></td>
 						<td>{{usuario.usuario}}</td>
 						<td>{{usuario.nombre}}</td>
 						<td>{{usuario.telefono}}</td>
 						<td>{{usuario.correo_electronico}}</td>
 						<td><button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-cliente',usuario.id]">Editar</button>
+							<button type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/familiares',usuario.id]">Familiares</button></td>
 					</tr>
 				</tbody>

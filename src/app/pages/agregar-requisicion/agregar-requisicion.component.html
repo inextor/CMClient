@@ -4,11 +4,11 @@
         <div class="p-0 mt-3">
             <div class=" mb-3 d-flex justify-content-between flex-wrap">
                 <div>
-                    <h4>AGREGAR REQUISICION</h4>
+                    <h4>{{this.requisicion.id ? 'EDITAR':'AGREGAR'}} REQUISICIÓN</h4>
                 </div>
                 <div>
                     <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                        (click)="guardar()" [disabled]="is_loading">Guardar</button>
+                        (click)="guardar()" [disabled]="is_loading">{{this.requisicion.id ? 'Guardar':'Agregar'}}</button>
                 </div>
             </div>
         </div>

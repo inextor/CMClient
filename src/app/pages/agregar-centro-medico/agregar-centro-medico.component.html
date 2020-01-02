@@ -3,11 +3,11 @@
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
 				<div >
-					<h4 class="">AGREGAR CENTRO MEDICO</h4>
+					<h4 class="">{{this.centro_medico.id ? 'EDITAR':'AGREGAR'}} CENTRO MEDICO</h4>
 				</div>
 				<div >
 					<button type="button" class="btn btn-primary btn-sm" (click)="guardar()"
-						[disabled]="is_loading">Guardar</button>
+						[disabled]="is_loading">{{this.centro_medico.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
 		</div>

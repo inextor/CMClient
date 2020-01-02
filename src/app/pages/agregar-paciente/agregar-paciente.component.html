@@ -8,7 +8,7 @@
 				</div>
 				<div>
 					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
+                    (click)="registrarse()" [disabled]="is_loading">{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
         </div>
