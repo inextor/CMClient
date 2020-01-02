@@ -86,7 +86,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			this.nombre						= 'nombre' in params ? params.nombre : '';
 
 			console.log('Search', this.cita_search );
-
+			console.log('nombre',this.nombre);
 			let rjoinObj:any = {};
 			let fjarray = [];
 
@@ -97,7 +97,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.cita_search.eq.id_paciente ? this.rest.paciente.get( this.cita_search.eq.id_paciente ) : of(null)
 				,this.cita_search.eq.id_doctor ? this.rest.doctor.get( this.cita_search.eq.id_doctor ) : of(null)
 				,this.rest.centro_medico.getAll({id_organizacion:usuario.id_organizacion})
-				,this.rest.searchCita.search( this.cita_search, { nombre: this.nombre} )
+				,this.rest.searchCita.search( this.cita_search )
 			]).subscribe((result)=>
 			{
 				this.paciente = result[ 0 ];
@@ -105,6 +105,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 				this.centros_medicos = result[2].datos;
 				this.info_citas = result[3].datos;
 				this.setPages( this.cita_search.pagina, result[3].total );
+				console.log(this.info_citas);
 			},error=>
 			{
 				console.log( error );
