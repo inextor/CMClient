@@ -5,6 +5,8 @@ import { Especialidad } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
 	selector: 'app-agregar-especialidad',
@@ -51,12 +53,12 @@ export class AgregarEspecialidadComponent extends BaseComponent implements OnIni
 	{
 		this.is_loading = true;
 
-		if( this.especialidad.id	)
+		if( this.especialidad.id)
 		{
 			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.especialidad.update( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
-				this.router.navigate(['/especialidades/0']);
+				this.router.navigate(['/especialidades']);
 			},error=>this.showError(error));
 		}
 		else
@@ -64,8 +66,9 @@ export class AgregarEspecialidadComponent extends BaseComponent implements OnIni
 			//this.rest.agregarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{
 			this.rest.especialidad.create( this.especialidad ).subscribe((especialidad)=>{
 				this.is_loading = false;
-				this.router.navigate(['/especialidades/0']);
+				this.router.navigate(['/especialidades']);
 			},error=>this.showError(error));
+		
 		}
 	}
 }

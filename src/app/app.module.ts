@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AccessModule } from './modules/access/access.module';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -80,7 +81,6 @@ import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.com
 import { ShellComponent } from './components/shell/shell.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket.component';
-
 
 @NgModule({
   declarations: [
@@ -164,10 +164,11 @@ import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket
     AppRoutingModule,
    HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
 	  FullCalendarModule,
-
+    CommonModule,
     BrowserAnimationsModule,
-	  FormsModule
+	  FormsModule,
 
   ],
   providers: [
