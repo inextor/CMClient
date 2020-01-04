@@ -90,7 +90,6 @@ export interface Consulta{
   medicamento?:string;
   analisis?:string;
   subjetivo?:string;
-  objetivo?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
