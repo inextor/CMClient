@@ -35,17 +35,38 @@
 						<td>{{servicio.nombre}}</td>
 						<!-- 	" -->
 						<td class="p-0">
-							<button type="button" class="btn btn-primary btn-sm m-1"
+
+							<button class="btn btn-light p-0 m-1 border "
+							[routerLink]="['/editar-producto',servicio.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1"
 								[routerLink]="['/editar-producto',servicio.id]">
 								Editar
-							</button>
+							</button> -->
 							<!--button type="button" class="btn btn-primary btn-sm m-1"
 							[routerLink]="['/editar-precios',servicio.id]">
 							Editar Precio
 						</button -->
-							<button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/inventario']">
+
+
+						<button class="btn btn-light p-0 m-1 border "
+						[routerLink]="['/inventario']">
+							<span class="">
+								<i class="">
+									<img src="../../../assets/icon/options/inventario.png" height="35px" width="35px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/inventario']">
 								Inventario
-							</button>
+							</button> -->
 						</td>
 					</tr>
 				</tbody>

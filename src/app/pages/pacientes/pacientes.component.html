@@ -25,56 +25,109 @@
 		</div>
 
 		<div class="card">
-		<table class="basica">
-			<thead>
-				<tr>
-					<th>Nombres</th>
-					<th>Apellidos</th>
-					<th>Telefono</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let paciente of pacientes">
-					<td>{{paciente.nombre | titlecase }}</td>
-					<td>{{paciente.apellidos| titlecase}}</td>
-					<td>{{paciente.telefono}}</td>
-					<td class="p-1">
-						<div class="d-inline-flex flex-wrap p-1">
-						<div type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/editar-paciente',paciente.id]"
-							[appAccess]="['RECEPCIONISTA']">Editar</div>
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Telefono</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let paciente of pacientes">
+						<td>{{paciente.nombre | titlecase }}</td>
+						<td>{{paciente.apellidos| titlecase}}</td>
+						<td>{{paciente.telefono}}</td>
+						<td class="p-0">
+							<!-- <div class="d-inline-flex flex-wrap p-1">
+								<div type="button" class="btn btn-primary btn-sm m-1"
+									[routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">
+									Editar</div>
+
+								<div type="button" class="btn btn-sm mr-2 icons"
+									[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
+										src="../../../assets/icon/citas.png" class="menuIcons" /></div>
+
+								<div type="button" class=" btn ml-2 mr-2 icons"
+									(click)="seleccionarDoctorNuevaCita(paciente)"><img
+										src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div>
+
+								<div type="button" class="btn ml-2 mr-2 icons"
+									[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
+										src="../../../assets/icon/agendar-familiar.png" class="menuIcons" /></div>
+
+								<div type="button" class="btn ml-2 mr-2 icons"
+									[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
+									[appAccess]="['Doctor']"><img src="../../../assets/icon/agendar-familiar.png"
+										class="menuIcons" /></div>
+								<div type="button" class="btn ml-2 mr-2 icons"
+									[routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
+									[appAccess]="['Doctor','admin']"><img src="../../../assets/icon/consultas.png"
+										class="menuIcons" /></div>
+
+								<div type="button" class="btn ml-2 mr-2 icons"
+									[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+									[appAccess]="['Doctor','admin']"><img src="../../../assets/icon/historia-medica.png"
+										class="menuIcons" /></div>
+							</div> -->
 							<!-- citas -->
-						<div type="button" class="btn btn-sm mr-2 icons"
-							[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
-							src="../../../assets/icon/citas.png" class="menuIcons" /></div>
+							<button class=" p-0 btn btn-light  m-1 border "
+								[routerLink]="['/citas','paciente',paciente.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/citas.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 							<!-- agendar cita -->
-						<div type="button" class=" btn ml-2 mr-2 icons"
-							(click)="seleccionarDoctorNuevaCita(paciente)"><img
-							src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div>
+							<button class=" p-0 btn btn-light m-1 border "
+								(click)="seleccionarDoctorNuevaCita(paciente)">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/agendar-cita.png" height="35px"
+											width="35px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 							<!-- agregar familiar -->
-						<div type="button" class="btn ml-2 mr-2 icons"
-							[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
-							src="../../../assets/icon/agendar-familiar.png" class="menuIcons" /></div>
+							<button class=" p-0 btn btn-light  m-1 border "
+								[routerLink]="['/agregar-familiar',paciente.id_usuario]" [appAccess]="['Doctor']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/agendar-familiar.png" height="35px"
+											width="35px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 							<!-- consultas -->
-						<div type="button" class="btn ml-2 mr-2 icons"
-							[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
-							[appAccess]="['Doctor']"><img
-							src="../../../assets/icon/agendar-familiar.png" class="menuIcons" /></div>
-						<div type="button" class="btn ml-2 mr-2 icons"
-							[routerLink]="['/agregar-consulta',paciente.id,usuario.id]" [appAccess]="['Doctor','admin']"><img
-							src="../../../assets/icon/consultas.png" class="menuIcons" /></div>
+							<button class=" p-0 btn btn-light m-1 border "
+								[routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
+								[appAccess]="['Doctor','admin']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/consultas.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 							<!-- historia medica o clinica -->
-						<div type="button" class="btn ml-2 mr-2 icons"
-							[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-							[appAccess]="['Doctor','admin']"><img
-							src="../../../assets/icon/historia-medica.png" class="menuIcons" /></div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+							<button class=" p-0 btn btn-light m-1 border "
+								[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+								[appAccess]="['Doctor','admin']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/historia-medica.png" height="35px"
+											width="35px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 		<div>
 			<app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">

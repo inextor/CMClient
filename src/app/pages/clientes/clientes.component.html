@@ -105,10 +105,28 @@
 						<td>{{usuario.nombre}}</td>
 						<td>{{usuario.telefono}}</td>
 						<td>{{usuario.correo_electronico}}</td>
-						<td><button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/editar-cliente',usuario.id]">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm m-1"
-							[routerLink]="['/familiares',usuario.id]">Familiares</button></td>
+						<td class="p-0">
+							<button class="btn btn-light p-0 m-1 border " [routerLink]="['/editar-cliente',usuario.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							
+							<button class="btn btn-light p-0 m-1 border " [routerLink]="['/familiares',usuario.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/agregar-familiar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-cliente',usuario.id]">Editar</button> -->
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/familiares',usuario.id]">Familiares</button></td> -->
 					</tr>
 				</tbody>
 			</table>

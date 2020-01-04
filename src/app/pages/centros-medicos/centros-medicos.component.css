@@ -4,3 +4,15 @@
 	width: 40px;
 	height: 40px;
 }
+.menuIcons{
+    /* vertical-align:middle; */
+    margin:0;
+
+  }
+.border{
+    border: 1px solid #000000;
+}
+.icons{
+  padding:0 !important;
+  background-color: none;
+}
