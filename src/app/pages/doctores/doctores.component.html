@@ -42,29 +42,62 @@
 						<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
 						<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
 						<td class="p-0">
-							<div class="d-flex flex-wrap p-1">
+							<!-- <div class="d-flex flex-wrap p-1">
 							<button type="button" class="btn btn-primary btn-sm"
 								[routerLink]="['/doctores',doctor.id, 'ver-doctor']"
-								[appAccess]="['Paciente']">Ver</button>
+								[appAccess]="['Paciente']">Ver</button> -->
 								<!-- agendar Cita -->
-							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
+							<!-- <div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								(click)="seleccionarPacienteNuevaCitaCon(doctor)"
 								[appAccess]="['Recepcionista','admin','doctor']"><img
-									src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div>
+									src="../../../assets/icon/agendar-cita.png" class="menuIcons" /></div> -->
 									<!-- citas -->
-							<div type="button" *ngIf="currentUser" class="mr-1 icons"
+							<!-- <div type="button" *ngIf="currentUser" class="mr-1 icons"
 								[routerLink]="['/citas','doctor',doctor.id]"
 								[appAccess]="['Recepcionista','admin','doctor']"><img
-								src="../../../assets/icon/citas.png" class="menuIcons" /></div>
+								src="../../../assets/icon/citas.png" class="menuIcons" /></div> -->
 								<!-- editar doctor -->
-							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
+							<!-- <div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								[routerLink]="['/editar-doctor',doctor.id]"
-								[appAccess]="['Recepcionista','admin','doctor']">Editar doctor</div>
+								[appAccess]="['Recepcionista','admin','doctor']">Editar doctor</div> -->
 								<!-- editar horario -->
-							<div type="button" *ngIf="currentUser" class=" mr-1 icons"
+							<!-- <div type="button" *ngIf="currentUser" class=" mr-1 icons"
 								(click)="editarHorario(doctor)" [appAccess]="['Recepcionista','admin']">Editar
 								Horario</div>
-							</div>
+							</div> -->
+
+							<button class=" p-0 btn btn-light  m-1 border " (click)="seleccionarPacienteNuevaCitaCon(doctor)">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/agendar-cita.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<button class=" p-0 btn btn-light  m-1 border " [routerLink]="['/citas','doctor',doctor.id]" [appAccess]="['Recepcionista','admin','doctor']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/citas.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<button class=" p-0 btn btn-light  m-1 border " [routerLink]="['/editar-doctor',doctor.id]" [appAccess]="['Recepcionista','admin','doctor']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar-doctor.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<button class=" p-0 btn btn-light  m-1 border " (click)="editarHorario(doctor)" [appAccess]="['Recepcionista','admin']">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar-horario.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 						</td>
 					</tr>
 				</tbody>

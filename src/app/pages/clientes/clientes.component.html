@@ -1,6 +1,6 @@
 <div class="card p-3">
 	<div class="container">
-		<h4 class="mb-3">Clientes</h4>
+		<h4 class="mb-3">CLIENTES</h4>
 
 		<div class=" d-flex flex-column justify-content-between flex-wrap">
 			<div>
@@ -95,17 +95,38 @@
 						<th>nombre</th>
 						<th>telefono</th>
 						<th>correo electronico</th>
-						<th>tiempo creacion</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let usuario of usuario_list">
-						<td><a [routerLink]="['/editar-usuario',usuario.id]">{{usuario.id}}</a></td>
+						<td><a >{{usuario.id}}</a></td>
 						<td>{{usuario.usuario}}</td>
 						<td>{{usuario.nombre}}</td>
 						<td>{{usuario.telefono}}</td>
 						<td>{{usuario.correo_electronico}}</td>
-						<td>{{usuario.tiempo_creacion| date: 'short' }}</td>
+						<td class="p-0">
+							<button class="btn btn-light p-0 m-1 border " [routerLink]="['/editar-cliente',usuario.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							
+							<button class="btn btn-light p-0 m-1 border " [routerLink]="['/familiares',usuario.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/agregar-familiar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/editar-cliente',usuario.id]">Editar</button> -->
+							<!-- <button type="button" class="btn btn-primary btn-sm m-1"
+							[routerLink]="['/familiares',usuario.id]">Familiares</button></td> -->
 					</tr>
 				</tbody>
 			</table>

@@ -8,7 +8,7 @@
 				</div>
 				<div>
 					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                    (click)="registrarse()" [disabled]="is_loading">Registrar</button>
+                    (click)="registrarse()" [disabled]="is_loading">{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
         </div>
@@ -71,23 +71,33 @@
                         [(ngModel)]="confirmar_contrasena">
                 </div>
             </div>
-            <label>*Informacion de padres o responsable del paciente</label>
+            <label for="">Información de facturación</label>
             <div class="form-row">
-
                 <div class="form-group col-md-6">
-                    <label position="stacked">Nombre Tutor</label>
-                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                        [(ngModel)]="paciente.nombre_tutor">
+                    <label position="stacked">RFC<span color="danger">*</span></label>
+                    <input  type="text" class="form-control" name="rfc" [(ngModel)]="usuario.factura_rfc">
                 </div>
                 <div class="form-group col-md-6">
+                    <label position="stacked">Razon Social</label>
+                    <input placeholder=""  class="form-control" name="razon_social"
+                        [(ngModel)]="usuario.factura_razon_social">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Codigo Postal</label>
+                    <input placeholder=""  class="form-control" name="codigo_postal"
+                        [(ngModel)]="usuario.factura_codigo_postal">
+                </div>
+                <div class="form-group col-md-6">
+    
                     <label position="stacked">Correo Electronico</label>
-                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                        [(ngModel)]="paciente.correo_electronico_tutor">
+                    <input placeholder=""  class="form-control" name="correo_electronico"
+                        [(ngModel)]="usuario.factura_correo_electronico">
                 </div>
-                <div class="form-group col-md-6">
-                    <label position="stacked">Telefono</label>
-                    <input placeholder="" type="text" class="form-control" name="nombre_tutor"
-                        [(ngModel)]="paciente.telefono_tutor">
+    
+                <div>
+                    <div *ngIf="error_message" class="alert alert-danger" role="alert">
+                        {{error_message}}
+                    </div>
                 </div>
             </div>
 

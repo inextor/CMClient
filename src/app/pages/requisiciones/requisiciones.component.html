@@ -2,60 +2,69 @@
     <div class="container">
 
         <div class="p-0 mt-3">
-			<div class="mb-3 d-flex justify-content-between flex-wrap">
-				<div >
-					<h4>REQUISICIONES</h4>
-				</div>
-				<div >
+            <div class="mb-3 d-flex justify-content-between flex-wrap">
+                <div>
+                    <h4>REQUISICIONES</h4>
+                </div>
+                <div>
                     <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-sm btn-primary">Agregar
                         Requisicion</button>
-				</div>
-			</div>
+                </div>
+            </div>
         </div>
         <div class="mb-2">
-			<div class="input-group">
-				<input type="text" [(ngModel)]="requisiciones_search.lk.pedimento" class="form-control">
-				<div class="input-group-append">
-					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()">Buscar</button>
-				</div>
-			</div>
+            <div class="input-group">
+                <input type="text" [(ngModel)]="requisiciones_search.lk.pedimento" class="form-control">
+                <div class="input-group-append">
+                    <button class="btn btn-sm btn-primary" type="button" id="button-addon1"
+                        (click)="search()">Buscar</button>
+                </div>
+            </div>
         </div>
-        
+
         <div class="card">
-        <table class="basica">
-            <thead>
-                <tr>
-                    <th>Orden</th>
-                    <th>Estatus</th>
-                    <th>Proveedor</th>
-                    <th>Fecha Creacion</th>
-                    <th>Fecha Entrega</th>
-                    <th>No. Pedimento</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let requisicion of requisiciones">
-                    <td>{{requisicion.id}}</td>
-                    <td>{{requisicion.estatus}}</td>
-                    <td>{{requisicion.id_proveedor}}</td>
-                    <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
-                    <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
-                    <td>{{requisicion.pedimento}}</td>
-                    <td>{{requisicion.total}}</td>
-                    <td class="p-0">
-                        <button class="btn btn-sm btn-primary m-1">Editar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <table class="basica">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Estatus</th>
+                        <th>Proveedor</th>
+                        <th>Fecha Creacion</th>
+                        <th>Fecha Entrega</th>
+                        <th>No. Pedimento</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let requisicion of requisiciones">
+                        <td>{{requisicion.id}}</td>
+                        <td>{{requisicion.estatus}}</td>
+                        <td>{{requisicion.id_proveedor}}</td>
+                        <td>{{requisicion.tiempo_creacion| date: 'short' }}</td>
+                        <td>{{requisicion.tiempo_entrega| date: 'short' }}</td>
+                        <td>{{requisicion.pedimento}}</td>
+                        <td>{{requisicion.total}}</td>
+                        <td class="p-0">
+                            <button class="btn btn-light p-0 m-1 border ">
+                                <span class="">
+                                    <i class="">
+                                        <img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+                                            class="menuIcons icons" />
+                                    </i>
+                                </span>
+                            </button>
+                            <!-- <button class="btn btn-sm btn-primary m-1">Editar</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div>
-			<app-paginacion [path]="'/requisiciones'" [pages]="pages" [totalPages]="totalPages"
-				[currentPage]="currentPage"></app-paginacion>
+            <app-paginacion [path]="'/requisiciones'" [pages]="pages" [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-paginacion>
         </div>
-        
+
     </div>
 </div>

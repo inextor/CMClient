@@ -24,29 +24,66 @@
 		</div>
 
 		<div class="card">
-		<table class="basica">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let especialidad of especialidades">
-					<td>
-						<div>{{ especialidad.nombre }}</div>
-					</td>
-					<td class="p-0">
-						<button class="m-1 btn btn-sm btn-primary"
-							[routerLink]="['/editar-especialidad', especialidad.id]">Editar</button>
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let especialidad of especialidades">
+						<td>
+							<div>{{ especialidad.nombre }}</div>
+						</td>
+						<td class="p-0">
+							<!-- <div type="button" class="btn btn-sm mr-2 icons"
+						[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
+						src="../../../assets/icon/citas.png" class="menuIcons" /></div> 
+					
+						<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="person">
+									<svg aria-hidden="true" width="15px" height="15px" focusable="false" data-prefix="fas" data-icon="user" class="svg-inline--fa fa-user fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
+								</i>
+							</span>
+						</div>
+						<input name="email" class="form-control" type="text" placeholder="usuario@email.com"
+							[(ngModel)]="usuario" required />
+					</div>
+					-->
+							<!-- <div class="m-1 btn btn-sm"
+							[routerLink]="['/editar-especialidad', especialidad.id]"><img
+							src="../../../assets/icon/options/editar.png" height="30px" width="30px" class="menuIcons" />Editar</div> -->
 
-						<button class="m-1 btn btn-sm btn-primary"
-							[routerLink]="['/configurar-especialidad', especialidad.id]">Configurar preguntas</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+
+							<button class="btn btn-light p-0 m-1 border "
+								[routerLink]="['/editar-especialidad', especialidad.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+
+
+
+							<button class="p-0 m-1 btn btn-light border"
+								[routerLink]="['/configurar-especialidad', especialidad.id]">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/historia-clinica.png" height="35px" width="35px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<app-paginacion [path]="'/especialidades'" [pages]="pages" [totalPages]="totalPages"
 			[currentPage]="currentPage"></app-paginacion>
 	</div>

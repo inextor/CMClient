@@ -33,8 +33,17 @@
                 <tr *ngFor="let proveedor of proveedores">
                     <td>{{proveedor.nombre}}</td>
                     <td class="p-0">
-                        <button class="btn btn-sm btn-primary m-1"
-                            [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button>
+                        <button class="btn btn-light p-0 m-1 border "
+                        [routerLink]="['/editar-proveedor',proveedor.id]">
+                            <span class="">
+                                <i class="">
+                                    <img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>
+                        </button>
+                        <!-- <button class="btn btn-sm btn-primary m-1"
+                            [routerLink]="['/editar-proveedor',proveedor.id]">Editar</button> -->
                     </td>
                 </tr>
             </tbody>

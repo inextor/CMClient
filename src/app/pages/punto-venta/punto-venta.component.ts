@@ -281,7 +281,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		this.datosVenta.venta.factura_correo_electronico	= usuario.factura_correo_electronico;
 
 		console.log('Cliente es', this.datosVenta.cliente );
-
+		//id_tipo_precio
 		if( usuario.id_tipo_precio )
 			this.datosVenta.venta.id_tipo_precio				= usuario.id_tipo_precio;
 

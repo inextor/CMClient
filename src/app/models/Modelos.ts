@@ -90,7 +90,6 @@ export interface Consulta{
   medicamento?:string;
   analisis?:string;
   subjetivo?:string;
-  objetivo?:string;
   tiempo_creacion?:Date;
   tiempo_actualizacion?:Date;
 
@@ -582,6 +581,7 @@ export interface Usuario{
   id?:number;
   usuario?:string;
   nombre?:string;
+  id_tipo_precio?:number;
   id_organizacion?:number;
   id_imagen?:number;
   tipo?:string;
