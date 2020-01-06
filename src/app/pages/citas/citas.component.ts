@@ -41,7 +41,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	cita_search:SearchObject<Cita> = {
 
 	};
-
+	busquedaAvanzada: boolean = false;
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
 		super( rest,router,route,location,titleService);

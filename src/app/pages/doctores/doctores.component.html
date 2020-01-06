@@ -31,17 +31,17 @@
 						<th>Nombre</th>
 						<th>Especialidad</th>
 						<th>Telefono</th>
-						<th>Acciones </th>
+						<th >Acciones </th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody >
 					<tr *ngFor="let doctor of doctores">
 						<td>{{doctor.nombre}}</td>
 						<td>{{doctor.especialidad}}</td>
 						<td>{{doctor.telefono}}</td>
 						<!-- <td><button type="button" size="small" [routerLink]="['/doctores',doctor.id, 'configurar-horario']">Ver perfil</button> -->
 						<!-- <td><button type="button" size="small"  [routerLink]="['/doctor',doctor.id]">Editar</button><button type="button" size="small" color="secondary">Citas</button> -->
-						<td class="p-0">
+						<td class="p-0 ">
 							<!-- <div class="d-flex flex-wrap p-1">
 							<button type="button" class="btn btn-primary btn-sm"
 								[routerLink]="['/doctores',doctor.id, 'ver-doctor']"
