@@ -1,148 +1,131 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<!-- <ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
-				<div class="form-group">
-					<label color="primary">Busqueda:</label>
-					<input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
-					ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date
-				</div> -->
-				<div class="card p-3">
-					<div class="container">
-						<h4 class="mb-3 mt-3">CITAS</h4>
+<!-- CONTENIDO -->
+<main class="p-2">
+	<!-- <ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
+	<div class="form-group">
+		<label color="primary">Busqueda:</label>
+		<input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
+		ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date
+	</div> -->
+	<div class="card p-3">
+		<div class="container">
+			<h4 class="mb-3 mt-3">CITAS</h4>
 
-						<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
+			<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
 
+			<div>
+				<div class="d-flex flex-row">
+					<div class="pr-2">
+						<label>Estado de cita</label>
+						<select class="form-control" [(ngModel)]="cita_search.eq.estatus">
+							<option value="">Todas</option>
+							<option value="ACTIVA">Activa</option>
+							<option value="CANCELADA">Canceladas</option>
+						</select>
+					</div>
+
+					<div class="pr-2">
+						<label>
+							Confirmado:
+						</label>
 						<div>
-							<div class="d-flex flex-row">
-								<div class="pr-2">
-									<label>Estado de cita</label>
-									<select class="form-control" [(ngModel)]="cita_search.eq.estatus">
-										<option value="">Todas</option>
-										<option value="ACTIVA">Activa</option>
-										<option value="CANCELADA">Canceladas</option>
-									</select>
-								</div>
 
-								<div class="pr-2">
-									<label>
-										Confirmado:
-									</label>
-									<div>
-
-										<input type="checkbox" value="SI"
-											[checked]="cita_search.eq.confirmado_por_doctor=='SI'"
-											(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
-										Por doctor
-									</div>
-
-									<div>
-										<input type="checkbox" value="SI"
-											[checked]="cita_search.eq.confirmado_por_paciente=='SI'"
-											(change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
-										Por paciente
-									</div>
-								</div>
-
-								<div class="pr-2">
-									<label>Clinica</label>
-									<select class="form-control" [(ngModel)]="cita_search.eq.id_centro_medico">
-										<option value="">Todas</option>
-										<option *ngFor="let centro of centros_medicos" [value]="centro.id">
-											{{centro.nombre}}</option>
-									</select>
-								</div>
-								<div class="pr-2">
-									<label>Fecha Inicio</label> <input class="form-control" type="date"
-										(change)="dateInicioChange($event.target.value)"
-										[value]="cita_search.ge.inicio">
-								</div>
-								<div class="pr-2">
-									<label>Fecha Fin</label><input type="date" class="form-control"
-										(change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
-								</div>
-								<div class="d-flex align-self-end justify-content-center p-2">
-									<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
-								</div>
-							</div>
+							<input type="checkbox" value="SI"
+								[checked]="cita_search.eq.confirmado_por_doctor=='SI'"
+								(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
+							Por doctor
 						</div>
 
-
 						<div>
-							<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+							<input type="checkbox" value="SI"
+								[checked]="cita_search.eq.confirmado_por_paciente=='SI'"
+								(change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
+							Por paciente
 						</div>
-						<table class="basica">
-							<thead>
-								<tr>
-									<th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
-										(click)="ordenar('Fecha')">Fecha</th>
-									<th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}"
-										(click)="ordenar('Paciente')">Paciente</th>
-									<th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
-										(click)="ordenar('Doctor')">Doctor</th>
-									<th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
-										(click)="ordenar('Especialidad')">Especialidad</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
-									<td>{{i.cita.inicio| date: 'short' }}</td>
-									<td>{{i.paciente.nombre}}</td>
-									<td>{{i.doctor? i.doctor.nombre : ''}}</td>
-									<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
-									<td>
-										<button type="button" class="btn btn-primary btn-sm m-1"
-											*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
-											(click)="currentInfoCita=i;showConfirmPaciente=true;">
-											<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
-											<i class="material-icons">perm_identity</i>
-										</button>
-										<button type="button" class="btn btn-primary btn-sm m-1"
-											*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
-											(click)="currentInfoCita=i;showConfirmDoctor=true">
-											<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
-											<i class="material-icons">person</i>
-										</button>
-										<button type="button" class="btn btn-primary btn-sm m-1"
-											*ngIf="i.cita.estatus == 'ACTIVA'"
-											(click)="currentInfoCita=i;showConfirmCancelar=true">
-											<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
-											<i class="material-icons">cancel</i>
-										</button>
-										<button type="button" class="btn btn-primary btn-sm m-1"
-											*ngIf="i.cita.estatus == 'ACTIVA'"
-											(click)="currentInfoCita=i;showConfirmActivar=true">
-											<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
-											<i class="material-icons">done</i>
-										</button>
-										<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
-									 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
-									 <i class="material-icons">create</i>
-								</button-->
-									</td>
-								</tr>
-							</tbody>
-						</table>
+					</div>
+
+					<div class="pr-2">
+						<label>Clinica</label>
+						<select class="form-control" [(ngModel)]="cita_search.eq.id_centro_medico">
+							<option value="">Todas</option>
+							<option *ngFor="let centro of centros_medicos" [value]="centro.id">
+								{{centro.nombre}}</option>
+						</select>
+					</div>
+					<div class="pr-2">
+						<label>Fecha Inicio</label> <input class="form-control" type="date"
+							(change)="dateInicioChange($event.target.value)"
+							[value]="cita_search.ge.inicio">
+					</div>
+					<div class="pr-2">
+						<label>Fecha Fin</label><input type="date" class="form-control"
+							(change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
+					</div>
+					<div class="d-flex align-self-end justify-content-center p-2">
+						<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 					</div>
 				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
+			</div>
+
+
+			<div>
+				<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
+			</div>
+			<table class="basica">
+				<thead>
+					<tr>
+						<th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
+							(click)="ordenar('Fecha')">Fecha</th>
+						<th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}"
+							(click)="ordenar('Paciente')">Paciente</th>
+						<th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
+							(click)="ordenar('Doctor')">Doctor</th>
+						<th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
+							(click)="ordenar('Especialidad')">Especialidad</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+						<td>{{i.cita.inicio| date: 'short' }}</td>
+						<td>{{i.paciente.nombre}}</td>
+						<td>{{i.doctor? i.doctor.nombre : ''}}</td>
+						<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
+						<td>
+							<button type="button" class="btn btn-primary btn-sm m-1"
+								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
+								(click)="currentInfoCita=i;showConfirmPaciente=true;">
+								<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
+								<i class="material-icons">perm_identity</i>
+							</button>
+							<button type="button" class="btn btn-primary btn-sm m-1"
+								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
+								(click)="currentInfoCita=i;showConfirmDoctor=true">
+								<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
+								<i class="material-icons">person</i>
+							</button>
+							<button type="button" class="btn btn-primary btn-sm m-1"
+								*ngIf="i.cita.estatus == 'ACTIVA'"
+								(click)="currentInfoCita=i;showConfirmCancelar=true">
+								<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
+								<i class="material-icons">cancel</i>
+							</button>
+							<button type="button" class="btn btn-primary btn-sm m-1"
+								*ngIf="i.cita.estatus == 'ACTIVA'"
+								(click)="currentInfoCita=i;showConfirmActivar=true">
+								<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
+								<i class="material-icons">done</i>
+							</button>
+							<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
+						 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+						 <i class="material-icons">create</i>
+					</button-->
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-</div>
+</main>
 <app-modal [show]="showConfirmDoctor">
 	<div class="card p-3" style="width: 18rem;">
 		<div class="card-body">
