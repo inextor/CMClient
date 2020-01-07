@@ -16,3 +16,8 @@
   padding:0 !important;
   background-color: none;
 }
+.options{
+  text-align: center !important;
+  margin: 0 !important;
+  width: 10%;
+}

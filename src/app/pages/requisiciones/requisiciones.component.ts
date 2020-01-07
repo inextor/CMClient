@@ -23,9 +23,22 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   requisiciones_search: SearchObject<Requisicion> = {};
   busqueda: string = '';
   todos_servicios: [] = [];
-  requisiciones: Requisicion[] = []
-
-
+  requisiciones: Requisicion[] = [];
+  proveedores:Proveedor[]=[];
+  proveedor_dic:any = {};
+  busquedaAvanzada:boolean = false;
+  clearBusqueda(){
+		this.requisiciones_search = {
+			eq: {},
+			gt: {},
+			ge: {},
+			le: {},
+			lt: {},
+			lk: {},
+			csv: {},
+		};
+		this.search();
+	}
   ngOnInit() {
     let centro_medico = this.rest.getCurrentCentroMedico();
     let usuario = this.rest.getUsuarioSesion();
@@ -41,21 +54,28 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
       };
 
       this.requisiciones_search.lk.pedimento	= "lk.pedimento" in params ?params["lk.pedimento"]:null;
+      this.requisiciones_search.eq.estatus	= "eq.estatus" in params ?params["eq.estatus"]:null;
+      this.requisiciones_search.eq.id_proveedor	= "eq.id_proveedor" in params ?params["eq.id_proveedor"]:null;
+      this.requisiciones_search.ge.tiempo_creacion	= "ge.tiempo_creacion" in params ?params["ge.tiempo_creacion"]:null;
+      this.requisiciones_search.le.tiempo_entrega	= "le.tiempo_entrega" in params ?params["le.tiempo_entrega"]:null;
       this.requisiciones_search.limite = this.pageSize;
       this.requisiciones_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
+
       this.is_loading = true;
-      forkJoin
-        (
+      forkJoin(
           [
             //getTiposGastos({id_organizacion: usuario.id_organizacion}),
             //this.rest.getGastos({ id_centro_medico: 1 })
+            this.rest.proveedor.getAll({id_organizacion: usuario.id_organizacion}),
             this.rest.requisicion.search(this.requisiciones_search) //TODO FIX ponerlo de la session o seleccionarlo
           ]
-        ).subscribe
-        (
-          (response: any[]) => {
-            this.requisiciones = response[0].datos;//TODO Cambiar al usaurio de la sesion
-            this.setPages(this.requisiciones_search.pagina, response[0].total);
+        ).subscribe(
+          (response) => {
+            this.proveedores = response[0].datos;
+            this.proveedores.forEach(i=>this.proveedor_dic[ i.id ] =  i);
+            console.log('proveedor',this.proveedor_dic);
+            this.requisiciones = response[1].datos;//TODO Cambiar al usaurio de la sesion
+            this.setPages(this.requisiciones_search.pagina, response[1].total);
             this.is_loading = false;
           }
           , (error) => {
@@ -70,7 +90,6 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
 	{
 		this.is_loading = true;
 		this.requisiciones_search.pagina = 0;
-		this.requisiciones_search.lk.pedimento	= this.requisiciones_search.lk.pedimento;
         let search = {};
         let array = ['eq','le','lt','ge','gt','csv','lk'];
         for(let i in this.requisiciones_search )

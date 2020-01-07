@@ -1,7 +1,7 @@
 <div class="card p-3">
-	<div class="container">
-		<h4 class="mb-3 mt-3">INVENTARIO</h4>
-		<div class="row">
+	<div class="">
+		<h4 class="mb-3">INVENTARIO</h4>
+		<!-- <div class="row">
 			<div class="col">
 				<label>Centro medico*</label>
 				<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
@@ -15,22 +15,40 @@
 			<div class="p-2 mt-4">
 				<button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 			</div>
-		</div>
-
-		<app-loading [display]="is_loading"></app-loading>
-		<div *ngFor="let is of inventarioServicios">
-			<div class="form-group-row row mt-2 mb-2">
-				<label class="col-form-label col-sm-10"
-					[for]="'is'+is.servicio.id">{{is.servicio.nombre | titlecase }}</label>
-				<div class="col-sm-2">
-					<input type="number" class="form-control form-inline" [id]="'is'+is.servicio.id"
-						[name]="'is'+is.servicio.id" [(ngModel)]="is.inventario.cantidad">
+		</div> -->
+		<div class=" card p-0 mb-2">
+			<div class="form-row p-2">
+				<div class="form-group col-md-3">
+					<label>Centro medico*</label>
+					<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
+						<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>Nombre*</label>
+					<input class="form-control" type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
+				</div>
+				<div class="form-group col-md-3">
+					<label>&nbsp;</label>
+					<button type="button" class="btn btn-primary w-100" (click)="buscar()">Buscar</button>
 				</div>
 			</div>
 		</div>
-		<div>
-			<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
+			<div class="card p-2">
+				<div *ngFor="let is of inventarioServicios">
+					<div class="form-group-row row mb-2">
+						<label class="col-form-label col-sm-10"
+							[for]="'is'+is.servicio.id">{{is.servicio.nombre | titlecase }}</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control form-inline" [id]="'is'+is.servicio.id"
+								[name]="'is'+is.servicio.id" [(ngModel)]="is.inventario.cantidad">
+						</div>
+					</div>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
+				</div>
+			</div>
 		</div>
-	</div>
 
-</div>
+	</div>

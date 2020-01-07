@@ -36,7 +36,7 @@ th{
 .basica td, .basica th {
 	border-width: 0;
 	line-height: 1.5;
-	padding: 2px;
+  padding: 2px;
 	color: #898989;
 }
 table.basica {

@@ -8,3 +8,9 @@
   padding:0;
   background-color: none;
 }
+
+.options{
+  text-align: center !important;
+  margin: 0 !important;
+  width: 20%;
+}

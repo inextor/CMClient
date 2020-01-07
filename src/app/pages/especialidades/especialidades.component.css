@@ -17,3 +17,15 @@ line-height: 12px;
   padding:0 !important;
   background-color: none;
 }
+.aling{
+  padding: 5px !important;
+  margin: 10px;
+}
+.options{
+  text-align: center !important;
+  margin: 0 !important;
+  width: 10%;
+}
+.full{
+
+}

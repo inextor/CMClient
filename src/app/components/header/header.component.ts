@@ -23,7 +23,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 			this.nombre=usuario.usuario;
 			if ( usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE" ){
 				this.rest.usuario.get(usuario.id).subscribe(params=>{
-					this.usuario=params
+					this.nombre=params.nombre
 				});
 			}
 			else if(usuario.tipo == "DOCTOR"){
