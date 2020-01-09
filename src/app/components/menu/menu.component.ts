@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from 'src/app/services/rest.service';
+import { RestService } from '../../services/rest.service';
 import { Router } from '@angular/router';
 
 @Component({

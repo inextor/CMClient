@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { BaseComponent } from '../../pages/base/base.component'
-import { RestService } from 'src/app/services/rest.service';
+import { RestService } from '../..//services/rest.service';
 import { Router } from '@angular/router';
-import { Usuario, Paciente } from 'src/app/models/Modelos';
+import { Usuario, Paciente } from '../../models/Modelos';
 import { ThrowStmt } from '@angular/compiler';
 import { forkJoin } from 'rxjs';
 
@@ -14,10 +14,11 @@ import { forkJoin } from 'rxjs';
 export class FamiliaresComponent extends BaseComponent implements OnInit {
   familiares: Paciente[] = []
   nombre: string = null
-
+  show_seleccionar_doctor_cita: boolean = false;
+  id_paciente: number = null;
+  
   ngOnInit() {
-    
-
+  console.log(this.id_paciente);
     this.route.paramMap.subscribe( params =>{
       let id = params.get('id') ==null ? null : parseInt(params.get('id') );
       if(id==null){
@@ -38,5 +39,10 @@ export class FamiliaresComponent extends BaseComponent implements OnInit {
 
       
   }
+  showSeleccionarDoctorCita(familiar) {
+    this.show_seleccionar_doctor_cita = true;
+    this.id_paciente = familiar;
+  }
+  
 
 }

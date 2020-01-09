@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { CitasService } from 'src/app/services/citas.service';
+import { CitasService } from '../../services/citas.service';
 import { AgendarCitaComponent } from '../agendar-cita/agendar-cita.component';
 import { RestService } from '../../services/rest.service';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from	'@angular/common';
+import { Router,Params, ParamMap} from "@angular/router"
 
 @Component({
 	selector: 'app-horario-doctor',
@@ -26,7 +27,11 @@ export class HorarioDoctorComponent implements OnInit {
 	]
 	is_mobile:boolean				= false;
 	show_modal:boolean				= false;
-
+	header: {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'timeGridWeek,timeGridDay'
+	  }
 	private id_doctor:number;
 	private id_paciente:number;
 	private id_centro_medico:number;
@@ -36,7 +41,8 @@ export class HorarioDoctorComponent implements OnInit {
 	constructor(
 		private citasService:CitasService,
 		public restService:RestService,
-		public route:ActivatedRoute
+		public route:ActivatedRoute,
+		public router:Router
 	)
 	{
 
@@ -65,28 +71,28 @@ export class HorarioDoctorComponent implements OnInit {
 	{
 		const calendarAPI = this.calendarComponent.getApi();
 
-		//if(calendarAPI){
-		//		calendarAPI.removeAllEventSources();
-		//}
+		if(calendarAPI){
+				calendarAPI.removeAllEventSources();
+		}
 
-		//this.citasService.getDisponibilidadDoctor(this.id_doctor, this.id_centro_medico).subscribe( events => {
-		//	const disponibilidad = events.datos.map( d=> {
-		//		const id = this.counterId;
-		//		this.counterId += 1;
+		this.citasService.getDisponibilidadDoctor(this.id_doctor, this.id_centro_medico).subscribe( events => {
+			const disponibilidad = events.datos.map( d=> {
+				const id = this.counterId;
+				this.counterId += 1;
 
-		//		return {
-		//			id: id,
-		//			tipo: "disponibilidad",
-		//			rendering: 'background',
-		//			startTime: d.hora_inicio,
-		//			endTime: d.hora_final,
-		//			daysOfWeek: [d.dia_semana]
-		//		}
-		//	});
+				return {
+					id: id,
+					tipo: "disponibilidad",
+					rendering: 'background',
+					startTime: d.hora_inicio,
+					endTime: d.hora_final,
+					daysOfWeek: [d.dia_semana]
+				}
+			});
 
-		//	const calendarAPI = this.calendarComponent.getApi();
-		//	calendarAPI.addEventSource(disponibilidad);
-		//});
+			const calendarAPI = this.calendarComponent.getApi();
+			calendarAPI.addEventSource(disponibilidad);
+		});
 
 		this.restService.horario_doctor.getAll({ id_centro_medico:this.id_centro_medico },{id_doctor:this.id_doctor}).subscribe( respuesta =>
 		{
@@ -161,11 +167,14 @@ export class HorarioDoctorComponent implements OnInit {
 		nota		: ''
 	};
 
+	
+
 	pacientes = [];
 
 	// TODO
 	aceptarCita()
 	{
+		let usuario = this.restService.getUsuarioSesion();
 		this.citasService.setCitaDoctor({
 			id_centro_medico	: this.id_centro_medico,
 			id_doctor			: this.id_doctor,
@@ -176,6 +185,9 @@ export class HorarioDoctorComponent implements OnInit {
 		});
 		this.getDisponibilidadDoctor();
 		this.show_modal = false;
+		if(usuario.tipo == 'PACIENTE'){
+			this.router.navigate(['/citas-paciente']);
+		}
 	}
 
 	dismissModal()

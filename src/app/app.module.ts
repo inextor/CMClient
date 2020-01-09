@@ -81,6 +81,7 @@ import { TicketVentaComponent } from './components/ticket-venta/ticket-venta.com
 import { ShellComponent } from './components/shell/shell.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket.component';
+import { SeleccionarDoctorCitaComponent } from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket
     ShellComponent,
     DashboardComponent,
     ImprimirTicketComponent,
+    SeleccionarDoctorCitaComponent,
 
   ],
   imports: [

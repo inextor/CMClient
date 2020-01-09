@@ -151,6 +151,7 @@ export interface Detalle_Venta{
 export interface Doctor{
   id?:number;
   id_especialidad?:number;
+  id_centro_medico?:number;
   telefono?:string;
   nombre?:string;
   especialidad?:string;
@@ -384,6 +385,7 @@ export interface Paciente{
   id?:number;
   id_usuario?:number;
   id_imagen?:number;
+  familiar?:boolean;
   nombre?:string;
   apellidos?:string;
   fecha_nacimiento?:string;

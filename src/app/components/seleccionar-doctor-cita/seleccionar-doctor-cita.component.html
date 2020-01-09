@@ -1,0 +1,53 @@
+<div  class="p-1" [ngClass]="{ 'custom-modal':true, 'd-none': !show}">
+	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
+    <div class="">
+    <div class="p-2">
+        <h4 class="mb-2">Seleccione un doctor</h4>
+        <div class="">
+
+        
+        <div class=" mb-2">
+            <label>Clinica:</label>
+            <select  (change)="showEspecialidad()" name="centro_medico" [(ngModel)]="doctor_search.eq.id_centro_medico"
+                class="form-control custom-select">
+                <option value="" selected="selected">Seleccione</option>
+                <option  *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
+                    {{centro_medico.nombre|titlecase}}</option>
+            </select>
+        </div>
+
+    
+
+            <div *ngIf="show_especialidad" class="">
+                <label>Especialidad:</label>
+                <select  (change)="search()" name="centro_medico" [(ngModel)]="doctor_search.eq.id_especialidad"
+                    class="form-control custom-select">
+                    <!-- <option value="" selected="selected">Seleccione</option> -->
+                    <option  *ngFor="let especialidad of especialidades" [value]="especialidad.id">
+                        {{especialidad.nombre|titlecase}}</option>
+                </select>
+            </div>
+        </div>
+		<!-- <div>
+			<input class="form-control" type="text" placeholder="Buscar..." id="searchCentroMedico" (keyup)="onKeyPressed($event)">
+        </div> -->
+        <!-- <div>
+            selec
+			<input class="form-control" type="text" placeholder="Buscar..." id="searchCentroMedico" (keyup)="onKeyPressed($event)">
+		</div> -->
+		<ul class="list-group mt-2">
+			<li (click)="seleccionarDoctorNuevaCita(doctor)" *ngFor="let doctor of doctores" class="list-group-item text-left">
+               
+                <div>
+                    {{doctor.nombre}}
+                </div>
+            </li>
+            <div class="list-group-item text-center"  *ngIf="doctores.length == 0 && buscado==true">
+                <div> Doctor no disponible en esta clinica</div>
+            
+             </div>
+        </ul>
+        <!-- <button class="btn btn-secondary btn-md" (click)="closeModal()">Cancelar</button> -->
+    </div>
+</div>
+</div>

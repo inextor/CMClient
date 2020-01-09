@@ -29,3 +29,5 @@ ALTER TABLE `centro_medico` ADD `estado` VARCHAR(60) NULL DEFAULT NULL AFTER `ci
 
 //cambios en usuario 
 ALTER TABLE `usuario` ADD `id_tipo_precio` INT(20) NOT NULL AFTER `tipo`; 
+
+agregar id_centro_medico en doctor 

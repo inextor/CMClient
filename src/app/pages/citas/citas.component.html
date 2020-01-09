@@ -112,7 +112,7 @@
 						<td>{{i.doctor? i.doctor.nombre : ''}}</td>
 						<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
 						<td class="p-0 options">
-							<button type="button" class="p-1 btn btn-light m-1 border center"
+							<button type="button" class=" btn btn-light border center"
 												  *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
 												  (click)="currentInfoCita=i;showConfirmPaciente=true;">
 								<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
@@ -121,7 +121,7 @@
 								</span>
 								
 							</button>
-							<button type="button" class="p-1 btn btn-light  m-1 border center"
+							<button type="button" class=" btn btn-light  border center"
 												  *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
 												  (click)="currentInfoCita=i;showConfirmDoctor=true">
 								<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
@@ -130,7 +130,7 @@
 								</span>
 								
 							</button>
-							<button type="button" class="p-1 btn btn-light  m-1 border center"
+							<button type="button" class=" btn btn-light  border center"
 												  *ngIf="i.cita.estatus == 'ACTIVA'"
 												  (click)="currentInfoCita=i;showConfirmCancelar=true">
 								<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
@@ -139,7 +139,7 @@
 								</span>
 								
 							</button>
-							<button type="button" class=" btn btn-light btn-sm border center"
+							<button type="button" class=" btn btn-light border center"
 												  *ngIf="i.cita.estatus == 'ACTIVA'"
 												  (click)="currentInfoCita=i;showConfirmActivar=true">
 								<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
@@ -203,8 +203,8 @@
 <app-modal [show]="showConfirmActivar">
     <div class="card p-3" style="width: 18rem;">
    	 <div class="card-body">
-   		 <h5 class="card-title">Cancelar Cita</h5>
-   		 <p class="card-text">Desea cancelar la cita</p>
+   		 <h5 class="card-title">Activar Cita</h5>
+   		 <p class="card-text">Desea activar la cita</p>
    		 <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmActivar=false">Cancelar</a>
    		 <a class="btn text-light ml-3 btn-danger" (click)="activar(currentInfoCita)">Aceptar</a>
    	 </div>

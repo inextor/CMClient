@@ -20,7 +20,6 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	centros:Centro_Medico[] = [];
 	last:string = '';
-
 	constructor(private rest:RestService)
 	{
 	}

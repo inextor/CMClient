@@ -23,7 +23,7 @@
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">GASTOS</a>
 				</div>
-				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
+				<div [appAccess]="['ADMIN']" [routerLink]="['/inventario']" [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a class="list-group-item list-group-item-action color1 ">INVENTARIO </a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']"[routerLink]="['/proveedores']" [appAccess]="['ADMIN']" class="menuSubButtons">
@@ -44,7 +44,7 @@
 					<a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
-					<a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">Punto De Venta</a>
+					<a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">Punto de venta</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/clientes']" class="list-group-item list-group-item-action color1 ">CLIENTES</a>
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		<div [appAccess]="['ADMIN','RECEPCIONISTA']" class="sidebar" [appAccess]="['ADMIN']">
+		<div [appAccess]="['ADMIN','RECEPCIONISTA']" class="sidebar" >
 			<a [routerLink]="['/doctores']" class="list-group-item list-group-item-action color2 group">
 				<img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" />DOCTORES
 			</a>
@@ -71,18 +71,18 @@
 		</div>
 	<!-- OPCIONES PACIENTES -->
 	<div [appAccess]="['PACIENTE']" class="sidebar">
-		<a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color4 group ">
-			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> CITAS
+		<a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color1 group ">
+			<img src="../../../assets/icon/options/citas.png" class="menuIcons" /> CITAS
 		</a>
 	</div>
 	<div [appAccess]="['PACIENTE']" class="sidebar">
-		<a class="list-group-item list-group-item-action color4 group ">
-			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> MIS DOCTORES
+		<a class="list-group-item list-group-item-action color2 group ">
+			<img src="../../../assets/icon/Mehr-Software-18.png" class="menuIcons" /> MIS DOCTORES
 		</a>
 	</div>
 	<div [appAccess]="['PACIENTE']" class="sidebar">
-		<a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color4 group ">
-			<img src="../../../assets/icon/Mehr-Software-20.png" class="menuIcons" /> FAMILIARES
+		<a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color3 group ">
+			<img src="../../../assets/icon/Mehr-Software-19.png" class="menuIcons" /> FAMILIARES
 		</a>
 	</div>
 	<!-- FIN OPCIONES PACIENTES -->
@@ -98,8 +98,10 @@
 <app-modal [show]="show_logout">
 	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
 
-			<div class="modal-content text-center p-3">
-				<h4 class="modal-title pt-2">Logout <i class="fa fa-lock ml-3"></i></h4>
+			<div class="modal-content text-center ">
+				<div class="modal-header">
+					<h4 class="modal-title">Logout <i class="fa fa-lock ml-3"></i></h4>
+				</div>
 				<div class="modal-body">
 					<p>Seguro que quieres salir del sistema?</p>
 				</div>

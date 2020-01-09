@@ -1,11 +1,14 @@
-<main class="p-3  position-relative">
+
 	<!-- [height]=650 -->
-	<div class="card p-3 m-3">
+	<div class="card p-3">
 		<full-calendar
 			#calendar
 			[plugins]="calendarPlugins"
 			defaultView="timeGridWeek"
+			contentHeight="auto"
 			[weekends]="true"
+			minTime="07:00:00"
+			maxTime="20:00:00"
 			[eventSources]="eventSources"
 			[firstDay]="1"
 			[events]="calendarEvents"
@@ -13,7 +16,7 @@
 			(eventRender)="eventRender($event)"
 			></full-calendar>
 	</div>
-</main>
+
 
 <div class="custom-modal" *ngIf="show_modal">
 	<div>

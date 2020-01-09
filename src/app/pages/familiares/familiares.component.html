@@ -1,6 +1,6 @@
 <div class="card p-3">
-    <div class="container">
-        <h4 class="mb-3 mt-3">FAMILIARES</h4>
+    <div class="">
+        <h4 class="mb-3">FAMILIARES</h4>
 
         <!-- <div class="pt-2 flex-wrap">
                             <td>
@@ -10,28 +10,51 @@
                                 </button>
                             </td>
                         </div> -->
-        <table class="basica">
+        <table class="basica table">
             <thead>
                 <tr>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre</th>
                     <th>Telefono</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let familiar of familiares">
-                    <td>{{familiar.nombre | titlecase }}</td>
-                    <td>{{familiar.apellidos| titlecase}}</td>
+                    <td>{{familiar.nombre | titlecase }} {{familiar.apellidos| titlecase}}</td>
                     <td>{{familiar.telefono}}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm m-1"
-                            [routerLink]="['/editar-familiar',familiar.id]" color="secondary">Editar</button>
-                        <button type="button" class="btn btn-primary btn-sm m-1"
+                    <td class="p-0 options">
+
+
+                        <!-- AGREGAR-FAMILIAR VALIDAR ESTO  -->
+                        <!-- <button type="button" class="p-0 btn btn-light m-1 border"
+                            [routerLink]="['/editar-familiar',familiar.id]" color="secondary">
+                            <span class="">
+                                <i class="">
+                                    <img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>
+                        </button> -->
+
+
+                        <!-- <button type="button" class="p-0 btn btn-light m-1 border"
                         [appAccess]="['paciente']"
-                            [routerLink]="['/citas','familiar',familiar.id]" color="secondary">Citas</button>
-                        <button type="button" [appAccess]="['paciente']" class="btn btn-primary btn-sm m-1">Agendar
-                            Cita</button>
+                            [routerLink]="['/citas-paciente',familiar.id]" color="secondary">
+                            <span class="">
+                                <i class="">
+                                    <img src="../../../assets/icon/options/citas.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>
+                            </button> -->
+                        <button type="button" (click)="showSeleccionarDoctorCita(familiar.id)" [appAccess]="['paciente']" class="p-0 btn btn-light m-1 border">
+                            <span class="">
+                                <i class="">
+                                    <img src="../../../assets/icon/options/agendar-cita.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>    
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -40,5 +63,10 @@
             <app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
             </app-paginacion>
         </div>
+
+        <app-seleccionar-doctor-cita [id_paciente]="id_paciente" [show]="show_seleccionar_doctor_cita" (selected)="onSeleccionarDoctorCita($event)"></app-seleccionar-doctor-cita>
+
+
+
     </div>
 </div>

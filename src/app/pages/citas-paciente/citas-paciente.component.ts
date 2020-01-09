@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario, Doctor, Paciente } from '../../models/Modelos';
 import { SearchCitaResponse, SearchCitaRequest } from '../../models/Respuestas';
@@ -35,12 +35,13 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
   showConfirmCancelar: boolean = false;
   showConfirmActivar: boolean = false;
 
+  show: boolean=false;
+  id_paciente: number = null;
   nombre: string;
 
   cita_search: SearchObject<Cita> = {
 
   };
-
   constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
     super(rest, router, route, location, titleService);
   }
@@ -50,6 +51,24 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
     d.setHours(d.getHours() - 3);
     let z = (i) => i < 10 ? '0' + i : i;
 
+    // this.route.paramMap.subscribe( params =>{
+    //   let id = params.get('id') ==null ? null : parseInt(params.get('id') );
+    //   if(id==null){
+    //     let currentUser = this.rest.getUsuarioSesion();
+    //     this.rest.paciente.getAll({id_usuario: currentUser.id}).subscribe(params=>{
+    //       this.familiares = params.datos
+    //     })
+    //   }else{
+    //     this.is_loading = true;
+      
+    //     this.rest.paciente.getAll({ id_usuario: id}).subscribe(params => {
+    //       this.familiares = params.datos
+    //     }
+    //   );
+    //   }
+     
+    // });
+    
     this.route.queryParams.subscribe(params => {
 
       //this.route.paramMap.subscribe( params =>
@@ -88,26 +107,27 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
 
       let rjoinObj: any = {};
       let fjarray = [];
-
+  
 
       this.is_loading = true;
       console.log(this.nombre)
       let usuario= this.rest.getUsuarioSesion();
-      forkJoin([
-        this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
-        , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
-        , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })
-        , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
-      ]).subscribe((result) => {
-        this.paciente = result[0];
-        this.doctor = result[1];
-        this.centros_medicos = result[2].datos;
-        this.info_citas = result[3].datos;
-        this.setPages(this.cita_search.pagina, result[3].total);
-      }, error => {
-        console.log(error);
-        this.showError(error);
-      });
+
+        forkJoin([
+          this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
+          , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
+          , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })
+          , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
+        ]).subscribe((result) => {
+          this.paciente = result[0];
+          this.doctor = result[1];
+          this.centros_medicos = result[2].datos;
+          this.info_citas = result[3].datos;
+          this.setPages(this.cita_search.pagina, result[3].total);
+        }, error => {
+          console.log(error);
+          this.showError(error);
+        });
     });
   }
 
@@ -121,6 +141,19 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
 
   getPathFromSearchObj() {
   }
+
+  onSeleccionarDoctor(doctor: Doctor) {
+    console.log('guardar el id de doctor y mandarlo a agendar cita')
+		// localStorage.setItem("centro_medico", JSON.stringify(centro_medico));
+		// this.show_seleccionar_centro_medico = false;
+  }
+  showSeleccionarDoctorCita() {
+    let usuario = this.rest.getUsuarioSesion();
+    this.show = true;
+    console.log(this.show);
+    this.id_paciente = usuario.id;
+  }
+  
 
   buscar() {
     this.is_loading = true;
