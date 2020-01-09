@@ -4,7 +4,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import TimeGrid from '@fullcalendar/timegrid';
-import { CitasService } from 'src/app/services/citas.service';
+import { CitasService } from '../../services/citas.service';
 import { RestService } from '../../services/rest.service';
 import { BaseComponent } from '../base/base.component';
 

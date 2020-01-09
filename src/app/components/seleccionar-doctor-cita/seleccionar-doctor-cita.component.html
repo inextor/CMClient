@@ -35,12 +35,22 @@
             selec
 			<input class="form-control" type="text" placeholder="Buscar..." id="searchCentroMedico" (keyup)="onKeyPressed($event)">
 		</div> -->
-		<ul class="list-group mt-2">
-			<li (click)="seleccionarDoctorNuevaCita(doctor)" *ngFor="let doctor of doctores" class="list-group-item text-left">
-               
-                <div>
-                    {{doctor.nombre}}
-                </div>
+		<ul class="list-group p-0 mt-2">
+            <li class="p-0"  (click)="seleccionarDoctorNuevaCita(doctor)" *ngFor="let doctor of doctores" class="list-group-item text-left">
+                <td class="p-0" >
+    
+
+                   
+                    <img class="m-0" *ngIf="doctor.id_imagen" width="50px" height="50px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
+                    <img class="m-0" *ngIf="doctor.id_imagen==null" width="50px" height="50px" src="/assets/icon/Mehr-Software-18.png">
+             
+                 {{doctor.nombre}}
+                       
+              
+             
+                
+                </td>
+         
             </li>
             <div class="list-group-item text-center"  *ngIf="doctores.length == 0 && buscado==true">
                 <div> Doctor no disponible en esta clinica</div>

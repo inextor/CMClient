@@ -152,6 +152,7 @@ export interface Doctor{
   id?:number;
   id_especialidad?:number;
   id_centro_medico?:number;
+  id_imagen?:number;
   telefono?:string;
   nombre?:string;
   especialidad?:string;

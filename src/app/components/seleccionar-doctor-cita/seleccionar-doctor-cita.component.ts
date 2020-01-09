@@ -110,7 +110,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
     {
       this.doctores = results.datos;
       
-      console.log(this.doctores);
+      console.log('doktors',this.doctores);
     });
 	}
 
@@ -137,6 +137,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 	}
   seleccionarDoctorNuevaCita(doctor)
 	{
+    console.log('id_paciente_selecdoctor',this.id_paciente);
     let usuario = this.rest.getUsuarioSesion();
 		if( usuario.tipo == 'PACIENTE' )
 		{

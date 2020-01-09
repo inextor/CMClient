@@ -17,7 +17,7 @@
 		<app-loading [display]="is_loading"></app-loading>
 		<form>
 			<div *ngIf="usuario.id_imagen">
-				<img [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
+				<img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
 			</div>
 			<div class="form-group">
 				<input type="file" (change)="uploadImage($event)" name="image">

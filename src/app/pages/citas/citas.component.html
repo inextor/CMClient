@@ -1,14 +1,14 @@
 <!-- CONTENIDO -->
 
-	<!-- <ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
+<!-- <ion-searchbar type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-searchbar>
 	 <div class="form-group">
 	 <label color="primary">Busqueda:</label>
 	 <input type="search" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)">
 	 ion-date type="" position="floating" (change)="changeSearch($event)" ionInput="changeSearch($event)"></ion-date
 	 </div> -->
-	 <div class="card p-3">
-		 <div class="">
-			 <h4 class="mb-3">CITAS</h4>
+<div class="card p-3">
+	<div class="">
+		<h4 class="mb-3">CITAS</h4>
 
 
 		<!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
@@ -22,14 +22,14 @@
 			</div>
 		</div>
 
-		<div class="container card p-0 mb-2" *ngIf="busquedaAvanzada">
+		<div class=" card p-0 mb-2" *ngIf="busquedaAvanzada">
 			<div class="form-row p-2">
 
 				<div class="form-group col-md-3">
 					<label>Estado de cita</label>
 					<select required class="form-control" [(ngModel)]="cita_search.eq.estatus">
-		
-						<option value="" >Todas</option>
+
+						<option value="">Todas</option>
 						<option value="ACTIVA">Activa</option>
 						<option value="CANCELADA">Canceladas</option>
 					</select>
@@ -59,8 +59,9 @@
 					</label>
 					<div class="form-row">
 						<div class="form-check form-check-inline ml-1">
-							<input class="form-check-input" value="SI" type="checkbox" [checked]="cita_search.eq.confirmado_por_doctor=='SI'"
-							(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">&nbsp;
+							<input class="form-check-input" value="SI" type="checkbox"
+								[checked]="cita_search.eq.confirmado_por_doctor=='SI'"
+								(change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">&nbsp;
 							<label class="form-check-label"> Por Doctor</label>
 						</div>
 						<!-- <div class="mr-1">
@@ -69,8 +70,9 @@
 							Por doctor
 						</div> -->
 						<div class=" form-check form-check-inline">
-							<input class="form-check-input" value="SI" type="checkbox" [checked]="cita_search.eq.confirmado_por_paciente=='SI'"
-							(change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">&nbsp;
+							<input class="form-check-input" value="SI" type="checkbox"
+								[checked]="cita_search.eq.confirmado_por_paciente=='SI'"
+								(change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">&nbsp;
 							<label class="form-check-label"> Por Doctor</label>
 						</div>
 						<!-- <div>
@@ -95,13 +97,13 @@
 				<thead>
 					<tr>
 						<th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
-						   (click)="ordenar('Fecha')">Fecha</th>
+							(click)="ordenar('Fecha')">Fecha</th>
 						<th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}"
-						   (click)="ordenar('Paciente')">Paciente</th>
+							(click)="ordenar('Paciente')">Paciente</th>
 						<th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
-						   (click)="ordenar('Doctor')">Doctor</th>
+							(click)="ordenar('Doctor')">Doctor</th>
 						<th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
-						   (click)="ordenar('Especialidad')">Especialidad</th>
+							(click)="ordenar('Especialidad')">Especialidad</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -112,41 +114,83 @@
 						<td>{{i.doctor? i.doctor.nombre : ''}}</td>
 						<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
 						<td class="p-0 options">
-							<button type="button" class=" btn btn-light border center"
-												  *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
-												  (click)="currentInfoCita=i;showConfirmPaciente=true;">
+							<button  class=" btn btn-primary m-1 p-1 border"
+								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
+								(click)="currentInfoCita=i;showConfirmPaciente=true;">
 								<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
 								<span>
-									<svg aria-hidden="true" widht="25px" height="25px" focusable="false" data-prefix="fas" data-icon="user-check" class="svg-inline--fa fa-user-check fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4zm323-128.4l-27.8-28.1c-4.6-4.7-12.1-4.7-16.8-.1l-104.8 104-45.5-45.8c-4.6-4.7-12.1-4.7-16.8-.1l-28.1 27.9c-4.7 4.6-4.7 12.1-.1 16.8l81.7 82.3c4.6 4.7 12.1 4.7 16.8.1l141.3-140.2c4.6-4.7 4.7-12.2.1-16.8z"></path></svg>
+									<i class="">
+										<svg aria-hidden="true" width="30px" height="30px" focusable="false"
+										data-prefix="fas" data-icon="user-check"
+										class="svg-inline--fa fa-user-check fa-w-16" role="img"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+										<path fill="currentColor"
+											d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4zm323-128.4l-27.8-28.1c-4.6-4.7-12.1-4.7-16.8-.1l-104.8 104-45.5-45.8c-4.6-4.7-12.1-4.7-16.8-.1l-28.1 27.9c-4.7 4.6-4.7 12.1-.1 16.8l81.7 82.3c4.6 4.7 12.1 4.7 16.8.1l141.3-140.2c4.6-4.7 4.7-12.2.1-16.8z">
+										</path>
+									</svg>
+
+									</i>
+									
 								</span>
-								
+
 							</button>
-							<button type="button" class=" btn btn-light  border center"
-												  *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
-												  (click)="currentInfoCita=i;showConfirmDoctor=true">
+							<button  class=" btn btn-primary p-1 m-1 border "
+								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
+								(click)="currentInfoCita=i;showConfirmDoctor=true">
 								<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
 								<span>
-									<svg aria-hidden="true" widht="25px" height="25px" focusable="false" data-prefix="fas" data-icon="clipboard-check" class="svg-inline--fa fa-clipboard-check fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm121.2 231.8l-143 141.8c-4.7 4.7-12.3 4.6-17-.1l-82.6-83.3c-4.7-4.7-4.6-12.3.1-17L99.1 285c4.7-4.7 12.3-4.6 17 .1l46 46.4 106-105.2c4.7-4.7 12.3-4.6 17 .1l28.2 28.4c4.7 4.8 4.6 12.3-.1 17z"></path></svg>
-								</span>
+									<i class="">
+										<svg aria-hidden="true" width="30px" height="30px" focusable="false"
+										data-prefix="fas" data-icon="clipboard-check"
+										class="svg-inline--fa fa-clipboard-check fa-w-12" role="img"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+										<path fill="currentColor"
+											d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm121.2 231.8l-143 141.8c-4.7 4.7-12.3 4.6-17-.1l-82.6-83.3c-4.7-4.7-4.6-12.3.1-17L99.1 285c4.7-4.7 12.3-4.6 17 .1l46 46.4 106-105.2c4.7-4.7 12.3-4.6 17 .1l28.2 28.4c4.7 4.8 4.6 12.3-.1 17z">
+										</path>
+									</svg>
+
+									</i>
 								
+								</span>
+
 							</button>
-							<button type="button" class=" btn btn-light  border center"
-												  *ngIf="i.cita.estatus == 'ACTIVA'"
-												  (click)="currentInfoCita=i;showConfirmCancelar=true">
+							<button  class="btn btn-primary p-1 m-1 border "
+								*ngIf="i.cita.estatus == 'ACTIVA'" (click)="currentInfoCita=i;showConfirmCancelar=true">
 								<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
 								<span>
-									<svg aria-hidden="true" widht="25px" height="25px" focusable="false" data-prefix="fas" data-icon="window-close" class="svg-inline--fa fa-window-close fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z"></path></svg>
-								</span>
+									<i class="">
+										<svg aria-hidden="true" width="30px" height="30px" focusable="false"
+										data-prefix="fas" data-icon="window-close"
+										class="svg-inline--fa fa-window-close fa-w-16" role="img"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+										<path fill="currentColor"
+											d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z">
+										</path>
+									</svg>
+									</i>
 								
+								</span>
+
 							</button>
-							<button type="button" class=" btn btn-light border center"
-												  *ngIf="i.cita.estatus == 'ACTIVA'"
-												  (click)="currentInfoCita=i;showConfirmActivar=true">
+							<button  class="btn btn-primary p-1 m-1 border"
+								*ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'"
+								(click)="currentInfoCita=i;showConfirmActivar=true">
 								<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
 								<span>
-									<svg aria-hidden="true" widht="25px" height="25px"  focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"></path></svg>
+									<i class="">
+										<svg aria-hidden="true" width="30px" height="30px" focusable="false"
+										data-prefix="fas" data-icon="check-square"
+										class="svg-inline--fa fa-check-square fa-w-14" role="img"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+										<path fill="currentColor"
+											d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z">
+										</path>
+									</svg>
+
+									</i>
+									
 								</span>
-								
+
 							</button>
 							<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
 	 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
@@ -168,45 +212,69 @@
 
 
 <app-modal [show]="showConfirmDoctor">
-    <div class="card p-3" style="width: 18rem;">
-   	 <div class="card-body">
-   		 <h5 class="card-title">Confirmar Doctor</h5>
-   		 <p class="card-text">Desea confirmar la asistencia del doctor</p>
-   		 <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmDoctor=false">Cancelar</a>
-   		 <a class="btn text-light ml-3 btn-primary" (click)="confirmarDoctor(currentInfoCita)">Aceptar</a>
-   	 </div>
-    </div>
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Confirmar Doctor</h5>
+		</div>
+		<div class="modal-body pb-0">
+			<p class="text-center">Desea confirmar la asistencia del doctor?</p>
+		</div>
+		<div class="modal-footer">
+			<a class="btn text-light  btn-secondary" (click)="showConfirmDoctor=false">Cancelar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarDoctor(currentInfoCita)">Aceptar</a>
+		</div>
+
+	</div>
 </app-modal>
 
 <app-modal [show]="showConfirmPaciente">
-    <div class="card p-3" style="width: 18rem;">
-   	 <div class="card-body">
-   		 <h5 class="card-title">Confirmar Paciente</h5>
-   		 <p class="card-text">Desea confirmar la asistencia del paciente</p>
-   		 <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmPaciente=false">Cancelar</a>
-   		 <a class="btn text-light ml-3 btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
-   	 </div>
-    </div>
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Confirmar Paciente</h5>
+		</div>
+		<div class="modal-body pb-0 ">
+			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+		</div>
+		<div class="modal-footer">
+			<a class="btn text-light  btn-secondary" (click)="showConfirmPaciente=false">Cancelar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
+
+		</div>
+
+	</div>
 </app-modal>
 
 <app-modal [show]="showConfirmCancelar">
-    <div class="card p-3" style="width: 18rem;">
-   	 <div class="card-body">
-   		 <h5 class="card-title">Cancelar Cita</h5>
-   		 <p class="card-text">Desea cancelar la cita</p>
-   		 <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmCancelar=false">Cancelar</a>
-   		 <a class="btn text-light ml-3 btn-danger" (click)="cancelar(currentInfoCita)">Aceptar</a>
-   	 </div>
-    </div>
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Cancelar Cita</h5>
+		</div>
+		<div class="modal-body pb-0">
+			<p class="text-center">Desea cancelar la cita?</p>
+
+		</div>
+
+		<div class="modal-footer">
+			<a class="btn text-light  btn-secondary" (click)="showConfirmCancelar=false">Cancelar</a>
+			<a class="btn text-light  btn-danger" (click)="cancelar(currentInfoCita)">Aceptar</a>
+		</div>
+	</div>
 </app-modal>
 
 <app-modal [show]="showConfirmActivar">
-    <div class="card p-3" style="width: 18rem;">
-   	 <div class="card-body">
-   		 <h5 class="card-title">Activar Cita</h5>
-   		 <p class="card-text">Desea activar la cita</p>
-   		 <a class="btn text-light mr-3 btn-secondary" (click)="showConfirmActivar=false">Cancelar</a>
-   		 <a class="btn text-light ml-3 btn-danger" (click)="activar(currentInfoCita)">Aceptar</a>
-   	 </div>
-    </div>
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Activar Cita</h5>
+		</div>
+		<div class="modal-body pb-0">
+
+			<p class="text-center ">Desea dar de alta la cita?</p>
+		</div>
+		<div class="modal-footer">
+
+			<a class="btn text-light btn-secondary" (click)="showConfirmActivar=false">Cancelar</a>
+			<a class="btn text-light  btn-danger" (click)="activar(currentInfoCita)">Aceptar</a>
+
+		</div>
+	</div>
 </app-modal>

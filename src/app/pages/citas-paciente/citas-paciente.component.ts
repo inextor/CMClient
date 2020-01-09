@@ -19,6 +19,7 @@ import { Title } from '@angular/platform-browser';
 export class CitasPacienteComponent extends BaseComponent implements OnInit {
   cita: Cita = {};
   info_citas: SearchCitaResponse[] = [];
+  citas_paciente: SearchCitaResponse[]=[];
   orderBy = 'Fecha';
   orderDirection = 'ASC';
   tipo_busqueda = 'nombre';
@@ -102,7 +103,6 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       this.cita_search.limite = this.pageSize;
       this.cita_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
       this.nombre = 'nombre' in params ? params.nombre : '';
-
       console.log('Search', this.cita_search);
 
       let rjoinObj: any = {};
@@ -112,7 +112,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       this.is_loading = true;
       console.log(this.nombre)
       let usuario= this.rest.getUsuarioSesion();
-
+         let index = 0;
         forkJoin([
           this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
           , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
@@ -123,12 +123,30 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
           this.doctor = result[1];
           this.centros_medicos = result[2].datos;
           this.info_citas = result[3].datos;
+          console.log(this.info_citas);
+          //Ḧacer la busqueda de las citas del paciente de una mejor manera <--------
+          this.info_citas.forEach(i=>{
+   
+           if(this.info_citas[index].paciente.id_usuario == usuario.id && this.info_citas[index].cita.estatus 
+            != "CANCELADA" ){
+            this.citas_paciente.push(this.info_citas[index]);
+            // console.log('id_usuario',usuario.id);
+            // console.log('index',index);
+            // console.log('citas_paciente',this.citas_paciente);
+           }
+           index+=1;
+          })
           this.setPages(this.cita_search.pagina, result[3].total);
         }, error => {
           console.log(error);
           this.showError(error);
         });
     });
+    this.rest.paciente.getAll({id_usuario : usuario.id},{familiar:0 }).subscribe((response)=>{
+      let paciente = response.datos;
+      console.log('id_pacienteasdasdagggggg', paciente);
+      this.id_paciente = paciente[0].id;
+    })
   }
 
   dateInicioChange(value: string) {
@@ -150,8 +168,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
   showSeleccionarDoctorCita() {
     let usuario = this.rest.getUsuarioSesion();
     this.show = true;
-    console.log(this.show);
-    this.id_paciente = usuario.id;
+    console.log('id_paciente',this.id_paciente);
   }
   
 
