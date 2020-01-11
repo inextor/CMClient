@@ -195,4 +195,10 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 		console.log('Busqueda', search );
 		this.router.navigate(['/pacientes'],{queryParams: search });
 	}
+
+	verCitasPaciente(id_paciente){
+		
+		this.router.navigate
+	}
+
 }

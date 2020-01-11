@@ -73,7 +73,8 @@
 							</div> -->
 							<!-- citas -->
 							<button class=" p-0 btn btn-light m-1 border "
-								[routerLink]="['/citas','paciente',paciente.id]">
+								[routerLink]="['/citas']" [queryParams]="{id_paciente: paciente.id}"
+								data-toggle="tooltip" title="Ver citas">
 								<span class="">
 									<i class=" vertical-align: middle !important;">
 										<img src="../../../assets/icon/options/citas.png" height="35px" width="35px"
@@ -83,7 +84,8 @@
 							</button>
 							<!-- agendar cita -->
 							<button class=" p-0 btn btn-light m-1 border "
-								(click)="seleccionarDoctorNuevaCita(paciente)">
+								(click)="seleccionarDoctorNuevaCita(paciente)"
+								data-toggle="tooltip" title="Agendar cita">
 								<span class="">
 									<i class="">
 										<img src="../../../assets/icon/options/agendar-cita.png" height="35px"
@@ -93,7 +95,8 @@
 							</button>
 							<!-- agregar familiar -->
 							<button class=" p-0 btn btn-light  m-1 border "
-								[routerLink]="['/agregar-familiar',paciente.id_usuario]" [appAccess]="['Doctor']">
+								[routerLink]="['/agregar-familiar',paciente.id_usuario]" [appAccess]="['Doctor']"
+								data-toggle="tooltip" title="Agregar familiar">
 								<span class="">
 									<i class="">
 										<img src="../../../assets/icon/options/agendar-familiar.png" height="35px"
@@ -104,7 +107,8 @@
 							<!-- consultas -->
 							<button class=" p-0 btn btn-light m-1 border "
 								[routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
-								[appAccess]="['Doctor','admin']">
+								[appAccess]="['Doctor','admin']"
+								data-toggle="tooltip" title="Consultas">
 								<span class="">
 									<i class="">
 										<img src="../../../assets/icon/options/consultas.png" height="35px" width="35px"
@@ -115,7 +119,8 @@
 							<!-- historia medica o clinica -->
 							<button class=" p-0 btn btn-light m-1 border "
 								[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-								[appAccess]="['Doctor','admin']">
+								[appAccess]="['Doctor','admin']"
+								data-toggle="tooltip" title="Historia Medica">
 								<span class="">
 									<i class="">
 										<img src="../../../assets/icon/options/historia-medica.png" height="35px"

@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-		<div class="mb-2" w>
+		<div class="mb-2"  *ngIf="busquedaAvanzada==false">
 			<div class="input-group" >
 				<input type="text" placeholder="Buscar" [(ngModel)]="usuario_search.lk.nombre" class="form-control">
 				<div class="input-group-append">
@@ -114,7 +114,8 @@
 						<td>{{usuario.tipo}}</td>
 						<td class="p-0 options">
 							<button class="btn btn-light p-0 m-1 border"
-							[routerLink]="['/editar-usuario',usuario.id]">
+							[routerLink]="['/editar-usuario',usuario.id]"
+							data-toggle="tooltip" title="Editar">
 								<span class="">
 									<i class="">
 										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"

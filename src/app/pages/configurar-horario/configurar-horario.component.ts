@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RestService } from 'src/app/services/rest.service';
-import { Centro_Medico, Doctor } from 'src/app/models/Modelos';
-import { BaseComponent } from 'src/app/pages/base/base.component';
-import { CitasService } from 'src/app/services/citas.service';
+import { RestService } from '../../services/rest.service';
+import { Centro_Medico, Doctor } from '../../models/Modelos';
+import { BaseComponent } from '../../pages/base/base.component';
+import { CitasService } from '../../services/citas.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';

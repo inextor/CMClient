@@ -100,7 +100,6 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       this.cita_search.eq.confirmado_por_doctor = 'confirmado_por_doctor' in params ? params.confirmado_por_doctor : null;
       this.cita_search.eq.confirmado_por_paciente = 'confirmado_por_paciente' in params ? params.confirmado_por_paciente : null;
 
-      this.cita_search.limite = this.pageSize;
       this.cita_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
       this.nombre = 'nombre' in params ? params.nombre : '';
       console.log('Search', this.cita_search);
@@ -123,20 +122,21 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
           this.doctor = result[1];
           this.centros_medicos = result[2].datos;
           this.info_citas = result[3].datos;
-          console.log(this.info_citas);
+          console.log('infositas',this.info_citas);
           //Ḧacer la busqueda de las citas del paciente de una mejor manera <--------
           this.info_citas.forEach(i=>{
    
            if(this.info_citas[index].paciente.id_usuario == usuario.id && this.info_citas[index].cita.estatus 
-            != "CANCELADA" ){
+            !== "CANCELADA" ){
             this.citas_paciente.push(this.info_citas[index]);
+            console.log('citaspaciente', this.citas_paciente);
             // console.log('id_usuario',usuario.id);
             // console.log('index',index);
             // console.log('citas_paciente',this.citas_paciente);
            }
            index+=1;
           })
-          this.setPages(this.cita_search.pagina, result[3].total);
+          this.setPages(this.cita_search.pagina,this.citas_paciente.length);
         }, error => {
           console.log(error);
           this.showError(error);

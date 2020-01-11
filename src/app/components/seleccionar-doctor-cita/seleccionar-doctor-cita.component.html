@@ -20,7 +20,7 @@
 
             <div *ngIf="show_especialidad" class="">
                 <label>Especialidad:</label>
-                <select  (change)="search()" name="centro_medico" [(ngModel)]="doctor_search.eq.id_especialidad"
+                <select  (change)="search()" name="especialidad" [(ngModel)]="doctor_search.eq.id_especialidad"
                     class="form-control custom-select">
                     <!-- <option value="" selected="selected">Seleccione</option> -->
                     <option  *ngFor="let especialidad of especialidades" [value]="especialidad.id">
