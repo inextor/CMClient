@@ -227,9 +227,9 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
     }).subscribe((cita) => {
       this.is_loading = false;
       this.showConfirmDoctor = false;
-      let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+      let index = this.citas_paciente.findIndex(i => i.cita.id == infoCita.cita.id);
       if (index >= 0)
-        this.info_citas[index].cita = cita;
+        this.citas_paciente[index].cita = cita;
     },
       (error) => {
         this.showConfirmDoctor = false;
@@ -246,9 +246,9 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
     }).subscribe((cita) => {
       this.is_loading = false;
       this.showConfirmPaciente = false;
-      let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+      let index = this.citas_paciente.findIndex(i => i.cita.id == infoCita.cita.id);
       if (index >= 0)
-        this.info_citas[index].cita = cita;
+        this.citas_paciente[index].cita = cita;
     }, (error) => {
       this.is_loading = false;
       this.showConfirmPaciente = false;
@@ -264,9 +264,10 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       console.log(infoCita);
       this.showConfirmCancelar = false;
       this.is_loading = false;
-      let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+      let index = this.citas_paciente.findIndex(i => i.cita.id == infoCita.cita.id);
       if (index >= 0)
-        this.info_citas[index].cita = cita;
+        this.citas_paciente[index].cita = cita;
+        console.log("citaspasiente",this.citas_paciente[index].cita = cita);
     },
       (error) => {
         this.is_loading = false;
@@ -296,10 +297,10 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       , estatus: 'ACTIVA'
     }).subscribe((cita) => {
       this.showConfirmActivar = false;
-      let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+      let index = this.citas_paciente.findIndex(i => i.cita.id == infoCita.cita.id);
       this.is_loading = false;
       if (index >= 0)
-        this.info_citas[index].cita = cita;
+        this.citas_paciente[index].cita = cita;
     }
       , (error) => {
         this.is_loading = false;
