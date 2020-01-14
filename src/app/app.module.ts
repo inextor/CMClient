@@ -82,6 +82,9 @@ import { ShellComponent } from './components/shell/shell.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket.component';
 import { SeleccionarDoctorCitaComponent } from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component';
+import { SeguimientoCitaComponent } from './pages/seguimiento-cita/seguimiento-cita.component';
+import { ControlCitasComponent } from './pages/control-citas/control-citas.component';
+
 
 @NgModule({
   declarations: [
@@ -158,6 +161,9 @@ import { SeleccionarDoctorCitaComponent } from './components/seleccionar-doctor-
     DashboardComponent,
     ImprimirTicketComponent,
     SeleccionarDoctorCitaComponent,
+    SeguimientoCitaComponent,
+    ControlCitasComponent,
+   
 
   ],
   imports: [

@@ -44,8 +44,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 				lk: {},
 				csv: {},
 			};
-
-		
+			
 			this.centro_medico_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;
 			this.centro_medico_search.limite			= this.pageSize;
 			this.centro_medico_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;

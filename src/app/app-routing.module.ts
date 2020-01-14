@@ -57,6 +57,8 @@ import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {ImprimirTicketComponent} from './pages/imprimir-ticket/imprimir-ticket.component';
 import {ClientesComponent} from './pages/clientes/clientes.component';
 import {SeleccionarDoctorCitaComponent} from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component'
+import {SeguimientoCitaComponent} from '../app/pages/seguimiento-cita/seguimiento-cita.component';
+import {ControlCitasComponent} from '../app/pages/control-citas/control-citas.component';
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -70,9 +72,7 @@ const routes: Routes = [
 			{ path: 'clientes', component:ClientesComponent},
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
-			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			// path para agendar cita con un doctor del lado del paciente 
-			
+			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },	
 			{ path: "agendar-cita", component: AgendarCitaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "pacientes", component: PacientesComponent, pathMatch: "full" },
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -138,6 +138,8 @@ const routes: Routes = [
 			{ path: "citas", component: CitasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "ventas", component: VentasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "seleccionar-doctor-cita", component:  SeleccionarDoctorCitaComponent, pathMatch: "full", canActivate: [AuthGuard]},
+			{ path: "seguimiento-cita", component:  SeguimientoCitaComponent, pathMatch: "full", canActivate: [AuthGuard]},
+			{ path: "control-citas/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: ControlCitasComponent, pathMatch: "full" },
 		]
 	},
 ];

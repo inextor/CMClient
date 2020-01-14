@@ -14,21 +14,12 @@ import { Doctor } from 'src/app/models/Modelos';
 import { OptionsInput } from '@fullcalendar/core';
 import { forkJoin } from 'rxjs';
 @Component({
-	selector: 'app-dashboard',
-	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.css']
+  selector: 'app-control-citas',
+  templateUrl: './control-citas.component.html',
+  styleUrls: ['./control-citas.component.css']
 })
-export class DashboardComponent implements OnInit {
-	constructor(
-		private citasService: CitasService,
-		public restService: RestService,
-		public route: ActivatedRoute,
-		public router: Router
-	) {
-
-	}
-
-	counterId				= 0;
+export class ControlCitasComponent implements OnInit {
+  counterId				= 0;
 	disponibilidadDoctor	= [];
 	horarioDoctor			= [];
 	calendarEvents			= [];
@@ -47,43 +38,36 @@ export class DashboardComponent implements OnInit {
 	private id_paciente:number;
 	private id_centro_medico:number;
 
-	@ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
-	//modelo de las opciones de la libreria full calendar
-	calendarOptions: OptionsInput;
+	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
 
-
-
-	ngOnInit() {
-
-		this.calendarOptions = {
-			editable: true,
-			header: {
-				left: 'title',
-				center: 'timeGridDay,timeGridWeek,dayGridMonth',
-				right: 'prev,next,today',
-			},
-			footer: true,
-			allDaySlot: false,
-			eventLimit: true,
-			height: 'auto',
-			defaultView: "timeGridDay"
-
-		};
-
+	constructor(
+		private citasService:CitasService,
+		public restService:RestService,
+		public route:ActivatedRoute,
+		public router:Router
+	)
+	{
 
 	}
+
+		//public modalController: ModalController,
+
+	ngOnInit()
+	{
+		this.is_mobile= this.restService.isMobile();
+
+		this.route.paramMap.subscribe( params =>
+		{
+			this.id_doctor		= parseInt(params.get('id_doctor'));
+			this.id_paciente		= parseInt(params.get('id_paciente'));
+			this.id_centro_medico	= parseInt(params.get('id_centro_medico'));
+		});
+	}
+
 	ngAfterViewInit(): void {
-		let usuario = this.restService.getUsuarioSesion();
-		forkJoin([
-			this.restService.doctor.get(usuario.id)
-		]).subscribe(response=>{
-			this.id_doctor= response[0].id;
-			this.id_centro_medico= response[0].id_centro_medico;
-			this.getDisponibilidadDoctor();
-		})
-	
-		
+		this.getDisponibilidadDoctor();
 	}
+
 
 	getDisponibilidadDoctor()
 	{
@@ -109,8 +93,7 @@ export class DashboardComponent implements OnInit {
 			});
 
 			const calendarAPI = this.calendarComponent.getApi();
-			calendarAPI.addEvent(disponibilidad);
-			calendarAPI.render();
+			calendarAPI.addEventSource(disponibilidad);
 		});
 
 		this.restService.horario_doctor.getAll({ id_centro_medico:this.id_centro_medico },{id_doctor:this.id_doctor}).subscribe( respuesta =>
@@ -130,15 +113,13 @@ export class DashboardComponent implements OnInit {
 					daysOfWeek: [i.dia_semana]
 				});
 			});
-			calendarAPI.addEvent({ id: 'disponibilidad', events: calendarEvents });
-			calendarAPI.render();
+			calendarAPI.addEventSource({ id: 'disponibilidad', events: calendarEvents });
 		});
 
 
 		this.citasService.getHorarioDoctor(this.id_doctor, this.id_centro_medico).subscribe(
 			events => {
-				let calendarEvents = [];
-				let prueba;
+				const calendarEvents = [];
 				events.datos.map(event => {
 					const id = this.counterId;
 					this.counterId += 1;
@@ -150,12 +131,11 @@ export class DashboardComponent implements OnInit {
 					});
 				});
 				const calendarAPI = this.calendarComponent.getApi();
-				calendarAPI.addEvent({id: 'horario', events: calendarEvents});
-
 				calendarAPI.render();
+				console.log("asdfasdfasdfs",calendarEvents);
+				calendarAPI.addEventSource({id: 'horario', events: calendarEvents});
 			}
 		)
-		calendarAPI.refetchEvents();
 	}
 
 
@@ -220,7 +200,7 @@ export class DashboardComponent implements OnInit {
 	
 	eventRender(info)
 	{
-		// console.log( info );
+		console.log( info );
 	}
-}
 
+}

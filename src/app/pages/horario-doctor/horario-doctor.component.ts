@@ -130,6 +130,7 @@ export class HorarioDoctorComponent implements OnInit {
 				});
 				const calendarAPI = this.calendarComponent.getApi();
 				calendarAPI.render();
+				console.log("asdfasdfasdfs",calendarEvents);
 				calendarAPI.addEventSource({id: 'horario', events: calendarEvents});
 			}
 		)
@@ -194,6 +195,7 @@ export class HorarioDoctorComponent implements OnInit {
 	{
 		this.show_modal = false;
 	}
+	
 	eventRender(info)
 	{
 		console.log( info );

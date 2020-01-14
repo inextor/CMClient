@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ declare var $:any;
 })
 export class AppComponent {
   title = 'CentroMedico';
+  calendarPlugins = [dayGridPlugin];
 }

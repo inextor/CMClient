@@ -34,7 +34,9 @@ export class CitasService {
   }
 
   getDisponibilidadDoctor(idDoctor, idCentroMedico) {
-	  return this.restService.horario_doctor.getAll({ id_centro_medico:idCentroMedico },{id_doctor:idDoctor});
+    console.log('id_doctor',idDoctor);
+    console.log('id_cm',idCentroMedico);
+    return this.restService.horario_doctor.getAll({ id_centro_medico:idCentroMedico },{id_doctor:idDoctor});
 	//return this.restService.doctor.horario.get(idDoctor, idCentroMedico);
   }
 

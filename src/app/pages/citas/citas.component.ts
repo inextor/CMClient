@@ -72,7 +72,12 @@ export class CitasComponent extends BaseComponent implements OnInit {
 			this.cita_search.ge.inicio = 'inicio' in params ? params.inicio : fecha_inicio;
 			this.cita_search.le.inicio = 'fin' in params ? params.fin : null;
 			this.cita_search.eq.id_paciente = 'id_paciente' in params ? params.id_paciente : null;
-			this.cita_search.eq.id_doctor = 'id_doctor' in params ? params.id_doctor : usuario.id;
+			if(usuario.tipo == "ADMIN" || usuario.tipo == "RECEPCIONISTA"){
+				this.cita_search.eq.id_doctor = 'id_doctor' in params ? params.id_doctor : null;
+			}else {
+				this.cita_search.eq.id_doctor = 'id_doctor' in params ? params.id_doctor : usuario.id;
+			}
+			
 
 			this.cita_search.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : null;
 			this.cita_search.eq.estatus = 'estatus' in params ? params.estatus : null;
