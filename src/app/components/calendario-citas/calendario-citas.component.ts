@@ -25,7 +25,6 @@ export interface SimpleMap{
 
 export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 
-
 	@Input() Doctor;
 	@Input() Centro_Medico;
 
@@ -84,16 +83,24 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 	good()
 	{
 		const calendarAPI = this.calendarComponent.getApi();
-		calendarAPI.addEventSource((info,successCallback,failureCallback)=>
-		{
-			console.log( info,typeof successCallback, typeof failureCallback );
-			this.getEvents( info, successCallback, failureCallback );
+		calendarAPI.addEventSource({
+			id: 'citas'
+			,events: (info,successCallback,failureCallback)=>
+			{
+				console.log( info,typeof successCallback, typeof failureCallback );
+				this.getEvents( info, successCallback, failureCallback );
+			}
 		});
+
+		calendarAPI.addEventSource({
+			id: 'nueva_cita'
+			,events: []
+		});
+
 		//calendarAPI.addEvent({id: 'disponibilidad', events: this.calendarEvents });
 		//calendarAPI.addEvent({id: 'citas', events: citas});
 		calendarAPI.refetchEvents();
 		calendarAPI.render();
-
 	}
 
 
@@ -108,10 +115,8 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 		console.log('Getting events for',info.start  );
 		let id_doctor:number = 2;
 		let id_centro_medico:number = 1;
-		//this.calendarAPI.remove
 
 		forkJoin([
-			//Disponibilidad
 			this.rest.horario_doctor.getAll({id_centro_medico:id_centro_medico },{ id_doctor: id_doctor})
 			,this.rest.cita.search
 			(
@@ -146,12 +151,13 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 				this.counterId++;
 				//console.log( i );
 				let obj = {
-					id
-					,rendering: 'background'
-					,classNames: ['disponibilidad']
-					,title: 'ffffff'
-					,start: i.start
-					,end: i.end
+					id:i.id
+					,rendering		: 'background'
+					,classNames		: ['disponibilidad']
+					,title			: 'ffffff'
+					,editable		: false
+					,start			: i.start
+					,end			: i.end
 					//daysOfWeek: [i.dia_semana]
 				};
 
@@ -162,17 +168,15 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 				calendarEvents.push( obj );
 			});
 
-			//console.log('Disponibilidad', calendarEvents );
-
-
 			responses[1].datos.forEach((cita)=>
 			{
 				const id = this.counterId;
 				this.counterId += 1;
 				let obj = {
-					id:''+cita.id,
+					id:''+cita.id
 					//classNames: ['evento_normal'],
-					title: 'paciente jodido'
+					,title: 'Reservado'
+					,editable: false
 					,start: cita.inicio
 					,end: cita.fin
 				};
@@ -188,16 +192,6 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 
 			successCallback( calendarEvents );
 		},(error)=>{  errorCallback( error ); });
-	}
-
-	loadData()
-	{
-		//const calendarAPI = this.calendarComponent.getApi();
-		//let start = this.calendarComponent.activeStart;
-		//let end= this.calendarComponent.activeEnd;
-
-		console.log("HERE");
-					//});
 	}
 
 	map(startDate:Date,horario_doctor:Horario_Doctor[])
@@ -268,5 +262,18 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 	eventRender(info)
 	{
 		 console.log('Event Render', info );
+	}
+
+	dateClick(evt)
+	{
+		console.log("Click on ", evt.date );
+		console.log( evt );
+		const calendarAPI = this.calendarComponent.getApi();
+		calendarAPI.addEvent({
+			title: 'Cita'
+			,id:'nueva_cita'
+			,start: evt.date
+			,editable: true
+		},'nueva_cita');
 	}
 }
