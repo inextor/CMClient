@@ -1,55 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { ActivatedRoute } from '@angular/router';
-import { Paciente, Centro_Medico, Doctor } from 'src/app/models/Modelos';
+import { Paciente, Centro_Medico, Doctor, Cita } from 'src/app/models/Modelos';
+import { BaseComponent } from '../base/base.component';
+import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 
 @Component({
-  selector: 'app-agendar-cita',
-  templateUrl: './agendar-cita.component.html',
-  styleUrls: ['./agendar-cita.component.css'],
+	selector: 'app-agendar-cita',
+	templateUrl: './agendar-cita.component.html',
+	styleUrls: ['./agendar-cita.component.css'],
 })
-export class AgendarCitaComponent implements OnInit {
 
-  constructor(
-    private restService:RestService,
-    private activatedRoute:ActivatedRoute
-  ) { }
+export class AgendarCitaComponent extends BaseComponent implements OnInit {
 
-  paciente:Paciente={};
-  centroMedico:Centro_Medico={};
-  doctor:Doctor={};
+	paciente:Paciente			={};
+	centro_medico:Centro_Medico	={};
+	doctor:Doctor				={};
 
-  ngOnInit() {
+	ngOnInit()
+	{
+		this.route.paramMap.subscribe(params=>
+		{
+			console.log( params );
+			forkJoin
+			([
+				this.rest.doctor.get( params.get('id_doctor') )
+				,this.rest.paciente.get( params.get('id_paciente') )
+				,this.rest.centro_medico.get( params.get('id_paciente') )
+			])
+			.subscribe((responses)=>
+			{
+				this.doctor	= responses[0];
+				this.paciente = responses[1];
+				this.centro_medico =  responses[2];
 
-		this.restService.paciente.get(parseInt(this.activatedRoute.snapshot.paramMap.get('idPaciente')))
-	  		//his.restService.getPaciente(parseInt(this.activatedRoute.snapshot.paramMap.get('idPaciente')))
-      .subscribe( paciente => {
-        this.paciente = paciente;
-      });
-	  this.restService.doctor.get(parseInt(this.activatedRoute.snapshot.paramMap.get('idDoctor')))
-	  //this.restService.getDoctor(parseInt(this.activatedRoute.snapshot.paramMap.get('idDoctor')))
-    .subscribe( doctor => {
-      this.doctor = doctor;
-    })
+			},(error)=>this.showError(error));
+		});
+	}
 
-	  this.restService.centro_medico.get( parseInt(this.activatedRoute.snapshot.paramMap.get('idCentroMedico')))
-	  //this.restService.getCentroMedico(parseInt(this.activatedRoute.snapshot.paramMap.get('idCentroMedico')))
-    .subscribe( centroMedico => {
-      this.centroMedico = centroMedico;
-    })
-
-    // this.restService.getPaciente(parseInt(this.activatedRoute.snapshot.paramMap.get('idPaciente')))
-    //   .subscribe( paciente => {
-    //     this.paciente = paciente;
-    //   });
-    // this.restService.getDoctor(parseInt(this.activatedRoute.snapshot.paramMap.get('idDoctor')))
-    // .subscribe( doctor => {
-    //   this.doctor = doctor;
-    // })
-    // this.restService.getCentroMedico(parseInt(this.activatedRoute.snapshot.paramMap.get('idCentroMedico')))
-    // .subscribe( centroMedico => {
-    //   this.centroMedico = centroMedico;
-    // })
-  }
-
+	onCitaAgendada(cita:Cita)
+	{
+		console.log('Cita is cita', cita );
+	}
 }

@@ -1,4 +1,4 @@
 <main class="p-2">
-	<app-horario-doctor></app-horario-doctor>
+	<app-calendario-agendar-cita [(doctor)]="doctor" [(centro_medico)]="centro_medico" [(paciente)]="paciente" (citaAgendada)="onCitaAgendada($event)"></app-calendario-agendar-cita>
 </main>
 
