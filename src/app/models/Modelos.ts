@@ -34,6 +34,7 @@ export interface Cita{
   id_paciente?:number;
   estatus?:string;
   id_doctor?:number;
+  id_servicio?:number;
   id_centro_medico?:number;
   inicio?:string;
   fin?:string;
@@ -541,6 +542,12 @@ export interface Servicio{
 
 
 };
+
+export interface Doctor_Servicio{
+  id?:number;
+  id_doctor?:number;
+  id_servicio?:number;
+}
 
 export interface Sesion{
   id?:string;
