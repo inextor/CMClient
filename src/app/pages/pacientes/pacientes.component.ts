@@ -101,7 +101,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 		if( usuario.tipo == 'DOCTOR' )
 		{
-			this.router.navigate(['/doctores',usuario.id,'centro-medico',this.centro_medico.id,'agendar-cita',paciente.id]);
+			this.router.navigate(['/agendar-cita','doctor',usuario.id,'centro-medico',this.centro_medico.id,'paciente',paciente.id]);
 			return;
 		}
 
@@ -197,7 +197,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	}
 
 	verCitasPaciente(id_paciente){
-		
+
 		this.router.navigate
 	}
 
