@@ -346,12 +346,18 @@ export class RestService {
 
 	getMysqlStringFromLocaDate(d:Date):string
 	{
+		let zero = (a)=>
+		{
+			if( a<10 )
+				return '0'+a;
+			return a;
+		};
 		 let event_string = d.getFullYear()
-								+'-'+(d.getMonth()+1)
-								+'-'+d.getDate()
-								+' '+d.getHours()
-								+':'+d.getMinutes()
-								+':'+d.getSeconds();
+								+'-'+zero(d.getMonth()+1)
+								+'-'+zero(d.getDate())
+								+' '+zero(d.getHours())
+								+':'+zero(d.getMinutes())
+								+':'+zero(d.getSeconds());
 
 		return event_string;
 
@@ -359,12 +365,19 @@ export class RestService {
 
 	getMysqlStringFromDate(d:Date):string
 	{
-			let event_string = d.getUTCFullYear()
-								+'-'+(d.getUTCMonth()+1)
-								+'-'+d.getUTCDate()
-								+' '+d.getUTCHours()
-								+':'+d.getUTCMinutes()
-								+':'+d.getUTCSeconds();
+		let zero = (a)=>
+		{
+			if( a<10 )
+				return '0'+a;
+			return a;
+		};
+
+		let event_string = d.getUTCFullYear()
+								+'-'+zero(d.getUTCMonth()+1)
+								+'-'+zero(d.getUTCDate())
+								+' '+zero( d.getUTCHours() )
+								+':'+zero( d.getUTCMinutes() )
+								+':'+zero( d.getUTCSeconds() );
 
 		return event_string;
 	}
