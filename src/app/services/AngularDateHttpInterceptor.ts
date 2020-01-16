@@ -39,7 +39,7 @@ export class AngularDateHttpInterceptor implements HttpInterceptor {
 			{
 				let date = key.indexOf('tiempo') == 0
 					? this.fromUTCStringToLocalDate( value )
-					: this.fromLocalStringToLocalDate( value );
+					: value
 				body[key] = date;//new Date(value);
 			}
 			else if (typeof value === 'object')
