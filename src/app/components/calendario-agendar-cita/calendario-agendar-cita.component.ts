@@ -271,7 +271,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 		 console.log('Event Render', info );
 	}
 
-	cancelarCita(evt)
+	cancelarCita()
 	{
 		this.show_modal = false;
 	}
