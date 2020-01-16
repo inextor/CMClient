@@ -38,18 +38,6 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 	counterId:number = 0;
 	calendarOptions= {
 			editable: false,
-			customButtons:{
-				anterior:
-				{
-					text: 'Anterior',
-					click: this.loadPrev
-				}
-				,siguiente:
-				{
-					text: 'Siguiente',
-					click: this.loadNext
-				}
-			},
 			header: {
 				left: 'title',
 				center: 'timeGridDay,timeGridWeek,dayGridMonth',
@@ -174,7 +162,7 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 				this.counterId += 1;
 				let obj = {
 					id:''+cita.id
-					//classNames: ['evento_normal'],
+					,classNames: ['evento_normal']
 					,title: 'Reservado'
 					,editable: false
 					,start: cita.inicio
@@ -269,6 +257,7 @@ export class CalendarioCitasComponent implements OnInit,AfterViewInit  {
 		console.log("Click on ", evt.date );
 		console.log( evt );
 		const calendarAPI = this.calendarComponent.getApi();
+
 		calendarAPI.addEvent({
 			title: 'Cita'
 			,id:'nueva_cita'
