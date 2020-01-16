@@ -43,7 +43,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
       let id_doctor = params.get('id_doctor') ? parseInt(params.get("id_doctor")) :null;
       let id_paciente = params.get('id_paciente') ? parseInt(params.get("id_paciente")) :null;
       let id_servicio = params.get('id_servicio') ? parseInt(params.get("id_servicio")) :null;
-
+      //agregando el servicio seleccionado por el paciente al crear la cita
       if(id_servicio){
         this.rest.servicio.get(id_servicio).subscribe((response)=>{
           console.log(response)
