@@ -17,7 +17,7 @@ Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio
 Detalle_Venta, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
  Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
-	Usuario, Venta, Proveedor, Requisicion} from	'../models/Modelos';
+	Usuario, Venta, Proveedor, Requisicion, Doctor_Servicio} from	'../models/Modelos';
 
 
 export interface DetalleServicio {
@@ -102,6 +102,7 @@ export class RestService {
 	public ingreso:ObjRest<Ingreso>;
 	public detalle_requisicion:ObjRest<Detalle_Requisicion>;
 	public requisicionInfo:ObjRest<RequisicionInfo>;
+	public doctor_servicio:ObjRest<Doctor_Servicio>;
 
 
 	//End vars
@@ -182,6 +183,7 @@ export class RestService {
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
 		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo.php`,http);
+		this.doctor_servicio				= new ObjRest<Doctor_Servicio>					(`${this.urlBase}/servicio_doctor.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico

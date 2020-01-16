@@ -118,8 +118,20 @@
 						<td>{{i.doctor? i.doctor.nombre : ''}}</td>
 						<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
 						<td class="p-0 options">
-							<!-- BOTONES DISABLED -->
 							<!-- confirmado paciente -->
+							<button class=" p-0 btn btn-light m-1 border "
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
+							[routerLink]="['/agregar-consulta',i.cita.id,'paciente',i.cita.id_paciente,'doctor',i.cita.id_paciente,'servicio',i.cita.id_servicio]"
+							[appAccess]="['Doctor','admin']"
+							data-toggle="tooltip" title="Consultas">
+							<span class="">
+								<i class="">
+									<img src="../../../assets/icon/options/consultas.png" height="43px" width="43px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
 								data-toggle="tooltip" title="Confirmado por paciente">
@@ -130,10 +142,7 @@
 									</i>
 								</span>
 							</button>
-						
-
-							<!-- FIN BOTONES DISABLED -->
-
+					
 
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"

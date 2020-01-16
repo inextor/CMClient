@@ -1,47 +1,129 @@
 <main class="">
     <div class="card p-3">
         <div class="">
-        	<h4 class=" mb-3">CONSULTA</h4>
+            <h4 class=" mb-3">CONSULTA</h4>
             <div class="mb-3">
                 <button type="button"
                     [routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
                     class="btn btn-primary">Ver Historial</button>
             </div>
-            <div>
-                <div>
-					<div class="">Doctor: <b>{{doctor.nombre | titlecase }}</b></div>
-					<div class="">Paciente: <b>{{paciente.nombre | titlecase }} {{paciente.apellidos|titlecase}}</b></div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <!-- progreso de la cita -->
+                    <div class="card p-2">
+                        <label for="">progreso tiempo cita </label>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <!-- servicios -->
+                    <div class="card mt-2 p-2 ">
+
+                        <div class=" mb-3 d-flex justify-content-between flex-wrap">
+                            <div>
+                                <h5 class="mb-3 mt-3">*Nuevo Servicio</h5>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+                                    [disabled]="is_loading">
+                                    Pagar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <div class="dropdown">
+                                    <div class="">
+                                        <label position="stacked">Articulo<span color="danger">*</span></label>
+                                        <input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda"
+                                            class="form-control">
+                                    </div>
+                                    <div *ngIf="search_servicios.length && busqueda != ''"
+                                        class="dropdown-menu show w-100">
+                                        <div *ngFor="let servicio of search_servicios;let i=index"
+                                            (click)="agregarServicio(servicio)">
+                                            <div *ngIf="i>0" class="dropdown-divider"></div>
+                                            <div class="dropdown-item">
+                                                {{servicio.nombre}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" card p-0 mb-3 ">
+                            <table class="basica p-0 m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Articulo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let sd of detalles_requisicion">
+                                        <th>
+                                            <label>{{servicios_by_id[ sd.id_servicio ].nombre | titlecase}}</label>
+                                        </th>
+                                        <th>
+                                            <input type="number" [(ngModel)]="sd.cantidad" step="1" min=0>
+                                        </th>
+                                        <th>
+                                            <button class="btn btn-secondary btn-sm">x</button>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- fin servicios -->
+                </div>
+
+                <div class="card form-group col-md-6 p-2">
+
+                    <div>
+                        <div>
+                            <div class="">Doctor: <b>{{doctor.nombre | titlecase }}</b></div>
+                            <div class="">Paciente: <b>{{paciente.nombre | titlecase }}
+                                    {{paciente.apellidos|titlecase}}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label class="">Motivo de la Consulta</label>
+                        <textarea class="form-control" [(ngModel)]="consulta.motivo_consulta"></textarea>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label class="">Diagnostico Objetivo</label>
+                        <textarea class="form-control " [(ngModel)]="consulta.diagnostico"></textarea>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label class="">Diagnostico Subjetivo</label>
+                        <textarea class="form-control" [(ngModel)]="consulta.subjetivo"></textarea>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <label class="">Tratamiento</label>
+                        <textarea class="form-control" [(ngModel)]="consulta.tratamiento"></textarea>
+                    </div>
+
+                    <div class="mt-3 mb-3">
+                        <label class="">Analisis</label>
+                        <textarea class="form-control" [(ngModel)]="consulta.analisis"></textarea>
+                    </div>
+                    <div *ngIf="error_message">
+                        <div class="alert alert-danger" role="alert">{{error_message}}</div>
+                    </div>
                 </div>
             </div>
-            <div class="mt-3 mb-3">
-                <label class="">Motivo de la Consulta</label>
-                <textarea class="form-control" [(ngModel)]="consulta.motivo_consulta"></textarea>
+            <div>
+                <button type="button" [disabled]="is_loading" (click)="guardar()"
+                    class="btn btn-primary">Guardar</button>
             </div>
-            <div class="mt-3 mb-3">
-                <label class="">Diagnostico Objetivo</label>
-                <textarea class="form-control " [(ngModel)]="consulta.diagnostico"></textarea>
-            </div>
-            <div class="mt-3 mb-3">
-                <label class="">Diagnostico Subjetivo</label>
-                <textarea class="form-control" [(ngModel)]="consulta.subjetivo"></textarea>
-            </div>
-            <div class="mt-3 mb-3">
-                <label class="">Tratamiento</label>
-                <textarea class="form-control" [(ngModel)]="consulta.tratamiento"></textarea>
-            </div>
-
-			<div class="mt-3 mb-3">
-                <label class="">Analisis</label>
-                <textarea class="form-control" [(ngModel)]="consulta.analisis"></textarea>
-            </div>
-			<div *ngIf="error_message">
-        	    <div class="alert alert-danger" role="alert">{{error_message}}</div>
-        	</div>
-
-        	<div>
-        	    <button type="button" [disabled]="is_loading" (click)="guardar()"
-        	        class="btn btn-primary">Guardar</button>
-        	</div>
         </div>
     </div>
 </main>

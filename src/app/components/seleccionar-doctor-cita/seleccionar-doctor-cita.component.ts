@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
-import { Doctor, Centro_Medico, Especialidad, Paciente } from '../../models/Modelos';
+import { Doctor, Centro_Medico, Especialidad, Paciente, Servicio, Doctor_Servicio } from '../../models/Modelos';
 import { RestService } from '../../services/rest.service';
 import { forkJoin } from 'rxjs';
 import {Router,ActivatedRoute} from "@angular/router"
@@ -7,6 +7,7 @@ import { SearchObject } from '../../models/Respuestas';
 import { BaseComponent } from '../../pages/base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import { ServiciosComponent } from 'src/app/pages/servicios/servicios.component';
 @Component({
   selector: 'app-seleccionar-doctor-cita',
   templateUrl: './seleccionar-doctor-cita.component.html',
@@ -24,9 +25,14 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 		super( rest,router,route,location,titleService);
 	}
   doctores:Doctor[]=[];
+  selected_doctor:Doctor=null;
+  selected_servicio=null;
   centros_medicos:Centro_Medico[]=[];
   especialidades:Especialidad[]=[];
   pacientes: Paciente[]=[];
+  doctor_servicios: Doctor_Servicio[]=[];
+  total_servicios: Servicio[]= [];
+  servicios: Servicio[]=[];
   paciente;
   doctor_search:SearchObject<Doctor>;
   last:string = '';
@@ -109,8 +115,9 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
     .subscribe(results=>
     {
       this.doctores = results.datos;
-      
+      this.selected_doctor = null;
       console.log('doktors',this.doctores);
+      console.log("doctorine",this.selected_doctor)
     });
 	}
 
@@ -134,17 +141,44 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 	dismissModal()
 	{
 //		this.modalCtrl.dismiss(null);
-	}
-  seleccionarDoctorNuevaCita(doctor)
+  }
+  seleccionarDoctor(doctor){
+    this.selected_doctor = doctor;
+    console.log("doctor selected",this.selected_doctor)
+    this.buscarServicios();
+  }
+
+  buscarServicios(){
+    let cont = 0
+      this.rest.doctor_servicio.getAll({id_doctor: this.selected_doctor.id}).subscribe((response)=>{
+    this.doctor_servicios = response.datos;
+        console.log("servicios del doctor",this.doctor_servicios);
+        // if(i[cont].id_)
+        // this.total_servicios = i[cont];
+        // cont+=1;
+
+      });
+      // = respuesta[0].datos;
+      // this.total_servicios=.forEach(i=>
+  }
+  seleccionarServicioDoctor(doctor_servicio){
+    this.selected_servicio = doctor_servicio;
+    console.log("servicio selected",this.selected_servicio)
+  }
+
+
+  seleccionarDoctorNuevaCita()
 	{
+
     console.log('id_paciente_selecdoctor',this.id_paciente);
     let usuario = this.rest.getUsuarioSesion();
 		if( usuario.tipo == 'PACIENTE' )
 		{
-			this.router.navigate(['/doctores',doctor.id,'centro-medico',doctor.id_centro_medico,'agendar-cita',this.id_paciente]);
+			this.router.navigate(['/doctor',this.selected_doctor.id,'centro-medico',this.selected_doctor.id_centro_medico,'paciente',this.id_paciente,'servicio',this.selected_servicio.id]);
 			return;
 		}
 
 	}
 
 }
+

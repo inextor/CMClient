@@ -35,6 +35,7 @@ export class HorarioDoctorComponent implements OnInit {
 	private id_doctor:number;
 	private id_paciente:number;
 	private id_centro_medico:number;
+	private id_servicio:number;
 
 	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
 
@@ -56,9 +57,10 @@ export class HorarioDoctorComponent implements OnInit {
 
 		this.route.paramMap.subscribe( params =>
 		{
-			this.id_doctor		= parseInt(params.get('id_doctor'));
+			this.id_doctor			= parseInt(params.get('id_doctor'));
 			this.id_paciente		= parseInt(params.get('id_paciente'));
 			this.id_centro_medico	= parseInt(params.get('id_centro_medico'));
+			this.id_servicio		= parseInt(params.get('id_servicio'));
 		});
 	}
 
@@ -180,6 +182,7 @@ export class HorarioDoctorComponent implements OnInit {
 			id_centro_medico	: this.id_centro_medico,
 			id_doctor			: this.id_doctor,
 			id_paciente			: this.id_paciente,
+			id_servicio			: this.id_servicio,
 			inicio				: this.cita.fecha + " " + this.cita.horaInicio,
 			fin					: this.cita.fecha + " " + this.cita.horaFin,
 			nota				: this.cita.nota
