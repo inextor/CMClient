@@ -179,13 +179,18 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 			{
 				const id = this.counterId;
 				this.counterId += 1;
+
+				let hora_final	= cita.inicio;
+				let hora		= this.rest.getLocalDateFromMysqlString( cita.inicio );
+				hora.setHours( hora.getHours()+1 );
+
 				let obj = {
 					id:''+cita.id
 					,classNames: ['evento_normal']
 					,title: 'Reservado'
 					,editable: false
 					,start: cita.inicio
-					,end: cita.fin
+					,end: cita.fin | hora
 				};
 
 				if( !this.events[ obj.id ] )
