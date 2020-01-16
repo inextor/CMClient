@@ -109,7 +109,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	};
 
 	ngOnInit()
-	{
+	{	
 		let centro_medico = this.rest.getCurrentCentroMedico();
 
 		this.route.paramMap.subscribe( params =>

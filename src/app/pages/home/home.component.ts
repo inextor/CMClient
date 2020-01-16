@@ -27,7 +27,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 			let usuario = this.rest.getUsuarioSesion();
 			console.log(usuario);
 			let centroMedico = this.rest.getCurrentCentroMedico();
-			if (usuario.tipo == "ADMIN") {
+			if (usuario.tipo == "ADMIN" || usuario.tipo == "DOCTOR") {
 				if ((centroMedico == null || centroMedico == undefined)) {
 					this.show_seleccionar_centro_medico = true;
 				}
