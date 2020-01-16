@@ -84,7 +84,6 @@ import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket
 import { SeleccionarDoctorCitaComponent } from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component';
 import { SeguimientoCitaComponent } from './pages/seguimiento-cita/seguimiento-cita.component';
 import { ControlCitasComponent } from './pages/control-citas/control-citas.component';
-import { CalendarioCitasComponent } from './components/calendario-citas/calendario-citas.component';
 import { CalendarioAgendarCitaComponent } from './components/calendario-agendar-cita/calendario-agendar-cita.component';
 
 
@@ -165,7 +164,6 @@ import { CalendarioAgendarCitaComponent } from './components/calendario-agendar-
     SeleccionarDoctorCitaComponent,
     SeguimientoCitaComponent,
     ControlCitasComponent,
-    CalendarioCitasComponent,
     CalendarioAgendarCitaComponent,
    
 
