@@ -347,4 +347,9 @@ button{
 	user-select: none; /* Standard */
 }
 
-
+/*
+ */
+.evento_normal
+{
+	background-color: red;
+}
