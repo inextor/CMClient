@@ -59,6 +59,7 @@ import {ClientesComponent} from './pages/clientes/clientes.component';
 import {SeleccionarDoctorCitaComponent} from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component'
 import {SeguimientoCitaComponent} from '../app/pages/seguimiento-cita/seguimiento-cita.component';
 import {ControlCitasComponent} from '../app/pages/control-citas/control-citas.component';
+import {CalendarioCitasDoctorComponent } from 'src/app/pages/calendario-citas-doctor/calendario-citas-doctor.component';
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -68,7 +69,7 @@ const routes: Routes = [
 		children:
 		[
 			{ path: '', redirectTo: 'dashboard', pathMatch: "full"},
-			{ path: 'dashboard', component:DashboardComponent },
+			{ path: 'dashboard', component:CalendarioCitasDoctorComponent},
 			{ path: 'clientes', component:ClientesComponent},
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: "doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: HorarioDoctorComponent, pathMatch: "full" },
@@ -109,7 +110,8 @@ const routes: Routes = [
 			{ path: "agregar-gasto", component: AgregarGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "consultas", component: ConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-consulta/:id_paciente/:id_doctor", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "agregar-consulta/:id_cita/paciente/:id_paciente/doctor/:id_doctor/servicio/:id_servicio", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "agregar-consulta-cita/:id_cita", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
+
 			{ path: "agregar-pregunta", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-pregunta/:id", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "inventario", component: InventarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
