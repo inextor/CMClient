@@ -22,7 +22,7 @@
 			</div>
 		</div>
 
-		<div  class=" card p-0 mb-2" *ngIf="busquedaAvanzada">
+		<div class=" card p-0 mb-2" *ngIf="busquedaAvanzada">
 			<div class="form-row p-2">
 
 				<div class="form-group col-md-3">
@@ -120,17 +120,16 @@
 						<td class="p-0 options">
 							<!-- confirmado paciente -->
 							<button class=" p-0 btn btn-light m-1 border "
-							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
-							[routerLink]="['/agregar-consulta',i.cita.id,'paciente',i.cita.id_paciente,'doctor',i.cita.id_paciente,'servicio',i.cita.id_servicio]"
-							[appAccess]="['Doctor','admin']"
-							data-toggle="tooltip" title="Consultas">
-							<span class="">
-								<i class="">
-									<img src="../../../assets/icon/options/consultas.png" height="43px" width="43px"
-										class="menuIcons icons" />
-								</i>
-							</span>
-						</button>
+								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
+								[routerLink]="['/agregar-consulta',i.cita.id,'paciente',i.cita.id_paciente,'doctor',i.cita.id_doctor,'servicio',i.cita.id_servicio]"
+								[appAccess]="['Doctor','admin']" data-toggle="tooltip" title="Consultas">
+								<span class="">
+									<i class="">
+										<img src="../../../assets/icon/options/consultas.png" height="43px" width="43px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
@@ -142,12 +141,12 @@
 									</i>
 								</span>
 							</button>
-					
+
 
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
-								(click)="currentInfoCita=i;showConfirmPaciente=true;"
-								data-toggle="tooltip" title="Confirmar paciente">
+								(click)="currentInfoCita=i;showConfirmPaciente=true;" data-toggle="tooltip"
+								title="Confirmar paciente">
 								<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
@@ -160,11 +159,11 @@
 
 							</button>
 
-								<!-- confirmado doctor -->
-								<button class=" btn btn-light p-0 m-1 border "
+							<!-- confirmado doctor -->
+							<button class=" btn btn-light p-0 m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
-								(click)="currentInfoCita=i;showConfirmDoctor=true"
-								data-toggle="tooltip" title="Confirmado por doctor">
+								(click)="currentInfoCita=i;showConfirmDoctor=true" data-toggle="tooltip"
+								title="Confirmado por doctor">
 								<span>
 									<i class="">
 										<img src="../../../assets/icon/options/confirmado-doctor.png" height="43px"
@@ -174,8 +173,8 @@
 							</button>
 							<button class=" btn btn-light p-0 m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
-								(click)="currentInfoCita=i;showConfirmDoctor=true"
-								data-toggle="tooltip" title="Confirmar doctor">
+								(click)="currentInfoCita=i;showConfirmDoctor=true" data-toggle="tooltip"
+								title="Confirmar doctor">
 								<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
@@ -189,8 +188,8 @@
 							</button>
 							<button class="btn btn-light p-1 m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
-								(click)="currentInfoCita=i;showConfirmCancelar=true"
-								data-toggle="tooltip" title="Cancelar cita">
+								(click)="currentInfoCita=i;showConfirmCancelar=true" data-toggle="tooltip"
+								title="Cancelar cita">
 								<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
@@ -203,8 +202,8 @@
 							</button>
 							<button class="btn btn-light p-1 m-1 border"
 								*ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'"
-								(click)="currentInfoCita=i;showConfirmActivar=true"
-								data-toggle="tooltip" title="Activar cita">
+								(click)="currentInfoCita=i;showConfirmActivar=true" data-toggle="tooltip"
+								title="Activar cita">
 								<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
