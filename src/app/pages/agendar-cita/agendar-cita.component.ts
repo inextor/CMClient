@@ -41,6 +41,6 @@ export class AgendarCitaComponent extends BaseComponent implements OnInit {
 	onCitaAgendada(cita:Cita)
 	{
 		console.log('Cita is cita', cita );
-		
+		this.router.navigate(['/citas']);
 	}
 }
