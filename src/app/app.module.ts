@@ -87,6 +87,7 @@ import { ControlCitasComponent } from './pages/control-citas/control-citas.compo
 import { CalendarioAgendarCitaComponent } from './components/calendario-agendar-cita/calendario-agendar-cita.component';
 import { CalendarioCitasDoctorComponent } from 'src/app/pages/calendario-citas-doctor/calendario-citas-doctor.component';
 import { PuntoVentaConsultaComponent } from './components/punto-venta-consulta/punto-venta-consulta.component';
+import { AgendarCitaPacienteComponent } from './pages/agendar-cita-paciente/agendar-cita-paciente.component';
 
 
 @NgModule({
@@ -169,6 +170,7 @@ import { PuntoVentaConsultaComponent } from './components/punto-venta-consulta/p
     ControlCitasComponent,
     CalendarioAgendarCitaComponent,
     PuntoVentaConsultaComponent,
+    AgendarCitaPacienteComponent,
 
 
   ],
