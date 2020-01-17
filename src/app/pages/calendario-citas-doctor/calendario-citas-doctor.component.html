@@ -1,0 +1,13 @@
+<full-calendar
+	#calendar
+	[header]="calendarOptions.header"
+	[plugins]="calendarPlugins"
+	defaultView="timeGridWeek"
+	deepChangeDetection="true"
+	(dateClick)="dateClick($event)"
+	(eventClick)="eventClicked($event)"
+></full-calendar>
+<div class="custom-modal" *ngIf="show_modal">
+
+</div>
+

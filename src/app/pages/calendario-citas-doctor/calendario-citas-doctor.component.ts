@@ -2,6 +2,8 @@ import { Component, OnInit,OnChanges,SimpleChanges,Input,Output,ViewChild,AfterV
 import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente } from 'src/app/models/Modelos';
 import { RestService } from 'src/app/services/rest.service';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
+import { Router,ActivatedRoute,Params, ParamMap} from "@angular/router"
+import { BaseComponent } from 'src/app/pages/base/base.component';
 
 
 import { FullCalendarComponent } from '@fullcalendar/angular';
@@ -16,11 +18,11 @@ export interface SimpleMap{
 }
 
 @Component({
-  selector: 'app-calendario-agendar-cita',
-  templateUrl: './calendario-agendar-cita.component.html',
-  styleUrls: ['./calendario-agendar-cita.component.css']
+  selector: 'app-calendario-citas-doctor',
+  templateUrl: './calendario-citas-doctor.component.html',
+  styleUrls: ['./calendario-citas-doctor.component.css']
 })
-export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
+export class CalendarioCitasDoctorComponent extends BaseComponent implements OnInit , OnChanges {
 
 	@Input() doctor:Doctor= null;
 	@Input() centro_medico:Centro_Medico = null;
@@ -52,23 +54,19 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	cita:Cita = {
 		inicio: null
-	}
+  }
 
 	cita_fecha:Date = null;
-
-  	constructor(private rest:RestService) {
-
-	}
 
 	ngOnInit()
 	{
 		this.counterId = 0;
-
 	}
 
 	ngAfterViewInit()
 	{
 		console.log('Here is the fail');
+		this.good();
 		//this.good();
 		//setTimeout(()=>{ this.loadData();console.log('yeahhh')}, 1000 );
 	}
@@ -78,13 +76,13 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	{
 		let loadCounter:number = 0
 
-		if( changes['doctor'] || changes['centro_medico'] || changes['paciente'] )
-		{
-			if( this.doctor !== null && this.centro_medico !== null && this.paciente !== null )
-			{
-				this.good();
-			}
-		}
+		//if( changes['doctor'] || changes['centro_medico'] || changes['paciente'] )
+		//{
+		//	if( this.doctor !== null && this.centro_medico !== null && this.paciente !== null )
+		//	{
+		//		this.good();
+		//	}
+		//}
 	}
 
 	good()
@@ -120,11 +118,17 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	getEvents(info,successCallback,errorCallback )
 	{
 		console.log('Getting events for',info.start  );
-		let id_doctor:number = 2;
-		let id_centro_medico:number = 1;
+
+		let centro_medico = this.rest.getCurrentCentroMedico();
+		let id_centro_medico = 1;
+		let usuario = this.rest.getUsuarioSesion();
+
+		console.log('Consultando para', centro_medico, usuario );
+
+		let id_doctor = usuario.id;
 
 		forkJoin([
-			this.rest.horario_doctor.getAll({id_centro_medico:id_centro_medico },{ id_doctor: id_doctor})
+			this.rest.horario_doctor.getAll({id_centro_medico: id_centro_medico },{ id_doctor: id_doctor })
 			,this.rest.cita.search
 			(
 				{
@@ -132,6 +136,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					{
 						id_centro_medico: id_centro_medico
 						,id_doctor: id_doctor
+						,estatus: 'ACTIVA'
 					}
 					,ge:
 					{
@@ -184,12 +189,12 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 				let hora		= this.rest.getLocalDateFromMysqlString( cita.inicio );
 				hora.setHours( hora.getHours()+1 );
 
+				console.log( cita );
+
 				let obj = {
 					id:''+cita.id
 					,classNames: ['evento_normal']
-					,title: 'Reservado'
-					,textColor: 'white'
-					
+					,title: 'MUAHHHH'
 					,editable: false
 					,start: cita.inicio
 					,end: cita.fin == null ? hora : cita.fin
@@ -273,62 +278,31 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 		});
 	}
 
-	eventRender(info)
+	eventClicked(evt)
 	{
-		 console.log('Event Render', info );
-	}
-
-	cancelarCita()
-	{
-		this.show_modal = false;
-	}
-
-
-	aceptarCita()
-	{
-		//let usuario = this.restService.getUsuarioSesion();
-		this.rest.cita.create({
-			id_centro_medico	: this.centro_medico.id
-			,id_doctor			: this.doctor.id
-			,id_paciente		: this.paciente.id
-			,inicio				: this.rest.getMysqlStringFromLocaDate( this.cita_fecha )
-			//,fin					: this.cita.fecha + " " + this.cita.horaFin,
-			,nota				: this.cita.nota
-		})
-		.subscribe
-		(
-			response =>
-			{
-				this.citaAgendada.emit( response );
-				//this.router.navigate(['/citas-paciente']);
-			}
-			,(error)=>
-			{
-				let str = this.rest.getErrorMessage( error );
-				this.rest.showError({ mensaje: this.rest.getErrorMessage( error ), tipo: 'alert-danger' });
-			}
-		);
+		console.log( evt );
+		console.log('Has id',evt.event.id );
+		this.router.navigate(['agregar-consulta-cita',evt.event.id]);
 	}
 
 	dateClick(evt)
 	{
-		this.cita_fecha = evt.date;
-		console.log("Click on ", evt.date );
-		console.log( evt );
-		const calendarAPI = this.calendarComponent.getApi();
+	//	this.cita_fecha = evt.date;
+	//	console.log("Click on ", evt.date );
+	//	console.log( evt );
+	//	const calendarAPI = this.calendarComponent.getApi();
 
-		//calendarAPI.addEvent({
-		//	title: 'Cita'
-		//	,id:'nueva_cita'
-		//	,start: evt.date
-		//	,editable: true
-		//},'nueva_cita');
-		//
+	//	//calendarAPI.addEvent({
+	//	//	title: 'Cita'
+	//	//	,id:'nueva_cita'
+	//	//	,start: evt.date
+	//	//	,editable: true
+	//	//},'nueva_cita');
+	//	//
 
-		let fecha = this.rest.getMysqlStringFromLocaDate( evt.date );
-		this.cita.inicio = fecha.substring(0,20);
+	//	let fecha = this.rest.getMysqlStringFromLocaDate( evt.date );
+	//	this.cita.inicio = fecha.substring(0,20);
 
-		console.log('Fecha inicio', this.cita.inicio );
-		this.show_modal = true;
+		console.log('Fecha inicio', evt );
 	}
 }
