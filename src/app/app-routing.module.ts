@@ -59,6 +59,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
+import {AgendarCitaPacienteComponent}	from './pages/agendar-cita-paciente/agendar-cita-paciente.component'
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -75,7 +76,7 @@ const routes: Routes = [
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
 			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agendar-cita/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente", component: AgendarCitaComponent, canActivate:[AuthGuard] },
-			{ path: "agendar-cita-paciente/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: AgendarCitaComponent, canActivate:[AuthGuard] },
+			{ path: "agendar-cita-paciente/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: AgendarCitaPacienteComponent, canActivate:[AuthGuard] },
 			{ path: "pacientes", component: PacientesComponent, pathMatch: "full" },
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
