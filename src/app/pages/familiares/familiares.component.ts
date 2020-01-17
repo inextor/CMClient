@@ -7,42 +7,47 @@ import { ThrowStmt } from '@angular/compiler';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-familiares',
-  templateUrl: './familiares.component.html',
-  styleUrls: ['./familiares.component.css']
+	selector: 'app-familiares',
+	templateUrl: './familiares.component.html',
+	styleUrls: ['./familiares.component.css']
 })
 export class FamiliaresComponent extends BaseComponent implements OnInit {
-  familiares: Paciente[] = []
-  nombre: string = null
-  show_seleccionar_doctor_cita: boolean = false;
-  id_paciente: number = null;
-  
-  ngOnInit() {
-  console.log(this.id_paciente);
-    this.route.paramMap.subscribe( params =>{
-      let id = params.get('id') ==null ? null : parseInt(params.get('id') );
-      if(id==null){
-        let currentUser = this.rest.getUsuarioSesion();
-        this.rest.paciente.getAll({id_usuario: currentUser.id}).subscribe(params=>{
-          this.familiares = params.datos
-        })
-      }else{
-        this.is_loading = true;
-      
-        this.rest.paciente.getAll({ id_usuario: id}).subscribe(params => {
-          this.familiares = params.datos
-        }
-      );
-      }
-     
-    });
+	familiares: Paciente[] = []
+	nombre: string = null
+	show_seleccionar_doctor_cita: boolean = false;
+	id_paciente: number = null;
 
-      
-  }
-  showSeleccionarDoctorCita(familiar) {
-    this.show_seleccionar_doctor_cita = true;
-    this.id_paciente = familiar;
-  }
-  
+	ngOnInit()
+	{
+		console.log(this.id_paciente);
+		this.route.paramMap.subscribe( params =>
+		{
+			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
+			if(id==null)
+			{
+				let currentUser = this.rest.getUsuarioSesion();
+				this.rest.paciente.getAll({id_usuario: currentUser.id})
+					.subscribe(params=>
+					{
+						this.familiares = params.datos
+					});
+			}
+			else
+			{
+				this.is_loading = true;
 
+				this.rest.paciente.getAll({ id_usuario: id})
+				.subscribe(params =>
+				{
+					this.familiares = params.datos
+				});
+			}
+		});
+	}
+
+	showSeleccionarDoctorCita(familiar)
+	{
+		this.show_seleccionar_doctor_cita = true;
+		this.id_paciente = familiar;
+	}
 }
