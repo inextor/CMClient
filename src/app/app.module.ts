@@ -82,7 +82,6 @@ import { ShellComponent } from './components/shell/shell.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ImprimirTicketComponent } from './pages/imprimir-ticket/imprimir-ticket.component';
 import { SeleccionarDoctorCitaComponent } from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component';
-import { SeguimientoCitaComponent } from './pages/seguimiento-cita/seguimiento-cita.component';
 import { ControlCitasComponent } from './pages/control-citas/control-citas.component';
 import { CalendarioAgendarCitaComponent } from './components/calendario-agendar-cita/calendario-agendar-cita.component';
 import { CalendarioCitasDoctorComponent } from 'src/app/pages/calendario-citas-doctor/calendario-citas-doctor.component';
@@ -166,7 +165,6 @@ import { AgendarCitaPacienteComponent } from './pages/agendar-cita-paciente/agen
     DashboardComponent,
     ImprimirTicketComponent,
     SeleccionarDoctorCitaComponent,
-    SeguimientoCitaComponent,
     ControlCitasComponent,
     CalendarioAgendarCitaComponent,
     PuntoVentaConsultaComponent,
