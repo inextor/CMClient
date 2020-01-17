@@ -83,20 +83,20 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
     }else{
       this.show_especialidad = false;
     }
-   
   }
+
  closeModal(){
    console.log(this.show);
   this.show = false;
   this.show= null;
 
  }
+
   search()
 	{
     console.log('searchsssss',this.id_paciente);
 		this.is_loading = true;
     this.doctor_search.pagina = 0;
-
         let search = {};
         let array = ['eq','le','lt','ge','gt','csv','lk'];
         for(let i in this.doctor_search )
@@ -137,11 +137,11 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 		});
 	}
 
-
 	dismissModal()
 	{
 //		this.modalCtrl.dismiss(null);
   }
+
   seleccionarDoctor(doctor){
     this.selected_doctor = doctor;
     console.log("doctor selected",this.selected_doctor)
@@ -156,29 +156,25 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
         // if(i[cont].id_)
         // this.total_servicios = i[cont];
         // cont+=1;
-
       });
       // = respuesta[0].datos;
       // this.total_servicios=.forEach(i=>
   }
+
   seleccionarServicioDoctor(doctor_servicio){
     this.selected_servicio = doctor_servicio;
     console.log("servicio selected",this.selected_servicio)
   }
 
-
   seleccionarDoctorNuevaCita()
 	{
-
     console.log('id_paciente_selecdoctor',this.id_paciente);
     let usuario = this.rest.getUsuarioSesion();
 		if( usuario.tipo == 'PACIENTE' )
 		{
-			this.router.navigate(['/agendar-cita','doctor',this.selected_doctor.id,'centro-medico',this.selected_doctor.id_centro_medico,'paciente',this.id_paciente]);
+			this.router.navigate(['/agendar-cita-paciente','doctor',this.selected_doctor.id,'centro-medico',this.selected_doctor.id_centro_medico,'paciente',this.id_paciente,'servicio',this.selected_servicio.id]);
 			return;
 		}
-
 	}
-
 }
 

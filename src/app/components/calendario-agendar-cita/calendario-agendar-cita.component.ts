@@ -1,5 +1,5 @@
 import { Component, OnInit,OnChanges,SimpleChanges,Input,Output,ViewChild,AfterViewInit,EventEmitter } from '@angular/core';
-import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente } from 'src/app/models/Modelos';
+import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente, Servicio } from 'src/app/models/Modelos';
 import { RestService } from 'src/app/services/rest.service';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 
@@ -25,6 +25,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	@Input() doctor:Doctor= null;
 	@Input() centro_medico:Centro_Medico = null;
 	@Input() paciente:Paciente;
+	@Input() servicio:Servicio;
 	@Output() citaAgendada = new EventEmitter<Cita>();
 
 	//calendarEvents:EventInput[] = [];
