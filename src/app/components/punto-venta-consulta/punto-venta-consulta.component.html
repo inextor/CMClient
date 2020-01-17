@@ -5,10 +5,7 @@
 	</div>
 
 	<div>
-		<button type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
-			[disabled]="is_loading">
-			Pagar
-		</button>
+		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta || !datosVenta.venta.id" [routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
 	</div>
 </div>
 
