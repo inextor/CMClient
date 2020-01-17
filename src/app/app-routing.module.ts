@@ -49,7 +49,6 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component';
 import { RequisicionesComponent } from './pages/requisiciones/requisiciones.component';
-import {SeguimientoCitaComponent} from '../app/pages/seguimiento-cita/seguimiento-cita.component';
 import {SeleccionarDoctorCitaComponent} from './components/seleccionar-doctor-cita/seleccionar-doctor-cita.component'
 import { ServiciosComponent } from './pages/servicios/servicios.component';
 import { ShellComponent } from './components/shell/shell.component';
@@ -147,7 +146,6 @@ const routes: Routes = [
 			{ path: "punto-venta", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "punto-venta/:id", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "requisiciones", component: RequisicionesComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "seguimiento-cita", component:  SeguimientoCitaComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "seleccionar-doctor-cita", component:  SeleccionarDoctorCitaComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "servicios", component: ServiciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "servicios/:id", component: ServiciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
