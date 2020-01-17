@@ -171,9 +171,10 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 			// = respuesta[0].datos;
 			// this.total_servicios=.forEach(i=>
 	}
-	seleccionarServicioDoctor(doctor_servicio)
+
+	seleccionarServicioDoctor(doctor_servicio_id)
 	{
-		this.selected_servicio = doctor_servicio;
+		this.selected_servicio = this.doctor_servicios.find(i => i.id ==  doctor_servicio_id );
 		console.log("servicio selected",this.selected_servicio)
 	}
 

@@ -65,8 +65,8 @@
 				  <!-- lista de servicios del doctor  -->
 		<div *ngIf="selected_doctor != null" class="mt-2">
 			<label>Servicios:</label>
-			<select  class="form-control custom-select">
-				<option *ngFor="let doctor_servicio of doctor_servicios" [value]="doctor_servicio" (click)="seleccionarServicioDoctor(doctor_servicio)">
+			<select  class="form-control custom-select" (change)="seleccionarServicioDoctor($event.target.value)">
+				<option *ngFor="let doctor_servicio of doctor_servicios" [value]="doctor_servicio.id"> <!--(click)="seleccionarServicioDoctor(doctor_servicio)" -->
 					{{doctor_servicio.nombre}}</option>
 			</select>
 		</div>
