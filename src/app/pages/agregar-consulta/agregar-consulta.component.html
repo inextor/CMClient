@@ -21,7 +21,9 @@
 					<!-- servicios -->
 					<div class="card mt-1 p-2 ">
 						<app-punto-venta-consulta [datosVenta]="datosVenta"></app-punto-venta-consulta>
-						{{datosVenta.detalles.length}} {{totalProducts}}
+						<div *ngIf="datosVenta !== null">
+							{{datosVenta.detalles.length}} {{totalProducts}}
+						</div>
 					</div>
 					<!-- fin servicios -->
 				</div>
