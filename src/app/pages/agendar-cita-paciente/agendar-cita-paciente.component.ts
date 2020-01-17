@@ -25,7 +25,7 @@ export class AgendarCitaPacienteComponent extends BaseComponent implements OnIni
         ([
           this.rest.doctor.get( params.get('id_doctor') )
           ,this.rest.paciente.get( params.get('id_paciente') )
-          ,this.rest.centro_medico.get( params.get('id_paciente') )
+          ,this.rest.centro_medico.get( params.get('id_centro_medico') )
           ,this.rest.servicio.get(params.get('id_servicio'))
         ])
         .subscribe((responses)=>
@@ -42,6 +42,7 @@ export class AgendarCitaPacienteComponent extends BaseComponent implements OnIni
     onCitaAgendada(cita:Cita)
     {
       console.log('Cita is cita', cita );
+      this.router.navigate(['/citas-paciente']);
   
     }
   
