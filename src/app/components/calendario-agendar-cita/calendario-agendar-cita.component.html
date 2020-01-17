@@ -1,3 +1,6 @@
+<div class="card p-3">
+
+
 <full-calendar
 	#calendar
 	[header]="calendarOptions.header"
@@ -6,6 +9,8 @@
 	deepChangeDetection="true"
 	(dateClick)="dateClick($event)"
 ></full-calendar>
+</div>
+
 <div class="custom-modal" *ngIf="show_modal">
 	<div>
 		<form >

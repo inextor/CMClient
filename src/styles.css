@@ -349,7 +349,11 @@ button{
 
 /*
  */
-.evento_normal
+/* .evento_normal
 {
 	background-color: red;
+} */
+
+.disponibilidad{
+  background-color: #a9dded;
 }
