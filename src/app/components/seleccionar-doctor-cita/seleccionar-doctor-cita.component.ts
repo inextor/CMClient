@@ -174,7 +174,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
     let usuario = this.rest.getUsuarioSesion();
 		if( usuario.tipo == 'PACIENTE' )
 		{
-			this.router.navigate(['/doctor',this.selected_doctor.id,'centro-medico',this.selected_doctor.id_centro_medico,'paciente',this.id_paciente,'servicio',this.selected_servicio.id]);
+			this.router.navigate(['/agendar-cita','doctor',this.selected_doctor.id,'centro-medico',this.selected_doctor.id_centro_medico,'paciente',this.id_paciente]);
 			return;
 		}
 
