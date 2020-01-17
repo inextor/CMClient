@@ -1,10 +1,10 @@
 .bloqueAbono{
-    display: none;
+	display: none;
 }
 
 @media print {
   #sidebar-wrapper,.menuButtons,header,.no-print{
-      display: none !important;
+	  display: none !important;
   }
   .print{
   display: block !important;
@@ -13,10 +13,10 @@
 }
 
 td{
-    width: 40px;
-    max-width: 40px;
-    padding: 0;
-    margin: 0;
+	width: 40px;
+	max-width: 40px;
+	padding: 0;
+	margin: 0;
 	border: none;
 }
 
@@ -26,22 +26,22 @@ tr:not(:first-child)>td
 }
 
 .bgColor{
-    background-color: white;
+	background-color: white;
 }
 /*
 .ticket {
-    width: 500px;
-    max-width: 500px;
+	width: 500px;
+	max-width: 500px;
 }
 */
 
 .fullwidth{
-    padding: 0;
+	padding: 0;
 
 }
 
 table.basica,.basica td,.basica th{
 	border-collapse: collapse;
-    font-size: 1.2em;
+	font-size: 1.2em;
 	border: none;
 }
