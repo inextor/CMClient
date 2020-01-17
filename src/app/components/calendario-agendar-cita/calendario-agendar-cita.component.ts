@@ -296,7 +296,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 			,inicio				: this.rest.getMysqlStringFromLocaDate( this.cita_fecha )
 			//,fin					: this.cita.fecha + " " + this.cita.horaFin,
 			,nota				: this.cita.nota
-			,id_servicio : this.servicio ? this.servicio.id : null
+			,id_servicio 		: this.servicio ? this.servicio.id : null
 		})
 		.subscribe
 		(
