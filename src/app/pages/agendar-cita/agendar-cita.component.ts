@@ -16,8 +16,6 @@ export class AgendarCitaComponent extends BaseComponent implements OnInit {
 	paciente:Paciente			={};
 	centro_medico:Centro_Medico	={};
 	doctor:Doctor				={};
-	servicio:Servicio 			={};
-
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe(params=>

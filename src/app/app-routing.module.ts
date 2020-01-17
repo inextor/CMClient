@@ -86,7 +86,6 @@ const routes: Routes = [
 			{ path: "editar-producto/:id", component: AgregarServicioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "usuarios", component: UsuariosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			//{ path: "agendar-cita", component: AgendarCitaComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "agendar-cita/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente", component: AgendarCitaComponent, canActivate:[AuthGuard] },
 			{ path: "agregar-centro-medico", component: AgregarCentroMedicoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-consulta-cita/:id_cita", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-consulta/:id_paciente/:id_doctor", component: AgregarConsultaComponent, pathMatch: "full", canActivate: [AuthGuard] },
