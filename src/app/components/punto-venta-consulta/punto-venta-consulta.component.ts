@@ -1,18 +1,9 @@
 import { Component, OnInit,Input,SimpleChanges,OnChanges } from '@angular/core';
-import { RestService,DetalleServicio  } from '../../services/rest.service';
-import { Usuario,Tipo_Precio,Precio_Servicio} from '../../models/Modelos';
-import { Router,ActivatedRoute,Params} from "@angular/router"
-import { Location } from	'@angular/common';
-import { LoadingComponent } from '../../components/loading/loading.component';
-import { HeaderComponent } from '../../components/header/header.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { combineLatest } from 'rxjs';
-import { Observable } from 'rxjs';
-import { forkJoin,of } from 'rxjs';
-import { mergeMap,catchError,flatMap } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
-import { Servicio,Pago,Centro_Medico} from '../../models/Modelos';
-import { Detalle_Venta,Venta} from '../../models/Modelos';
+import { RestService  } from '../../services/rest.service';
+import { Precio_Servicio} from '../../models/Modelos';
+import { of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
+import { Servicio,Pago} from '../../models/Modelos';
 import { DatosVenta } from '../../services/rest.service';
 
 
@@ -30,6 +21,7 @@ interface Info_Precio
 
 export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 
+
 	constructor(public rest:RestService) { }
 
 	search_loading:boolean	= false;
@@ -37,7 +29,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 	busqueda:string = '';
 	precios_info:Info_Precio	= {};
 
-	infoPago:InfoPago			= {
+	infoPago			= {
 		total_venta 	: 0
 		,iva			: 0
 		,subtotal		: 0
@@ -65,12 +57,11 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 
 	}
 
-	ngOnChange(changes:SimpleChanges)
-	{
+	ngOnChanges(changes: SimpleChanges): void {
 		console.log('Somethign change', changes );
 		if( changes['datosVenta'] )
 			this.calcularTotalVenta();
-	}
+  }
 
 	search_servicios:Servicio[] = [];
 
