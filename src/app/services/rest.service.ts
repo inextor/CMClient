@@ -12,7 +12,7 @@ import {ObjRest} from './ObjRest';
 import {SearchRest} from './SearchRest';
 import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models/Respuestas';
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
-import {   Centro_Medico, Cita,
+import {	Centro_Medico, Cita,
 Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
 Detalle_Venta, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
  Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
@@ -134,48 +134,48 @@ export class RestService {
 		this.errorObservable = this.errorBehaviorSubject.asObservable();
 
 		//this.doctor = new DoctorRest(http,this.urlBase);
-		this.bitacora						= new ObjRest<Bitacora>                         (`${this.urlBase}/bitacora.php`,http);
-		this.centro_medico					= new ObjRest<Centro_Medico>                    (`${this.urlBase}/centro_medico.php`,http);
-		this.proveedor						= new ObjRest<Proveedor>                    	(`${this.urlBase}/proveedor.php`,http);
-		this.cita							= new ObjRest<Cita>                             (`${this.urlBase}/cita.php`,http);
-		this.comision_por_servios			= new ObjRest<Comision_Por_Servios>             (`${this.urlBase}/comision_por_servios.php`,http);
-		this.comisiones_doctor				= new ObjRest<Comisiones_Doctor>                (`${this.urlBase}/comisiones_doctor.php`,http);
-		this.configuracion					= new ObjRest<Configuracion>                    (`${this.urlBase}/configuracion.php`,http);
-		this.consulta						= new ObjRest<Consulta>                         (`${this.urlBase}/consulta.php`,http);
-		this.consultorio					= new ObjRest<Consultorio>                      (`${this.urlBase}/consultorio.php`,http);
-		this.consultorio_doctor				= new ObjRest<Consultorio_Doctor>               (`${this.urlBase}/consultorio_doctor.php`,http);
-		this.detalle_venta					= new ObjRest<Detalle_Venta>                    (`${this.urlBase}/detalle_venta.php`,http);
-		this.doctor							= new ObjRest<Doctor>                           (`${this.urlBase}/doctor.php`,http);
-		this.especialidad_pregunta			= new ObjRest<Especialidad_Pregunta>            (`${this.urlBase}/especialidad_pregunta.php`,http);
-		this.expediente						= new ObjRest<Expediente>                       (`${this.urlBase}/expediente.php`,http);
-		this.factura						= new ObjRest<Factura>                          (`${this.urlBase}/factura.php`,http);
-		this.fondo_caja						= new ObjRest<Fondo_Caja>                       (`${this.urlBase}/fondo_caja.php`,http);
-		this.gasto_centro_medico			= new ObjRest<Gasto_Centro_Medico>              (`${this.urlBase}/gasto_centro_medico.php`,http);
-		this.gasto_doctor					= new ObjRest<Gasto_Doctor>                     (`${this.urlBase}/gasto_doctor.php`,http);
-		this.historia_horario				= new ObjRest<Historia_Horario>                 (`${this.urlBase}/historia_horario.php`,http);
-		this.horario_doctor					= new ObjRest<Horario_Doctor>                   (`${this.urlBase}/horario_doctor.php`,http);
-		this.imagen							= new ObjRest<Imagen>                           (`${this.urlBase}/imagen.php`,http);
-		this.inventario						= new ObjRest<Inventario>                       (`${this.urlBase}/inventario.php`,http);
-		this.notificacion					= new ObjRest<Notificacion>                     (`${this.urlBase}/notificacion.php`,http);
-		this.organizacion					= new ObjRest<Organizacion>                     (`${this.urlBase}/organizacion.php`,http);
-		this.paciente						= new ObjRest<Paciente>                         (`${this.urlBase}/paciente.php`,http);
-		this.pago							= new ObjRest<Pago>                             (`${this.urlBase}/pago.php`,http);
-		this.poliza							= new ObjRest<Poliza>                           (`${this.urlBase}/poliza.php`,http);
-		this.precio_servicio				= new ObjRest<Precio_Servicio>                  (`${this.urlBase}/precio_servicio.php`,http);
-		this.pregunta_historia_clinica		= new ObjRest<Pregunta_Historia_Clinica>        (`${this.urlBase}/pregunta_historia_clinica.php`,http);
-		this.recepcionista_doctor			= new ObjRest<Recepcionista_Doctor>             (`${this.urlBase}/recepcionista_doctor.php`,http);
-		this.respuesta_historia_clinica		= new ObjRest<Respuesta_Historia_Clinica>       (`${this.urlBase}/respuesta_historia_clinica.php`,http);
-		this.servicio						= new ObjRest<Servicio>                         (`${this.urlBase}/servicio.php`,http); //NO SOPORTA POST
-		this.servicio_recurso				= new ObjRest<Servicio_Recurso>					(`${this.urlBase}/servicio_recurso.php`,http); //PARA dar de alta el servicio
+		this.bitacora						= new ObjRest<Bitacora>						(`${this.urlBase}/bitacora.php`,http);
+		this.centro_medico					= new ObjRest<Centro_Medico>				(`${this.urlBase}/centro_medico.php`,http);
+		this.proveedor						= new ObjRest<Proveedor>					(`${this.urlBase}/proveedor.php`,http);
+		this.cita							= new ObjRest<Cita>							(`${this.urlBase}/cita.php`,http);
+		this.comision_por_servios			= new ObjRest<Comision_Por_Servios>			(`${this.urlBase}/comision_por_servios.php`,http);
+		this.comisiones_doctor				= new ObjRest<Comisiones_Doctor>			(`${this.urlBase}/comisiones_doctor.php`,http);
+		this.configuracion					= new ObjRest<Configuracion>				(`${this.urlBase}/configuracion.php`,http);
+		this.consulta						= new ObjRest<Consulta>						(`${this.urlBase}/consulta.php`,http);
+		this.consultorio					= new ObjRest<Consultorio>					(`${this.urlBase}/consultorio.php`,http);
+		this.consultorio_doctor				= new ObjRest<Consultorio_Doctor>			(`${this.urlBase}/consultorio_doctor.php`,http);
+		this.detalle_venta					= new ObjRest<Detalle_Venta>				(`${this.urlBase}/detalle_venta.php`,http);
+		this.doctor							= new ObjRest<Doctor>						(`${this.urlBase}/doctor.php`,http);
+		this.especialidad_pregunta			= new ObjRest<Especialidad_Pregunta>		(`${this.urlBase}/especialidad_pregunta.php`,http);
+		this.expediente						= new ObjRest<Expediente>					(`${this.urlBase}/expediente.php`,http);
+		this.factura						= new ObjRest<Factura>						(`${this.urlBase}/factura.php`,http);
+		this.fondo_caja						= new ObjRest<Fondo_Caja>					(`${this.urlBase}/fondo_caja.php`,http);
+		this.gasto_centro_medico			= new ObjRest<Gasto_Centro_Medico>			(`${this.urlBase}/gasto_centro_medico.php`,http);
+		this.gasto_doctor					= new ObjRest<Gasto_Doctor>					(`${this.urlBase}/gasto_doctor.php`,http);
+		this.historia_horario				= new ObjRest<Historia_Horario>				(`${this.urlBase}/historia_horario.php`,http);
+		this.horario_doctor					= new ObjRest<Horario_Doctor>				(`${this.urlBase}/horario_doctor.php`,http);
+		this.imagen							= new ObjRest<Imagen>						(`${this.urlBase}/imagen.php`,http);
+		this.inventario						= new ObjRest<Inventario>					(`${this.urlBase}/inventario.php`,http);
+		this.notificacion					= new ObjRest<Notificacion>					(`${this.urlBase}/notificacion.php`,http);
+		this.organizacion					= new ObjRest<Organizacion>					(`${this.urlBase}/organizacion.php`,http);
+		this.paciente						= new ObjRest<Paciente>						(`${this.urlBase}/paciente.php`,http);
+		this.pago							= new ObjRest<Pago>							(`${this.urlBase}/pago.php`,http);
+		this.poliza							= new ObjRest<Poliza>						(`${this.urlBase}/poliza.php`,http);
+		this.precio_servicio				= new ObjRest<Precio_Servicio>				(`${this.urlBase}/precio_servicio.php`,http);
+		this.pregunta_historia_clinica		= new ObjRest<Pregunta_Historia_Clinica>	(`${this.urlBase}/pregunta_historia_clinica.php`,http);
+		this.recepcionista_doctor			= new ObjRest<Recepcionista_Doctor>			(`${this.urlBase}/recepcionista_doctor.php`,http);
+		this.respuesta_historia_clinica		= new ObjRest<Respuesta_Historia_Clinica>	(`${this.urlBase}/respuesta_historia_clinica.php`,http);
+		this.servicio						= new ObjRest<Servicio>						(`${this.urlBase}/servicio.php`,http); //NO SOPORTA POST
+		this.servicio_recurso				= new ObjRest<Servicio_Recurso>				(`${this.urlBase}/servicio_recurso.php`,http); //PARA dar de alta el servicio
 
-		//this.sesion						= new ObjRest<Sesion>                           (`${this.urlBase}/sesion.php`,http);
-		this.tipo_gasto						= new ObjRest<Tipo_Gasto>                       (`${this.urlBase}/tipo_gasto.php`,http);
-		this.tipo_precio					= new ObjRest<Tipo_Precio>                      (`${this.urlBase}/tipo_precio.php`,http);
-		this.usuario						= new ObjRest<Usuario>                          (`${this.urlBase}/usuario.php`,http);
-		// this.usuario_centro_medico		= new ObjRest<Usuario_Centro_Medico>            (`${this.urlBase}/usuario_centro_medico.php`,http);
-		this.venta							= new ObjRest<Venta>                            (`${this.urlBase}/venta.php`,http);
+		//this.sesion						= new ObjRest<Sesion>							(`${this.urlBase}/sesion.php`,http);
+		this.tipo_gasto						= new ObjRest<Tipo_Gasto>					(`${this.urlBase}/tipo_gasto.php`,http);
+		this.tipo_precio					= new ObjRest<Tipo_Precio>					(`${this.urlBase}/tipo_precio.php`,http);
+		this.usuario						= new ObjRest<Usuario>						(`${this.urlBase}/usuario.php`,http);
+		// this.usuario_centro_medico		= new ObjRest<Usuario_Centro_Medico>		(`${this.urlBase}/usuario_centro_medico.php`,http);
+		this.venta							= new ObjRest<Venta>						(`${this.urlBase}/venta.php`,http);
 		this.searchCita						= new SearchRest<SearchCitaRequest,SearchCitaResponse>(`${this.urlBase}/searchCita.php`,http);
-		this.especialidad_pregunta			= new ObjRest<Especialidad_Pregunta_Accion>                     (`${this.urlBase}/especialidad_pregunta.php`,http);
+		this.especialidad_pregunta			= new ObjRest<Especialidad_Pregunta_Accion>	(`${this.urlBase}/especialidad_pregunta.php`,http);
 		this.searchGastoCentroMedico		= new SearchRest<Gasto_Centro_Medico,SearchGastoCentroMedicoResponse>(`${this.urlBase}/searchGastosCentroMedico.php`,http);
 		this.searchServicio					= new SearchRest<Servicio,ServicioResponseItem>(`${this.urlBase}/searchServicio.php`,http);
 		this.especialidad					= new ObjRest<Especialidad>						(`${this.urlBase}/especialidad.php`,http);
@@ -202,7 +202,7 @@ export class RestService {
 		// localStorage.removeItem('session_token');
 		// localStorage.removeItem('id_organizacion');
 		this.currentUserSubject.next(null)
-    }
+	}
 
 	doLogin(usuario:string,contrasena:string):Observable<LoginResponse>
 	{
@@ -240,7 +240,7 @@ export class RestService {
 	}
 
 	public get currentUserValue() {
-        return this.currentUserSubject.value;
+		return this.currentUserSubject.value;
 	}
 
 	hasRoles(roles:string[]): boolean{
@@ -544,7 +544,7 @@ export class RestService {
 					,venta.id_usuario_cliente ? this.usuario.get( venta.id_usuario_cliente ) : of( null )
 					,this.tipo_precio.get( venta.id_tipo_precio )
 				])
-  			})
+			})
 			,flatMap((responses)=>
 			{
 				let venta:Venta							= responses[0];
