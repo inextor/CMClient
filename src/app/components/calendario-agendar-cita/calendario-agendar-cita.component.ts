@@ -190,7 +190,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					,title: 'Reservado'
 					,editable: false
 					,start: cita.inicio
-					,end: cita.fin | hora
+					,end: cita.fin == null ? hora : cita.fin
 				};
 
 				if( !this.events[ obj.id ] )
