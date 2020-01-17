@@ -132,6 +132,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					{
 						id_centro_medico: id_centro_medico
 						,id_doctor: id_doctor
+						,estatus: 'ACTIVA'
 					}
 					,ge:
 					{
@@ -189,7 +190,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					,classNames: ['evento_normal']
 					,title: 'Reservado'
 					,textColor: 'white'
-					
+
 					,editable: false
 					,start: cita.inicio
 					,end: cita.fin == null ? hora : cita.fin
