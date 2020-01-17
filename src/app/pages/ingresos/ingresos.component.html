@@ -28,7 +28,7 @@
 					<th>id</th>
 					<th>Nota</th>
 					<th >Monto</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
@@ -44,7 +44,6 @@
 					<td>{{ingreso.id}}</td>
 					<td>{{ingreso.nota}}</td>
 					<td class="text-right" >{{ingreso.monto | currency: '$'}}</td>
-					
 				</tr>
 			</tbody>
 		</table>
@@ -54,5 +53,5 @@
 				[currentPage]="currentPage"></app-paginacion>
 		</div>
 	</div>
-	<app-ingreso [show]="showAddIngreso" (onClose)="ingresoClosed()"></app-ingreso>
+	<app-ingreso [show]="showAddIngreso" (onClose)="ingresoClosed($event)"></app-ingreso>
 </div>
