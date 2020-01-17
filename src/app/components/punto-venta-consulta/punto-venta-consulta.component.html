@@ -50,3 +50,6 @@
 		</li>
 	</ul>
 </div>
+<div *ngIf="datosVenta && datosVenta.venta" class="text-right p-1">
+	<strong style="font-size:3rem;">{{datosVenta.venta.total | currency}}</strong>
+</div>

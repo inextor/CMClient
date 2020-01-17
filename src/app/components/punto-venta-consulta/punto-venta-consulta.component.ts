@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,SimpleChanges,OnChanges } from '@angular/core';
 import { RestService,DetalleServicio  } from '../../services/rest.service';
 import { Usuario,Tipo_Precio,Precio_Servicio} from '../../models/Modelos';
 import { Router,ActivatedRoute,Params} from "@angular/router"
@@ -28,7 +28,7 @@ interface Info_Precio
 	styleUrls: ['./punto-venta-consulta.component.css']
 })
 
-export class PuntoVentaConsultaComponent implements OnInit {
+export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 
 	constructor(public rest:RestService) { }
 
@@ -37,6 +37,27 @@ export class PuntoVentaConsultaComponent implements OnInit {
 	busqueda:string = '';
 	precios_info:Info_Precio	= {};
 
+	infoPago:InfoPago			= {
+		total_venta 	: 0
+		,iva			: 0
+		,subtotal		: 0
+		,total_pagado	: 0
+		,total_a_pagar	: 0
+		,cambio			: 0
+		,total_cantidades: 0
+		,cantidad_faltante	: 0
+	};
+
+	pago:Pago = {
+		efectivo	: 0.0
+		,total		: 0.0
+		,dolares	: 0.0
+		,tarjeta	: 0.0
+		,cheque		: 0.0
+		,deposito	: 0.0
+		,cambio		: 0.0
+		,tipo_cambio_dolares : 0.0
+	};
 
 	@Input() datosVenta:DatosVenta = null;
 
@@ -44,11 +65,73 @@ export class PuntoVentaConsultaComponent implements OnInit {
 
 	}
 
+	ngOnChange(changes:SimpleChanges)
+	{
+		console.log('Somethign change', changes );
+		if( changes['datosVenta'] )
+			this.calcularTotalVenta();
+	}
+
 	search_servicios:Servicio[] = [];
 
 	calcularTotalVenta()
 	{
+		let total		= 0;
+		let subtotal	= 0;
+		let iva			= 0;
+		let centro_medico = this.rest.getCurrentCentroMedico();
 
+		let prices = [];
+
+		for(let i of this.datosVenta.detalles )
+		{
+			i.detalle_venta.precio		= i.precio_servicio.precio;
+			i.detalle_venta.total		= i.precio_servicio.precio*i.detalle_venta.cantidad;
+			i.detalle_venta.subtotal 	= i.detalle_venta.total/(1+(centro_medico.iva*0.01));
+			i.detalle_venta.iva			= i.detalle_venta.total- i.detalle_venta.subtotal;
+
+			total 		+= i.detalle_venta.total;
+			subtotal	+= i.detalle_venta.subtotal;
+			iva			+= i.detalle_venta.iva;
+		}
+
+		console.log('Precios', prices );
+
+		this.datosVenta.venta.total		= total;
+		this.datosVenta.venta.subtotal	= subtotal;
+		this.datosVenta.venta.iva		= iva;
+
+		let pagos_hechos		= this.datosVenta.pagos.reduce((a,b)=>{ return a+b.total},0);
+		//this.datosVenta.venta.total = total;
+		//this.datosVenta.venta.subtotal
+
+		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
+
+		this.infoPago.iva			= iva;
+		this.infoPago.subtotal		= subtotal;
+		this.infoPago.total_venta	= total;//this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
+		this.infoPago.total_pagado	= pagos_hechos;
+		this.infoPago.total_a_pagar	= total-pagos_hechos;
+		this.infoPago.cambio		= 0 ;
+		this.calcularCantidades();
+	}
+
+	calcularCantidades()
+	{
+
+		this.pago.total		= this.infoPago.total_a_pagar;
+		this.pago.subtotal	= this.infoPago.subtotal;
+		this.pago.iva		= this.infoPago.iva;
+
+		this.pago.tipo_cambio_dolares	= this.datosVenta.centro_medico.tipo_cambio_dolares;
+
+		this.infoPago.total_cantidades = this.pago.efectivo
+				+(this.pago.dolares*this.pago.tipo_cambio_dolares)
+				+this.pago.tarjeta
+				+this.pago.cheque
+				+this.pago.deposito;
+
+		this.pago.cambio		= this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
 	}
 
 	buscar(evt:any)
