@@ -16,12 +16,18 @@ import { Detalle_Venta,Venta} from '../../models/Modelos';
 import { DatosVenta } from '../../services/rest.service';
 
 
+interface Info_Precio
+{
+	[key:number]:Precio_Servicio[];
+}
+
 
 @Component({
 	selector: 'app-punto-venta-consulta',
 	templateUrl: './punto-venta-consulta.component.html',
 	styleUrls: ['./punto-venta-consulta.component.css']
 })
+
 export class PuntoVentaConsultaComponent implements OnInit {
 
 	constructor(public rest:RestService) { }
@@ -56,7 +62,7 @@ export class PuntoVentaConsultaComponent implements OnInit {
 			this.search_loading = false;
 			this.search_servicios = response.datos;
 			x.unsubscribe();
-		},(error)=> this.rest.showError({ mensaje: this.rest.getErrorMessage(error) , tipo:'alert-danger' }));
+		},(error)=> this.showError( this.rest.getErrorMessage(error) ));
 	}
 
 	agregarServicio(servicio:Servicio)
@@ -192,5 +198,9 @@ export class PuntoVentaConsultaComponent implements OnInit {
 			console.log("No se envio");
 
 		this.calcularTotalVenta();
+	}
+	showError(error:string)
+	{
+		this.rest.showError({ mensaje: error , tipo:'alert-danger' })
 	}
 }

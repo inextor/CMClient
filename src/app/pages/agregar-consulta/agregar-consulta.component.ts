@@ -6,17 +6,13 @@ import { Route } from '@angular/compiler/src/core';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { forkJoin,of } from 'rxjs';
+import { catchError,flatMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { ServiciosComponent } from '../servicios/servicios.component';
 
 interface ServicioById {
 	[key:number]:Servicio;
 };
-
-interface Info_Precio
-{
-	[key:number]:Precio_Servicio[];
-}
 
 @Component({
 	selector: 'app-agregar-consulta',
@@ -59,18 +55,21 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		{
 			if( response.total ==  0 )
 			{
+				console.log('Consulta no encontrada');
 				this.rest.cita.get( id_cita ).subscribe((cita)=>
 				{
 					this.loadConsultaData({
 						id_doctor 			: cita.id_doctor
 						,id_paciente 		: cita.id_paciente
 						,id_venta			: null
+						,id_cita			: id_cita
 						,id_centro_medico	: cita.id_centro_medico
 					});
 				},(error)=>this.showError( error ));
 			}
 			else
 			{
+				console.log('Consulta Encontrada');
 				this.loadConsultaData( response.datos[0] );
 			}
 		},(error)=>this.showError(error));
@@ -118,6 +117,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			{
 				this.datosVenta = this.getNewVenta(responses[4].datos );
 			}
+			this.is_loading = false;
 		});
 	}
 
@@ -175,16 +175,21 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	guardar() {
 		this.is_loading = true;
-		let observable = this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
+		let observable =
 
-		observable.subscribe
+		this.rest.guardarDatosVenta( this.datosVenta ).pipe
 		(
-			consulta => {
-				this.consulta = consulta
-				this.is_loading = false;
-			}
-			, error => this.showError(error)
-		);
+			flatMap((datosVenta)=>
+			{
+				this.consulta.id_venta = datosVenta.venta.id;
+				return this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
+			})
+		).subscribe((consulta)=>
+		{
+			this.consulta = consulta;
+			this.is_loading = false;
+			//Redirigir a donde???
+		},(error)=>this.showError(error));
 	}
 
 	buscar(evt: any)
@@ -198,30 +203,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		});
 	}
 
-	agregarServicio(servicio: Servicio)
+	ngOnDestroy()
 	{
-		//if( !( servicio.id in this.servicios_by_id ) )
-		//	this.servicios_by_id[ servicio.id ] = servicio;
 
-		//let s = this.detalles_requisicion.find(i => i.id_servicio == servicio.id);
-		//if (s) {
-		//	this.busqueda = '';
-		//	this.aumentar(s);
-		//	return;
-		//}
-
-		//this.detalles_requisicion.push
-		//({
-		//	id_servicio	: servicio.id, cantidad	: 1,
-		//});
-
-
-		//this.busqueda			= '';
-		//this.search_servicios	= [];
-	}
-
-	aumentar(detalle_requisicion)
-	{
-	//	detalle_requisicion.cantidad++;
 	}
 }

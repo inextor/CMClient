@@ -136,6 +136,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 					{
 						id_centro_medico: id_centro_medico
 						,id_doctor: id_doctor
+						,estatus: 'ACTIVA'
 					}
 					,ge:
 					{
@@ -188,10 +189,12 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 				let hora		= this.rest.getLocalDateFromMysqlString( cita.inicio );
 				hora.setHours( hora.getHours()+1 );
 
+				console.log( cita );
+
 				let obj = {
 					id:''+cita.id
 					,classNames: ['evento_normal']
-					,title: 'Reservado'
+					,title: 'MUAHHHH'
 					,editable: false
 					,start: cita.inicio
 					,end: cita.fin == null ? hora : cita.fin
