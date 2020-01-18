@@ -316,6 +316,16 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	dateClick(evt)
 	{
 		this.cita_fecha = evt.date;
+
+
+		let dateNow = new Date();
+
+		if( evt.date < dateNow )
+		{
+			this.rest.showError({ mensaje: 'No se pueden agregar citas con fecha en el pasado', tipo:'alert-danger'});
+			return;
+		}
+
 		console.log("Click on ", evt.date );
 		console.log( evt );
 		const calendarAPI = this.calendarComponent.getApi();
