@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Lato,'Lato', "Helvetica Neue", sans-serif;
-  background-image: url(/assets/wallpaper.png);
+  background-image: url(./assets/wallpaper.png);
   background-repeat: repeat;
 }
 

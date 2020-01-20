@@ -42,7 +42,7 @@
 						<td class="p-1">
 							<img *ngIf="centro_medico.id_imagen"
 								[src]="this.rest.urlBase+'/imagen.php?id='+centro_medico.id_imagen" class="image_icon">
-							<img *ngIf="!centro_medico.id_imagen" src="/assets/hospital_icon.png" class="image_icon">
+							<img *ngIf="!centro_medico.id_imagen" src="./assets/hospital_icon.png" class="image_icon">
 							{{centro_medico.nombre}}
 						</td>
 						<td class="p-0 options">
@@ -55,7 +55,7 @@
 							data-toggle="tooltip" title="Editar">
 								<span class="">
 									<i class="">
-										<img src="../../../assets/icon/options/editar.png" height="35px" width="35px"
+										<img src="./assets/icon/options/editar.png" height="35px" width="35px"
 											class="menuIcons icons" />
 									</i>
 								</span>
@@ -66,13 +66,13 @@
 							data-toggle="tooltip" title="Servicios">
 								<span class="">
 									<i class="">
-										<img src="../../../assets/icon/options/servicios.png" height="35px" width="35px"
+										<img src="./assets/icon/options/servicios.png" height="35px" width="35px"
 											class="menuIcons icons" />
 									</i>
 								</span>
 							</button>
 
-							
+
 						</td>
 					</tr>
 				</tbody>
