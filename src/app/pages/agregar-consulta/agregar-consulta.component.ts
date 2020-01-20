@@ -35,7 +35,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	centro_medico:Centro_Medico = null;
 	//timer
 	timeLeft: number = 60;
-  	interval;
+	interval;
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion:Detalle_Requisicion[] = [];
@@ -98,6 +98,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		return datosVenta;
 	}
 
+
 	loadConsultaData(consulta)
 	{
 		this.consulta = consulta;
@@ -137,7 +138,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 				,iva				: centro_medico.iva
 				,total				: 0
 				,estatus			: 'PENDIENTE'
-				,cliente			: tipo_precios[0].nombre
+				,cliente			: this.paciente.nombre
 				,id_tipo_precio		: tipo_precios[0].id
 			}
 			,centro_medico
@@ -215,15 +216,15 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	//timer
 	startTimer() {
 		this.interval = setInterval(() => {
-		  if(this.timeLeft > 0) {
-			this.timeLeft--;
-		  } else {
+			if(this.timeLeft > 0) {
+				this.timeLeft--;
+			} else {
 			this.timeLeft = 60;
-		  }
+			}
 		},1000)
-	  }
+		}
 	
-	  pauseTimer() {
+	pauseTimer() {
 		clearInterval(this.interval);
-	  }
+	}
 }
