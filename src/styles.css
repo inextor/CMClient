@@ -370,3 +370,9 @@ button{
 {
 	background-color: #74424d;
 }
+
+
+th.fc-day-header.fc-widget-header
+{
+	color: black;
+}
