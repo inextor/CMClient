@@ -4,8 +4,8 @@
 		<h5 class="mb-3 mt-3">*Nuevo Servicio</h5>
 	</div>
 
-	<div>
-		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta || !datosVenta.venta.id" [routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
+	<div *ngIf="datosVenta" >
+		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta.id" [routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
 	</div>
 </div>
 
