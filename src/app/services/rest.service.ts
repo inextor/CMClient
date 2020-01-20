@@ -324,7 +324,7 @@ export class RestService {
 				parseInt(components[1])-1, //Month
 				parseInt(components[2]), //Day
 				parseInt(components[3]), //Hour
-				parseInt(components[5])) //Minutes
+				parseInt(components[4])) //Minutes
 		return d;
 	}
 
@@ -337,7 +337,7 @@ export class RestService {
 						parseInt(components[1])-1,
 						parseInt(components[2]),
 						parseInt(components[3]),
-						parseInt(components[5])
+						parseInt(components[4])
 				);
 
 		let d = new Date();
