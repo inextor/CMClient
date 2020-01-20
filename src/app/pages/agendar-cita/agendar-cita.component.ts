@@ -25,7 +25,7 @@ export class AgendarCitaComponent extends BaseComponent implements OnInit {
 			([
 				this.rest.doctor.get( params.get('id_doctor') )
 				,this.rest.paciente.get( params.get('id_paciente') )
-				,this.rest.centro_medico.get( params.get('id_paciente') )
+				,this.rest.centro_medico.get( params.get('id_centro_medico') )
 			])
 			.subscribe((responses)=>
 			{
