@@ -1,9 +1,9 @@
 import { Component, OnInit,Input,SimpleChanges,OnChanges } from '@angular/core';
-import { RestService  } from '../../services/rest.service';
+import { RestService	} from '../../services/rest.service';
 import { Precio_Servicio} from '../../models/Modelos';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { Servicio,Pago} from '../../models/Modelos';
+import { Servicio,Pago,Cita} from '../../models/Modelos';
 import { DatosVenta } from '../../services/rest.service';
 
 
@@ -20,7 +20,6 @@ interface Info_Precio
 })
 
 export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
-
 
 	constructor(public rest:RestService) { }
 
@@ -52,6 +51,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 	};
 
 	@Input() datosVenta:DatosVenta = null;
+	@Input() id_servicio_default:number = null;
 
 	ngOnInit() {
 
@@ -61,7 +61,20 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 		console.log('Somethign change', changes );
 		if( changes['datosVenta'] )
 			this.calcularTotalVenta();
-  }
+
+		if( changes['id_servicio_default'] )
+		{
+			console.log('Change id_servicio_default');
+
+			if( this.id_servicio_default == null )
+				return;
+
+			this.rest.servicio.get( this.id_servicio_default ).subscribe((servicio)=>
+			{
+				this.agregarServicio( servicio )
+			},(error)=>this.showError );
+		}
+	}
 
 	search_servicios:Servicio[] = [];
 
@@ -164,7 +177,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 		(
 			flatMap((x)=>
 			{
-				if(  servicio.id in this.precios_info)
+				if(	servicio.id in this.precios_info)
 				{
 					return of({total: this.precios_info[ servicio.id ].length, datos: this.precios_info[ servicio.id ]});
 				}
@@ -240,7 +253,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 	disminuir(sd)
 	{
 		console.log('Disminuir');
-		if( sd.detalle_venta.cantidad  <= 1 )
+		if( sd.detalle_venta.cantidad	<= 1 )
 		{
 			console.log("try to remove");
 			let index = this.datosVenta.detalles.findIndex(i=>i.servicio.id == sd.servicio.id );
