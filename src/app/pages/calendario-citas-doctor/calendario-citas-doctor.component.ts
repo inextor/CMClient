@@ -35,6 +35,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 
 	events:SimpleMap = {};
+	citas:Cita[] = [];
 
 	show_modal:boolean	= false;
 	counterId:number = 0;
@@ -54,7 +55,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 	cita:Cita = {
 		inicio: null
-  }
+  	}
 
 	cita_fecha:Date = null;
 
@@ -157,6 +158,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 			let fooo = this.map(info.start, responses[0].datos );
 
+
+
 			fooo.forEach(i=>
 			{
 				let id = this.counterId+1;
@@ -182,6 +185,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 			responses[1].datos.forEach((cita)=>
 			{
+				this.citas.push( cita );
+
 				const id = this.counterId;
 				this.counterId += 1;
 
@@ -193,7 +198,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 				let obj = {
 					id:''+cita.id
-					,classNames: ['evento_normal']
+					,classNames: ['evento_normal',cita.estatus]
 					,title: 'Agendado'
 					,editable: false
 					,start: cita.inicio
@@ -282,7 +287,23 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	{
 		console.log( evt );
 		console.log('Has id',evt.event.id );
+
+		for(let cita of this.citas)
+		{
+			if( cita.id == evt.event.id )
+			{
+				if( cita.estatus == 'CANCELADA' )
+				{
+					this.showError('La cita ya esta cancelada');
+					return;
+				}
+				this.router.navigate(['agregar-consulta-cita',evt.event.id]);
+				return;
+			}
+		}
+
 		this.router.navigate(['agregar-consulta-cita',evt.event.id]);
+		return;
 	}
 
 	dateClick(evt)
