@@ -30,9 +30,11 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	servicios_by_id:ServicioById	= {};
 	paciente: Paciente = {};
 	doctor: Doctor = {};
+	cita: Cita = null;
 	consulta: Consulta = {};
 	datosVenta:DatosVenta = null;
 	centro_medico:Centro_Medico = null;
+	id_servicio_default:number = null;
 	//timer
 	timeLeft: number = 60;
 	interval;
@@ -77,7 +79,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			}
 		},(error)=>this.showError(error));
 	}
-	
+
 	getDatosVenta( consulta:Consulta , centro_medico:Centro_Medico )
 	{
 		let datosVenta:DatosVenta =
@@ -111,16 +113,35 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			,centro_medico.id == this.consulta.id_centro_medico ? of( centro_medico ) : this.rest.centro_medico.get( this.consulta.id_centro_medico )
 			,consulta.id_venta ? this.rest.getDatosVenta( this.consulta.id_venta) : of( null )
 			,this.rest.tipo_precio.search({ eq:{ id_organizacion: centro_medico.id_organizacion }})
+			,consulta.id_cita ? this.rest.cita.get( consulta.id_cita ): of(null)
 		]).subscribe((responses)=>
 		{
 			this.doctor = responses[0];
 			this.paciente = responses[1];
 			this.centro_medico = responses[2];
 			this.datosVenta	= responses[ 3 ];
-			if( responses[ 3 ]  == null )
+			//this.tipo_precios	= responses[4];
+			this.cita	= responses[ 5 ];
+
+			if( this.consulta.id )
 			{
-				this.datosVenta = this.getNewVenta(responses[4].datos );
+				//Lo carga automaticamente
+				console.log('Consulta',this.consulta );
 			}
+			else
+			{
+				//Venta Nueva
+				this.datosVenta = this.getNewVenta( responses[4].datos );
+				if( this.cita ) //Condicion de carrera entre datosVenta y id_servicio_default al asignar punto_venta_consulta
+				{
+					console.log('ConsultaX',this.consulta,'Cita',this.cita);
+					setTimeout(()=>
+					{
+						this.id_servicio_default = this.cita.id_servicio;
+					},500);
+				}
+			}
+
 			this.is_loading = false;
 		});
 	}
@@ -195,7 +216,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			//Redirigir a donde???
 		},(error)=>this.showError(error));
 	}
-	
+
 
 	buscar(evt: any)
 	{
@@ -222,8 +243,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			this.timeLeft = 60;
 			}
 		},1000)
-		}
-	
+	}
+
 	pauseTimer() {
 		clearInterval(this.interval);
 	}
