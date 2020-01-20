@@ -6,7 +6,7 @@ import { Route } from '@angular/compiler/src/core';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { forkJoin,of } from 'rxjs';
-import { catchError,flatMap } from 'rxjs/operators';
+import { catchError,flatMap, min } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { ServiciosComponent } from '../servicios/servicios.component';
 
@@ -36,8 +36,9 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	centro_medico:Centro_Medico = null;
 	id_servicio_default:number = null;
 	//timer
-	timeLeft: number = 60;
-	interval;
+	porcentaje: string= '0%';
+	timeLeft: number = 0;
+	interval:number=0 ;
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion:Detalle_Requisicion[] = [];
@@ -104,7 +105,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	loadConsultaData(consulta)
 	{
 		this.consulta = consulta;
-
+		console.log("se cargo la consulta",consulta)
 		let centro_medico = this.rest.getCurrentCentroMedico();
 
 		forkJoin([
@@ -122,6 +123,9 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			this.datosVenta	= responses[ 3 ];
 			//this.tipo_precios	= responses[4];
 			this.cita	= responses[ 5 ];
+			if(this.consulta.inicio_consulta !=null){
+				this.interval = setInterval(()=>this.actualizarTimer(),1000);
+			}
 
 			if( this.consulta.id )
 			{
@@ -212,6 +216,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		).subscribe((consulta)=>
 		{
 			this.consulta = consulta;
+			console.log("nueva consulta",consulta)
 			this.is_loading = false;
 			//Redirigir a donde???
 		},(error)=>this.showError(error));
@@ -236,16 +241,27 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	//timer
 	startTimer() {
-		this.interval = setInterval(() => {
-			if(this.timeLeft > 0) {
-				this.timeLeft++;
-			} else {
-			this.timeLeft = 60;
-			}
-		},1000)
+		let date = new Date();
+		let str = this.rest.getMysqlStringFromLocaDate(date);
+		this.consulta.inicio_consulta = str ;
+		this.guardar();
 	}
 
 	pauseTimer() {
 		clearInterval(this.interval);
+	}
+	actualizarTimer(){
+
+		if(this.consulta.inicio_consulta != null){
+			console.log("entro actualizar");
+			let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
+			let now = new Date();
+			let defaultTime = 120;
+			let diferencia = (now.getTime() - date.getTime())/100;
+			console.log(date,now);
+			console.log("inicio consulta",this.consulta.inicio_consulta);
+			this.porcentaje = diferencia/defaultTime + '%';
+			console.log("entro actualizar porcentaje",this.porcentaje);
+		}
 	}
 }

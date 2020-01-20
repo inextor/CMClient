@@ -94,6 +94,8 @@ export interface Consulta{
 	medicamento?:string;
 	analisis?:string;
 	subjetivo?:string;
+	inicio_consulta?:string;
+	fin_consulta?:string;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 
