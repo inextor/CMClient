@@ -67,6 +67,9 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 
 	calcularTotalVenta()
 	{
+		if( this.datosVenta == null )
+			return;
+
 		let total		= 0;
 		let subtotal	= 0;
 		let iva			= 0;

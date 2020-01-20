@@ -357,3 +357,16 @@ button{
 .disponibilidad{
   background-color: #a9dded;
 }
+
+.cita_calendario.ACTIVA
+{
+
+}
+.cita_calendario.INACTIVA
+{
+
+}
+.cita_calendario.CANCELADA
+{
+	background-color: #74424d;
+}
