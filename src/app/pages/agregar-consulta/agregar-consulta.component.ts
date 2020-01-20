@@ -217,7 +217,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	startTimer() {
 		this.interval = setInterval(() => {
 			if(this.timeLeft > 0) {
-				this.timeLeft--;
+				this.timeLeft++;
 			} else {
 			this.timeLeft = 60;
 			}
