@@ -194,7 +194,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 				let obj = {
 					id:''+cita.id
 					,classNames: ['evento_normal']
-					,title: 'MUAHHHH'
+					,title: 'Agendado'
 					,editable: false
 					,start: cita.inicio
 					,end: cita.fin == null ? hora : cita.fin

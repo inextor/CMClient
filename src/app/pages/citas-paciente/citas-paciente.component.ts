@@ -126,8 +126,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
           //Ḧacer la busqueda de las citas del paciente de una mejor manera <--------
           this.info_citas.forEach(i=>{
    
-           if(this.info_citas[index].paciente.id_usuario == usuario.id && this.info_citas[index].cita.estatus 
-            !== "CANCELADA" ){
+           if(this.info_citas[index].paciente.id_usuario == usuario.id && this.info_citas[index].cita.estatus !== "CANCELADA" ){
             this.citas_paciente.push(this.info_citas[index]);
             console.log('citaspaciente', this.citas_paciente);
             // console.log('id_usuario',usuario.id);

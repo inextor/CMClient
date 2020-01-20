@@ -121,7 +121,7 @@
 							<!-- confirmado paciente -->
 							<button class=" p-0 btn btn-light m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
-								[routerLink]="['/agregar-consulta',i.cita.id,'paciente',i.cita.id_paciente,'doctor',i.cita.id_doctor,'servicio',i.cita.id_servicio]"
+								[routerLink]="['/agregar-consulta-cita',i.cita.id]"
 								[appAccess]="['Doctor','admin']" data-toggle="tooltip" title="Consultas">
 								<span class="">
 									<i class="">

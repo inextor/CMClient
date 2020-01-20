@@ -29,7 +29,7 @@ export class ToastErrorComponent implements OnInit {
 
 			setTimeout(()=>{
 				this.hightlight = false;
-				// this.show = false;
+				this.show = false;
 			},3500);
 		});
 	}

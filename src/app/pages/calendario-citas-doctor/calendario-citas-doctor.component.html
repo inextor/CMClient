@@ -1,12 +1,17 @@
+<div class="card p-3">
 <full-calendar
 	#calendar
 	[header]="calendarOptions.header"
 	[plugins]="calendarPlugins"
 	defaultView="timeGridWeek"
+	contentHeight="auto"
+	minTime="07:00:00"
+    maxTime="20:00:00"
 	deepChangeDetection="true"
 	(dateClick)="dateClick($event)"
 	(eventClick)="eventClicked($event)"
 ></full-calendar>
+</div>
 <div class="custom-modal" *ngIf="show_modal">
 
 </div>

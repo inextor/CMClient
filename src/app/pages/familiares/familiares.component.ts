@@ -14,7 +14,7 @@ import { forkJoin } from 'rxjs';
 export class FamiliaresComponent extends BaseComponent implements OnInit {
 	familiares: Paciente[] = []
 	nombre: string = null
-	show_seleccionar_doctor_cita: boolean = false;
+	show: boolean=false;
 	id_paciente: number = null;
 
 	ngOnInit()
@@ -47,7 +47,9 @@ export class FamiliaresComponent extends BaseComponent implements OnInit {
 
 	showSeleccionarDoctorCita(familiar)
 	{
-		this.show_seleccionar_doctor_cita = true;
+
 		this.id_paciente = familiar;
+		this.show = true;
+		
 	}
 }
