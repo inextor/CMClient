@@ -33,7 +33,9 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	consulta: Consulta = {};
 	datosVenta:DatosVenta = null;
 	centro_medico:Centro_Medico = null;
-
+	//timer
+	timeLeft: number = 60;
+	interval;
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion:Detalle_Requisicion[] = [];
@@ -171,6 +173,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			//Redirigir a donde???
 		},(error)=>this.showError(error));
 	}
+	
 
 	buscar(evt: any)
 	{
@@ -186,5 +189,20 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	ngOnDestroy()
 	{
 
+	}
+
+	//timer
+	startTimer() {
+		this.interval = setInterval(() => {
+			if(this.timeLeft > 0) {
+				this.timeLeft--;
+			} else {
+			this.timeLeft = 60;
+			}
+		},1000)
+		}
+	
+	pauseTimer() {
+		clearInterval(this.interval);
 	}
 }
