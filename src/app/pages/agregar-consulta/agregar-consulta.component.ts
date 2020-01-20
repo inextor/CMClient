@@ -66,6 +66,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 						,id_venta			: null
 						,id_cita			: id_cita
 						,id_centro_medico	: cita.id_centro_medico
+						,id_servicio 		: cita.id_servicio
 					});
 				},(error)=>this.showError( error ));
 			}
@@ -76,11 +77,12 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			}
 		},(error)=>this.showError(error));
 	}
+	
 	getDatosVenta( consulta:Consulta , centro_medico:Centro_Medico )
 	{
-		let datosVenta:DatosVenta		=
+		let datosVenta:DatosVenta =
 		{
-			venta			: {
+			venta: {
 				id_centro_medico 	: centro_medico.id
 				,id_usuario_atendio	: consulta.id_doctor
 				,iva				: 0
