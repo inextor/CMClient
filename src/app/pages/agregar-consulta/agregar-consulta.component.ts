@@ -248,7 +248,11 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	}
 
 	pauseTimer() {
-		clearInterval(this.interval);
+		let date = new Date ()
+		let str = this.rest.getMysqlStringFromLocaDate(date);
+		this.consulta.fin_consulta = str;
+		this.guardar();
+		this.router.navigate(['punto-venta',this.datosVenta.venta.id]);
 	}
 	actualizarTimer(){
 
