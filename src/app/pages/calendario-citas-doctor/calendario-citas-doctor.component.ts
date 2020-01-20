@@ -285,8 +285,9 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 	eventClicked(evt)
 	{
-		console.log( evt );
-		console.log('Has id',evt.event.id );
+
+		if( evt.event.rendering == 'background' )
+			return;
 
 		for(let cita of this.citas)
 		{
@@ -324,6 +325,6 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	//	let fecha = this.rest.getMysqlStringFromLocaDate( evt.date );
 	//	this.cita.inicio = fecha.substring(0,20);
 
-		console.log('Fecha inicio', evt );
+//		console.log('Fecha inicio', evt );
 	}
 }
