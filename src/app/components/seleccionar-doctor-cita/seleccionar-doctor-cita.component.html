@@ -38,7 +38,7 @@
 					<td class="p-0">
 						<img class="m-0" *ngIf="doctor.id_imagen " width="50px" height="50px" [src]="rest.urlBase+'/imagen.php?id='+doctor.id_imagen">
 						<img class="m-0" *ngIf="doctor.id_imagen==null " width="50px" height="50px"
-							src="/assets/icon/Mehr-Software-18.png">
+							src="./assets/icon/Mehr-Software-18.png">
 						{{doctor.nombre}}
 					</td>
 				</li>
@@ -54,7 +54,7 @@
 						<img class="m-0" *ngIf="selected_doctor.id_imagen" width="50px" height="50px"
 							[src]="rest.urlBase+'/imagen.php?id='+selected_doctor.id_imagen">
 						<img class="m-0" *ngIf="selected_doctor.id_imagen==null" width="50px" height="50px"
-							src="/assets/icon/Mehr-Software-18.png">
+							src="./assets/icon/Mehr-Software-18.png">
 						{{selected_doctor.nombre}}
 					</td>
 				</li>
