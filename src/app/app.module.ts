@@ -88,6 +88,7 @@ import { CalendarioCitasDoctorComponent } from 'src/app/pages/calendario-citas-d
 import { PuntoVentaConsultaComponent } from './components/punto-venta-consulta/punto-venta-consulta.component';
 import { AgendarCitaPacienteComponent } from './pages/agendar-cita-paciente/agendar-cita-paciente.component';
 import { DistribucionComponent } from './pages/distribucion/distribucion.component';
+import { AgregarDistribucionComponent } from './pages/agregar-distribucion/agregar-distribucion.component';
 
 
 @NgModule({
@@ -171,6 +172,7 @@ import { DistribucionComponent } from './pages/distribucion/distribucion.compone
     PuntoVentaConsultaComponent,
     AgendarCitaPacienteComponent,
     DistribucionComponent,
+    AgregarDistribucionComponent,
 
 
   ],
