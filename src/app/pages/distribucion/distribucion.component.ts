@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { SearchObject } from '../../services/ObjRest';
+import { SearchObject } from '../../models/Respuestas';
 import { Router,ActivatedRoute } from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
@@ -9,9 +9,10 @@ import { of } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
 
-import {Distribucion} from '../../models/RestModels';
-import {Centro_Medico} from '../../models/RestModels';
-import {Usuario} from '../../models/RestModels';
+import {Distribucion} from 'src/app/models/Modelos';
+import {Centro_Medico} from 'src/app/models/Modelos';
+import {Usuario} from 'src/app/models/Modelos';
+import { DistribucionInfo } from 'src/app/models/Respuestas';
 
 @Component({
   selector: 'app-distribucion',
@@ -20,29 +21,18 @@ import {Usuario} from '../../models/RestModels';
 })
 export class DistribucionComponent extends BaseComponent implements OnInit {
 
-  constructor() { }
 
-	distribucion_list:Distribucion[] = [];
-
-	
-	centro_medico_list:Centro_Medico[] = [];
-	usuario_list:Usuario[] = [];
-
+	distribucion_list:DistribucionInfo[] = [];
 
 	distribucion_search:SearchObject<Distribucion> = {
 
 	};
 
-	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
-	{
-		super( rest,router,route,location,titleService);
-  }
 
 	ngOnInit()
 	{
 		this.route.queryParams.subscribe( params =>
 		{
-
 
 			this.distribucion_search = {
 				eq: {},
@@ -56,7 +46,7 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 			};
 
 
-			this.distribucion_search.limit = this.pageSize;
+			this.distribucion_search.limite = this.pageSize;
 
 			this.titleService.setTitle('distribucion');
 
@@ -79,31 +69,22 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 			console.log('Search', this.distribucion_search);
 
 			this.is_loading = true;
-			this.distribucion_search.page =	'page' in params ? parseInt( params.page ) : 0;
-			this.currentPage = this.distribucion_search.page;
+			this.distribucion_search.pagina =	'pagina' in params ? parseInt( params.pagina ) : 0;
+			this.currentPage = this.distribucion_search.pagina;
 
-			
-			forkJoin([
-				this.rest.distribucion.search(this.distribucion_search)
-				,
-				this.rest.centro_medico.getAll({}),
-				this.rest.usuario.getAll({})
-			])
-			.subscribe((responses)=>
+			this.rest.distribucionInfo.search(this.distribucion_search)
+			.subscribe((response)=>
 			{
-				this.distribucion_list = responses[0].data;
-				this.setPages( this.distribucion_search.page, responses[0].total );
-				this.centro_medico_list = responses[ 1 ].data;
-				this.usuario_list = responses[ 2 ].data;
+				this.distribucion_list = response.data;
+				this.setPages( this.distribucion_search.pagina, response.total );
 			});
-
 		});
 	}
 
 	search()
 	{
 		this.is_loading = true;
-		this.distribucion_search.page = 0;
+		this.distribucion_search.pagina = 0;
 
 		let search = {};
 		let array = ['eq','le','lt','ge','gt','csv','lk'];

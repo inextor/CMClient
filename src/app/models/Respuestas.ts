@@ -1,7 +1,11 @@
 /////
 //
-import {Usuario,Sesion,Doctor,Paciente,Cita,Centro_Medico,Tipo_Precio,Servicio,Precio_Servicio,Recurso,Inventario} from './Modelos';
-import {Especialidad_Pregunta,Pregunta_Historia_Clinica,Respuesta_Historia_Clinica} from './Modelos';
+import {
+	Centro_Medico
+	,Cita ,Distribucion,Detalle_Distribucion, Doctor ,Especialidad_Pregunta ,Inventario ,Paciente
+	,Precio_Servicio,Pregunta_Historia_Clinica ,Recurso ,Respuesta_Historia_Clinica
+	,Servicio ,Sesion ,Tipo_Precio ,Usuario } from './Modelos';
+
 import { Gasto_Centro_Medico,Tipo_Gasto } from './Modelos';
 
 
@@ -38,6 +42,14 @@ export interface SearchObject<T>
 	lk?:T; //like
 	start?:T;
 	csv?:CsvArray;
+}
+
+
+
+export interface DistribucionInfo
+{
+	distribucion:Distribucion;
+	detalles_distribucion:Detalle_Distribucion[];
 }
 
 export interface Recurso_Response{

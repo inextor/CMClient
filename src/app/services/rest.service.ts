@@ -14,7 +14,7 @@ import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
 import {	Centro_Medico, Cita,
 Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
-Detalle_Venta, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
+Detalle_Venta, Distribucion, Detalle_Distribucion, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
  Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
 Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
 	Usuario, Venta, Proveedor, Requisicion, Doctor_Servicio} from	'../models/Modelos';
@@ -103,6 +103,7 @@ export class RestService {
 	public detalle_requisicion:ObjRest<Detalle_Requisicion>;
 	public requisicionInfo:ObjRest<RequisicionInfo>;
 	public doctor_servicio:ObjRest<Doctor_Servicio>;
+	public distribucionInfo:SearchRest<Distribucion,DistribucionInfo>;
 
 
 	//End vars
@@ -184,6 +185,7 @@ export class RestService {
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
 		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo.php`,http);
 		this.doctor_servicio				= new ObjRest<Doctor_Servicio>					(`${this.urlBase}/servicio_doctor.php`,http);
+		this.distribucionInfo				= new SearchRest<Distribucion,DistribucionInfo>	(`${this.urlBase}/distribucionInfo.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico
