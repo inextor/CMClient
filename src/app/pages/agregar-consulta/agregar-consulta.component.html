@@ -18,15 +18,26 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<div class="card p-2">
-						<label for="">progreso tiempo cita </label>
-						<div class="progress">
-							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+						<label for="">porcentaje transcurrido: {{tiempo_transcurrido}} %</label>
+						<div  class="progress" *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null"
+								role="progressbar" [ngStyle]="{width:porcentaje}" aria-valuenow="100" aria-valuemin="0"
+								aria-valuemax="100">12%</div>
+						</div>
+						<div *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null" class="progress text">
+							<div class="progress-bar bg-warning"
 								role="progressbar" [ngStyle]="{width:porcentaje}" aria-valuenow="100" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
-						<div class="pt-2">
-							<button (click)='startTimer()' class="btn btn-primary">Iniciar Consulta</button>
-							<button (click)='pauseTimer()' class="btn btn-primary">Finalizar Consulta</button>
+						<div class="pt-2 d-flex flex-row-reverse" *ngIf="this.consulta.inicio_consulta == null && this.consulta.fin_consulta == null">
+					
+								<button (click)='startTimer()' class="btn btn-primary">Iniciar Consulta</button>
+							</div>
+								<div class="pt-2 d-flex flex-row-reverse" *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null" >
+								<button (click)='pauseTimer()' class="btn btn-primary mr-2">Finalizar Consulta</button>
+						</div>
+						<div class="pt-2 d-flex flex-row-reverse" *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null">
+							<button (click)='pauseTimer()' class="btn btn-primary">Proceder al pago</button>  
 						</div>
 					</div>
 				</div>

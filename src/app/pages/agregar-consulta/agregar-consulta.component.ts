@@ -39,6 +39,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	porcentaje: string = '0%';
 	timeLeft: number = 0;
 	interval: number = 0;
+	tiempo_transcurrido: number = 0;
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion: Detalle_Requisicion[] = [];
@@ -66,11 +67,26 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 							, id_centro_medico: cita.id_centro_medico
 							, id_servicio: cita.id_servicio
 						});
+
 					}, (error) => this.showError(error));
 				}
 				else {
 					console.log('Consulta Encontrada');
 					this.loadConsultaData(response.datos[0]);
+					//mostrar el tiempo que se realizo en la cita, cuando esta ya termino.
+					if (this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null) {
+						let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
+						let now = this.rest.getLocalDateFromMysqlString(this.consulta.fin_consulta);
+						let defaultTime = 1800;
+						let diferencia = (now.getTime() - date.getTime()) / 100;
+						console.log(date, now);
+						console.log("inicio consulta", this.consulta.inicio_consulta);
+						this.porcentaje = diferencia / defaultTime + '%';
+						this.tiempo_transcurrido = (diferencia / defaultTime); 
+
+					}
+
+
 				}
 			}, (error) => this.showError(error));
 	}
@@ -176,9 +192,12 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			if (params.has('id')) {
 				let id = params.get('id') ? parseInt(params.get('id')) : null;
 				this.loadById(id);
+
 			}
 			else {
 				this.loadByIdCita(parseInt(params.get('id_cita')))
+				console.log("iniceo consulta", this.consulta.inicio_consulta);
+
 			}
 		});
 	}
@@ -218,18 +237,18 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	//timer
 	startTimer() {
-		console.log("porcent",this.porcentaje);
-		if(this.consulta.inicio_consulta == null){
+		console.log("porcent", this.porcentaje);
+		if (this.consulta.inicio_consulta == null) {
 			let date = new Date();
 			let str = this.rest.getMysqlStringFromLocaDate(date);
 			this.consulta.inicio_consulta = str;
 		}
-	
+
 		this.guardar();
 	}
 
 	pauseTimer() {
-	
+
 		if (this.consulta.fin_consulta == null) {
 			let date = new Date()
 			let str = this.rest.getMysqlStringFromLocaDate(date);
@@ -245,12 +264,14 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			console.log("entro actualizar");
 			let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
 			let now = new Date();
-			let defaultTime = 120;
-			let diferencia = (now.getTime() - date.getTime()) / 100;
+			let defaultTime = 1800;
+			let diferencia = (now.getTime() - date.getTime()) / 100;	
 			console.log(date, now);
 			console.log("inicio consulta", this.consulta.inicio_consulta);
 			this.porcentaje = diferencia / defaultTime + '%';
 			console.log("entro actualizar porcentaje", this.porcentaje);
+			this.tiempo_transcurrido = diferencia / defaultTime; 
+	
 		}
 	}
 }
