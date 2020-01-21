@@ -20,17 +20,19 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 
 	centros:Centro_Medico[] = [];
 	last:string = '';
+
 	constructor(private rest:RestService)
 	{
 	}
 
 	ngOnInit()
 	{
-		this.rest.centro_medico.getAll({}).subscribe((respuesta)=>
+		let usuario = this.rest.getUsuarioSesion();
+
+		this.rest.centro_medico.search({eq:{ id_organizacion: usuario.id_organizacion }}).subscribe((respuesta)=>
 		{
 			this.centros = respuesta.datos;
 		});
-
 	}
 
 	onKeyPressed(evt)
@@ -41,7 +43,13 @@ export class SeleccionarCentroMedicoComponent implements OnInit {
 			return;
 			// ,{limit:10} dentro de search
 		this.last = input.value.trim();
-		this.rest.centro_medico.search({ lk:{nombre:this.last} }).subscribe((respuesta)=>
+		let usuario = this.rest.getUsuarioSesion();
+
+		this.rest.centro_medico.search
+		({
+			eq:{ id_organizacion: usuario.id_organizacion }
+			,lk: { nombre:this.last}
+		}).subscribe((respuesta)=>
 		{
 			this.centros = respuesta.datos;
 		});

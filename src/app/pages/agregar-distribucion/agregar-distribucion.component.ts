@@ -17,6 +17,9 @@ import {Usuario} from '../../models/Modelos';
 export class AgregarDistribucionComponent extends BaseComponent implements OnInit {
 
 	distribucionInfo:DistribucionInfo= null;
+	centro_medico_list:Centro_Medico[] = [];
+	usuario_list:Usuario[]	= [];
+
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
@@ -28,13 +31,44 @@ export class AgregarDistribucionComponent extends BaseComponent implements OnIni
 
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );;
 
+			let usuario = this.rest.getUsuarioSesion();
+
 			if( id )
 			{
-				this.rest.distribucionInfo.get( id )
-				.subscribe((response)=>
+				forkJoin([
+					this.rest.distribucionInfo.get( id )
+					,this.rest.centro_medico.search({
+						eq:{ id_organizacion: usuario.id_organizacion }
+					})
+					,this.rest.usuario.search({
+						eq:{ id_organizacion: usuario.id_organizacion }
+						,csv:{ tipo:['DOCTOR','RECEPCIONISTA','ASISTENTE','ADMIN'] }
+					})
+				])
+				.subscribe((responses)=>
 				{
-					this.distribucionInfo = response;
-				});
+					this.distribucionInfo = responses[0];
+					this.centro_medico_list = responses[1].datos;
+					this.usuario_list = responses[2].datos;
+				},(error)=>this.showError(error));
+			}
+			else
+			{
+				forkJoin([
+					this.rest.centro_medico.search
+					({
+						eq:{ id_organizacion: usuario.id_organizacion }
+					})
+					,this.rest.usuario.search({
+						eq:{ id_organizacion: usuario.id_organizacion }
+						,csv:{ tipo:['DOCTOR','RECEPCIONISTA','ASISTENTE','ADMIN'] }
+					})
+				]).subscribe((responses)=>
+				{
+					this.is_loading = false;
+					this.centro_medico_list = responses[0].datos;
+					this.usuario_list = responses[1].datos;
+				},(error)=>this.showError(error));
 			}
 		});
 	}
