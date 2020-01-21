@@ -120,6 +120,21 @@ export interface Consultorio_Doctor{
 	tiempo_actualizacion?:Date;
 };
 
+export interface Detalle_Distribucion{
+	id?:number;
+	id_distribucion?:number;
+	id_servicio?:number;
+	cantidad?:number;
+	id_requisicion?:number;
+	recibido?:number;
+	merma?:number;
+	extraviado?:number;
+	nota?:string;
+	cantidad_enviada?:number;
+	tiempo_creacion?:Date;
+	tiempo_actualizacion?:Date;
+};
+
 export interface Detalle_Requisicion{
 	id?:number;
 	id_requisicion?:number;
@@ -149,6 +164,20 @@ export interface Detalle_Venta{
 	subtotal?:number;
 	iva?:number;
 	total?:number;
+	tiempo_creacion?:Date;
+	tiempo_actualizacion?:Date;
+
+};
+
+export interface Distribucion{
+	id?:number;
+	id_centro_medico_solicitante?:number;
+	estatus?:string;
+	id_usuario_recibio?:number;
+	id_usuario_envio?:number;
+	guia?:string;
+	paqueteria?:string;
+	id_centro_medico_distribuidor?:number;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 
