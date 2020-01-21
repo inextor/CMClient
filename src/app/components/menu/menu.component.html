@@ -43,6 +43,11 @@
 				<div [appAccess]="['ADMIN','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
 				</div>
+
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a [routerLink]="['/distribucion']" class="list-group-item list-group-item-action color1 ">Distribucion</a>
+				</div>
+
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">PUNTO VENTA</a>
 				</div>
