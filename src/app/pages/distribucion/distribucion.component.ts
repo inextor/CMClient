@@ -75,7 +75,7 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 			this.rest.distribucionInfo.search(this.distribucion_search)
 			.subscribe((response)=>
 			{
-				this.distribucion_list = response.data;
+				this.distribucion_list = response.datos;
 				this.setPages( this.distribucion_search.pagina, response.total );
 			});
 		});
