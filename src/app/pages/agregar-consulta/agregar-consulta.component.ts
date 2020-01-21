@@ -39,7 +39,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	porcentaje: string = '0%';
 	timeLeft: number = 0;
 	interval: number = 0;
-	tiempo_transcurrido: number = 0;
+	tiempo_transcurrido: string = '';
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion: Detalle_Requisicion[] = [];
@@ -78,11 +78,11 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 						let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
 						let now = this.rest.getLocalDateFromMysqlString(this.consulta.fin_consulta);
 						let defaultTime = 1800;
-						let diferencia = (now.getTime() - date.getTime()) / 100;
+						let diferencia = (now.getTime() - date.getTime()) / 10;
 						console.log(date, now);
 						console.log("inicio consulta", this.consulta.inicio_consulta);
 						this.porcentaje = diferencia / defaultTime + '%';
-						this.tiempo_transcurrido = (diferencia / defaultTime); 
+						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0); 
 
 					}
 
@@ -243,7 +243,6 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			let str = this.rest.getMysqlStringFromLocaDate(date);
 			this.consulta.inicio_consulta = str;
 		}
-
 		this.guardar();
 	}
 
@@ -265,12 +264,13 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
 			let now = new Date();
 			let defaultTime = 1800;
-			let diferencia = (now.getTime() - date.getTime()) / 100;	
+			let diferencia = (now.getTime() - date.getTime()) / 10;	
 			console.log(date, now);
 			console.log("inicio consulta", this.consulta.inicio_consulta);
-			this.porcentaje = diferencia / defaultTime + '%';
+			this.porcentaje = (diferencia / defaultTime).toFixed(2) + '%';
 			console.log("entro actualizar porcentaje", this.porcentaje);
-			this.tiempo_transcurrido = diferencia / defaultTime; 
+			this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0); 
+
 	
 		}
 	}
