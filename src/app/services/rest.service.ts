@@ -12,12 +12,15 @@ import {ObjRest} from './ObjRest';
 import {SearchRest} from './SearchRest';
 import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models/Respuestas';
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
+import {DistribucionInfo} from '../models/Respuestas';
+
 import {	Centro_Medico, Cita,
-Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
-Detalle_Venta, Distribucion, Detalle_Distribucion, Detalle_Requisicion, Doctor, Expediente, Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor,
- Horario_Doctor, Imagen, Inventario,  Notificacion, Organizacion,
-Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor, Servicio, Tipo_Precio,
-	Usuario, Venta, Proveedor, Requisicion, Doctor_Servicio} from	'../models/Modelos';
+	Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
+	Detalle_Venta, Distribucion, Detalle_Distribucion, Detalle_Requisicion, Doctor, Expediente,
+	Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor, Horario_Doctor, Imagen, Inventario,
+	Notificacion, Organizacion, Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor,
+	Servicio, Tipo_Precio, Usuario, Venta, Proveedor, Requisicion, Doctor_Servicio
+	} from	'../models/Modelos';
 
 
 export interface DetalleServicio {

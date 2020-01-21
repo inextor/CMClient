@@ -47,20 +47,20 @@ export class ObjRest<T>{
 		}
 		return this.http.get<Respuesta<T>>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
 	}
-
 /*
 export interface SearchObject<T>
 {
-	eq?:T; //Equals to
-	gt?:T; //Great than
-	lt?:T; //Less than
-	ge?:T; //Great or equal than
-	le?:T; //less or equal than
-	lk?:T; //like
+       eq?:T; //Equals to
+       gt?:T; //Great than
+       lt?:T; //Less than
+       ge?:T; //Great or equal than
+       le?:T; //less or equal than
+       lk?:T; //like
+	   csv?:
 }
 */
 
-	search(searchObj:SearchObject<T>)
+	search(searchObj:SearchObject<T>):Observable<Respuesta<T>>
 	{
 		let params = new HttpParams();
 

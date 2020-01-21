@@ -45,16 +45,16 @@ export class AgregarDistribucionComponent extends BaseComponent implements OnIni
 
 		if( this.distribucionInfo.distribucion.id )
 		{
-			this.rest.distribucionInfo.update( this.distribucion ).subscribe((distribucion)=>{
+			this.rest.distribucionInfo.update( this.distribucionInfo ).subscribe((distribucionInfo)=>{
 				this.is_loading = false;
-				this.router.navigate(['/list-distribucion']);
+				this.router.navigate(['/distribucion']);
 			},(error)=>this.showError(error));
 		}
 		else
 		{
-			this.rest.distribucion.create( this.distribucion ).subscribe((distribucion)=>{
+			this.rest.distribucionInfo.create( this.distribucionInfo ).subscribe((distribucionInfo)=>{
 				this.is_loading = false;
-				this.router.navigate(['/list-distribucion']);
+				this.router.navigate(['/distribucion']);
 			},(error)=>this.showError(error));
 		}
 	}

@@ -25,7 +25,7 @@ export class SearchRest<U,T>{
 		return headers;
 	}
 
-	get(id:string):Observable<T>
+	get(id:any):Observable<T>
 	{
 		let params = new HttpParams();
 		params = params.append('id',''+id);
@@ -38,7 +38,7 @@ export class SearchRest<U,T>{
 
 		for( let i in extraParams )
 		{
-			params = params.set(i,extraParams[''+i]);
+			params = params.set(i,''+extraParams[i]);
 		}
 
 		for( let i in search)
@@ -59,10 +59,8 @@ export class SearchRest<U,T>{
 		}
 
 		for(let i in searchObj.eq )
-		{
 			if( searchObj.eq[i] )
 				params = params.set(i,''+searchObj.eq[i] );
-		}
 
 		for(let i in searchObj.gt )
 			if( searchObj.gt[i] )
@@ -80,13 +78,19 @@ export class SearchRest<U,T>{
 			if( searchObj.le[i] )
 				params = params.set(i+'<~',''+searchObj.le[i] );
 
+		for(let i in searchObj.csv )
+			if( searchObj.csv[i].length )
+				params = params.set(i+',',''+searchObj.csv[i].join(','));
+
 		for(let i in searchObj.lk )
 			if( searchObj.lk[i] )
 				params = params.set(i+'~~',''+searchObj.lk[i] );
 
-		for(let i in searchObj.csv )
-			if( searchObj.csv[i].length )
-				params = params.set(i+',',''+searchObj.csv[i].join(','));
+		for(let i in searchObj.start )
+		{
+			if( searchObj.start[i] )
+				params = params.set(i+'^',''+searchObj.start[i] );
+		}
 
 		if( searchObj.pagina )
 		{
@@ -99,5 +103,36 @@ export class SearchRest<U,T>{
 		}
 
 		return this.http.get<Respuesta<T>>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+	create(obj:T):Observable<T>
+	{
+		return this.http.post<T>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+	update(obj:T):Observable<T>
+	{
+		return this.http.put<T>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+	batchCreate(obj:T[]):Observable<T[]> {
+		return this.http.post<T[]>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+	batchUpdate(obj:T[]):Observable<T[]>
+	{
+		return this.http.put<T[]>(`${this.urlBase}`,obj,{headers:this.getSessionHeaders(),withCredentials:true});
+	}
+
+	delete(obj:T):Observable<T>
+	{
+		let params = new HttpParams();
+
+		for(let i in obj)
+		{
+			params = params.set(i,''+obj[i]);
+		}
+
+		return this.http.delete<T>(`${this.urlBase}`,{params,headers:this.getSessionHeaders(),withCredentials:true});
 	}
 }
