@@ -65,7 +65,7 @@
 						</td>
 					</tr>
 					<tr *ngFor="let g of gastos">
-						<td class="text-center ">{{g.gasto_centro_medico.id}}</td>
+						<td class="text-center">{{g.gasto_centro_medico.id}}</td>
 						<td >{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</td>
 						<td>{{g.usuario.usuario}}</td>
 						<td>{{g.gasto_centro_medico.descripcion ? g.gasto_centro_medico.descripcion : 'N/A'}}</td>

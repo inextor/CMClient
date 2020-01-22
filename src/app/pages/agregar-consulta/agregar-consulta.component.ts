@@ -86,7 +86,6 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 					}
 
-
 				}
 			}, (error) => this.showError(error));
 	}
@@ -138,6 +137,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 				//Lo carga automaticamente
 				console.log('Consulta', this.consulta);
 			}
+
 			else {
 				//Venta Nueva
 				this.datosVenta = this.getNewVenta(responses[4].datos);

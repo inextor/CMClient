@@ -27,16 +27,17 @@ export class VerConsultasComponent extends BaseComponent implements OnInit {
 	{
 		this.route.paramMap.subscribe( params =>
 		{
-			this.id_paciente = params.get('id_paciente') ==null ? null : parseInt(params.get('id_paciente') );
-			this.id_paciente = params.get('id_doctor') ==null ? null : parseInt(params.get('id_doctor') );
-			this.is_loading = true;
 
+			this.id_paciente = params.get('id_paciente') ==null ? null : parseInt(params.get('id_paciente') );
+			this.id_doctor = params.get('id_doctor') ==null ? null : parseInt(params.get('id_doctor') );
+			this.is_loading = true;
+			// console.log('params',params.keys );
 			this.rest.paciente.get( this.id_paciente ).subscribe((paciente)=>
 			{
 				this.paciente = paciente;
 			});
 
-			this.rest.consulta.getAll({ id_paciente:this.id_paciente,id_doctor:this.id_doctor }).subscribe((consultas)=>
+			this.rest.consulta.search({eq:{id_paciente:this.id_paciente,id_doctor:this.id_doctor},limite:10000}).subscribe((consultas)=>
 			{
 				this.consultas = consultas.datos;
 				this.is_loading = false;

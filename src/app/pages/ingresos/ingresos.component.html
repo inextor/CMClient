@@ -25,7 +25,7 @@
 		<table class="basica">
 			<thead>
 				<tr>
-					<th>id</th>
+					<th >id</th>
 					<th>Nota</th>
 					<th >Monto</th>
 
@@ -41,7 +41,7 @@
 					</td>
 				</tr>
 				<tr *ngFor="let ingreso of ingresos">
-					<td>{{ingreso.id}}</td>
+					<td class="text-center w">{{ingreso.id}}</td>
 					<td>{{ingreso.nota}}</td>
 					<td class="text-right" >{{ingreso.monto | currency: '$'}}</td>
 				</tr>
