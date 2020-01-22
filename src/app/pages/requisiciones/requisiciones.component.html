@@ -114,11 +114,10 @@
                         <td>{{requisicion.estatus}}</td>
 
                         <td class="p-0 options">
-                            <button class="btn btn-light p-0 m-1 border ">
+                            <button class="btn btn-light p-0 m-1 border" title="editar" [routerLink]="['/editar-requisicion',requisicion.id]">
                                 <span class="">
                                     <i class="">
-                                        <img src="./assets/icon/options/editar.png" height="35px" width="35px"
-                                            class="menuIcons icons" />
+                                        <img src="./assets/icon/options/editar.png" height="35px" width="35px" class="menuIcons icons" />
                                     </i>
                                 </span>
                             </button>

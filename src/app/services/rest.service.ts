@@ -40,10 +40,16 @@ export interface DatosVenta
 	tipo_precio		: Tipo_Precio;
 };
 
+export interface Detalle_Requisicion_Info
+{
+	detalle_requisicion: Detalle_Requisicion;
+	servicio?:Servicio;
+}
+
 export interface RequisicionInfo
 {
 	requisicion	: Requisicion;
-	detalles_requisicion:Detalle_Requisicion[];
+	detalles: Detalle_Requisicion_Info[];
 }
 
 @Injectable({
@@ -186,7 +192,7 @@ export class RestService {
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
-		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo.php`,http);
+		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo3.php`,http);
 		this.doctor_servicio				= new ObjRest<Doctor_Servicio>					(`${this.urlBase}/servicio_doctor.php`,http);
 		this.distribucionInfo				= new SearchRest<Distribucion,DistribucionInfo>	(`${this.urlBase}/distribucionInfo.php`,http);
 	}

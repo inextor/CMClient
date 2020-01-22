@@ -7,16 +7,13 @@ import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { SearchObject } from '../../models/Respuestas';
 import { forkJoin } from 'rxjs';
+import { RequisicionInfo, Detalle_Requisicion_Info } from '../../services/rest.service';
 
 interface OldSearch {
 	[key: string]: Servicio[];
 }
 
-interface requisicionDetalle {
-	requisicion:Requisicion;
-	detalles_requisicion: Detalle_Requisicion;
 
-}
 
 interface ServicioById {
 	[key:number]:Servicio;
@@ -38,7 +35,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	todos_servicios: []				= [];
 	proveedores: Proveedor[]		= [];
 	requisicion: Requisicion		= {};
-	detalles_requisicion:Detalle_Requisicion[] = [];
+	detalles_requisicion:Detalle_Requisicion_Info[] = [];
 	servicios_by_id:ServicioById	= {};
 
 	ngOnInit()
@@ -51,6 +48,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			this.requisicion = {
 				id_usuario_solicito : usuario.id
 				,id_centro_medico	: centro_medico.id
+				,id_proveedor		: null
 			}
 
 			forkJoin([
@@ -78,7 +76,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		if( !( servicio.id in this.servicios_by_id ) )
 			this.servicios_by_id[ servicio.id ] = servicio;
 
-		let s = this.detalles_requisicion.find(i => i.id_servicio == servicio.id);
+		let s = this.detalles_requisicion.find(i => i.servicio.id == servicio.id );
 		if (s) {
 			this.busqueda = '';
 			this.aumentar(s);
@@ -87,9 +85,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 
 		this.detalles_requisicion.push
 		({
-			id_servicio	: servicio.id, cantidad	: 1,
+			servicio: servicio
+			,detalle_requisicion:{ id_servicio	: servicio.id, cantidad	: 1}
 		});
-
 
 		this.busqueda			= '';
 		this.search_servicios	= [];
@@ -105,7 +103,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		 if (this.requisicion.id) {
 			 this.rest.requisicionInfo.update({
 				 requisicion: this.requisicion
-				 ,detalles_requisicion: this.detalles_requisicion
+				 ,detalles: this.detalles_requisicion
 			}).subscribe((requisicion) => {
 				 this.is_loading = false;
 				 this.router.navigate(['/requisiciones']);
@@ -114,7 +112,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		 else {
 			 this.rest.requisicionInfo.create({
 				 requisicion: this.requisicion,
-				 detalles_requisicion: this.detalles_requisicion
+				 detalles: this.detalles_requisicion
 			 }).subscribe((requisicion) => {
 				 this.is_loading = false;
 				 this.router.navigate(['/requisiciones']);

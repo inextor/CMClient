@@ -20,7 +20,7 @@
                 <div class="form-group col-md-6">
                     <label position="stacked">Proveedor<span color="danger">*</span></label>
                     <select class="form-control" name="foo" [(ngModel)]="requisicion.id_proveedor">
-                        <option value='' selected disabled hidden>Seleccione un proveedor</option>
+                        <option [value]="null">Seleccione un proveedor</option>
                         <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
                             {{proveedor.nombre}}</option>
                     </select>
@@ -86,13 +86,13 @@
                     <tbody>
                         <tr *ngFor="let sd of detalles_requisicion">
                             <th>
-                                <label>{{servicios_by_id[ sd.id_servicio ].nombre | titlecase}}</label>
+                                <label>{{servicios_by_id[ sd.detalle_requisicion.id_servicio ].nombre | titlecase}}</label>
                             </th>
                             <th>
-                                <input type="number" [(ngModel)]="sd.cantidad" step="1" min=0>
+                                <input type="number" [(ngModel)]="sd.detalle_requisicion.cantidad" step="1" min=0>
                             </th>
                             <th>
-                                <input type="number" [(ngModel)]="sd.costo" step="1" min=0>
+                                <input type="number" [(ngModel)]="sd.detalle_requisicion.costo" step="1" min=0>
                             </th>
                             <th>
                                 <button class="btn btn-secondary btn-sm">x</button>
