@@ -21,12 +21,13 @@
 				<div class="form-group col-md-3">
 					<label>Centro medico*</label>
 					<select class="form-control" name="foo" [(ngModel)]="search_inventario.eq.id_centro_medico">
+						<option [value]="search_inventario.eq.id_centro_medico">Seleccione un centro medico</option>
 						<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 					</select>
 				</div>
 				<div class="form-group col-md-3">
 					<label>Nombre*</label>
-					<input class="form-control" type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
+					<input placeholder="Nombre" class="form-control" type="text" name="nombre" [(ngModel)]="searchServicio.lk.nombre">
 				</div>
 				<div class="form-group col-md-3">
 					<label>&nbsp;</label>

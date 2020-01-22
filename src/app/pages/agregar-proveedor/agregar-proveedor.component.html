@@ -8,7 +8,7 @@
 					<h4 >{{this.proveedor.id ? 'EDITAR':'AGREGAR'}} PROVEEDOR</h4>
 				</div>
 				<div >
-					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
+					<button  type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
 				[disabled]="is_loading">{{this.proveedor.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
@@ -18,35 +18,35 @@
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label position="stacked">Nombre<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="nombre" [(ngModel)]="proveedor.nombre">
+				<input placeholder="Nombre" type="text" class="form-control" name="nombre" [(ngModel)]="proveedor.nombre">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Telefono<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="telefono" [(ngModel)]="proveedor.telefono">
+				<input placeholder="Telefono" type="text" class="form-control" name="telefono" [(ngModel)]="proveedor.telefono">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">RFC<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="rfc" [(ngModel)]="proveedor.rfc">
+				<input placeholder="RFC" type="text" class="form-control" name="rfc" [(ngModel)]="proveedor.rfc">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Direccion<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="direccion" [(ngModel)]="proveedor.direccion">
+				<input placeholder="Direccion" type="text" class="form-control" name="direccion" [(ngModel)]="proveedor.direccion">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Contacto<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="contacto" [(ngModel)]="proveedor.contacto">
+				<input placeholder="Contacto" type="text" class="form-control" name="contacto" [(ngModel)]="proveedor.contacto">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Cuenta Bancaria<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria">
+				<input placeholder="Cuenta Bancaria" type="text" class="form-control" name="cuenta_bancaria" [(ngModel)]="proveedor.cuenta_bancaria">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Dias Credito<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="dias_credito" [(ngModel)]="proveedor.dias_credito">
+				<input placeholder="Dias Credito" type="text" class="form-control" name="dias_credito" [(ngModel)]="proveedor.dias_credito">
 			</div>
 			<div class="form-group col-md-6">
 				<label position="stacked">Nota<span color="danger">*</span></label>
-				<input type="text" class="form-control" name="nota" [(ngModel)]="proveedor.nota">
+				<input placeholder="Nota" type="text" class="form-control" name="nota" [(ngModel)]="proveedor.nota">
 			</div>
 		</div>
 	
