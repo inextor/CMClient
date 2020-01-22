@@ -180,7 +180,7 @@ export class AgregarDistribucionComponent extends BaseComponent implements OnIni
 
 		this.distribucionInfo.detalles.push
 		({
-			id_servicio	: servicio.id, cantidad	: 1,
+			id_servicio	: servicio.id, cantidad	: qty
 		});
 
 		this.busqueda			= '';
