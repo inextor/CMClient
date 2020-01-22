@@ -32,7 +32,7 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
 
 		this.route.queryParams.subscribe( params =>
-		{	
+		{
 			console.log("params",params);
 			this.especialidad_search = {
 				eq: {},
@@ -50,7 +50,7 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 			this.especialidad_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 			// this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 			this.is_loading = true;
-			this.rest.consulta.search(this.especialidad_search).subscribe((respuesta) =>
+			this.rest.especialidad.search(this.especialidad_search).subscribe((respuesta) =>
 			{
 				this.especialidades = respuesta.datos;
 				this.setPages( this.especialidad_search.pagina, respuesta.total );
