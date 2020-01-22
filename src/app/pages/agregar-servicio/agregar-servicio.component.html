@@ -42,7 +42,7 @@
 				<tr *ngFor="let centro_medico of centros_medicos; index as i">
 					<td><b>{{centro_medico.nombre}}</b></td>
 					<td *ngFor="let tipo_precio of tipo_precios; index as j">
-						<input type="number" class="form-control" [name]="i+'-'+j"
+						<input placeholder="$" type="number" class=" form-control" [name]="i+'-'+j"
 							[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
 					</td>
 				</tr>
