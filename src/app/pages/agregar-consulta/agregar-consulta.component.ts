@@ -82,7 +82,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 						console.log(date, now);
 						console.log("inicio consulta", this.consulta.inicio_consulta);
 						this.porcentaje = diferencia / defaultTime + '%';
-						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0); 
+						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0);
 
 					}
 
@@ -204,20 +204,22 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	guardar() {
 		this.is_loading = true;
-		let observable =
 
-			this.rest.guardarDatosVenta(this.datosVenta).pipe
-				(
-					flatMap((datosVenta) => {
-						this.consulta.id_venta = datosVenta.venta.id;
-						return this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
-					})
-				).subscribe((consulta) => {
-					this.consulta = consulta;
-					console.log("nueva consulta", consulta)
-					this.is_loading = false;
-					//Redirigir a donde???
-				}, (error) => this.showError(error));
+		let observable = this.rest.guardarDatosVenta(this.datosVenta).pipe
+		(
+			flatMap((datosVenta) => {
+				this.consulta.id_venta = datosVenta.venta.id;
+				this.datosVenta = datosVenta;
+				return this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
+			})
+			,flatMap((consulta)=>
+			{
+				this.consulta = consulta;
+				return of( consulta );
+			})
+		);
+
+		return observable;
 	}
 
 
@@ -243,7 +245,11 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			let str = this.rest.getMysqlStringFromLocaDate(date);
 			this.consulta.inicio_consulta = str;
 		}
-		this.guardar();
+
+		this.guardar().subscribe((consulta)=>
+		{
+			this.is_loading =false;
+		},(error)=>this.showError(error));
 	}
 
 	pauseTimer() {
@@ -253,9 +259,14 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			let str = this.rest.getMysqlStringFromLocaDate(date);
 			this.consulta.fin_consulta = str;
 		}
-		this.guardar();
+
 		clearInterval(this.interval)
-		this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
+
+		this.is_loading = true;
+		this.guardar().subscribe((response)=>
+		{
+			this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
+		},(error)=>this.showError(error));
 	}
 	actualizarTimer() {
 
@@ -264,14 +275,12 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
 			let now = new Date();
 			let defaultTime = 1800;
-			let diferencia = (now.getTime() - date.getTime()) / 10;	
+			let diferencia = (now.getTime() - date.getTime()) / 10;
 			console.log(date, now);
 			console.log("inicio consulta", this.consulta.inicio_consulta);
 			this.porcentaje = (diferencia / defaultTime).toFixed(2) + '%';
 			console.log("entro actualizar porcentaje", this.porcentaje);
-			this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0); 
-
-	
+			this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0);
 		}
 	}
 }
