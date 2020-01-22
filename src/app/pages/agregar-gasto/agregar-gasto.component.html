@@ -4,12 +4,12 @@
 
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
-				<div >
-					<h4 >AGREGAR GASTO</h4>
+				<div>
+					<h4>AGREGAR GASTO</h4>
 				</div>
-				<div >
-					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
-				[disabled]="is_loading">Agregar</button>
+				<div>
+					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
+						(click)="guardar()" [disabled]="is_loading">Agregar</button>
 				</div>
 			</div>
 		</div>
@@ -18,15 +18,29 @@
 			<div class="form-row">
 
 				<div class="form-group col-md-6">
-					<label position="stacked">Cantidad<span >*</span></label>
-					<input placeholder="Cantidad" required type="text" class="form-control" name="nombre"
+					<label position="stacked">Cantidad<span>*</span></label>
+					<input placeholder="Cantidad" type="text" class="form-control" name="nombre"
 						[(ngModel)]="gasto_centro_medico.monto">
 				</div>
 
 				<div class="form-group col-md-6">
-					<label position="stacked">Referencia<span >*</span></label>
-					<input placeholder="Referencia" required type="text" class="form-control" name="referencia"
+					<label position="stacked">Referencia<span>*</span></label>
+					<input placeholder="Referencia" type="text" class="form-control" name="referencia"
 						[(ngModel)]="gasto_centro_medico.referencia">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label position="stacked">Forma de pago<span>*</span></label>
+					<input placeholder="Forma de pago" type="text" class="form-control" name="forma_pago">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label position="stacked">Proveedor<span>*</span></label>
+					<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss">
+						<option value="" selected="selected">Seleccione un proveedor</option>
+						<option value="" >Parafarmic</option>
+						<option value="" >Suministros Punto Geriátrico</option>
+					</select>
 				</div>
 
 
@@ -34,8 +48,9 @@
 					<label>Centro Medico</label>
 					<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss"
 						[(ngModel)]="gasto_centro_medico.id_centro_medico">
-						<option [value]="gasto_centro_medico.id_centro_medico" selected="selected" >Seleccione un centro medico</option >
-							<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
+						<option [value]="gasto_centro_medico.id_centro_medico" selected="selected">Seleccione un centro
+							medico</option>
+						<option *ngFor="let centro of centros_medicos" [value]="centro.id">{{centro.nombre}}</option>
 					</select>
 				</div>
 
@@ -43,7 +58,8 @@
 					<label>Tipo Gasto</label>
 					<select value="brown" okText="Okay" class="form-control" cancelText="Dismiss"
 						[(ngModel)]="gasto_centro_medico.id_tipo_gasto">
-						<option [value]="gasto_centro_medico.id_tipo_gasto" selected="selected" >Seleccione un tipo de gasto</option >
+						<option [value]="gasto_centro_medico.id_tipo_gasto" selected="selected">Seleccione un tipo de
+							gasto</option>
 
 						<option *ngFor="let tipo of tiposGasto" [value]="tipo.id">{{tipo.nombre}}</option>
 					</select>
@@ -52,7 +68,8 @@
 			</div>
 			<div class="form-group">
 				<label>Nota</label>
-				<textarea placeholder="Nota" class="form-control" [(ngModel)]="gasto_centro_medico.descripcion"></textarea>
+				<textarea placeholder="Nota" class="form-control"
+					[(ngModel)]="gasto_centro_medico.descripcion"></textarea>
 			</div>
 
 		</div>
