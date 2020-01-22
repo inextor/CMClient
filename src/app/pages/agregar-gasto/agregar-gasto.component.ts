@@ -17,8 +17,8 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 	id_gasto:number = null;
 
     gasto_centro_medico:Gasto_Centro_Medico = {
-		id_tipo_gasto:0,
-		id_centro_medico: 1, //XXX QUITAR Y PONER EL QUE HAY EN SESION
+		id_tipo_gasto:null,
+		id_centro_medico: null, //XXX QUITAR Y PONER EL QUE HAY EN SESION
     };
 
 	currentUser:Usuario;

@@ -114,7 +114,7 @@
 							</button>
 							<!-- consultas -->
 							<button class=" p-0 btn btn-light m-1 border "
-								[routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
+								[routerLink]="['/ver-consultas','doctor',usuario.id,'paciente',paciente.id]"
 								[appAccess]="['Doctor','admin']"
 								data-toggle="tooltip" title="Consultas">
 								<span class="">

@@ -116,7 +116,7 @@ const routes: Routes = [
 			{ path: "configurar-especialidad/:idEspecialidad", component: ConfigurarPreguntasComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico", component: ConfigurarHorarioComponent, pathMatch: 'full' },
 			{ path: "configurar-preguntas", component: ConfigurarPreguntasComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "consultas", component: ConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "consultas/doctor/:id_doctor/paciente/:id_paciente", component: ConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "control-citas/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: ControlCitasComponent, pathMatch: "full" },
 			{ path: "distribucion", component:DistribucionComponent},
 			{ path: "dashboard", component:CalendarioCitasDoctorComponent},

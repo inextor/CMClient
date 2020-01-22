@@ -19,13 +19,13 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
-					<input class="form-control" type="text" name="nombre"
+					<input placeholder="Nombre" class="form-control" type="text" name="nombre"
 						[(ngModel)]="servicio_recurso.servicio.nombre">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Tipo de servicio*</label>
 					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
-						<option value="" selected="selected">Seleccione</option>
+						<option [value]="tipo" selected="selected">Seleccione un servicio</option>
 						<option value="SERVICIO">Servicio</option>
 						<option value="PRODUCTO_FISICO">Producto Fisico</option>
 					</select>

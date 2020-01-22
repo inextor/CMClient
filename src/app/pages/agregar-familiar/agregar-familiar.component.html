@@ -1,4 +1,4 @@
-<main class="p-2">
+
 	<div class="card p-3">
 
 		<div class="">
@@ -19,36 +19,36 @@
 			</div>
 
 			<form>
-
-				<div lines="full" class="list	">
-					<label position="stacked">Imagen<span color="danger">*</span></label>
-					<div *ngIf="paciente.id_imagen">
-						<img [src]="this.rest.urlBase+'/imagen.php?id='+paciente.id_imagen">
-					</div>
-					<div class="form-group">
-						<input type="file" (change)="uploadImage($event)" name="image">
-					</div>
-					<div class="form-group">
+				<label position="stacked">Imagen<span color="danger">*</span></label>
+				<div *ngIf="paciente.id_imagen">
+					<img [src]="this.rest.urlBase+'/imagen.php?id='+paciente.id_imagen">
+				</div>
+				<div class="form-group">
+					<input type="file" (change)="uploadImage($event)" name="image">
+				</div>
+				<div class="form-row">
+					
+					<div class="form-group col-md-6 ">
 						<label position="stacked">Nombre<span color="danger">*</span></label>
 						<input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 ">
 						<label position="stacked">Apellidos<span color="danger">*</span></label>
 						<input required type="text" class="form-control" name="apellidos"
 							[(ngModel)]="paciente.apellidos">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 ">
 						<label position="stacked">Sexo<span color="danger">*</span></label>
 						<input required type="text" class="form-control" name="sexo" [(ngModel)]="paciente.sexo">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 ">
 						<label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
 						<!--input required type="text" name="fecha_nacimiento" [(ngModel)]="paciente.fecha_nacimiento"></input-->
 						<input type="date" displayFormat="YYYY-MM-DD" class="form-control" name="fecha_nacimiento"
 							[(ngModel)]="paciente.fecha_nacimiento">
 					</div>
 
-					<div class="form-group">
+					<div class="form-group col-md-6 ">
 						<label position="stacked">Telefono<span color="danger">*</span></label>
 						<input required type="text" class="form-control" name="telefono_casa"
 							[(ngModel)]="paciente.telefono">
@@ -62,4 +62,3 @@
 		</div>
 
 	</div>
-</main>

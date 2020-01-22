@@ -1,18 +1,34 @@
-<main class="p-2">
-    <div>
-        <h5 class="pt-3 mb-3">Consultas</h5>
-        <app-loading [display]="is_loading"></app-loading>
-		<div class="card p-3 mb-3 mt-3">
-			Paciente:<b> {{paciente.nombre | titlecase}} {{paciente.apellidos|titlecase}}</b>
-		</div>
-		<div *ngFor="let consulta of consultas" class="card mt-3 mb-3 p-3">
-			<div><b>Fecha:</b>{{consulta.tiempo_creacion | date:'medium'}}</div>
-			<p *ngIf="consulta.motivo_consulta && consulta.motivo_consulta.trim() !== ''"><strong>Motivo Consulta:</strong> {{consulta.motivo_consulta}}</p>
-			<p *ngIf="consulta.diagnostico && consulta.diagnostico.trim() !== ''"><strong>Diagnostico:</strong> {{consulta.diagnostico}}</p>
-			<p *ngIf="consulta.medicamento && consulta.medicamento.trim() !== ''"><strong>Tratamiento:</strong> {{consulta.medicamento}}</p>
-			<div>
-				<button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm">Editar</button><button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm ml-3">Ver</button>
+<div class="card p-3">
+	<div class="">
+		<div class="p-0">
+			<div class="d-flex justify-content-between flex-wrap">
+				<div class="mb-3">
+					<h4>HISTORIAL CONSULTAS</h4>
+				</div>
+				<div class="mb-3">
+					<!-- <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
+						Agregar especialidad
+					</button> -->
+				</div>
 			</div>
 		</div>
-    </div>
-</main>
+		<div>
+			<app-loading [display]="is_loading"></app-loading>
+			<div class="card p-3 mb-3 mt-3">
+				Paciente:<b> {{paciente.nombre | titlecase}} {{paciente.apellidos|titlecase}}</b>
+			</div>
+			<div *ngFor="let consulta of consultas" class="card mt-3 mb-3 p-3">
+				<div><b>Fecha:</b>{{consulta.tiempo_creacion | date:'medium'}}</div>
+				<p *ngIf="consulta.motivo_consulta && consulta.motivo_consulta.trim() !== ''"><strong>Motivo
+						Consulta:</strong> {{consulta.motivo_consulta}}</p>
+				<p *ngIf="consulta.diagnostico && consulta.diagnostico.trim() !== ''"><strong>Diagnostico:</strong>
+					{{consulta.diagnostico}}</p>
+				<p *ngIf="consulta.medicamento && consulta.medicamento.trim() !== ''"><strong>Tratamiento:</strong>
+					{{consulta.medicamento}}</p>
+				<!-- <div>
+				<button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm">Editar</button><button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm ml-3">Ver</button>
+			</div> -->
+			</div>
+		</div>
+	</div>
+</div>
