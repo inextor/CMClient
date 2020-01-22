@@ -23,6 +23,8 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 
 
 	distribucion_list:DistribucionInfo[] = [];
+	usuario_list:Usuario[] = [];
+	centro_medico_list:Centro_Medico[] = [];
 
 	distribucion_search:SearchObject<Distribucion> = {
 
@@ -71,12 +73,24 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 			this.is_loading = true;
 			this.distribucion_search.pagina =	'pagina' in params ? parseInt( params.pagina ) : 0;
 			this.currentPage = this.distribucion_search.pagina;
+			let usuario = this.rest.getUsuarioSesion();
 
-			this.rest.distribucionInfo.search(this.distribucion_search)
-			.subscribe((response)=>
+			forkJoin([
+				this.rest.distribucionInfo.search(this.distribucion_search)
+				,this.rest.usuario.search({
+					eq:{ id_organizacion: usuario.id_organizacion }
+					,csv:{ tipo:['DOCTOR','RECEPCIONISTA','ADMIN','ASISTENTE'] }
+				})
+				,this.rest.centro_medico.search({
+					eq:{ id_organizacion: usuario.id_organizacion }
+				})
+			])
+			.subscribe((responses)=>
 			{
-				this.distribucion_list = response.datos;
-				this.setPages( this.distribucion_search.pagina, response.total );
+				this.distribucion_list = responses[0].datos;
+				this.usuario_list = responses[1].datos;
+				this.centro_medico_list = responses[2].datos;
+				this.setPages( this.distribucion_search.pagina, responses[0].total );
 			});
 		});
 	}

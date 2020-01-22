@@ -10,33 +10,33 @@
 			<div class="mt-3 mb-3 form-group">
 				<label class="">Centro Medico Solicitante</label>
 				<select name="id_centro_medico_solicitante" [(ngModel)]="distribucion_search.eq.id_centro_medico_solicitante" class="form-control">
-
-						<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
-					</select>
+					<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
+				</select>
 			</div>
 			<div class="mt-3 mb-3 form-group">
 				<label class="">Estatus</label>
 				<select name="estatus" [(ngModel)]="distribucion_search.lk.estatus" class="form-control">
-				<option value="PENDIENTE">PENDIENTE</option>
-				<option value="EN_TRANSITO">EN_TRANSITO</option>
-				<option value="RECIBIDO">RECIBIDO</option>
-				<option value="CANCELADO">CANCELADO</option>
-</select>
+					<option value="PENDIENTE">PENDIENTE</option>
+					<option value="EN_TRANSITO">EN_TRANSITO</option>
+					<option value="RECIBIDO">RECIBIDO</option>
+					<option value="CANCELADO">CANCELADO</option>
+				</select>
 			</div>
-			<div class="mt-3 mb-3 form-group">
+			<!--div class="mt-3 mb-3 form-group">
 				<label class="">Id_usuario_recibio</label>
 				<select name="id_usuario_recibio" [(ngModel)]="distribucion_search.eq.id_usuario_recibio" class="form-control">
 
-						<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
-					</select>
-			</div>
+					<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
+				</select>
+			</div-->
+
 			<div class="mt-3 mb-3 form-group">
 				<label class="">Id_usuario_envio</label>
 				<select name="id_usuario_envio" [(ngModel)]="distribucion_search.eq.id_usuario_envio" class="form-control">
-
-						<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
-					</select>
+					<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
+				</select>
 			</div>
+
 			<div class="mt-3 mb-3 form-group">
 				<label class="">Guia</label>
 				<input type="text" name="guia" [(ngModel)]="distribucion_search.lk.guia" class="form-control">
@@ -51,16 +51,8 @@
 				<label class="">Id_centro_medico_distribuidor</label>
 				<select name="id_centro_medico_distribuidor" [(ngModel)]="distribucion_search.eq.id_centro_medico_distribuidor" class="form-control">
 
-						<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
-					</select>
-			</div>
-			<div class="mt-3 mb-3 form-group">
-				<label class="">Tiempo_creacion</label>
-				<input type="datetime-local" name="tiempo_creacion" [(ngModel)]="distribucion_search.eq.tiempo_creacion" class="form-control">
-			</div>
-			<div class="mt-3 mb-3 form-group">
-				<label class="">Tiempo_actualizacion</label>
-				<input type="datetime-local" name="tiempo_actualizacion" [(ngModel)]="distribucion_search.eq.tiempo_actualizacion" class="form-control">
+					<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
+				</select>
 			</div>
 
 			<div class="d-flex align-self-end justify-content-center p-2">
@@ -68,13 +60,9 @@
 			</div>
 		</div>
 	</div>
-
-	<div>
-	</div>
-
 	<div>
 		<div class="row">
-							<div class="col">id</div>
+			<div class="col">id</div>
 			<div class="col">id centro medico solicitante</div>
 			<div class="col">estatus</div>
 			<div class="col">id usuario recibio</div>
@@ -82,12 +70,9 @@
 			<div class="col">guia</div>
 			<div class="col">paqueteria</div>
 			<div class="col">id centro medico distribuidor</div>
-			<div class="col">tiempo creacion</div>
-			<div class="col">tiempo actualizacion</div>
-
 		</div>
 		<div  *ngFor="let distribucion of distribucion_list" class="row">
-					<div class="col"><a [routerLink]="['/agregar-distribucion',distribucion.id]">{{distribucion.id}}</a></div>
+			<div class="col"><a [routerLink]="['/agregar-distribucion',distribucion.id]">{{distribucion.id}}</a></div>
 			<div class="col">{{distribucion.id_centro_medico_solicitante}}</div>
 			<div class="col">{{distribucion.estatus}}</div>
 			<div class="col">{{distribucion.id_usuario_recibio}}</div>
