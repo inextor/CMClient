@@ -38,11 +38,11 @@
 			<div class="form-row p-2">
 				<div class="form-group col-md-3">
 					<label>Usuario</label>
-					<input class="form-control" type="text" [(ngModel)]="usuario_search.lk.usuario">
+					<input placeholder="Ingrese Usuario" class="form-control" type="text" [(ngModel)]="usuario_search.lk.usuario">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Nombre</label>
-					<input class="form-control" type="text" [(ngModel)]="usuario_search.lk.nombre">
+					<input placeholder="Ingrese Nombre" class="form-control" type="text" [(ngModel)]="usuario_search.lk.nombre">
 				</div>
 				<!-- <div class="form-group col-md-3">
 					<label>Atendio:</label>
@@ -63,19 +63,19 @@
 				</div> -->
 				<div class="form-group col-md-3">
 					<label>Correo</label>
-					<input class="form-control" type="text" [(ngModel)]="usuario_search.lk.correo_electronico">
+					<input placeholder="Ingrese Correo" class="form-control" type="text" [(ngModel)]="usuario_search.lk.correo_electronico">
 				</div>
 
 				<div class="form-group col-md-3">
 					<label>Telefono</label>
-					<input class="form-control" type="text" [(ngModel)]="usuario_search.lk.telefono">
+					<input placeholder="Ingrese Telefono" class="form-control" type="text" [(ngModel)]="usuario_search.lk.telefono">
 				</div>
 
 				<div class="form-group col-md-3">
 					<label>Tipo:</label>
 					<select  name="tipo" [(ngModel)]="usuario_search.lk.tipo"
 						class="form-control">
-						<option value="" selected="selected" selected>Seleccione</option>
+						<option [value]="usuario_search.lk.tipo" selected="selected" selected>Seleccione un tipo de usuario</option>
 						<option value="ADMIN">ADMIN</option>
 						<option value="PACIENTE">PACIENTE</option>
 						<option value="DOCTOR">DOCTOR</option>

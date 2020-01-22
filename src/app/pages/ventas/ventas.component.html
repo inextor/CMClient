@@ -26,16 +26,16 @@
 				<div class="form-row p-2">
 					<div class="form-group col-md-3">
 						<label>Id Cliente</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.lk.id">
+						<input placeholder="Numero de cliente" class="form-control" type="text" [(ngModel)]="venta_search.lk.id">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Cliente</label>
-						<input class="form-control" type="text" [(ngModel)]="venta_search.lk.cliente">
+						<input placeholder="Cliente" class="form-control" type="text" [(ngModel)]="venta_search.lk.cliente">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Atendio:</label>
 						<select [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
-							<option value="" selected="selected">Seleccione</option>
+							<option [value]="venta_search.eq.id_usuario_atendio" selected="selected">Seleccione un vendedor</option>
 							<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
 								{{usuario.nombre|titlecase}}</option>
 						</select>
@@ -44,19 +44,19 @@
 						<label>Centro Medico:</label>
 						<select  name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico"
 							class="form-control">
-							<option value="" selected="selected">Seleccione</option>
+							<option [value]="venta_search.eq.id_centro_medico" selected="selected">Seleccione un centro medico</option>
 							<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
 								{{centro_medico.nombre|titlecase}}</option>
 						</select>
 					</div>
 					<div class="form-group col-md-3">
 						<label>Fecha</label>
-						<input type="date" class="form-control" [(ngModel)]="venta_search.eq.fecha">
+						<input  type="date" class="form-control" [(ngModel)]="venta_search.eq.fecha">
 					</div>
 					<div class="form-group col-md-3">
 						<label>Estatus</label>
 						<select name="estatus" class="form-control" [(ngModel)]="venta_search.eq.estatus">
-							<option value="" selected="selected"> Seleccione</option>
+							<option [value]="venta_search.eq.estatus" selected="selected"> Seleccione el estado de la venta</option>
 							<option value="PAGADA">PAGADA</option>
 							<option value="PENDIENTE">PENDIENTE</option>
 							<option value="PROCESADA">PROCESADA</option>

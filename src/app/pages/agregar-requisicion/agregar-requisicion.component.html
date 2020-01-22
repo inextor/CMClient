@@ -32,22 +32,22 @@
 
                 <div class="form-group col-md-4">
                     <label position="stacked">Costo de flete<span color="danger">*</span></label>
-                    <input min=0 type="number" class="form-control" name="direccion" [(ngModel)]="requisicion.flete">
+                    <input placeholder="Costo de flete" min=0 type="number" class="form-control" name="direccion" [(ngModel)]="requisicion.flete">
                 </div>
                 <div class="form-group col-md-4">
                     <label position="stacked">Costo de importacion<span color="danger">*</span></label>
-                    <input min=0 type="number" class="form-control" name="contacto"
+                    <input placeholder="Costo de importacion" min=0 type="number" class="form-control" name="contacto"
                         [(ngModel)]="requisicion.importacion">
                 </div>
                 <div class="form-group col-md-4">
                     <label position="stacked">No. Pedimento<span color="danger">*</span></label>
-                    <input type="text" class="form-control" name="cuenta_bancaria" [(ngModel)]="requisicion.pedimento">
+                    <input placeholder="No. pedimento" type="text" class="form-control" name="cuenta_bancaria" [(ngModel)]="requisicion.pedimento">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label position="stacked">Nota<span color="danger">*</span></label>
-                    <textarea type="text" class="form-control" name="rfc" [(ngModel)]="requisicion.nota"></textarea>
+                    <textarea placeholder="Nota" type="text" class="form-control" name="rfc" [(ngModel)]="requisicion.nota"></textarea>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                     <div class="dropdown">
                         <div class="">
                             <label position="stacked">Articulo<span color="danger">*</span></label>
-                            <input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
+                            <input  type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
                         </div>
                         <div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
                             <div *ngFor="let servicio of search_servicios;let i=index"
