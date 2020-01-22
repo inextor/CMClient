@@ -1,7 +1,7 @@
 <div class="card p-3">
 
 	<app-loading [display]="is_loading"></app-loading>
-	<div class="container">		
+	<div class="container">
 
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
@@ -15,7 +15,7 @@
 		</div>
 
 <div>
-	
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
@@ -25,13 +25,13 @@
 				<div class="form-group col-md-6">
 					<label for="">Tipo de servicio*</label>
 					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
-						<option [value]="tipo" selected="selected">Seleccione un servicio</option>
+						<option [value]="null" selected="selected">Seleccione un servicio</option>
 						<option value="SERVICIO">Servicio</option>
 						<option value="PRODUCTO_FISICO">Producto Fisico</option>
 					</select>
 				</div>
 			</div>
-	
+
 	</div>
 		<div class="card">
 			<table class="basica">
@@ -49,7 +49,7 @@
 			</table>
 		</div>
 
-		
+
 
 	</div>
 </div>
