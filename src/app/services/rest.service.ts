@@ -126,7 +126,7 @@ export class RestService {
 	constructor(private http: HttpClient)
 	{
 		//Produccion por cambiarx`x
-		this.urlBase = 'http://';
+		this.urlBase = 'http://54.175.170.17/Mehr/api';
 
 		if( window.location.hostname.indexOf('127.0.0.1' ) == 0 )
 			this.urlBase = 'http://hospital.nextor.mx';

@@ -67,7 +67,7 @@
 				</div>
 				<div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
 					<div *ngFor="let servicio of search_servicios;let i=index"
-						(click)="agregarServicio(servicio)">
+						(click)="agregarServicio(servicio,1)">
 						<div *ngIf="i>0" class="dropdown-divider"></div>
 						<div class="dropdown-item">
 							{{servicio.nombre}}

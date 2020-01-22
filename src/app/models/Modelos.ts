@@ -133,6 +133,7 @@ export interface Detalle_Distribucion{
 	cantidad_enviada?:number;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
+
 };
 
 export interface Detalle_Requisicion{
