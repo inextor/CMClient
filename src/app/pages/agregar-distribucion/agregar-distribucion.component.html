@@ -1,9 +1,9 @@
-<div class="card p-3">
+<div class="container card p-3">
 	<h5>distribucion</h5>
 	<div class="container">
 		<div class="row">
 			<div class="col-6 mt-3 mb-3">
-				<label class="">Id_centro_medico_solicitante</label>
+				<label class="">Sucursal Solicitante</label>
 				<select name="id_centro_medico_solicitante" [(ngModel)]="distribucionInfo.distribucion.id_centro_medico_solicitante" class="form-control">
 					<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
 				</select>
@@ -19,14 +19,13 @@
 				</select>
 			</div>
 			<div class="col-6 mt-3 mb-3">
-				<label class="">Id_usuario_recibio</label>
+				<label class="">Recibio</label>
 				<select name="id_usuario_recibio" [(ngModel)]="distribucionInfo.distribucion.id_usuario_recibio" class="form-control">
-
 					<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
 				</select>
 			</div>
 			<div class="col-6 mt-3 mb-3">
-				<label class="">Id_usuario_envio</label>
+				<label class="">Envio</label>
 				<select name="id_usuario_envio" [(ngModel)]="distribucionInfo.distribucion.id_usuario_envio" class="form-control">
 					<option *ngFor="let c of usuario_list" [value]="c.id">{{c.usuario}}</option>
 				</select>
@@ -34,16 +33,17 @@
 			<div class="col-6 mt-3 mb-3">
 				<label class="">Guia</label>
 				<input type="text" name="guia" [(ngModel)]="distribucionInfo.distribucion.guia" class="form-control">
-
 			</div>
+
 			<div class="col-6 mt-3 mb-3">
 				<label class="">Paqueteria</label>
 				<input type="text" name="paqueteria" [(ngModel)]="distribucionInfo.distribucion.paqueteria" class="form-control">
-
 			</div>
+
 			<div class="col-6 mt-3 mb-3">
-				<label class="">Id_centro_medico_distribuidor</label>
+				<label class="">Sucursal Distribuidora</label>
 				<select name="id_centro_medico_distribuidor" [(ngModel)]="distribucionInfo.distribucion.id_centro_medico_distribuidor" class="form-control">
+					<option [value]="null" [selected]>Ninguno</option>
 					<option *ngFor="let c of centro_medico_list" [value]="c.id">{{c.nombre}}</option>
 				</select>
 			</div>
@@ -52,5 +52,58 @@
 				<button type="button" [disabled]="is_loading" (click)="save()" class="btn btn-primary">Save</button>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="container card mt-3 mb-3 pt-3 ">
+	<h5 class="mb-3 mt-3">*AGREGAR PRODUCTOS</h5>
+	<div class="form-row">
+
+		<div class="form-group col-md-6">
+			<div class="dropdown">
+				<div class="">
+					<label position="stacked">Articulo<span color="danger">*</span></label>
+					<input type="text" (keyup)="buscar($event)" [(ngModel)]="busqueda" class="form-control">
+				</div>
+				<div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
+					<div *ngFor="let servicio of search_servicios;let i=index"
+						(click)="agregarServicio(servicio)">
+						<div *ngIf="i>0" class="dropdown-divider"></div>
+						<div class="dropdown-item">
+							{{servicio.nombre}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container card p-0 mb-3 ">
+		<table class="basica p-0 m-0">
+			<thead>
+				<tr>
+					<th>Articulo</th>
+					<th>Solicitado</th>
+					<th>Cantidad</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let dd of detalles_distribucion">
+					<th>
+						<label>{{servicios_by_id[ dd.id_servicio ].nombre | titlecase}}</label>
+					</th>
+
+					<th>
+						{{detalles_requisicion_by_service[ dd.id_servicio ] ? detalles_requisicion_by_service[ dd.id_servicio ].detalle_requisicion.cantidad : 0 }}
+					</th>
+					<th>
+						<input type="number" [(ngModel)]="dd.cantidad" step="1" min=0>
+					</th>
+					<th>
+						<button class="btn btn-secondary btn-sm">x</button>
+					</th>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

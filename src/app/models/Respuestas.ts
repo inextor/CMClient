@@ -49,7 +49,7 @@ export interface SearchObject<T>
 export interface DistribucionInfo
 {
 	distribucion:Distribucion;
-	detalles_distribucion:Detalle_Distribucion[];
+	detalles:Detalle_Distribucion[];
 }
 
 export interface Recurso_Response{

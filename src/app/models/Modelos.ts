@@ -172,12 +172,13 @@ export interface Detalle_Venta{
 export interface Distribucion{
 	id?:number;
 	id_centro_medico_solicitante?:number;
-	estatus?:string;
 	id_usuario_recibio?:number;
 	id_usuario_envio?:number;
+	id_centro_medico_distribuidor?:number;
+	id_requisicion?:number;
+	estatus?:string;
 	guia?:string;
 	paqueteria?:string;
-	id_centro_medico_distribuidor?:number;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 
