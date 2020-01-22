@@ -30,6 +30,7 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 
 	};
 
+	centros_medicos = {};
 
 	ngOnInit()
 	{
@@ -87,10 +88,18 @@ export class DistribucionComponent extends BaseComponent implements OnInit {
 			])
 			.subscribe((responses)=>
 			{
-				this.distribucion_list = responses[0].datos;
-				this.usuario_list = responses[1].datos;
+				console.log('distribucion',responses);
 				this.centro_medico_list = responses[2].datos;
+				this.centro_medico_list.forEach((i)=>
+				{
+					this.centros_medicos[i.id]=i;
+				});
+
+				console.log( this.centros_medicos );
+
+				this.usuario_list = responses[1].datos;
 				this.setPages( this.distribucion_search.pagina, responses[0].total );
+				this.distribucion_list = responses[0].datos;
 			});
 		});
 	}
