@@ -620,4 +620,23 @@ export class RestService {
 			})
 		);
 	}
+	getCompanyInfo():Promise<Organizacion>
+	{
+		return this.http.get<Organizacion>(`${this.urlBase}/Organizacion.php?domain=foo`)
+        .pipe
+		(
+			map(response=>{
+                localStorage.setItem("Organizacion", JSON.stringify( response ) );
+               return response;
+			})
+		).toPromise();
+	}
+	getCompanyFromSession():Organizacion
+	{
+		let organizacion = localStorage.getItem('organizacion');
+		if( organizacion )
+			return JSON.parse( organizacion );
+
+		return null;
+	}
 }

@@ -13,6 +13,10 @@
 					</a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a [routerLink]="['/editar-organizacion']"
+						class="list-group-item list-group-item-action color1 ">ORGANIZACION</a>
+				</div>
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a [routerLink]="['/centros-medicos']"
 						class="list-group-item list-group-item-action color1 ">CLINICAS</a>
 				</div>
