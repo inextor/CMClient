@@ -19,7 +19,7 @@ import {	Centro_Medico, Cita,
 	Detalle_Venta, Distribucion, Detalle_Distribucion, Detalle_Requisicion, Doctor, Expediente,
 	Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor, Horario_Doctor, Imagen, Inventario,
 	Notificacion, Organizacion, Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor,
-	Servicio, Tipo_Precio, Usuario, Venta, Proveedor, Requisicion, Doctor_Servicio
+	Servicio, Tipo_Precio, Usuario,Unidad_Medida, Venta, Proveedor, Requisicion, Doctor_Servicio
 	} from	'../models/Modelos';
 
 
@@ -102,6 +102,7 @@ export class RestService {
 	public tipo_gasto:ObjRest<Tipo_Gasto>;
 	public tipo_precio:ObjRest<Tipo_Precio>;
 	public usuario:ObjRest<Usuario>;
+	public unidad_medida:ObjRest<Unidad_Medida>;
 	public searchCita:SearchRest<SearchCitaRequest,SearchCitaResponse>;
 	public especialidad_pregunta:ObjRest<Especialidad_Pregunta>;
 	public searchGastoCentroMedico:SearchRest<Gasto_Centro_Medico,SearchGastoCentroMedicoResponse>;
@@ -183,6 +184,8 @@ export class RestService {
 		this.tipo_precio					= new ObjRest<Tipo_Precio>					(`${this.urlBase}/tipo_precio.php`,http);
 		this.usuario						= new ObjRest<Usuario>						(`${this.urlBase}/usuario.php`,http);
 		// this.usuario_centro_medico		= new ObjRest<Usuario_Centro_Medico>		(`${this.urlBase}/usuario_centro_medico.php`,http);
+
+		this.unidad_medida					= new ObjRest<Unidad_Medida>				(`${this.urlBase}/unidad_medida.php`,http);
 		this.venta							= new ObjRest<Venta>						(`${this.urlBase}/venta.php`,http);
 		this.searchCita						= new SearchRest<SearchCitaRequest,SearchCitaResponse>(`${this.urlBase}/searchCita.php`,http);
 		this.especialidad_pregunta			= new ObjRest<Especialidad_Pregunta_Accion>	(`${this.urlBase}/especialidad_pregunta.php`,http);
