@@ -89,7 +89,22 @@ import { PuntoVentaConsultaComponent } from './components/punto-venta-consulta/p
 import { AgendarCitaPacienteComponent } from './pages/agendar-cita-paciente/agendar-cita-paciente.component';
 import { DistribucionComponent } from './pages/distribucion/distribucion.component';
 import { AgregarDistribucionComponent } from './pages/agregar-distribucion/agregar-distribucion.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { RestService } from './services/rest.service';
 
+export function init_app(rest: RestService) {
+  return () =>
+{
+  return rest.getCompanyInfo().catch((error)=>
+  {
+    console.log('Load from storage');
+    let company = localStorage.getItem('company');
+    if( !company )
+      throw 'Company not found';
+    return Promise.resolve( JSON.parse( company ) );
+  });
+};
+}
 
 @NgModule({
   declarations: [
@@ -173,6 +188,7 @@ import { AgregarDistribucionComponent } from './pages/agregar-distribucion/agreg
     AgendarCitaPacienteComponent,
     DistribucionComponent,
     AgregarDistribucionComponent,
+    ImageUploaderComponent,
 
 
   ],

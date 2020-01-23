@@ -33,13 +33,13 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 	//inicializa la busqueda para limpiar los forms de busqueda cada que se selecciona busqueda Avanzada
 	clearBusqueda(){
 		this.usuario_search = {
-			eq: {},
+			eq: {id_organizacion: this.rest.getUsuarioSesion().id_organizacion},
 			gt: {},
 			ge: {},
 			le: {},
 			lt: {},
 			lk: {},
-			csv: {},
+			csv: {tipo: ['ADMIN','RECEPCIONISTA','ASISTENTE']},
 		};
 		this.search();
 	}
@@ -55,7 +55,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 				le: {},
 				lt: {},
 				lk: {},
-				csv: {},
+				csv: {tipo: ['ADMIN','RECEPCIONISTA','ASISTENTE']},
 			};
 			let usuario = this.rest.getUsuarioSesion();
 			this.usuario_search.lk.usuario	= "lk.usuario" in params ?params["lk.usuario"]:null;

@@ -422,7 +422,14 @@ export interface Notificacion{
 
 export interface Organizacion{
 	id?:number;
-	nombre?:string;
+	id_imagen_default_ticket?:number;
+	id_imagen_default_login ?:number;
+	id_imagen_default_logo ?:number;
+	id_imagen_default_proveedor?:number;
+	id_imagen_default_servicio ?:number;
+	id_imagen_default_usuario ?:number;
+	id_imagen_default_sucursal?:number;
+	nombre?:string
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 

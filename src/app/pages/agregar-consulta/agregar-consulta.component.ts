@@ -38,7 +38,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	//timer
 	porcentaje: string = '0%';
 	timeLeft: number = 0;
-	interval: number = 0;
+	interval;
 	tiempo_transcurrido: string = '';
 	//venta_handler:VentaHandler;
 
