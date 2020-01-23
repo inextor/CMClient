@@ -5,7 +5,9 @@
 
 			<div class="d-flex mb-2 flex-wrap">
 				<button [routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
-					class="btn btn-primary">Ver Historial</button>
+					class="btn btn-primary mr-2">Ver Historial</button>
+				<button [routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+					class="btn btn-primary">Historia medica</button>
 
 			</div>
 			<!-- <div class="mb-3">
