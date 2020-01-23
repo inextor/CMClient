@@ -7,73 +7,73 @@
 				<label position="stacked">Nombre Organización<span color="danger">*</span></label>
 				<input required type="text" name="nombre" [(ngModel)]="organizacion.nombre">
 			</div>
-			<div>
+			<div >
 				<label>default ticket</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_ticket">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_ticket">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_ticket"
 						[alt]="organizacion.nombre+' ticket'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div class="">
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_ticket"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default logo</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_logo">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_logo">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_logo"
 						[alt]="organizacion.nombre+' logo'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_logo"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default login</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_login">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_login">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_login"
 						[alt]="organizacion.nombre+' login'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_login"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default proveedor</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_proveedor">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_proveedor">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_proveedor"
 						[alt]="organizacion.nombre+' proveedor'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_proveedor"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default servicio</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_servicio">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_servicio">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_servicio"
 						[alt]="organizacion.nombre+' servicio'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_servicio"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default usuario</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_usuario">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_usuario">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_usuario"
 						[alt]="organizacion.nombre+' usuario'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_usuario"></app-image-uploader>
 				</div>
 			</div>
 			<div>
 				<label>default sucursal</label>
-				<div class="image_logo" *ngIf="organizacion.id_imagen_default_sucursal">
+				<!-- <div class="image_logo" *ngIf="organizacion.id_imagen_default_sucursal">
 					<img [src]="rest.urlBase+'/imagen.php?id='+organizacion.id_imagen_default_sucursal"
 						[alt]="organizacion.nombre+' sucursal'">
-				</div>
-				<div class="mt-3 mb-3">
+				</div> -->
+				<div >
 					<app-image-uploader [(image)]="organizacion.id_imagen_default_sucursal"></app-image-uploader>
 				</div>
 			</div>
