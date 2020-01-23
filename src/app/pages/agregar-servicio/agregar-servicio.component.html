@@ -1,7 +1,6 @@
 <div class="card p-3">
 	<app-loading [display]="is_loading"></app-loading>
 	<div class="container">
-
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
 				<div >
@@ -22,7 +21,7 @@
 				<div class="form-group col-md-6">
 					<label for="">Tipo de servicio*</label>
 					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
-						<option [value]="null" selected="selected">Seleccione un servicio</option>
+						<option [value]="null">Seleccione un servicio</option>
 						<option value="SERVICIO">Servicio</option>
 						<option value="PRODUCTO_FISICO">Producto Fisico</option>
 					</select>
@@ -32,45 +31,47 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="">Unidad de medida</label>
-					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.tipo">
+					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.id_unidad_medida">
 						<option [value]="null">Seleccione una unidad de medida</option>
 						<option *ngFor="let unidad_medida of unidades_de_medida" [value]="unidad_medida.id">{{unidad_medida.nombre | titlecase}}</option>
 					</select>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Precio Referencia</label>
-					<input type="number" step="any" [(ngModel)]="servicio_recurso.servicio.precio_referencia">
+					<input type="number" step="any" [(ngModel)]="servicio_recurso.servicio.precio_referencia" class="form-control">
 				</div>
 
 			</div>
 		</div>
 
-		<div>
-			<div class="form-row dropdown">
-				<div>
-					<label>Producto o Servicio</label>
-					<input type="text" name="search_servicio" [(ngModel)]="search" (keyup)="changeSearchServicio($event)" class="form-control">
-				</div>
-				<div *ngIf="search_servicios.length && search!= ''" class="dropdown-menu show w-100 no-selectable-text">
-					<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
-						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
-						<div class="dropdown-item search">
-							{{servicio.nombre|uppercase}}
+		<ng-container *ngIf="servicio_recurso.servicio.tipo == 'SERVICIO'">
+			<div class="row">
+				<div class="dropdown col-12">
+					<div class="dropdown">
+						<label>Agregar Productos</label>
+						<input type="text" name="search_servicio" [(ngModel)]="search" (keyup)="changeSearchServicio($event)" class="form-control" placeholder="Buscar">
+						<div *ngIf="search_servicios.length && search!= ''" class="dropdown-menu show w-100 no-selectable-text">
+							<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
+								<div class="dropdown-item search">
+									{{servicio.nombre|uppercase}}
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="p-3">
-			Servicios Secundarios {{servicio_recurso.recursos.length}}
-			<div *ngFor="let recurso_response of servicio_recurso.recursos" class="row">
-				<div class="col-8">
-					<label>{{recurso_response.servicio.nombre | titlecase}}</label>
+			<div class="p-3">
+				<h2>Servicios Secundarios</h2>
+				<div *ngFor="let recurso_response of servicio_recurso.recursos" class="row">
+					<div class="col-8">
+						<label>{{recurso_response.servicio.nombre | titlecase}}</label>
+					</div>
+					<div class="col-2 text-right">{{recurso_response.servicio.precio_referencia | currency }} </div>
+					<div class="col-2 text-right"><input type="number" [(ngModel)]="recurso_response.recurso.cantidad" min="0"></div>
 				</div>
-				<div class="col-4"><input type="number" [(ngModel)]="recurso_response.recurso.cantidad"></div>
 			</div>
-		</div>
+		</ng-container>
 
 		<div class="card">
 			<table class="basica">
@@ -81,7 +82,13 @@
 				<tr *ngFor="let centro_medico of centros_medicos; index as i">
 					<td><b>{{centro_medico.nombre}}</b></td>
 					<td *ngFor="let tipo_precio of tipo_precios; index as j">
-						<input placeholder="$" type="number" class=" form-control" [name]="i+'-'+j" [(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
+						<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j" [(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
+						<span *ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio" class="text-success">
+							{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
+						</span>
+						<span *ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia>precios[centro_medico.id][tipo_precio.id].precio" class="text-danger">
+							{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
+						</span>
 					</td>
 				</tr>
 			</table>

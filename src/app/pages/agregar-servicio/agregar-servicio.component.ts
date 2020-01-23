@@ -8,6 +8,7 @@ import { Location } from	'@angular/common';
 import { RestService } from '../../services/rest.service';
 import {Router,ActivatedRoute} from "@angular/router"
 import { Title } from '@angular/platform-browser';
+import { Unidad_Medida } from 'src/app/models/Modelos';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			'nombre': '',
 			'codigo': '',
 			'prestado_por': 'centro_medico',
-			'tipo':''
+			'tipo':null,
+			'id_unidad_medida':null
 		},
 		recursos : []
 	};
@@ -58,7 +60,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
 					this.rest.centro_medico.getAll({id_organizacion: this.usuario.id_organizacion}),
-					this.rest.unidad_medida.getAll(),
+					this.rest.unidad_medida.getAll({}),
 					this.rest.precio_servicio.getAll({},{ id_servicio: this.id }),
 					this.rest.servicio_recurso.get( this.id ),
 				])
@@ -78,8 +80,8 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 					//this.rest.precio_servicio.getAll({ id_servicio: this.id })
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
-					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion}),
-					this.rest.unidad_medida.getAll()
+					this.rest.centro_medico.getAll({id_organizacion: this.usuario.id_organizacion}),
+					this.rest.unidad_medida.getAll({})
 				])
 				.subscribe((valores)=>
 				{
@@ -130,9 +132,22 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		{
 			this.precio_servicios = valores[3].datos;
 			this.servicio_recurso = valores[4];
+
 		}
 		else
 		{
+			this.servicio_recurso = {
+				servicio:{
+					'id': null,
+					'nombre': '',
+					'codigo': '',
+					'prestado_por': 'centro_medico',
+					'tipo':null,
+					'id_unidad_medida':null
+				},
+				recursos : []
+			}
+
 			this.precio_servicios = [];
 		}
 
@@ -159,18 +174,6 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				}
 			});
 		});
-
-		console.log( 'precios',this.precios );
-
-		this.servicio_recurso= valores.length == 4	? valores[3] : {
-			servicio:{
-				'id': null,
-				'nombre': '',
-				'codigo': '',
-				'prestado_por': 'centro_medico'
-			},
-			recursos : []
-		};
 		this.is_loading = false;
 	}
 
@@ -250,4 +253,33 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			this.search_servicios = response.datos;
 		});
 	}
+
+	getPrice(price1:number,price2:number)
+	{
+		if( price1> price2 )
+		{
+			let total:number = price1-price2;
+			return total/price2;
+		}
+		else
+		{
+			return 1-price1/price2;
+		}
+	}
+	getUtilidad(precio:number)
+	{
+		let precio2 = this.servicio_recurso.servicio.precio_referencia;
+
+		if( precio> precio2)
+		{
+			let total:number = precio-precio2;
+			return total/precio2;
+		}
+		else
+		{
+			return 1-precio/precio2;
+		}
+
+	}
+
 }
