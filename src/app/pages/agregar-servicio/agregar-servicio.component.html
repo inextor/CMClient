@@ -1,5 +1,4 @@
 <div class="card p-3">
-
 	<app-loading [display]="is_loading"></app-loading>
 	<div class="container">
 
@@ -14,13 +13,11 @@
 			</div>
 		</div>
 
-<div>
-
+		<div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
-					<input placeholder="Nombre" class="form-control" type="text" name="nombre"
-						[(ngModel)]="servicio_recurso.servicio.nombre">
+					<input placeholder="Nombre" class="form-control" type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Tipo de servicio*</label>
@@ -31,8 +28,35 @@
 					</select>
 				</div>
 			</div>
+		</div>
 
-	</div>
+		<div>
+			<div class="form-row dropdown">
+				<div>
+					<label>Producto o Servicio</label>
+					<input type="text" name="search_servicio" [(ngModel)]="search" (keyup)="changeSearchServicio($event)" class="form-control">
+				</div>
+				<div *ngIf="search_servicios.length && search!= ''" class="dropdown-menu show w-100 no-selectable-text">
+					<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
+						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
+						<div class="dropdown-item search">
+							{{servicio.nombre|uppercase}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="p-3">
+			Servicios Secundarios {{servicio_recurso.recursos.length}}
+			<div *ngFor="let recurso_response of servicio_recurso.recursos" class="row">
+				<div class="col-8">
+					<label>{{recurso_response.servicio.nombre | titlecase}}</label>
+				</div>
+				<div class="col-4"><input type="number" [(ngModel)]="recurso_response.recurso.cantidad"></div>
+			</div>
+		</div>
+
 		<div class="card">
 			<table class="basica">
 				<tr>
@@ -42,14 +66,10 @@
 				<tr *ngFor="let centro_medico of centros_medicos; index as i">
 					<td><b>{{centro_medico.nombre}}</b></td>
 					<td *ngFor="let tipo_precio of tipo_precios; index as j">
-						<input placeholder="$" type="number" class=" form-control" [name]="i+'-'+j"
-							[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
+						<input placeholder="$" type="number" class=" form-control" [name]="i+'-'+j" [(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio">
 					</td>
 				</tr>
 			</table>
 		</div>
-
-
-
 	</div>
 </div>
