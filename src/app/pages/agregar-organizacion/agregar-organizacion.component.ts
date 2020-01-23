@@ -22,37 +22,32 @@ export class AgregarOrganizacionComponent extends BaseComponent implements OnIni
   
   ngOnInit() {
     
-    let usuario = this.rest.getUsuarioSesion();
-    this.rest.organizacion.get(usuario.id_organizacion).subscribe((response)=>{
-      this.organizacion = response;
-      console.log("organizacion", this.organizacion)})
-
+    // let usuario = this.rest.getUsuarioSesion();
+    // this.rest.organizacion.get(usuario.id_organizacion).subscribe((response)=>{
+    //   this.organizacion = response;
+    //   console.log("organizacion", this.organizacion)})
+      
       this.route.paramMap.subscribe( params =>
         {
-          let c = this.rest.getCompanyFromSession();
-          this.organizacion.id = c.id;
-    
-          this.rest.organizacion.get( c.id ).subscribe((organizacion)=>
-          {
-            this.is_loading = false;
-            this.organizacion= organizacion;
-          },(error)=>
-          {
-            this.is_loading = false;
-            this.showError( error );
-          });
-    
-    
+          let usuario = this.rest.getUsuarioSesion();
+          this.rest.organizacion.get(usuario.id_organizacion).subscribe(response=>{
+            this.organizacion = response;
+            console.log("estaeslaorganizacion",this.organizacion);
+          })
         });
   }
 
-  uploadImage(evt)
+
+	guardar()
 	{
-		if (evt.target.files.length)
-		{
-			this.rest.uploadImage(evt.target.files[0], false).subscribe((imageData) => {
-				this.organizacion.id_imagen_default_logo = imageData.id;
-			}, error => this.showError(error));
-		}
+    this.is_loading = true;
+    console.log("este es el guardar",this.organizacion);
+		this.rest.organizacion.update( this.organizacion ).subscribe((response)=>{
+			this.is_loading = false;
+			localStorage.setItem('organizacion',JSON.stringify( response ) );
+			this.router.navigate(['/agregar-organizacion']);
+    },(error)=>this.showError(error));
+    
+    
 	}
 }

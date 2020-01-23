@@ -631,9 +631,9 @@ export class RestService {
 			})
 		).toPromise();
 	}
-	getCompanyFromSession():Organizacion
+	getCompanyFromSession():Usuario
 	{
-		let organizacion = localStorage.getItem('organizacion');
+		let organizacion = localStorage.getItem('usuario');
 		if( organizacion )
 			return JSON.parse( organizacion );
 
