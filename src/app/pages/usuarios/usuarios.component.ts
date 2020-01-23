@@ -38,7 +38,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 			ge: {},
 			le: {},
 			lt: {},
-			lk: {},
+			lk: {tipo: null},
 			csv: {tipo: ['ADMIN','RECEPCIONISTA','ASISTENTE']},
 		};
 		this.search();
@@ -54,7 +54,7 @@ export class UsuariosComponent extends BaseComponent implements OnInit {
 				ge: {},
 				le: {},
 				lt: {},
-				lk: {},
+				lk: {tipo: null},
 				csv: {tipo: ['ADMIN','RECEPCIONISTA','ASISTENTE']},
 			};
 			let usuario = this.rest.getUsuarioSesion();
