@@ -470,7 +470,7 @@ export class RestService {
 		if(paciente.fecha_naciemiento){
 			paciente.fecha_nacimiento = paciente.fecha_nacimiento.substring(0,10);
 		}
-		return this.http.post<any>(`${this.urlBase}/usuario.php`,{usuario,paciente},{ headers: this.getSessionHeaders(),withCredentials:true});
+		return this.http.post<any>(`${this.urlBase}/usuario_paciente.php`,{usuario,paciente},{ headers: this.getSessionHeaders(),withCredentials:true});
 	}
 
 	guardarHorarioDoctor(idDoctor:number, idCentroMedico:number, horarios:Horario_Doctor[]):Observable<any>
