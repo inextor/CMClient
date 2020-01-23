@@ -28,10 +28,13 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		recursos : []
 	};
 
+	search:string = '';
+	search_servicios:Servicio[] = [];
 	tipo_precios:Tipo_Precio[] = [];
 	precio_servicios:Precio_Servicio[] = [];
 	centros_medicos:Centro_Medico[] = [];
 	precios	= {};
+	usuario = null;
 	id:number = null;
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
@@ -44,8 +47,8 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		this.route.paramMap.subscribe( params =>
 		{
 			this.id = params.get('id') ==null ? null : parseInt(params.get('id') );
-			let user = this.rest.getUsuarioSesion();
-			this.servicio_recurso.servicio.id_organizacion = user.id_organizacion;
+			this.usuario= this.rest.getUsuarioSesion();
+			this.servicio_recurso.servicio.id_organizacion = this.usuario.id_organizacion;
 
 			this.is_loading = true;
 
@@ -53,7 +56,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			{
 				forkJoin([
 					this.rest.tipo_precio.getAll({}),
-					this.rest.centro_medico.getAll({id_organizacion: user.id_organizacion}),
+					this.rest.centro_medico.getAll({id_organizacion: this.usuario.id_organizacion}),
 					this.rest.precio_servicio.getAll({},{ id_servicio: this.id }),
 					this.rest.servicio_recurso.get( this.id )
 				])
@@ -88,6 +91,28 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 				});
 			}
 		});
+	}
+
+	agregarServicio(servicio:Servicio)
+	{
+
+		let index = this.servicio_recurso.recursos.findIndex(i=> i.servicio.id == servicio.id );
+
+		if( index > -1  )
+		{
+			this.servicio_recurso.recursos[ index].recurso.cantidad++;
+		}
+		else
+		{
+			this.servicio_recurso.recursos.push({
+				servicio: servicio
+				,recurso: { id_servicio_secundario: servicio.id, cantidad: 1 }
+			})
+		}
+		this.search = '';
+		this.search_servicios = [];
+
+		console.log('Agregando Servicio', servicio);
 	}
 
 
@@ -147,7 +172,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 	guardar()
 	{
-	this.is_loading = true;
+		this.is_loading = true;
 
 		if( this.servicio_recurso.servicio.id )
 		{
@@ -206,9 +231,19 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		}
 		,(error)=>
 		{
-		this.is_loading = false;
-
+			this.is_loading = false;
 			this.showError( error );
+		});
+	}
+
+	changeSearchServicio(evt)
+	{
+		this.rest.servicio.search({
+			lk:{ nombre: evt.target.value }
+			,eq:{ id_organizacion: this.usuario.id_organizacion, tipo: 'PRODUCTO_FISICO' }
+		}).subscribe((response)=>
+		{
+			this.search_servicios = response.datos;
 		});
 	}
 }
