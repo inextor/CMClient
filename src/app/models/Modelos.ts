@@ -580,6 +580,7 @@ export interface Servicio{
 	id_unidad_medida?:number;
 	id_imagen?:number;
 	codigo?:string;
+	precio_referencia?:number;
 	tipo?:string;
 	nombre?:string;
 	prestado_por?:string;
