@@ -117,6 +117,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		this.search = '';
 		this.search_servicios = [];
 
+		this.updateCantidades();
 		console.log('Agregando Servicio', servicio);
 	}
 
@@ -150,6 +151,8 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 			this.precio_servicios = [];
 		}
+
+		this.updateCantidades();
 
 		this.centros_medicos.forEach( i=> this.precios[i.id] = {});
 
@@ -280,6 +283,11 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 			return 1-precio/precio2;
 		}
 
+	}
+	updateCantidades()
+	{
+		this.servicio_recurso.recursos =  this.servicio_recurso.recursos.filter(i=>i.recurso.cantidad > 0 );
+		this.servicio_recurso.servicio.precio_referencia = this.servicio_recurso.recursos.reduce((p,c)=>p+c.servicio.precio_referencia*c.recurso.cantidad,0);
 	}
 
 }
