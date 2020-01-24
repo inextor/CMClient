@@ -7,7 +7,7 @@
 					<h4>INGRESOS</h4>
 				</div>
 				<div>
-					<button type="button" class="btn btn-primary btn-sm" (click)="showAddIngreso=true;" size="small">Agregar
+					<button type="button" class="btn btn-primary btn-sm" (click)="showAddIngreso=true;"  size="small">Agregar
 						Ingreso</button>
 				</div>
 			</div>
@@ -53,5 +53,5 @@
 				[currentPage]="currentPage"></app-paginacion>
 		</div>
 	</div>
-	<app-ingreso [show]="showAddIngreso" (onClose)="ingresoClosed($event)"></app-ingreso>
+	<app-ingreso [(show)]="showAddIngreso"  (onClose)="ingresoClosed($event)"></app-ingreso>
 </div>

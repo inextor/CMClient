@@ -16,8 +16,8 @@ import { Location } from '@angular/common';
 export class IngresoComponent extends BaseComponent implements OnInit {
 
 	@Input() show:boolean = false;
-	@Output() onClose= new EventEmitter<boolean>();
-
+	@Input() closable:boolean = true;
+	@Output() showChange= new EventEmitter<boolean>();
 	ingreso: Ingreso = {
 		id:null,
 		monto:null,
@@ -25,6 +25,17 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 	};
 
 	ngOnInit() {
+		this.rest.keyUpObserver.subscribe((e)=>
+		{
+			if( e.keyCode == 27 )
+			{
+				if( this.closable )
+				{
+					this.showChange.emit( false );
+				}
+			}
+		});
+	
 		let centro_medico=this.rest.getCurrentCentroMedico()
 		this.ingreso = {
 			monto:null,
@@ -39,8 +50,10 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 
 	onCancel()
 	{
-		this.onClose.emit( false );
+		this.showChange.emit( false );
+	
 	}
+
 
 	guardar(){
 		this.is_loading = true;
@@ -50,7 +63,7 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 			this.rest.ingreso.update(this.ingreso).subscribe((response) => {
 				this.is_loading = false;
 				this.show = false;
-				this.onClose.emit(true);
+				this.showChange.emit(true);
 			}, error => this.showError(error));
 		}
 		else {
@@ -58,7 +71,7 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 			this.rest.ingreso.create(this.ingreso).subscribe((response) => {
 				this.is_loading = false;
 				this.show = false;
-				this.onClose.emit(true);
+				this.showChange.emit(true);
 			}, error => this.showError(error));
 		}
 	}

@@ -73,7 +73,6 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 			},error=>this.showError(error));
 		});
 
-
 		// this.rest.doctor.getAll({}).subscribe((respuesta)=>
 		// {
 		// 	this.doctores = respuesta.datos;
@@ -87,7 +86,6 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 		}else{
 			this.show_especialidad = false;
 		}
-
 	}
 
 	closeModal()
@@ -129,7 +127,6 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 	}
 
 
-
 	onKeyPressed(evt)
 	{
 		let input = <HTMLInputElement>document.getElementById('searchCentroMedico');
@@ -166,7 +163,6 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 				// if(i[cont].id_)
 				// this.total_servicios = i[cont];
 				// cont+=1;
-
 		});
 			// = respuesta[0].datos;
 			// this.total_servicios=.forEach(i=>

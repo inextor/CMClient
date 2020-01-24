@@ -30,7 +30,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<div class="card p-2">
-						<label for="">Tiempo Transcurrido: {{tiempo_transcurrido}} min</label>
+						<label for="">Tiempo Transcurrido: {{tiempo_transcurrido | number: '1.0-0'}} min</label>
 						<div class="progress"
 							*ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null">
 							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated"

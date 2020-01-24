@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario, Gasto_Centro_Medico, Tipo_Gasto, Ingreso } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
@@ -17,6 +17,7 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 	showAddIngreso: boolean = false;
 	ingresos: Ingreso[] = [];
 	ingreso_search:SearchObject<Ingreso>;
+	@Input() onClose:boolean;
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
