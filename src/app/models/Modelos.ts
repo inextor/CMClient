@@ -190,6 +190,7 @@ export interface Doctor{
 	id_especialidad?:number;
 	id_centro_medico?:number;
 	id_imagen?:number;
+	duracion_consulta?:number;
 	telefono?:string;
 	nombre?:string;
 	especialidad?:string;
@@ -423,13 +424,13 @@ export interface Notificacion{
 export interface Organizacion{
 	id?:number;
 	id_imagen_default_ticket?:number;
-	id_imagen_default_login ?:number;
-	id_imagen_default_logo ?:number;
+	id_imagen_default_login?:number;
+	id_imagen_default_logo?:number;
 	id_imagen_default_proveedor?:number;
-	id_imagen_default_servicio ?:number;
-	id_imagen_default_usuario ?:number;
+	id_imagen_default_servicio?:number;
+	id_imagen_default_usuario?:number;
 	id_imagen_default_sucursal?:number;
-	nombre?:string
+	nombre?:string;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 

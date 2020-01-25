@@ -91,6 +91,8 @@ import { DistribucionComponent } from './pages/distribucion/distribucion.compone
 import { AgregarDistribucionComponent } from './pages/agregar-distribucion/agregar-distribucion.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import { RestService } from './services/rest.service';
+import { CalendarioDoctoresComponent } from './pages/calendario-doctores/calendario-doctores.component';
+import { ViewCitasDoctoresComponent } from './components/view-citas-doctores/view-citas-doctores.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -189,6 +191,8 @@ export function init_app(rest: RestService) {
     DistribucionComponent,
     AgregarDistribucionComponent,
     ImageUploaderComponent,
+    CalendarioDoctoresComponent,
+    ViewCitasDoctoresComponent,
 
 
   ],
