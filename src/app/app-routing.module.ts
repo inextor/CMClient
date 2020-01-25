@@ -21,6 +21,7 @@ import { AgregarUsuarioComponent } from './pages/agregar-usuario/agregar-usuario
 import { AuthGuard } from "./../app/classes/";
 import { BaseComponent } from './pages/base/base.component';
 import { CalendarioCitasDoctorComponent } from 'src/app/pages/calendario-citas-doctor/calendario-citas-doctor.component';
+import { CalendarioDoctoresComponent } from 'src/app/pages/calendario-doctores/calendario-doctores.component';
 import { CentrosMedicosComponent } from './pages/centros-medicos/centros-medicos.component';
 import { CitaComponent } from "./pages/cita/cita.component";
 import { CitasComponent } from './pages/citas/citas.component';
@@ -73,6 +74,7 @@ const routes: Routes = [
 			{ path: '', redirectTo: 'dashboard', pathMatch: "full"},
 			{ path: 'dashboard', component:CalendarioCitasDoctorComponent},
 			{ path: 'clientes', component:ClientesComponent},
+			{ path: 'calendario-doctores', component: CalendarioDoctoresComponent,pathMatch:"full"},
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: "doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
