@@ -191,6 +191,7 @@ export interface Doctor{
 	id_centro_medico?:number;
 	id_imagen?:number;
 	duracion_consulta?:number;
+	color_calendario?:string;
 	telefono?:string;
 	nombre?:string;
 	especialidad?:string;
