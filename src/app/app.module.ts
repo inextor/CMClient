@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -98,7 +98,7 @@ export function init_app(rest: RestService) {
   return rest.getCompanyInfo().catch((error)=>
   {
     console.log('Load from storage');
-    let company = localStorage.getItem('company');
+    let company = localStorage.getItem('organizacion');
     if( !company )
       throw 'Company not found';
     return Promise.resolve( JSON.parse( company ) );
@@ -206,7 +206,8 @@ export function init_app(rest: RestService) {
 
   ],
   providers: [
-	  { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true }
+    // ,{ provide: APP_INITIALIZER, useFactory: init_app, deps: [RestService], multi: true }
 ],
   bootstrap: [AppComponent]
 })

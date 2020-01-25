@@ -515,6 +515,7 @@ export interface Pregunta_Historia_Clinica{
 export interface Proveedor{
 	id?:number;
 	id_organizacion?:number;
+	id_imagen?:number;
 	nombre?:string;
 	direccion?:string;
 	telefono?:string;

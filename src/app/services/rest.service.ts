@@ -225,15 +225,13 @@ export class RestService {
 				if(response && response.sesion.id) {
 					localStorage.setItem("usuario", JSON.stringify( response ) );
 					localStorage.setItem('session_token', response.sesion.id );
-					this.currentUserSubject.next(response)
+					this.currentUserSubject.next(response);	
 				}
-
 				return response;
 			}));
-
 		return result;
 	}
-
+	 
 	statusMenu():boolean{
 		if(this.isLoggedIn){
 			if(localStorage.getItem("activate_menu")=='true'){
@@ -626,7 +624,7 @@ export class RestService {
         .pipe
 		(
 			map(response=>{
-                localStorage.setItem("Organizacion", JSON.stringify( response ) );
+                localStorage.setItem("organizacion", JSON.stringify( response ) );
                return response;
 			})
 		).toPromise();
