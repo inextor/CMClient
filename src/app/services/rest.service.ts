@@ -13,6 +13,7 @@ import {SearchRest} from './SearchRest';
 import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models/Respuestas';
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
 import {DistribucionInfo} from '../models/Respuestas';
+import { CitaInfo,HorariosCentroMedico } from '../models/Respuestas';
 
 import {	Centro_Medico, Cita,
 	Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
@@ -115,6 +116,9 @@ export class RestService {
 	public doctor_servicio:ObjRest<Doctor_Servicio>;
 	public distribucionInfo:SearchRest<Distribucion,DistribucionInfo>;
 
+	public citaInfo:SearchRest<Cita,CitaInfo>;
+	public horarios_centro_medico:SearchRest<Centro_Medico,HorariosCentroMedico>;
+
 
 	//End vars
 
@@ -198,6 +202,8 @@ export class RestService {
 		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo3.php`,http);
 		this.doctor_servicio				= new ObjRest<Doctor_Servicio>					(`${this.urlBase}/servicio_doctor.php`,http);
 		this.distribucionInfo				= new SearchRest<Distribucion,DistribucionInfo>	(`${this.urlBase}/distribucionInfo.php`,http);
+		this.citaInfo						= new SearchRest<Cita,CitaInfo>(`${this.urlBase}/citaInfo.php`,http);
+		this.horarios_centro_medico			= new SearchRest<Centro_Medico,HorariosCentroMedico>(`${this.urlBase}/horarios_centro_medico.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico
