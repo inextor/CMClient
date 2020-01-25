@@ -4,7 +4,9 @@ import {
 	Centro_Medico
 	,Cita ,Distribucion,Detalle_Distribucion, Doctor ,Especialidad_Pregunta ,Inventario ,Paciente
 	,Precio_Servicio,Pregunta_Historia_Clinica ,Recurso ,Respuesta_Historia_Clinica
-	,Servicio ,Sesion ,Tipo_Precio ,Usuario } from './Modelos';
+	,Servicio ,Sesion ,Tipo_Precio ,Usuario ,Horario_Doctor
+
+} from './Modelos';
 
 import { Gasto_Centro_Medico,Tipo_Gasto } from './Modelos';
 
@@ -179,6 +181,26 @@ export interface RespuestaPreguntaHistoriaClinica
 
 }
 
+export interface CitaInfo
+{
+	cita:Cita;
+	paciente:Paciente;
+	doctor:Doctor;
+	centro_medico:Centro_Medico;
+	servicio:Servicio;
+}
+
+export interface HorarioDoctor
+{
+	doctor:Doctor;
+	horario:Horario_Doctor[];
+}
+
+export interface HorariosCentroMedico
+{
+	centro_medico:Centro_Medico;
+	doctores:HorarioDoctor[];
+}
 export interface CitaInfoRespons
 {
 	doctor?:Doctor;
