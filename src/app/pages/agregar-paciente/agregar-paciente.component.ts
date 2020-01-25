@@ -62,9 +62,24 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	registrarse()
 	{
+		console.log('paciente',this.paciente,'usuario',this.usuario);
 		this.is_loading = true;
 		if( this.usuario.id )
 		{
+		// 	forkJoin([
+		// 		this.rest.usuario.create( this.usuario )
+		// 		,this.rest.paciente.create(this.paciente)
+		// 	])
+		// 	.subscribe((responses)=>
+		// 	{
+		// 		this.is_loading = false;
+		// 		this.router.navigate(['/pacientes']);
+		// 	}
+		// 	,(error)=>
+		// 		this.showError(error));
+
+
+
 			this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
 			{
 				this.is_loading = false;
@@ -76,8 +91,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 			forkJoin([
 				this.rest.usuario.update( this.usuario )
 				,this.rest.paciente.update(this.paciente )
-			]).subscribe
-			(
+			]).subscribe(
 				(responses)=>
 				{
 					this.router.navigate(['/pacientes']);
@@ -89,7 +103,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 			);
 
 
-			//Que pedo aqui
+			//Que pedo aqui jajaja no se
 			//
 		}
 	}

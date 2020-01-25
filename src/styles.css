@@ -382,9 +382,7 @@ th.fc-day-header.fc-widget-header
 .logo_container
 {
 	width: 60px;
-	height: 60px;
-	display: inline-block;
-	background-image:url(/assets/default-logo.png);
+  height: 60px;
 	background-size: cover;
 	background-position:center center;
 	transform: scale(1.2);

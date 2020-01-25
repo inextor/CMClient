@@ -14,6 +14,9 @@
 
 		<div>
 			<div class="form-row">
+				<div class="form-group col-md-12">
+					<app-image-uploader [(image)]="servicio_recurso.servicio.id_imagen"></app-image-uploader>
+				</div>
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
 					<input placeholder="Nombre" class="form-control" type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">

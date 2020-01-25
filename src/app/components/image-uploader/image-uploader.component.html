@@ -1,8 +1,8 @@
 <div class="mt-3 mb-3">
-	<label>
-		<div *ngIf="image!==null" class="logo_container" [ngStyle]="{'width':width,'height':height,'background-image': 'url('+rest.urlBase+'/imagen.php?id='+image+')'}"></div>
-		<div *ngIf="image==null" class="logo_container" style="width:width;height:height;background-image: url(/assets/portadaHospital.jpg)"></div>
+	<label >
+		<div *ngIf="image!==null && image!==undefined" class="logo_container" [ngStyle]="{'width':width,'height':height,'background-image': 'url('+rest.urlBase+'/imagen.php?id='+image+')'}"></div>
+		<div *ngIf="image==undefined || image==null" class="logo_container" style="background-image: url(/assets/add2.png)">
+		</div>
 		<input style="display:none" type="file" (change)="uploadImage($event)">
 	</label>
 </div>
-

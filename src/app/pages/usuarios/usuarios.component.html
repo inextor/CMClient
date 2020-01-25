@@ -75,10 +75,10 @@
 					<label>Tipo:</label>
 					<select  name="tipo" [(ngModel)]="usuario_search.lk.tipo"
 						class="form-control">
-						<option [value]="usuario_search.lk.tipo" selected="selected" selected>Seleccione un tipo de usuario</option>
+						<option [value]="null" selected="selected" selected>Seleccione un tipo de usuario</option>
 						<option value="ADMIN">ADMIN</option>
-						<option value="PACIENTE">PACIENTE</option>
-						<option value="DOCTOR">DOCTOR</option>
+						<option value="RECEPCIONISTA">RECEPCIONISTA</option>
+						<option value="ASISTENTE">ASISTENTE</option>
 					</select>
 				</div>
 

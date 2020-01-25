@@ -39,7 +39,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	porcentaje: string = '0%';
 	timeLeft: number = 0;
 	interval;
-	tiempo_transcurrido: string = '';
+	tiempo_transcurrido: number;
+	tiempo_transcurrido_segundos: string = '';
 	//venta_handler:VentaHandler;
 
 	detalles_requisicion: Detalle_Requisicion[] = [];
@@ -82,7 +83,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 						console.log(date, now);
 						console.log("inicio consulta", this.consulta.inicio_consulta);
 						this.porcentaje = diferencia / defaultTime + '%';
-						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0);
+						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60);
 
 					}
 
@@ -249,6 +250,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		this.guardar().subscribe((consulta)=>
 		{
 			this.is_loading =false;
+			this.loadConsultaData(consulta);
 		},(error)=>this.showError(error));
 	}
 
@@ -280,7 +282,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			console.log("inicio consulta", this.consulta.inicio_consulta);
 			this.porcentaje = (diferencia / defaultTime).toFixed(2) + '%';
 			console.log("entro actualizar porcentaje", this.porcentaje);
-			this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60).toFixed(0);
+			this.tiempo_transcurrido = Math.floor(((now.getTime() - date.getTime())/1000)/60);
+			this.tiempo_transcurrido_segundos = (((now.getTime() - date.getTime())/1000).toFixed(0));
 		}
 	}
 }

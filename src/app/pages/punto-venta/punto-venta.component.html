@@ -57,9 +57,17 @@
 		<ul class="list-group">
 			<li class="list-group-item"  *ngFor="let sd of datosVenta.detalles">
 				<div class="row">
-					<label class="col-4 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
-					<label class="col-4 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
-					<div class="col-4 text-right">
+					<div class="image_logo col-3 form-check-label"  *ngIf="sd.servicio.id_imagen">
+					<img class="image_logo" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+						[alt]="sd.servicio.nombre+' imagen'">
+					</div>
+					<div class=" col-3 form-check-label"  *ngIf="!sd.servicio.id_imagen">
+						<img class="image_logo" src="assets/product.png"
+							[alt]="sd.servicio.nombre+' imagen'">
+						</div>
+					<label class="col-3 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
+					<label class="col-3 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+					<div class="col-3 text-right">
 						<div class="btn-group" role="group">
 								<button type="button" class="btn btn-primary border font-weight-bold" (click)="disminuir(sd)">-</button>
 								<button type="button" class="btn btn-primary border font-weight-bold" (click)="aumentar(sd)">+</button>

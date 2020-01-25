@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService,DetalleServicio  } from '../../services/rest.service';
-import { Usuario,Tipo_Precio,Precio_Servicio} from '../../models/Modelos';
+import { Usuario,Tipo_Precio,Precio_Servicio, Organizacion} from '../../models/Modelos';
 import { Router,ActivatedRoute,Params} from "@angular/router"
 import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
@@ -74,7 +74,7 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 		,pagos			: []
 		,tipo_precio	: {}
 	};
-
+	organizacion;
 	search_usuario:Usuario[]	= [];
 	search_rfc	:Usuario[] = [];
 	search_servicios:Servicio[]	= [];
@@ -111,7 +111,6 @@ export class PuntoVentaComponent extends	BaseComponent implements OnInit {
 	ngOnInit()
 	{
 		let centro_medico = this.rest.getCurrentCentroMedico();
-
 		this.route.paramMap.subscribe( params =>
 		{
 			this.facturar	= false;

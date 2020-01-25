@@ -16,8 +16,15 @@
 
 
 		<app-loading [display]="is_loading"></app-loading>
-		<label for="">Información de usuario</label>
+		<label for="">Agregar imagen</label>
 		<div class="form-row">
+			<div class="form-group col-md-12">
+				
+				<app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
+			</div>
+		</div>
+		<div class="form-row">
+			
 			<div class="form-group col-md-6">
 				<label position="stacked">Usuario<span color="danger">*</span></label>
 				<input placeholder="Usuario" type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
@@ -25,7 +32,7 @@
 			<div class="form-group col-md-6">
 				<label position="stacked">Tipo<span color="danger">*</span></label>
 				<select value="" class="form-control" [(ngModel)]="usuario.tipo" name="tipo">
-					<option [value]="usuario.tipo" selected="selected" >Seleccione un tipo de usuario</option>
+					<option [value]="null" selected="selected" >Seleccione un tipo de usuario</option>
 					<option value="ADMIN">Admin</option>
 					<option value="RECEPCIONISTA">recepcionista</option>
 					<option value="ASISTENTE">Asistente</option>

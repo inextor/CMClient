@@ -14,11 +14,17 @@
         </div>
         
         <form>
-            <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
+            <!-- <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
             <div *ngIf="usuario.id_imagen">
                 <img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
             </div>
-            <input type="file" (change)="uploadImage($event)" name="image">
+            <input type="file" (change)="uploadImage($event)" name="image"> -->
+
+            <div class="form-group col-md-12">
+				
+				<app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
+			</div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label position="stacked">Nombre<span color="danger">*</span></label>
