@@ -97,7 +97,7 @@ import { ViewCitasDoctoresComponent } from './components/view-citas-doctores/vie
 export function init_app(rest: RestService) {
   return () =>
 {
-  return rest.getCompanyInfo().catch((error)=>
+  return rest.getOrganizacionInfo().catch((error)=>
   {
     console.log('Load from storage');
     let company = localStorage.getItem('organizacion');

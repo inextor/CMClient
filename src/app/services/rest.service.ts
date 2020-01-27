@@ -624,7 +624,7 @@ export class RestService {
 			})
 		);
 	}
-	getCompanyInfo():Promise<Organizacion>
+	getOrganizacionInfo():Promise<Organizacion>
 	{
 		return this.http.get<Organizacion>(`${this.urlBase}/Organizacion.php?domain=foo`)
         .pipe
