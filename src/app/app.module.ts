@@ -93,6 +93,7 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { RestService } from './services/rest.service';
 import { CalendarioDoctoresComponent } from './pages/calendario-doctores/calendario-doctores.component';
 import { ViewCitasDoctoresComponent } from './components/view-citas-doctores/view-citas-doctores.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -193,6 +194,7 @@ export function init_app(rest: RestService) {
     ImageUploaderComponent,
     CalendarioDoctoresComponent,
     ViewCitasDoctoresComponent,
+    ReportesComponent,
 
 
   ],

@@ -62,8 +62,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
-import { AgendarCitaPacienteComponent}	from './pages/agendar-cita-paciente/agendar-cita-paciente.component'
-
+import { AgendarCitaPacienteComponent}	from './pages/agendar-cita-paciente/agendar-cita-paciente.component';
+import { ReportesComponent}	from './pages/reportes/reportes.component';
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
@@ -169,6 +169,7 @@ const routes: Routes = [
 			{ path: "ventas", component: VentasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "ver-consultas/doctor/:id_doctor/paciente/:id_paciente", component: VerConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "ver-doctor/:idDoctor", component:VerDoctorComponent, pathMatch:"full", canActivate:[AuthGuard] },
+			{ path: "reportes", component:ReportesComponent, pathMatch:"full", canActivate:[AuthGuard]},
 		]
 	},
 ];

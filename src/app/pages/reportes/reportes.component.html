@@ -1,0 +1,135 @@
+<div class="card p-3">
+    <div class="">
+        <h4 class="mb-3">REPORTES</h4>
+
+        <div class=" card p-0 mb-2 " >
+            <div class="form-row p-2">
+                <div class="form-group col-md-3">
+                    <label>Fecha de inicio</label>
+                    <input  type="date" class="form-control" [(ngModel)]="venta_search.le.fecha">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Fecha de fin</label>
+                    <input  type="date" class="form-control" [(ngModel)]="venta_search.ge.fecha">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Cliente:</label>
+                    <select  name="usuario_cliente" [(ngModel)]="venta_search.eq.id_usuario_cliente"
+                        class="form-control">
+                        <option [value]="null" selected="selected">Seleccione un cliente</option>
+                        <option *ngFor="let usuario of usuario_list" [value]="usuario.id">
+                            {{usuario.nombre|titlecase}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Vendedor:</label>
+                    <select  name="centro_medico" [(ngModel)]="venta_search.eq.id_usuario_atendio"
+                        class="form-control">
+                        <option [value]="null" selected="selected">Seleccione un usuario</option>
+                        <option *ngFor="let usuario_atendio of usuarios_atendio" [value]="usuario_atendio.id">
+                            {{usuario_atendio.nombre|titlecase}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Centro Medico:</label>
+                    <select  name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico"
+                        class="form-control">
+                        <option [value]="null" selected="selected">Seleccione un centro medico</option>
+                        <option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
+                            {{centro_medico.nombre|titlecase}}</option>
+                    </select>
+                </div>
+            
+
+                <div class="form-group col-md-3">
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+        <table class="basica">
+            <thead>
+                <tr >
+                    <th >Nombre</th>
+                    <th>prueba</th>
+                    <!-- <th>Cliente</th>
+                    <th>Estado</th>
+                    <th>Subtotal</th>
+                    <th>Iva</th>
+                    <th>Total</th>
+                    <th>Fecha</th> -->
+                    <!--th>cambio</th>
+<th>efectivo desc</th>
+<th>dolares desc</th>
+<th>tipo cambio</th>
+<th>id usuario recepcionista</th>
+<th>cupon desc</th>
+<th>id centro medico</th>
+<th>fecha</th>
+<th>redondeo</th>
+<th>nombre</th>
+<th>estatus</th>
+<th>activa</th>
+<th>pendiente</th>
+<th>comprobante</th>
+<th>promocion desc</th>
+<th>id tipo precio</th>
+<th>folio</th>
+<th>UUID</th>
+<th>porcentaje desc</th>
+<th>fecha facturacion</th>
+<th>tiempo creacion</th>
+<th>tiempo actualizacion</th-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario_atendio of usuarios_atendio">
+            
+
+                    <td>{{usuario_atendio.nombre}}</td>
+                
+                    <!-- <td>{{venta_usuario.total}}</td> -->
+                    <!-- <td class="text-center"><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td> -->
+                    <!-- <td class="text-left">{{venta.cliente}}</td> -->
+                    <!--td class="text-center">{{venta.id_usuario_cliente}}</td-->
+                    <!-- <td>{{venta.estatus}}</td> -->
+                    <!-- <td class="text-right">{{venta.subtotal ? (venta.subtotal|currency):'N/A'}}</td>
+                    <td class="text-right">{{venta.iva ? (venta.iva | currency):'N/A'}}</td>
+                    <td class="text-right">{{venta.total ? (venta.total| currency):'N/A'}}</td>
+                    <td class="text-center">{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</td> -->
+                    <!--td>{{venta.cambio}}</td>
+<td>{{venta.efectivo_desc}}</td>
+<td>{{venta.dolares_desc}}</td>
+<td>{{venta.tipo_cambio}}</td>
+<td>{{venta.id_usuario_recepcionista}}</td>
+<td>{{venta.cupon_desc}}</td>
+<td>{{venta.id_centro_medico}}</td>
+<td>{{venta.fecha}}</td>
+<td>{{venta.redondeo}}</td>
+<td>{{venta.nombre}}</td>
+<td>{{venta.estatus}}</td>
+<td>{{venta.activa}}</td>
+<td>{{venta.pendiente}}</td>
+<td>{{venta.comprobante}}</td>
+<td>{{venta.promocion_desc}}</td>
+<td>{{venta.id_tipo_precio}}</td>
+<td>{{venta.folio}}</td>
+<td>{{venta.UUID}}</td>
+<td>{{venta.porcentaje_desc}}</td>
+<td>{{venta.fecha_facturacion}}</td>
+<td>{{venta.tiempo_creacion}}</td>
+<td>{{venta.tiempo_actualizacion}}</td -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <div>
+            <app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-paginacion>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,131 @@
+import { Component, OnInit } from '@angular/core';
+import { RestService } from '../../services/rest.service';
+
+import { Venta, Centro_Medico,Usuario } from '../../models/Modelos';
+import { SearchObject } from '../../models/Respuestas';
+import { Router,ActivatedRoute } from "@angular/router"
+import { BaseComponent } from '../base/base.component';
+import { Location } from '@angular/common';
+import { forkJoin } from 'rxjs';
+import { of } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+
+@Component({
+  selector: 'app-reportes',
+  templateUrl: './reportes.component.html',
+  styleUrls: ['./reportes.component.css']
+})
+export class ReportesComponent extends BaseComponent implements OnInit {
+
+  constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
+
+	ventas:Venta[] = [];
+	usuario_list:Usuario[] = [];
+	usuarios_atendio:Usuario[]	= [];
+	centros_medicos:Centro_Medico[] = [];
+	venta_search:SearchObject<Venta> = {
+  };
+  venta_usuario
+	busquedaAvanzada:boolean = false;
+	clearBusqueda(){
+		this.venta_search = {
+			lt: {}
+			,eq: {}
+			,ge: {}
+			,gt: {}
+			,le: {}
+			,lk: {}
+			,csv: {}
+		};
+		this.search();
+	}
+	ngOnInit()
+	{
+		this.route.queryParams.subscribe( params =>
+		{
+
+			this.venta_search = {
+				lt: {}
+				,eq: {id_usuario_cliente: null, id_centro_medico: null, id_usuario_atendio: null}
+				,ge: {}
+				,gt: {}
+				,le: {}
+				,lk: {}
+				,csv: {}
+			};
+
+			this.titleService.setTitle('reportes');
+
+			this.venta_search.lk.id					= "lk.id" in params ?params["lk.id"]:null;
+			this.venta_search.eq.id_usuario_cliente	= "eq.id_usuario_cliente" in params ?params["eq.id_usuario_cliente"]:null;
+			this.venta_search.eq.facturado			= "eq.facturado" in params ?params["eq.facturado"]:null;
+			this.venta_search.eq.id_usuario_atendio	= "eq.id_usuario_atendio" in params ?params["eq.id_usuario_atendio"]:null;
+			this.venta_search.eq.id_centro_medico	= "eq.id_centro_medico" in params ?params["eq.id_centro_medico"]:null;
+			this.venta_search.eq.activa				= "eq.activa" in params ?params["eq.activa"]:null;
+			this.venta_search.lk.cliente			= "lk.cliente" in params ?params["lk.cliente"]:null;
+			this.venta_search.le.fecha				= "le.fecha" in params ?params["le.fecha"]:null;
+			this.venta_search.ge.fecha				= "ge.fecha" in params ?params["ge.fecha"]:null;
+			this.venta_search.eq.estatus			= "eq.estatus" in params ?params["eq.estatus"]:null;
+			this.venta_search.limite				= this.pageSize;
+			console.log('Search', this.venta_search);
+
+			let rjoinObj:any = {};
+			let fjarray = [];
+
+
+			this.is_loading = true;
+			this.venta_search.pagina= params['pagina'] ? parseInt( params['pagina'] ) : 0;
+
+			forkJoin(
+				this.rest.venta.search( this.venta_search )
+				,this.rest.usuario.search({
+					eq:
+					{
+						id_organizacion: this.rest.getUsuarioSesion().id_organizacion
+					}
+					,csv:
+					{
+						tipo:['ADMIN','DOCTOR','RECEPCIONISTA','ASISTENTE']
+					}
+				})
+        ,this.rest.centro_medico.search({eq:{ id_organizacion: this.rest.getUsuarioSesion().id_organizacion } })
+        ,this.rest.paciente.search({})
+			)
+			.subscribe((result)=>
+			{
+				this.ventas = result[0].datos;
+				this.setPages( this.venta_search.pagina, result[0].total );
+				this.usuarios_atendio = result[1].datos;
+        this.centros_medicos = result[2].datos;
+        this.usuario_list = result[3].datos;
+        // traer la lista de usuarios y sus respectivas ventas desde el webservice.
+			},error=>
+			{
+				this.showError( error );
+			});
+		});
+	}
+
+	search()
+	{
+		this.is_loading = true;
+		this.venta_search.pagina= 0;
+		let search = {};
+		let array = ['eq','le','lt','ge','gt','csv','lk'];
+		for(let i in this.venta_search )
+		{
+			console.log( 'i',i,array.indexOf( i ) );
+			if(array.indexOf( i ) > -1 )
+			{
+				for(let j in this.venta_search[i])
+					search[i+'.'+j] = this.venta_search[i][j];
+			}
+		}
+		console.log('search',this.venta_search );
+		console.log('Busqueda', search );
+		this.router.navigate(['/reportes'],{queryParams: search });
+	}
+}
