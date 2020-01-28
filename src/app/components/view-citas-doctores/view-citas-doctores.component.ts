@@ -283,7 +283,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 				]
 			});
 		}
-
+		console.log("kiero ir a casa forest");
 		return intervals;
 	}
 
