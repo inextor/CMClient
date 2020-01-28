@@ -1,4 +1,4 @@
-<div class="card container p-3">
+<div class="card p-3">
 	<div class="row">
 		<div class="col">Hora</div>
 		<div class="col" *ngFor="let t of titleDates">{{t}}</div>
@@ -7,7 +7,7 @@
 		<div class="row pt-2 pb-2" *ngFor="let interval of dinfo.intervals">
 			<div class="col">{{interval.start | date: 'shortTime' }}</div>
 			<div *ngFor="let dates of interval.dates" class="col">
-				<div *ngFor="let cita of dates">{{cita.paciente.nombre}}</div>
+				<div *ngFor="let cita of dates">{{cita.doctor.nombre}}</div>
 			</div>
 		</div>
 	</div>

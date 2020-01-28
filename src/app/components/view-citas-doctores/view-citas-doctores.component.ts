@@ -113,9 +113,11 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		])
 		.subscribe((responses)=>
 		{
+			console.log("doctores", responses[1].doctores);
 			this.doctores_info = responses[1].doctores.map(horario_doctor=>
 			{
 				let doctor		= horario_doctor.doctor;
+				
 				let citasInfo	= responses[0].datos.filter(citaInfo=>citaInfo.cita.id_doctor = doctor.id)
 
 				let startDate		= new Date();
@@ -168,8 +170,9 @@ export class ViewCitasDoctoresComponent implements OnInit {
 				};
 			});
 
-			console.log( this.doctores_info );
+			
 		});
+		// console.log("doctoresinfo", this.doctores_info );
 	}
 
 	initDates()
@@ -195,7 +198,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		let today = new Date();
 		today.setSeconds( 0 );
 		today.setMilliseconds( 0 );
-
+		console.log("citas antes de foreach",citas);
 		citas.forEach((i)=>
 		{
 			let date = this.rest.getLocalDateFromMysqlString( i.cita.inicio );
@@ -208,6 +211,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			let nd = new Date();
 			nd.setTime( today.getTime() );
 			dates.push( nd );
+			console.log("push citas",citas);
 		});
 
 		let counter = new Date();
@@ -298,16 +302,17 @@ export class ViewCitasDoctoresComponent implements OnInit {
 
 			d.setDate( intervals[0].start.getDate() );
 			d.setMonth( intervals[0].start.getMonth() );
-
+			// console.log("cita",d);
 			for(let j=0;j<intervals.length;j++)
 			{
+				// console.log("entroal for",intervals[j].start, intervals[j].end);
 				if( d >= intervals[j].start && d<intervals[j].end )
 				{
 					intervals[j].dates[ this.indexDay[ day  ] ].push( i );
 					return;
 				}
 			}
-			console.error('No se agrego la cita',i);
+			// console.error('No se agrego la cita',i);
 		});
 	}
 }

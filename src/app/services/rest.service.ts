@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
-import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso } from '../models/Modelos';
+import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, sucursal_doctor } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
@@ -118,6 +118,7 @@ export class RestService {
 
 	public citaInfo:SearchRest<Cita,CitaInfo>;
 	public horarios_centro_medico:SearchRest<Centro_Medico,HorariosCentroMedico>;
+	public sucursal_doctor:ObjRest<sucursal_doctor>;
 
 
 	//End vars
@@ -204,6 +205,7 @@ export class RestService {
 		this.distribucionInfo				= new SearchRest<Distribucion,DistribucionInfo>	(`${this.urlBase}/distribucionInfo.php`,http);
 		this.citaInfo						= new SearchRest<Cita,CitaInfo>(`${this.urlBase}/citaInfo.php`,http);
 		this.horarios_centro_medico			= new SearchRest<Centro_Medico,HorariosCentroMedico>(`${this.urlBase}/horarios_centro_medico.php`,http);
+		this.sucursal_doctor				= new ObjRest<sucursal_doctor>(`${this.urlBase}/sucursal_doctor.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico

@@ -29,6 +29,14 @@ export interface Centro_Medico{
 
 };
 
+export interface sucursal_doctor{
+	id?:number;
+	id_doctor?:number;
+	id_centro_medico?:number;
+	tiempo_creacion?:Date;
+	tiempo_actualizacion?:Date;
+}
+
 export interface Cita{
 	id?:number;
 	id_paciente?:number;
