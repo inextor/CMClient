@@ -103,8 +103,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		let id_centro_medico = 1; //XXX
 
 		forkJoin([
-			this.rest.citaInfo.search
-			({
+			this.rest.citaInfo.search({
 				eq: { id_centro_medico : id_centro_medico }
 				,ge: { inicio: this.rest.getMysqlStringFromLocaDate( startDate ) }
 				,le: { inicio: this.rest.getMysqlStringFromLocaDate( endSearch ) }
@@ -113,15 +112,17 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		])
 		.subscribe((responses)=>
 		{
-			console.log("doctores", responses[1].doctores);
+			// console.log("doctores", responses[1].doctores);
 			this.doctores_info = responses[1].doctores.map(horario_doctor=>
 			{
 				let doctor		= horario_doctor.doctor;
 				
-				let citasInfo	= responses[0].datos.filter(citaInfo=>citaInfo.cita.id_doctor = doctor.id)
+				let citasInfo	= responses[0].datos.filter(citaInfo=>citaInfo.cita.id_doctor == doctor.id);
 
 				let startDate		= new Date();
-
+			
+				// console.log("citasinfo",citasInfo);
+			
 				startDate.setHours( 0 );
 				startDate.setMinutes( 0 );
 				startDate.setSeconds( 0 );
@@ -161,6 +162,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 
 				console.log('HERE M*****ers');
 				let intervals = this.getIntervalFromCitas( citasInfo, startDate, endDate, 40);
+			
 				this.addCitasToIntervals( citasInfo, intervals);
 
 				return {
@@ -169,10 +171,10 @@ export class ViewCitasDoctoresComponent implements OnInit {
 					,intervals	: intervals
 				};
 			});
-
+			console.log("doctoresinfo", this.doctores_info );
 			
 		});
-		// console.log("doctoresinfo", this.doctores_info );
+	
 	}
 
 	initDates()
@@ -187,18 +189,18 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			this.indexDay[ currentDay.getDay() ] = index;
 			currentDay.setDate( currentDay.getDate()+1 );
 		});
-		console.log( this.indexDay );
+		// console.log( this.indexDay );
 	}
 
 
 	getIntervalFromCitas(citas:CitaInfo[],start:Date, end:Date, minutes_increment:number):DateInterval[]
 	{
-		console.log("End musst be",end );
+		// console.log("End musst be",end );
 		let dates:Date[] = [];
 		let today = new Date();
 		today.setSeconds( 0 );
 		today.setMilliseconds( 0 );
-		console.log("citas antes de foreach",citas);
+		// console.log("citas antes de foreach",citas);
 		citas.forEach((i)=>
 		{
 			let date = this.rest.getLocalDateFromMysqlString( i.cita.inicio );
@@ -211,9 +213,9 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			let nd = new Date();
 			nd.setTime( today.getTime() );
 			dates.push( nd );
-			console.log("push citas",citas);
+			// console.log("push citas",citas);
 		});
-
+		console.log("dates",dates);
 		let counter = new Date();
 		counter.setTime( start.getTime() );
 		counter.setMilliseconds( 0 );
@@ -223,7 +225,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		realEnd.setTime( end.getTime() );
 		realEnd.setMinutes( realEnd.getMinutes()+minutes_increment );
 
-		console.log('Realend', realEnd );
+		// console.log('Realend', realEnd );
 
 		while( counter < realEnd )
 		{
@@ -231,7 +233,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			d.setTime( counter.getTime() );
 			dates.push( d );
 			counter.setMinutes( counter.getMinutes()+minutes_increment );
-			console.log('Counter', counter );
+			// console.log('Counter', counter );
 		}
 
 		//Remove Duplicates
@@ -257,7 +259,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			}
 		});
 
-		console.log('Dates are', dates );
+		// console.log('Dates are', dates );
 
 		toRemove.sort()
 
@@ -283,7 +285,6 @@ export class ViewCitasDoctoresComponent implements OnInit {
 				]
 			});
 		}
-		console.log("kiero ir a casa forest");
 		return intervals;
 	}
 
@@ -291,7 +292,8 @@ export class ViewCitasDoctoresComponent implements OnInit {
 	{
 		if( intervals.length  == 0 )
 			return;
-
+			// console.log("intervals",intervals);
+			// console.log("citasinfo",citas);
 		citas.forEach((i)=>
 		{
 			let d = this.rest.getLocalDateFromMysqlString( i.cita.inicio );
@@ -299,20 +301,22 @@ export class ViewCitasDoctoresComponent implements OnInit {
 
 			d.setSeconds( 0 );
 			d.setMilliseconds( 0 );
-
 			d.setDate( intervals[0].start.getDate() );
 			d.setMonth( intervals[0].start.getMonth() );
-			// console.log("cita",d);
+			console.log("cita",d);
 			for(let j=0;j<intervals.length;j++)
 			{
 				// console.log("entroal for",intervals[j].start, intervals[j].end);
-				if( d >= intervals[j].start && d<intervals[j].end )
+				console.log("intervalo",intervals[j]);
+				console.log("la d",d);
+				if( d <= intervals[j].end && d>intervals[j].start )
 				{
+					console.log("entroakis");
 					intervals[j].dates[ this.indexDay[ day  ] ].push( i );
 					return;
 				}
 			}
-			// console.error('No se agrego la cita',i);
+			console.error('No se agrego la cita',i);
 		});
 	}
 }

@@ -1,13 +1,18 @@
 <div class="card p-4">
-<div class="row">
-			<div class="col">Hora</div>
-			<div class="col" *ngFor="let t of titleDates">{{t}}</div>
+
+<div class="form-row">
+			
+			<div class="col border ">Hora</div>
+			<div class="col border" *ngFor="let t of titleDates">{{t}}</div>
 		</div> 
+
 		<div *ngFor="let dinfo of doctores_info">
-			<div class="row pt-2 pb-2" *ngFor="let interval of dinfo.intervals">
-				<div class="col">{{interval.start | date: 'shortTime' }}</div>
-				<div *ngFor="let dates of interval.dates" class="col">
-					<div *ngFor="let cita of dates">{{cita.doctor.nombre}}</div>
+		
+			<div class="form-row" *ngFor="let interval of dinfo.intervals">
+
+				<div class="col border">{{interval.start | date: 'shortTime' }}</div>
+				<div *ngFor="let dates of interval.dates" class="col border">
+					<div *ngFor="let cita of dates">{{cita.paciente.nombre}}</div>
 				</div>
 			</div>
 		</div>
