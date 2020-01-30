@@ -10,7 +10,7 @@ import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs';
 import { forkJoin,of } from 'rxjs';
 import { mergeMap,catchError } from 'rxjs/operators';
-import { SearchObject } from '../../models/Respuestas';
+import { SearchObject, SearchCitaResponse } from '../../models/Respuestas';
 import { Cita } from 'src/app/models/Modelos';
 import { CitaInfo } from 'src/app/models/Respuestas';
 
@@ -57,13 +57,30 @@ interface DateInterval
 })
 
 export class ViewCitasDoctoresComponent implements OnInit {
-
+	public is_loading:boolean	= false;
+	info_citas: SearchCitaResponse[] = [];
 	@Input() startDate = new Date();
 	titleDates:string[] = ['','','','','','',''];
+	titleDatesStart:string[] = ['','','','','','',''];
+	dateArray:Date[]=[null,null,null,null,null,null,null];
 	indexDay:number[] = [0,1,2,3,4,5,6];
 	doctores_info:Doctor_Info[] = [];
 	intervals:DateInterval[];
+	//
+	showOptionDoctor: boolean = false;
+	showOptionPaciente: boolean = false;
+	showConfirmCancelar: boolean = false;
+	showConfirmActivar: boolean = false;
+	showConfirmDoctor: boolean = false;
+	showConfirmPaciente: boolean = false;
+	show_modal:boolean	= false;
 
+
+	cita:Cita = {
+		inicio: null
+	}
+
+	cita_fecha:Date = null;
 	constructor(public rest: RestService)
 	{
 
@@ -116,17 +133,18 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			this.doctores_info = responses[1].doctores.map(horario_doctor=>
 			{
 				let doctor		= horario_doctor.doctor;
-				
+			
 				let citasInfo	= responses[0].datos.filter(citaInfo=>citaInfo.cita.id_doctor == doctor.id);
 
-				let startDate		= new Date();
-			
+				// let startDate		= new Date();
+				let startDate = new Date();
 				// console.log("citasinfo",citasInfo);
-			
+		
 				startDate.setHours( 0 );
 				startDate.setMinutes( 0 );
 				startDate.setSeconds( 0 );
 				startDate.setMilliseconds( 0 );
+				
 
 				let endDate = new Date();
 				endDate.setTime( startDate.getTime() );
@@ -153,7 +171,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 					minMinutes	= Math.max( minMinutes, minutesStart );
 					maxMinutes	= Math.max( maxMinutes, minutesEnd );
 				});
-
+				console.log("imprimiendo el horario doctor",horario_doctor);
 				startDate.setHours( minHour );
 				startDate.setMinutes( minMinutes );
 
@@ -187,6 +205,11 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		{
 			this.titleDates[ index ] = dateNames[ currentDay.getDay() ]+' '+currentDay.getDate();
 			this.indexDay[ currentDay.getDay() ] = index;
+			let datex=new Date();
+			datex.setTime(currentDay.getTime());
+			this.dateArray[index]=datex;
+
+			//currenDay++
 			currentDay.setDate( currentDay.getDate()+1 );
 		});
 		// console.log( this.indexDay );
@@ -209,7 +232,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 
 			today.setMinutes( date.getMinutes() );
 			today.setHours( date.getHours() );
-
+			// 
 			let nd = new Date();
 			nd.setTime( today.getTime() );
 			dates.push( nd );
@@ -231,6 +254,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 		{
 			let d:Date = new Date();
 			d.setTime( counter.getTime() );
+			
 			dates.push( d );
 			counter.setMinutes( counter.getMinutes()+minutes_increment );
 			// console.log('Counter', counter );
@@ -259,7 +283,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			}
 		});
 
-		// console.log('Dates are', dates );
+		console.log('Dates are', dates );
 
 		toRemove.sort()
 
@@ -309,7 +333,7 @@ export class ViewCitasDoctoresComponent implements OnInit {
 				// console.log("entroal for",intervals[j].start, intervals[j].end);
 				console.log("intervalo",intervals[j]);
 				console.log("la d",d);
-				if( d <= intervals[j].end && d>intervals[j].start )
+				if( d>=intervals[j].start && d < intervals[j].end  )
 				{
 					console.log("entroakis");
 					intervals[j].dates[ this.indexDay[ day  ] ].push( i );
@@ -319,4 +343,154 @@ export class ViewCitasDoctoresComponent implements OnInit {
 			console.error('No se agrego la cita',i);
 		});
 	}
+
+
+	//control para agendar cita
+
+	dateClick(dateIntervalo:DateInterval,indice)
+	{
+		// console.log("citassss",citas);
+		// this.cita_fecha = date;
+		console.log("estoy imprimiendo el interval start",this.cita_fecha);
+
+		let dateNow = this.dateArray[indice];
+		console.log("citassssdatenow",dateNow);
+
+		let dateCita = new Date();
+		dateCita.setTime(dateNow.getTime());
+		dateCita.setHours(dateIntervalo.start.getHours());
+		dateCita.setMinutes(dateIntervalo.start.getMinutes());
+		dateCita.setSeconds(0);
+		dateCita.setMilliseconds(0);
+		console.log("dacita",dateCita);
+		// if( date < dateNow )
+		// {
+		// 	this.rest.showError({ mensaje: 'No se pueden agregar citas con fecha en el pasado', tipo:'alert-danger'});
+		// 	return;
+		// }
+
+		// console.log("Click on ", date );
+		// const calendarAPI = this.calendarComponent.getApi();
+
+		//calendarAPI.addEvent({
+		//	title: 'Cita'
+		//	,id:'nueva_cita'
+		//	,start: evt.date
+		//	,editable: true
+		//},'nueva_cita');
+		//
+
+		// let fecha = this.rest.getMysqlStringFromLocaDate( date );
+		// this.cita.inicio = fecha.substring(0,20);
+
+		console.log('Fecha inicio', this.cita.inicio );
+		this.show_modal = true;
+	}
+
+	cancelarCita()
+	{
+		this.show_modal = false;
+	}
+
+	confirmarDoctor(infoCita: SearchCitaResponse)
+{
+	this.rest.cita.update({
+		id: infoCita.cita.id
+		, confirmado_por_doctor: 'SI'
+	}).subscribe((cita) => {
+		this.is_loading = false;
+		this.showConfirmDoctor = false;
+		let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+		if (index >= 0)
+			this.info_citas[index].cita = cita;
+	},
+		(error) => {
+			this.showConfirmDoctor = false;
+			this.is_loading = false;
+			this.showError(error);
+		});
+}
+
+confirmarPaciente(infoCita: SearchCitaResponse)
+{
+	this.is_loading = true;
+	this.rest.cita.update({
+		id: infoCita.cita.id
+		, confirmado_por_paciente: 'SI'
+	}).subscribe((cita) => {
+		this.is_loading = false;
+		this.showConfirmPaciente = false;
+		let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+		if (index >= 0)
+			this.info_citas[index].cita = cita;
+	}, (error) => {
+		this.is_loading = false;
+		this.showConfirmPaciente = false;
+		this.showError(error);
+	});
+}
+
+cancelar(infoCita: SearchCitaResponse)
+{
+	this.rest.cita.update({
+		id: infoCita.cita.id
+		, estatus: 'CANCELADA'
+	}).subscribe((cita) => {
+		console.log(infoCita);
+		this.showConfirmCancelar = false;
+		this.is_loading = false;
+		let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+		if (index >= 0)
+			this.info_citas[index].cita = cita;
+	},
+		(error) => {
+			this.is_loading = false;
+			this.showConfirmCancelar = false;
+			this.showError(error)
+		});
+}
+
+activar(infoCita: SearchCitaResponse) {
+	this.rest.cita.update({
+		id: infoCita.cita.id
+		, estatus: 'ACTIVA'
+	}).subscribe((cita) => {
+		this.showConfirmActivar = false;
+		let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
+		this.is_loading = false;
+		if (index >= 0)
+			this.info_citas[index].cita = cita;
+	}
+		, (error) => {
+			this.is_loading = false;
+			this.showConfirmActivar = false;
+			this.showError(error);
+		});
+}
+	// aceptarCita()
+	// {
+	// 	let usuario = this.restService.getUsuarioSesion();
+	// 	this.rest.cita.create({
+	// 		id_centro_medico	: this.centro_medico.id
+	// 		,id_doctor			: this.doctor.id
+	// 		,id_paciente		: this.paciente.id
+	// 		,inicio				: this.rest.getMysqlStringFromLocaDate( this.cita_fecha )
+	// 		,fin					: this.cita.fecha + " " + this.cita.horaFin,
+	// 		,nota				: this.cita.nota
+	// 		,id_servicio 		: this.servicio ? this.servicio.id : null
+	// 	})
+	// 	.subscribe
+	// 	(
+	// 		response =>
+	// 		{
+	// 			this.citaAgendada.emit( response );
+	// 			this.router.navigate(['/citas-paciente']);
+	// 		}
+	// 		,(error)=>
+	// 		{
+	// 			let str = this.rest.getErrorMessage( error );
+	// 			this.rest.showError({ mensaje: this.rest.getErrorMessage( error ), tipo: 'alert-danger' });
+	// 		}
+	// 	);
+	// }
 }

@@ -1,19 +1,137 @@
 <div class="card p-4">
 
-<div class="form-row">
+	<div class="form-row text-center headerColor">
+		<div class="col-sm-1 border text-center p-2">
+			Doctor
+		</div>
+		<div class="col border p-2">Hora</div>
+		<div class="col border p-2" *ngFor="let t of titleDates">{{t}}</div>
+	</div>
+
+	<div *ngFor="let dinfo of doctores_info, let i = index">
+
+		<div [ngStyle]="{'background-color': dinfo.doctor.custom_color}" class="form-row fontColor"
+				*ngFor="let interval of dinfo.intervals, let j = index ">
+			<div *ngIf="j!=0" class="col-sm-1 "></div>
+			<div nowrap *ngIf="j==0" class="col-sm-1 border">{{dinfo.doctor.nombre}} </div>
+			<div class="col border">{{interval.start | date: 'shortTime' }}</div>
+			<button [ngStyle]="{'background-color': dinfo.doctor.custom_color}"
+			(click)="dateClick(interval,k)"	*ngFor="let dates of interval.dates; index as k" class="col border" >
 			
-			<div class="col border ">Hora</div>
-			<div class="col border" *ngFor="let t of titleDates">{{t}}</div>
-		</div> 
+				<div *ngFor="let cita of dates">
 
-		<div *ngFor="let dinfo of doctores_info">
-		
-			<div class="form-row" *ngFor="let interval of dinfo.intervals">
+					<div (click)="currentInfoCita=i;showOptionPaciente=true" *ngIf="cita.paciente.nombre">
+						{{cita.paciente.nombre}} {{cita.paciente.apellidos}}
+					</div>
 
-				<div class="col border">{{interval.start | date: 'shortTime' }}</div>
-				<div *ngFor="let dates of interval.dates" class="col border">
-					<div *ngFor="let cita of dates">{{cita.paciente.nombre}}</div>
+				</div>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="custom-modal" *ngIf="show_modal">
+	<div>
+		<form>
+			<div>
+				<div class="form-group">
+					<label>Fecha: <strong>{{cita_fecha | date: 'short' }}</strong></label>
 				</div>
 			</div>
-		</div>
+			<div class="form-group">
+				<textarea class="form-control" [(ngModel)]="cita.nota" name="nota" placeholder="Notas..."></textarea>
+			</div>
+		</form>
+		<button type="button" (click)="cancelarCita()" class="btn btn-secondary">Cancelar</button>
+		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
+	</div>
 </div>
+
+
+<app-modal [show]="showOptionPaciente">
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Opciones Paciente</h5>
+		</div>
+		<div class="modal-body  text-center ">
+			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+			<!-- *ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'" -->
+
+			<button class=" p-0 btn btn-light m-1 border " [appAccess]="['Doctor','admin']" data-toggle="tooltip"
+				title="Consultas">
+				<span class="">
+					<i class="">
+						<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+
+			<button class=" btn btn-light m-1 p-0 border" (click)="currentInfoCita=i;showConfirmPaciente=true;"
+			data-toggle="tooltip" title="Confirmar paciente">
+			<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
+			<span>
+				<i class="">
+					<img src="./assets/icon/options/confirmar-paciente.png" height="43px" width="43px"
+						class="menuIcons icons" />
+
+				</i>
+
+			</span>
+
+		</button>
+
+
+			<button class=" btn btn-light p-0 m-1 border " (click)="currentInfoCita=i;showConfirmDoctor=true"
+				data-toggle="tooltip" title="Confirmar doctor">
+				<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmar-doctor.png" height="43px" width="43px"
+							class="menuIcons icons" />
+
+					</i>
+
+				</span>
+
+			</button>
+			<button class="btn btn-light p-1 m-1 border " (click)="currentInfoCita=i;showConfirmCancelar=true"
+				data-toggle="tooltip" title="Cancelar cita">
+				<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
+							class="menuIcons icons" />
+					</i>
+
+				</span>
+
+			</button>
+		
+			<button class="btn btn-light p-1 m-1 border" (click)="currentInfoCita=i;showConfirmActivar=true"
+				data-toggle="tooltip" title="Activar cita">
+				<span>
+					<i class="">
+						<i class="">
+							<img src="./assets/icon/options/activar-cita.png" height="35px" width="35px"
+								class="menuIcons icons" />
+						</i>
+					</i>
+				</span>
+			</button>
+
+			<!-- <a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Agendar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Cancelar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Confirmar per doptor</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Confirmar per
+				paciente</a> -->
+		</div>
+		<div class="modal-footer">
+			<a class="btn text-light  btn-secondary" (click)="showOptionPaciente=false">Cancelar</a>
+			<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
+
+		</div>
+
+	</div>
+</app-modal>
