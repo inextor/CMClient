@@ -8,7 +8,7 @@
 			<div class="col-sm-1 borderColor p-2">Hora</div>
 			<div class="col borderColor p-2" *ngFor="let t of titleDates">{{t}}</div>
 		</div>
-		<div *ngFor="let dinfo of doctores_info, let i = index" >
+		<div *ngFor="let dinfo of doctores_info, let i = index">
 			<div [ngStyle]="{'background-color': dinfo.doctor.custom_color}" class="form-row fontColor"
 				*ngFor="let interval of dinfo.intervals, let j = index ">
 				<div *ngIf="j!=0" class="col BorderColor"></div>
@@ -20,9 +20,10 @@
 						<div [ngStyle]="{'color': dinfo.doctor.custom_color}">new</div>
 					</div>
 					<div *ngFor="let cita of dates">
-						<div [ngStyle]="{'background-color': cita.cita.estatus === 'ACTIVA' ? '#b9f6ca' : '#ff8a80','color':'black'}"
-							(click)="currentInfoCita=cita;showOptionPaciente=true" *ngIf="cita.paciente.nombre">
-						<p class="nowrap" >{{cita.paciente.nombre}} {{cita.paciente.apellidos}} </p>	
+						<div [ngStyle]="{'background-color': cita.cita.estatus === 'ACTIVA' && cita.cita.confirmado_por_doctor === 'SI'
+						&& cita.cita.confirmado_por_paciente==='SI' ? '#b9f6ca' : '#ff8a80','color':'black'}"
+							(click)="optionPaciente(interval,dinfo.doctor,k,cita)" *ngIf="cita.paciente.nombre">
+							<p class="nowrap">{{cita.paciente.nombre}} {{cita.paciente.apellidos}} </p>
 						</div>
 					</div>
 				</button>
@@ -32,55 +33,12 @@
 	</div>
 </div>
 
-<div class="custom-modal" *ngIf="show_modal">
-	<div style="width: 30rem;">
-		<form>
-			<div>
-				<div class="form-group">
-					<label>Fecha: <strong>{{cita_fecha | date: 'short' }}</strong></label>
-				</div>
-			</div>
-
-			<!-- buscar paciente -->
-
-			<div *ngIf="!selected_paciente" class="dropdown mb-3">
-				<div class="mt-3 row">
-					<div class="col">
-						<label class="">Seleccionar paciente:</label>
-						<input type="text" (keyup)="buscarPaciente($event)" id="busqueda" class="form-control"
-							placeholder="Buscar...">
-					</div>
-					<div *ngIf="search_loading">
-						<div class="spinner-border text-primary" role="status">
-							<span class="sr-only">Loading...</span>
-						</div>
-					</div>
-				</div>
-				<div *ngIf="search_paciente.length " class="dropdown-menu show w-100 no-selectable-text">
-					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
-						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
-						<div class="dropdown-item search">
-							{{paciente.nombre|uppercase}} {{paciente.apellidos|uppercase}}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div *ngIf="selected_doctor">Paciente: {{selected_paciente.nombre}}</div>
-
-			<div class="form-group">
-				<textarea class="form-control" [(ngModel)]="cita.nota" name="nota" placeholder="Notas..."></textarea>
-			</div>
-		</form>
-		<button type="button" (click)="cancelarCita()" class="btn btn-secondary">Cancelar</button>
-		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
-	</div>
-</div>
-
 
 <app-modal [show]="showOptionPaciente">
 	<div class="modal-content" style="width: 25rem;">
 		<div class="modal-header">
 			<h5 class="modal-title">Opciones Paciente</h5>
+			<div type="button" (click)="new_cita()">add cita</div>
 		</div>
 		<div class="modal-body  text-center ">
 			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
@@ -95,8 +53,21 @@
 					</i>
 				</span>
 			</button>
+			<!-- confirmado por paciente -->
+			<button class=" btn btn-light m-1 p-0 border"
+			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente=='SI'"
+								data-toggle="tooltip" title="Confirmado por paciente">
+								<span>
+									<i class="">
+										<img src="./assets/icon/options/confirmado-paciente.png" height="43px"
+											width="43px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 			<!-- confirmar paciente -->
-			<button class=" btn btn-light m-1 p-0 border" (click)="showConfirmPaciente=true;" data-toggle="tooltip"
+			<button class=" btn btn-light m-1 p-0 border" 
+			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente!='SI'"
+			(click)="showConfirmPaciente=true;" data-toggle="tooltip"
 				title="Confirmar paciente">
 				<span>
 					<i class="">
@@ -105,8 +76,22 @@
 					</i>
 				</span>
 			</button>
+			<!-- confirmado por doctor  -->
+			<button class=" btn btn-light p-0 m-1 border "
+			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor=='SI'"
+							 data-toggle="tooltip"
+								title="Confirmado por doctor">
+								<span>
+									<i class="">
+										<img src="./assets/icon/options/confirmado-doctor.png" height="43px"
+											width="43px" class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
 			<!-- confirmar doctor -->
-			<button class=" btn btn-light p-0 m-1 border " (click)="showConfirmDoctor=true" data-toggle="tooltip"
+			<button class=" btn btn-light p-0 m-1 border " 
+			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
+			(click)="showConfirmDoctor=true" data-toggle="tooltip"
 				title="Confirmar doctor">
 
 				<span>
@@ -117,7 +102,7 @@
 				</span>
 			</button>
 			<!-- cancelar -->
-			<button class="btn btn-light p-1 m-1 border " (click)="showConfirmCancelar=true" data-toggle="tooltip"
+			<button class="btn btn-light p-1 m-1 border " *ngIf="currentInfoCita && currentInfoCita.cita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true" data-toggle="tooltip"
 				title="Cancelar cita">
 
 				<span>
@@ -129,7 +114,7 @@
 			</button>
 
 			<!-- activar -->
-			<button class="btn btn-light p-1 m-1 border" (click)="showConfirmActivar=true" data-toggle="tooltip"
+			<button class="btn btn-light p-1 m-1 border" *ngIf="currentInfoCita && currentInfoCita.cita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true" data-toggle="tooltip"
 				title="Activar cita">
 				<span>
 					<i class="">
@@ -210,3 +195,47 @@
 		<!-- fin confirmacion de las opciones de la cita -->
 	</div>
 </app-modal>
+
+<div class="custom-modal" *ngIf="show_modal">
+	<div style="width: 30rem;">
+		<form>
+			<div>
+				<div class="form-group">
+					<label>Fecha: <strong>{{cita_fecha | date: 'short' }}</strong></label>
+				</div>
+			</div>
+
+			<!-- buscar paciente -->
+
+			<div *ngIf="!selected_paciente" class="dropdown mb-3">
+				<div class="mt-3 row">
+					<div class="col">
+						<label class="">Seleccionar paciente:</label>
+						<input type="text" (keyup)="buscarPaciente($event)" id="busqueda" class="form-control"
+							placeholder="Buscar...">
+					</div>
+					<div *ngIf="search_loading">
+						<div class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="search_paciente.length " class="dropdown-menu show w-100 no-selectable-text">
+					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
+						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
+						<div class="dropdown-item search">
+							{{paciente.nombre|uppercase}} {{paciente.apellidos|uppercase}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="selected_doctor">Paciente: {{selected_paciente.nombre}}</div>
+
+			<div class="form-group">
+				<textarea class="form-control" [(ngModel)]="cita.nota" name="nota" placeholder="Notas..."></textarea>
+			</div>
+		</form>
+		<button type="button" (click)="cancelarCita()" class="btn btn-secondary">Cancelar</button>
+		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
+	</div>
+</div>

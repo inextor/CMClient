@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Doctor, Usuario, Tipo_Gasto, Paciente } from '../../models/Modelos';
 import { Router, ActivatedRoute, Params, ParamMap } from "@angular/router"
@@ -52,10 +52,11 @@ interface DateInterval {
 	styleUrls: ['./view-citas-doctores.component.css']
 })
 
-export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit {
+export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit,OnChanges {
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
+
 	public is_loading: boolean = false;
 	info_citas: SearchCitaResponse[] = [];
 	currentInfoCita: SearchCitaResponse = null;
@@ -77,7 +78,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	doctores: Doctor[] = [];
 	servicio;
 	selected_doctor = null;
-	selected_paciente = null;
+	selected_paciente;
 	//
 	showOptionDoctor: boolean = false;
 	showOptionPaciente: boolean = false;
@@ -98,7 +99,6 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	ngOnInit() {
 		this.initDates();
 		this.loadCitas();
-
 	}
 
 	//control para buscar doctores
@@ -146,7 +146,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	}
 	seleccionarPaciente(paciente: Paciente) {
 		this.selected_paciente = paciente;
-		console.log("selected paciente", this.selected_paciente);
+		// console.log("selected paciente", this.selected_paciente);
 	}
 
 
@@ -157,14 +157,21 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 		if (properties['startDate']) {
 			this.loadCitas();
 		}
+		
+		console.log("algocambio",properties);
 	}
 
 	loadCitas() {
+		this.initDates();
 		let startDate = new Date();
+startDate.setTime(this.startDate.getTime());
+
+
 		startDate.setHours(0);
 		startDate.setMinutes(0);
 		startDate.setSeconds(0);
 		startDate.setMilliseconds(0);
+
 
 		let endDate = new Date();
 		endDate.setTime(startDate.getTime());
@@ -178,6 +185,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 
 		forkJoin([
 			this.rest.citaInfo.search({
+				limite:10000,
 				eq: { id_centro_medico: id_centro_medico }
 				, ge: { inicio: this.rest.getMysqlStringFromLocaDate(startDate) }
 				, le: { inicio: this.rest.getMysqlStringFromLocaDate(endSearch) }
@@ -230,7 +238,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 						minMinutes = Math.max(minMinutes, minutesStart);
 						maxMinutes = Math.max(maxMinutes, minutesEnd);
 					});
-					console.log("imprimiendo el horario doctor", horario_doctor);
+					// console.log("imprimiendo el horario doctor", horario_doctor);
 					startDate.setHours(minHour);
 					startDate.setMinutes(minMinutes);
 
@@ -248,7 +256,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 						, intervals: intervals
 					};
 				});
-				console.log("doctoresinfo", this.doctores_info);
+				// console.log("doctoresinfo", this.doctores_info);
 
 			});
 
@@ -315,7 +323,21 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 		}
 
 		//Remove Duplicates
-		dates.sort();
+		dates.sort((a,b)=>{
+			if (a.getHours() == b.getHours() && a.getMinutes() == b.getMinutes()) {
+				return 0;
+			}
+			if(a.getHours()>b.getHours()){
+				return 1;
+			}
+			if(a.getHours()<b.getHours()){
+				return -1;
+			}
+			if(a.getMinutes()==b.getMinutes()){
+				return 0;
+			}
+			return a.getMinutes()>b.getMinutes()?1:-1;
+		});
 		let lastGoodIndex = null;
 		let toRemove: number[] = []
 
@@ -333,7 +355,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 			}
 		});
 
-		console.log('Dates are', dates);
+		// console.log('Dates are', dates);
 
 		toRemove.sort((a,b)=>{
 			if(a==b){
@@ -369,8 +391,8 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	addCitasToIntervals(citas: CitaInfo[], intervals: DateInterval[]) {
 		if (intervals.length == 0)
 			return;
-		console.log("intervals",intervals);
-		console.log("citasinfo",citas);
+		// console.log("intervals",intervals);
+		// console.log("citasinfo",citas);
 		citas.forEach((i, index) => {
 			let d = this.rest.getLocalDateFromMysqlString(i.cita.inicio);
 			let day = d.getDay();
@@ -411,11 +433,11 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	dateClick(dateIntervalo: DateInterval, doctor, indice) {
 		// console.log("citassss",citas);
 		// this.cita_fecha = date;
-		console.log("estoy imprimiendo el interval start", this.cita_fecha);
+		// console.log("estoy imprimiendo el interval start", this.cita_fecha);
 
 		let dateNow = this.dateArray[indice];
 		// console.log("citassssdatenow",dateNow);
-		console.log("este es el doctor de interval", doctor);
+		// console.log("este es el doctor de interval", doctor);
 		this.selected_doctor = doctor;
 		let dateCita = new Date();
 		dateCita.setTime(dateNow.getTime());
@@ -423,7 +445,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 		dateCita.setMinutes(dateIntervalo.start.getMinutes());
 		dateCita.setSeconds(0);
 		dateCita.setMilliseconds(0);
-		console.log("dacita", dateCita);
+		// console.log("dacita", dateCita);
 		this.cita_fecha = dateCita;
 
 		// if( date < dateNow )
@@ -450,6 +472,30 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 		this.show_modal = true;
 	}
 
+	optionPaciente(dateIntervalo: DateInterval, doctor, indice,cita){
+	
+		let dateNow = this.dateArray[indice];
+		this.selected_doctor = doctor;
+		let dateCita = new Date();
+		dateCita.setTime(dateNow.getTime());
+		dateCita.setHours(dateIntervalo.start.getHours());
+		dateCita.setMinutes(dateIntervalo.start.getMinutes());
+		dateCita.setSeconds(0);
+		dateCita.setMilliseconds(0);
+		this.currentInfoCita=cita;
+		this.showOptionPaciente=true;
+		this.cita_fecha = dateCita;
+	console.log("currentInfocita",this.currentInfoCita);
+	}
+
+	new_cita(){
+		forkJoin([
+			this.show_modal = true
+		])
+			// this.show_modal = true;
+		// this.show_modal = true;
+	}
+
 	cancelarCita() {
 		this.selected_paciente = null;
 		this.search_paciente = null;
@@ -462,10 +508,13 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 			, confirmado_por_doctor: 'SI'
 		}).subscribe((cita) => {
 			this.is_loading = false;
+			this.showOptionPaciente= false;
 			this.showConfirmDoctor = false;
 			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
 			if (index >= 0)
 				this.info_citas[index].cita = cita;
+			
+			this.loadCitas();
 		},
 			(error) => {
 				this.showConfirmDoctor = false;
@@ -481,10 +530,13 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 			, confirmado_por_paciente: 'SI'
 		}).subscribe((cita) => {
 			this.is_loading = false;
+			this.showOptionPaciente= false;
 			this.showConfirmPaciente = false;
 			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
 			if (index >= 0)
 				this.info_citas[index].cita = cita;
+
+			this.loadCitas();
 		}, (error) => {
 			this.is_loading = false;
 			this.showConfirmPaciente = false;
@@ -495,9 +547,12 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 	cancelar(infoCita: SearchCitaResponse) {
 		this.rest.cita.update({
 			id: infoCita.cita.id
-			, estatus: 'CANCELADA'
+			, estatus: 'CANCELADA',
+			confirmado_por_paciente: 'NO',
+			confirmado_por_doctor: 'NO'
 		}).subscribe((cita) => {
 			console.log(infoCita);
+			this.showOptionPaciente= false;
 			this.showConfirmCancelar = false;
 			this.is_loading = false;
 			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
@@ -519,6 +574,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 			id: infoCita.cita.id
 			, estatus: 'ACTIVA'
 		}).subscribe((cita) => {
+			this.showOptionPaciente= false;
 			this.showConfirmActivar = false;
 			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
 			this.is_loading = false;
@@ -550,8 +606,14 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 			response => {
 				// this.citaAgendada.emit( response );
 				console.log()
+
 				this.show_modal = false;
 				this.loadCitas();
+				this.selected_doctor=null;
+				this.selected_paciente =null;
+				this.search_paciente = null;
+				this.cita.nota = null;
+
 				
 			}
 			, (error) => {
