@@ -335,7 +335,12 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit 
 
 		console.log('Dates are', dates);
 
-		toRemove.sort()
+		toRemove.sort((a,b)=>{
+			if(a==b){
+				return 0;
+			}
+			return a>b?1:-1;
+		})
 
 		while (toRemove.length) {
 			let index = toRemove.pop();
