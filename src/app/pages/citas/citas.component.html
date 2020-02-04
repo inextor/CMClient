@@ -130,7 +130,6 @@
 									</i>
 								</span>
 							</button>
-
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
 								data-toggle="tooltip" title="Confirmado por paciente">
@@ -141,8 +140,6 @@
 									</i>
 								</span>
 							</button>
-
-
 							<button class=" btn btn-light m-1 p-0 border"
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
 								(click)="currentInfoCita=i;showConfirmPaciente=true;" data-toggle="tooltip"
@@ -152,13 +149,9 @@
 									<i class="">
 										<img src="./assets/icon/options/confirmar-paciente.png" height="43px"
 											width="43px" class="menuIcons icons" />
-
 									</i>
-
 								</span>
-
 							</button>
-
 							<!-- confirmado doctor -->
 							<button class=" btn btn-light p-0 m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
@@ -180,11 +173,8 @@
 									<i class="">
 										<img src="./assets/icon/options/confirmar-doctor.png" height="43px"
 											width="43px" class="menuIcons icons" />
-
 									</i>
-
 								</span>
-
 							</button>
 							<button class="btn btn-light p-1 m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
@@ -196,9 +186,7 @@
 										<img src="./assets/icon/options/cancelar-cita.png" height="35px"
 											width="35px" class="menuIcons icons" />
 									</i>
-
 								</span>
-
 							</button>
 							<button class="btn btn-light p-1 m-1 border"
 								*ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'"
@@ -211,11 +199,8 @@
 											<img src="./assets/icon/options/activar-cita.png" height="35px"
 												width="35px" class="menuIcons icons" />
 										</i>
-
 									</i>
-
 								</span>
-
 							</button>
 							<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
 	 <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
@@ -226,16 +211,12 @@
 				</tbody>
 			</table>
 		</div>
-
 		<div *ngIf="info_citas.length!=0">
 			<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
 			</app-paginacion>
 		</div>
-
 	</div>
 </div>
-
-
 <app-modal [show]="showConfirmDoctor">
 	<div class="modal-content" style="width: 25rem;">
 		<div class="modal-header">

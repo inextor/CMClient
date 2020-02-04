@@ -121,8 +121,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 		{
 			this.doctores = results.datos;
 			this.selected_doctor = null;
-			console.log('doktors',this.doctores);
-			console.log("doctorine",this.selected_doctor)
+	
 		});
 	}
 

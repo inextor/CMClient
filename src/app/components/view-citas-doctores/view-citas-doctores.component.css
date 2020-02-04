@@ -2,9 +2,28 @@
     background-color: #0099CC;
     color: white;
 }
+.borderColor{    
+    border: solid 1px white;
+
+}
 .customColor1{
     background-color:   #2BBBAD;
 }
 .fontColor{
 font-weight: 550;
+}
+.slide{
+    display:inline-block;
+}
+.nowrap{
+    width: 125px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
