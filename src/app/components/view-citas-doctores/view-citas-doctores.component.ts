@@ -164,7 +164,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit,
 	loadCitas() {
 		this.initDates();
 		let startDate = new Date();
-startDate.setTime(this.startDate.getTime());
+		startDate.setTime(this.startDate.getTime());
 
 
 		startDate.setHours(0);
@@ -202,10 +202,6 @@ startDate.setTime(this.startDate.getTime());
 					// let startDate		= new Date();
 					let dateNow = this.dateArray[indice];
 					let startDate = new Date();
-					// console.log("citasinfo",citasInfo);
-
-
-					// console.log("citassssdatenow",dateNow);
 					startDate.setTime(dateNow.getTime());
 					startDate.setHours(0);
 					startDate.setMinutes(0);
@@ -284,21 +280,27 @@ startDate.setTime(this.startDate.getTime());
 	getIntervalFromCitas(citas: CitaInfo[], start: Date, end: Date, minutes_increment: number): DateInterval[] {
 		// console.log("End musst be",end );
 		let dates: Date[] = [];
-		let today = new Date();
-		today.setSeconds(0);
-		today.setMilliseconds(0);
+		// let today = new Date();
+		// today.setSeconds(0);
+		// today.setMilliseconds(0);
 		// console.log("citas antes de foreach",citas);
 		citas.forEach((i) => {
 			let date = this.rest.getLocalDateFromMysqlString(i.cita.inicio);
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 
-			today.setMinutes(date.getMinutes());
-			today.setHours(date.getHours());
+			// today.setMinutes(date.getMinutes());
+			// today.setHours(date.getHours());
 			// 
-			let nd = new Date();
-			nd.setTime(today.getTime());
-			dates.push(nd);
+			// let nd = new Date();
+			let realnd = new Date();
+			realnd.setTime(start.getTime());
+			realnd.setHours(date.getHours());
+			realnd.setMinutes(date.getMinutes());
+			realnd.setSeconds(date.getSeconds());
+			realnd.setMilliseconds(date.getMilliseconds());
+			// nd.setTime(today.getTime());
+			dates.push(realnd);
 			// console.log("push citas",citas);
 		});
 		console.log("dates", dates);
@@ -306,11 +308,19 @@ startDate.setTime(this.startDate.getTime());
 		counter.setTime(start.getTime());
 		counter.setMilliseconds(0);
 		counter.setSeconds(0);
+//*
+		let realEnd = new Date();
+		realEnd.setTime(start.getTime());
+		realEnd.setHours(end.getHours());
+		realEnd.setMinutes(realEnd.getMinutes() + minutes_increment);
+		realEnd.setSeconds(0);
+		realEnd.setMilliseconds(0);
+/*/
 
 		let realEnd = new Date();
 		realEnd.setTime(end.getTime());
 		realEnd.setMinutes(realEnd.getMinutes() + minutes_increment);
-
+//*/
 		// console.log('Realend', realEnd );
 
 		while (counter < realEnd) {
@@ -355,7 +365,7 @@ startDate.setTime(this.startDate.getTime());
 			}
 		});
 
-		// console.log('Dates are', dates);
+		 console.log('Dates are', dates);
 
 		toRemove.sort((a,b)=>{
 			if(a==b){
@@ -397,7 +407,6 @@ startDate.setTime(this.startDate.getTime());
 			let d = this.rest.getLocalDateFromMysqlString(i.cita.inicio);
 			let day = d.getDay();
 
-			d.setTime(d.getTime());
 			d.setSeconds(0);
 			d.setMilliseconds(0);
 			d.setDate(intervals[0].start.getDate());
