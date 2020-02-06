@@ -1,20 +1,21 @@
-
 <div class=" mb-3 d-flex justify-content-between flex-wrap">
 	<div>
 		<h5 class="mb-3 mt-3">*Nuevo Servicio</h5>
 	</div>
-
-	<div *ngIf="datosVenta" >
-		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta.id" [routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
-	</div>
+<!-- 
+	<div *ngIf="datosVenta">
+		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta.id"
+			[routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
+	</div> -->
 </div>
 
 <div class="dropdown">
 	<div class="mt-3 row">
 		<div class="col-10">
-			<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda" class="form-control" placeholder="Buscar...">
+			<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda" class="form-control"
+				placeholder="Buscar...">
 		</div>
-		<div class="col-2"*ngIf="search_loading">
+		<div class="col-2" *ngIf="search_loading">
 			<div class="spinner-border text-primary" role="status">
 				<span class="sr-only">Loading...</span>
 			</div>
@@ -30,23 +31,42 @@
 	</div>
 </div>
 
-<div *ngIf="datosVenta" class="p-0 mt-3 ">
+<div *ngIf="datosVenta" class="p-0 mt-3">
 	<ul class="list-group">
-		<li class="list-group-item"  *ngFor="let sd of datosVenta.detalles">
+		<li class="list-group-item" *ngFor="let sd of datosVenta.detalles">
 			<div class="row">
 				<label class="col-4 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
-				<label class="col-4 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+				<label class="col-2 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+				<label class="col-2"> {{sd.detalle_venta.precio| currency}}</label>
 				<div class="col-4 text-right">
 					<div class="btn-group" role="group">
-							<button type="button" class="btn btn-primary border font-weight-bold" (click)="disminuir(sd)">-</button>
-							<button type="button" class="btn btn-primary border font-weight-bold" (click)="aumentar(sd)">+</button>
-							<button type="button" class="btn btn-primary border font-weight-bold" (click)="eliminar(sd)">x</button>
+						<button type="button" class="btn btn-primary border font-weight-bold"
+							(click)="disminuir(sd)">-</button>
+						<button type="button" class="btn btn-primary border font-weight-bold"
+							(click)="aumentar(sd)">+</button>
+						<button type="button" class="btn btn-primary border font-weight-bold"
+							(click)="eliminar(sd)">x</button>
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
 </div>
-<div *ngIf="datosVenta && datosVenta.venta" class="text-right p-1">
-	<strong style="font-size:3rem;">{{datosVenta.venta.total | currency}}</strong>
+<div class="row p-3">
+
+
+<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
+	<div>Subtotal:</div>
+	<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
+</div>
+
+<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
+	<div>Iva:</div>
+	<div class="font-weight-bold" >{{datosVenta.venta.iva| currency}}</div>
+</div>
+
+<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
+	
+	<strong style="font-size:3rem;" >{{datosVenta.venta.total | currency}}</strong>
+</div>
 </div>

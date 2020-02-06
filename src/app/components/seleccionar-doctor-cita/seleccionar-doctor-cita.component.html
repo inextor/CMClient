@@ -66,8 +66,10 @@
 		<div *ngIf="selected_doctor != null" class="mt-2">
 			<label>Servicios:</label>
 			<select  class="form-control custom-select" (change)="seleccionarServicioDoctor($event.target.value)">
+				<option value="" selected >Seleccione un servicio</option>
 				<option *ngFor="let doctor_servicio of doctor_servicios" [value]="doctor_servicio.id"> <!--(click)="seleccionarServicioDoctor(doctor_servicio)" -->
 					{{doctor_servicio.nombre}}</option>
+
 			</select>
 		</div>
 			<!-- servicio seleccionado -->

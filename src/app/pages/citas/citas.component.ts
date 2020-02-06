@@ -39,7 +39,6 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	nombre: string;
 
 	cita_search: SearchObject<Cita> = {
-
 	};
 	busquedaAvanzada: boolean = false;
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
@@ -55,7 +54,7 @@ export class CitasComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe(params => {
 			this.cita_search = {
-				eq: {},
+				eq: {estatus:'',id_centro_medico:null},
 				ge: {},
 				le: {}
 			};

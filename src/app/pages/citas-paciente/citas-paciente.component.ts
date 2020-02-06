@@ -10,6 +10,7 @@ import { SearchObject } from '../../models/Respuestas';
 import { forkJoin } from 'rxjs';
 import { of } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-citas-paciente',
@@ -19,7 +20,7 @@ import { Title } from '@angular/platform-browser';
 export class CitasPacienteComponent extends BaseComponent implements OnInit {
   cita: Cita = {};
   info_citas: SearchCitaResponse[] = [];
-  citas_paciente: SearchCitaResponse[]=[];
+  citas_paciente: SearchCitaResponse[] = [];
   orderBy = 'Fecha';
   orderDirection = 'ASC';
   tipo_busqueda = 'nombre';
@@ -36,7 +37,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
   showConfirmCancelar: boolean = false;
   showConfirmActivar: boolean = false;
 
-  show: boolean=false;
+  show: boolean = false;
   id_paciente: number = null;
   nombre: string;
 
@@ -61,15 +62,15 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
     //     })
     //   }else{
     //     this.is_loading = true;
-      
+
     //     this.rest.paciente.getAll({ id_usuario: id}).subscribe(params => {
     //       this.familiares = params.datos
     //     }
     //   );
     //   }
-     
+
     // });
-    
+
     this.route.queryParams.subscribe(params => {
 
       //this.route.paramMap.subscribe( params =>
@@ -106,42 +107,45 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
 
       let rjoinObj: any = {};
       let fjarray = [];
-  
+
 
       this.is_loading = true;
       console.log(this.nombre)
-      let usuario= this.rest.getUsuarioSesion();
-         let index = 0;
-        forkJoin([
-          this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
-          , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
+      let usuario = this.rest.getUsuarioSesion();
+      let index = 0;
+      this.rest.paciente.search({ eq: { id_usuario: usuario.id } }).pipe(flatMap(response => {
+        if (response.datos.length == 0) {
+          console.log("error")
+        }
+        let ids = response.datos.map(i => i.id);
+        this.cita_search.csv={id_paciente:ids};
+        return forkJoin([
+          of(response.datos)
           , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })
-          , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
-        ]).subscribe((result) => {
-          this.paciente = result[0];
-          this.doctor = result[1];
-          this.centros_medicos = result[2].datos;
-          this.info_citas = result[3].datos;
-          console.log('infositas',this.info_citas);
-          //Ḧacer la busqueda de las citas del paciente de una mejor manera <--------
-          this.info_citas.forEach(i=>{
-   
-           if(this.info_citas[index].paciente.id_usuario == usuario.id && this.info_citas[index].cita.estatus !== "CANCELADA" ){
-            this.citas_paciente.push(this.info_citas[index]);
-            console.log('citaspaciente', this.citas_paciente);
-            // console.log('id_usuario',usuario.id);
-            // console.log('index',index);
-            // console.log('citas_paciente',this.citas_paciente);
-           }
-           index+=1;
-          })
-          this.setPages(this.cita_search.pagina,this.citas_paciente.length);
-        }, error => {
-          console.log(error);
-          this.showError(error);
-        });
+          , this.rest.searchCita.search(this.cita_search)
+        ])
+      }))
+      // forkJoin([
+      //   this.cita_search.eq.id_paciente ? this.rest.paciente.get(this.cita_search.eq.id_paciente) : of(null)
+      //   , this.cita_search.eq.id_doctor ? this.rest.doctor.get(this.cita_search.eq.id_doctor) : of(null)
+      //   , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })
+      //   , this.rest.searchCita.search(this.cita_search, { nombre: this.nombre })
+      // ])
+      .subscribe((result) => {
+        // this.paciente = result[0];
+        // this.doctor = result[1];
+        this.centros_medicos = result[1].datos;
+        this.info_citas = result[2].datos;
+        console.log('infositas', this.info_citas);
+        //Ḧacer la busqueda de las citas del paciente de una mejor manera <--------
+       
+        this.setPages(this.cita_search.pagina, this.info_citas.length);
+      }, error => {
+        console.log(error);
+        this.showError(error);
+      });
     });
-    this.rest.paciente.getAll({id_usuario : usuario.id},{familiar:0 }).subscribe((response)=>{
+    this.rest.paciente.getAll({ id_usuario: usuario.id }, { familiar: 0 }).subscribe((response) => {
       let paciente = response.datos;
       console.log('id_pacienteasdasdagggggg', paciente);
       this.id_paciente = paciente[0].id;
@@ -161,15 +165,15 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
 
   onSeleccionarDoctor(doctor: Doctor) {
     console.log('guardar el id de doctor y mandarlo a agendar cita')
-		// localStorage.setItem("centro_medico", JSON.stringify(centro_medico));
-		// this.show_seleccionar_centro_medico = false;
+    // localStorage.setItem("centro_medico", JSON.stringify(centro_medico));
+    // this.show_seleccionar_centro_medico = false;
   }
   showSeleccionarDoctorCita() {
     let usuario = this.rest.getUsuarioSesion();
     this.show = true;
-    console.log('id_paciente',this.id_paciente);
+    console.log('id_paciente', this.id_paciente);
   }
-  
+
 
   buscar() {
     this.is_loading = true;
@@ -266,7 +270,7 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
       let index = this.citas_paciente.findIndex(i => i.cita.id == infoCita.cita.id);
       if (index >= 0)
         this.citas_paciente[index].cita = cita;
-        console.log("citaspasiente",this.citas_paciente[index].cita = cita);
+      console.log("citaspasiente", this.citas_paciente[index].cita = cita);
     },
       (error) => {
         this.is_loading = false;

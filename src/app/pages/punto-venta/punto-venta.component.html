@@ -66,7 +66,8 @@
 							[alt]="sd.servicio.nombre+' imagen'">
 						</div>
 					<label class="col-3 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
-					<label class="col-3 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+					<label class="col-1 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+					<label class="col-2 text-center form-check-label">{{sd.detalle_venta.precio | currency}}</label>
 					<div class="col-3 text-right">
 						<div class="btn-group" role="group">
 								<button type="button" class="btn btn-primary border font-weight-bold" (click)="disminuir(sd)">-</button>

@@ -87,10 +87,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="citas_paciente.length==0 " class="text-center">
+                <tr *ngIf="info_citas.length==0 " class="text-center">
                     <td colspan="6">No se encontraron registros</td>
                 </tr>
-                <tr *ngFor="let i of citas_paciente" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+                <tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
                     <td>{{i.cita.inicio| date: 'short' }}</td>
                     <td>{{i.paciente.nombre}}</td>
                     <td>{{i.doctor? i.doctor.nombre : ''}}</td>
