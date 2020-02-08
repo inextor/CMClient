@@ -55,4 +55,9 @@ export class CitasService {
 	return this.restService.searchCita.getAll({ id_doctor: idDoctor, id_centro_medico: idCentroMedico });
 	  //return this.restService.doctor.agenda.get(idDoctor, idCentroMedico);
   }
+  getCitasPaciente(idPaciente, idCentroMedico){
+    return this.restService.searchCita.getAll({ id_paciente: idPaciente, id_centro_medico: idCentroMedico });
+      //return this.restService.doctor.agenda.get(idDoctor, idCentroMedico);
+    }
+
 }

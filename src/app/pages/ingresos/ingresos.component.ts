@@ -17,6 +17,7 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 	showAddIngreso: boolean = false;
 	ingresos: Ingreso[] = [];
 	ingreso_search:SearchObject<Ingreso>;
+	busquedaAvanzada:boolean = false;
 	@Input() onClose:boolean;
 
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
@@ -40,6 +41,8 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 			this.titleService.setTitle('Ingresos');
 			let usuario = this.rest.getUsuarioSesion().id;
 			this.ingreso_search.lk.nota	= "lk.nota" in params ?params["lk.nota"]:null;
+			this.ingreso_search.ge.tiempo_creacion	= "ge.tiempo_creacion" in params ?params["ge.tiempo_creacion"]:null;
+			this.ingreso_search.le.tiempo_creacion	= "le.tiempo_creacion" in params ?params["le.tiempo_creacion"]:null;
 			this.ingreso_search.limite			= this.pageSize;
 			this.ingreso_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 			this.is_loading = true;

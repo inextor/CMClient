@@ -16,11 +16,11 @@
 
 		<app-loading [display]="is_loading"></app-loading>
 		<form>
-			<div *ngIf="usuario.id_imagen">
-				<img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
-			</div>
-			<div class="form-group">
-				<input type="file" (change)="uploadImage($event)" name="image">
+			<label for="">Agregar imagen</label>
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<app-image-uploader [(image)]="doctor.id_imagen"></app-image-uploader>
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -35,11 +35,13 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label position="stacked">Color Calendario<span color="danger"></span></label>
-					<input type="color" class="form-control" name="color_calendario" [(ngModel)]="doctor.color_calendario">
+					<input type="color" class="form-control" name="color_calendario"
+						[(ngModel)]="doctor.color_calendario">
 				</div>
 				<div class="form-group col-md-6">
 					<label position="stacked">Default Duracion de consulta<span color="danger"></span></label>
-					<input type="number" class="form-control" name="duracion_consulta" [(ngModel)]="doctor.duracion_consulta">
+					<input type="number" class="form-control" name="duracion_consulta"
+						[(ngModel)]="doctor.duracion_consulta">
 				</div>
 			</div>
 			<div class="form-row">

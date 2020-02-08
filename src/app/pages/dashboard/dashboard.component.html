@@ -1,3 +1,4 @@
+<!-- 
 <div class="card p-3" [appAccess]="['PACIENTE']" >
 	<full-calendar 
     #calendar
@@ -12,6 +13,25 @@
     [events]="calendarEvents"
     (dateClick)="dateClick($event)"
     (eventRender)="eventRender($event)"
+    ></full-calendar>
+</div> -->
+
+<div class="card p-3" [appAccess]="['PACIENTE']">
+    <full-calendar  
+	#calendar
+	[header]="calendarOptions.header"
+	[plugins]="calendarPlugins"
+	minTime="07:00:00"
+	maxTime="20:00:00"
+	contentHeight="auto"
+	timeZone="UTC"
+	defaultView="timeGridDay"
+	[allDaySlot]="false"
+	[plugins]="calendarPlugins"
+	[weekends]="false"
+	[eventSources]="eventSources"
+	[events]="calendarEvents"
+	(eventRender)="eventRender($event)"
     ></full-calendar>
 </div>
 

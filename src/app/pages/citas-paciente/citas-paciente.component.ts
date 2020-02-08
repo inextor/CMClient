@@ -118,7 +118,8 @@ export class CitasPacienteComponent extends BaseComponent implements OnInit {
           console.log("error")
         }
         let ids = response.datos.map(i => i.id);
-        this.cita_search.csv={id_paciente:ids};
+        let estados = ['ACTIVA','PENDIENTE'];
+        this.cita_search.csv={id_paciente:ids,estatus:estados};
         return forkJoin([
           of(response.datos)
           , this.rest.centro_medico.getAll({ id_organizacion: usuario.id_organizacion })

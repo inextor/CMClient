@@ -31,7 +31,7 @@
         
               "src/styles.css"
             ],
-            "scripts": ["assets/js/notificacionService.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {

@@ -358,19 +358,10 @@ button{
   background-color: #a9dded;
 }
 
-.cita_calendario.ACTIVA
-{
-
-}
-.cita_calendario.INACTIVA
-{
-
-}
 .cita_calendario.CANCELADA
 {
 	background-color: #74424d;
 }
-
 
 th.fc-day-header.fc-widget-header
 {
@@ -388,3 +379,15 @@ th.fc-day-header.fc-widget-header
 	transform: scale(1.2);
 	opacity: 0.95;
 }
+/* Control de la resolucion */
+@media only screen and (max-width: 700px) {
+  /* resize tabla for mobile dispositives  */
+  table.basica,.basica td,.basica th{
+    border-collapse: collapse;
+      border-color: #edf2f6;
+      border-style: solid;
+      padding:0;
+      font-size: 0.7em;
+    }
+
+  }

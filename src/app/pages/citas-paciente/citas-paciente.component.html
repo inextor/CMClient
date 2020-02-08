@@ -1,77 +1,18 @@
 <div class="card p-3">
     <div class="">
-
         <div class="p-0">
 			<div class="d-flex justify-content-between flex-wrap">
 				<div class="mb-3">
 					<h4 >MIS CITAS</h4>
 				</div>
 				<div class="mb-3">
-
                     <div>
                         <button (click)="showSeleccionarDoctorCita()" type="button" class="btn btn-primary btn-sm">Nueva Cita</button>
                     </div>
 				</div>
 			</div>
 		</div>
-        <!--  (change)="changeSearch($event)" ionInput="changeSearch($event)" (change)="segmentChanged($event)"-->
-
-        <!-- <div>
-                            <div class="d-flex flex-row">
-                                <div class="pr-2">
-                                    <label>Estado de cita</label>
-                                    <select class="form-control" [(ngModel)]="cita_search.eq.estatus">
-                                        <option value="">Todas</option>
-                                        <option value="ACTIVA">Activa</option>
-                                        <option value="CANCELADA">Canceladas</option>
-                                    </select>
-                                </div>
-
-                                <div class="pr-2">
-                                    <label>
-                                        Confirmado:
-                                    </label>
-                                    <div>
-
-                                        <input type="checkbox" value="SI"
-                                            [checked]="cita_search.eq.confirmado_por_doctor=='SI'"
-                                            (change)="cita_search.eq.confirmado_por_doctor = cita_search.eq.confirmado_por_doctor=='SI' ? '' : 'SI'">
-                                        Por doctor
-                                    </div>
-
-                                    <div>
-                                        <input type="checkbox" value="SI"
-                                            [checked]="cita_search.eq.confirmado_por_paciente=='SI'"
-                                            (change)="cita_search.eq.confirmado_por_paciente = cita_search.eq.confirmado_por_paciente=='SI' ? '' : 'SI'">
-                                        Por paciente
-                                    </div>
-                                </div>
-
-                                <div class="pr-2">
-                                    <label>Clinica</label>
-                                    <select class="form-control" [(ngModel)]="cita_search.eq.id_centro_medico">
-                                        <option value="">Todas</option>
-                                        <option *ngFor="let centro of centros_medicos" [value]="centro.id">
-                                            {{centro.nombre}}</option>
-                                    </select>
-                                </div>
-                                <div class="pr-2">
-                                    <label>Fecha Inicio</label> <input class="form-control" type="date"
-                                        (change)="dateInicioChange($event.target.value)"
-                                        [value]="cita_search.ge.inicio">
-                                </div>
-                                <div class="pr-2">
-                                    <label>Fecha Fin</label><input type="date" class="form-control"
-                                        (change)="dateFinChange($event.target.value)" [value]="cita_search.le.inicio">
-                                </div>
-                                <div class="d-flex align-self-end justify-content-center p-2">
-                                    <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-        <table class="basica">
+        <table class="basica table">
             <thead>
                 <tr>
                     <th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
@@ -80,8 +21,8 @@
                         (click)="ordenar('Paciente')">Familiar</th>
                     <th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
                         (click)="ordenar('Doctor')">Doctor</th>
-                    <th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
-                        (click)="ordenar('Especialidad')">Especialidad</th>
+                    <!-- <th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
+                        (click)="ordenar('Especialidad')">Especialidad</th> -->
                         <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -93,8 +34,7 @@
                 <tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
                     <td>{{i.cita.inicio| date: 'short' }}</td>
                     <td>{{i.paciente.nombre}}</td>
-                    <td>{{i.doctor? i.doctor.nombre : ''}}</td>
-                    <td>{{i.doctor? i.doctor.especialidad : ''}}</td>
+                    <td>{{i.doctor? i.doctor.nombre : ''}} {{i.doctor? i.doctor.especialidad : ''}}</td>
                     <td>{{i.cita.estatus}}</td>
                     <td class="p-0 options">
                        <!-- BOTONES DISABLED -->
@@ -161,7 +101,6 @@
                                 </i>
                             </span>
                         </button>
-
                     </td>
                 </tr>
             </tbody>
@@ -176,7 +115,7 @@
 <app-seleccionar-doctor-cita [id_paciente]="id_paciente" [show]="show" ></app-seleccionar-doctor-cita>
 
 <app-modal [show]="showConfirmPaciente">
-    <div class="modal-content" style="width: 25rem;">
+    <div class="modal-content "  class="customModal">
         <div class="modal-header">
             <h5 class="modal-title">Confirmar</h5>
         </div>
@@ -190,8 +129,8 @@
     </div>
 </app-modal>
 
-<app-modal [show]="showConfirmCancelar">
-    <div class="modal-content" style="width: 25rem;">
+<app-modal  [show]="showConfirmCancelar">
+    <div class="modal-content " class="customModal">
         <div class="modal-header">
             <h5 class="modal-title">Cancelar Cita</h5>
         </div>
@@ -205,8 +144,8 @@
     </div>
 </app-modal>
 
-<app-modal [show]="showConfirmActivar">
-    <div class="modal-content" style="width: 25rem;">
+<app-modal  [show]="showConfirmActivar">
+    <div class="modal-content"  class="customModal" >
         <div class="modal-header">
             <h5 class="modal-title">Confirmar Cita </h5>
         </div>

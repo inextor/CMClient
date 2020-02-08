@@ -1,20 +1,12 @@
 <div class="card p-3">
-<full-calendar
-	#calendar
-	[header]="calendarOptions.header"
-	[plugins]="calendarPlugins"
-	defaultView="timeGridWeek"
-	contentHeight="auto"
-	minTime="07:00:00"
-    maxTime="20:00:00"
-	deepChangeDetection="true"
-	(dateClick)="dateClick($event)"
-></full-calendar>
+	<full-calendar #calendar [header]="calendarOptions.header" [plugins]="calendarPlugins" defaultView="timeGridWeek"
+		contentHeight="auto" minTime="07:00:00" maxTime="20:00:00" deepChangeDetection="true"
+		(dateClick)="dateClick($event)"></full-calendar>
 </div>
 
 <div class="custom-modal" *ngIf="show_modal">
 	<div>
-		<form >
+		<form>
 			<div>
 				<div class="form-group">
 					<label>Fecha: <strong>{{cita_fecha | date: 'short' }}</strong></label>
@@ -28,4 +20,3 @@
 		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
 	</div>
 </div>
-
