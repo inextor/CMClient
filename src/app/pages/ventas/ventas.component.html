@@ -1,108 +1,96 @@
-	<div class="card p-3">
-		<div class="">
-			<h4 class="mb-3">VENTAS</h4>
+<div class="card p-3">
+	<div class="">
+		<h4 class="mb-3">VENTAS</h4>
 
-			<div class=" d-flex flex-column justify-content-between flex-wrap">
-					<div>
-						<div class=" form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"
-								(change)="busquedaAvanzada=!busquedaAvanzada">&nbsp;
-							<label class="form-check-label"> Busqueda Avanzada</label>
-						</div>
-					</div>
-			</div>
-
-			<div class="mb-2" *ngIf="busquedaAvanzada==false">
-				<div class="input-group" >
-					<input type="text" placeholder="Buscar" [(ngModel)]="venta_search.lk.cliente" class="form-control">
-					<div class="input-group-append">
-						<button class="btn btn-sm btn-primary" type="button" id="button-addon1"
-							(click)="search()"><svg aria-hidden="true" width="20px" height="20px" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></button>
-					</div>
+		<div class=" d-flex flex-column justify-content-between flex-wrap">
+			<div>
+				<div class=" form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" (click)="clearBusqueda()"
+						(change)="busquedaAvanzada=!busquedaAvanzada">&nbsp;
+					<label class="form-check-label"> Busqueda Avanzada</label>
 				</div>
 			</div>
+		</div>
 
-			<div class=" card p-0 mb-2 " *ngIf="busquedaAvanzada">
-				<div class="form-row p-2">
-					<div class="form-group col-md-3">
-						<label>Id Cliente</label>
-						<input placeholder="Numero de cliente" class="form-control" type="text" [(ngModel)]="venta_search.lk.id">
-					</div>
-					<div class="form-group col-md-3">
-						<label>Cliente</label>
-						<input placeholder="Cliente" class="form-control" type="text" [(ngModel)]="venta_search.lk.cliente">
-					</div>
-					<div class="form-group col-md-3">
-						<label>Atendio:</label>
-						<select [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
-							<option [value]="venta_search.eq.id_usuario_atendio" selected="selected">Seleccione un vendedor</option>
-							<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
-								{{usuario.nombre|titlecase}}</option>
-						</select>
-					</div>
-					<div class="form-group col-md-3">
-						<label>Centro Medico:</label>
-						<select  name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico"
-							class="form-control">
-							<option [value]="venta_search.eq.id_centro_medico" selected="selected">Seleccione un centro medico</option>
-							<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
-								{{centro_medico.nombre|titlecase}}</option>
-						</select>
-					</div>
-					<div class="form-group col-md-3">
-						<label>Fecha</label>
-						<input  type="date" class="form-control" [(ngModel)]="venta_search.eq.fecha">
-					</div>
-					<div class="form-group col-md-3">
-						<label>Estatus</label>
-						<select name="estatus" class="form-control" [(ngModel)]="venta_search.eq.estatus">
-							<option [value]="venta_search.eq.estatus" selected="selected"> Seleccione el estado de la venta</option>
-							<option value="PAGADA">PAGADA</option>
-							<option value="PENDIENTE">PENDIENTE</option>
-							<option value="PROCESADA">PROCESADA</option>
-						</select>
-					</div>
-
-					<div class="form-group col-md-3">
-						<label>&nbsp;</label>
-						<button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
-					</div>
+		<div class="mb-2" *ngIf="busquedaAvanzada==false">
+			<div class="input-group">
+				<input type="text" placeholder="Buscar" [(ngModel)]="venta_search.lk.cliente" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn-sm btn-primary" type="button" id="button-addon1" (click)="search()"><svg
+							aria-hidden="true" width="20px" height="20px" focusable="false" data-prefix="fas"
+							data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img"
+							xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+							<path fill="currentColor"
+								d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+							</path>
+						</svg></button>
 				</div>
 			</div>
+		</div>
 
-			<div class="card">
+		<div class=" card p-0 mb-2 " *ngIf="busquedaAvanzada">
+			<div class="form-row p-2">
+				<div class="form-group col-md-3">
+					<label>Id Cliente</label>
+					<input placeholder="Numero de cliente" class="form-control" type="text"
+						[(ngModel)]="venta_search.lk.id">
+				</div>
+				<div class="form-group col-md-3">
+					<label>Cliente</label>
+					<input placeholder="Cliente" class="form-control" type="text" [(ngModel)]="venta_search.lk.cliente">
+				</div>
+				<div class="form-group col-md-3">
+					<label>Atendio:</label>
+					<select [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
+						<option [value]="venta_search.eq.id_usuario_atendio" selected="selected">Seleccione un vendedor
+						</option>
+						<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
+							{{usuario.nombre|titlecase}}</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>Centro Medico:</label>
+					<select name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico" class="form-control">
+						<option [value]="venta_search.eq.id_centro_medico" selected="selected">Seleccione un centro
+							medico</option>
+						<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
+							{{centro_medico.nombre|titlecase}}</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>Fecha</label>
+					<input type="date" class="form-control" [(ngModel)]="venta_search.eq.fecha">
+				</div>
+				<div class="form-group col-md-3">
+					<label>Estatus</label>
+					<select name="estatus" class="form-control" [(ngModel)]="venta_search.eq.estatus">
+						<option [value]="venta_search.eq.estatus" selected="selected"> Seleccione el estado de la venta
+						</option>
+						<option value="PAGADA">PAGADA</option>
+						<option value="PENDIENTE">PENDIENTE</option>
+						<option value="PROCESADA">PROCESADA</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label>&nbsp;</label>
+					<button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card hidden-mobile">
 			<table class="basica">
 				<thead>
-					<tr >
-						<th >Id</th>
+					<tr>
+						<th>Id</th>
 						<th>Cliente</th>
 						<th>Estado</th>
 						<th>Subtotal</th>
 						<th>Iva</th>
 						<th>Total</th>
 						<th>Fecha</th>
-						<!--th>cambio</th>
-<th>efectivo desc</th>
-<th>dolares desc</th>
-<th>tipo cambio</th>
-<th>id usuario recepcionista</th>
-<th>cupon desc</th>
-<th>id centro medico</th>
-<th>fecha</th>
-<th>redondeo</th>
-<th>nombre</th>
-<th>estatus</th>
-<th>activa</th>
-<th>pendiente</th>
-<th>comprobante</th>
-<th>promocion desc</th>
-<th>id tipo precio</th>
-<th>folio</th>
-<th>UUID</th>
-<th>porcentaje desc</th>
-<th>fecha facturacion</th>
-<th>tiempo creacion</th>
-<th>tiempo actualizacion</th-->
+
 					</tr>
 				</thead>
 				<tbody>
@@ -115,37 +103,44 @@
 						<td class="text-right">{{venta.iva ? (venta.iva | currency):'N/A'}}</td>
 						<td class="text-right">{{venta.total ? (venta.total| currency):'N/A'}}</td>
 						<td class="text-center">{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</td>
-						<!--td>{{venta.cambio}}</td>
-<td>{{venta.efectivo_desc}}</td>
-<td>{{venta.dolares_desc}}</td>
-<td>{{venta.tipo_cambio}}</td>
-<td>{{venta.id_usuario_recepcionista}}</td>
-<td>{{venta.cupon_desc}}</td>
-<td>{{venta.id_centro_medico}}</td>
-<td>{{venta.fecha}}</td>
-<td>{{venta.redondeo}}</td>
-<td>{{venta.nombre}}</td>
-<td>{{venta.estatus}}</td>
-<td>{{venta.activa}}</td>
-<td>{{venta.pendiente}}</td>
-<td>{{venta.comprobante}}</td>
-<td>{{venta.promocion_desc}}</td>
-<td>{{venta.id_tipo_precio}}</td>
-<td>{{venta.folio}}</td>
-<td>{{venta.UUID}}</td>
-<td>{{venta.porcentaje_desc}}</td>
-<td>{{venta.fecha_facturacion}}</td>
-<td>{{venta.tiempo_creacion}}</td>
-<td>{{venta.tiempo_actualizacion}}</td -->
+
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-			<div>
-				<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages"
-					[currentPage]="currentPage"></app-paginacion>
-			</div>
+		<!-- vista para dispositivos -->
 
+		<div class="hidden-desktop ">
+            <div class="d-flex flex-row border " *ngFor="let venta of ventas">
+                <div class="p-2 tableColor">
+					<div>Id</div>
+					<div>Cliente</div>
+					<div>Estado</div>
+					<div>Subtotal</div>
+					<div>Iva</div>
+					<div>Total</div>
+					<div>Fecha</div>
+                </div>
+                <div class="p-2">
+					<div ><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></div>
+					<div >{{venta.cliente}}</div>
+					<!--div class="text-center">{{venta.id_usuario_cliente}}</div-->
+					<div>{{venta.estatus}}</div>
+					<div >{{venta.subtotal ? (venta.subtotal|currency):'N/A'}}</div>
+					<div >{{venta.iva ? (venta.iva | currency):'N/A'}}</div>
+					<div >{{venta.total ? (venta.total| currency):'N/A'}}</div>
+					<div >{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</div>
+
+                    
+                </div>
+            </div>
 		</div>
+		
+		<div>
+			<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
+			</app-paginacion>
+		</div>
+
 	</div>
+</div>

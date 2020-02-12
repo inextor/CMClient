@@ -7,6 +7,9 @@ body {
   background-image: url(./assets/wallpaper.png);
   background-repeat: repeat;
 }
+i{
+  font-family: 'lato-light', 'arial', sans-serif;
+}
 
 table.basica
 {
@@ -54,6 +57,10 @@ table.basica {
 .basica thead tr{
   background-color: #3684C1;
   font-family: 'lato-thin', 'arial', sans-serif;
+  color: white;
+}
+.table-color{
+  background-color: #3684C1;
   color: white;
 }
 .basica thead {
@@ -262,7 +269,10 @@ body
 
 	button[type="button"]{
 		display: none;
-	}
+  }
+  .button{
+    border-radius: 4px;
+  }
 	.card
 	{
 		border: 0;
@@ -306,26 +316,6 @@ h1,h2,h3,h4,h5{
   font-family: 'lato-bold', 'arial', sans-serif;
 }
 
-/* td,th{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'lato-light', 'arial', sans-serif;
-  color: #898989;
-} */
-
-/*
-button{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-button{
-  font-family: 'lato-light', 'arial', sans-serif !important;
-  font-size: 1.1em !important;
-}
-*/
 
 @font-face{
   font-family: lato-bold;
@@ -379,15 +369,3 @@ th.fc-day-header.fc-widget-header
 	transform: scale(1.2);
 	opacity: 0.95;
 }
-/* Control de la resolucion */
-@media only screen and (max-width: 700px) {
-  /* resize tabla for mobile dispositives  */
-  table.basica,.basica td,.basica th{
-    border-collapse: collapse;
-      border-color: #edf2f6;
-      border-style: solid;
-      padding:0;
-      font-size: 0.7em;
-    }
-
-  }

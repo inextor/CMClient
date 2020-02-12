@@ -8,7 +8,7 @@
 				</div>
 				<div class="mb-3">
 					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-paciente']">
-						Agregar Paciente
+						<i class="fa fa-plus-circle mr-2"></i>Paciente
 					</button>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<div class="card">
+		<div class="card hidden-mobile">
 			<table class="basica">
 				<thead>
 					<tr>
@@ -141,6 +141,114 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- vista para dispositivos moviles -->
+		<div class="hidden-desktop ">
+            <div class="d-flex flex-row border " *ngFor="let paciente of pacientes">
+                <div class="p-2 tableColor">
+					<div>Nombres:</div>
+					<div>Apellidos:</div>
+					<div>Telefono:</div>
+					<div>Acciones:</div>
+                </div>
+                <div class="p-2">
+					<div>{{paciente.nombre | titlecase }}</div>
+					<div>{{paciente.apellidos| titlecase}}</div>
+					<div>{{paciente.telefono ? paciente.telefono:'N/A'}}</div>
+					<div class="p-0 ">
+						<!-- <div class="d-inline-flex flex-wrap p-1">
+							<div type="button" class="btn btn-primary btn-sm m-1"
+								[routerLink]="['/editar-paciente',paciente.id]" [appAccess]="['RECEPCIONISTA']">
+								Editar</div>
+
+							<div type="button" class="btn btn-sm mr-2 icons"
+								[routerLink]="['/citas','paciente',paciente.id]" color="secondary"><img
+									src="./assets/icon/citas.png" class="menuIcons" /></div>
+
+							<div type="button" class=" btn ml-2 mr-2 icons"
+								(click)="seleccionarDoctorNuevaCita(paciente)"><img
+									src="./assets/icon/agendar-cita.png" class="menuIcons" /></div>
+
+							<div type="button" class="btn ml-2 mr-2 icons"
+								[routerLink]="['/agregar-familiar',paciente.id_usuario]" color="secondary"><img
+									src="./assets/icon/agendar-familiar.png" class="menuIcons" /></div>
+
+							<div type="button" class="btn ml-2 mr-2 icons"
+								[routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
+								[appAccess]="['Doctor']"><img src="./assets/icon/agendar-familiar.png"
+									class="menuIcons" /></div>
+							<div type="button" class="btn ml-2 mr-2 icons"
+								[routerLink]="['/agregar-consulta',paciente.id,usuario.id]"
+								[appAccess]="['Doctor','admin']"><img src="./assets/icon/consultas.png"
+									class="menuIcons" /></div>
+
+							<div type="button" class="btn ml-2 mr-2 icons"
+								[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+								[appAccess]="['Doctor','admin']"><img src="./assets/icon/historia-medica.png"
+									class="menuIcons" /></div>
+						</div> -->
+						<!-- citas -->
+						<button class=" p-0 btn btn-light m-1 border "
+							[routerLink]="['/citas']" [queryParams]="{id_paciente: paciente.id}"
+							data-toggle="tooltip" title="Ver citas">
+							<span class="">
+								<i class=" vertical-align: middle !important;">
+									<img src="./assets/icon/options/citas.png" height="35px" width="35px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<!-- agendar cita -->
+						<button class=" p-0 btn btn-light m-1 border "
+							(click)="seleccionarDoctorNuevaCita(paciente)"
+							data-toggle="tooltip" title="Agendar cita">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/agendar-cita.png" height="35px"
+										width="35px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<!-- agregar familiar -->
+						<button class=" p-0 btn btn-light  m-1 border "
+							[routerLink]="['/agregar-familiar',paciente.id_usuario]" [appAccess]="['Doctor']"
+							data-toggle="tooltip" title="Agregar familiar">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/agendar-familiar.png" height="35px"
+										width="35px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<!-- consultas -->
+						<button class=" p-0 btn btn-light m-1 border "
+							[routerLink]="['/ver-consultas','doctor',usuario.id,'paciente',paciente.id]"
+							[appAccess]="['Doctor','admin']"
+							data-toggle="tooltip" title="Consultas">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/consultas.png" height="35px" width="35px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<!-- historia medica o clinica -->
+						<button class=" p-0 btn btn-light m-1 border "
+							[routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
+							[appAccess]="['Doctor','admin']"
+							data-toggle="tooltip" title="Historia Medica">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/historia-medica.png" height="35px"
+										width="35px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+					</div>
+                    
+                </div>
+            </div>
+		</div>
+
 
 		<div>
 			<app-paginacion [path]="'/pacientes'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">

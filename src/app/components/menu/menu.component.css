@@ -7,6 +7,7 @@
 
 body {
   overflow-x: hidden;
+  font-size: 12px;
 }
 
 #sidebar-wrapper {
@@ -20,7 +21,7 @@ body {
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
+
 }
 
 #sidebar-wrapper .list-group {
@@ -81,7 +82,7 @@ body {
 }
 .list-group-item{
    color: #fff;
-   font-size: 0.83em;
+   font-size:  14px;
 }
 .color1{
  background-color:#3e5a80;
@@ -104,17 +105,17 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'lato-bold', 'arial', sans-serif;
+  font-family: 'lato', sans-serif !important;
 }
 
-@font-face{
-  font-family: lato-bold;
+/* @font-face{
+  font-family: lato-b;
   src: url(../../../assets/font/custom/Lato-Bold.ttf) format("opentype");}
 
 a{
 margin-right: 10px;
   font-family: 'lato-bold', 'arial', sans-serif;
-}
+} */
 
 .modal-footer
 {

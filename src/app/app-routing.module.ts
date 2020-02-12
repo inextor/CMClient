@@ -64,6 +64,9 @@ import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.compo
 import { VerDoctorComponent } from './pages/ver-doctor/ver-doctor.component';
 import { AgendarCitaPacienteComponent}	from './pages/agendar-cita-paciente/agendar-cita-paciente.component';
 import { ReportesComponent}	from './pages/reportes/reportes.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
+
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
@@ -170,6 +173,8 @@ const routes: Routes = [
 			{ path: "ver-consultas/doctor/:id_doctor/paciente/:id_paciente", component: VerConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "ver-doctor/:idDoctor", component:VerDoctorComponent, pathMatch:"full", canActivate:[AuthGuard] },
 			{ path: "reportes", component:ReportesComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "notificaciones", component:NotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "push-notificaciones", component:PushNotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
 		]
 	},
 ];

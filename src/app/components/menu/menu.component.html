@@ -1,3 +1,4 @@
+
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 	<div class=" list-group-flush">
@@ -39,19 +40,15 @@
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/ingresos']" class="list-group-item list-group-item-action color1 ">INGRESOS</a>
 				</div>
-
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/ventas']" class="list-group-item list-group-item-action color1 ">VENTAS</a>
 				</div>
-
 				<div [appAccess]="['ADMIN','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/requisiciones']" class="list-group-item list-group-item-action color1 ">REQUISICIONES</a>
 				</div>
-
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a [routerLink]="['/distribucion']" class="list-group-item list-group-item-action color1 ">DISTRIBUCION</a>
 				</div>
-
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/punto-venta']" class="list-group-item list-group-item-action color1 ">PUNTO VENTA</a>
 				</div>
@@ -63,6 +60,9 @@
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/reportes']" class="list-group-item list-group-item-action color1 ">REPORTES </a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/notificaciones']" class="list-group-item list-group-item-action color1 ">NOTIFICACION </a>
 				</div>
 			</div>
 		</div>
@@ -84,23 +84,23 @@
 	<!-- OPCIONES PACIENTES -->
 	<div [appAccess]="['PACIENTE']" class="sidebar">
 		<a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color1 group ">
-			<img src="./assets/icon/mis-citas.png" class="menuIcons" /> CITAS
+			<img src="./assets/icon/mis-citas.png" class="menuIcons" /> Citas
 		</a>
 	</div>
 	<div [appAccess]="['PACIENTE']" class="sidebar">
 		<a class="list-group-item list-group-item-action color2 group ">
-			<img src="./assets/icon/Mehr-Software-18.png" class="menuIcons" /> MIS DOCTORES
+			<img src="./assets/icon/Mehr-Software-18.png" class="menuIcons" /> Mis doctores
 		</a>
 	</div>
 	<div [appAccess]="['PACIENTE']" class="sidebar">
 		<a [routerLink]="['/familiares']" class="list-group-item list-group-item-action color3 group ">
-			<img src="./assets/icon/familiares.png" class="menuIcons" /> FAMILIARES
+			<img src="./assets/icon/familiares.png" class="menuIcons" /> Familiares
 		</a>
 	</div>
 	<!-- FIN OPCIONES PACIENTES -->
 		<div class="sidebar">
 			<a (click)="showLogoutModal()" class="list-group-item list-group-item-action color5 group">
-				<img src="./assets/icon/Mehr-Software-21.png" class="menuIcons" />LOG OUT
+				<img src="./assets/icon/Mehr-Software-21.png" class="menuIcons" />Log out
 			</a>
 		</div>
 	</div>

@@ -93,7 +93,7 @@
 		</div>
 
 
-		<div class="card">
+		<div class="card hidden-mobile">
 			<table class="basica">
 				<thead>
 					<tr>
@@ -121,8 +121,8 @@
 							<!-- confirmado paciente -->
 							<button class=" p-0 btn btn-light m-1 border "
 								*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
-								[routerLink]="['/agregar-consulta-cita',i.cita.id]"
-								[appAccess]="['Doctor','admin']" data-toggle="tooltip" title="Consultas">
+								[routerLink]="['/agregar-consulta-cita',i.cita.id]" [appAccess]="['Doctor','admin']"
+								data-toggle="tooltip" title="Consultas">
 								<span class="">
 									<i class="">
 										<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
@@ -171,8 +171,8 @@
 								<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
-										<img src="./assets/icon/options/confirmar-doctor.png" height="43px"
-											width="43px" class="menuIcons icons" />
+										<img src="./assets/icon/options/confirmar-doctor.png" height="43px" width="43px"
+											class="menuIcons icons" />
 									</i>
 								</span>
 							</button>
@@ -183,8 +183,8 @@
 								<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
 								<span>
 									<i class="">
-										<img src="./assets/icon/options/cancelar-cita.png" height="35px"
-											width="35px" class="menuIcons icons" />
+										<img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
+											class="menuIcons icons" />
 									</i>
 								</span>
 							</button>
@@ -196,8 +196,8 @@
 								<span>
 									<i class="">
 										<i class="">
-											<img src="./assets/icon/options/activar-cita.png" height="35px"
-												width="35px" class="menuIcons icons" />
+											<img src="./assets/icon/options/activar-cita.png" height="35px" width="35px"
+												class="menuIcons icons" />
 										</i>
 									</i>
 								</span>
@@ -211,6 +211,115 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- vista para dispositivos -->
+		<div class="hidden-desktop ">
+			<div class="d-flex flex-row border " *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+				<div class="p-2 tableColor">
+					<div>Fecha:</div>
+					<div>Paciente:</div>
+					<div>Doctor:</div>
+					<div>Especialidad:</div>
+					<div>Acciones:</div>
+				</div>
+				<div class="p-2">
+					<div>{{i.cita.inicio| date: 'short' }}</div>
+					<div>{{i.paciente.nombre}}</div>
+					<div>{{i.doctor? i.doctor.nombre : ''}}</div>
+					<div>{{i.doctor? i.doctor.especialidad : ''}}</div>
+					<div class="p-0">
+						<!-- confirmado paciente -->
+						<button class=" p-0 btn btn-light m-1 border "
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI' && i.cita.confirmado_por_doctor=='SI'"
+							[routerLink]="['/agregar-consulta-cita',i.cita.id]" [appAccess]="['Doctor','admin']"
+							data-toggle="tooltip" title="Consultas">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<button class=" btn btn-light m-1 p-0 border"
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
+							data-toggle="tooltip" title="Confirmado por paciente">
+							<span>
+								<i class="">
+									<img src="./assets/icon/options/confirmado-paciente.png" height="43px"
+										width="43px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<button class=" btn btn-light m-1 p-0 border"
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
+							(click)="currentInfoCita=i;showConfirmPaciente=true;" data-toggle="tooltip"
+							title="Confirmar paciente">
+							<!--span class="oi" data-glyph="person" title="icon name" aria-hidden="true"></span-->
+							<span>
+								<i class="">
+									<img src="./assets/icon/options/confirmar-paciente.png" height="43px"
+										width="43px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<!-- confirmado doctor -->
+						<button class=" btn btn-light p-0 m-1 border "
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
+							(click)="currentInfoCita=i;showConfirmDoctor=true" data-toggle="tooltip"
+							title="Confirmado por doctor">
+							<span>
+								<i class="">
+									<img src="./assets/icon/options/confirmado-doctor.png" height="43px"
+										width="43px" class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<button class=" btn btn-light p-0 m-1 border "
+							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
+							(click)="currentInfoCita=i;showConfirmDoctor=true" data-toggle="tooltip"
+							title="Confirmar doctor">
+							<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
+							<span>
+								<i class="">
+									<img src="./assets/icon/options/confirmar-doctor.png" height="43px" width="43px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<button class="btn btn-light p-1 m-1 border "
+							*ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
+							(click)="currentInfoCita=i;showConfirmCancelar=true" data-toggle="tooltip"
+							title="Cancelar cita">
+							<!--span class="oi" data-glyph="close-circle-outline" title="icon name" aria-hidden="true"></span-->
+							<span>
+								<i class="">
+									<img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+						<button class="btn btn-light p-1 m-1 border"
+							*ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'"
+							(click)="currentInfoCita=i;showConfirmActivar=true" data-toggle="tooltip"
+							title="Activar cita">
+							<!--span class="oi" data-glyph="checkmark-circle-outline" title="icon name" aria-hidden="true"></span-->
+							<span>
+								<i class="">
+									<i class="">
+										<img src="./assets/icon/options/activar-cita.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</i>
+							</span>
+						</button>
+						<!--button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/agregar-centro-medico',i.cita.id]" (click)="currentInfoCita=i;">
+ <span class="oi" data-glyph="create" title="icon name" aria-hidden="true"></span>
+ <i class="material-icons">create</i>
+ </button-->
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div *ngIf="info_citas.length!=0">
 			<app-paginacion [path]="'/citas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
 			</app-paginacion>

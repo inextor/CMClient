@@ -1,14 +1,14 @@
 <div class="card p-3">
     <div class="container">
 
-        <div class="p-0 mt-3">
+        <div class="p-0">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
 				<div>
-					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}} PACIENTE</h4>
+					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}}</h4>
 				</div>
 				<div>
 					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                    (click)="registrarse()" [disabled]="is_loading">{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
+                    (click)="registrarse()" [disabled]="is_loading"><i class="fa fa-save mr-2"></i>{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
         </div>
@@ -19,11 +19,13 @@
                 <img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
             </div>
             <input type="file" (change)="uploadImage($event)" name="image"> -->
-
-            <div class="form-group col-md-12">
-				
-				<app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
-			</div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label for="">Agregar Imagen*</label>
+                    <app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
+                </div>
+            </div>
+            
 
             <div class="form-row">
                 <div class="form-group col-md-6">

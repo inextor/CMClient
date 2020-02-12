@@ -10,7 +10,7 @@
 								</button>
 							</td>
 						</div> -->
-		<table class="basica table">
+		<table class="basica table hidden-mobile">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -59,6 +59,36 @@
 				</tr>
 			</tbody>
 		</table>
+		<!-- mobile-->
+		<div class="hidden-desktop">
+            <div class="d-flex flex-row border " *ngFor="let familiar of familiares">
+
+                <div class="p-2 table-color">
+					<div>Nombre:</div>
+
+					<div>Acciones:</div>
+
+
+                </div>
+                <div class="p-2">
+					<div>{{familiar.nombre | titlecase }} {{familiar.apellidos| titlecase}}</div>
+                    <div class="p-0 options">
+						<button type="button" (click)="showSeleccionarDoctorCita(familiar.id)" [appAccess]="['paciente']" class="p-0 btn btn-light m-1 border">
+							<span class="">
+								<i class="">
+									<img src="./assets/icon/options/agendar-cita.png" height="35px" width="35px"
+										class="menuIcons icons" />
+								</i>
+							</span>
+						</button>
+					</div>
+                </div>
+
+
+
+            </div>
+
+        </div>
 		<div class="mt-3 mb-3">
 			<app-paginacion [path]="'/familiares'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
 		</div>

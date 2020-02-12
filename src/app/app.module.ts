@@ -94,6 +94,8 @@ import { RestService } from './services/rest.service';
 import { CalendarioDoctoresComponent } from './pages/calendario-doctores/calendario-doctores.component';
 import { ViewCitasDoctoresComponent } from './components/view-citas-doctores/view-citas-doctores.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -195,6 +197,8 @@ export function init_app(rest: RestService) {
     CalendarioDoctoresComponent,
     ViewCitasDoctoresComponent,
     ReportesComponent,
+    NotificationsComponent,
+    PushNotificationsComponent,
 
 
   ],

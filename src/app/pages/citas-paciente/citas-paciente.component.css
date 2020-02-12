@@ -11,3 +11,20 @@
       width: 20rem;
     }
   }
+
+  @media only screen and (max-width: 700px) {
+    .hidden-xs{
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    .hidden-desktop{
+      display: none;
+    }
+  }
+  
+  .dateColor{
+    background-color: #3684C1;
+    color: white;
+  }

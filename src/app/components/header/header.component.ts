@@ -14,13 +14,14 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 	showCentros =false;
 	usuario: Usuario=null
 	nombre:string=null
+	isNavbarCollapsed=false;
 	ngOnInit()
 	{ 
 		
 		let usuario = this.rest.getUsuarioSesion();
 		if( usuario )
 		{
-			this.nombre=usuario.usuario;
+			this.nombre=usuario.nombre;
 			if ( usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE" ){
 				this.rest.usuario.get(usuario.id).subscribe(params=>{
 					this.nombre=params.nombre
@@ -31,17 +32,21 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 					this.nombre = params.nombre
 				});
 			}
-			else if(usuario.tipo == "PACIENTE"){
-				this.rest.paciente.getAll({id_usuario:usuario.id}).subscribe(params =>{
-					if(params.total == 1){
-						this.nombre = params.datos[0].nombre
-					}
-				});
-			}
+			// else if(usuario.tipo == "PACIENTE"){
+			// 	this.rest.paciente.getAll({id_usuario:usuario.id}).subscribe(params =>{
+			// 		if(params.total == 1){
+			// 			this.nombre = params.datos[0].nombre
+			// 		}
+			// 	});
+			// }
+		}
+	}
+	closeMenu(){
+		if(this.isNavbarCollapsed == true){
+			this.isNavbarCollapsed = false;
 		}
 	}
 
-	isNavbarCollapsed=false;
 	logout() {
 		// remove user from local storage and set current user to null
 		localStorage.clear();

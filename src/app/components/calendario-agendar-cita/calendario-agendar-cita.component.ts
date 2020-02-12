@@ -39,6 +39,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	counterId:number = 0;
 	calendarOptions= {
 			editable: false,
+
 			header: {
 				left: 'title',
 				center: 'timeGridDay,timeGridWeek,dayGridMonth',
@@ -50,6 +51,8 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 			height: 'auto',
 			defaultView: "timeGridWeek"
 	};
+
+
 
 	cita:Cita = {
 		inicio: null
@@ -63,6 +66,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	ngOnInit()
 	{
+
 		this.counterId = 0;
 
 	}
@@ -77,6 +81,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes:SimpleChanges)
 	{
+		
 		let loadCounter:number = 0
 
 		if( changes['doctor'] || changes['centro_medico'] || changes['paciente'] )
@@ -90,7 +95,10 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	good()
 	{
+	
+
 		const calendarAPI = this.calendarComponent.getApi();
+		
 		calendarAPI.addEventSource({
 			id: 'citas'
 			,events: (info,successCallback,failureCallback)=>

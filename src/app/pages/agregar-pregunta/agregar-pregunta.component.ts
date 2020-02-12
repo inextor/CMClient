@@ -13,7 +13,9 @@ export class AgregarPreguntaComponent extends BaseComponent implements OnInit {
 
 	preguntas_generales:Pregunta_Historia_Clinica[] = [];
 	pregunta:Pregunta_Historia_Clinica = {
-
+		tipo_pregunta: '',
+		es_pregunta_binaria: '',
+		depende_del_genero: '',
 	};
 
 	ngOnInit() {

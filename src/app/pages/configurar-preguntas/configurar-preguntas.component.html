@@ -1,56 +1,63 @@
-<main class="p-2">
-	<div class="card p-3">
-		<div class="container">
-			<h4 class="mb-3 mt-3">CONFIGURAR PREGUNTAS</h4>
-			<td>
-				<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-pregunta']">
-					Agregar Pregunta
-				</button>
-			</td>
-			<table class="basica ">
-				<thead>
-					<tr>
-						<th>Pregunta</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let p of preguntasEspecialidad;let i = index">
-						<td>{{p.pregunta_historia_clinica.pregunta}} </td>
-						<td>
-							<button type="button" size="small" class="btn btn-primary btn-sm"
-								(click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
-								Remover</button>
-							<button type="button" size="small" class="btn btn-primary btn-sm" *ngIf="i>0"
-								(click)="mover(p.especialidad_pregunta,'mover_arriba')">Mover
-								Arriba</button>
-							<button type="button" size="small" class="btn btn-primary btn-sm"
-								*ngIf="i<preguntasEspecialidad.length-1"
-								(click)="mover(p.especialidad_pregunta,'mover_abajo')">Mover Abajo</button>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
-			<table class="basica">
-				<thead>
-					<tr>
-						<th>Listado de preguntas</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let p of busquedaPreguntas">
-						<td>{{p.pregunta}} </td>
-
-						<td><button type="button" size="small" class="btn btn-primary btn-sm"
-								(click)="agregarEspecialidadPregunta(p)">
-								Agregar
-							</button></td>
-
-					</tr>
-				</tbody>
-			</table>
+<div class="card p-3">
+	<div class="">
+		<div class="p-0">
+			<div class="d-flex justify-content-between flex-wrap">
+				<div class="mb-3">
+					<h4>CUESTIONARIO</h4>
+				</div>
+				<div class="mb-3">
+					<div>
+						<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-pregunta']">
+							<i class="fa fa-plus-circle mr-2"></i>Pregunta
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
+		<table class="basica ">
+			<thead>
+				<tr>
+					<th>Pregunta</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let p of preguntasEspecialidad;let i = index">
+					<td>{{p.pregunta_historia_clinica.pregunta}} </td>
+					<td>
+						<button type="button" size="small" class="btn btn-primary btn-sm"
+							(click)="deleteEspecialidadPregunta(p.especialidad_pregunta)">
+							<i class="fa fa-trash-alt"></i>
+						</button>
+						<button type="button" size="small" class="btn btn-primary btn-sm" *ngIf="i>0"
+							(click)="mover(p.especialidad_pregunta,'mover_arriba')">
+							<i class="fa fa-arrow-up "></i>
+						</button>
+						<button type="button" size="small" class="btn btn-primary btn-sm"
+							*ngIf="i<preguntasEspecialidad.length-1"
+							(click)="mover(p.especialidad_pregunta,'mover_abajo')">
+							<i class="fa fa-arrow-down"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="basica">
+			<thead>
+				<tr>
+					<th>Listado de preguntas</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let p of busquedaPreguntas">
+					<td>{{p.pregunta}} </td>
+					<td><button type="button" size="small" class="btn btn-primary btn-sm"
+							(click)="agregarEspecialidadPregunta(p)">
+							<i class="fa fa-plus-circle"> </i>
+						</button></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-</main>
+</div>

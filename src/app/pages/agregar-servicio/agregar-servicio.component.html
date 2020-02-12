@@ -3,11 +3,12 @@
 	<div class="container">
 		<div class="p-0 mt-3">
 			<div class=" mb-3 d-flex justify-content-between flex-wrap">
-				<div >
+				<div>
 					<h4>{{ id ? 'EDITAR': 'AGREGAR' }} SERVICIO</h4>
 				</div>
-				<div >
-					<button type="button" class="btn btn-primary btn-sm" [disabled]="is_loading" (click)="guardar()">{{ id ? 'Guardar':'Agregar'}}</button>
+				<div>
+					<button type="button" class="btn btn-primary btn-sm" [disabled]="is_loading" (click)="guardar()">
+						<i class="fa fa-save mr-2"></i>{{ id ? 'Guardar':'Agregar'}}</button>
 				</div>
 			</div>
 		</div>
@@ -15,11 +16,13 @@
 		<div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
+					<label for=""> Agregar Imagen*</label>
 					<app-image-uploader [(image)]="servicio_recurso.servicio.id_imagen"></app-image-uploader>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Nombre del servicio*</label>
-					<input placeholder="Nombre" class="form-control" type="text" name="nombre" [(ngModel)]="servicio_recurso.servicio.nombre">
+					<input placeholder="Nombre" class="form-control" type="text" name="nombre"
+						[(ngModel)]="servicio_recurso.servicio.nombre">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Tipo de servicio*</label>
@@ -36,12 +39,14 @@
 					<label for="">Unidad de medida</label>
 					<select class="form-control" name="tipo" [(ngModel)]="servicio_recurso.servicio.id_unidad_medida">
 						<option [value]="null">Seleccione una unidad de medida</option>
-						<option *ngFor="let unidad_medida of unidades_de_medida" [value]="unidad_medida.id">{{unidad_medida.nombre | titlecase}}</option>
+						<option *ngFor="let unidad_medida of unidades_de_medida" [value]="unidad_medida.id">
+							{{unidad_medida.nombre | titlecase}}</option>
 					</select>
 				</div>
-				<div class="form-group col-md-6" >
+				<div class="form-group col-md-6">
 					<label for="">Precio Referencia</label>
-					<input type="number" step="any" [(ngModel)]="servicio_recurso.servicio.precio_referencia" [disabled]="servicio_recurso.servicio.tipo != 'PRODUCTO_FISICO'" class="form-control">
+					<input type="number" step="any" [(ngModel)]="servicio_recurso.servicio.precio_referencia"
+						[disabled]="servicio_recurso.servicio.tipo != 'PRODUCTO_FISICO'" class="form-control">
 				</div>
 
 			</div>
@@ -52,9 +57,12 @@
 				<div class="dropdown col-12">
 					<div class="dropdown">
 						<label>Agregar Productos</label>
-						<input type="text" name="search_servicio" [(ngModel)]="search" (keyup)="changeSearchServicio($event)" class="form-control" placeholder="Buscar">
-						<div *ngIf="search_servicios.length && search!= ''" class="dropdown-menu show w-100 no-selectable-text">
-							<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
+						<input type="text" name="search_servicio" [(ngModel)]="search"
+							(keyup)="changeSearchServicio($event)" class="form-control" placeholder="Buscar">
+						<div *ngIf="search_servicios.length && search!= ''"
+							class="dropdown-menu show w-100 no-selectable-text">
+							<div *ngFor="let servicio of search_servicios;let i=index"
+								(click)="agregarServicio(servicio)">
 								<div class="dropdown-item search">
 									{{servicio.nombre|uppercase}}
 								</div>
@@ -64,7 +72,7 @@
 				</div>
 			</div>
 
-			<div class="p-3">
+			<div class="p-3 hidden-mobile">
 				<h4 class="mb-3">Servicios Secundarios</h4>
 				<div class="row mb-2 ">
 					<div class="col-8 font-weight-bold">Nombre</div>
@@ -75,13 +83,27 @@
 					<div class="col-8">
 						<label class="col-form-label">{{recurso_response.servicio.nombre | titlecase}}</label>
 					</div>
-					<div class="col-2 text-right"><label class="col-form-label">{{recurso_response.servicio.precio_referencia | currency }}</label></div>
-					<div class="col-2 text-right"><input type="number" class="form-control" [(ngModel)]="recurso_response.recurso.cantidad" min="0" (change)="updateCantidades()"></div>
+					<div class="col-2 text-right"><label
+							class="col-form-label">{{recurso_response.servicio.precio_referencia | currency }}</label>
+					</div>
+					<div class="col-2 text-right"><input type="number" class="form-control"
+							[(ngModel)]="recurso_response.recurso.cantidad" min="0" (change)="updateCantidades()"></div>
 				</div>
 			</div>
 		</ng-container>
+		<!-- tabla de servicios para dispositivos -->
+		<div class=" p-3 hidden-desktop ">
+			<div class="row border " *ngFor="let recurso_response of servicio_recurso.recursos">
+				<div class="p-2 dateColor">
+					<div>Nombre: {{recurso_response.servicio.nombre | titlecase}}</div>
+					<div>Precio Referencia: {{recurso_response.servicio.precio_referencia | currency }}</div>
+					<div >Cantidad: <input type="number" class="form-control" [(ngModel)]="recurso_response.recurso.cantidad"
+						min="0" (change)="updateCantidades()"></div>
+				</div>
+			</div>
+		</div>
 
-		<div class="card">
+		<div class="card hidden-mobile">
 			<table class="basica">
 				<tr>
 					<td>Centro Medico</td>
@@ -90,16 +112,56 @@
 				<tr *ngFor="let centro_medico of centros_medicos; index as i">
 					<td><b>{{centro_medico.nombre}}</b></td>
 					<td *ngFor="let tipo_precio of tipo_precios; index as j">
-						<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j" [(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
-						<span *ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio" class="text-success">
+						<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j"
+							[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
+						<span
+							*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio"
+							class="text-success">
 							{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
 						</span>
-						<span *ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia>precios[centro_medico.id][tipo_precio.id].precio" class="text-danger">
+						<span
+							*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia>precios[centro_medico.id][tipo_precio.id].precio"
+							class="text-danger">
 							{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
 						</span>
 					</td>
 				</tr>
 			</table>
 		</div>
+		<!-- tabla de precios para dispositivos moviles -->
+		<div class="hidden-desktop ">
+			<div class="row border">
+				<div class="col-6 p-2">Centro Medico</div>
+				<div class="col-6 p-2">Tipo de precio</div>
+			</div>
+			<div class="row border " *ngFor="let centro_medico of centros_medicos; index as i">
+				<div class="p-2 col-6 dateColor">
+					<div><b>{{centro_medico.nombre}}</b></div>
+				</div>
+				<div class="p-2 col-6">
+					<div *ngFor="let tipo_precio of tipo_precios">
+						<div> {{tipo_precio.nombre}}
+							<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j"
+								[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
+							<span
+								*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio"
+								class="text-success">
+								{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
+							</span>
+							<span
+								*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia>precios[centro_medico.id][tipo_precio.id].precio"
+								class="text-danger">
+								{{getUtilidad(precios[centro_medico.id][tipo_precio.id].precio)| percent: '1.0-2' }}
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
 	</div>
 </div>

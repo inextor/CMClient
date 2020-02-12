@@ -1,18 +1,19 @@
 <div class="card p-3">
     <div class="">
         <div class="p-0">
-			<div class="d-flex justify-content-between flex-wrap">
-				<div class="mb-3">
-					<h4 >MIS CITAS</h4>
-				</div>
-				<div class="mb-3">
+            <div class="d-flex justify-content-between flex-wrap">
+                <div class="mb-3">
+                    <h4>MIS CITAS</h4>
+                </div>
+                <div class="mb-3">
                     <div>
-                        <button (click)="showSeleccionarDoctorCita()" type="button" class="btn btn-primary btn-sm">Nueva Cita</button>
+                        <button (click)="showSeleccionarDoctorCita()" class="btn btn-primary btn-sm">
+                            <i class="fa fa-plus-circle mr-2"></i>cita </button>
                     </div>
-				</div>
-			</div>
-		</div>
-        <table class="basica table">
+                </div>
+            </div>
+        </div>
+        <table class="basica table hidden-xs">
             <thead>
                 <tr>
                     <th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
@@ -23,7 +24,7 @@
                         (click)="ordenar('Doctor')">Doctor</th>
                     <!-- <th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
                         (click)="ordenar('Especialidad')">Especialidad</th> -->
-                        <th>Estado</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -37,67 +38,66 @@
                     <td>{{i.doctor? i.doctor.nombre : ''}} {{i.doctor? i.doctor.especialidad : ''}}</td>
                     <td>{{i.cita.estatus}}</td>
                     <td class="p-0 options">
-                       <!-- BOTONES DISABLED -->
-                            <button  disabled class="btn btn-light p-1 m-1 border" *ngIf="i.cita.estatus == 'PENDIENTE' ">
-                            <span >
+                        <!-- BOTONES DISABLED -->
+                        <button disabled class="btn btn-light p-1 m-1 border" *ngIf="i.cita.estatus == 'PENDIENTE' ">
+                            <span>
                                 <i class="">
                                     <img src="./assets/icon/options/confirmar-paciente.png" height="35px" width="35px"
-                                    class="menuIcons icons" />
+                                        class="menuIcons icons" />
                                 </i>
                             </span>
-                             </button>
-
-                             <!-- FIN BOTONES DISABLED -->
+                        </button>
+                        <!-- FIN BOTONES DISABLED -->
                         <!-- confirmar cita -->
-
-                        <button  class="btn btn-light p-1 m-1 border"
+                        <button class="btn btn-light p-1 m-1 border"
                             *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
-                            (click)="currentInfoCita=i;showConfirmPaciente=true;"
-                            data-toggle="tooltip" title="Confirmar Cita">
-                            <span >
+                            (click)="currentInfoCita=i;showConfirmPaciente=true;" data-toggle="tooltip"
+                            title="Confirmar Cita">
+                            <span>
                                 <i class="">
 
                                     <img src="./assets/icon/options/confirmar-paciente.png" height="35px" width="35px"
-                                    class="menuIcons icons" />
+                                        class="menuIcons icons" />
 
                                 </i>
                             </span>
                         </button>
                         <!-- confirmado por paciente check -->
-                        <button  disabled class="btn btn-light p-1 m-1 border"
-                        *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
-                        data-toggle="tooltip" title="Confirmado por paciente">
-                        <span >
-                            <i class="">
+                        <button disabled class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
+                            data-toggle="tooltip" title="Confirmado por paciente">
+                            <span>
+                                <i class="">
 
-                                <img src="./assets/icon/options/confirmado-paciente.png" height="35px" width="35px"
-                                class="menuIcons icons" />
+                                    <img src="./assets/icon/options/confirmado-paciente.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
 
-                            </i>
-                        </span>
-                    </button>
-                    <!-- notificacion confirmado por doctor -->
-                    <button disabled class="btn btn-light p-1 m-1 border"
-                        *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
-                        data-toggle="tooltip" title="Confirmado por doctor">
-                        <span >
-                            <i class="">
+                                </i>
+                            </span>
+                        </button>
+                        <!-- notificacion confirmado por doctor -->
+                        <button disabled class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
+                            data-toggle="tooltip" title="Confirmado por doctor">
+                            <span>
+                                <i class="">
 
-                                <img src="./assets/icon/options/confirmado-doctor.png" height="35px" width="35px"
-                                class="menuIcons icons" />
+                                    <img src="./assets/icon/options/confirmado-doctor.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
 
-                            </i>
-                        </span>
-                    </button>
-                    <!-- cancelar cita -->
-                        <button type="button" class="btn btn-light p-1 m-1 border" *ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
-                            (click)="currentInfoCita=i;showConfirmCancelar=true"
-                            data-toggle="tooltip" title="Cancelar Cita">
-                            <span >
+                                </i>
+                            </span>
+                        </button>
+                        <!-- cancelar cita -->
+                        <button type="button" class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
+                            (click)="currentInfoCita=i;showConfirmCancelar=true" data-toggle="tooltip"
+                            title="Cancelar Cita">
+                            <span>
                                 <i class="">
 
                                     <img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
-                                    class="menuIcons icons" />
+                                        class="menuIcons icons" />
                                 </i>
                             </span>
                         </button>
@@ -105,17 +105,104 @@
                 </tr>
             </tbody>
         </table>
+        <!-- vista para dispositivos -->
+        <div class="hidden-desktop ">
+            <div class="d-flex flex-row border " *ngFor="let i of info_citas"
+                [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
+                <div class="p-2 dateColor">
+                    <div>Fecha:</div>
+                    <div>Paciente:</div>
+                    <div>Doctor:</div>
+                    <div>Especialidad:</div>
+                    <div>Estado:</div>
+                    <div>Acciones:</div>
+                </div>
+                <div class="p-2">
+                    <div>{{i.cita.inicio| date: 'short' }}</div>
+                    <div>{{i.paciente.nombre}}</div>
+                    <div>{{i.doctor? i.doctor.nombre : ''}} </div>
+                    <div>{{i.doctor? i.doctor.especialidad : ''}}</div>
+                    <div>{{i.cita.estatus}}</div>
+                    <div class="">
+                        <!-- BOTONES DISABLED -->
+                        <button disabled class="btn btn-light p-1 m-1 border" *ngIf="i.cita.estatus == 'PENDIENTE' ">
+                            <span>
+                                <i class="">
+                                    <img src="./assets/icon/options/confirmar-paciente.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>
+                        </button>
+                        <!-- FIN BOTONES DISABLED -->
+                        <!-- confirmar cita -->
+                        <button class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='NO'"
+                            (click)="currentInfoCita=i;showConfirmPaciente=true;" data-toggle="tooltip"
+                            title="Confirmar Cita">
+                            <span>
+                                <i class="">
+
+                                    <img src="./assets/icon/options/confirmar-paciente.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+
+                                </i>
+                            </span>
+                        </button>
+                        <!-- confirmado por paciente check -->
+                        <button disabled class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_paciente=='SI'"
+                            data-toggle="tooltip" title="Confirmado por paciente">
+                            <span>
+                                <i class="">
+
+                                    <img src="./assets/icon/options/confirmado-paciente.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+
+                                </i>
+                            </span>
+                        </button>
+                        <!-- notificacion confirmado por doctor -->
+                        <button disabled class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='SI'"
+                            data-toggle="tooltip" title="Confirmado por doctor">
+                            <span>
+                                <i class="">
+
+                                    <img src="./assets/icon/options/confirmado-doctor.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+
+                                </i>
+                            </span>
+                        </button>
+                        <!-- cancelar cita -->
+                        <button type="button" class="btn btn-light p-1 m-1 border"
+                            *ngIf="i.cita.estatus == 'ACTIVA' || i.cita.estatus == 'PENDIENTE'"
+                            (click)="currentInfoCita=i;showConfirmCancelar=true" data-toggle="tooltip"
+                            title="Cancelar Cita">
+                            <span>
+                                <i class="">
+
+                                    <img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
+                                        class="menuIcons icons" />
+                                </i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div *ngIf="citas_paciente.length!=0">
-            <app-paginacion [path]="'/citas-paciente'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
+            <app-paginacion [path]="'/citas-paciente'" [pages]="pages" [totalPages]="totalPages"
+                [currentPage]="currentPage">
             </app-paginacion>
         </div>
     </div>
 </div>
 
-<app-seleccionar-doctor-cita [id_paciente]="id_paciente" [show]="show" ></app-seleccionar-doctor-cita>
+<app-seleccionar-doctor-cita [id_paciente]="id_paciente" [show]="show"></app-seleccionar-doctor-cita>
 
 <app-modal [show]="showConfirmPaciente">
-    <div class="modal-content "  class="customModal">
+    <div class="modal-content " class="customModal">
         <div class="modal-header">
             <h5 class="modal-title">Confirmar</h5>
         </div>
@@ -129,7 +216,7 @@
     </div>
 </app-modal>
 
-<app-modal  [show]="showConfirmCancelar">
+<app-modal [show]="showConfirmCancelar">
     <div class="modal-content " class="customModal">
         <div class="modal-header">
             <h5 class="modal-title">Cancelar Cita</h5>
@@ -144,8 +231,8 @@
     </div>
 </app-modal>
 
-<app-modal  [show]="showConfirmActivar">
-    <div class="modal-content"  class="customModal" >
+<app-modal [show]="showConfirmActivar">
+    <div class="modal-content" class="customModal">
         <div class="modal-header">
             <h5 class="modal-title">Confirmar Cita </h5>
         </div>

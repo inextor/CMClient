@@ -1,5 +1,6 @@
 .navbar{
     background-color: #019eb6 !important;
+    font-size: 12px;
     color: white;
 }
 
@@ -9,6 +10,12 @@
   /* height: 10% !important;
   width: 10% !important; */
     padding: 0% !important;
+}
+.menuIcons{
+  width:45px;
+  height:45px;
+  vertical-align:middle;
+  margin-right:3px;
 }
 .logoUser{
     height: 50px !important;
@@ -29,8 +36,13 @@ padding: 0% !important;
   color: white;
 }
 .subMenu{
-  padding-left: 30px;}
+  padding-left: 30px;
+  color: white;
+}
 
+  .nav-item{
+    color: white;
+  }
 
 @media only screen and (min-width: 767px) {
   .hiddeSubMenu{
@@ -59,21 +71,28 @@ a{
 
 @font-face{
   font-family: lato-light;
-  src: url(../../../assets/font/custom/Lato-Bold.ttf) format("opentype");}
+  src: url(../../../assets/font/custom/Lato-Bold.ttf) format("opentype");
+  font-size: 13px;
+}
 
   /* COLORES MENU */
   .color1{
  background-color:#3e5a80;
+ color: white;
 }
 .color2{
  background-color:#3285c6;
+ color: white;
 }
 .color3{
  background-color:#aad3c7;
+ color: white;
 }
 .color4{
  background-color:#019eb6;
+ color: white;
 }
 .color5{
  background-color:#8a93a1;
+ color: white;
 }
