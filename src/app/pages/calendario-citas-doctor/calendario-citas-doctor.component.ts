@@ -69,6 +69,21 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	ngOnInit() {
 		this.usuario = this.rest.getUsuarioSesion();
 		this.counterId = 0;
+		if(this.usuario && this.usuario.tipo == 'PACIENTE'){
+			this.calendarOptions = {
+				editable: false,
+				header: {
+					left: 'title',
+					center: 'timeGridDay,timeGridWeek,dayGridMonth',
+					right: 'prev,today,next anterior,siguiente',
+				},
+				footer: true,
+				allDaySlot: false,
+				eventLimit: true,
+				height: 'auto',
+				defaultView: "dayGridMonth"
+			};
+		}
 	}
 
 	ngAfterViewInit() {
@@ -94,6 +109,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	good() {
 		const calendarAPI = this.calendarComponent.getApi();
 		let usuario = this.rest.getUsuarioSesion();
+
 		if (usuario.tipo == 'DOCTOR') {
 			calendarAPI.addEventSource({
 				id: 'citas'
