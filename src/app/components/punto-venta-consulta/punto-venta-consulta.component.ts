@@ -138,7 +138,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 				+this.pago.cheque
 				+this.pago.deposito;
 
-		this.pago.cambio		= this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
+		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
 	}
 
 	buscar(evt:any)

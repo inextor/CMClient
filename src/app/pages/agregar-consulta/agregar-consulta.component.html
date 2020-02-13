@@ -1,32 +1,25 @@
 <main class="">
 	<div class="card p-3">
 		<div class="">
-
-
 			<div class="d-inline-flex  mb-3">
 				<div class="mr-4">
 					<h4 class=" align-self-end ">CONSULTA</h4>
 				</div >
-					
-					<div class="align-self-center"> <h5> paciente: <b>{{paciente.nombre | titlecase }}
+					<div class="align-self-center"> <h5> Paciente: <b>{{paciente.nombre | titlecase }}
 						{{paciente.apellidos|titlecase}}</b>  </h5> 
 					</div>
-		
 			</div>
 			<div class="d-flex mb-2 flex-wrap">
 				<button [routerLink]="['/ver-consultas','doctor',doctor.id,'paciente',paciente.id]"
 					class="btn btn-primary mr-2">Ver Historial</button>
 				<button [routerLink]="['/historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
-					class="btn btn-primary">Historia medica</button>
-
+					class="btn btn-primary">Historia Medica</button>
 			</div>
 			<!-- <div class="mb-3">
 				<button type="button"
 					[routerLink]="['/llenar-historia-clinica','doctor',doctor.id,'paciente',paciente.id]"
 					class="btn btn-primary">Ver Historial</button>
-
 			</div> -->
-
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<div class="card p-2">

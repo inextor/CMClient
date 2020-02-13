@@ -1,17 +1,14 @@
-<div class=" mb-3 d-flex justify-content-between flex-wrap">
-	<div>
-		<h5 class="mb-3 mt-3">*Nuevo Servicio</h5>
-	</div>
-<!-- 
+<!-- <div class=" mb-3 d-flex justify-content-between flex-wrap">
 	<div *ngIf="datosVenta">
 		<button type="submit" class="btn btn-primary btn-sm" [disabled]="!datosVenta.venta.id"
 			[routerLink]="['/punto-venta',datosVenta.venta.id]">Pagar </button>
-	</div> -->
-</div>
+	</div> 
+</div> -->
 
-<div class="dropdown">
-	<div class="mt-3 row">
+<div class="dropdown" *ngIf="datosVenta && infoPago.total_pagado < datosVenta.venta.total ">
+	<div class=" mb-3 row" >
 		<div class="col-10">
+			<h5 class="mb-3">*Nuevo Servicio</h5>
 			<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda" class="form-control"
 				placeholder="Buscar...">
 		</div>
@@ -31,7 +28,7 @@
 	</div>
 </div>
 
-<div *ngIf="datosVenta" class="p-0 mt-3">
+<div *ngIf="datosVenta" class="p-0 mt-3 hidden-mobile">
 	<ul class="list-group">
 		<li class="list-group-item" *ngFor="let sd of datosVenta.detalles">
 			<div class="row">
@@ -52,21 +49,65 @@
 		</li>
 	</ul>
 </div>
-<div class="row p-3">
 
+<!-- vista en dispositivos moviles -->
 
-<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
-	<div>Subtotal:</div>
-	<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
+<div class=" hidden-desktop" *ngIf="datosVenta">
+	<div class="list-group-item p-1" *ngFor="let sd of datosVenta.detalles">
+		<div class="">
+			<div class="center">
+				<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
+					<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+						[alt]="sd.servicio.nombre+' imagen'">
+				</div>
+				<div class="form-check-label" *ngIf="!sd.servicio.id_imagen">
+					<img class="image_logo_movil" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
+				</div>
+			</div>
+			<div>Servicio: {{sd.servicio.nombre | titlecase}}</div>
+			<div>Cantidad: {{sd.detalle_venta.cantidad}}</div>
+			<div>Precio: {{sd.detalle_venta.precio | currency}}</div>
+			<div *ngIf="infoPago.total_a_pagar != 0">Acciones:
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-primary border font-weight-bold"
+						(click)="disminuir(sd)">-</button>
+					<button type="button" class="btn btn-primary border font-weight-bold"
+						(click)="aumentar(sd)">+</button>
+					<button type="button" class="btn btn-primary border font-weight-bold"
+						(click)="eliminar(sd)">x</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
 
-<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
-	<div>Iva:</div>
-	<div class="font-weight-bold" >{{datosVenta.venta.iva| currency}}</div>
-</div>
 
-<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
-	
-	<strong style="font-size:3rem;" >{{datosVenta.venta.total | currency}}</strong>
+<div class="row p-2" *ngIf="datosVenta && infoPago.total_a_pagar != 0">
+	<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
+		<div>Subtotal:</div>
+		<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
+	</div>
+
+	<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
+		<div>Iva:</div>
+		<div class="font-weight-bold">{{datosVenta.venta.iva| currency}}</div>
+	</div>
+
+	<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
+
+		<strong style="font-size:3rem;">{{infoPago.total_a_pagar | currency}}</strong>
+	</div>
+	<!-- <div >
+		{{datosVenta.venta.total | currency}} 
+		{{infoPago.total_a_pagar | currency}}
+	</div> -->
 </div>
+<div class="row p-2" *ngIf="datosVenta && infoPago.total_pagado >= datosVenta.venta.total && infoPago.total_pagado != 0 ">
+	<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
+
+		<strong style="font-size:3rem;">PAGADO</strong>
+
+	</div>
+
 </div>
