@@ -91,10 +91,8 @@
 
 	<!-- vista en dispositivos moviles -->
 	<div class="mt-2 pt-2 hidden-desktop">
-		<div class="row " *ngFor="let sd of datosVenta.detalles">
-
-
-			<div class="container p-2 border" >
+		<div class="row " *ngFor="let sd of datosVenta.detalles">	
+			<div class="container p-2 border">
 				<div class="center">
 					<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
 						<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
@@ -150,21 +148,24 @@
 
 	<div class="row p-3">
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<div>Subtotal:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<div>Iva:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.iva| currency}}</div>
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<div>Total:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.total | currency }}</div>
 		</div>
-
+		<div class="col-md-2">
+			<div>Pendiente:</div>
+			<div class="font-weight-bold">{{datosVenta.venta.pendiente | currency}}</div>
+		</div>
 		<div class="col-md-3 mt-3 mb-3" *ngIf="datosVenta.venta.id">
 			<button type="button" class="btn btn-primary btn-lg" (click)="cancelarVenta()">
 				Cancelar Venta

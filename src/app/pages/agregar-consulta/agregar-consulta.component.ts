@@ -206,8 +206,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	guardar() {
 		this.is_loading = true;
 
-		let observable = this.rest.guardarDatosVenta(this.datosVenta).pipe
-		(
+		let observable = this.rest.guardarDatosVenta(this.datosVenta).pipe(
 			flatMap((datosVenta) => {
 				this.consulta.id_venta = datosVenta.venta.id;
 				this.datosVenta = datosVenta;

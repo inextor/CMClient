@@ -86,10 +86,12 @@
 						<th>Id</th>
 						<th>Cliente</th>
 						<th>Estado</th>
-						<th>Subtotal</th>
-						<th>Iva</th>
+						<!-- <th>Subtotal</th>
+						<th>Iva</th> -->
 						<th>Total</th>
+						<th>Pendiente</th>
 						<th>Fecha</th>
+						<th>Ventas</th>
 
 					</tr>
 				</thead>
@@ -99,10 +101,12 @@
 						<td class="text-left">{{venta.cliente}}</td>
 						<!--td class="text-center">{{venta.id_usuario_cliente}}</td-->
 						<td>{{venta.estatus}}</td>
-						<td class="text-right">{{venta.subtotal ? (venta.subtotal|currency):'N/A'}}</td>
-						<td class="text-right">{{venta.iva ? (venta.iva | currency):'N/A'}}</td>
+						<!-- <td class="text-right">{{venta.subtotal ? (venta.subtotal|currency):'N/A'}}</td>
+						<td class="text-right">{{venta.iva ? (venta.iva | currency):'N/A'}}</td> -->
 						<td class="text-right">{{venta.total ? (venta.total| currency):'N/A'}}</td>
+						<td class="text-right">{{venta.pendiente ? (venta.pendiente| currency):'N/A'}}</td>
 						<td class="text-center">{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</td>
+						<td class="text-center"><button [routerLink]="['/punto-venta',venta.id]" class="btn btn-primary">Proceder al pago</button></td>
 
 					</tr>
 				</tbody>
@@ -131,8 +135,6 @@
 					<div >{{venta.iva ? (venta.iva | currency):'N/A'}}</div>
 					<div >{{venta.total ? (venta.total| currency):'N/A'}}</div>
 					<div >{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</div>
-
-                    
                 </div>
             </div>
 		</div>

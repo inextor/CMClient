@@ -34,10 +34,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
 				this.rest.sucursal_doctor.getAll({ id_doctor: usuario.id })
 			]).subscribe((response) => {
 				this.centros_medicos_doctor = response[0].datos
-				console.log("loscentros del doktopr", this.centros_medicos_doctor);
+		
 				if (this.centros_medicos_doctor.length > 1) {
 					let centroMedico = this.rest.getCurrentCentroMedico();
-					console.log("entro al primer if ");
+
 					if (usuario.tipo == "ADMIN" || usuario.tipo == "DOCTOR") {
 						if ((centroMedico == null || centroMedico == undefined)) {
 							this.show_seleccionar_centro_medico = true;
@@ -46,7 +46,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
 				}
 				else {
-					console.log("entro aki")
+
 					this.rest.centro_medico.get(usuario.id_centro_medico).subscribe(response => {
 
 						localStorage.setItem('centro_medico', JSON.stringify(response));

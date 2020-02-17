@@ -48,7 +48,6 @@ export class VentasComponent extends BaseComponent implements OnInit {
 	{
 		this.route.queryParams.subscribe( params =>
 		{
-
 			this.venta_search = {
 				lt: {}
 				,eq: {}
@@ -58,9 +57,7 @@ export class VentasComponent extends BaseComponent implements OnInit {
 				,lk: {}
 				,csv: {}
 			};
-
 			this.titleService.setTitle('venta');
-
 			this.venta_search.lk.id					= "lk.id" in params ?params["lk.id"]:null;
 			this.venta_search.eq.id_usuario_cliente	= "eq.id_usuario_cliente" in params ?params["eq.id_usuario_cliente"]:null;
 			this.venta_search.eq.facturado			= "eq.facturado" in params ?params["eq.facturado"]:null;
@@ -78,8 +75,6 @@ export class VentasComponent extends BaseComponent implements OnInit {
 
 			let rjoinObj:any = {};
 			let fjarray = [];
-
-
 			this.is_loading = true;
 			this.venta_search.pagina= params['pagina'] ? parseInt( params['pagina'] ) : 0;
 

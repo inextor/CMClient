@@ -84,6 +84,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 				defaultView: "dayGridMonth"
 			};
 		}
+
 	}
 
 	ngAfterViewInit() {

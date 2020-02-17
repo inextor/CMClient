@@ -13,14 +13,17 @@
 		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" (click)="gotoPage(totalPages-1)">&gt;&gt;</button>
 	</div>
 </div-->
-<div class="d-flex bd-hightlight border border-primary">
+<div class="d-flex mt-2 bd-hightlight ">
 	<div>
-		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"  (click)="gotoPage(0)">&lt;&lt;</button>
-		<button [disabled]="currentPage == 0" type="button" class="btn btn-primary"  (click)="gotoPage(currentPage-1)">&lt;</button>
+		<button [disabled]="currentPage == 0" type="button" class="btn border "  (click)="gotoPage(0)"><i class="fa fa-angle-double-left ml-2 mr-2 "></i></button>
+		<button [disabled]="currentPage == 0" type="button" class="btn border"  (click)="gotoPage(currentPage-1)"><i class="fa fa-angle-left ml-2 mr-2"></i></button>
 	</div>
-	<div class="flex-grow-1 text-center indicador">página {{currentPage+1}} de {{totalPages}}</div>
+	<div class="flex-grow-1 text-center indicador hidden-mobile">página {{currentPage+1}} de {{totalPages}}</div>
+	<div class="flex-grow-1 text-center indicador hidden-desktop">{{currentPage+1}}</div>
 	<div>
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" (click)="gotoPage(currentPage+1)">&gt;</button>
-		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" (click)="gotoPage(totalPages-1)">&gt;&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn border" (click)="gotoPage(currentPage+1)"><i class="fa fa-angle-right ml-2 mr-2"></i></button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn border" (click)="gotoPage(totalPages-1)"><i class="fa fa-angle-double-right ml-2 mr-2 "></i></button>
+		<!-- <button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" (click)="gotoPage(currentPage+1)">&gt;</button>
+		<button [disabled]="currentPage >= totalPages-1 "type="button" class="btn btn-primary" (click)="gotoPage(totalPages-1)">&gt;&gt;</button> -->
 	</div>
 </div>
