@@ -17,15 +17,15 @@
             <thead>
                 <tr>
                     <th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
-                        (click)="ordenar('Fecha')">Fecha</th>
+                        (click)="ordenar('Fecha')">FECHA</th>
                     <th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}"
-                        (click)="ordenar('Paciente')">Familiar</th>
+                        (click)="ordenar('Paciente')">FAMILIAR</th>
                     <th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
-                        (click)="ordenar('Doctor')">Doctor</th>
+                        (click)="ordenar('Doctor')">DOCTOR</th>
                     <!-- <th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
                         (click)="ordenar('Especialidad')">Especialidad</th> -->
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
                 <tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
                     <td>{{i.cita.inicio| date: 'short' }}</td>
                     <td>{{i.paciente.nombre}}</td>
-                    <td>{{i.doctor? i.doctor.nombre : ''}} {{i.doctor? i.doctor.especialidad : ''}}</td>
+                    <td>{{i.doctor? i.doctor.nombre : ''}} - {{i.doctor? i.doctor.especialidad : ''}}</td>
                     <td>{{i.cita.estatus}}</td>
                     <td class="p-0 options">
                         <!-- BOTONES DISABLED -->

@@ -36,16 +36,16 @@
 			<table class="basica">
 				<thead>
 					<tr>
-						<th>Nombres</th>
-						<th>Apellidos</th>
-						<th>Telefono</th>
-						<th>Acciones</th>
+						<th>NOMBRE</th>
+						<th>APELLIDO</th>
+						<th>TELÉFONO</th>
+						<th>OPCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let paciente of pacientes">
-						<td>{{paciente.nombre | titlecase }}</td>
-						<td>{{paciente.apellidos| titlecase}}</td>
+						<td>{{paciente.nombre | uppercase }}</td>
+						<td>{{paciente.apellidos| uppercase}}</td>
 						<td>{{paciente.telefono ? paciente.telefono:'N/A'}}</td>
 						<td class="p-0 options">
 							<!-- <div class="d-inline-flex flex-wrap p-1">

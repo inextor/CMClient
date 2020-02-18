@@ -98,14 +98,14 @@
 				<thead>
 					<tr>
 						<th [ngClass]="{desc:orderBy=='Fecha' && orderDirection=='DESC',asc:orderBy=='Fecha' && orderDirection=='ASC'}"
-							(click)="ordenar('Fecha')">Fecha</th>
+							(click)="ordenar('Fecha')">FECHA</th>
 						<th [ngClass]="{desc:orderBy=='Paciente' && orderDirection=='DESC',asc:orderBy=='Paciente' && orderDirection=='ASC'}"
-							(click)="ordenar('Paciente')">Paciente</th>
-						<th [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
-							(click)="ordenar('Doctor')">Doctor</th>
-						<th [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
-							(click)="ordenar('Especialidad')">Especialidad</th>
-						<th>Acciones</th>
+							(click)="ordenar('Paciente')">PACIENTE</th>
+						<th [appAccess]="['ADMIN','RECEPCIONISTA']" [ngClass]="{desc:orderBy=='Doctor' && orderDirection=='DESC',asc:orderBy=='Doctor' && orderDirection=='ASC'}"
+							(click)="ordenar('Doctor')">DOCTOR</th>
+						<th [appAccess]="['ADMIN','RECEPCIONISTA']" [ngClass]="{desc:orderBy=='Especialidad' && orderDirection=='DESC',asc:orderBy=='Especialidad' && orderDirection=='ASC'}"
+							(click)="ordenar('Especialidad')">ESPECIALIDAD</th>
+						<th>OPCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -114,9 +114,9 @@
 					</tr>
 					<tr *ngFor="let i of info_citas" [ngClass]="{cancelada:i.cita.estatus == 'CANCELADA'}">
 						<td>{{i.cita.inicio| date: 'short' }}</td>
-						<td>{{i.paciente.nombre}}</td>
-						<td>{{i.doctor? i.doctor.nombre : ''}}</td>
-						<td>{{i.doctor? i.doctor.especialidad : ''}}</td>
+						<td>{{i.paciente.nombre | uppercase}} {{i.paciente.apellidos | uppercase}}</td>
+						<td [appAccess]="['ADMIN','RECEPCIONISTA']">{{i.doctor? (i.doctor.nombre | uppercase) : ''}}</td>
+						<td [appAccess]="['ADMIN','RECEPCIONISTA']">{{i.doctor? (i.doctor.especialidad | uppercase) : ''}}</td>
 						<td class="p-0 options">
 							<!-- confirmado paciente -->
 							<button class=" p-0 btn btn-light m-1 border "
