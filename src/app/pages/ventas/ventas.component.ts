@@ -35,7 +35,7 @@ export class VentasComponent extends BaseComponent implements OnInit {
 	clearBusqueda(){
 		this.venta_search = {
 			lt: {}
-			,eq: {}
+			,eq: {id_usuario_atendio:null,id_centro_medico:null,estatus:null}
 			,ge: {}
 			,gt: {}
 			,le: {}
@@ -50,7 +50,7 @@ export class VentasComponent extends BaseComponent implements OnInit {
 		{
 			this.venta_search = {
 				lt: {}
-				,eq: {}
+				,eq: {id_usuario_atendio:null,id_centro_medico:null,estatus:null}
 				,ge: {}
 				,gt: {}
 				,le: {}

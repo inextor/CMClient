@@ -1,145 +1,373 @@
-<div class="card p-3 mb-3">
-	<div class="container">
-		<h4 class="mt-3 mb-3">PUNTO DE VENTA</h4>
-		{{datosVenta.venta.factura_rfc}}
-		<app-loading *ngIf="is_loading"></app-loading>
-		<div class="form-row">
-			<div [ngClass]="{'block':show_name_input,'col-7':true}">
-				<label>Cliente</label>
-				<input type="" [(ngModel)]="datosVenta.venta.cliente" (keyup)="buscarCliente($event)"
-					class="form-control" [placeholder]="datosVenta.tipo_precio.nombre">
-				<div *ngIf="search_usuario.length" class="dropdown-menu show w-100 no-selectable-text">
-					<div class="dropdown-item search"><a [routerLink]="'/agregar-paciente'" class="d-block">Agregar
-							Nuevo Usuario</a></div>
-					<div *ngFor="let usuario of search_usuario" (click)="selectUsuario(usuario)">
-						<div class="dropdown-item search">
-							{{usuario.nombre|titlecase}} <i class="text-muted"> {{usuario.usuario|uppercase}}</i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<label>Tipo Cliente</label>
-				<select class="form-control col" name="tipo_precio" [ngModel]="datosVenta.venta.id_tipo_precio"
-					(change)="changeTipoPrecio($event.target.value)">
-					<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id"
-						[selected]="datosVenta.venta.id_tipo_precio==tipo_precio.id">{{tipo_precio.nombre |  uppercase}}
-					</option>
-				</select>
-			</div>
-			<div *ngIf="ventas.length>0">
-				<label>Ventas Pendientes</label>
-				<select class="form-control col" name="tipo_precio" (change)="cambiarVenta($event.target.value)">
-					<option value="">Seleccionar</option>
-					<option *ngFor="let venta of ventas" [value]="venta.id">{{venta.id}} {{ venta.cliente |  uppercase}}
-					</option>
-				</select>
-			</div>
-		</div>
-
-		<div class="dropdown mb-3">
-			<div class="mt-3 row">
-				<div class="col">
-					<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda"
-						class="form-control" placeholder="Buscar...">
-				</div>
-				<div *ngIf="search_loading">
-					<div class="spinner-border text-primary" role="status">
-						<span class="sr-only">Loading...</span>
-					</div>
-				</div>
-			</div>
-			<div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100 no-selectable-text">
-				<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
-					<!--div *ngIf="i>0" class="dropdown-divider"></div -->
-					<div class="dropdown-item search">
-						{{servicio.nombre|uppercase}}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container mt-3 pt-3 hidden-mobile">
-		<ul class="list-group">
-			<li class="list-group-item" *ngFor="let sd of datosVenta.detalles">
+<div class="">
+	<div class="container-fluid">
+		<div class="row">
+			<div class=" card col-sm-12 col-lg-6">
 				<div class="row">
-					<div class="image_logo col-3 form-check-label" *ngIf="sd.servicio.id_imagen">
-						<img class="image_logo" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
-							[alt]="sd.servicio.nombre+' imagen'">
-					</div>
-					<div class=" col-3 form-check-label" *ngIf="!sd.servicio.id_imagen">
-						<img class="image_logo" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
-					</div>
-					<label class="col-3 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
-					<label class="col-1 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
-					<label class="col-2 text-center form-check-label">{{sd.detalle_venta.precio | currency}}</label>
-					<div class="col-3 text-right">
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-primary border font-weight-bold"
-								(click)="disminuir(sd)">-</button>
-							<button type="button" class="btn btn-primary border font-weight-bold"
-								(click)="aumentar(sd)">+</button>
-							<button type="button" class="btn btn-primary border font-weight-bold"
-								(click)="eliminar(sd)">x</button>
+
+
+
+<!-- 
+					{{datosVenta.venta.factura_rfc}}
+					<app-loading *ngIf="is_loading"></app-loading> -->
+
+
+					<!-- <div class="form-row">
+					<div [ngClass]="{'block':show_name_input,'col-7':true}">
+						<label>Cliente</label>
+						<input type="" [(ngModel)]="datosVenta.venta.cliente" (keyup)="buscarCliente($event)"
+							class="form-control" [placeholder]="datosVenta.tipo_precio.nombre">
+						<div *ngIf="search_usuario.length" class="dropdown-menu show w-100 no-selectable-text">
+							<div class="dropdown-item search"><a [routerLink]="'/agregar-paciente'"
+									class="d-block">Agregar
+									Nuevo Usuario</a></div>
+							<div *ngFor="let usuario of search_usuario" (click)="selectUsuario(usuario)">
+								<div class="dropdown-item search">
+									{{usuario.nombre|titlecase}} <i class="text-muted">
+										{{usuario.usuario|uppercase}}</i>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
+					<div class="col">
+						<label>Tipo Cliente</label>
+						<select class="form-control col" name="tipo_precio" [ngModel]="datosVenta.venta.id_tipo_precio"
+							(change)="changeTipoPrecio($event.target.value)">
+							<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id"
+								[selected]="datosVenta.venta.id_tipo_precio==tipo_precio.id">
+								{{tipo_precio.nombre |  uppercase}}
+							</option>
+						</select>
+					</div>
+					<div *ngIf="ventas.length>0">
+						<label>Ventas Pendientes</label>
+						<select class="form-control col" name="tipo_precio"
+							(change)="cambiarVenta($event.target.value)">
+							<option value="">Seleccionar</option>
+							<option *ngFor="let venta of ventas" [value]="venta.id">{{venta.id}}
+								{{ venta.cliente |  uppercase}}
+							</option>
+						</select>
+					</div>
+				</div> -->
+					<table class="tittle">
+						<thead>
+							<tr>
+								<th>PRODUCTOS Y SERVICIOS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="dropdown">
+										<div class=" row">
 
-	<!-- vista en dispositivos moviles -->
-	<div class="mt-2 pt-2 hidden-desktop">
-		<div class="row " *ngFor="let sd of datosVenta.detalles">	
-			<div class="container p-2 border">
-				<div class="center">
-					<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
-						<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
-							[alt]="sd.servicio.nombre+' imagen'">
-					</div>
-					<div class="form-check-label" *ngIf="!sd.servicio.id_imagen">
-						<img class="image_logo_movil" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
-					</div>
-				</div>
-				<div>Servicio: {{sd.servicio.nombre | titlecase}}</div>
-				<div>Cantidad: {{sd.detalle_venta.cantidad}}</div>
-				<div>Precio: {{sd.detalle_venta.precio | currency}}</div>
-				<div>Acciones:
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="disminuir(sd)">-</button>
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="aumentar(sd)">+</button>
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="eliminar(sd)">x</button>
-					</div>
+											<div class="col">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="basic-addon1"><i
+																class="fa fa-search"></i></span>
+													</div>
+													<input type="text" (keyup)="buscar($event)" id="busqueda"
+														[(ngModel)]="busqueda" class="form-control"
+														placeholder="Buscar Producto o Servicio...">
+												</div>
+											</div>
+											<div *ngIf="search_loading">
+												<div class="spinner-border text-primary" role="status">
+													<span class="sr-only">Loading...</span>
+												</div>
+											</div>
+										</div>
+										<div *ngIf="search_servicios.length && busqueda != ''"
+											class="dropdown-menu show w-100 no-selectable-text">
+											<div *ngFor="let servicio of search_servicios;let i=index"
+												(click)="agregarServicio(servicio)">
+												<!--div *ngIf="i>0" class="dropdown-divider"></div -->
+												<div class="dropdown-item search">
+													{{servicio.nombre|uppercase}}
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- <label for="">PRODUCTOS Y SERVICIOS</label> -->
+
 				</div>
 			</div>
 
-			<!-- <div class="row">
-				<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
-					<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
-						[alt]="sd.servicio.nombre+' imagen'">
-				</div>
-				<div class="form-check-label" *ngIf="!sd.servicio.id_imagen">
-					<img class="image_logo_movil" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
-				</div>
-			</div> -->
-			<!-- <div class="row">
-				<div class="col">
-					
+
+			<div class=" card col-sm-12 col-lg-6">
+				<div class="hidden-mobile">
+					<div class="row">
+						<table class="basica">
+							<thead>
+								<tr>
+									<th>CLIENTE</th>
+									<th>TIPO CLIENTE</th>
+									<th>VENTAS PENDIENTES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="" [(ngModel)]="datosVenta.venta.cliente"
+											(keyup)="buscarCliente($event)" class="form-control"
+											[placeholder]="datosVenta.tipo_precio.nombre">
+										<div *ngIf="search_usuario.length"
+											class="dropdown-menu show w-100 no-selectable-text">
+											<div class="dropdown-item search"><a [routerLink]="'/agregar-paciente'"
+													class="d-block">Agregar
+													Nuevo Usuario</a></div>
+											<div *ngFor="let usuario of search_usuario"
+												(click)="selectUsuario(usuario)">
+												<div class="dropdown-item search">
+													{{usuario.nombre|titlecase}} <i class="text-muted">
+														{{usuario.usuario|uppercase}}</i>
+												</div>
+											</div>
+										</div>
+									</td>
+									<td>
+										<select class="form-control col" name="tipo_precio"
+											[ngModel]="datosVenta.venta.id_tipo_precio"
+											(change)="changeTipoPrecio($event.target.value)">
+											<option *ngFor="let tipo_precio of tipo_precios" [value]="tipo_precio.id"
+												[selected]="datosVenta.venta.id_tipo_precio==tipo_precio.id">
+												{{tipo_precio.nombre |  uppercase}}
+											</option>
+										</select>
+									</td>
+									<td>
+										<select class="form-control col" name="tipo_precio"
+											(change)="cambiarVenta($event.target.value)">
+											<option value="">Seleccionar</option>
+											<option *ngFor="let venta of ventas" [value]="venta.id">{{venta.id}}
+												{{ venta.cliente |  uppercase}}
+											</option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="row">
+						<table class="basica">
+							<thead>
+								<tr>
+
+									<th>CANTIDAD</th>
+									<th></th>
+									<th>SERVICIO</th>
+									<th>PRECIO</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let sd of datosVenta.detalles">
+									<td class="text-center">
+
+										<button class="border icon-quanty increase" (click)="aumentar(sd)"><i
+												class="fa fa-angle-up"></i></button>
+										<div> <input type="text" class="quanty" [(ngModel)]="sd.detalle_venta.cantidad">
+										</div>
+										<button class="border icon-quanty decrease " (click)="disminuir(sd)"><i
+												class="fa fa-angle-down "></i></button>
+
+
+
+
+									</td>
+									<td>
+										<img *ngIf="sd.servicio.id_imagen" class="image_logo"
+											[src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+											[alt]="sd.servicio.nombre+' imagen'">
+										<img *ngIf="!sd.servicio.id_imagen" class="image_logo" src="assets/product.png"
+											[alt]="sd.servicio.nombre+' imagen'">
+									</td>
+									<td class="text-center">
+										<label class="pl-2" for="">
+											{{sd.servicio.nombre | titlecase}}</label> </td>
+									<td class="text-center">{{sd.detalle_venta.precio | currency}} <button type="button"
+											class="btn" (click)="eliminar(sd)"><i
+												class="fa fa-times icon-danger"></i></button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<table class="data">
+							<thead>
+								<tr>
+									<th>TOTAL ARTICULOS</th>
+									<th></th>
+									<th class="text-right">SUBTOTAL</th>
+									<th>{{datosVenta.venta.subtotal| currency}}</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div class="row">
+						<table class="data">
+							<tbody>
+								<tr>
+									<td>
+										IVA
+									</td>
+									<td>{{datosVenta.venta.iva| currency}}</td>
+									<td class="text-right">
+										SALDO PENDIENTE
+									</td>
+									<td>
+										{{datosVenta.venta.pendiente | currency}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<table class="data">
+							<thead>
+								<tr>
+									<th class="text-right">TOTAL</th>
+									<th>{{datosVenta.venta.total | currency }}</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div class="row">
+						<table class="data">
+							<tbody>
+								<tr>
+									<td class="text-right">	<div class="" *ngIf="datosVenta.venta.id">
+										<button type="button" class="btn btn-primary btn-sm" (click)="cancelarVenta()">
+											Cancelar Venta
+										</button>
+									</div></td>
+								
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- <div class="col-md-2">
+						<div>Iva:</div>
+						<div class="font-weight-bold"></div>
+					</div>
+			
+					<div class="col-md-2">
+						<div>Total:</div>
+						<div class="font-weight-bold">{{datosVenta.venta.total | currency }}</div>
+					</div>
+					<div class="col-md-2">
+						<div>Pendiente:</div>
+						<div class="font-weight-bold">{{datosVenta.venta.pendiente | currency}}</div>
+					</div> -->
+					<!-- <div class="form-row" *ngFor="let sd of datosVenta.detalles">
+						<div class="image_logo col-3 " *ngIf="sd.servicio.id_imagen">
+							<img class="image_logo" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+								[alt]="sd.servicio.nombre+' imagen'">
+						</div>
+						<div class=" col-3 " *ngIf="!sd.servicio.id_imagen">
+							<img class="image_logo" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
+						</div>
+						<label class="col-3 "></label>
+						<label class="col-1 text-center ">{{sd.detalle_venta.cantidad}}</label>
+						<label class="col-2 text-center "></label>
+						<div class="col-3 text-right">
+							<div class="btn-group" role="group">
+								
+							</div>
+						</div>
+					</div> -->
+
+
 				</div>
 
-			</div> -->
+				<!-- vista en dispositivos moviles -->
+				<div class="mt-2 pt-2 hidden-desktop">
+					<div class="row " *ngFor="let sd of datosVenta.detalles">
+						<div class="container p-2 border">
+							<div class="center">
+								<div class="aling-center  image_logo_movil form-check-label"
+									*ngIf="sd.servicio.id_imagen">
+									<img class="image_logo_movil"
+										[src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+										[alt]="sd.servicio.nombre+' imagen'">
+								</div>
+								<div class="form-check-label" *ngIf="!sd.servicio.id_imagen">
+									<img class="image_logo_movil" src="assets/product.png"
+										[alt]="sd.servicio.nombre+' imagen'">
+								</div>
+							</div>
+							<div>Servicio: {{sd.servicio.nombre | titlecase}}</div>
+							<div>Cantidad: {{sd.detalle_venta.cantidad}}</div>
+							<div>Precio: {{sd.detalle_venta.precio | currency}}</div>
+							<div>Acciones:
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-primary border font-weight-bold"
+										(click)="disminuir(sd)">-</button>
+									<button type="button" class="btn btn-primary border font-weight-bold"
+										(click)="aumentar(sd)">+</button>
+									<button type="button" class="btn btn-primary border font-weight-bold"
+										(click)="eliminar(sd)">x</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div class="row">
+						<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
+							<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
+								[alt]="sd.servicio.nombre+' imagen'">
+						</div>
+						<div class="form-check-label" *ngIf="!sd.servicio.id_imagen">
+							<img class="image_logo_movil" src="assets/product.png" [alt]="sd.servicio.nombre+' imagen'">
+						</div>
+					</div> -->
+						<!-- <div class="row">
+						<div class="col">
+							
+						</div>
+		
+					</div> -->
 
 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-venta">
+		<div class="row p-0">
+			<div class="p-0 col-lg-7 w-100">
+				<button class="btn btn-warning btn-lg w-100">
+					<strong style="font-size:2.2rem;">TOTAL: {{datosVenta.venta.total | currency }} </strong>
+				</button>
+			</div>
+			<div class="p-0 col-lg-5 w-100">
+
+
+				<button class="btn btn-primary h-100 btn-lg  w-100" (click)="guardarVenta()"
+					[disabled]="show_creando_venta">Pagar</button>
+
+				<!-- <div class="col p-0">
+						<button type="button" class="btn btn-danger btn-lg  w-100" >Abonar</button>
+					</div> -->
+
+			</div>
 		</div>
 	</div>
 
 </div>
 
-<footer class="card w-100">
+
+
+
+<!-- anterior pago  -->
+<!-- <footer class="card w-100">
 	<div class="m-auto text-center" *ngIf="procesando_pago">
 		<div class="spinner-border text-success" role="status">
 			<span class="sr-only">Loading...</span>
@@ -176,7 +404,7 @@
 				[disabled]="show_creando_venta">Pagar</button>
 		</div>
 	</div>
-</footer>
+</footer> -->
 
 
 <app-modal [(show)]="show_modal_pago">

@@ -40,23 +40,24 @@ th{
 	border-width: 0;
 	line-height: 1.5;
   padding: 2px;
-	color: #898989;
+	/* color: #898989; */
 }
 table.basica {
     border-width: 0;
     font-size: 13px;
 
     overflow-x: auto;
-    	font-family: 'lato-light', 'arial', sans-serif;
+    	/* font-family: 'lato-light', 'arial', sans-serif; */
 	width: 100%;
-	color: #000000;
+	/* color: #000000; */
 	background-color: white;
   border: 2px white solid;
 }
 
 .basica thead tr{
   background-color: #3684C1;
-  font-family: 'lato-thin', 'arial', sans-serif;
+  font-size: 10px;
+  /* font-family: 'lato-thin', 'arial', sans-serif; */
   color: white;
 }
 .table-color{

@@ -204,7 +204,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 		let x = this.rest.usuario.search({
 			eq: { tipo: 'PACIENTE' }
-			, lk: { nombre: evt.target.value, usuario: evt.target.value },
+			, lk: { nombre: evt.target.value, usuario: evt.target.value },limite:8
 		}).subscribe((response) => {
 			this.is_loading = false;
 			this.search_usuario = response.datos;
@@ -264,7 +264,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 	buscar(evt: any) {
 		this.search_loading = true;
 		let x = this.rest.servicio.search({
-			lk: { nombre: evt.target.value },
+			lk: { nombre: evt.target.value },limite:10
 			// eq:{tipo:'PRODUCTO_FISICO'}
 		}).subscribe((response) => {
 			this.search_loading = false;

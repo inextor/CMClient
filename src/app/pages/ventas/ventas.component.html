@@ -42,8 +42,7 @@
 				<div class="form-group col-md-3">
 					<label>Atendio:</label>
 					<select [(ngModel)]="venta_search.eq.id_usuario_atendio" class="form-control">
-						<option [value]="venta_search.eq.id_usuario_atendio" selected="selected">Seleccione un vendedor
-						</option>
+						<option [value]="null" selected="selected">Seleccione un vendedor</option>
 						<option *ngFor="let usuario of usuarios_atendio" [value]="usuario.id">
 							{{usuario.nombre|titlecase}}</option>
 					</select>
@@ -51,7 +50,7 @@
 				<div class="form-group col-md-3">
 					<label>Centro Medico:</label>
 					<select name="centro_medico" [(ngModel)]="venta_search.eq.id_centro_medico" class="form-control">
-						<option [value]="venta_search.eq.id_centro_medico" selected="selected">Seleccione un centro
+						<option [value]="null" selected="selected">Seleccione un centro
 							medico</option>
 						<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
 							{{centro_medico.nombre|titlecase}}</option>
@@ -64,7 +63,7 @@
 				<div class="form-group col-md-3">
 					<label>Estatus</label>
 					<select name="estatus" class="form-control" [(ngModel)]="venta_search.eq.estatus">
-						<option [value]="venta_search.eq.estatus" selected="selected"> Seleccione el estado de la venta
+						<option [value]="null" selected="selected"> Seleccione el estado de la venta
 						</option>
 						<option value="PAGADA">PAGADA</option>
 						<option value="PENDIENTE">PENDIENTE</option>
@@ -83,29 +82,24 @@
 			<table class="basica">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>Cliente</th>
-						<th>Estado</th>
-						<!-- <th>Subtotal</th>
-						<th>Iva</th> -->
-						<th>Total</th>
-						<th>Pendiente</th>
-						<th>Fecha</th>
-						<th>Ventas</th>
+						<th>ID</th>
+						<th>FECHA</th>
+						<th>CLIENTE</th>
+						<th>TOTAL</th>
+						<th>PENDIENTE</th>
+						<th>ESTADO</th>
+						<th>VENTAS</th>
 
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let venta of ventas">
 						<td class="text-center"><a [routerLink]="['/ticket-venta',venta.id]">{{venta.id}}</a></td>
+						<td class="text-center">{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</td>
 						<td class="text-left">{{venta.cliente}}</td>
-						<!--td class="text-center">{{venta.id_usuario_cliente}}</td-->
-						<td>{{venta.estatus}}</td>
-						<!-- <td class="text-right">{{venta.subtotal ? (venta.subtotal|currency):'N/A'}}</td>
-						<td class="text-right">{{venta.iva ? (venta.iva | currency):'N/A'}}</td> -->
 						<td class="text-right">{{venta.total ? (venta.total| currency):'N/A'}}</td>
 						<td class="text-right">{{venta.pendiente ? (venta.pendiente| currency):'N/A'}}</td>
-						<td class="text-center">{{venta.tiempo_creacion | date:'dd/MM/yyyy, h:mm a' }}</td>
+						<td>{{venta.estatus}}</td>
 						<td class="text-center"><button [routerLink]="['/punto-venta',venta.id]" class="btn btn-primary">Proceder al pago</button></td>
 
 					</tr>

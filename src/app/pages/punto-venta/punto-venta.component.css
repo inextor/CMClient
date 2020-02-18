@@ -14,8 +14,8 @@
 }
 
 .image_logo{
-	width: 100px;
-	height: 100px;
+	width: 60px;
+	height: 60px;
 }
 .image_logo_movil{
 	width: 60px;
@@ -26,6 +26,164 @@
 	  
 }
 
+.icon-danger{
+	color: rgb(231, 78, 78);
+}
+.quanty{
+	text-align: center;
+	width: 35px;
+}
+.icon-quanty{
+	color: white;
+	height: 25px;
+	width: 50px;
+}
+.increase{
+background-color: #a5d6a7;
+}
+.decrease{
+background-color: #ef9a9a;
+}
+.footer-venta {
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	width:100%;
+  }
+/* tabla */
+
+table.basica
+{
+	width: 100%;
+}
+table.basica th
+{
+	text-align: center;
+}
+
+table.basica,.basica td,.basica th{
+	/* border-collapse: collapse;
+    border-color: #edf2f6;
+    border-style: solid; */
+    font-size: 1.2em;
+}
+
+th{
+  color:white;
+}
+
+.basica th
+{
+    text-align: center;
+}
+
+.basica td, .basica th {
+	border-width: 0;
+	line-height: 1.5;
+
+	/* color: #898989; */
+}
+table.basica {
+    border-width: 0;
+    font-size: 13px;
+
+    overflow-x: auto;
+    	/* font-family: 'lato-light', 'arial', sans-serif; */
+	width: 100%;
+	/* color: #000000; */
+	background-color: white;
+
+}
+
+.basica thead tr{
+  background-color: #3684C1;
+  font-size: 10px;
+  /* font-family: 'lato-thin', 'arial', sans-serif; */
+  color: white;
+}
+.table-color{
+  background-color: #3684C1;
+  color: white;
+}
+.basica thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.basica thead th
+{
+  color: white;
+
+  height: 35px;
+  line-height: 35px;
+}
+
+.basica tr:nth-child(odd) td
+{
+  background-color: #e8f5e9;
+  border-bottom: 1px solid #dfdfdf;
+}
+.basica tr:nth-child(even) td
+{
+	background-color: #e8f5e9;
+	border-bottom: 1px solid #dfdfdf;
+
+}
+
+
+table.data{
+	width: 100%;
+}
+
+.data thead tr{
+	background-color: grey;
+	font-size: 10px;
+	/* font-family: 'lato-thin', 'arial', sans-serif; */
+	color: white;
+  }
+
+  table.tittle{
+	width: 100%;
+}
+table.tittle,.tittle td,.tittle th{
+	/* border-collapse: collapse;
+    border-color: #edf2f6;
+    border-style: solid; */
+    font-size: 1.2em;
+}
+.tittle th{
+	padding-left: 10px;
+}
+
+.tittle td, .tittle th {
+	border-width: 0;
+
+	/* color: #898989; */
+}
+  .tittle thead tr{
+background-color: #eeeeee ;
+	font-size: 10px;
+	/* font-family: 'lato-thin', 'arial', sans-serif; */
+
+  }
+  .tittle thead th
+{
+	color: #616161 ;
+
+  height: 35px;
+  line-height: 35px;
+}
+.tittle tr:nth-child(odd) td
+{
+  background-color: #e8f5e9;
+  border-bottom: 1px solid #dfdfdf;
+}
+.tittle tr:nth-child(even) td
+{
+	background-color: #e8f5e9;
+	border-bottom: 1px solid #dfdfdf;
+
+}
 
 
 @media only screen and (max-width: 700px) {

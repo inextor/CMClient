@@ -74,8 +74,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 				editable: false,
 				header: {
 					left: 'title',
-					center: 'timeGridDay,timeGridWeek,dayGridMonth',
-					right: 'prev,today,next anterior,siguiente',
+					center: 'timeGridDay,dayGridMonth',
+					right: 'prev,next anterior,siguiente',
 				},
 				footer: true,
 				allDaySlot: false,
