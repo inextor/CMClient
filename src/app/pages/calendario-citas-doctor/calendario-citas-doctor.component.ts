@@ -46,6 +46,16 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	};
 	show_modal: boolean = false;
 	counterId: number = 0;
+
+
+	slotLabelFormat ={
+	
+		hour: 'numeric',
+		minute: '2-digit',
+		omitZeroMinute: false,
+		meridiem: 'short'
+	  }
+
 	buttons = {
 		today: 'hoy',
 		month: 'mes',
@@ -262,6 +272,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 					, classNames: ['evento_normal', cita.cita.estatus]
 					, title: cita.paciente.nombre
 					, editable: false
+					,slotLabelFormat:this.slotLabelFormat
 					, start: cita.cita.inicio
 					, textColor: 'white'
 					, end: cita.cita.fin === null ? hora : cita.cita.fin
@@ -347,6 +358,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 						, classNames: ['evento_normal', cita.cita.estatus]
 						, title: cita.paciente.nombre + ' ' + cita.paciente.apellidos
 						, editable: false
+						,slotLabelFormat:this.slotLabelFormat
 						, start: cita.cita.inicio
 						, textColor: 'white'
 						, end: cita.cita.fin == null ? hora : cita.cita.fin

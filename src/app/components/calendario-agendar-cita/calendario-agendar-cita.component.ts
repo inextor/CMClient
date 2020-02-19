@@ -34,9 +34,26 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 
 	events:SimpleMap = {};
-
+	usuario;
 	show_modal:boolean	= false;
 	counterId:number = 0;
+	buttons = {
+		today: 'hoy',
+		month: 'mes',
+		week: 'semana',
+		day: 'dia',
+	}
+
+	slotLabelFormat ={
+	
+			hour: 'numeric',
+			minute: '2-digit',
+			omitZeroMinute: false,
+			meridiem: 'short'
+		  }
+	  
+
+	titleFormat;
 	calendarOptions= {
 			editable: false,
 
@@ -46,7 +63,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 				right: 'prev,today,next anterior,siguiente',
 			},
 			footer: true,
-			allDaySlot: false,
+
 			eventLimit: true,
 			height: 'auto',
 			defaultView: "timeGridWeek"
@@ -66,8 +83,68 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	ngOnInit()
 	{
-
+		this.usuario = this.rest.getUsuarioSesion();
 		this.counterId = 0;
+		if (this.usuario && this.usuario.tipo == 'PACIENTE') {
+			if (window.innerWidth <= 700) {
+				this.calendarOptions = {
+					editable: false,
+					header: {
+						left: 'title',
+						center: 'timeGridDay,timeGridWeek',
+						right: 'prev,next',
+					},
+					footer: true,
+
+					eventLimit: true,
+					height: 'auto',
+					defaultView: "timeGridWeek"
+				};
+				this.buttons = {
+					today: 'hoy',
+					month: 'mes',
+					week: 'sem',
+					day: 'dia',
+				};
+
+				this.titleFormat = {
+					month: 'short', day: 'numeric'
+				};
+			} else {
+
+				this.titleFormat = {
+					year: 'numeric', month: 'long', day: 'numeric'
+
+				}
+			}
+
+		}else{
+			if (window.innerWidth <= 700) {
+				this.calendarOptions = {
+					editable: false,
+					header: {
+						left: 'title',
+						center: 'timeGridDay,timeGridWeek',
+						right: 'prev,next',
+					},
+					footer: true,
+
+					eventLimit: true,
+					height: 'auto',
+					defaultView: "timeGridWeek"
+				};
+				this.buttons = {
+					today: 'hoy',
+					month: 'mes',
+					week: 'sem',
+					day: 'dia',
+				};
+
+				this.titleFormat = {
+					month: 'short', day: 'numeric'
+				};
+			}
+		}
 
 	}
 
@@ -199,7 +276,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					,classNames: ['evento_normal']
 					,title: 'Reservado'
 					,textColor: 'white'
-
+					,slotLabelFormat:this.slotLabelFormat
 					,editable: false
 					,start: cita.inicio
 					,end: cita.fin == null ? hora : cita.fin
