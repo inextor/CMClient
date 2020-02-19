@@ -38,10 +38,10 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	show_modal:boolean	= false;
 	counterId:number = 0;
 	buttons = {
-		today: 'hoy',
-		month: 'mes',
-		week: 'semana',
-		day: 'dia',
+		today: 'Hoy',
+		month: 'Mes',
+		week: 'Semana',
+		day: 'Día',
 	}
 
 	slotLabelFormat ={

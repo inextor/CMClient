@@ -195,13 +195,13 @@ export class CitasComponent extends BaseComponent implements OnInit {
 	}
 
 	confirmarPaciente(infoCita: SearchCitaResponse) {
-		this.is_loading = true;
 		this.rest.cita.update({
 			id: infoCita.cita.id
 			, confirmado_por_paciente: 'SI'
 		}).subscribe((cita) => {
 			this.is_loading = false;
 			this.showConfirmPaciente = false;
+			this.ngOnInit()
 			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.cita.id);
 			if (index >= 0)
 				this.info_citas[index].cita = cita;

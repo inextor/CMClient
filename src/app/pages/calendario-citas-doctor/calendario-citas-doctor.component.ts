@@ -57,10 +57,10 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	  }
 
 	buttons = {
-		today: 'hoy',
-		month: 'mes',
-		week: 'semana',
-		day: 'dia',
+		today: 'Hoy',
+		month: 'Mes',
+		week: 'Semana',
+		day: 'Día',
 		list: 'lista'
 	}
 

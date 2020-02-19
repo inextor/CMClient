@@ -8,7 +8,7 @@
 					<label>Clinica:</label>
 					<select (change)="showEspecialidad()" name="centro_medico"
 						[(ngModel)]="doctor_search.eq.id_centro_medico" class="form-control custom-select">
-						<option value="" selected="selected">Seleccione</option>
+						<option [value]="null" selected hidden>Seleccione</option>
 						<option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
 							{{centro_medico.nombre|titlecase}}</option>
 					</select>
@@ -17,7 +17,7 @@
 					<label>Especialidad:</label>
 					<select (change)="search()" name="especialidad" [(ngModel)]="doctor_search.eq.id_especialidad"
 						class="form-control custom-select">
-						<!-- <option value="" selected="selected">Seleccione</option> -->
+						<option [value]="null" selected hidden>Seleccione</option>
 						<option *ngFor="let especialidad of especialidades" [value]="especialidad.id">
 							{{especialidad.nombre|titlecase}}</option>
 					</select>

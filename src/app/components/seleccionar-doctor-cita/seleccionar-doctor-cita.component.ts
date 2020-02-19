@@ -38,7 +38,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 	last:string = '';
 	show_especialidad:boolean = false;
 	buscado:boolean = false;
-
+	
 	ngOnInit()
 	{
 		console.log('asdfasdffamiliaer',this.id_paciente);
@@ -46,7 +46,7 @@ export class SeleccionarDoctorCitaComponent extends BaseComponent implements OnI
 		this.route.queryParams.subscribe( params =>
 		{
 			this.doctor_search = {
-				eq: {},
+				eq: {id_centro_medico:null,id_especialidad:null},
 				gt: {},
 				ge: {},
 				le: {},
