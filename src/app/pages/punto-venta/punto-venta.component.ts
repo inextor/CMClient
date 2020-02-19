@@ -83,7 +83,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 	procesando_pago: boolean = false;
 	show_creando_venta: boolean = false;
 	feria = 0;
-	search_venta:SearchObject<Venta>;
+	search_venta: SearchObject<Venta>;
 	infoPago: InfoPago = {
 		total_venta: 0
 		, iva: 0
@@ -204,7 +204,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 		let x = this.rest.usuario.search({
 			eq: { tipo: 'PACIENTE' }
-			, lk: { nombre: evt.target.value, usuario: evt.target.value },limite:8
+			, lk: { nombre: evt.target.value, usuario: evt.target.value }, limite: 8
 		}).subscribe((response) => {
 			this.is_loading = false;
 			this.search_usuario = response.datos;
@@ -264,7 +264,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 	buscar(evt: any) {
 		this.search_loading = true;
 		let x = this.rest.servicio.search({
-			lk: { nombre: evt.target.value },limite:10
+			lk: { nombre: evt.target.value }, limite: 10
 			// eq:{tipo:'PRODUCTO_FISICO'}
 		}).subscribe((response) => {
 			this.search_loading = false;
@@ -275,14 +275,22 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 	guardarVenta() {
 		this.is_loading = true;
-		this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
+		console.log("guardando venta",this.datosVenta);
+		if (this.datosVenta.venta.estatus == "PROCESADA") {
 			this.is_loading = false;
-			this.datosVenta = datosVenta;
+			this.calcularTotalVenta();
 			this.calcularCantidades();
 			this.show_modal_pago = true;
-		}, (error) => {
-			this.showError(error);
-		});
+		} else {
+			this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
+				this.is_loading = false;
+				this.datosVenta = datosVenta;
+				this.calcularCantidades();
+				this.show_modal_pago = true;
+			}, (error) => {
+				this.showError(error);
+			});
+		}
 	}
 
 	cancelarVenta() {
@@ -482,6 +490,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.datosVenta.venta.iva = iva;
 
 		let pagos_hechos = this.datosVenta.pagos.reduce((a, b) => { return a + b.total }, 0);
+		console.log("infoPAgo",this.datosVenta.pagos);
 		//this.datosVenta.venta.total = total;
 		//this.datosVenta.venta.subtotal
 
@@ -493,11 +502,12 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.infoPago.total_pagado = pagos_hechos;
 		this.infoPago.total_a_pagar = total - pagos_hechos;
 		this.infoPago.cambio = 0;
+		console.log("infoPAgo",this.infoPago);
 		this.calcularCantidades();
 	}
 
 	calcularCantidades() {
-
+		
 		this.pago.total = this.infoPago.total_a_pagar;
 		this.pago.subtotal = this.infoPago.subtotal;
 		this.pago.iva = this.infoPago.iva;
@@ -511,6 +521,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			+ this.pago.deposito;
 
 		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
+		console.log("calcularCantidades",this.pago);
 	}
 
 	getNewVenta(tipo_precios): DatosVenta {
