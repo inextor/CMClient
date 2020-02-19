@@ -395,14 +395,14 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			+ (pago.dolares * pago.tipo_cambio_dolares)
 			+ pago.tarjeta
 			+ pago.cheque
-			+ pago.deposito - pago.total) > 0 ?
+			+ pago.deposito - this.infoPago.total_a_pagar) > 0 ?
 			(
 				(0 + pago.efectivo
 					+ (pago.dolares * pago.tipo_cambio_dolares)
 					+ pago.tarjeta
 					+ pago.cheque
 					+ pago.deposito
-					- pago.total)
+					- this.infoPago.total_a_pagar)
 			)
 			: 0);
 
@@ -413,12 +413,8 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 	pagarVenta() {
 		this.pago.id_venta = this.datosVenta.venta.id;
-		// let estadoVenta;
-		// if(this.pago >= this.datosVenta.venta.total){
-		// 	estadoVenta= 'PROCESADA'
-		// }else{
-		// 	estadoVenta=''
-		// }
+
+		this.calcularCantidades();
 		this.rest.pago.create(this.pago).subscribe((response) => {
 			this.is_loading = false;
 			this.datosVenta.venta.estatus = 'PROCESADA';
@@ -478,8 +474,8 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			i.detalle_venta.subtotal = i.detalle_venta.total / (1 + (centro_medico.iva * 0.01));
 			i.detalle_venta.iva = i.detalle_venta.total - i.detalle_venta.subtotal;
 
-			total += i.detalle_venta.total;
-			subtotal += i.detalle_venta.subtotal;
+			total 		+= i.detalle_venta.total;
+			subtotal	+= i.detalle_venta.subtotal;
 			iva += i.detalle_venta.iva;
 		}
 
@@ -506,12 +502,12 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.calcularCantidades();
 	}
 
-	calcularCantidades() {
-		
-		this.pago.total = this.infoPago.total_a_pagar;
-		this.pago.subtotal = this.infoPago.subtotal;
-		this.pago.iva = this.infoPago.iva;
-
+	calcularCantidades()
+	{
+		this.pago.total		= this.infoPago.total_a_pagar;
+		this.pago.total_a_pagar = this.infoPago.total_a_pagar;
+		this.pago.subtotal	= this.infoPago.subtotal;
+		this.pago.iva		= this.infoPago.iva;
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
 
 		this.infoPago.total_cantidades = this.pago.efectivo
@@ -520,7 +516,12 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			+ this.pago.cheque
 			+ this.pago.deposito;
 
-		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.pago.total : 0;
+		this.pago.total = this.infoPago.total_cantidades;
+
+		if( this.pago.total > this.pago.total_a_pagar )
+			this.pago.total = this.pago.total_a_pagar;
+
+		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.infoPago.total : 0;
 		console.log("calcularCantidades",this.pago);
 	}
 

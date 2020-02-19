@@ -6,7 +6,7 @@
 
 
 
-<!-- 
+<!--
 					{{datosVenta.venta.factura_rfc}}
 					<app-loading *ngIf="is_loading"></app-loading> -->
 
@@ -97,7 +97,7 @@
 
 				</div>
 				<div class="row">
-				
+
 				</div>
 			</div>
 
@@ -250,7 +250,7 @@
 											Cancelar Venta
 										</button>
 									</div></td>
-								
+
 								</tr>
 							</tbody>
 						</table>
@@ -260,7 +260,7 @@
 						<div>Iva:</div>
 						<div class="font-weight-bold"></div>
 					</div>
-			
+
 					<div class="col-md-2">
 						<div>Total:</div>
 						<div class="font-weight-bold">{{datosVenta.venta.total | currency }}</div>
@@ -282,7 +282,7 @@
 						<label class="col-2 text-center "></label>
 						<div class="col-3 text-right">
 							<div class="btn-group" role="group">
-								
+
 							</div>
 						</div>
 					</div> -->
@@ -332,9 +332,9 @@
 					</div> -->
 						<!-- <div class="row">
 						<div class="col">
-							
+
 						</div>
-		
+
 					</div> -->
 
 
@@ -449,11 +449,11 @@
 
 			<div class="row">
 				<label class="col-8">Total:</label>
-				<label class="col-4 text-right">{{pago.total | currency }}</label>
+				<label class="col-4 text-right">{{infoPago.total_a_pagar | currency }}</label>
 			</div>
 			<div class="row">
 				<label class="col-8">Total en Dlls:</label>
-				<label class="col-4 text-right">{{pago.total/pago.tipo_cambio_dolares | currency }}</label>
+				<label class="col-4 text-right">{{infoPago.total_a_pagar/pago.tipo_cambio_dolares | currency }}</label>
 			</div>
 			<div class="row">
 				<label class="col-10">Cantidad a Pagar:</label>
