@@ -6,6 +6,15 @@
     border: solid 1px white;
 
 }
+.colorCitaPendiente{
+color: #ff8a80; 
+border: solid 2px #f75a4c;
+}
+.colorCitaActiva{
+    color: #b9f6ca; 
+    border: solid 2px #62f58c;
+}
+
 .customColor1{
     background-color:   #2BBBAD;
 }

@@ -1,4 +1,3 @@
-
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
 	<div class=" list-group-flush">
@@ -61,7 +60,7 @@
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/reportes']" class="list-group-item list-group-item-action color1 ">Reportes </a>
 				</div>
-				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a [routerLink]="['/notificaciones']" class="list-group-item list-group-item-action color1 ">Notificacion </a>
 				</div>
 			</div>
@@ -109,7 +108,6 @@
 
 <app-modal [show]="show_logout">
 	<!--button type="button" *ngIf="idOrganizacion" (click)="dismissModal()">Cerrar</button -->
-
 			<div class="modal-content text-center ">
 				<div class="modal-header">
 					<h4 class="modal-title">Logout <i class="fa fa-lock ml-3"></i></h4>

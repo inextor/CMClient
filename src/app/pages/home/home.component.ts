@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario, Servicio, Especialidad, Centro_Medico, sucursal_doctor } from '../../models/Modelos';
+import { Usuario, Servicio, Especialidad, Centro_Medico, Sucursal_Doctor } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { HeaderComponent } from "../../components/header/header.component";

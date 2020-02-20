@@ -146,6 +146,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 		this.search_loading = true;
 		let x = this.rest.servicio.search({
 			lk:{ nombre: evt.target.value },
+			limite:8
 			// eq:{tipo:'PRODUCTO_FISICO'}
 		}).subscribe((response)=>
 		{
@@ -157,6 +158,7 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 
 	agregarServicio(servicio:Servicio)
 	{
+		if(this.datosVenta && this.datosVenta.venta.estatus !== 'PAGADA'){
 		let detalle_servicio = this.datosVenta.detalles.find(i=>i.servicio.id == servicio.id );
 
 		if( detalle_servicio )
@@ -242,6 +244,10 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 		{
 			console.log('Solo imprimimos el error en la consola');
 		});
+	}else{
+		this.showError('No puedes agregar otro servicio.')
+	}
+
 	}
 
 	focusBusqueda()

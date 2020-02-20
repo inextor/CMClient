@@ -5,19 +5,25 @@
 	</div> 
 </div> -->
 
-<div class="dropdown" *ngIf="datosVenta && infoPago.total_pagado < datosVenta.venta.total ">
-	<div class=" mb-3 row" >
-		<div class="col-10">
-			<h5 class="mb-3">*Nuevo Servicio</h5>
-			<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda" class="form-control"
-				placeholder="Buscar...">
+<div class="dropdown">
+	<div class=" mb-2 row">
+		<div class="col-12">
+			<h5 class="mb-2">*Nuevo Servicio</h5>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+				</div>
+				<input type="text" (keyup)="buscar($event)" id="busqueda" [(ngModel)]="busqueda" class="form-control"
+					placeholder="Buscar...">
+			</div>
 		</div>
-		<div class="col-2" *ngIf="search_loading">
+		<!-- <div class="col-2" *ngIf="search_loading">
 			<div class="spinner-border text-primary" role="status">
 				<span class="sr-only">Loading...</span>
 			</div>
-		</div>
+		</div> -->
 	</div>
+
 	<div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100 no-selectable-text">
 		<div *ngFor="let servicio of search_servicios;let i=index" (click)="agregarServicio(servicio)">
 			<!--div *ngIf="i>0" class="dropdown-divider"></div -->
@@ -28,30 +34,29 @@
 	</div>
 </div>
 
-<div *ngIf="datosVenta" class="p-0 mt-3 hidden-mobile">
-	<ul class="list-group">
-		<li class="list-group-item" *ngFor="let sd of datosVenta.detalles">
-			<div class="row">
-				<label class="col-4 form-check-label">{{sd.servicio.nombre | titlecase}}</label>
-				<label class="col-2 text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
-				<label class="col-2"> {{sd.detalle_venta.precio| currency}}</label>
-				<div class="col-4 text-right">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="disminuir(sd)">-</button>
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="aumentar(sd)">+</button>
-						<button type="button" class="btn btn-primary border font-weight-bold"
-							(click)="eliminar(sd)">x</button>
+<div *ngIf="datosVenta" class=" border mt-2 hidden-mobile">
+
+
+			<div class="row p-1" *ngFor="let sd of datosVenta.detalles">
+				
+				<label class="col-5  form-check-label">{{sd.servicio.nombre | titlecase}}</label>
+				<label class="col-1  text-center form-check-label">{{sd.detalle_venta.cantidad}}</label>
+				<label class="col-3  text-center"> {{sd.detalle_venta.precio| currency}}</label>
+				<div class="col-3  text-right" *ngIf="datosVenta.venta.estatus !=='PAGADA' ">
+					<div class="btn-group " role="group">
+						<button type="button" class="btn btn-primary border font-weight-bold" (click)="disminuir(sd)"><i
+								class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-primary border font-weight-bold" (click)="aumentar(sd)"><i
+								class="fa fa-plus"></i></button>
+						<button type="button" class="btn btn-primary border font-weight-bold" (click)="eliminar(sd)"><i
+								class="fa fa-times"></i></button>
 					</div>
 				</div>
 			</div>
-		</li>
-	</ul>
+
 </div>
 
 <!-- vista en dispositivos moviles -->
-
 <div class=" hidden-desktop" *ngIf="datosVenta">
 	<div class="list-group-item p-1" *ngFor="let sd of datosVenta.detalles">
 		<div class="">
@@ -69,45 +74,35 @@
 			<div>Precio: {{sd.detalle_venta.precio | currency}}</div>
 			<div *ngIf="infoPago.total_a_pagar != 0">Acciones:
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-primary border font-weight-bold"
-						(click)="disminuir(sd)">-</button>
-					<button type="button" class="btn btn-primary border font-weight-bold"
-						(click)="aumentar(sd)">+</button>
-					<button type="button" class="btn btn-primary border font-weight-bold"
-						(click)="eliminar(sd)">x</button>
+					<button type="button" class="btn btn-primary border font-weight-bold" (click)="disminuir(sd)"><i
+							class="fa fa-minus"></i></button>
+					<button type="button" class="btn btn-primary border font-weight-bold" (click)="aumentar(sd)"><i
+							class="fa fa-plus"></i></button>
+					<button type="button" class="btn btn-primary border font-weight-bold" (click)="eliminar(sd)"><i
+							class="fa fa-times"></i></button>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 
-
-<div class="row p-2" *ngIf="datosVenta && infoPago.total_a_pagar != 0">
+<div class="row p-2" *ngIf="datosVenta.venta.estatus !=='PAGADA' ">
 	<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
 		<div>Subtotal:</div>
 		<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
 	</div>
-
 	<div *ngIf="datosVenta && datosVenta.venta" class="col-md-3">
 		<div>Iva:</div>
 		<div class="font-weight-bold">{{datosVenta.venta.iva| currency}}</div>
 	</div>
-
 	<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
-
-		<strong style="font-size:3rem;">{{infoPago.total_a_pagar | currency}}</strong>
+		<strong style="font-size:2.5rem;">{{infoPago.total_a_pagar | currency}}</strong>
 	</div>
-	<!-- <div >
-		{{datosVenta.venta.total | currency}} 
-		{{infoPago.total_a_pagar | currency}}
-	</div> -->
 </div>
-<div class="row p-2" *ngIf="datosVenta && infoPago.total_pagado >= datosVenta.venta.total && infoPago.total_pagado != 0 ">
-	<div *ngIf="datosVenta && datosVenta.venta" class=" col-md-6 text-right">
 
+<div class="row p-2"
+	*ngIf="datosVenta && datosVenta.venta.estatus == 'PAGADA'">
+	<div *ngIf="datosVenta && datosVenta.venta" class="col-md-12 text-right">
 		<strong style="font-size:3rem;">PAGADO</strong>
-
 	</div>
-
 </div>

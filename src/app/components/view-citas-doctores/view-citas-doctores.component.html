@@ -1,6 +1,5 @@
 <div class="card p-4">
 	<div>
-
 		<div class="form-row text-center headerColor">
 			<div class="col borderColor text-center p-2">
 				Doctor
@@ -9,18 +8,20 @@
 			<div class="col borderColor p-2" *ngFor="let t of titleDates">{{t}}</div>
 		</div>
 		<div *ngFor="let dinfo of doctores_info, let i = index">
-			<div [ngStyle]="{'background-color': dinfo.doctor.custom_color}" class="form-row fontColor"
+			<div [ngStyle]="{'background-color': dinfo.doctor.color_calendario}" class="form-row fontColor"
 				*ngFor="let interval of dinfo.intervals, let j = index ">
 				<div *ngIf="j!=0" class="col BorderColor"></div>
 				<div *ngIf="j==0" class="col ">{{dinfo.doctor.nombre}} </div>
 				<div class="col-sm-1 borderColor">{{interval.start | date: 'HH:mm a' }}</div>
-				<button [ngStyle]="{'background-color': dinfo.doctor.custom_color}"
+				<button [ngStyle]="{'background-color': dinfo.doctor.color_calendario}"
 					*ngFor="let dates of interval.dates; index as k" class="col borderColor">
 					<div (click)="dateClick(interval,dinfo.doctor,k)" *ngIf="dates==''">
-						<div [ngStyle]="{'color': dinfo.doctor.custom_color}">new</div>
+						<div [ngStyle]="{'color': dinfo.doctor.color_calendario}">
+							<p>.</p>
+						</div>
 					</div>
 					<div *ngFor="let cita of dates">
-						<div [ngStyle]="{'background-color': cita.cita.estatus === 'ACTIVA' && cita.cita.confirmado_por_doctor === 'SI'
+						<div  [ngStyle]="{'background-color': cita.cita.estatus === 'ACTIVA' && cita.cita.confirmado_por_doctor === 'SI'
 						&& cita.cita.confirmado_por_paciente==='SI' ? '#b9f6ca' : '#ff8a80','color':'black'}"
 							(click)="optionPaciente(interval,dinfo.doctor,k,cita)" *ngIf="cita.paciente.nombre">
 							<p class="nowrap">{{cita.paciente.nombre}} {{cita.paciente.apellidos}} </p>
@@ -29,7 +30,6 @@
 				</button>
 			</div>
 		</div>
-
 	</div>
 </div>
 
@@ -55,20 +55,19 @@
 			</button>
 			<!-- confirmado por paciente -->
 			<button class=" btn btn-light m-1 p-0 border"
-			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente=='SI'"
-								data-toggle="tooltip" title="Confirmado por paciente">
-								<span>
-									<i class="">
-										<img src="./assets/icon/options/confirmado-paciente.png" height="43px"
-											width="43px" class="menuIcons icons" />
-									</i>
-								</span>
-							</button>
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente=='SI'" data-toggle="tooltip"
+				title="Confirmado por paciente">
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmado-paciente.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
 			<!-- confirmar paciente -->
-			<button class=" btn btn-light m-1 p-0 border" 
-			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente!='SI'"
-			(click)="showConfirmPaciente=true;" data-toggle="tooltip"
-				title="Confirmar paciente">
+			<button class=" btn btn-light m-1 p-0 border"
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente!='SI'"
+				(click)="showConfirmPaciente=true;" data-toggle="tooltip" title="Confirmar paciente">
 				<span>
 					<i class="">
 						<img src="./assets/icon/options/confirmar-paciente.png" height="43px" width="43px"
@@ -78,21 +77,19 @@
 			</button>
 			<!-- confirmado por doctor  -->
 			<button class=" btn btn-light p-0 m-1 border "
-			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor=='SI'"
-							 data-toggle="tooltip"
-								title="Confirmado por doctor">
-								<span>
-									<i class="">
-										<img src="./assets/icon/options/confirmado-doctor.png" height="43px"
-											width="43px" class="menuIcons icons" />
-									</i>
-								</span>
-							</button>
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor=='SI'" data-toggle="tooltip"
+				title="Confirmado por doctor">
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmado-doctor.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
 			<!-- confirmar doctor -->
-			<button class=" btn btn-light p-0 m-1 border " 
-			*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
-			(click)="showConfirmDoctor=true" data-toggle="tooltip"
-				title="Confirmar doctor">
+			<button class=" btn btn-light p-0 m-1 border "
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
+				(click)="showConfirmDoctor=true" data-toggle="tooltip" title="Confirmar doctor">
 
 				<span>
 					<i class="">
@@ -102,8 +99,9 @@
 				</span>
 			</button>
 			<!-- cancelar -->
-			<button class="btn btn-light p-1 m-1 border " *ngIf="currentInfoCita && currentInfoCita.cita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true" data-toggle="tooltip"
-				title="Cancelar cita">
+			<button class="btn btn-light p-1 m-1 border "
+				*ngIf="currentInfoCita && currentInfoCita.cita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true"
+				data-toggle="tooltip" title="Cancelar cita">
 
 				<span>
 					<i class="">
@@ -114,8 +112,9 @@
 			</button>
 
 			<!-- activar -->
-			<button class="btn btn-light p-1 m-1 border" *ngIf="currentInfoCita && currentInfoCita.cita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true" data-toggle="tooltip"
-				title="Activar cita">
+			<button class="btn btn-light p-1 m-1 border"
+				*ngIf="currentInfoCita && currentInfoCita.cita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true"
+				data-toggle="tooltip" title="Activar cita">
 				<span>
 					<i class="">
 						<i class="">

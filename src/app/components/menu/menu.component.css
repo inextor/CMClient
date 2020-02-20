@@ -10,6 +10,11 @@ body {
   font-size: 12px;
 }
 
+a{
+  font-size: 1.1em !important;
+  font-family: 'lato-bold', 'arial', sans-serif;
+}
+
 #sidebar-wrapper {
 
   margin-left: -15rem;

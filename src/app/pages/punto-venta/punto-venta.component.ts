@@ -21,8 +21,6 @@ interface OldSearch {
 	[key: string]: Servicio[];
 }
 
-
-
 interface Info_Precio {
 	[key: number]: Precio_Servicio[];
 }
@@ -150,7 +148,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 					let response_precios = response[0];
 					this.datosVenta = response[1];
 				}
-
+				console.log("datosBenta", this.datosVenta);
 				this.ventas = response[2].datos;
 				this.calcularTotalVenta();
 				this.is_loading = false;
@@ -275,28 +273,33 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 	guardarVenta() {
 		this.is_loading = true;
-		console.log("guardando venta",this.datosVenta);
+		console.log("guardando venta", this.datosVenta);
 		if (this.datosVenta.venta.estatus == "PROCESADA") {
 			this.is_loading = false;
 			this.calcularTotalVenta();
 			this.calcularCantidades();
 			this.show_modal_pago = true;
 		} else {
-			this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
-				this.is_loading = false;
-				this.datosVenta = datosVenta;
-				this.calcularCantidades();
-				this.show_modal_pago = true;
-			}, (error) => {
-				this.showError(error);
-			});
+			if (this.datosVenta.venta.estatus !== 'PAGADA') {
+
+				this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
+					this.is_loading = false;
+					this.datosVenta = datosVenta;
+					this.calcularCantidades();
+					this.show_modal_pago = true;
+				}, (error) => {
+					this.showError(error);
+				});
+			}else{
+				this.showError('Error, la Venta ya fue liquidada')
+			}
 		}
 	}
 
 	cancelarVenta() {
 		this.is_loading = true;
 		if (this.infoPago.total_pagado > 0) {
-			this.showError('cita con saldo pendiente');
+			this.showError('Error, la venta ya fue procesada');
 		} else {
 			this.rest.venta.update({ id: this.datosVenta.venta.id, activa: 'NO' }).subscribe((venta) => {
 				this.is_loading = false;
@@ -415,6 +418,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.pago.id_venta = this.datosVenta.venta.id;
 
 		this.calcularCantidades();
+		this.calcularCambio(this.pago);
 		this.rest.pago.create(this.pago).subscribe((response) => {
 			this.is_loading = false;
 			this.datosVenta.venta.estatus = 'PROCESADA';
@@ -474,8 +478,8 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			i.detalle_venta.subtotal = i.detalle_venta.total / (1 + (centro_medico.iva * 0.01));
 			i.detalle_venta.iva = i.detalle_venta.total - i.detalle_venta.subtotal;
 
-			total 		+= i.detalle_venta.total;
-			subtotal	+= i.detalle_venta.subtotal;
+			total += i.detalle_venta.total;
+			subtotal += i.detalle_venta.subtotal;
 			iva += i.detalle_venta.iva;
 		}
 
@@ -486,10 +490,9 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.datosVenta.venta.iva = iva;
 
 		let pagos_hechos = this.datosVenta.pagos.reduce((a, b) => { return a + b.total }, 0);
-		console.log("infoPAgo",this.datosVenta.pagos);
+		console.log("infoPAgo", this.datosVenta.pagos);
 		//this.datosVenta.venta.total = total;
 		//this.datosVenta.venta.subtotal
-
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
 
 		this.infoPago.iva = iva;
@@ -498,16 +501,15 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.infoPago.total_pagado = pagos_hechos;
 		this.infoPago.total_a_pagar = total - pagos_hechos;
 		this.infoPago.cambio = 0;
-		console.log("infoPAgo",this.infoPago);
+		console.log("infoPAgo", this.infoPago);
 		this.calcularCantidades();
 	}
 
-	calcularCantidades()
-	{
-		this.pago.total		= this.infoPago.total_a_pagar;
+	calcularCantidades() {
+		this.pago.total = this.infoPago.total_a_pagar;
 		this.pago.total_a_pagar = this.infoPago.total_a_pagar;
-		this.pago.subtotal	= this.infoPago.subtotal;
-		this.pago.iva		= this.infoPago.iva;
+		this.pago.subtotal = this.infoPago.subtotal;
+		this.pago.iva = this.infoPago.iva;
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
 
 		this.infoPago.total_cantidades = this.pago.efectivo
@@ -518,11 +520,11 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 		this.pago.total = this.infoPago.total_cantidades;
 
-		if( this.pago.total > this.pago.total_a_pagar )
+		if (this.pago.total > this.pago.total_a_pagar)
 			this.pago.total = this.pago.total_a_pagar;
 
-		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.infoPago.total : 0;
-		console.log("calcularCantidades",this.pago);
+		this.pago.cambio = this.infoPago.total_cantidades - this.pago.total > 0 ? this.infoPago.total_cantidades - this.infoPago.total_a_pagar : 0;
+		console.log("calcularCantidades", this.pago);
 	}
 
 	getNewVenta(tipo_precios): DatosVenta {

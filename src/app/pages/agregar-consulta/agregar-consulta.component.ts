@@ -83,7 +83,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 						console.log(date, now);
 						console.log("inicio consulta", this.consulta.inicio_consulta);
 						this.porcentaje = diferencia / defaultTime + '%';
-						this.tiempo_transcurrido = (((now.getTime() - date.getTime())/1000)/60);
+						this.tiempo_transcurrido = (((now.getTime() - date.getTime()) / 1000) / 60);
 
 					}
 
@@ -205,23 +205,29 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	guardar() {
 		this.is_loading = true;
-
 		let observable = this.rest.guardarDatosVenta(this.datosVenta).pipe(
 			flatMap((datosVenta) => {
 				this.consulta.id_venta = datosVenta.venta.id;
 				this.datosVenta = datosVenta;
 				return this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
 			})
-			,flatMap((consulta)=>
-			{
+			, flatMap((consulta) => {
 				this.consulta = consulta;
-				return of( consulta );
+				return of(consulta);
 			})
 		);
-
 		return observable;
 	}
 
+	procederPago() {
+		if (this.datosVenta.venta.estatus == 'PENDIENTE') {
+			this.guardar().subscribe((response) => {
+				this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
+			}, (error) => this.showError(error));
+		} else {
+			this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
+		}
+	}
 
 	buscar(evt: any) {
 		let x = this.rest.servicio.search({
@@ -246,13 +252,11 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			this.consulta.inicio_consulta = str;
 		}
 
-		this.guardar().subscribe((consulta)=>
-		{
-			this.is_loading =false;
+		this.guardar().subscribe((consulta) => {
+			this.is_loading = false;
 			this.loadConsultaData(consulta);
-		},(error)=>this.showError(error));
+		}, (error) => this.showError(error));
 	}
-
 	pauseTimer() {
 
 		if (this.consulta.fin_consulta == null) {
@@ -264,10 +268,9 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		clearInterval(this.interval)
 
 		this.is_loading = true;
-		this.guardar().subscribe((response)=>
-		{
-			this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
-		},(error)=>this.showError(error));
+		this.guardar().subscribe((response) => {
+			this.is_loading = false;
+		}, (error) => this.showError(error));
 	}
 	actualizarTimer() {
 
@@ -281,8 +284,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			console.log("inicio consulta", this.consulta.inicio_consulta);
 			this.porcentaje = (diferencia / defaultTime).toFixed(2) + '%';
 			console.log("entro actualizar porcentaje", this.porcentaje);
-			this.tiempo_transcurrido = Math.floor(((now.getTime() - date.getTime())/1000)/60);
-			this.tiempo_transcurrido_segundos = (((now.getTime() - date.getTime())/1000).toFixed(0));
+			this.tiempo_transcurrido = Math.floor(((now.getTime() - date.getTime()) / 1000) / 60);
+			this.tiempo_transcurrido_segundos = (((now.getTime() - date.getTime()) / 1000).toFixed(0));
 		}
 	}
 }

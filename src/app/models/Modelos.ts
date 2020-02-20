@@ -447,7 +447,6 @@ export interface Organizacion{
 	nombre?:string;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
-
 }
 
 export interface Paciente{
@@ -466,7 +465,6 @@ export interface Paciente{
 	telefono_tutor?:string;
 	correo_electronico_tutor?:string;
 	domicilio?:string;
-
 }
 
 export interface Pago{

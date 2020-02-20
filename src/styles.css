@@ -11,6 +11,11 @@ i{
   font-family: 'lato-light', 'arial', sans-serif;
 }
 
+button{
+  font-size: 1em !important;
+  font-family: 'lato-bold', 'arial', sans-serif;
+ }
+
 table.basica
 {
 	width: 100%;
@@ -271,9 +276,7 @@ body
 	button[type="button"]{
 		display: none;
   }
-  .button{
-    border-radius: 4px;
-  }
+
 	.card
 	{
 		border: 0;
