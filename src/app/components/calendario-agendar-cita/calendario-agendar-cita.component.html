@@ -1,5 +1,6 @@
 <div class="card p-3">
-	<full-calendar #calendar 
+	<full-calendar 
+	#calendar 
 		[header]="calendarOptions.header"  
 		[plugins]="calendarPlugins" 
 		defaultView="timeGridWeek"
@@ -12,7 +13,8 @@
 		minTime="07:00:00" 
 		maxTime="20:00:00" 
 		deepChangeDetection="true"
-		(dateClick)="dateClick($event)">
+		(dateClick)="dateClick($event)"
+		(eventClick)="eventClicked($event)">
 	</full-calendar>
 </div>
 

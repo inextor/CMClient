@@ -11,16 +11,16 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
 	@Input() pagina: string;
+	@Input() clinica;
 	showCentros =false;
 	usuario: Usuario=null
 	nombre:string=null
-	clinica;
 	isNavbarCollapsed=false;
 	ngOnInit()
 	{ 
 		
 		let usuario = this.rest.getUsuarioSesion();
-		this.clinica= this.rest.getCurrentCentroMedico();
+		this.clinica = this.rest.getCurrentCentroMedico();
 		if( usuario )
 		{
 			this.nombre=usuario.nombre;

@@ -360,6 +360,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 						, editable: false
 						,slotLabelFormat:this.slotLabelFormat
 						, start: cita.cita.inicio
+						,borderColor: '#9e9e9e'
+						,backgroundColor: cita.cita.confirmado_por_doctor == 'SI' && cita.cita.confirmado_por_paciente =='SI' ? '#1e88e5':'#e53935'
 						, textColor: 'white'
 						, end: cita.cita.fin == null ? hora : cita.cita.fin
 					};
@@ -381,18 +383,20 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	eventClicked(evt) {
 		if (this.usuario.tipo == 'DOCTOR') {
 
-
 			if (evt.event.rendering == 'background')
 				return;
 
 			for (let cita of this.citas) {
 				if (cita.id == evt.event.id) {
-					if (cita.estatus == 'CANCELADA') {
-						this.showError('La cita ya esta cancelada');
+					if (cita.estatus !== 'CANCELADA' && cita.confirmado_por_doctor=='SI' && cita.confirmado_por_paciente =='SI') {
+						this.router.navigate(['agregar-consulta-cita', evt.event.id]);
+						return;
+
+					}else{
+						this.showError('la cita debe confirmarse por doctor y paciente');
 						return;
 					}
-					this.router.navigate(['agregar-consulta-cita', evt.event.id]);
-					return;
+					
 				}
 			}
 

@@ -18,7 +18,7 @@ import { forkJoin } from 'rxjs';
 export class HomeComponent extends BaseComponent implements OnInit {
 
 	show_seleccionar_centro_medico: boolean = false;
-
+	clinica;
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
@@ -70,6 +70,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
 	onSeleccionarCentroMedico(centro_medico: Centro_Medico) {
 		localStorage.setItem("centro_medico", JSON.stringify(centro_medico));
+		this.clinica= this.rest.getCurrentCentroMedico();
 		this.show_seleccionar_centro_medico = false;
 	}
 }

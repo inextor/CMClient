@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SearchObject } from 'src/app/models/Respuestas';
+import { WindowScrollController } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-seleccionar-centro-medico',

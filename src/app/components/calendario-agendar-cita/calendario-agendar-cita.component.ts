@@ -32,7 +32,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
 	@ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
 
-
+	disponible: boolean = false;
 	events:SimpleMap = {};
 	usuario;
 	show_modal:boolean	= false;
@@ -59,7 +59,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 			header: {
 				left: 'title',
-				center: 'timeGridDay,timeGridWeek,dayGridMonth',
+				center: 'timeGridDay,timeGridWeek',
 				right: 'prev,today,next anterior,siguiente',
 			},
 			footer: true,
@@ -248,7 +248,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 					id:i.id
 					,rendering		: 'background'
 					,classNames		: ['disponibilidad']
-					,title			: 'ffffff'
+					,title			: 'disponible'
 					,editable		: false
 					,start			: i.start
 					,end			: i.end
@@ -400,33 +400,43 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	dateClick(evt)
 	{
-		this.cita_fecha = evt.date;
+		// console.log("Click on ", evt.date );
+		console.log( 'asdfasdagsdgasdgasgas',evt );
+		// si el evento seleccionado es disponible se puede crear la cita 
+		if( this.disponible == true){
+			this.cita_fecha = evt.date;
+			let dateNow = new Date();
+			// si la fecha de la cita es anterior a la del dia de hoy manda un error
+			if( evt.date < dateNow )
+			{
+				this.rest.showError({ mensaje: 'No se pueden agregar citas con fecha en el pasado', tipo:'alert-danger'});
+				return;
+			}
+			const calendarAPI = this.calendarComponent.getApi();
 
-
-		let dateNow = new Date();
-
-		if( evt.date < dateNow )
-		{
-			this.rest.showError({ mensaje: 'No se pueden agregar citas con fecha en el pasado', tipo:'alert-danger'});
-			return;
+			let fecha = this.rest.getMysqlStringFromLocaDate( evt.date );
+			this.cita.inicio = fecha.substring(0,20);
+	
+			console.log('Fecha inicio', this.cita.inicio );
+			//volvemos a poner el flag  disponible en false, por si se cancela la creacion de la cita
+			this.disponible = false;
+			this.show_modal = true;
+		}else{
+			this.rest.showError({ mensaje: 'Fecha no disponible para citas', tipo:'alert-danger'});
+				return;
 		}
-
-		console.log("Click on ", evt.date );
-		console.log( evt );
-		const calendarAPI = this.calendarComponent.getApi();
-
-		//calendarAPI.addEvent({
-		//	title: 'Cita'
-		//	,id:'nueva_cita'
-		//	,start: evt.date
-		//	,editable: true
-		//},'nueva_cita');
-		//
-
-		let fecha = this.rest.getMysqlStringFromLocaDate( evt.date );
-		this.cita.inicio = fecha.substring(0,20);
-
-		console.log('Fecha inicio', this.cita.inicio );
-		this.show_modal = true;
+		return false;
 	}
+	
+	eventClicked(evt) {
+		//Indica si se selecciono un evento con titulo disponible para validar el horario disponible
+		console.log( 'evento',evt );
+			if( evt.event.title == 'disponible' )
+			{
+				// si el evento es disponible pone el flag disponible en true
+				this.disponible = true;
+			}
+			
+	}
+
 }

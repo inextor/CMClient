@@ -314,6 +314,9 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		x.focus();
 	}
 	agregarServicio(servicio: Servicio) {
+
+		if(this.datosVenta.venta.estatus !== 'PAGADA'){
+
 		let detalle_servicio = this.datosVenta.detalles.find(i => i.servicio.id == servicio.id);
 
 		if (detalle_servicio) {
@@ -391,6 +394,9 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			}, (error) => {
 				console.log('Solo imprimimos el error en la consola');
 			});
+		}else{
+			this.showError('Error, venta ya procesada')
+		}
 	}
 
 	calcularCambio(pago): number {
