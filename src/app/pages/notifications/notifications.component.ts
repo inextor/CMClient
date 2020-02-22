@@ -24,7 +24,7 @@ import {
 })
 export class NotificationsComponent implements OnInit {
 
-  private title: string = 'Push Notifications!';
+   title: string = 'Push Notifications!';
 
   constructor(private _notificationService: PushNotificationsService) {
 

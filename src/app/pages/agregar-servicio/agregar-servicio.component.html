@@ -141,7 +141,7 @@
 				<div class="p-2 col-6">
 					<div *ngFor="let tipo_precio of tipo_precios">
 						<div> {{tipo_precio.nombre}}
-							<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j"
+							<input placeholder="$" type="number" class="form-control" name="i+'-'+j"
 								[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
 							<span
 								*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio"

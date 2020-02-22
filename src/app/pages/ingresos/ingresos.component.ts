@@ -24,6 +24,18 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 	{
 		super( rest,router,route,location,titleService);
 	}
+
+	clearBusqueda(){
+		this.ingreso_search = {
+			eq: {},
+			gt: {},
+			ge: {},
+			le: {},
+			lt: {},
+			lk: {},
+			csv: {},
+		};
+	}
 	ngOnInit() {
 
 		this.route.queryParams.subscribe( params =>
