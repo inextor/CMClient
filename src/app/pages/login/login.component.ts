@@ -27,18 +27,19 @@ export class LoginComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		this.centro_medico = this.rest.getCurrentCentroMedico()
 		this.route.params.subscribe(params => {
 			if (this.rest.getUsuarioSesion() != null) {
 				this.router.navigate(['/dashboard'])
 			}
-
 		})
 	}
 
 	usuario: string = '';
 	contrasena: string = '';
 	is_loading: boolean = false;
-
+	centro_medico;
 	doLoginKeyboard(evt: KeyboardEvent) {
 		if (evt.keyCode == 13)
 			this.doLogin();
@@ -46,11 +47,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
 	doLogin() {
 		this.is_loading = true;
-
 		this.rest.doLogin(this.usuario, this.contrasena).subscribe(
 			response => {
 				this.is_loading = false;
-				this.router.navigate(['/dashboard']);
+					this.router.navigate(['/seleccionar-centro-medico']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
 			}, error => this.showError(error));
 	}

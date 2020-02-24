@@ -66,10 +66,13 @@ import { AgendarCitaPacienteComponent}	from './pages/agendar-cita-paciente/agend
 import { ReportesComponent}	from './pages/reportes/reportes.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
+import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
+
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
+	{  path: "seleccionar-centro-medico", component: SeleccionarCentroMedicoHomeComponent, pathMatch: "full" },
 	{
 		path: '', component: HomeComponent,
 		children:

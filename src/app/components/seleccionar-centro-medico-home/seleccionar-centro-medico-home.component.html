@@ -1,11 +1,1 @@
-<div class="custom-modal">
-	<div class="container">
-		<div class="list" *ngFor="let centro_medico of centros">
-			<div class="form-group" (click)="seleccionarCentro(centro_medico)">
-				<label>
-					<h2>{{centro_medico.nombre}}</h2>
-				</label>
-			</div>
-		</div>
-	</div>
-</div>
+<app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" (selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>

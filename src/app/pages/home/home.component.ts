@@ -34,7 +34,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 				this.rest.sucursal_doctor.getAll({ id_doctor: usuario.id })
 			]).subscribe((response) => {
 				this.centros_medicos_doctor = response[0].datos
-		
+				console.log('los centros medicos del doctor',this.centros_medicos_doctor)
 				if (this.centros_medicos_doctor.length > 1) {
 					let centroMedico = this.rest.getCurrentCentroMedico();
 
