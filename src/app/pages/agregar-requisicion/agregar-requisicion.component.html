@@ -85,18 +85,18 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let sd of detalles_requisicion">
-                            <th>
+                            <td>
                                 <label>{{servicios_by_id[ sd.detalle_requisicion.id_servicio ].nombre | titlecase}}</label>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <input type="number" [(ngModel)]="sd.detalle_requisicion.cantidad" step="1" min=0>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <input type="number" [(ngModel)]="sd.detalle_requisicion.costo" step="1" min=0>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <button class="btn btn-secondary btn-sm">x</button>
-                            </th>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

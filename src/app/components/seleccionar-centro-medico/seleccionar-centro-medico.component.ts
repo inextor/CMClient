@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { Subject,Observable,of } from 'rxjs';
 import { RestService } from '../../services/rest.service';
-import { Centro_Medico } from '../../models/Modelos';
+import { Centro_Medico, Sucursal_Doctor } from '../../models/Modelos';
 import {map,distinctUntilChanged,mergeMap,delay} from 'rxjs/operators';
 import {debounceTime} from 'rxjs/operators';
 import { BaseComponent } from 'src/app/pages/base/base.component';
@@ -25,7 +25,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 
 	centros:Centro_Medico[] = [];
 	last:string = '';
-	centros_search:SearchObject<Centro_Medico>;
+	centros_search:SearchObject<Sucursal_Doctor>;
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
 		super( rest,router,route,location,titleService);
@@ -40,7 +40,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 			{
 				console.log("params",params);
 				this.centros_search = {
-					eq: {id_organizacion: usuario.id_organizacion},
+					eq: {id_doctor: usuario.id},
 					gt: {},
 					ge: {},
 					le: {},
@@ -55,7 +55,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 				this.centros_search.pagina			= 'pagina' in params ? parseInt( params.pagina ):0;
 				// this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 				this.is_loading = true;
-				this.rest.centro_medico.search(this.centros_search).subscribe((respuesta) =>
+				this.rest.sucursal_doctor.search(this.centros_search).subscribe((respuesta) =>
 				{
 					this.centros = respuesta.datos;
 					this.setPages( this.centros_search.pagina, respuesta.total );
@@ -81,7 +81,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 		
 		let usuario = this.rest.getUsuarioSesion();
 		this.centros_search = {
-			eq: {id_organizacion: usuario.id_organizacion},
+			eq: {id_doctor: usuario.id},
 			gt: {},
 			ge: {},
 			le: {},
@@ -93,7 +93,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 		// this.especialidad_search.lk.codigo	= "lk.codigo" in params ?params["lk.codigo"]:null;
 		this.is_loading = true;
 		this.centros_search.limite			= this.pageSize;
-		this.rest.centro_medico.search(this.centros_search).subscribe((respuesta)=>
+		this.rest.sucursal_doctor.search(this.centros_search).subscribe((respuesta)=>
 		{
 			this.centros = respuesta.datos;
 			this.setPages( this.centros_search.pagina, respuesta.total );

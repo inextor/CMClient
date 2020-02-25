@@ -623,6 +623,7 @@ export interface Sesion{
 
 export interface Sucursal_Doctor{
 	id?:number;
+	nombre?:string;
 	id_doctor?:number;
 	id_centro_medico?:number;
 	tiempo_creacion?:Date;
