@@ -45,7 +45,6 @@
         <div class=" card p-0 mb-2" *ngIf="busquedaAvanzada">
             <div class="form-row p-2">
 
-
                 <div class="form-group col-md-3">
                     <label>No. pedimento</label>
                     <input placeholder="No. de pedimento" type="text" class="form-control" [(ngModel)]="requisiciones_search.lk.pedimento">
@@ -96,12 +95,12 @@
                 <thead>
                     <tr>
                         <th>Orden</th>
-                        <th>No. Pedimento</th>
-                        <th>Total</th>
+                        <th>Estado</th>
                         <th>Proveedor</th>
                         <th>Fecha Creacion</th>
                         <th>Fecha Entrega</th>
-                        <th>Estado</th>
+                        <th>No. Pedimento</th>
+                        <th>Total</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -111,16 +110,14 @@
                     </tr>
                     <tr *ngFor="let requisicion of requisiciones">
                         <td class="text-center">{{requisicion.id}}</td>
-
-                        <td>{{requisicion.pedimento}}</td>
-                        <td class="text-center">{{requisicion.total}}</td>
+                        <td>{{requisicion.estatus}}</td>
                         <td>{{proveedor_dic[ requisicion.id_proveedor ].nombre}}</td>
                         <td class="text-center">{{requisicion.tiempo_creacion| date: 'short' }}</td>
                         <td class="text-center">
                             {{requisicion.tiempo_entrega ? (requisicion.tiempo_entrega| date: 'short'):'N/A' }}</td>
                         <!-- <td class="text-center" *ngIf="requisicion.tiempo_entrega==null">------------</td> -->
-                        <td>{{requisicion.estatus}}</td>
-
+                        <td>{{requisicion.pedimento}}</td>
+                        <td>{{requisicion.total}}</td>
                         <td class="p-0 options">
                             <!-- <button class="btn btn-light p-0 m-1 border" title="editar"
                                 [routerLink]="['/editar-requisicion',requisicion.id]">
@@ -135,7 +132,7 @@
                                 [routerLink]="['/agregar-distribucion','requisicion',requisicion.id]">
                                 <span class="">
                                     <i class="">
-                                        Distribucion
+                                        Ordenar
                                         <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                             class="menuIcons icons" /> -->
                                     </i>

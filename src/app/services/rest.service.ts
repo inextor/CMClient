@@ -200,7 +200,7 @@ export class RestService {
 		this.consulta						= new ObjRest<Consulta>							(`${this.urlBase}/consulta.php`,http);
 		this.ingreso						= new ObjRest<Ingreso>							(`${this.urlBase}/ingreso.php`,http);
 		this.requisicion					= new ObjRest<Requisicion>						(`${this.urlBase}/requisicion.php`,http);
-		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo3.php`,http);
+		this.requisicionInfo				= new ObjRest<RequisicionInfo>					(`${this.urlBase}/requisicionInfo.php`,http);
 		this.doctor_servicio				= new ObjRest<Doctor_Servicio>					(`${this.urlBase}/servicio_doctor.php`,http);
 		this.distribucionInfo				= new SearchRest<Distribucion,DistribucionInfo>	(`${this.urlBase}/distribucionInfo.php`,http);
 		this.citaInfo						= new SearchRest<Cita,CitaInfo>(`${this.urlBase}/citaInfo.php`,http);

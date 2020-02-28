@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Router, ActivatedRoute } from "@angular/router"
-import { Proveedor, Requisicion,	Servicio, Detalle_Venta , Detalle_Requisicion } from '../../models/Modelos';
+import { Router, ActivatedRoute } from "@angular/router";
+import { Proveedor, Requisicion,	Servicio, Detalle_Venta , Detalle_Requisicion, Centro_Medico } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
@@ -13,8 +13,6 @@ interface OldSearch {
 	[key: string]: Servicio[];
 }
 
-
-
 interface ServicioById {
 	[key:number]:Servicio;
 };
@@ -25,7 +23,7 @@ interface ServicioById {
 	styleUrls: ['./agregar-requisicion.component.css']
 })
 export class AgregarRequisicionComponent extends BaseComponent implements OnInit {
-
+	distribuidor:boolean = false;
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
@@ -34,10 +32,16 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	busqueda: string				= '';
 	todos_servicios: []				= [];
 	proveedores: Proveedor[]		= [];
+	sucursales:Centro_Medico[]=[];
+	list_detalles: Detalle_Requisicion={
+		id_servicio:null,
+		cantidad: null
+	}
 	requisicion: Requisicion		= {};
 	detalles_requisicion:Detalle_Requisicion_Info[] = [];
 	servicios_by_id:ServicioById	= {};
-
+	total=0;
+	 
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
@@ -49,16 +53,21 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 				id_usuario_solicito : usuario.id
 				,id_centro_medico	: centro_medico.id
 				,id_proveedor		: null
+				,flete : 0 
+				,importacion: 0
+				,subtotal: 0 
+				,total: 0
 			}
 
 			forkJoin([
 				this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
+				this.rest.centro_medico.search({eq: { id_organizacion: usuario.id_organizacion }})
 			]).subscribe((respuestas) => {
 				this.proveedores = respuestas[0].datos;
+				this.sucursales = respuestas[1].datos;
 			}, (error) => this.showError(error));
 		});
 	}
-
 
 	buscar(evt: any)
 	{
@@ -71,31 +80,92 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		});
 	}
 
-	agregarServicio(servicio: Servicio)
-	{
+	add(servicio){
 		if( !( servicio.id in this.servicios_by_id ) )
 			this.servicios_by_id[ servicio.id ] = servicio;
+		let total= 0;
 
 		let s = this.detalles_requisicion.find(i => i.servicio.id == servicio.id );
 		if (s) {
 			this.busqueda = '';
 			this.aumentar(s);
+			this.calcularCantidades(total);
 			return;
 		}
-
 		this.detalles_requisicion.push
 		({
 			servicio: servicio
-			,detalle_requisicion:{ id_servicio	: servicio.id, cantidad	: 1}
+			,detalle_requisicion:{id_servicio	: servicio.id, cantidad : 1 ,costo : servicio.precio_referencia }
 		});
-
+		
+		this.calcularCantidades(total);
 		this.busqueda			= '';
 		this.search_servicios	= [];
 	}
 
+	incrementar(servicio){
+		console.log("hola");
+		console.log("servis",servicio);
+		let s = this.detalles_requisicion.find(i => i.servicio.id == servicio.servicio.id );
+		console.log("s",s);
+		if (s) {
+			this.busqueda = '';
+			let total = 0;
+			this.aumentar(s);
+			this.calcularCantidades(total);
+			return;
+		}}
+	// addServicio(servicio,this.list_detalles){
+		
+	// 	this.calcularCantidades(this.detalles_requisicion)
+	// }
+	calcularCantidades(total){
+
+		this.detalles_requisicion.forEach(i => {
+			// total += i.detalle_requisicion.cantidad;
+	
+			total += i.detalle_requisicion.cantidad * i.detalle_requisicion.costo;
+			i.detalle_requisicion.subtotal= total
+
+			console.log("cantidad",i.detalle_requisicion.cantidad);
+			console.log("costo",i.detalle_requisicion.costo);
+			// let temp = i.detalle_requisicion.cantidad;
+			// total = total + temp;
+		});
+		this.requisicion.subtotal = total;
+		this.requisicion.total = total + this.requisicion.flete + this.requisicion.importacion;
+
+	}
+
+	// agregarServicio(servicio: Servicio)
+	// {
+	// 	if( !( servicio.id in this.servicios_by_id ) )
+	// 		this.servicios_by_id[ servicio.id ] = servicio;
+
+	// 	let s = this.detalles_requisicion.find(i => i.servicio.id == servicio.id );
+	// 	if (s) {
+	// 		this.busqueda = '';
+	// 		this.aumentar(s);
+	// 		return;
+	// 	}
+
+	// 	this.detalles_requisicion.push
+	// 	({
+	// 		servicio: servicio
+	// 		,detalle_requisicion:{ id_servicio	: servicio.id, cantidad	: 1}
+	// 	});
+
+	// 	this.busqueda			= '';
+	// 	this.search_servicios	= [];
+	// }
+	
+
+
+
 	aumentar(detalle_requisicion)
 	{
 		detalle_requisicion.cantidad++;
+		detalle_requisicion.costo++;
 	}
 
 	 guardar() {

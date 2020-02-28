@@ -140,6 +140,7 @@ export interface Detalle_Requisicion{
 	id?:number;
 	id_requisicion?:number;
 	id_servicio?:number;
+	estatus?:string;
 	cantidad?:number;
 	precio?:number;
 	subtotal?:number;
@@ -571,12 +572,14 @@ export interface Requisicion{
 	id_usuario_solicito?:number;
 	id_usuario_recibio?:number;
 	id_proveedor?:number;
+	id_centro_medico_distribuidor?:number;
 	nota?:string;
 	flete?:number;
 	importacion?:number;
 	total_articulos?:number;
 	pedimento?:string;
 	estatus?:string;
+	subtotal?:number;
 	total?:number;
 	tiempo_creacion?:Date;
 	tiempo_entrega?:Date;
