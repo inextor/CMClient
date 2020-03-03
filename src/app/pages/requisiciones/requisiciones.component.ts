@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Usuario, Doctor, Centro_Medico, Proveedor, Servicio, Requisicion } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
@@ -18,7 +18,10 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
     super(rest, router, route, location, titleService);
   }
-
+   //modales
+   show: boolean = false;
+   showOrdenarRequisicion: boolean = false;
+   //
   servicios: Servicio[] = [];
   requisiciones_search: SearchObject<Requisicion> = {};
   busqueda: string = '';
@@ -26,7 +29,11 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   requisiciones: Requisicion[] = [];
   proveedores:Proveedor[]=[];
   proveedor_dic:any = {};
+  sucursales:Centro_Medico[]=[];
+  sucursal_dic:any = {};
   busquedaAvanzada:boolean = false;
+  fecha_entrega;
+  id_requisicion =  null;
   clearBusqueda(){
 		this.requisiciones_search = {
 			eq: {},
@@ -67,12 +74,15 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
             //getTiposGastos({id_organizacion: usuario.id_organizacion}),
             //this.rest.getGastos({ id_centro_medico: 1 })
             this.rest.proveedor.getAll({id_organizacion: usuario.id_organizacion}),
-            this.rest.requisicion.search(this.requisiciones_search) //TODO FIX ponerlo de la session o seleccionarlo
+            this.rest.requisicion.search(this.requisiciones_search), //TODO FIX ponerlo de la session o seleccionarlo
+            this.rest.centro_medico.search(this.requisiciones_search)
           ]
         ).subscribe(
           (response) => {
             this.proveedores = response[0].datos;
+            this.sucursales = response[2].datos;
             this.proveedores.forEach(i=>this.proveedor_dic[ i.id ] =  i);
+            this.sucursales.forEach(i=>this.sucursal_dic[ i.id ] =  i);
             console.log('proveedor',this.proveedor_dic);
             this.requisiciones = response[1].datos;//TODO Cambiar al usaurio de la sesion
             this.setPages(this.requisiciones_search.pagina, response[1].total);
@@ -105,4 +115,32 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
 		this.router.navigate(['requisiciones'],{queryParams: search});
 	}
 
+  //ordenar requisiciones
+	
+	ordenarRequisicion(currentRequisicion: Requisicion) {
+    console.log("asdfasdf",this.fecha_entrega);
+		this.rest.requisicion.update({
+			id: currentRequisicion.id
+      , estatus: 'EN_TRANSITO'
+      , tiempo_entrega: this.fecha_entrega
+		}).subscribe((requisicion) => {
+			this.showOrdenarRequisicion = false;
+			let index = this.requisiciones.findIndex(i => i.id == currentRequisicion.id);
+			this.is_loading = false;
+			if (index >= 0)
+				this.requisiciones[index] = requisicion;
+		}
+			, (error) => {
+				this.is_loading = false;
+				this.showOrdenarRequisicion = false;
+				this.showError(error);
+			});
+  }
+  
+  //recibir material requisiciones
+
+  recibirRequisicion(requisicion) {
+    this.id_requisicion = requisicion;
+    this.show = true;
+  }
 }

@@ -7,8 +7,8 @@
                     <h4>REQUISICIONES</h4>
                 </div>
                 <div>
-                    <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-sm btn-primary">Agregar
-                        Requisicion</button>
+                    <button [routerLink]="['/agregar-requisicion']" type="button" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus mr-1"></i>Requisicion</button>
                 </div>
             </div>
         </div>
@@ -47,7 +47,8 @@
 
                 <div class="form-group col-md-3">
                     <label>No. pedimento</label>
-                    <input placeholder="No. de pedimento" type="text" class="form-control" [(ngModel)]="requisiciones_search.lk.pedimento">
+                    <input placeholder="No. de pedimento" type="text" class="form-control"
+                        [(ngModel)]="requisiciones_search.lk.pedimento">
                 </div>
 
                 <div class="form-group col-md-3">
@@ -73,12 +74,11 @@
 
                 <div class="form-group col-md-3">
                     <label>Fecha de creación</label>
-                     <input class="form-control" type="date"
-                        [(ngModel)]="requisiciones_search.ge.tiempo_creacion">
+                    <input class="form-control" type="date" [(ngModel)]="requisiciones_search.ge.tiempo_creacion">
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label>Fecha de entrega</label><input  type="date" class="form-control"
+                    <label>Fecha de entrega</label><input type="date" class="form-control"
                         [(ngModel)]="requisiciones_search.le.tiempo_entrega">
                 </div>
                 <div class="form-group col-md-3">
@@ -89,14 +89,13 @@
             </div>
         </div>
 
-
         <div class="card">
             <table class="basica">
                 <thead>
                     <tr>
                         <th>Orden</th>
                         <th>Estado</th>
-                        <th>Proveedor</th>
+                        <th>Distribuidor</th>
                         <th>Fecha Creacion</th>
                         <th>Fecha Entrega</th>
                         <th>No. Pedimento</th>
@@ -111,13 +110,17 @@
                     <tr *ngFor="let requisicion of requisiciones">
                         <td class="text-center">{{requisicion.id}}</td>
                         <td>{{requisicion.estatus}}</td>
-                        <td>{{proveedor_dic[ requisicion.id_proveedor ].nombre}}</td>
+                        <td>
+                            {{requisicion.id_proveedor ? (proveedor_dic[ requisicion.id_proveedor ].nombre):''}}
+                            {{requisicion.id_centro_medico_distribuidor ? (sucursal_dic[ requisicion.id_centro_medico_distribuidor ].nombre):'' }}
+                        </td>
+                        <!-- <td *ngIf="requisicion.id_centro_medico_distribuidor">{{proveedor_dic[ requisicion.id_proveedor ].nombre}}</td> -->
                         <td class="text-center">{{requisicion.tiempo_creacion| date: 'short' }}</td>
                         <td class="text-center">
                             {{requisicion.tiempo_entrega ? (requisicion.tiempo_entrega| date: 'short'):'N/A' }}</td>
                         <!-- <td class="text-center" *ngIf="requisicion.tiempo_entrega==null">------------</td> -->
                         <td>{{requisicion.pedimento}}</td>
-                        <td>{{requisicion.total}}</td>
+                        <td>{{requisicion.total | currency}}</td>
                         <td class="p-0 options">
                             <!-- <button class="btn btn-light p-0 m-1 border" title="editar"
                                 [routerLink]="['/editar-requisicion',requisicion.id]">
@@ -128,13 +131,26 @@
                                     </i>
                                 </span>
                             </button> -->
-                            <button class="btn btn-light p-0 m-1 border" title="falta boton"
-                                [routerLink]="['/agregar-distribucion','requisicion',requisicion.id]">
+                            <button class="btn btn-light btn-sm border" title="ordenar"
+                                *ngIf="requisicion.estatus == 'PENDIENTE' "
+                                (click)="currentRequisicion=requisicion;showOrdenarRequisicion=true;">
                                 <span class="">
-                                    <i class="">
-                                        Ordenar
+                                    <i class="" style="color:orangered;">
+                                        <i class="fa fa-box-open"></i>
+                                     
                                         <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                             class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+                            <button class="btn btn-light btn-sm border" title="recibir"
+                                *ngIf="requisicion.estatus == 'EN_TRANSITO' "
+                                [routerLink]="['/recibir-requisicion',requisicion.id]" >
+                                <span class="">
+                                    <i class="" style="color:green;">
+                                        <i class="fa fa-truck"></i>
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                        class="menuIcons icons" /> -->
                                     </i>
                                 </span>
                             </button>
@@ -152,3 +168,43 @@
 
     </div>
 </div>
+<!-- recibir requisicion -->
+
+<app-modal [show]="showOrdenarRequisicion">
+    <div *ngIf="currentRequisicion" class="modal-content" class="customModal col-md-12">
+        <div class="p-2">
+            <div>
+                <h5 class="modal-title">Detalle de la requisición No: {{currentRequisicion.id}}</h5>
+            </div>
+            <div>
+                <p class="modal-title">No. pedimento: {{currentRequisicion.pedimento}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
+                <input type="date" class="form-control" name="telefono" [(ngModel)]="fecha_entrega">
+            </div>
+            <div></div>
+            <div></div>
+        </div>
+        <!-- <div class="card m-2" >
+            <div class="card-header">
+                <div>proveedor: {{currentRequisicion.id_proveedor ? (proveedor_dic[ currentRequisicion.id_proveedor ].nombre):''}}  
+                    {{currentRequisicion.id_centro_medico_distribuidor ? (sucursal_dic[ currentRequisicion.id_centro_medico_distribuidor ].nombre):'' }}  
+                </div>
+            </div>
+            <div>
+                <div> </div>
+            </div>
+          </div> -->
+
+        <!-- <div class="modal-body pb-0 ">
+			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+		</div> -->
+        <div class="modal-footer">
+            <a class="btn text-light  btn-secondary" (click)="showOrdenarRequisicion=false">Cancelar</a>
+            <a class="btn text-light  btn-primary" (click)="ordenarRequisicion(currentRequisicion)">Aceptar</a>
+        </div>
+    </div>
+</app-modal>

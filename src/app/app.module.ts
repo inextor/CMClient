@@ -96,6 +96,7 @@ import { ViewCitasDoctoresComponent } from './components/view-citas-doctores/vie
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
+import { RecibirRequisicionComponent } from './pages/recibir-requisicion/recibir-requisicion.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -199,6 +200,7 @@ export function init_app(rest: RestService) {
     ReportesComponent,
     NotificationsComponent,
     PushNotificationsComponent,
+    RecibirRequisicionComponent,
 
 
   ],

@@ -27,6 +27,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
+
 	servicios: Servicio[]			= [];
 	search_servicios: Servicio[]	= [];
 	busqueda: string				= '';
@@ -41,7 +42,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	detalles_requisicion:Detalle_Requisicion_Info[] = [];
 	servicios_by_id:ServicioById	= {};
 	total=0;
-	 
+	
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
@@ -52,6 +53,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			this.requisicion = {
 				id_usuario_solicito : usuario.id
 				,id_centro_medico	: centro_medico.id
+				,id_centro_medico_distribuidor:null
 				,id_proveedor		: null
 				,flete : 0 
 				,importacion: 0
@@ -68,7 +70,21 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			}, (error) => this.showError(error));
 		});
 	}
-
+	
+	clean(){
+		let usuario = this.rest.getUsuarioSesion();
+		let centro_medico = this.rest.getCurrentCentroMedico();
+		this.requisicion = {
+			id_usuario_solicito : usuario.id
+			,id_centro_medico	: centro_medico.id
+			,id_centro_medico_distribuidor:null
+			,id_proveedor		: null
+			,flete : 0 
+			,importacion: 0
+			,subtotal: 0 
+			,total: 0
+		}
+	}
 	buscar(evt: any)
 	{
 		let x = this.rest.servicio.search({
@@ -189,4 +205,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			 }, error => this.showError(error));
 		 }
 	}
+
+
+
 }

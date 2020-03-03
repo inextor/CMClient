@@ -119,6 +119,7 @@ export class RestService {
 	public citaInfo:SearchRest<Cita,CitaInfo>;
 	public horarios_centro_medico:SearchRest<Centro_Medico,HorariosCentroMedico>;
 	public sucursal_doctor:ObjRest<Sucursal_Doctor>;
+	
 
 
 	//End vars
@@ -206,6 +207,8 @@ export class RestService {
 		this.citaInfo						= new SearchRest<Cita,CitaInfo>(`${this.urlBase}/citaInfo.php`,http);
 		this.horarios_centro_medico			= new SearchRest<Centro_Medico,HorariosCentroMedico>(`${this.urlBase}/horarios_centro_medico.php`,http);
 		this.sucursal_doctor				= new ObjRest<Sucursal_Doctor>(`${this.urlBase}/sucursal_doctor.php`,http);
+		this.detalle_requisicion			= new ObjRest<Detalle_Requisicion>(`${this.urlBase}/detalle_requisicion.php`,http);
+	
 	}
 
 	getCurrentCentroMedico():Centro_Medico

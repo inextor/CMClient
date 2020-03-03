@@ -67,6 +67,7 @@ import { ReportesComponent}	from './pages/reportes/reportes.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
 import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
+import { RecibirRequisicionComponent} from './pages/recibir-requisicion/recibir-requisicion.component';
 
 
 const routes: Routes = [
@@ -178,6 +179,7 @@ const routes: Routes = [
 			{ path: "reportes", component:ReportesComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "notificaciones", component:NotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "push-notificaciones", component:PushNotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "recibir-requisicion/:id_requisicion", component:RecibirRequisicionComponent, pathMatch:"full", canActivate:[AuthGuard]},
 		]
 	},
 ];
