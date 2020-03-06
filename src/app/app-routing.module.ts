@@ -159,6 +159,7 @@ const routes: Routes = [
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: "ingresos", component: IngresosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "inventario", component: InventarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			// { path: "inventario/:id_centro_medico", component: InventarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "pacientes", component: PacientesComponent, pathMatch: "full" },
 			{ path: "proveedores", component: ProveedoresComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "punto-venta", component: PuntoVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},

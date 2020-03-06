@@ -136,7 +136,7 @@
                                 (click)="currentRequisicion=requisicion;showOrdenarRequisicion=true;">
                                 <span class="">
                                     <i class="" style="color:orangered;">
-                                        <i class="fa fa-box-open"></i>
+                                        <i class="fa fa-box"></i>
                                      
                                         <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                             class="menuIcons icons" /> -->
@@ -154,6 +154,17 @@
                                     </i>
                                 </span>
                             </button>
+                              <!-- RECIBIDO -->
+                            <button class="btn btn-light btn-sm border" title="recibir"
+                            *ngIf="requisicion.estatus == 'RECIBIDO' ">
+                            <span class="">
+                                <i class="" style="color:green;">
+                                    <i class="fa fa-box-open"></i>
+                                    <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                    class="menuIcons icons" /> -->
+                                </i>
+                            </span>
+                        </button>
                             <!-- <button class="btn btn-sm btn-primary m-1">Editar</button> -->
                         </td>
                     </tr>

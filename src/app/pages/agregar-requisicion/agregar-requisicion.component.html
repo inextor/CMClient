@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-6" *ngIf="distribuidor==true">
                             <label position="stacked">Sucursal<span color="danger">*</span></label>
-                            <select class="form-control" name="foo" [(ngModel)]="requisicion.id_centro_medico_distribuidor">
+                            <select class="form-control" name="foo" (change)="search()" [(ngModel)]="requisicion.id_centro_medico_distribuidor">
                                 <option [value]="null" selected>Seleccione una sucursal</option>
                                 <option *ngFor="let sucursal of sucursales" [value]="sucursal.id">
                                     {{sucursal.nombre}}</option>
@@ -50,7 +50,7 @@
                                 [(ngModel)]="requisicion.tiempo_entrega">
                         </div> -->
                         <div class="col-6">
-                            <label position="stacked" class="mt-2">Costo de flete<span color="danger">*</span></label>
+                            <label position="stacked" class="">Costo de flete<span color="danger">*</span></label>
                             <input placeholder="Costo de flete" min=0 type="number" class="form-control"
                                 name="direccion" [(ngModel)]="requisicion.flete">
                         </div>
@@ -120,8 +120,8 @@
             </div>
         </div>
 
-
-        <div class="card mt-2 ">
+        <!-- proveedor -->
+        <div *ngIf="distribuidor==false" class="card mt-2 ">
             <h5 class="p-2">*AGREGAR PRODUCTOS</h5>
             <div class="form-row p-2">
 
@@ -173,6 +173,61 @@
                 </table>
             </div>
         </div>
+        <!-- sucursal -->
+        <div *ngIf="distribuidor==true" class="card mt-2 ">
+            <h5 class="p-2">*AGREGAR PRODUCTOS</h5>
+            <div class="form-row p-2">
+
+                <div class="form-group col-md-6">
+                    <div class="dropdown">
+                        <div class="">
+                            <label position="stacked">Articulo<span color="danger">*</span></label>
+                            <input type="text" (keyup)="buscarInventariosSucursal($event)" [(ngModel)]="busqueda" class="form-control">
+                        </div>
+                        <div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
+                            <div *ngFor="let servicio of search_servicios;let i=index" (click)="add(servicio)">
+                                <div *ngIf="i>0" class="dropdown-divider"></div>
+                                <div class="dropdown-item">
+                                    {{servicio.nombre}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-1 ">
+                <table class="basica p-1 m-0">
+                    <thead>
+                        <tr>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Costo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sd of detalles_requisicion">
+                            <td>
+                                <label>{{servicios_by_id[ sd.detalle_requisicion.id_servicio ].nombre | titlecase}}</label>
+                            </td>
+                            <td>
+                                <input type="number" (change)="incrementar(sd)"
+                                    [(ngModel)]="sd.detalle_requisicion.cantidad" step="1" min=0>
+                            </td>
+                            <td>
+                                <input type="number" (change)="incrementar(sd)"
+                                    [(ngModel)]="sd.detalle_requisicion.costo" step="1" min=0>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm">x</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
 
     </div>
 </div>

@@ -62,11 +62,12 @@
 							</button>
 
 							<button class="btn btn-light p-0 m-1 border "
-							[routerLink]="['/servicios',centro_medico.id]"
-							data-toggle="tooltip" title="Servicios">
+							[routerLink]="['/inventario']"
+							[queryParams]="{id_centro_medico: centro_medico.id}"
+							data-toggle="tooltip" title="Inventario">
 								<span class="">
 									<i class="">
-										<img src="./assets/icon/options/servicios.png" height="35px" width="35px"
+										<img src="./assets/icon/options/inventario.png" height="35px" width="35px"
 											class="menuIcons icons" />
 									</i>
 								</span>

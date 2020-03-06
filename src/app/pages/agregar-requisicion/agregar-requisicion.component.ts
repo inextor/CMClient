@@ -85,6 +85,19 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			,total: 0
 		}
 	}
+
+	buscarInventariosSucursal(evt: any){
+		let x = this.rest.servicio.search({
+			lk: { nombre: evt.target.value },
+			eq:{tipo:'PRODUCTO_FISICO'}
+		}).subscribe((response) => {
+			this.search_servicios = response.datos;
+			x.unsubscribe();
+		});
+	}
+
+
+	
 	buscar(evt: any)
 	{
 		let x = this.rest.servicio.search({
@@ -174,9 +187,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	// 	this.busqueda			= '';
 	// 	this.search_servicios	= [];
 	// }
-	
-
-
 
 	aumentar(detalle_requisicion)
 	{

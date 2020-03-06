@@ -409,6 +409,7 @@ export interface Inventario{
 	id?:number;
 	id_centro_medico?:number;
 	id_servicio?:number;
+	nombre?:string;
 	cantidad?:number;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;

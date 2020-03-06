@@ -96,6 +96,14 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
     });
   }
 
+  //requisicion sucursal servicios
+
+  serviciosSucursal(){
+    
+  }
+
+
+
   search()
 	{
 		this.is_loading = true;
