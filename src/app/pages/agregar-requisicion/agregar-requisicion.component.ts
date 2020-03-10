@@ -63,10 +63,12 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 
 			forkJoin([
 				this.rest.proveedor.search({ eq: { id_organizacion: usuario.id_organizacion } }),
-				this.rest.centro_medico.search({eq: { id_organizacion: usuario.id_organizacion }})
+				this.rest.centro_medico.search({eq: { id_organizacion: usuario.id_organizacion }}),
+				this.rest.servicio.search({eq: { id_organizacion: usuario.id_organizacion }})
 			]).subscribe((respuestas) => {
 				this.proveedores = respuestas[0].datos;
 				this.sucursales = respuestas[1].datos;
+				this.servicios = respuestas[2].datos;
 			}, (error) => this.showError(error));
 		});
 	}
@@ -84,12 +86,13 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			,subtotal: 0 
 			,total: 0
 		}
+		this.detalles_requisicion.length=0;
 	}
 
 	buscarInventariosSucursal(evt: any){
-		let x = this.rest.servicio.search({
+		let x = this.rest.inventario.search({
 			lk: { nombre: evt.target.value },
-			eq:{tipo:'PRODUCTO_FISICO'}
+			eq:{id_centro_medico: this.requisicion.id_centro_medico_distribuidor?this.requisicion.id_centro_medico_distribuidor:0},
 		}).subscribe((response) => {
 			this.search_servicios = response.datos;
 			x.unsubscribe();
@@ -125,6 +128,32 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		({
 			servicio: servicio
 			,detalle_requisicion:{id_servicio	: servicio.id, cantidad : 1 ,costo : servicio.precio_referencia }
+		});
+		
+		this.calcularCantidades(total);
+		this.busqueda			= '';
+		this.search_servicios	= [];
+	}
+
+	addServicioSucursal(servicio){
+		// if( !( servicio.id in this.servicios_by_id ) )
+		// 	this.servicios_by_id[ servicio.id ] = servicio;
+		let total= 0;
+
+		let s = this.detalles_requisicion.find(i => i.servicio.id == servicio.id_servicio );
+		if (s) {
+			this.busqueda = '';
+			this.aumentar(s);
+			this.calcularCantidades(total);
+			return;
+		}
+		//obteniendo el servicio de la requisicion.
+		let servicioRequisicion = this.servicios.find(i=> i.id == servicio.id_servicio);
+		console.log("el servicio de la requisicion", servicioRequisicion);
+		this.detalles_requisicion.push
+		({
+			servicio: servicioRequisicion
+			,detalle_requisicion:{id_servicio	: servicio.id_servicio, cantidad : 1 ,costo : servicio.precio_referencia }
 		});
 		
 		this.calcularCantidades(total);

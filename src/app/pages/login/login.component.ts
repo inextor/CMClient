@@ -50,7 +50,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 		this.rest.doLogin(this.usuario, this.contrasena).subscribe(
 			response => {
 				this.is_loading = false;
-					this.router.navigate(['/seleccionar-centro-medico']);
+					this.router.navigate(['/seleccionar-centro-medico-home']);
 				//this.restService.callMethodGet('/assets/data.json',{foo:'yes'}).subscribe((response)=>
 			}, error => this.showError(error));
 	}

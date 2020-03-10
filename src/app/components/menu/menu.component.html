@@ -7,6 +7,12 @@
 		</div>
 		<div *ngIf="showCentros">
 			<div>
+				
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a (click)="seleccionar_clinica()"
+						class="list-group-item list-group-item-action color1 ">Seleccionar CM
+					</a>
+				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/especialidades']"
 						class="list-group-item list-group-item-action color1 ">Especialidades
@@ -59,6 +65,9 @@
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
 					<a [routerLink]="['/reportes']" class="list-group-item list-group-item-action color1 ">Reportes </a>
+				</div>
+				<div [appAccess]="['ADMIN','DOCTOR','RECEPCIONISTA']" class="menuSubButtons">
+					<a [routerLink]="['/reporte-inventario']" class="list-group-item list-group-item-action color1 ">Reporte Inv. </a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a [routerLink]="['/notificaciones']" class="list-group-item list-group-item-action color1 ">Notificacion </a>
@@ -122,6 +131,8 @@
 			</div>
 </app-modal>
 
+<app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico" [showCancel]="true"
+	(selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>
 
 <!-- /#sidebar-wrapper -->
 

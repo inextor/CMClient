@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario, Doctor, Centro_Medico, Proveedor, Servicio, Requisicion } from '../../models/Modelos';
+import { Usuario, Doctor, Centro_Medico, Proveedor, Servicio, Requisicion, Detalle_Requisicion } from '../../models/Modelos';
 import { Router, ActivatedRoute } from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from '@angular/common';
@@ -22,6 +22,8 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
    show: boolean = false;
    showOrdenarRequisicion: boolean = false;
    //
+   detalles:Detalle_Requisicion[]=[]
+   servicios_dic:any = {};
   servicios: Servicio[] = [];
   requisiciones_search: SearchObject<Requisicion> = {};
   busqueda: string = '';
@@ -51,7 +53,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
     let usuario = this.rest.getUsuarioSesion();
     this.route.queryParams.subscribe(params => {
       this.requisiciones_search = {
-        eq: {},
+        eq: {id_centro_medico:centro_medico.id},
         gt: {},
         ge: {},
         le: {},
@@ -144,7 +146,33 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
 				this.showError(error);
 			});
   }
-  
+  get_detalles(currentRequisicion){
+    let usuario = this.rest.getUsuarioSesion();
+    forkJoin(
+      [
+        //getTiposGastos({id_organizacion: usuario.id_organizacion}),
+        //this.rest.getGastos({ id_centro_medico: 1 })
+        this.rest.detalle_requisicion.search({eq:{id_requisicion:currentRequisicion.id}}),
+        this.rest.servicio.getAll({}), //TODO FIX ponerlo de la session o seleccionarlo
+      ]
+      ).subscribe(
+      (response) => {
+        this.detalles = response[0].datos;
+        this.servicios = response[1].datos;
+        this.servicios.forEach(i=>this.servicios_dic[ i.id ] =  i);
+        console.log("servis",this.servicios_dic)
+        this.is_loading = false;
+      }
+      , (error) => {
+        this.showError(error);
+        this.is_loading = false;
+      }
+      );
+    // this.rest.detalle_requisicion.search({eq:{id_requisicion:currentRequisicion.id}}).subscribe((response)=>{
+    // 	this.detalles = response.datos;
+    // })
+    
+  }
   //recibir material requisiciones
 
   recibirRequisicion(requisicion) {

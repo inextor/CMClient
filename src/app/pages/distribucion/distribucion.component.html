@@ -1,12 +1,12 @@
-<div class="container card p-3">
-	<h4 class="mb-3">Distribucion</h4>
-	<div class="container p-3">
-		<div class="row p-3">
+<div class=" card p-3">
+    <h4 class="mb-3">Distribucion</h4>
+    <div class=" p-3">
+        <!-- <div class="row p-3">
 				<button title="agregar distribucion" class="btn btn-primary" [routerLink]="['/agregar-distribucion']">Agregar Distribucion</button>
-		</div>
+		</div> -->
 
-		<div class="d-flex flex-row">
-			<!-- div class="mt-3 mb-3 form-group">
+        <div class="d-flex flex-row">
+            <!-- div class="mt-3 mb-3 form-group">
 				<label class="">Id</label>
 				<input type="number" name="id" [(ngModel)]="distribucion_search.eq.id" class="form-control">
 			</div>
@@ -63,8 +63,66 @@
 				<button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
 			</div>
 		</div-->
-	</div>
-	<div>
+        </div>
+
+        <div class="card">
+            <table class="basica">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Estado</th>
+                        <th>Solicitante</th>
+                        <th>Fecha Creacion</th>
+                        <th>No. Pedimento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="requisiciones.length==0 " class="text-center">
+                        <td colspan="8">No hay distribuciones pendientes</td>
+                    </tr>
+                    <tr *ngFor="let requisicion of requisiciones">
+                        <td class="text-center">{{requisicion.id}}</td>
+                        <td>{{requisicion.estatus}}</td>
+                        <td>
+                            <!-- {{requisicion.id_proveedor ? (proveedor_dic[ requisicion.id_proveedor ].nombre):''}} -->
+                            {{requisicion.id_centro_medico ? (sucursal_dic[ requisicion.id_centro_medico ].nombre):'' }}
+                        </td>
+                        <!-- <td *ngIf="requisicion.id_centro_medico_distribuidor">{{proveedor_dic[ requisicion.id_proveedor ].nombre}}</td> -->
+                        <td class="text-center">{{requisicion.tiempo_creacion| date: 'short' }}</td>
+
+                        <!-- <td class="text-center" *ngIf="requisicion.tiempo_entrega==null">------------</td> -->
+                        <td>{{requisicion.pedimento}}</td>
+                        <td class="p-0 text-center">
+                            <!-- <button class="btn btn-light p-0 m-1 border" title="editar"
+                                [routerLink]="['/editar-requisicion',requisicion.id]">
+                                <span class="">
+                                    <i class="">
+                                        <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                            class="menuIcons icons" />
+                                    </i>
+                                </span>
+                            </button> -->
+                            <button class="btn btn-light btn-sm border" title="Enviar"
+                                *ngIf="requisicion.estatus == 'PENDIENTE' "
+                                (click)="currentRequisicion=requisicion;showOrdenarRequisicion=true;get_detalles(currentRequisicion)">
+                                <span class="">
+                                    <i class="" style="color:orangered;">
+                                        <i class="fa fa-box"></i> Distribuir
+
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                            class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+
+                            <!-- <button class="btn btn-sm btn-primary m-1">Editar</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div>
 		<table class="basica">
 			<thead>
 				<tr>
@@ -85,6 +143,80 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
-	<app-paginacion [path]="'/distribucion'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
-</div>
+	</div> -->
+        <app-paginacion [path]="'/distribucion'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
+        </app-paginacion>
+    </div>
+
+
+    <app-modal [show]="showOrdenarRequisicion">
+        <div *ngIf="currentRequisicion" class="modal-content" class="customModal col-md-12 w-12">
+            <div class="p-2">
+                <div>
+                    <h5 class="modal-title">Detalle de la requisición No: {{currentRequisicion.id}}</h5>
+                </div>
+                <div>
+                    <p class="modal-title">No. pedimento: {{currentRequisicion.pedimento}}</p>
+                </div>
+            </div>
+            <div class="border row">
+                <div class="col-md-6 text-center mb-2"><label class="font-weight-bold" for="">ESTADO</label> <div>{{currentRequisicion.estatus}}</div> </div>
+                <div class="col-md-6 text-center mb-2"><label class="font-weight-bold" for="">FECHA</label><div>{{currentRequisicion.tiempo_creacion|date: 'short' }}</div></div>
+                <div class="col-md-6 text-center"><label class="font-weight-bold" for="">FLETE</label><div>{{currentRequisicion.flete | currency}}</div> </div>
+                <div class="col-md-6 text-center"><label class="font-weight-bold" for="">IMPORTACION</label><div>{{currentRequisicion.importacion |currency}}</div></div>
+           
+                <!-- <div></div>
+                <div></div>
+                <div></div> -->
+            </div>
+            <div class="row m-2">
+                <div class="col-6 ">
+                    <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
+                    <input type="date" class="form-control" name="telefono" [(ngModel)]="fecha_entrega">
+                </div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <table class="basica">
+                    <thead>
+                        <tr>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Costo P/u</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detalle of detalles">
+                            <td>
+                                {{servicios_dic[ detalle.id_servicio ].nombre}}
+                            </td>
+                            <!-- <td> {{detalle.id_servicio}}</td> -->
+                            <td> {{detalle.cantidad}}</td>
+                            <td> {{detalle.costo | currency}}</td>
+                            <td> {{detalle.subtotal | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="card m-2" >
+            <div class="card-header">
+                <div>proveedor: {{currentRequisicion.id_proveedor ? (proveedor_dic[ currentRequisicion.id_proveedor ].nombre):''}}  
+                    {{currentRequisicion.id_centro_medico_distribuidor ? (sucursal_dic[ currentRequisicion.id_centro_medico_distribuidor ].nombre):'' }}  
+                </div>
+            </div>
+            <div>
+                <div> </div>
+            </div>
+          </div> -->
+
+            <!-- <div class="modal-body pb-0 ">
+			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+		</div> -->
+            <div class="modal-footer">
+                <a class="btn text-light  btn-secondary" (click)="showOrdenarRequisicion=false">Cancelar</a>
+                <a class="btn text-light  btn-primary" (click)="ordenarRequisicion(currentRequisicion)">Aceptar</a>
+            </div>
+        </div>
+    </app-modal>

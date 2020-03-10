@@ -3,4 +3,6 @@
     margin: 0 !important;
     width: 20%;
   }
-  
+  .customModal{
+    width: 50rem;
+  }

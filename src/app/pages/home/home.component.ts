@@ -46,12 +46,15 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
 				}
 				else {
+					if(usuario.tipo =="PACIENTE"){
+						this.rest.centro_medico.get(usuario.id_centro_medico).subscribe(response => {
 
-					this.rest.centro_medico.get(usuario.id_centro_medico).subscribe(response => {
+							localStorage.setItem('centro_medico', JSON.stringify(response));
+						})
+						console.log(usuario);
+						
+					}
 
-						localStorage.setItem('centro_medico', JSON.stringify(response));
-					})
-					console.log(usuario);
 					// let centroMedico = this.rest.getCurrentCentroMedico();
 					// if (usuario.tipo == "ADMIN" || usuario.tipo == "DOCTOR") {
 					// 	if ((centroMedico == null || centroMedico == undefined)) {

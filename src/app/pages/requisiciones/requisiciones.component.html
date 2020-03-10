@@ -94,7 +94,7 @@
                 <thead>
                     <tr>
                         <th>Orden</th>
-                        <th>Estado</th>
+                        <!-- <th>Estado</th> -->
                         <th>Distribuidor</th>
                         <th>Fecha Creacion</th>
                         <th>Fecha Entrega</th>
@@ -109,7 +109,7 @@
                     </tr>
                     <tr *ngFor="let requisicion of requisiciones">
                         <td class="text-center">{{requisicion.id}}</td>
-                        <td>{{requisicion.estatus}}</td>
+                        <!-- <td style><i>{{requisicion.estatus}} </i></td> -->
                         <td>
                             {{requisicion.id_proveedor ? (proveedor_dic[ requisicion.id_proveedor ].nombre):''}}
                             {{requisicion.id_centro_medico_distribuidor ? (sucursal_dic[ requisicion.id_centro_medico_distribuidor ].nombre):'' }}
@@ -132,34 +132,49 @@
                                 </span>
                             </button> -->
                             <button class="btn btn-light btn-sm border" title="ordenar"
-                                *ngIf="requisicion.estatus == 'PENDIENTE' "
-                                (click)="currentRequisicion=requisicion;showOrdenarRequisicion=true;">
+                                *ngIf="requisicion.estatus == 'PENDIENTE' && requisicion.id_proveedor"
+                                (click)="currentRequisicion=requisicion;showOrdenarRequisicion=true;get_detalles(currentRequisicion)">
                                 <span class="">
                                     <i class="" style="color:orangered;">
-                                        <i class="fa fa-box"></i>
+                                        <i class="fa fa-box"></i> Ordenar
                                      
                                         <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                             class="menuIcons icons" /> -->
                                     </i>
                                 </span>
                             </button>
+                            <!-- aviso -->
+                            <button class="btn btn-light btn-sm border" title="Esperando envio del distribuidor" disabled
+                                *ngIf="requisicion.estatus == 'PENDIENTE' && requisicion.id_centro_medico_distribuidor"
+                              >
+                                <span class="">
+                                    <i class="" style="color:orangered;">
+                                        <i class="fa fa-box"></i> Ordenar
+                                     
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                            class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+
+
                             <button class="btn btn-light btn-sm border" title="recibir"
                                 *ngIf="requisicion.estatus == 'EN_TRANSITO' "
                                 [routerLink]="['/recibir-requisicion',requisicion.id]" >
                                 <span class="">
                                     <i class="" style="color:green;">
-                                        <i class="fa fa-truck"></i>
+                                        <i class="fa fa-truck"></i> En transito
                                         <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                         class="menuIcons icons" /> -->
                                     </i>
                                 </span>
                             </button>
                               <!-- RECIBIDO -->
-                            <button class="btn btn-light btn-sm border" title="recibir"
+                            <button class="btn btn-light btn-sm border" title="recibido"
                             *ngIf="requisicion.estatus == 'RECIBIDO' ">
                             <span class="">
                                 <i class="" style="color:green;">
-                                    <i class="fa fa-box-open"></i>
+                                    <i class="fa fa-box-open"></i> Recibido
                                     <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
                                     class="menuIcons icons" /> -->
                                 </i>
@@ -191,14 +206,47 @@
                 <p class="modal-title">No. pedimento: {{currentRequisicion.pedimento}}</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
-                <input type="date" class="form-control" name="telefono" [(ngModel)]="fecha_entrega">
+        <div class="border row">
+                <div class="col-md-6 text-center mb-2"><label class="font-weight-bold" for="">ESTADO</label> <div>{{currentRequisicion.estatus}}</div> </div>
+                <div class="col-md-6 text-center mb-2"><label class="font-weight-bold" for="">FECHA</label><div>{{currentRequisicion.tiempo_creacion|date: 'short' }}</div></div>
+                <div class="col-md-6 text-center"><label class="font-weight-bold" for="">FLETE</label><div>{{currentRequisicion.flete | currency}}</div> </div>
+                <div class="col-md-6 text-center"><label class="font-weight-bold" for="">IMPORTACION</label><div>{{currentRequisicion.importacion |currency}}</div></div>
+           
+                <!-- <div></div>
+                <div></div>
+                <div></div> -->
             </div>
-            <div></div>
-            <div></div>
-        </div>
+            <div class="row m-2">
+                <div class="col-6 ">
+                    <label position="stacked">Fecha de entrega<span color="danger">*</span></label>
+                    <input type="date" class="form-control" name="telefono" [(ngModel)]="fecha_entrega">
+                </div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="row">
+                <table class="basica">
+                    <thead>
+                        <tr>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Costo P/u</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detalle of detalles">
+                            <td>
+                                {{servicios_dic[ detalle.id_servicio ].nombre}}
+                            </td>
+                            <!-- <td> {{detalle.id_servicio}}</td> -->
+                            <td> {{detalle.cantidad}}</td>
+                            <td> {{detalle.costo | currency}}</td>
+                            <td> {{detalle.subtotal | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         <!-- <div class="card m-2" >
             <div class="card-header">
                 <div>proveedor: {{currentRequisicion.id_proveedor ? (proveedor_dic[ currentRequisicion.id_proveedor ].nombre):''}}  

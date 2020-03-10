@@ -29,6 +29,8 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 
 	inventarioServicios: InventarioServicio[] = [];
 	centros_medicos: Centro_Medico[] = [];
+	currentCentroMedico;
+	centro_medico_dic:any={}
 	centro_medico: Centro_Medico;
 	inventarios: Inventario[]=[];
 	searchServicio: SearchObject<Servicio> = {
@@ -53,7 +55,7 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 			let centro_medico: Centro_Medico = this.rest.getCurrentCentroMedico();
 
 			this.search_inventario.eq.id_centro_medico = 'id_centro_medico' in params ? params.id_centro_medico : centro_medico.id;
-
+			this.currentCentroMedico=params.id_centro_medico
 			this.searchServicio.eq.tipo = 'PRODUCTO_FISICO';
 			this.searchServicio.lk.nombre = 'nombre' in params ? params.nombre : '';
 			this.searchServicio.pagina = 'pagina' in params ? params.pagina : 0;
@@ -65,19 +67,17 @@ export class InventarioComponent extends BaseComponent implements OnInit {
 			]).subscribe((respuestas) => {
 				let respuestaServicios = respuestas[0];
 				this.centros_medicos = respuestas[1].datos;
+				this.centros_medicos.forEach((i) => { this.centro_medico_dic[i.id] = i });
 				this.inventarios = respuestas[2].datos;
 				console.log("inventariosss",this.inventarios);
 				// let servicios_ids = respuestaServicios.datos.map(i => i.id);
 				// this.search_inventario.csv['id_servicios'] = servicios_ids;
-
 				// this.rest.inventario.search(this.search_inventario).subscribe((respuestaInventario) => {
 				// 	console.log("HERE4");
 				// 	this.is_loading = false;
 				// 	let objInventario: InventarioKeys = {};
 				// 	this.inventarioServicios = [];
-
 				// 	respuestaInventario.datos.forEach((i) => { objInventario[i.id_servicio] = i });
-
 				// 	respuestaServicios.datos.forEach((servicio) => {
 				// 		let inventario = servicio.id in objInventario ? objInventario[servicio.id] : {
 				// 			id_servicio: servicio.id, id_centro_medico: this.search_inventario.eq.id_centro_medico, cantidad: 0

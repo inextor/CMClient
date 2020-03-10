@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router } from '@angular/router';
+import { Centro_Medico } from 'src/app/models/Modelos';
 
 @Component({
   selector: "app-menu",
@@ -11,7 +12,7 @@ export class MenuComponent implements OnInit {
   constructor(private rest: RestService, public router: Router ) {}
   showCentros:boolean = false;
   show_logout: boolean = false;
-
+	show_seleccionar_centro_medico:boolean = false;
   ngOnInit() {}
 
   showLogoutModal() {
@@ -31,5 +32,14 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  seleccionar_clinica(){
+    this.show_seleccionar_centro_medico = true;
+  }
 
+
+	onSeleccionarCentroMedico(centro_medico: Centro_Medico) {
+		localStorage.setItem("centro_medico", JSON.stringify(centro_medico));
+		// this.clinica= this.rest.getCurrentCentroMedico();
+		this.show_seleccionar_centro_medico = false;
+	}
 }

@@ -68,12 +68,13 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 import { PushNotificationsComponent } from './components/push-notifications/push-notifications.component';
 import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
 import { RecibirRequisicionComponent} from './pages/recibir-requisicion/recibir-requisicion.component';
+import { ReporteInventarioComponent} from './pages/reporte-inventario/reporte-inventario.component';
 
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
-	{  path: "seleccionar-centro-medico", component: SeleccionarCentroMedicoHomeComponent, pathMatch: "full" },
+	{  path: "seleccionar-centro-medico-home", component: SeleccionarCentroMedicoHomeComponent, pathMatch: "full" },
 	{
 		path: '', component: HomeComponent,
 		children:
@@ -181,6 +182,8 @@ const routes: Routes = [
 			{ path: "notificaciones", component:NotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "push-notificaciones", component:PushNotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "recibir-requisicion/:id_requisicion", component:RecibirRequisicionComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "reporte-inventario", component:ReporteInventarioComponent, pathMatch:"full", canActivate:[AuthGuard]},
+		
 		]
 	},
 ];

@@ -185,10 +185,10 @@
                             <input type="text" (keyup)="buscarInventariosSucursal($event)" [(ngModel)]="busqueda" class="form-control">
                         </div>
                         <div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
-                            <div *ngFor="let servicio of search_servicios;let i=index" (click)="add(servicio)">
+                            <div *ngFor="let servicio of search_servicios;let i=index" (click)="addServicioSucursal(servicio)">
                                 <div *ngIf="i>0" class="dropdown-divider"></div>
                                 <div class="dropdown-item">
-                                    {{servicio.nombre}}
+                                    {{servicio.nombre}} -> Cantidad: <label style="color:green;" for="">{{servicio.cantidad}}</label> 
                                 </div>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                     <tbody>
                         <tr *ngFor="let sd of detalles_requisicion">
                             <td>
-                                <label>{{servicios_by_id[ sd.detalle_requisicion.id_servicio ].nombre | titlecase}}</label>
+                                <label>{{sd.servicio.nombre | titlecase}}</label>
                             </td>
                             <td>
                                 <input type="number" (change)="incrementar(sd)"
