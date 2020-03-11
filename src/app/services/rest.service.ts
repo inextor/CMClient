@@ -439,7 +439,7 @@ export class RestService {
 	agregarUsuarioDoctor(usuario:Usuario,doctor:Doctor):Observable<AgregarUsuarioResponse>
 	{
 		console.log( "HEADERS",this.getSessionHeaders() );
-		return this.http.post<AgregarUsuarioResponse>(`${this.urlBase}/usuario.php`,{usuario,doctor},{ headers: this.getSessionHeaders(),withCredentials:true});
+		return this.http.post<any>(`${this.urlBase}/usuario_paciente.php`,{usuario,doctor},{ headers: this.getSessionHeaders(),withCredentials:true});
 	}
 
 	agregarUsuario(usuario:Usuario):Observable<AgregarUsuarioResponse>
@@ -476,7 +476,7 @@ export class RestService {
 
 	registrarUsuarioPaciente(usuario,paciente):Observable<any>
 	{
-		if(paciente.fecha_naciemiento){
+		if(paciente.fecha_nacimiento){
 			paciente.fecha_nacimiento = paciente.fecha_nacimiento.substring(0,10);
 		}
 		return this.http.post<any>(`${this.urlBase}/usuario_paciente.php`,{usuario,paciente},{ headers: this.getSessionHeaders(),withCredentials:true});

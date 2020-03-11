@@ -30,11 +30,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label position="stacked">Nombre<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
+                    <input placeholder="Nombre" required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Apellido<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.apellidos">
+                    <input placeholder="Apellido" required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.apellidos">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Sexo<span color="danger">*</span></label>
@@ -51,31 +51,31 @@
                         [(ngModel)]="paciente.fecha_nacimiento">
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Telefono(celular)<span color="danger">*</span></label>
-                    <input required type="tel" class="form-control" name="telefono_celular"
+                    <label position="stacked">Teléfono(celular)<span color="danger">*</span></label>
+                    <input placeholder="Teléfono" required type="tel" class="form-control" name="telefono_celular"
                         [(ngModel)]="paciente.telefono">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Domicilio<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="domicilio" [(ngModel)]="paciente.domicilio">
+                    <input placeholder="Domicilio" required type="text" class="form-control" name="domicilio" [(ngModel)]="paciente.domicilio">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="correo_electronico"
+                    <input placeholder="Correo Electrónico" required type="text" class="form-control" name="correo_electronico"
                         [(ngModel)]="usuario.correo_electronico">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Usuario<span color="danger">*</span></label>
-                    <input required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
+                    <input placeholder="Usuario" required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Contraseña</label>
-                    <input placeholder="" type="password" class="form-control" name="contrasena"
+                    <input placeholder="Contraseña" type="password" class="form-control" name="contrasena"
                         [(ngModel)]="usuario.contrasena">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Confirmar contraseña</label>
-                    <input placeholder="" type="password" class="form-control" name="confirmar_contrasena"
+                    <input placeholder="Confirmar" type="password" class="form-control" name="confirmar_contrasena"
                         [(ngModel)]="confirmar_contrasena">
                 </div>
             </div>
@@ -83,22 +83,22 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label position="stacked">RFC<span color="danger">*</span></label>
-                    <input  type="text" class="form-control" name="rfc" [(ngModel)]="usuario.factura_rfc">
+                    <input placeholder="RFC" type="text" class="form-control" name="rfc" [(ngModel)]="usuario.factura_rfc">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Razon Social</label>
-                    <input placeholder=""  class="form-control" name="razon_social"
+                    <input placeholder="Razon Social"  class="form-control" name="razon_social"
                         [(ngModel)]="usuario.factura_razon_social">
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Codigo Postal</label>
-                    <input placeholder=""  class="form-control" name="codigo_postal"
+                    <label position="stacked">Código Postal</label>
+                    <input placeholder="Codigo postal"  class="form-control" name="codigo_postal"
                         [(ngModel)]="usuario.factura_codigo_postal">
                 </div>
                 <div class="form-group col-md-6">
     
-                    <label position="stacked">Correo Electronico</label>
-                    <input placeholder=""  class="form-control" name="correo_electronico"
+                    <label position="stacked">Correo Eléctronico</label>
+                    <input placeholder="Correo Eléctronico"  class="form-control" name="correo_electronico"
                         [(ngModel)]="usuario.factura_correo_electronico">
                 </div>
     

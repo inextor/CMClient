@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Doctor,Usuario,Especialidad } from '../../models/Modelos';
+import { Doctor,Usuario,Especialidad, Centro_Medico } from '../../models/Modelos';
 import { Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from  '@angular/common';
 import { forkJoin } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import { relativeTimeThreshold } from 'moment';
 
 @Component({
 	selector: 'app-agregar-doctor',
@@ -15,32 +16,46 @@ import { Title } from '@angular/platform-browser';
 
 export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
-
-
-	doctor:Doctor = {
-		'nombre':'',
-		'especialidad':'',
-		'telefono':''
-	};
-
-	usuario:Usuario = {
-		'usuario':'',
-		'contrasena':'',
-		'tipo':'DOCTOR',
-		'id_imagen': null
-	};
-
-
-	especialidades:Especialidad[] = [];
-
 	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
 	{
 		super( rest,router,route,location,titleService);
 	}
 
+
+	doctor:Doctor = {
+		nombre:'',
+		especialidad:'',
+		telefono:'',
+		id_especialidad:null,
+		id_centro_medico:null,
+		id_imagen:null,
+		color_calendario:'',
+		duracion_consulta:null
+	}
+
+	usuario:Usuario = {
+		id_organizacion: 1,
+		id_centro_medico:null,
+		id_imagen: null,
+		contrasena: '',
+		correo_electronico:'',
+		factura_rfc:'',
+		factura_razon_social:'',
+		factura_codigo_postal:'',
+		factura_correo_electronico:'',
+		tipo: 'DOCTOR'
+	}
+
+
+	especialidades:Especialidad[] = [];
+	especialidad_dic:any={};
+	centro_medico:Centro_Medico;
+
+
 	ngOnInit() {
 
 		let usuario = this.rest.getUsuarioSesion();
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.is_loading = false;
 		if( usuario !== null )
 		{
@@ -53,12 +68,17 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 
 			if( id )
 			{
-				forkJoin([this.rest.usuario.get( id ), this.rest.doctor.get( id ),this.rest.especialidad.getAll({},{limit:1000})] ).subscribe((response)=>
+				forkJoin([
+					this.rest.usuario.get( id ), 
+					this.rest.doctor.get( id ),
+					this.rest.especialidad.getAll({},{limit:1000})
+				]).subscribe((response)=>
 				{
 					this.is_loading = false;
 					this.usuario = response[0];
 					this.doctor = response[1];
 					this.especialidades = response[2].datos;
+					this.especialidades.forEach((i)=>{this.especialidad_dic[i.id]=i})
 				},(error)=>
 				{
 					this.is_loading = false;
@@ -70,21 +90,17 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 				this.rest.especialidad.getAll({},{limit:1000}).subscribe((response)=>
 				{
 					this.especialidades = response.datos;
+					this.especialidades.forEach((i)=>{this.especialidad_dic[i.id]=i})
 				},error=>console.log(error));
+				this.usuario={
+					id_centro_medico: this.centro_medico.id,
+					id_organizacion: this.centro_medico.id_organizacion,
+					tipo: 'DOCTOR',
+				}
 
-				this.doctor = {
-					'nombre':'',
-					'especialidad':'',
-					'telefono':''
-				};
-
-				this.usuario = {
-					'usuario':'',
-					'contrasena':'',
-					'tipo':'DOCTOR',
-					'id_imagen': null,
-					'id_organizacion' : usuario.id_organizacion
-				};
+				this.doctor={
+					id_centro_medico: this.centro_medico.id
+				}
 			}
 		});
 	}
@@ -94,8 +110,12 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 		this.is_loading = true;
 		if( this.usuario.id )
 		{
+			
 			this.is_loading = true;
 			console.log("Actualizando A",this.doctor);
+			this.usuario.nombre = this.doctor.nombre;
+			this.usuario.telefono = this.doctor.telefono;
+			this.doctor.especialidad = this.especialidad_dic[this.doctor.id_especialidad].nombre;  
 			this.rest.doctor.update( this.doctor ).subscribe((doctor)=>
 			{
 				this.doctor = doctor;
@@ -111,10 +131,13 @@ export class AgregarDoctorComponent extends BaseComponent implements OnInit {
 		else
 		{
 			this.is_loading = true;
+			this.usuario.nombre = this.doctor.nombre;
+			this.usuario.telefono = this.doctor.telefono;
+			this.doctor.especialidad = this.especialidad_dic[this.doctor.id_especialidad].nombre;  
 			this.rest.agregarUsuarioDoctor(this.usuario,this.doctor).subscribe((doctor)=>
 			{
 				this.is_loading = false;
-				this.router.navigate(['/home']);
+				this.router.navigate(['/doctores']);
 			},error=>this.showError(error) );
 		}
 	}

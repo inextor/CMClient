@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
-import { Usuario , Paciente } from '../../models/Modelos';
+import { Usuario , Paciente, Centro_Medico } from '../../models/Modelos';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
   styleUrls: ['./agregar-paciente.component.css']
 })
 export class AgregarPacienteComponent extends BaseComponent implements OnInit {
-
+	centro_medico:Centro_Medico;
 	usuario:Usuario = {
 		id_organizacion: 1,
 		id_imagen: null,
@@ -35,7 +35,9 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	ngOnInit()
 	{
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.paramMap.subscribe( params =>{
+			this.usuario.id_centro_medico = this.centro_medico.id;
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			this.is_loading = true;
 
@@ -78,7 +80,23 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		// 	,(error)=>
 		// 		this.showError(error));
 
+		forkJoin([
+			this.rest.usuario.update( this.usuario )
+			,this.rest.paciente.update(this.paciente )
+		]).subscribe(
+			(responses)=>
+			{
+				this.router.navigate(['/pacientes']);
+			}
+			,(error)=>
+			{
+				this.showError( error );
+			}
+		);
 
+		}
+		else
+		{
 
 			this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
 			{
@@ -86,26 +104,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 				this.router.navigate(['/pacientes']);
 			}, error=> this.showError(error) );
 		}
-		else
-		{
-			forkJoin([
-				this.rest.usuario.update( this.usuario )
-				,this.rest.paciente.update(this.paciente )
-			]).subscribe(
-				(responses)=>
-				{
-					this.router.navigate(['/pacientes']);
-				}
-				,(error)=>
-				{
-					this.showError( error );
-				}
-			);
 
-
-			//Que pedo aqui jajaja no se
-			//
-		}
 	}
 
 	uploadImage(evt) {
