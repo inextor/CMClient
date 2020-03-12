@@ -17,7 +17,6 @@ export class SeleccionarPacienteComponent implements OnInit {
 	@Input() showCancel:boolean;
 	@Output() selected = new EventEmitter<Paciente>();
 
-
 	pacientes:Paciente[] = [];
 	last:string = '';
 

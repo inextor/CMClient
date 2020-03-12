@@ -98,15 +98,14 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	seleccionarDoctorNuevaCita(paciente)
 	{
 		let usuario = this.rest.getUsuarioSesion();
-
+		// Agregar una funcion parecida que el recepcionista pueda utilizar para agregar una cita
+		// con el doctor y con el pasiente
 		if( usuario.tipo == 'DOCTOR' )
 		{
 			this.router.navigate(['/agendar-cita','doctor',usuario.id,'centro-medico',this.centro_medico.id,'paciente',paciente.id]);
 			return;
 		}
-
 		let s = this.rest.getSesion();
-
 		//this.rest.getDoctores().subscribe(response=>
 		//this.rest.doctor.getAll({id_organizacion:1}).subscribe(response=>
 		//FIX LA ORGANIZACION
@@ -148,7 +147,6 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 				*/
 			}
 		});
-
 	}
 
 	changeSearch( evt )

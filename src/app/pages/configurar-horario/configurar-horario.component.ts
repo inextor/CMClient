@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../services/rest.service';
-import { Centro_Medico, Doctor } from '../../models/Modelos';
+import { Centro_Medico, Doctor, Sucursal_Doctor } from '../../models/Modelos';
 import { BaseComponent } from '../../pages/base/base.component';
 import { CitasService } from '../../services/citas.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import * as moment from 'moment';
+import { forkJoin } from 'rxjs';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Location } from	'@angular/common';
 import { Router } from "@angular/router"
@@ -22,13 +23,15 @@ import { Title } from '@angular/platform-browser';
 export class ConfigurarHorarioComponent extends BaseComponent implements OnInit {
 
 	centroMedico:Centro_Medico={}
+	centros:Centro_Medico[]=[]
+	centro_medico_dic:any={}
 	doctor:Doctor={}
 	id_centro_medico:number;
 	id_doctor:number;
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
 	counterId = 1;
 	calendarEvents = [];
-
+	sucursal_doctor:Sucursal_Doctor={};
 
 	constructor(
 		public rest:RestService,
@@ -56,15 +59,22 @@ export class ConfigurarHorarioComponent extends BaseComponent implements OnInit 
 			this.id_doctor = parseInt(params.get('id_doctor'));
 			//Hacer forkjoin
 			//XXX Para que queremos el centro medico????
-			this.rest.centro_medico.get( this.id_centro_medico ).subscribe( centroMedico =>
-			{
-				this.centroMedico = centroMedico;
-			});
 
-			//XXX Para que queremos el doctor???? Para Mostrar la informacion de que estamos editando su horario
-			this.rest.doctor.get( this.id_doctor ).subscribe( doctor =>
+			forkJoin([
+				this.rest.centro_medico.get( this.id_centro_medico ),
+				this.rest.doctor.get( this.id_doctor ),
+				this.rest.centro_medico.getAll({}),
+			]).subscribe((response)=>
 			{
-				this.doctor = doctor;
+				this.centroMedico = response[0];
+				this.doctor = response[1];
+				this.centros = response[2].datos;
+				this.centros.forEach((i)=>{this.centro_medico_dic[i.id]=i})
+				this.is_loading = false;
+			},(error)=>
+			{
+				this.is_loading = false;
+				this.showError( error );
 			});
 		});
 
@@ -79,6 +89,7 @@ export class ConfigurarHorarioComponent extends BaseComponent implements OnInit 
 
 		const events = this.citasService.getDisponibilidadDoctor(this.id_doctor, this.id_centro_medico).subscribe(citas =>
 		{
+			
 			this.calendarEvents = citas.datos.map(event =>
 			{
 				const id = this.counterId;
@@ -180,5 +191,21 @@ export class ConfigurarHorarioComponent extends BaseComponent implements OnInit 
 			daysOfWeek: event.daysOfWeek
 		}));
 		this.citasService.setDisponibilidadDoctor(this.id_doctor, this.id_centro_medico ,disponibilidadDoctor);
+
+		this.rest.sucursal_doctor.search({eq:{id_doctor:this.id_doctor,id_centro_medico:this.id_centro_medico}}).subscribe((response)=>{
+			let sucursal_doctor = response.datos;
+			console.log("entro",sucursal_doctor);
+			if(sucursal_doctor.length>=1){
+				return;
+			}else{
+				console.log("entro al else")
+				this.sucursal_doctor.nombre = this.centro_medico_dic[this.id_centro_medico].nombre;
+				this.sucursal_doctor.id_doctor = this.id_doctor;
+				this.sucursal_doctor.id_centro_medico = this.id_centro_medico;
+				this.rest.sucursal_doctor.create(this.sucursal_doctor).subscribe((response)=>{
+					console.log("creo la sucursal doctor");
+				})
+			}
+		})
 	}
 }

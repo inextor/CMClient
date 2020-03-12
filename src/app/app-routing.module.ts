@@ -86,7 +86,7 @@ const routes: Routes = [
 			{ path: "horario-doctor/centro-medico/:id_centro_medico/Doctor/:id_doctor/Paciente/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: "doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: HorarioDoctorComponent, pathMatch: "full" },
 			{ path: 'configurar-horario/doctor/:id_doctor/centro-medico/:id_centro_medico', component: ConfigurarHorarioComponent, pathMatch: 'full' },
-			{ path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			// { path: "doctores/:id_doctor/centro-medico/:id_centro_medico/agendar-cita/:id_paciente", component: HorarioDoctorComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agendar-cita/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente", component: AgendarCitaComponent, canActivate:[AuthGuard] },
 			{ path: "agendar-cita-paciente/doctor/:id_doctor/centro-medico/:id_centro_medico/paciente/:id_paciente/servicio/:id_servicio", component: AgendarCitaPacienteComponent, canActivate:[AuthGuard] },
 			{ path: "pacientes", component: PacientesComponent, pathMatch: "full" },

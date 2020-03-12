@@ -16,7 +16,6 @@ import { SearchObject } from 'src/app/models/Respuestas';
 })
 export class DoctoresComponent extends BaseComponent implements OnInit {
 
-
 	currentUser: Usuario;
 	selected_doctor:Doctor = null;
 	show_seleccionar_paciente:boolean = false;
@@ -51,7 +50,6 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 				}
 			}
 		); */
-
 		this.route.queryParams.subscribe( params =>
 		{
 			this.doctor_search = {
@@ -78,7 +76,6 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 			},error => this.showError );
 		});
 	}
-
 
 	editarHorario(doctor:Doctor)
 	{
@@ -145,9 +142,10 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 	onSeleccionarPacienteNuevaCita(paciente:Paciente)
 	{
 		console.log('FOOOOO aqui llego');
-		let cm_id = this.rest.getCurrentCentroMedico();
-		if( cm_id )
-			this.router.navigate(['/doctores',this.selectedDoctor.id,'centro-medico',cm_id,'agendar-cita',paciente.id]);
+		let centro_medico = this.rest.getCurrentCentroMedico();
+		if( centro_medico ){
+			this.router.navigate(['/doctores',this.selectedDoctor.id,'centro-medico',centro_medico.id,'agendar-cita',paciente.id]);
+		}
 	}
 
 	search()

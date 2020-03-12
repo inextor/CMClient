@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularDateHttpInterceptor } from './services/AngularDateHttpInterceptor'
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AccessModule } from './modules/access/access.module';
-import {FullCalendarModule} from '@fullcalendar/angular';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgendarCitaComponent } from './pages/agendar-cita/agendar-cita.component';
@@ -69,7 +69,7 @@ import { IngresosComponent } from './pages/ingresos/ingresos.component';
 import { AgregarConsultaComponent } from './pages/agregar-consulta/agregar-consulta.component';
 import { VerConsultasComponent } from './pages/ver-consultas/ver-consultas.component';
 import { DateTimeComponent } from './components/date-time/date-time.component';
-import {IngresoComponent} from './components/ingreso/ingreso.component';
+import { IngresoComponent } from './components/ingreso/ingreso.component';
 import { PuntoVentaComponent } from './pages/punto-venta/punto-venta.component'
 import { FamiliaresComponent } from './pages/familiares/familiares.component';
 import { CitasPacienteComponent } from './pages/citas-paciente/citas-paciente.component';
@@ -131,7 +131,7 @@ export function init_app(rest: RestService) {
     AgregarTipoPrecioComponent,
     AgregarUsuarioComponent,
     BaseComponent,
-	CalendarioCitasDoctorComponent,
+	  CalendarioCitasDoctorComponent,
     CentrosMedicosComponent,
     CitaComponent,
     CitasComponent,
@@ -205,14 +205,12 @@ export function init_app(rest: RestService) {
     RecibirRequisicionComponent,
     AgregarProductoInventarioComponent,
     ReporteInventarioComponent,
-
-
   ],
   imports: [
     AccessModule,
     BrowserModule,
     AppRoutingModule,
-   HttpClientModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
 	  FullCalendarModule,

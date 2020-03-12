@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-6" *ngIf="distribuidor==true">
                             <label position="stacked">Sucursal<span color="danger">*</span></label>
-                            <select class="form-control" name="foo" (change)="search()" [(ngModel)]="requisicion.id_centro_medico_distribuidor">
+                            <select class="form-control" name="foo" [(ngModel)]="requisicion.id_centro_medico_distribuidor">
                                 <option [value]="null" selected>Seleccione una sucursal</option>
                                 <option *ngFor="let sucursal of sucursales" [value]="sucursal.id">
                                     {{sucursal.nombre}}</option>

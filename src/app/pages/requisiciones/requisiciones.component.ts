@@ -21,6 +21,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
    //modales
    show: boolean = false;
    showOrdenarRequisicion: boolean = false;
+   currentRequisicion:Requisicion;
    //
    detalles:Detalle_Requisicion[]=[]
    servicios_dic:any = {};
@@ -148,11 +149,12 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   }
   get_detalles(currentRequisicion){
     let usuario = this.rest.getUsuarioSesion();
+    this.currentRequisicion = currentRequisicion;
     forkJoin(
       [
         //getTiposGastos({id_organizacion: usuario.id_organizacion}),
         //this.rest.getGastos({ id_centro_medico: 1 })
-        this.rest.detalle_requisicion.search({eq:{id_requisicion:currentRequisicion.id}}),
+        this.rest.detalle_requisicion.search({eq:{id_requisicion:this.currentRequisicion.id}}),
         this.rest.servicio.getAll({}), //TODO FIX ponerlo de la session o seleccionarlo
       ]
       ).subscribe(

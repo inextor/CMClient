@@ -12,7 +12,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div>
 			<div class="input-group mb-2">
 				<input type="text" placeholder="Buscar" [(ngModel)]="doctor_search.lk.nombre" class="form-control">
@@ -31,8 +30,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="card">
 			<table class="basica">
 				<thead>
@@ -84,7 +81,9 @@
 									</i>
 								</span>
 							</button>
-							<button class=" p-0 btn btn-light  m-1 border " [routerLink]="['/citas','doctor',doctor.id]" [appAccess]="['Recepcionista','admin','doctor']"
+							<button class=" p-0 btn btn-light  m-1 border " [routerLink]="['/citas']"
+							[queryParams]="{id_doctor: doctor.id}"
+							[appAccess]="['Recepcionista','admin','doctor']"
 							data-toggle="tooltip" title="Ver citas">
 								<span class="">
 									<i class="">

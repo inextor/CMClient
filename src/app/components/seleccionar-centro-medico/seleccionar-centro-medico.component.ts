@@ -52,18 +52,18 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 			this.centros_search.pagina = 'pagina' in params ? parseInt(params.pagina) : 0;
 			// this.currentPage = params['pagina'] == null ? 0 : parseInt(params['pagina'] );
 			this.is_loading = true;
-			if (usuario.tipo !== "ADMIN") {
-				this.rest.sucursal_doctor.search(this.centros_search).subscribe((respuesta) => {
-					this.centros = respuesta.datos;
-					this.setPages(this.centros_search.pagina, respuesta.total);
-					this.is_loading = false;
-				}, error => this.showError(error));
-			} else {
+			if (usuario.tipo == "ADMIN" || usuario.tipo == "RECEPCIONISTA") {
 				this.rest.centro_medico.search(this.centros_search).subscribe((respuesta) => {
 					this.centros = respuesta.datos;
 					this.setPages(this.centros_search.pagina, respuesta.total);
 					this.is_loading = false;
 				})
+			}else {
+				this.rest.sucursal_doctor.search(this.centros_search).subscribe((respuesta) => {
+					this.centros = respuesta.datos;
+					this.setPages(this.centros_search.pagina, respuesta.total);
+					this.is_loading = false;
+				}, error => this.showError(error));
 			}
 		});
 
