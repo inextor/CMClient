@@ -136,10 +136,10 @@ export class RestService {
 		this.urlBase = 'http://54.175.170.17/Mehr/api';
 
 		if( window.location.hostname.indexOf('127.0.0.1' ) == 0 )
-			this.urlBase = 'http://167.71.146.189/CentroMedico/';
+			this.urlBase = 'http://http://54.175.170.17/Mehr/';
 
 		if( window.location.hostname.indexOf('localhost') == 0 )
-			this.urlBase = 'http://127.0.0.1/CentroMedico';
+			this.urlBase = 'http://127.0.0.1/CentroMedico/';
 
 		this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('usuario')));
 		this.currentUser = this.currentUserSubject.asObservable();
