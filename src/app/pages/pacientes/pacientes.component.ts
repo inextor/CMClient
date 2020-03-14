@@ -44,7 +44,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 		{
 			this.paciente_search = {
 				lt: {}
-				,eq: {}
+				,eq: {id_organizacion: 1}
 				,ge: {}
 				,gt: {}
 				,le: {}

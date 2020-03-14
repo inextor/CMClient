@@ -454,6 +454,7 @@ export interface Organizacion{
 export interface Paciente{
 	id?:number;
 	id_usuario?:number;
+	id_organizacion?:number;
 	id_imagen?:number;
 	familiar?:number;
 	nombre?:string;
