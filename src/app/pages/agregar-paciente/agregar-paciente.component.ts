@@ -18,14 +18,13 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		factura_rfc:'',
 		factura_razon_social:'',
 		factura_codigo_postal:'',
-		factura_correo_electronico:'',
 		tipo: 'PACIENTE'
 	};
 	paciente:Paciente = {
 		id:null,
 		id_organizacion:1,
 		nombre:'',
-		apellidos:'',
+		apellidos:'', 
 		sexo:'',
 		fecha_nacimiento:'',
 		telefono:'',
@@ -62,7 +61,6 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		});
 	}
 
-
 	registrarse()
 	{
 		console.log('paciente',this.paciente,'usuario',this.usuario);
@@ -80,7 +78,6 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		// 	}
 		// 	,(error)=>
 		// 		this.showError(error));
-
 		forkJoin([
 			this.rest.usuario.update( this.usuario )
 			,this.rest.paciente.update(this.paciente )
@@ -98,7 +95,6 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		}
 		else
 		{
-
 			this.rest.registrarUsuarioPaciente( this.usuario, this.paciente ).subscribe((usuario)=>
 			{
 				this.is_loading = false;

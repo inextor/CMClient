@@ -2,106 +2,114 @@
     <div class="container">
 
         <div class="p-0">
-			<div class=" mb-3 d-flex justify-content-between flex-wrap">
-				<div>
-					<h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}}</h4>
-				</div>
-				<div>
-					<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm"
-                    (click)="registrarse()" [disabled]="is_loading"><i class="fa fa-save mr-2"></i>{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
-				</div>
-			</div>
+            <div class=" mb-3 d-flex justify-content-between flex-wrap">
+                <div>
+                    <h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}}</h4>
+                </div>
+                <div>
+                    <button type="button" expand="block" form="pacienteForm" type="submit" class="btn btn-primary btn-sm"
+                        [disabled]="is_loading"><i
+                            class="fa fa-save mr-2"></i>{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
+                </div>
+            </div>
         </div>
-        
-        <form>
-            <!-- <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
+
+
+        <!-- <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
             <div *ngIf="usuario.id_imagen">
                 <img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
             </div>
             <input type="file" (change)="uploadImage($event)" name="image"> -->
-            <div class="form-row">
-                <div class="form-group col-12">
-                    <label for="">Agregar Imagen*</label>
-                    <app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
-                </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="">Agregar Imagen*</label>
+                <app-image-uploader [(image)]="usuario.id_imagen"></app-image-uploader>
             </div>
-            
-
+        </div>
+        <form ngNativeValidate id="pacienteForm" (submit)="registrarse()">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label position="stacked">Nombre<span color="danger">*</span></label>
-                    <input placeholder="Nombre" required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.nombre">
+                    <label position="stacked">Nombre(s)<span color="danger">*</span></label>
+                    <input placeholder="Nombre" required type="text" class="form-control" name="nombre"
+                        [(ngModel)]="paciente.nombre" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Apellido<span color="danger">*</span></label>
-                    <input placeholder="Apellido" required type="text" class="form-control" name="nombre" [(ngModel)]="paciente.apellidos">
+                    <label position="stacked">Apellido(s)<span color="danger">*</span></label>
+                    <input placeholder="Apellido" required type="text" class="form-control" name="nombre"
+                        [(ngModel)]="paciente.apellidos" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Sexo<span color="danger">*</span></label>
-					<select  name="sexo" [(ngModel)]="paciente.sexo" class="form-control">
-						<option value="">Seleccione uno</option>
-						<option value="FEMENINO">Femenino</option>
-						<option value="MASCULINO">Masculino</option>
-					</select>
+                    <select name="sexo" required [(ngModel)]="paciente.sexo" class="form-control"  oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                    oninput="setCustomValidity('')">
+                        <option value="">Seleccione uno</option>
+                        <option value="FEMENINO">Femenino</option>
+                        <option value="MASCULINO">Masculino</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
 
                     <input required type="date" class="form-control" name="nombre"
-                        [(ngModel)]="paciente.fecha_nacimiento">
+                        [(ngModel)]="paciente.fecha_nacimiento"oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')" >
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Teléfono(celular)<span color="danger">*</span></label>
-                    <input placeholder="Teléfono" required type="tel" class="form-control" name="telefono_celular"
-                        [(ngModel)]="paciente.telefono">
+                    <label position="stacked" for="tel">Teléfono(celular)<span color="danger">*</span></label>
+                    <input placeholder="Teléfono" required type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  class="form-control" name="telefono_celular"
+                        [(ngModel)]="paciente.telefono" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Domicilio<span color="danger">*</span></label>
-                    <input placeholder="Domicilio" required type="text" class="form-control" name="domicilio" [(ngModel)]="paciente.domicilio">
+                    <input placeholder="Domicilio" required type="text" class="form-control" name="domicilio"
+                        [(ngModel)]="paciente.domicilio" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-                    <input placeholder="Correo Electrónico" required type="text" class="form-control" name="correo_electronico"
-                        [(ngModel)]="usuario.correo_electronico">
+                    <input placeholder="Correo Electrónico" required type="email" class="form-control"
+                        name="correo_electronico" [(ngModel)]="usuario.correo_electronico" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Usuario<span color="danger">*</span></label>
-                    <input placeholder="Usuario" required type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario">
+                    <input placeholder="Usuario" required type="text" class="form-control" name="usuario"
+                        [(ngModel)]="usuario.usuario" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Contraseña</label>
-                    <input placeholder="Contraseña" type="password" class="form-control" name="contrasena"
-                        [(ngModel)]="usuario.contrasena">
+                    <input placeholder="Contraseña" required type="password" class="form-control" name="contrasena"
+                        [(ngModel)]="usuario.contrasena" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Confirmar contraseña</label>
-                    <input placeholder="Confirmar" type="password" class="form-control" name="confirmar_contrasena"
-                        [(ngModel)]="confirmar_contrasena">
+                    <input placeholder="Confirmar" required type="password" class="form-control" name="confirmar_contrasena"
+                        [(ngModel)]="confirmar_contrasena" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
             </div>
             <label for="">Información de facturación</label>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label position="stacked">RFC<span color="danger">*</span></label>
-                    <input placeholder="RFC" type="text" class="form-control" name="rfc" [(ngModel)]="usuario.factura_rfc">
+                    <input placeholder="RFC" type="text" class="form-control" name="rfc"
+                        [(ngModel)]="usuario.factura_rfc">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Razon Social</label>
-                    <input placeholder="Razon Social"  class="form-control" name="razon_social"
+                    <input placeholder="Razon Social"class="form-control" name="razon_social"
                         [(ngModel)]="usuario.factura_razon_social">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Código Postal</label>
-                    <input placeholder="Codigo postal"  class="form-control" name="codigo_postal"
+                    <input placeholder="Codigo postal" class="form-control" name="codigo_postal"
                         [(ngModel)]="usuario.factura_codigo_postal">
                 </div>
-                <div class="form-group col-md-6">
-    
-                    <label position="stacked">Correo Eléctronico</label>
-                    <input placeholder="Correo Eléctronico"  class="form-control" name="correo_electronico"
-                        [(ngModel)]="usuario.factura_correo_electronico">
-                </div>
-    
                 <div>
                     <div *ngIf="error_message" class="alert alert-danger" role="alert">
                         {{error_message}}
