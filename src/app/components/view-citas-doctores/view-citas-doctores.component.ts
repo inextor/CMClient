@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Doctor, Usuario, Tipo_Gasto, Paciente } from '../../models/Modelos';
+import { Doctor, Usuario, Tipo_Gasto, Paciente, Centro_Medico } from '../../models/Modelos';
 import { Router, ActivatedRoute, Params, ParamMap } from "@angular/router"
 import { Location } from '@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
@@ -67,6 +67,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit,
 	indexDay: number[] = [0, 1, 2, 3, 4, 5, 6];
 	doctores_info: Doctor_Info[] = [];
 	intervals: DateInterval[];
+	centro_medico:Centro_Medico;
 	//busqueda
 	busqueda: string = '';
 	search_loading: boolean = false;
@@ -162,6 +163,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit,
 	}
 
 	loadCitas() {
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.initDates();
 		let startDate = new Date();
 		startDate.setTime(this.startDate.getTime());
@@ -181,7 +183,7 @@ export class ViewCitasDoctoresComponent extends BaseComponent implements OnInit,
 		endSearch.setTime(startDate.getTime());
 		endSearch.setDate(startDate.getDate() + 8);
 
-		let id_centro_medico = 1; //XXX
+		let id_centro_medico = this.centro_medico.id; //XXX
 
 		forkJoin([
 			this.rest.citaInfo.search({
