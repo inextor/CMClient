@@ -398,9 +398,8 @@ th.fc-day-header.fc-widget-header
   border-color: var(--theme-disabled-button-border-color);
 }
 
-.form-control.ng-untouched.ng-pristine.ng-invalid{
-  border:0 solid none ;
-}
+
+
 input:required {
-  box-shadow: none;
+  box-shadow:none;
 }
