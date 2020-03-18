@@ -36,7 +36,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		this.route.queryParams.subscribe( params =>
 		{
 			this.centro_medico_search = {
-				eq: { id_organizacion: this.centro_medico.id },
+				eq: { id_organizacion: this.centro_medico.id_organizacion },
 				gt: {},
 				ge: {},
 				le: {},
@@ -69,7 +69,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		this.is_loading = true;
 		this.centro_medico_search.pagina = 0;
 		this.centro_medico_search.eq = {
-			id_organizacion: this.centro_medico.id
+			id_organizacion: this.centro_medico.id_organizacion
 		}
 		let search = {};
 		let array = ['eq','le','lt','ge','gt','csv','lk'];
