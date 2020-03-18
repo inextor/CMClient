@@ -53,11 +53,14 @@ export class OrganizacionesComponent extends BaseComponent implements OnInit {
 			},error=>this.showError(error));
 		});
 
+	
 		// this.rest.centro_medico.getAll({ id_organizacion: 1 }).subscribe((respuesta)=>
 		// {
 		// 	this.is_loading = false;
 		// 	this.centros_medicos = respuesta.datos;
 		// }, (error) =>  this.showError );
   }
-
+  error(){
+	this.showError("Error");
+}
 }
