@@ -23,7 +23,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 	doctor:Doctor = {};
 	cita:Cita = {};
 	//Sacarlo de la session del recepcionista
-	centro_medico:Centro_Medico = { id: 1 };
+	centro_medico:Centro_Medico;
 	crequest:SearchPacienteRequest = {};
 	usuario:Usuario = {};
 	paciente_search:SearchObject<Paciente> = {};
@@ -54,6 +54,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 
 			let usuario:Usuario = this.rest.getUsuarioSesion();
+			this.centro_medico = this.rest.getCurrentCentroMedico();
 			console.log( usuario );
 
 			if(usuario.tipo=="DOCTOR")
