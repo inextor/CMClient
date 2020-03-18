@@ -28,7 +28,6 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 	public statusmenu: boolean;
 	ngOnInit()	{
 		this.titleService.setTitle('Clinicas');
-		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.usuario= this.rest.getUsuarioSesion();
 		this.is_loading = true;
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
@@ -37,7 +36,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		this.route.queryParams.subscribe( params =>
 		{
 			this.centro_medico_search = {
-				eq: { id_organizacion: this.centro_medico.id_organizacion?this.centro_medico.id_organizacion:this.usuario.id_organizacion },
+				eq: { id_organizacion:this.usuario.id_organizacion },
 				gt: {},
 				ge: {},
 				le: {},
@@ -70,7 +69,7 @@ export class CentrosMedicosComponent extends BaseComponent implements OnInit {
 		this.is_loading = true;
 		this.centro_medico_search.pagina = 0;
 		this.centro_medico_search.eq = {
-			id_organizacion: this.centro_medico.id_organizacion? this.centro_medico.id_organizacion:this.usuario.id_organizacion 
+			id_organizacion: this.usuario.id_organizacion 
 		}
 		let search = {};
 		let array = ['eq','le','lt','ge','gt','csv','lk'];
