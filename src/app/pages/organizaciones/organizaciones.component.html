@@ -1,0 +1,57 @@
+<div class="card p-3">
+	<div class="">
+
+		<div class="p-0">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div>
+					<h4>ORGANIZACIONES</h4>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-organizacion']">
+						Agregar Organización
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngIf="is_loading">
+						<td colspan="2">
+							<app-loading [is_loading]="is_loading"></app-loading>
+						</td>
+					</tr>
+					<tr *ngFor="let organizacion of organizaciones">
+                        <td>{{organizacion.nombre}}</td>
+						<td class="p-0 options">
+							<button class="btn btn-light p-0 m-1 border "
+							[routerLink]="['/editar-organizacion',organizacion.id]"
+							data-toggle="tooltip" title="Editar">
+								<span class="">
+									<i class="">
+										<img src="./assets/icon/options/editar.png" height="35px" width="35px"
+											class="menuIcons icons" />
+									</i>
+								</span>
+							</button>
+
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div>
+			<app-paginacion [path]="'/organizaciones'" [pages]="pages" [totalPages]="totalPages"
+				[currentPage]="currentPage"></app-paginacion>
+		</div>
+	</div>
+</div>

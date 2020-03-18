@@ -99,6 +99,7 @@ import { PushNotificationsComponent } from './components/push-notifications/push
 import { RecibirRequisicionComponent } from './pages/recibir-requisicion/recibir-requisicion.component';
 import { AgregarProductoInventarioComponent } from './pages/agregar-producto-inventario/agregar-producto-inventario.component';
 import { ReporteInventarioComponent } from './pages/reporte-inventario/reporte-inventario.component';
+import { OrganizacionesComponent } from './pages/organizaciones/organizaciones.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -205,6 +206,7 @@ export function init_app(rest: RestService) {
     RecibirRequisicionComponent,
     AgregarProductoInventarioComponent,
     ReporteInventarioComponent,
+    OrganizacionesComponent,
   ],
   imports: [
     AccessModule,

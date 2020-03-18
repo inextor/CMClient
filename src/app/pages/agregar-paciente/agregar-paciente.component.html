@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Apellido(s)<span color="danger">*</span></label>
-                    <input placeholder="Apellido" required type="text" class="form-control" name="nombre"
+                    <input placeholder="Apellido" required type="text" class="form-control" name="apellido"
                         [(ngModel)]="paciente.apellidos" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">
                 </div>
@@ -52,7 +52,7 @@
                 <div class="form-group col-md-6">
                     <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
 
-                    <input required type="date" class="form-control" name="nombre"
+                    <input required type="date" class="form-control" name="fecha_nacimiento"
                         [(ngModel)]="paciente.fecha_nacimiento"oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')" >
                 </div>

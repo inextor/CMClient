@@ -69,7 +69,7 @@ import { PushNotificationsComponent } from './components/push-notifications/push
 import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-centro-medico-home/seleccionar-centro-medico-home.component';
 import { RecibirRequisicionComponent} from './pages/recibir-requisicion/recibir-requisicion.component';
 import { ReporteInventarioComponent} from './pages/reporte-inventario/reporte-inventario.component';
-
+import { OrganizacionesComponent} from './pages/organizaciones/organizaciones.component';
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -109,6 +109,8 @@ const routes: Routes = [
 			{ path: "agregar-familiar/:id_usuario", component: AgregarFamiliarComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-gasto", component: AgregarGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-organizacion", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "editar-organizacion/:id", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
+		
 			{ path: "editar-organizacion", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-pregunta", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -183,7 +185,7 @@ const routes: Routes = [
 			{ path: "push-notificaciones", component:PushNotificationsComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "recibir-requisicion/:id_requisicion", component:RecibirRequisicionComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "reporte-inventario", component:ReporteInventarioComponent, pathMatch:"full", canActivate:[AuthGuard]},
-		
+			{ path: "organizaciones", component:OrganizacionesComponent, pathMatch:"full", canActivate:[AuthGuard]},
 		]
 	},
 ];
