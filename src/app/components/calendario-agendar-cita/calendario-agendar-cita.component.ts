@@ -1,5 +1,5 @@
 import { Component, OnInit,OnChanges,SimpleChanges,Input,Output,ViewChild,AfterViewInit,EventEmitter } from '@angular/core';
-import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente, Servicio } from 'src/app/models/Modelos';
+import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente, Servicio, Usuario } from 'src/app/models/Modelos';
 import { RestService } from 'src/app/services/rest.service';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 
@@ -34,7 +34,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	disponible: boolean = false;
 	events:SimpleMap = {};
-	usuario;
+	usuario:Usuario;
 	show_modal:boolean	= false;
 	counterId:number = 0;
 	buttons = {
@@ -84,6 +84,7 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	ngOnInit()
 	{
 		this.usuario = this.rest.getUsuarioSesion();
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.counterId = 0;
 		if (this.usuario && this.usuario.tipo == 'PACIENTE') {
 			if (window.innerWidth <= 700) {
@@ -206,8 +207,9 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	getEvents(info,successCallback,errorCallback )
 	{
 		console.log('Getting events for',info.start  );
-		let id_doctor:number = 2;
-		let id_centro_medico:number = 1;
+		let centro_medico = this.rest.getCurrentCentroMedico();
+		let id_doctor:number = this.usuario.id;
+		let id_centro_medico:number = centro_medico.id;
 
 		forkJoin([
 			this.rest.horario_doctor.getAll({id_centro_medico:id_centro_medico },{ id_doctor: id_doctor})
