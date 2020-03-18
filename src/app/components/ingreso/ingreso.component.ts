@@ -18,6 +18,7 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 	@Input() show:boolean = false;
 	@Input() closable:boolean = true;
 	@Output() showChange= new EventEmitter<boolean>();
+	
 	ingreso: Ingreso = {
 		id:null,
 		monto:null,
@@ -51,7 +52,6 @@ export class IngresoComponent extends BaseComponent implements OnInit {
 	onCancel()
 	{
 		this.showChange.emit( false );
-	
 	}
 
 

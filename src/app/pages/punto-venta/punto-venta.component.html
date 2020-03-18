@@ -6,7 +6,7 @@
 
 
 
-<!--
+					<!--
 					{{datosVenta.venta.factura_rfc}}
 					<app-loading *ngIf="is_loading"></app-loading> -->
 
@@ -179,10 +179,6 @@
 										</div>
 										<button class="border icon-quanty decrease " (click)="disminuir(sd)"><i
 												class="fa fa-angle-down "></i></button>
-
-
-
-
 									</td>
 									<td>
 										<img *ngIf="sd.servicio.id_imagen" class="image_logo"
@@ -245,11 +241,14 @@
 						<table class="data">
 							<tbody>
 								<tr>
-									<td class="text-right">	<div class="" *ngIf="datosVenta.venta.id">
-										<button type="button" class="btn btn-primary btn-sm" (click)="cancelarVenta()">
-											Cancelar Venta
-										</button>
-									</div></td>
+									<td class="text-right">
+										<div class="" *ngIf="datosVenta.venta.id">
+											<button type="button" class="btn btn-primary btn-sm"
+												(click)="cancelarVenta()">
+												Cancelar Venta
+											</button>
+										</div>
+									</td>
 
 								</tr>
 							</tbody>
@@ -347,7 +346,8 @@
 		<div class="row p-0">
 			<div class="p-0 col-lg-7 w-100">
 				<button class="btn btn-warning btn-lg w-100">
-					<strong *ngIf="datosVenta.venta.estatus !=='PAGADA' " style="font-size:2.2rem;">TOTAL: {{infoPago.total_a_pagar  | currency }} </strong>
+					<strong *ngIf="datosVenta.venta.estatus !=='PAGADA' " style="font-size:2.2rem;">TOTAL:
+						{{infoPago.total_a_pagar  | currency }} </strong>
 					<strong *ngIf="datosVenta.venta.estatus == 'PAGADA'" style="font-size:2.2rem;">PAGADO </strong>
 				</button>
 			</div>
@@ -594,9 +594,14 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 text-right w-100">
+		<div class="col-md-6 text-left w-100">
+			<button type="button" class="btn btn-primary m-3" (click)="show_modal_pago=false">
+				<i class="fa fa-times mr-2" ></i>Cancelar</button>
+		</div>
+		<div class="col-md-6 text-right w-100">
 			<button type="button" class="btn btn-primary m-3" [disabled]="procesando_pago"
-				(click)="pagarVenta()">Pagar</button>
+				(click)="pagarVenta()"><i class="fa fa-credit-card mr-2"></i>
+				Pagar</button>
 		</div>
 	</div>
 

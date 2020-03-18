@@ -22,7 +22,8 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 	@Input() show: boolean;
 	@Input() showCancel: boolean;
 	@Output() selected = new EventEmitter<Centro_Medico>();
-
+	@Output() showChange= new EventEmitter<boolean>();
+	
 	centros: Centro_Medico[] = [];
 	last: string = '';
 	centros_search: SearchObject<Sucursal_Doctor>;
@@ -112,6 +113,10 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 		}
 	}
 
+	onCancel()
+	{
+		this.showChange.emit( false );
+	}
 
 	dismissModal() {
 		//		this.modalCtrl.dismiss(null);
