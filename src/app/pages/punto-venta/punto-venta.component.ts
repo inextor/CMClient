@@ -126,8 +126,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
 				, this.rest.getDatosVenta(id)
 				, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' }, limite: 200 })
-			])
-				: forkJoin([
+			]): forkJoin([
 					this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
 					, of(null)
 					, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' } })
@@ -149,8 +148,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				this.ventas = response[2].datos;
 				this.calcularTotalVenta();
 				this.is_loading = false;
-			}
-				, (error) => {
+			}, (error) => {
 					this.showError(error);
 				});
 		});
@@ -493,6 +491,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.datosVenta.venta.iva = iva;
 
 		let pagos_hechos = this.datosVenta.pagos.reduce((a, b) => { return a + b.total }, 0);
+		this.datosVenta.venta.pendiente = total- pagos_hechos;
 		console.log("infoPAgo", this.datosVenta.pagos);
 		//this.datosVenta.venta.total = total;
 		//this.datosVenta.venta.subtotal
@@ -503,6 +502,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.infoPago.total_venta = total;//this.datosVenta.detalles.reduce((a,b)=>{ return a+b.detalle_venta.total},0);
 		this.infoPago.total_pagado = pagos_hechos;
 		this.infoPago.total_a_pagar = total - pagos_hechos;
+
 		this.infoPago.cambio = 0;
 		console.log("infoPAgo", this.infoPago);
 		this.calcularCantidades();

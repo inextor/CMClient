@@ -8,31 +8,25 @@
 		<div *ngIf="showCentros">
 			<div>
 				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
-					<a (click)="seleccionar_clinica()"
-						class="list-group-item list-group-item-action color1 ">Seleccionar CM
-					</a>
+					<a (click)="seleccionar_clinica()" class="list-group-item list-group-item-action color1 ">Seleccionar CM</a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
-					<a [routerLink]="['/especialidades']"
-						class="list-group-item list-group-item-action color1 ">Especialidades
-					</a>
+					<a [routerLink]="['/especialidades']" class="list-group-item list-group-item-action color1 ">Especialidades</a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
-					<a [routerLink]="['/centros-medicos']"
-						class="list-group-item list-group-item-action color1 ">Clinicas</a>
+					<a [routerLink]="['/centros-medicos']" class="list-group-item list-group-item-action color1 ">Clinicas</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
-					<a [routerLink]="['/servicios']"
-						class="list-group-item list-group-item-action color1 ">Servicios</a>
+					<a [routerLink]="['/servicios']" class="list-group-item list-group-item-action color1 ">Servicios</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
 					<a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">Gastos</a>
 				</div>
 				<div [appAccess]="['ADMIN']" [routerLink]="['/inventario']" class="menuSubButtons">
-					<a class="list-group-item list-group-item-action color1 ">Inventario </a>
+					<a class="list-group-item list-group-item-action color1 ">Inventario</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR']"[routerLink]="['/proveedores']"  class="menuSubButtons">
-					<a class="list-group-item list-group-item-action color1 ">Proveedores </a>
+					<a class="list-group-item list-group-item-action color1 ">Proveedores</a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
 					<a [routerLink]="['/usuarios']" class="list-group-item list-group-item-action color1 ">Usuarios</a>
