@@ -35,6 +35,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	datosVenta: DatosVenta = null;
 	centro_medico: Centro_Medico = null;
 	id_servicio_default: number = null;
+	tipo_precios: Tipo_Precio[] = [];
 	//timer
 	porcentaje: string = '0%';
 	timeLeft: number = 0;
@@ -50,45 +51,60 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		//this.venta_handler = new VentaHandler();
 	}
 
+	ngOnInit() {
+		this.route.paramMap.subscribe(params => {
+			this.is_loading = true;
+			let id = params.get('id') ? parseInt(params.get('id')) : null;
+
+			if (id) {
+				this.loadById(id);
+			}
+			else {
+				this.loadByIdCita(parseInt(params.get('id_cita')))
+			}
+		});
+	}
+
+
+	loadById(id: number) {
+		this.rest.consulta.get(id).subscribe(consulta => {
+			this.loadConsultaData(consulta);
+		}, (error) => { this.showError(error) });
+	}
 
 	loadByIdCita(id_cita: number) {
-		this.rest.consulta.search
-			({
-				eq: { id_cita: id_cita }
-			})
-			.subscribe((response) => {
-				if (response.total == 0) {
-					console.log('Consulta no encontrada');
-					this.rest.cita.get(id_cita).subscribe((cita) => {
-						this.loadConsultaData({
-							id_doctor: cita.id_doctor
-							, id_paciente: cita.id_paciente
-							, id_venta: null
-							, id_cita: id_cita
-							, id_centro_medico: cita.id_centro_medico
-							, id_servicio: cita.id_servicio
-						});
-
-					}, (error) => this.showError(error));
-				}
-				else {
-					console.log('Consulta Encontrada');
-					this.loadConsultaData(response.datos[0]);
-					//mostrar el tiempo que se realizo en la cita, cuando esta ya termino.
-					if (this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null) {
-						let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
-						let now = this.rest.getLocalDateFromMysqlString(this.consulta.fin_consulta);
-						let defaultTime = 1800;
-						let diferencia = (now.getTime() - date.getTime()) / 10;
-						console.log(date, now);
-						console.log("inicio consulta", this.consulta.inicio_consulta);
-						this.porcentaje = diferencia / defaultTime + '%';
-						this.tiempo_transcurrido = (((now.getTime() - date.getTime()) / 1000) / 60);
-
-					}
+		this.rest.consulta.search({ eq: { id_cita: id_cita } }).subscribe((response) => {
+			if (response.total == 0) {
+				console.log('Consulta no encontrada');
+				this.rest.cita.get(id_cita).subscribe((cita) => {
+					this.loadConsultaData({
+						id_doctor: cita.id_doctor
+						, id_paciente: cita.id_paciente
+						, id_venta: null
+						, id_cita: id_cita
+						, id_centro_medico: cita.id_centro_medico
+						, id_servicio: cita.id_servicio
+					});
+				}, (error) => this.showError(error));
+			}
+			else {
+				console.log('Consulta Encontrada');
+				this.loadConsultaData(response.datos[0]);
+				//mostrar el tiempo que se realizo en la cita, cuando esta ya termino.
+				if (this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null) {
+					let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
+					let now = this.rest.getLocalDateFromMysqlString(this.consulta.fin_consulta);
+					let defaultTime = 1800;
+					let diferencia = (now.getTime() - date.getTime()) / 10;
+					console.log(date, now);
+					console.log("inicio consulta", this.consulta.inicio_consulta);
+					this.porcentaje = diferencia / defaultTime + '%';
+					this.tiempo_transcurrido = (((now.getTime() - date.getTime()) / 1000) / 60);
 
 				}
-			}, (error) => this.showError(error));
+
+			}
+		}, (error) => this.showError(error));
 	}
 
 	getDatosVenta(consulta: Consulta, centro_medico: Centro_Medico) {
@@ -110,12 +126,10 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		return datosVenta;
 	}
 
-
 	loadConsultaData(consulta) {
 		this.consulta = consulta;
 		console.log("se cargo la consulta", consulta)
 		let centro_medico = this.rest.getCurrentCentroMedico();
-
 		forkJoin([
 			this.rest.doctor.get(this.consulta.id_doctor)
 			, this.rest.paciente.get(this.consulta.id_paciente)
@@ -128,7 +142,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			this.paciente = responses[1];
 			this.centro_medico = responses[2];
 			this.datosVenta = responses[3];
-			//this.tipo_precios	= responses[4];
+			this.tipo_precios = responses[4].datos;
 			this.cita = responses[5];
 			if (this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null) {
 				this.interval = setInterval(() => this.actualizarTimer(), 1000);
@@ -150,7 +164,6 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 					}, 500);
 				}
 			}
-
 			this.is_loading = false;
 		});
 	}
@@ -163,6 +176,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		return {
 			venta: {
 				id_centro_medico: centro_medico.id
+				, id_usuario_cliente: this.cita.id_paciente
 				, id_usuario_atendio: usuario.id
 				, iva: centro_medico.iva
 				, total: 0
@@ -179,29 +193,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		}
 	}
 
-	loadById(id: number) {
-		this.rest.consulta.get(id)
-			.subscribe(consulta => {
-				this.loadConsultaData(consulta);
-			}, (error) => { this.showError(error) });
-	}
 
-	ngOnInit() {
-		this.route.paramMap.subscribe(params => {
-			this.is_loading = true;
-
-			if (params.has('id')) {
-				let id = params.get('id') ? parseInt(params.get('id')) : null;
-				this.loadById(id);
-
-			}
-			else {
-				this.loadByIdCita(parseInt(params.get('id_cita')))
-				console.log("iniceo consulta", this.consulta.inicio_consulta);
-
-			}
-		});
-	}
 
 	guardar() {
 		this.is_loading = true;
@@ -220,13 +212,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 	}
 
 	procederPago() {
-		if (this.datosVenta.venta.estatus == 'PENDIENTE') {
-			this.guardar().subscribe((response) => {
-				this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
-			}, (error) => this.showError(error));
-		} else {
-			this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
-		}
+		this.router.navigate(['punto-venta', this.datosVenta.venta.id]);
 	}
 
 	buscar(evt: any) {

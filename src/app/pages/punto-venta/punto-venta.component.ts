@@ -122,19 +122,16 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 			this.is_loading = true;
 
-			let subscription = id
-				? forkJoin
-					([
-						this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
-						, this.rest.getDatosVenta(id)
-						, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' }, limite: 200 })
-					])
-				: forkJoin
-					([
-						this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
-						, of(null)
-						, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' } })
-					]);
+			let subscription = id ? forkJoin([
+				this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
+				, this.rest.getDatosVenta(id)
+				, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' }, limite: 200 })
+			])
+				: forkJoin([
+					this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
+					, of(null)
+					, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' } })
+				]);
 
 			subscription.subscribe((response) => {
 				this.tipo_precios = response[0].datos;
@@ -290,7 +287,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				}, (error) => {
 					this.showError(error);
 				});
-			}else{
+			} else {
 				this.showError('Error, la Venta ya fue liquidada')
 			}
 		}
@@ -315,86 +312,86 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 	}
 	agregarServicio(servicio: Servicio) {
 
-		if(this.datosVenta.venta.estatus !== 'PAGADA'){
+		if (this.datosVenta.venta.estatus !== 'PAGADA') {
 
-		let detalle_servicio = this.datosVenta.detalles.find(i => i.servicio.id == servicio.id);
+			let detalle_servicio = this.datosVenta.detalles.find(i => i.servicio.id == servicio.id);
 
-		if (detalle_servicio) {
-			detalle_servicio.detalle_venta.cantidad++;
-			this.search_servicios = [];
-			this.busqueda = '';
-			this.calcularTotalVenta();
-			this.focusBusqueda();
-			return;
-		}
-
-		let precio_servicio = null;
-
-
-		this.is_loading = true;
-		of(true).pipe
-			(
-				flatMap((x) => {
-					if (servicio.id in this.precios_info) {
-						return of({ total: this.precios_info[servicio.id].length, datos: this.precios_info[servicio.id] });
-					}
-					//Else
-					let centro_medico = this.rest.getCurrentCentroMedico();
-					return this.rest.precio_servicio.search
-						({
-							eq:
-							{
-								id_servicio: servicio.id
-								, id_centro_medico: centro_medico.id
-							}
-						})
-				})
-			)
-			.subscribe((response) => {
-				this.is_loading = false;
-				if (response.datos.length == 0) {
-					this.busqueda = '';
-					this.search_servicios = [];
-					this.showError('El producto "' + servicio.nombre + '" no tiene asignado un precio 1');
-					this.calcularTotalVenta();
-					this.focusBusqueda();
-					return;
-				}
-
-
-				if (!(servicio.id in this.precios_info)) {
-					this.precios_info[servicio.id] = response.datos;
-				}
-
-				let precio_servicio = this.precios_info[servicio.id].find((p) => p.id_tipo_precio == this.datosVenta.venta.id_tipo_precio);
-
-				if (!precio_servicio) {
-					this.busqueda = '';
-					this.search_servicios = [];
-					this.showError('El producto "' + servicio.nombre + '" no tiene asignado un precio 2');
-					this.calcularTotalVenta();
-					this.focusBusqueda();
-					return;
-				}
-
-				this.datosVenta.detalles.push({
-					servicio
-					, precio_servicio
-					, detalle_venta:
-					{
-						id_servicio: servicio.id
-						, cantidad: 1
-					}
-				});
-
-				this.busqueda = '';
+			if (detalle_servicio) {
+				detalle_servicio.detalle_venta.cantidad++;
 				this.search_servicios = [];
+				this.busqueda = '';
 				this.calcularTotalVenta();
 				this.focusBusqueda();
-			}, (error) => {
-				console.log('Solo imprimimos el error en la consola');
-			});
-		}else{
+				return;
+			}
+
+			let precio_servicio = null;
+
+
+			this.is_loading = true;
+			of(true).pipe
+				(
+					flatMap((x) => {
+						if (servicio.id in this.precios_info) {
+							return of({ total: this.precios_info[servicio.id].length, datos: this.precios_info[servicio.id] });
+						}
+						//Else
+						let centro_medico = this.rest.getCurrentCentroMedico();
+						return this.rest.precio_servicio.search
+							({
+								eq:
+								{
+									id_servicio: servicio.id
+									, id_centro_medico: centro_medico.id
+								}
+							})
+					})
+				)
+				.subscribe((response) => {
+					this.is_loading = false;
+					if (response.datos.length == 0) {
+						this.busqueda = '';
+						this.search_servicios = [];
+						this.showError('El producto "' + servicio.nombre + '" no tiene asignado un precio 1');
+						this.calcularTotalVenta();
+						this.focusBusqueda();
+						return;
+					}
+
+
+					if (!(servicio.id in this.precios_info)) {
+						this.precios_info[servicio.id] = response.datos;
+					}
+
+					let precio_servicio = this.precios_info[servicio.id].find((p) => p.id_tipo_precio == this.datosVenta.venta.id_tipo_precio);
+
+					if (!precio_servicio) {
+						this.busqueda = '';
+						this.search_servicios = [];
+						this.showError('El producto "' + servicio.nombre + '" no tiene asignado un precio 2');
+						this.calcularTotalVenta();
+						this.focusBusqueda();
+						return;
+					}
+
+					this.datosVenta.detalles.push({
+						servicio
+						, precio_servicio
+						, detalle_venta:
+						{
+							id_servicio: servicio.id
+							, cantidad: 1
+						}
+					});
+
+					this.busqueda = '';
+					this.search_servicios = [];
+					this.calcularTotalVenta();
+					this.focusBusqueda();
+				}, (error) => {
+					console.log('Solo imprimimos el error en la consola');
+				});
+		} else {
 			this.showError('Error, venta ya procesada')
 		}
 	}
@@ -429,8 +426,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			this.is_loading = false;
 			this.datosVenta.venta.estatus = 'PROCESADA';
 			this.router.navigate(['/ticket-venta', this.datosVenta.venta.id, 1]);
-		}
-			, (error) => {
+		},(error) => {
 				this.is_loading = false;
 				this.showError(error);
 			});
@@ -470,6 +466,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 		this.calcularTotalVenta();
 	}
+
 	calcularTotalVenta() {
 		let total = 0;
 		let subtotal = 0;

@@ -60,7 +60,7 @@
 					<!-- progreso de la cita -->
 
 					<!-- servicios -->
-					<div class="card p-2">
+					<div class="card p-2" *ngIf="datosVenta">
 						<app-punto-venta-consulta [datosVenta]="datosVenta" [id_servicio_default]="id_servicio_default">
 						</app-punto-venta-consulta>
 						<!-- div *ngIf="datosVenta !== null">{{datosVenta.detalles.length}} {{totalProducts}}</div -->
