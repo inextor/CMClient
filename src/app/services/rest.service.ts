@@ -621,14 +621,14 @@ export class RestService {
 					return forkJoin([of([]),of(venta)]);
 
 				return forkJoin([this.detalle_venta.batchUpdate(detalles_venta),of( venta )]);
-			})
-			,flatMap((responses)=>
+			}),flatMap((responses)=>
 			{
 				console.log("Result of svaing detalles", responses );
 				return this.getDatosVenta( responses[ 1 ].id );
 			})
 		);
 	}
+
 	getOrganizacionInfo():Promise<Organizacion>
 	{
 		return this.http.get<Organizacion>(`${this.urlBase}/Organizacion.php?domain=foo`)

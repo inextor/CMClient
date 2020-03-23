@@ -126,11 +126,11 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
 				, this.rest.getDatosVenta(id)
 				, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' }, limite: 200 })
-			]): forkJoin([
-					this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
-					, of(null)
-					, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' } })
-				]);
+			]) : forkJoin([
+				this.rest.tipo_precio.getAll({ id_organizacion: usuario.id_organizacion })
+				, of(null)
+				, this.rest.venta.search({ eq: { id_usuario_atendio: usuario.id, estatus: 'PENDIENTE', activa: 'SI' } })
+			]);
 
 			subscription.subscribe((response) => {
 				this.tipo_precios = response[0].datos;
@@ -149,8 +149,8 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				this.calcularTotalVenta();
 				this.is_loading = false;
 			}, (error) => {
-					this.showError(error);
-				});
+				this.showError(error);
+			});
 		});
 	}
 
@@ -265,29 +265,31 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			x.unsubscribe();
 		}, (error) => this.showError(error));
 	}
-
 	guardarVenta() {
 		this.is_loading = true;
 		console.log("guardando venta", this.datosVenta);
-		if (this.datosVenta.venta.estatus == "PROCESADA") {
-			this.is_loading = false;
-			this.calcularTotalVenta();
-			this.calcularCantidades();
-			this.show_modal_pago = true;
-		} else {
-			if (this.datosVenta.venta.estatus !== 'PAGADA') {
-
-				this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
-					this.is_loading = false;
-					this.datosVenta = datosVenta;
-					this.calcularCantidades();
-					this.show_modal_pago = true;
-				}, (error) => {
-					this.showError(error);
-				});
+		if (this.datosVenta.detalles.length >= 1) {
+			if (this.datosVenta.venta.estatus == "PROCESADA") {
+				this.is_loading = false;
+				// this.calcularTotalVenta();
+				// this.calcularCantidades();
+				this.show_modal_pago = true;
 			} else {
-				this.showError('Error, la Venta ya fue liquidada')
+				if (this.datosVenta.venta.estatus !== 'PAGADA') {
+					this.rest.guardarDatosVenta(this.datosVenta).subscribe((datosVenta) => {
+						this.is_loading = false;
+						this.datosVenta = datosVenta;
+						console.log("DATOSQUE TRAJO", this.datosVenta);
+						this.show_modal_pago = true;
+					}, (error) => {
+						this.showError(error);
+					});
+				} else {
+					this.showError('Error, la Venta ya fue liquidada')
+				}
 			}
+		} else {
+			this.showError('Ingrese un producto o servicio.')
 		}
 	}
 
@@ -308,9 +310,10 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		let x = <HTMLInputElement>document.getElementById('busqueda');
 		x.focus();
 	}
+
 	agregarServicio(servicio: Servicio) {
 
-		if (this.datosVenta.venta.estatus !== 'PAGADA') {
+		if (this.datosVenta.venta.estatus == 'PENDIENTE') {
 
 			let detalle_servicio = this.datosVenta.detalles.find(i => i.servicio.id == servicio.id);
 
@@ -381,16 +384,20 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 							, cantidad: 1
 						}
 					});
-
+					//limpiando la busqueda 
 					this.busqueda = '';
 					this.search_servicios = [];
+					// calculando cantidades 
 					this.calcularTotalVenta();
 					this.focusBusqueda();
 				}, (error) => {
 					console.log('Solo imprimimos el error en la consola');
 				});
 		} else {
-			this.showError('Error, venta ya procesada')
+			this.showError('No puedes agregar un servicio, la venta ya fue procesada')
+			// limpiando busqueda
+			this.busqueda = '';
+			this.search_servicios = [];
 		}
 	}
 
@@ -407,8 +414,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 					+ pago.cheque
 					+ pago.deposito
 					- this.infoPago.total_a_pagar)
-			)
-			: 0);
+			) : 0);
 
 		pago.cambio = cambio;
 		pago.cambio_en_dolares = cambio / this.datosVenta.centro_medico.tipo_cambio_dolares;
@@ -424,35 +430,49 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			this.is_loading = false;
 			this.datosVenta.venta.estatus = 'PROCESADA';
 			this.router.navigate(['/ticket-venta', this.datosVenta.venta.id, 1]);
-		},(error) => {
-				this.is_loading = false;
-				this.showError(error);
-			});
+		}, (error) => {
+			this.is_loading = false;
+			this.showError(error);
+		});
 	}
 
 	disminuir(sd) {
-		console.log('Disminuir');
-		if (sd.detalle_venta.cantidad <= 1) {
-			console.log("try to remove");
-			let index = this.datosVenta.detalles.findIndex(i => i.servicio.id == sd.servicio.id);
-			if (index > -1)
-				this.datosVenta.detalles.splice(index, 1);
-			else
-				console.log("No se envio");
 
+		if (this.datosVenta.venta.estatus == "PROCESADA") {
+			this.showError("No puedes agregar otra cantidad, la venta ya fue procesada.");
+		} else {
+
+			console.log('Disminuir');
+			if (sd.detalle_venta.cantidad <= 1) {
+				console.log("try to remove");
+				let index = this.datosVenta.detalles.findIndex(i => i.servicio.id == sd.servicio.id);
+				if (index > -1)
+					this.datosVenta.detalles.splice(index, 1);
+				else
+					console.log("No se envio");
+
+				this.calcularTotalVenta();
+				return;
+			}
+			else {
+				console.log('cantidad >= 2 ');
+			}
+
+			sd.detalle_venta.cantidad--;
 			this.calcularTotalVenta();
-			return;
-		}
-		else {
-			console.log('cantidad >= 2 ');
 		}
 
-		sd.detalle_venta.cantidad--;
-		this.calcularTotalVenta();
 	}
 	aumentar(sd) {
-		sd.detalle_venta.cantidad++;
-		this.calcularTotalVenta();
+		if (this.datosVenta.venta.estatus == "PROCESADA") {
+			this.showError("No puedes agregar otra cantidad, la venta ya fue procesada.");
+		} else {
+
+			sd.detalle_venta.cantidad++;
+			this.calcularTotalVenta();
+
+		}
+
 	}
 
 	eliminar(sd) {
@@ -491,7 +511,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.datosVenta.venta.iva = iva;
 
 		let pagos_hechos = this.datosVenta.pagos.reduce((a, b) => { return a + b.total }, 0);
-		this.datosVenta.venta.pendiente = total- pagos_hechos;
+		this.datosVenta.venta.pendiente = total - pagos_hechos;
 		console.log("infoPAgo", this.datosVenta.pagos);
 		//this.datosVenta.venta.total = total;
 		//this.datosVenta.venta.subtotal

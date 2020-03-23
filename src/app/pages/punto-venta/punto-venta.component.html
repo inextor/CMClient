@@ -201,10 +201,8 @@
 						<table class="data">
 							<thead>
 								<tr>
-									<th>TOTAL ARTICULOS</th>
-									<th></th>
-									<th class="text-right">SUBTOTAL</th>
-									<th>{{datosVenta.venta.subtotal| currency}}</th>
+									<th class="text-center">SUBTOTAL:{{infoPago.subtotal | currency}}</th>
+									<th class="text-left">IVA:{{infoPago.iva| currency}}</th>
 								</tr>
 							</thead>
 						</table>
@@ -213,15 +211,8 @@
 						<table class="data">
 							<tbody>
 								<tr>
-									<td>
-										IVA
-									</td>
-									<td>{{datosVenta.venta.iva| currency}}</td>
-									<td class="text-right">
-										SALDO PENDIENTE
-									</td>
-									<td>
-										{{datosVenta.venta.pendiente | currency}}
+									<td class="text-center">
+										SALDO PENDIENTE: {{infoPago.total_a_pagar | currency}}
 									</td>
 								</tr>
 							</tbody>
@@ -231,8 +222,7 @@
 						<table class="data">
 							<thead>
 								<tr>
-									<th class="text-right">TOTAL</th>
-									<th>{{datosVenta.venta.total | currency }}</th>
+									<th class="text-center">TOTAL DE VENTA: {{datosVenta.venta.total | currency }}</th>
 								</tr>
 							</thead>
 						</table>
