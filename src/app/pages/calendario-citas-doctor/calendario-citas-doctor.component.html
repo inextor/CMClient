@@ -1,22 +1,12 @@
-<div class="card p-2" >
-	<full-calendar 
-		#calendar 
-		[header]="calendarOptions.header" 
-		[plugins]="calendarPlugins" 
-		[defaultView]="calendarOptions.defaultView"
-		locale="es"
-		[buttonText]="buttons"
-		[slotLabelFormat]="slotLabelFormat"
-		[titleFormat]="titleFormat"
-		contentHeight="auto"
-		[allDaySlot]="false"
-		minTime="07:00:00" 
-		maxTime="20:00:00" 
-		deepChangeDetection="true"
-		(dateClick)="dateClick($event)" 
+<div class="card p-2">
+	<full-calendar #calendar [header]="calendarOptions.header" [plugins]="calendarPlugins"
+		[defaultView]="calendarOptions.defaultView" locale="es" [buttonText]="buttons"
+		[slotLabelFormat]="slotLabelFormat" [titleFormat]="titleFormat" contentHeight="auto" [allDaySlot]="false"
+		minTime="07:00:00" maxTime="20:00:00" deepChangeDetection="true" (dateClick)="dateClick($event)"
 		(eventClick)="eventClicked($event)">
 	</full-calendar>
 </div>
+
 
 <app-modal [show]="showOptionPaciente">
 	<div class="modal-content" style="width: 25rem;">
@@ -179,7 +169,7 @@
 	</div>
 </app-modal>
 
-
+<!-- Agregar nueva cita  -->
 <div class="custom-modal" *ngIf="show_modal">
 	<div style="width: 30rem;">
 		<form>
@@ -204,7 +194,7 @@
 						</div>
 					</div>
 				</div>
-				<div *ngIf="search_paciente.length " class="dropdown-menu show w-100 no-selectable-text">
+				<div *ngIf="search_paciente !== null " class="dropdown-menu show w-100 no-selectable-text">
 					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
 						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
 						<div class="dropdown-item search">
@@ -223,3 +213,4 @@
 		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
 	</div>
 </div>
+<!-- fin agregar nueva cita -->

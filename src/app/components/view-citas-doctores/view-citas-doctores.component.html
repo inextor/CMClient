@@ -219,7 +219,7 @@
 						</div>
 					</div>
 				</div>
-				<div *ngIf="search_paciente.length " class="dropdown-menu show w-100 no-selectable-text">
+				<div *ngIf="search_paciente.length !== null " class="dropdown-menu show w-100 no-selectable-text">
 					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
 						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
 						<div class="dropdown-item search">

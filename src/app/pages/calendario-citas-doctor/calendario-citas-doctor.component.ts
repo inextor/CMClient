@@ -392,9 +392,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 		}, (error) => { errorCallback(error); });
 	}
 
-
-
 	eventClicked(evt) {
+		console.log("evento",evt);
 		if (this.usuario.tipo == 'DOCTOR') {
 
 			if (evt.event.rendering == 'background')
