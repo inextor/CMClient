@@ -2,15 +2,18 @@ import { Component, OnInit,OnChanges,SimpleChanges,Input,Output,ViewChild,AfterV
 import { Cita,Horario_Doctor,Doctor,Centro_Medico,Paciente, Servicio, Usuario } from 'src/app/models/Modelos';
 import { RestService } from 'src/app/services/rest.service';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
-
-
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { OptionsInput } from '@fullcalendar/core';
+import { OptionsInput, constrainPoint } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import TimeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
-
+import { SearchObject, SearchCitaResponse, SearchCitaRequest, Respuesta  } from '../../models/Respuestas';
+import { BaseComponent } from 'src/app/pages/base/base.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { Location } from '@angular/common';
+import { CitasComponent } from 'src/app/pages/citas/citas.component';
 export interface SimpleMap{
 	 [key: string]: Object;
 }
@@ -20,12 +23,14 @@ export interface SimpleMap{
   templateUrl: './calendario-agendar-cita.component.html',
   styleUrls: ['./calendario-agendar-cita.component.css']
 })
-export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
-
-	@Input() doctor:Doctor= null;
-	@Input() centro_medico:Centro_Medico = null;
+export class CalendarioAgendarCitaComponent extends BaseComponent implements OnInit, OnChanges {
+	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
+		super(rest, router, route, location, titleService);
+	}
+	@Input() doctor:Doctor;
+	@Input() centro_medico:Centro_Medico;
 	@Input() paciente:Paciente;
-	@Input() servicio:Servicio = null;
+	@Input() servicio:Servicio;
 	@Output() citaAgendada = new EventEmitter<Cita>();
 
 	//calendarEvents:EventInput[] = [];
@@ -74,13 +79,12 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 	cita:Cita = {
 		inicio: null
 	}
-
+	cita_search: SearchObject<Cita> = {
+	};
 	cita_fecha:Date = null;
-
-  	constructor(private rest:RestService) {
-
-	}
-
+	// variables validacion citas
+	citas:Cita[]=[];
+	citas_dic: any={};
 	ngOnInit()
 	{
 		this.usuario = this.rest.getUsuarioSesion();
@@ -146,7 +150,11 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 				};
 			}
 		}
-
+		this.cita_search = {
+			eq: {},
+			ge: {},
+			le: {}
+		};
 	}
 
 	ngAfterViewInit()
@@ -173,12 +181,11 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	good()
 	{
-	
-
 		const calendarAPI = this.calendarComponent.getApi();
 		
 		calendarAPI.addEventSource({
 			id: 'citas'
+
 			,events: (info,successCallback,failureCallback)=>
 			{
 				console.log( info,typeof successCallback, typeof failureCallback );
@@ -375,7 +382,11 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 
 	aceptarCita()
 	{
+	
 		//let usuario = this.restService.getUsuarioSesion();
+		let cita = this.citas.find(i => i.inicio == this.rest.getMysqlStringFromLocaDate(this.cita_fecha));
+		console.log("la encontro",cita);
+		if(!cita){
 		this.rest.cita.create({
 			id_centro_medico	: this.centro_medico.id
 			,id_doctor			: this.doctor.id
@@ -397,11 +408,32 @@ export class CalendarioAgendarCitaComponent implements OnInit, OnChanges {
 				let str = this.rest.getErrorMessage( error );
 				this.rest.showError({ mensaje: this.rest.getErrorMessage( error ), tipo: 'alert-danger' });
 			}
-		);
+		);}else{
+			this.showError("Ya existe una cita del paciente con la misma fecha.")
+		}
 	}
 
+// busca las citas recientes del paciente seleccionado para comparar si ya existe una con la misma fecha.
+	validateDate(){
+		let d = new Date();
+		d.setHours(d.getHours() - 3);
+		let z = (i) => i < 10 ? '0' + i : i;
+		let currentDate = new Date();
+		let fecha_inicio = '' + currentDate.getFullYear() + '-' + z(currentDate.getMonth() + 1) + '-' + z(currentDate.getDate()) + ' ' + z(currentDate.getHours()) + ':' + z(currentDate.getMinutes()) + ':00';
+		this.cita_search.eq.id_centro_medico = this.centro_medico.id
+		this.cita_search.eq.id_doctor = this.doctor.id
+		this.cita_search.eq.id_paciente = this.paciente.id
+		this.cita_search.ge.inicio = fecha_inicio
+		console.log("lacitasearch",this.cita_search);
+		this.rest.cita.search(this.cita_search).subscribe((response)=>{
+			this.citas = response.datos
+			this.citas.forEach(i => this.citas_dic[i.id] = i);
+			console.log("imprimiento citas",this.citas);
+		})
+	}
 	dateClick(evt)
 	{
+		this.validateDate();
 		// console.log("Click on ", evt.date );
 		console.log( 'asdfasdagsdgasdgasgas',evt );
 		// si el evento seleccionado es disponible se puede crear la cita 

@@ -98,7 +98,6 @@ export interface Consulta{
 	fin_consulta?:string;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
-
 }
 
 export interface Consultorio{
