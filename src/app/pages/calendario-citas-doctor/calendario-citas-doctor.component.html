@@ -18,4 +18,208 @@
 	</full-calendar>
 </div>
 
-<div class="custom-modal" *ngIf="show_modal"></div>
+<app-modal [show]="showOptionPaciente">
+	<div class="modal-content" style="width: 25rem;">
+		<div class="modal-header">
+			<h5 class="modal-title">Opciones Paciente</h5>
+			<div type="button" (click)="new_cita()">new cita</div>
+		</div>
+		<div class="modal-body  text-center ">
+			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+
+			<!-- *ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'" -->
+			<button class=" p-0 btn btn-light m-1 border " [appAccess]="['Doctor','admin']" data-toggle="tooltip"
+				title="Consultas">
+				<span class="">
+					<i class="">
+						<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+			<!-- confirmado por paciente -->
+			<button class=" btn btn-light m-1 p-0 border"
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente=='SI'" data-toggle="tooltip"
+				title="Confirmado por paciente">
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmado-paciente.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+			<!-- confirmar paciente -->
+			<button class=" btn btn-light m-1 p-0 border"
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente!='SI'"
+				(click)="showConfirmPaciente=true;" data-toggle="tooltip" title="Confirmar paciente">
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmar-paciente.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+			<!-- confirmado por doctor  -->
+			<button class=" btn btn-light p-0 m-1 border "
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor=='SI'" data-toggle="tooltip"
+				title="Confirmado por doctor">
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmado-doctor.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+			<!-- confirmar doctor -->
+			<button class=" btn btn-light p-0 m-1 border "
+				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
+				(click)="showConfirmDoctor=true" data-toggle="tooltip" title="Confirmar doctor">
+
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/confirmar-doctor.png" height="43px" width="43px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+			<!-- cancelar -->
+			<button class="btn btn-light p-1 m-1 border "
+				*ngIf="currentInfoCita && currentInfoCita.cita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true"
+				data-toggle="tooltip" title="Cancelar cita">
+
+				<span>
+					<i class="">
+						<img src="./assets/icon/options/cancelar-cita.png" height="35px" width="35px"
+							class="menuIcons icons" />
+					</i>
+				</span>
+			</button>
+
+			<!-- activar -->
+			<button class="btn btn-light p-1 m-1 border"
+				*ngIf="currentInfoCita && currentInfoCita.cita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true"
+				data-toggle="tooltip" title="Activar cita">
+				<span>
+					<i class="">
+						<i class="">
+							<img src="./assets/icon/options/activar-cita.png" height="35px" width="35px"
+								class="menuIcons icons" />
+						</i>
+					</i>
+				</span>
+			</button>
+
+		</div>
+		<div class="modal-footer">
+			<a class="btn text-light  btn-secondary" (click)="showOptionPaciente=false">Cancelar</a>
+		</div>
+
+		<!-- confirmacion de las opciones de la cita -->
+		<app-modal [show]="showConfirmPaciente">
+			<div class="modal-content" style="width: 25rem;">
+				<div class="modal-header">
+					<h5 class="modal-title">Confirmar</h5>
+				</div>
+				<div class="modal-body pb-0">
+					<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn text-light  btn-secondary" (click)="showConfirmPaciente=false">Cancelar</a>
+					<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
+				</div>
+			</div>
+		</app-modal>
+
+		<app-modal [show]="showConfirmDoctor">
+			<div class="modal-content" style="width: 25rem;">
+				<div class="modal-header">
+					<h5 class="modal-title">Confirmar Doctor</h5>
+				</div>
+				<div class="modal-body pb-0">
+					<p class="text-center">Desea confirmar la asistencia del doctor?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn text-light  btn-secondary" (click)="showConfirmDoctor=false">Cancelar</a>
+					<a class="btn text-light  btn-primary" (click)="confirmarDoctor(currentInfoCita)">Aceptar</a>
+				</div>
+
+			</div>
+		</app-modal>
+
+		<app-modal [show]="showConfirmCancelar">
+			<div class="modal-content" style="width: 25rem;">
+				<div class="modal-header">
+					<h5 class="modal-title">Cancelar Cita</h5>
+				</div>
+				<div class="modal-body pb-0">
+					<p class="text-center">Desea cancelar la cita?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn text-light  btn-secondary" (click)="showConfirmCancelar=false">Cancelar</a>
+					<a class="btn text-light btn-danger" (click)="cancelar(currentInfoCita)">Aceptar</a>
+				</div>
+			</div>
+		</app-modal>
+
+		<app-modal [show]="showConfirmActivar">
+			<div class="modal-content" style="width: 25rem;">
+				<div class="modal-header">
+					<h5 class="modal-title">Confirmar Cita </h5>
+				</div>
+				<div class="modal-body">
+					<p class="car-text">Desea Confirmar la cita?</p>
+				</div>
+				<div class="modal-footer">
+					<a class="btn text-light btn-secondary" (click)="showConfirmActivar=false">Cancelar</a>
+					<a class="btn text-light btn-danger" (click)="activar(currentInfoCita)">Aceptar</a>
+				</div>
+			</div>
+		</app-modal>
+		<!-- fin confirmacion de las opciones de la cita -->
+	</div>
+</app-modal>
+
+
+<div class="custom-modal" *ngIf="show_modal">
+	<div style="width: 30rem;">
+		<form>
+			<div>
+				<div class="form-group">
+					<label>Fecha: <strong>{{cita_fecha | date: 'short' }}</strong></label>
+				</div>
+			</div>
+
+			<!-- buscar paciente -->
+
+			<div *ngIf="!selected_paciente" class="dropdown mb-3">
+				<div class="mt-3 row">
+					<div class="col">
+						<label class="">Seleccionar paciente:</label>
+						<input type="text" (keyup)="buscarPaciente($event)" id="busqueda" class="form-control"
+							placeholder="Buscar...">
+					</div>
+					<div *ngIf="search_loading">
+						<div class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+				</div>
+				<div *ngIf="search_paciente.length " class="dropdown-menu show w-100 no-selectable-text">
+					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
+						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
+						<div class="dropdown-item search">
+							{{paciente.nombre|uppercase}} {{paciente.apellidos|uppercase}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="selected_paciente">Paciente: {{selected_paciente.nombre}}</div>
+
+			<div class="form-group">
+				<textarea class="form-control" [(ngModel)]="cita.nota" name="nota" placeholder="Notas..."></textarea>
+			</div>
+		</form>
+		<button type="button" (click)="cancelarCita()" class="btn btn-secondary">Cancelar</button>
+		<button type="button" (click)="aceptarCita()" class="btn btn-primary"> Acceptar </button>
+	</div>
+</div>
