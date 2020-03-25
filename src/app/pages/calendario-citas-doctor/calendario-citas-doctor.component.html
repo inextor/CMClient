@@ -3,7 +3,7 @@
 		[defaultView]="calendarOptions.defaultView" locale="es" [buttonText]="buttons"
 		[slotLabelFormat]="slotLabelFormat" [titleFormat]="titleFormat" contentHeight="auto" [allDaySlot]="false"
 		minTime="07:00:00" maxTime="20:00:00" deepChangeDetection="true" (dateClick)="dateClick($event)"
-		(eventClick)="eventClicked($event)">
+		(eventClick)="eventClick($event)">
 	</full-calendar>
 </div>
 
@@ -11,15 +11,17 @@
 <app-modal [show]="showOptionPaciente">
 	<div class="modal-content" style="width: 25rem;">
 		<div class="modal-header">
-			<h5 class="modal-title">Opciones Paciente</h5>
-			<div type="button" (click)="new_cita()">new cita</div>
+			<h5 class="modal-title">Opciones</h5>
+			<div type="button" (click)="new_cita()">nueva cita</div>
 		</div>
 		<div class="modal-body  text-center ">
-			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+			<p class="text-center">Desea confirmar la asistencia?</p>
 
 			<!-- *ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'" -->
-			<button class=" p-0 btn btn-light m-1 border " [appAccess]="['Doctor','admin']" data-toggle="tooltip"
-				title="Consultas">
+			<button class=" p-0 btn btn-light m-1 border " [appAccess]="['DOCTOR','ADMIN']" data-toggle="tooltip"
+			*ngIf="currentCita && currentCita.confirmado_por_paciente=='SI' &&  currentCita.confirmado_por_doctor=='SI' "
+			(click)="consulta(currentCita)"	
+			title="Consulta">
 				<span class="">
 					<i class="">
 						<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
@@ -29,7 +31,7 @@
 			</button>
 			<!-- confirmado por paciente -->
 			<button class=" btn btn-light m-1 p-0 border"
-				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente=='SI'" data-toggle="tooltip"
+				*ngIf="currentCita && currentCita.confirmado_por_paciente=='SI' " data-toggle="tooltip"
 				title="Confirmado por paciente">
 				<span>
 					<i class="">
@@ -40,7 +42,7 @@
 			</button>
 			<!-- confirmar paciente -->
 			<button class=" btn btn-light m-1 p-0 border"
-				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_paciente!='SI'"
+				*ngIf="currentCita && currentCita.confirmado_por_paciente!='SI'"
 				(click)="showConfirmPaciente=true;" data-toggle="tooltip" title="Confirmar paciente">
 				<span>
 					<i class="">
@@ -51,7 +53,7 @@
 			</button>
 			<!-- confirmado por doctor  -->
 			<button class=" btn btn-light p-0 m-1 border "
-				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor=='SI'" data-toggle="tooltip"
+				*ngIf="currentCita && currentCita.confirmado_por_doctor=='SI'" data-toggle="tooltip"
 				title="Confirmado por doctor">
 				<span>
 					<i class="">
@@ -62,7 +64,7 @@
 			</button>
 			<!-- confirmar doctor -->
 			<button class=" btn btn-light p-0 m-1 border "
-				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
+				*ngIf="currentCita && currentCita.confirmado_por_doctor!='SI'"
 				(click)="showConfirmDoctor=true" data-toggle="tooltip" title="Confirmar doctor">
 
 				<span>
@@ -74,7 +76,7 @@
 			</button>
 			<!-- cancelar -->
 			<button class="btn btn-light p-1 m-1 border "
-				*ngIf="currentInfoCita && currentInfoCita.cita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true"
+				*ngIf="currentCita && currentCita.estatus=='ACTIVA'" (click)="showConfirmCancelar=true"
 				data-toggle="tooltip" title="Cancelar cita">
 
 				<span>
@@ -87,7 +89,7 @@
 
 			<!-- activar -->
 			<button class="btn btn-light p-1 m-1 border"
-				*ngIf="currentInfoCita && currentInfoCita.cita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true"
+				*ngIf="currentCita && currentCita.estatus!=='ACTIVA'" (click)="showConfirmActivar=true"
 				data-toggle="tooltip" title="Activar cita">
 				<span>
 					<i class="">
@@ -115,7 +117,7 @@
 				</div>
 				<div class="modal-footer">
 					<a class="btn text-light  btn-secondary" (click)="showConfirmPaciente=false">Cancelar</a>
-					<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentInfoCita)">Aceptar</a>
+					<a class="btn text-light  btn-primary" (click)="confirmarPaciente(currentCita)">Aceptar</a>
 				</div>
 			</div>
 		</app-modal>
@@ -130,7 +132,7 @@
 				</div>
 				<div class="modal-footer">
 					<a class="btn text-light  btn-secondary" (click)="showConfirmDoctor=false">Cancelar</a>
-					<a class="btn text-light  btn-primary" (click)="confirmarDoctor(currentInfoCita)">Aceptar</a>
+					<a class="btn text-light  btn-primary" (click)="confirmarDoctor(currentCita)">Aceptar</a>
 				</div>
 
 			</div>
@@ -146,7 +148,7 @@
 				</div>
 				<div class="modal-footer">
 					<a class="btn text-light  btn-secondary" (click)="showConfirmCancelar=false">Cancelar</a>
-					<a class="btn text-light btn-danger" (click)="cancelar(currentInfoCita)">Aceptar</a>
+					<a class="btn text-light btn-danger" (click)="cancelar(currentCita)">Aceptar</a>
 				</div>
 			</div>
 		</app-modal>
@@ -161,7 +163,7 @@
 				</div>
 				<div class="modal-footer">
 					<a class="btn text-light btn-secondary" (click)="showConfirmActivar=false">Cancelar</a>
-					<a class="btn text-light btn-danger" (click)="activar(currentInfoCita)">Aceptar</a>
+					<a class="btn text-light btn-danger" (click)="activar(currentCita)">Aceptar</a>
 				</div>
 			</div>
 		</app-modal>
@@ -194,10 +196,10 @@
 						</div>
 					</div>
 				</div>
-				<div *ngIf="search_paciente !== null " class="dropdown-menu show w-100 no-selectable-text">
+				<div *ngIf="search_paciente.length!==0" class="dropdown-menu show w-100 no-selectable-text">
 					<div *ngFor="let paciente of search_paciente;let i=index" (click)="seleccionarPaciente(paciente)">
 						<!--div *ngIf="i>0" class="dropdown-divider"></div -->
-						<div class="dropdown-item search">
+						<div *ngIf="search_paciente" class="dropdown-item search">
 							{{paciente.nombre|uppercase}} {{paciente.apellidos|uppercase}}
 						</div>
 					</div>

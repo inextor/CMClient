@@ -12,7 +12,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
 import { flatMap } from 'rxjs/operators';
 import { UsuariosComponent } from '../usuarios/usuarios.component';
-import { SearchObject } from '../../models/Respuestas';
+import { SearchObject, SearchCitaResponse } from '../../models/Respuestas';
 import { PacientesComponent } from '../pacientes/pacientes.component';
 
 export interface SimpleMap {
@@ -36,6 +36,10 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	@ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
 	// CONTROL MODALES 
 	showOptionPaciente: boolean = false;
+	showConfirmCancelar: boolean = false;
+	showConfirmActivar: boolean = false;
+	showConfirmDoctor: boolean = false;
+	showConfirmPaciente: boolean = false;
 	// FIN CONTROL MODALES
 	// BUSQUEDA
 	busqueda: string = '';
@@ -49,6 +53,10 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	selected_paciente;
 	servicio;
 	//
+	// OpcionesPaciente
+	info_citas: SearchCitaResponse[] = [];
+	currentCita;
+	// 
 	// FIN
 	dateArray: Date[] = [null, null, null, null, null, null, null];
 	events: SimpleMap = {};
@@ -98,9 +106,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	cita: Cita = {
 		inicio: null
 	}
-
 	cita_fecha: Date = null;
-
+	citas_dic: any = {};
 	ngOnInit() {
 		this.usuario = this.rest.getUsuarioSesion();
 		this.counterId = 0;
@@ -358,7 +365,9 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 			responses[1].datos.forEach((cita) => {
 				this.citas.push(cita.cita);
-
+				// diccionario citas
+				this.citas.forEach(i => this.citas_dic[i.id] = i);
+				// fin diccionario citas
 				const id = this.counterId;
 				this.counterId += 1;
 
@@ -392,8 +401,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 		}, (error) => { errorCallback(error); });
 	}
 
-	eventClicked(evt) {
-		console.log("evento",evt);
+	eventClick(evt) {
+		console.log("evento", evt.event.id);
 		if (this.usuario.tipo == 'DOCTOR') {
 
 			if (evt.event.rendering == 'background')
@@ -401,25 +410,31 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 			for (let cita of this.citas) {
 				if (cita.id == evt.event.id) {
-					if (cita.estatus !== 'CANCELADA' && cita.confirmado_por_doctor == 'SI' && cita.confirmado_por_paciente == 'SI') {
-						this.router.navigate(['agregar-consulta-cita', evt.event.id]);
-						return;
+					this.currentCita = cita;
+					let d = new Date(this.currentCita.inicio);
+					this.cita_fecha = d;
+					console.log("entro a eventclicked", this.currentCita);
+					// if (cita.estatus !== 'CANCELADA' && cita.confirmado_por_doctor == 'SI' && cita.confirmado_por_paciente == 'SI') {
+					// 	this.router.navigate(['agregar-consulta-cita', evt.event.id]);
+					// 	return;
 
-					} else {
-						this.showError('la cita debe confirmarse por doctor y paciente');
-						return;
-					}
-
+					// } else {
+					// 	this.showError('la cita debe confirmarse por doctor y paciente');
+					// 	return;
+					// }
+					this.showOptionPaciente = true;
 				}
 			}
 
-			this.router.navigate(['agregar-consulta-cita', evt.event.id]);
-			return;
+			// this.router.navigate(['agregar-consulta-cita', evt.event.id]);
+			// return;
 		}
+		return
 	}
 
 	dateClick(evt) {
 		if (this.usuario.tipo !== "PACIENTE") {
+			// if (this.currentCita==null) {
 
 
 			// console.log("citassss",citas);
@@ -445,6 +460,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 			//	this.cita.inicio = fecha.substring(0,20);
 
 			//		console.log('Fecha inicio', evt );
+
+			// }
 		}
 		return
 	}
@@ -484,41 +501,174 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 	cancelarCita() {
 		this.selected_paciente = null;
 		this.search_paciente = null;
+		this.cita.nota = '';
 		this.show_modal = false;
 	}
 
 	aceptarCita() {
 		let usuario = this.rest.getUsuarioSesion();
 		this.selected_doctor = this.usuario.id
-		this.rest.cita.create({
-			id_centro_medico: usuario.id_centro_medico
-			//falta seleccionar doctor paciente, y un serviciooo jejeje
-			, id_doctor: this.selected_doctor
-			, id_paciente: this.selected_paciente.id
-			, inicio: this.rest.getMysqlStringFromLocaDate(this.cita_fecha)
-			// ,fin					: this.cita.fecha + " " + this.cita.horaFin,
-			, nota: this.cita.nota
-			, id_servicio: this.servicio ? this.servicio.id : null
-		}).subscribe(
-			response => {
-				// this.citaAgendada.emit( response );
-				console.log()
+		console.log("fecha de la cita",this.cita_fecha);
+		let cita = this.citas.find(i => i.inicio == this.rest.getMysqlStringFromLocaDate(this.cita_fecha) && i.id_paciente == this.selected_paciente.id);
+		console.log("la encontro", cita);
+		if (!cita) {
+			this.rest.cita.create({
+				id_centro_medico: usuario.id_centro_medico
+				//falta seleccionar doctor paciente, y un serviciooo jejeje
+				, id_doctor: this.selected_doctor
+				, id_paciente: this.selected_paciente.id
+				, inicio: this.rest.getMysqlStringFromLocaDate(this.cita_fecha)
+				// ,fin					: this.cita.fecha + " " + this.cita.horaFin,
+				, nota: this.cita.nota
+				, id_servicio: this.servicio ? this.servicio.id : null
+			}).subscribe(
+				response => {
+					// this.citaAgendada.emit( response );
+					console.log()
 
-				this.show_modal = false;
-				// this.ngAfterViewInit();
-				const calendarAPI = this.calendarComponent.getApi();
-				calendarAPI.refetchEvents();
-				this.selected_doctor = null;
-				this.selected_paciente = null;
-				this.search_paciente = null;
-				this.cita.nota = null;
+					this.show_modal = false;
+					this.showOptionPaciente = false;
+					// this.ngAfterViewInit();
+					const calendarAPI = this.calendarComponent.getApi();
+					calendarAPI.refetchEvents();
+					this.selected_doctor = null;
+					this.selected_paciente = null;
+					this.search_paciente = null;
+					this.cita.nota = null;
 
 
-			}
+				}
+				, (error) => {
+					let str = this.rest.getErrorMessage(error);
+					this.rest.showError({ mensaje: this.rest.getErrorMessage(error), tipo: 'alert-danger' });
+				}
+			);
+		}else{
+			this.showError("Ya existe una cita del paciente con la misma fecha.")
+		}
+	}
+	// Opciones Paciente
+
+
+	// nueva cita
+	new_cita() {
+		forkJoin([
+			// this.cita_fecha = this.currentCita.inicio,
+			this.show_modal = true
+		])
+		// this.show_modal = true;
+		// this.show_modal = true;
+	}
+
+	// modales de control de citas
+	// activar cita
+	activar(infoCita) {
+		console.log("infocitaactivar", infoCita);
+		this.rest.cita.update({
+			id: infoCita.id
+			, estatus: 'ACTIVA'
+		}).subscribe((cita) => {
+			this.showOptionPaciente = false;
+			this.showConfirmActivar = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.id);
+			this.is_loading = false;
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+
+			// this.loadCitas();
+			const calendarAPI = this.calendarComponent.getApi();
+			calendarAPI.refetchEvents();
+		}
 			, (error) => {
-				let str = this.rest.getErrorMessage(error);
-				this.rest.showError({ mensaje: this.rest.getErrorMessage(error), tipo: 'alert-danger' });
-			}
-		);
+				this.is_loading = false;
+				this.showConfirmActivar = false;
+				this.showOptionPaciente = false;
+
+				this.showError(error);
+			});
+	}
+	// fin activar cita
+	// cancelar cita
+	cancelar(infoCita) {
+		this.rest.cita.update({
+			id: infoCita.id
+			, estatus: 'CANCELADA',
+			confirmado_por_paciente: 'NO',
+			confirmado_por_doctor: 'NO'
+		}).subscribe((cita) => {
+			console.log(infoCita);
+			this.showOptionPaciente = false;
+			this.showConfirmCancelar = false;
+			this.is_loading = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+
+			const calendarAPI = this.calendarComponent.getApi();
+			calendarAPI.refetchEvents();
+		},
+			(error) => {
+				this.is_loading = false;
+				this.showConfirmCancelar = false;
+				this.showError(error)
+			});
+	}
+	// fin cancelar cita
+	// confircar doctor cita
+	confirmarDoctor(infoCita) {
+		this.rest.cita.update({
+			id: infoCita.id
+			, confirmado_por_doctor: 'SI'
+		}).subscribe((cita) => {
+			this.is_loading = false;
+			this.showOptionPaciente = false;
+			this.showConfirmDoctor = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+
+			const calendarAPI = this.calendarComponent.getApi();
+			calendarAPI.refetchEvents();
+		},
+			(error) => {
+				this.showConfirmDoctor = false;
+				this.is_loading = false;
+				this.showError(error);
+			});
+	}
+	// fin
+	// confirmar paciente cita
+	confirmarPaciente(infoCita) {
+		this.is_loading = true;
+		this.rest.cita.update({
+			id: infoCita.id
+			, confirmado_por_paciente: 'SI'
+		}).subscribe((cita) => {
+			this.is_loading = false;
+			this.showOptionPaciente = false;
+			this.showConfirmPaciente = false;
+			let index = this.info_citas.findIndex(i => i.cita.id == infoCita.id);
+			if (index >= 0)
+				this.info_citas[index].cita = cita;
+
+			const calendarAPI = this.calendarComponent.getApi();
+			calendarAPI.refetchEvents();
+		}, (error) => {
+			this.is_loading = false;
+			this.showConfirmPaciente = false;
+			this.showError(error);
+		});
+	}
+	// fin
+	// to consulta
+	consulta(infoCita) {
+		if (infoCita.estatus !== 'CANCELADA' && infoCita.confirmado_por_doctor == 'SI' && infoCita.confirmado_por_paciente == 'SI') {
+			this.router.navigate(['agregar-consulta-cita', infoCita.id]);
+			return;
+
+		} else {
+			this.showError('la cita debe confirmarse por doctor y paciente');
+			return;
+		}
 	}
 }

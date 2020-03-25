@@ -37,15 +37,15 @@
 <app-modal [show]="showOptionPaciente">
 	<div class="modal-content" style="width: 25rem;">
 		<div class="modal-header">
-			<h5 class="modal-title">Opciones Paciente</h5>
-			<div type="button" (click)="new_cita()">new cita</div>
+			<h5 class="modal-title">Opciones</h5>
+			<div type="button" (click)="new_cita()">nueva cita</div>
 		</div>
 		<div class="modal-body  text-center ">
-			<p class="text-center">Desea confirmar la asistencia del paciente?</p>
+			<p class="text-center">Desea confirmar la asistencia ?</p>
 
 			<!-- *ngIf="i.cita.estatus == 'PENDIENTE' || i.cita.estatus == 'CANCELADA'" -->
 			<button class=" p-0 btn btn-light m-1 border " [appAccess]="['Doctor','admin']" data-toggle="tooltip"
-				title="Consultas">
+				title="Consulta">
 				<span class="">
 					<i class="">
 						<img src="./assets/icon/options/consultas.png" height="43px" width="43px"
