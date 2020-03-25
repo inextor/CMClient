@@ -384,8 +384,8 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 					, slotLabelFormat: this.slotLabelFormat
 					, start: cita.cita.inicio
 					, borderColor: '#9e9e9e'
-					, backgroundColor: cita.cita.confirmado_por_doctor == 'SI' && cita.cita.confirmado_por_paciente == 'SI' ? '#1e88e5' : '#e53935'
-					, textColor: 'white'
+					, backgroundColor: cita.cita.confirmado_por_doctor == 'SI' && cita.cita.confirmado_por_paciente == 'SI' ? '#1e88e5' : '#ef5350 '
+					, textColor: 'black'
 					, end: cita.cita.fin == null ? hora : cita.cita.fin
 				};
 
