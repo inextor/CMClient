@@ -20,7 +20,7 @@ import {	Centro_Medico, Cita,
 	Detalle_Venta, Distribucion, Detalle_Distribucion, Detalle_Requisicion, Doctor, Expediente,
 	Factura, Fondo_Caja, Gasto_Centro_Medico, Gasto_Doctor, Horario_Doctor, Imagen, Inventario,
 	Notificacion, Organizacion, Paciente, Pago, Poliza, Precio_Servicio, Recepcionista_Doctor,
-	Servicio, Tipo_Precio, Usuario,Unidad_Medida, Venta, Proveedor, Requisicion, Doctor_Servicio
+	Servicio, Tipo_Precio, Usuario,Unidad_Medida, Venta, Proveedor, Requisicion, Doctor_Servicio,Categoria_Merma
 	} from	'../models/Modelos';
 
 
@@ -119,6 +119,7 @@ export class RestService {
 	public citaInfo:SearchRest<Cita,CitaInfo>;
 	public horarios_centro_medico:SearchRest<Centro_Medico,HorariosCentroMedico>;
 	public sucursal_doctor:ObjRest<Sucursal_Doctor>;
+	public categoria_merma:ObjRest<Categoria_Merma>;
 	
 
 
@@ -133,10 +134,10 @@ export class RestService {
 	constructor(private http: HttpClient)
 	{
 		//Produccion por cambiarx`x
-		this.urlBase = 'http://54.175.170.17/Mehr/api';
+		this.urlBase = 'https://expediente.centromedico.life/Mehr/api';
 
 		if( window.location.hostname.indexOf('127.0.0.1' ) == 0 )
-			this.urlBase = 'http://http://54.175.170.17/Mehr/';
+			this.urlBase = 'https://expediente.centromedico.life/Mehr/';
 
 		if( window.location.hostname.indexOf('localhost') == 0 )
 			this.urlBase = 'http://127.0.0.1/CentroMedico/';
@@ -208,6 +209,7 @@ export class RestService {
 		this.horarios_centro_medico			= new SearchRest<Centro_Medico,HorariosCentroMedico>(`${this.urlBase}/horarios_centro_medico.php`,http);
 		this.sucursal_doctor				= new ObjRest<Sucursal_Doctor>(`${this.urlBase}/sucursal_doctor.php`,http);
 		this.detalle_requisicion			= new ObjRest<Detalle_Requisicion>(`${this.urlBase}/detalle_requisicion.php`,http);
+		this.categoria_merma			= new ObjRest<Categoria_Merma>(`${this.urlBase}/categoria_merma.php`,http);
 	
 	}
 
