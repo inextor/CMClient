@@ -70,7 +70,8 @@ import { SeleccionarCentroMedicoHomeComponent } from './components/seleccionar-c
 import { RecibirRequisicionComponent} from './pages/recibir-requisicion/recibir-requisicion.component';
 import { ReporteInventarioComponent} from './pages/reporte-inventario/reporte-inventario.component';
 import { OrganizacionesComponent} from './pages/organizaciones/organizaciones.component';
-
+import { ControlInventarioComponent} from './pages/control-inventario/control-inventario.component';
+import { MaximosMinimosComponent } from './pages/maximos-minimos/maximos-minimos.component';
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
@@ -186,6 +187,8 @@ const routes: Routes = [
 			{ path: "recibir-requisicion/:id_requisicion", component:RecibirRequisicionComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "reporte-inventario", component:ReporteInventarioComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "organizaciones", component:OrganizacionesComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "control-inventario", component:ControlInventarioComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "maximos-minimos", component:MaximosMinimosComponent, pathMatch:"full", canActivate:[AuthGuard]},
 		]
 	},
 ];

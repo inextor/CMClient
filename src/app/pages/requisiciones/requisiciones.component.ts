@@ -19,6 +19,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
     super(rest, router, route, location, titleService);
   }
    //modales
+   show_agregar_requisicion: boolean = false;
    show: boolean = false;
    showOrdenarRequisicion: boolean = false;
    currentRequisicion:Requisicion;
@@ -36,6 +37,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
   sucursal_dic:any = {};
   busquedaAvanzada:boolean = false;
   fecha_entrega;
+  rastreo;
   id_requisicion =  null;
   clearBusqueda(){
 		this.requisiciones_search = {
@@ -134,6 +136,7 @@ export class RequisicionesComponent extends BaseComponent implements OnInit {
 			id: currentRequisicion.id
       , estatus: 'EN_TRANSITO'
       , tiempo_entrega: this.fecha_entrega
+      , rastreo: this.rastreo
 		}).subscribe((requisicion) => {
 			this.showOrdenarRequisicion = false;
 			let index = this.requisiciones.findIndex(i => i.id == currentRequisicion.id);

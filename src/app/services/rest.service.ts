@@ -53,6 +53,12 @@ export interface RequisicionInfo
 	detalles: Detalle_Requisicion_Info[];
 }
 
+// export interface InventarioInfo
+// {
+// 	lote_inventario	: Lote_Inventario;
+// 	merma: Merma;
+// }
+
 @Injectable({
 	providedIn: 'root'
 })

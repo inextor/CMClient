@@ -30,7 +30,7 @@
                             {{usuario_atendio.nombre|titlecase}}</option>
                     </select>
                 </div> -->
-                <div class="form-group col-md-3">
+                <!-- <div class="form-group col-md-3">
                     <label>Centro Medico:</label>
                     <select  name="centro_medico" [(ngModel)]="detalle_inventario_search.eq.id_centro_medico"
                         class="form-control">
@@ -38,7 +38,7 @@
                         <option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
                             {{centro_medico.nombre|titlecase}}</option>
                     </select>
-                </div>
+                </div> -->
             
 
                 <div class="form-group col-md-3">
@@ -52,7 +52,7 @@
         <table class="basica">
             <thead>
                 <tr >
-                    <th>Insumo</th>
+                    <th>Articulo</th>
                     <th>Cantidad</th>
                     <th>Unidad de medida</th>
                     <th>Total</th>

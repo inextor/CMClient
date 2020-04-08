@@ -1,0 +1,113 @@
+<div class="card p-3">
+    <div class="">
+        <h4 class="mb-3">MAXIMOS-MINIMOS</h4>
+
+        <!-- <div class=" card p-0 mb-2 " >
+            <div class="form-row p-2">
+                <div class="form-group col-md-3">
+                    <label>Fecha de inicio</label>
+                    <input  type="date" class="form-control" [(ngModel)]="detalle_inventario_search.le.fecha">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Fecha de fin</label>
+                    <input  type="date" class="form-control" [(ngModel)]="detalle_inventario_search.ge.fecha">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Cliente:</label>
+                    <select  name="usuario_cliente" [(ngModel)]="detalle_inventario_search.eq.id_usuario_cliente"
+                        class="form-control">
+                        <option [value]="null" selected="selected">Seleccione un cliente</option>
+                        <option *ngFor="let usuario of usuario_list" [value]="usuario.id">
+                            {{usuario.nombre|titlecase}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="card">
+            <table class="basica">
+                <thead>
+                    <tr>
+                        <th>Inventario</th>
+                        <th>Articulo</th>
+                        <th>Minimo</th>
+                        <th>Cantidad</th>
+                        <th>Unidad de medida</th>
+                        <th>Opciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inventario of inventarios">
+                        <td class="text-center"> 
+                            <button class="btn btn-light btn-sm border" title="Esperando envio del distribuidor"
+                            *ngIf=" inventario.cantidad < servicio_dic[inventario.id_servicio].cantidad_minima">
+                                <span class="">
+                                    <i class="" style="color:red;">
+                                        <i class="fa fa-thumbs-down"></i> LOW
+
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+                            <button class="btn btn-light btn-sm border" title="Esperando envio del distribuidor"
+                            *ngIf=" inventario.cantidad > servicio_dic[inventario.id_servicio].cantidad_minima &&
+                            inventario.cantidad < (servicio_dic[inventario.id_servicio].cantidad_minima)+(500)"
+                            >
+                                <span class="">
+                                    <i class="" style="color:orangered;">
+                                        <i class="fa fa-minus-circle"></i> MID
+
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+                            <button class="btn btn-light btn-sm border" title="recibido"
+                            *ngIf="inventario.cantidad >(servicio_dic[inventario.id_servicio].cantidad_minima)+(500)">
+                                <span class="">
+                                    <i class="" style="color:green;">
+                                        <i class="fa fa-thumbs-up"></i> FULL
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+                        </td>
+                        <td>{{servicio_dic? servicio_dic[inventario.id_servicio].nombre:''}}</td>
+                        <td>{{servicio_dic? servicio_dic[inventario.id_servicio].cantidad_minima:''}}</td>
+                        <td>{{inventario.cantidad}}</td>
+                        <td>{{unidad_dic? unidad_dic[servicio_dic[inventario.id_servicio].id_unidad_medida].nombre:''}}
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm border btn-primary" title="Esperando envio del distribuidor"
+                            *ngIf=" inventario.cantidad < servicio_dic[inventario.id_servicio].cantidad_minima" [routerLink]="['/agregar-requisicion']">
+                                <span class="">
+                                    <i class="" >
+                                        <i class="fa fa-box"></i> Ordenar
+
+                                        <!-- <img src="./assets/icon/options/editar.png" height="35px" width="35px"
+                                class="menuIcons icons" /> -->
+                                    </i>
+                                </span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <app-paginacion [path]="'/reporte-inventario'" [pages]="pages" [totalPages]="totalPages"
+                [currentPage]="currentPage"></app-paginacion>
+        </div>
+
+    </div>
+</div>
+
+<app-agregar-requisicion [show]="show"></app-agregar-requisicion>

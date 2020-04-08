@@ -1,5 +1,5 @@
-<div class="card p-3">
-    <div class="">
+<div class="card p-3"  >
+    <div class="" >
 
         <div class="p-0 mt-3">
             <div class=" mb-3 d-flex justify-content-between flex-wrap">
@@ -36,6 +36,7 @@
                                     {{proveedor.nombre}}</option>
                             </select>
                         </div>
+
                         <div class="col-6" *ngIf="distribuidor==true">
                             <label position="stacked">Sucursal<span color="danger">*</span></label>
                             <select class="form-control" name="foo" [(ngModel)]="requisicion.id_centro_medico_distribuidor">
@@ -70,8 +71,6 @@
                             <textarea placeholder="Nota" type="text" class="form-control" name="rfc"
                                 [(ngModel)]="requisicion.nota"></textarea>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
@@ -119,7 +118,6 @@
                 </div>
             </div>
         </div>
-
         <!-- proveedor -->
         <div *ngIf="distribuidor==false" class="card mt-2 ">
             <h5 class="p-2">*AGREGAR PRODUCTOS</h5>
@@ -148,7 +146,7 @@
                         <tr>
                             <th>Articulo</th>
                             <th>Cantidad</th>
-                            <th>Costo</th>
+                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -163,7 +161,7 @@
                             </td>
                             <td>
                                 <input type="number" (change)="incrementar(sd)"
-                                    [(ngModel)]="sd.detalle_requisicion.costo" step="1" min=0>
+                                    [(ngModel)]="sd.detalle_requisicion.precio" step="1" min=0>
                             </td>
                             <td>
                                 <button class="btn btn-secondary btn-sm">x</button>
@@ -216,7 +214,7 @@
                             </td>
                             <td>
                                 <input type="number" (change)="incrementar(sd)"
-                                    [(ngModel)]="sd.detalle_requisicion.costo" step="1" min=0>
+                                    [(ngModel)]="sd.detalle_requisicion.precio" step="1" min=0>
                             </td>
                             <td>
                                 <button class="btn btn-secondary btn-sm">x</button>
@@ -226,8 +224,5 @@
                 </table>
             </div>
         </div>
-
-
-
     </div>
 </div>

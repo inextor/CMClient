@@ -139,6 +139,7 @@ export interface Detalle_Requisicion{
 	id?:number;
 	id_requisicion?:number;
 	id_servicio?:number;
+	id_categoria_merma?:number;
 	estatus?:string;
 	cantidad?:number;
 	precio?:number;
@@ -149,7 +150,8 @@ export interface Detalle_Requisicion{
 	nota?:string;
 	recibido?:number;
 	merma?:number;
-	extraviados?:number;
+	existente_inventario?:number;
+	tiempo_caducidad?:Date;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 
@@ -579,6 +581,7 @@ export interface Requisicion{
 	importacion?:number;
 	total_articulos?:number;
 	pedimento?:string;
+	rastreo?:string;
 	estatus?:string;
 	subtotal?:number;
 	total?:number;
@@ -607,6 +610,7 @@ export interface Servicio{
 	id_imagen?:number;
 	codigo?:string;
 	precio_referencia?:number;
+	cantidad_minima?:number;
 	tipo?:string;
 	nombre?:string;
 	prestado_por?:string;
@@ -732,7 +736,11 @@ export interface Venta{
 	factura_correo_electronico?:string;
 	factura_uso_cfdi?:string;
 	facturada?:string;
-
 }
 
+export interface Categoria_Merma{
+	id?:number;
+	nombre?:string;
+	descripcion?:string;
+}
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Doctor, Centro_Medico, Especialidad, Paciente, Servicio, Doctor_Servicio, Detalle_Requisicion, Requisicion, Inventario } from '../../models/Modelos';
+import { Doctor, Centro_Medico, Especialidad, Paciente, Servicio, Doctor_Servicio, Detalle_Requisicion, Requisicion, Inventario, Categoria_Merma } from '../../models/Modelos';
 import { RestService, RequisicionInfo, Detalle_Requisicion_Info } from '../../services/rest.service';
 import { forkJoin } from 'rxjs';
 import { Router, ActivatedRoute } from "@angular/router"
@@ -33,6 +33,7 @@ export class RecibirRequisicionComponent extends BaseComponent implements OnInit
 	servicio_dic: any = {};
 	detalle_list: Detalle_Requisicion[] = [];
 	inventario: Inventario[] = [];
+	categorias_merma:Categoria_Merma[]=[];
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
 
@@ -68,17 +69,20 @@ export class RecibirRequisicionComponent extends BaseComponent implements OnInit
 			forkJoin([
 				this.rest.servicio.getAll({}),
 				this.rest.requisicion.search(this.requisicion_search),
-				this.rest.detalle_requisicion.search(this.detalle_requisicion_search)
+				this.rest.detalle_requisicion.search(this.detalle_requisicion_search),
+				this.rest.categoria_merma.getAll({}),
 			]).subscribe(results => {
 				this.servicios = results[0].datos;
 				this.servicios.forEach(i => this.servicio_dic[i.id] = i);
 				this.requisicion = results[1];
+				this.categorias_merma= results[3].datos;
 				this.detalles = results[2].datos;
 				this.detalles.forEach(i => {
 					this.detalles_requisicion.push({
 						detalle_requisicion: i, servicio: this.servicios.find(j => j.id == i.id_servicio)
 					})
 				})
+				
 				console.log(this.detalles_requisicion);
 			}, error => this.showError(error));
 		});
@@ -90,11 +94,31 @@ export class RecibirRequisicionComponent extends BaseComponent implements OnInit
 		console.log("s", s);
 		if (s) {
 			s.recibido = detalle_requisicion.recibido;
+			s.existente_inventario = detalle_requisicion.recibido;
 			s.merma = detalle_requisicion.merma;
 			console.log("detalle1", s);
+
 		}
 	}
+
 	// se asigna la cantidad recibida y la merma si existe
+
+	// asignando la categoria si la merma es mayor a cero
+	seleccionarCategoriaMerma(detalle_requisicion){
+		
+		let s = this.detalles.find(i => i.id == detalle_requisicion.id);
+		console.log("s", s);
+		if (s) {
+			if(s.merma || s.merma>0){
+				s.id_categoria_merma = detalle_requisicion.id_categoria_merma;
+				console.log("detalle1", s);
+			}else{
+				this.showError("")
+			}
+
+		}
+	}
+
 
 	checked(detalle_requisicion) {
 		if (detalle_requisicion !== 'RECIBIDO') {
@@ -102,7 +126,7 @@ export class RecibirRequisicionComponent extends BaseComponent implements OnInit
 			if (detalle && detalle.recibido == 0) {
 				detalle.merma = detalle_requisicion.merma;
 				detalle.recibido = detalle_requisicion.cantidad;
-
+				detalle.existente_inventario = detalle_requisicion.cantidad;
 			} else {
 				// aun no se ke poner aki :( )
 

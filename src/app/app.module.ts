@@ -100,6 +100,8 @@ import { RecibirRequisicionComponent } from './pages/recibir-requisicion/recibir
 import { AgregarProductoInventarioComponent } from './pages/agregar-producto-inventario/agregar-producto-inventario.component';
 import { ReporteInventarioComponent } from './pages/reporte-inventario/reporte-inventario.component';
 import { OrganizacionesComponent } from './pages/organizaciones/organizaciones.component';
+import { ControlInventarioComponent } from './pages/control-inventario/control-inventario.component';
+import { MaximosMinimosComponent } from './pages/maximos-minimos/maximos-minimos.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -207,6 +209,8 @@ export function init_app(rest: RestService) {
     AgregarProductoInventarioComponent,
     ReporteInventarioComponent,
     OrganizacionesComponent,
+    ControlInventarioComponent,
+    MaximosMinimosComponent,
   ],
   imports: [
     AccessModule,

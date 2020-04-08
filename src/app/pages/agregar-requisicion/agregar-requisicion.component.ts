@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Proveedor, Requisicion,	Servicio, Detalle_Venta , Detalle_Requisicion, Centro_Medico } from '../../models/Modelos';
@@ -27,7 +27,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
 		super(rest, router, route, location, titleService);
 	}
-
+	@Input() show:boolean = false;
 	servicios: Servicio[]			= [];
 	search_servicios: Servicio[]	= [];
 	busqueda: string				= '';
@@ -127,7 +127,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		this.detalles_requisicion.push
 		({
 			servicio: servicio
-			,detalle_requisicion:{id_servicio	: servicio.id, cantidad : 1 ,costo : servicio.precio_referencia }
+			,detalle_requisicion:{id_servicio	: servicio.id, cantidad : 1 ,precio : servicio.precio_referencia }
 		});
 		
 		this.calcularCantidades(total);
@@ -153,7 +153,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		this.detalles_requisicion.push
 		({
 			servicio: servicioRequisicion
-			,detalle_requisicion:{id_servicio	: servicio.id_servicio, cantidad : 1 ,costo : servicio.precio_referencia }
+			,detalle_requisicion:{id_servicio	: servicio.id_servicio, cantidad : 1 ,precio : servicio.precio_referencia }
 		});
 		
 		this.calcularCantidades(total);
@@ -182,11 +182,11 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 		this.detalles_requisicion.forEach(i => {
 			// total += i.detalle_requisicion.cantidad;
 	
-			total += i.detalle_requisicion.cantidad * i.detalle_requisicion.costo;
+			total += i.detalle_requisicion.cantidad * i.detalle_requisicion.precio;
 			i.detalle_requisicion.subtotal= total
 
 			console.log("cantidad",i.detalle_requisicion.cantidad);
-			console.log("costo",i.detalle_requisicion.costo);
+			console.log("Precio",i.detalle_requisicion.precio);
 			// let temp = i.detalle_requisicion.cantidad;
 			// total = total + temp;
 		});
@@ -220,7 +220,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	aumentar(detalle_requisicion)
 	{
 		detalle_requisicion.cantidad++;
-		detalle_requisicion.costo++;
+		detalle_requisicion.precio++;
 	}
 
 	 guardar() {
