@@ -49,7 +49,7 @@
                         <td>{{unidad_dic? unidad_dic[servicio_dic[lote_inventario.id_servicio].id_unidad_medida].nombre:''}}</td>
                         <td>{{lote_inventario.existente}}</td>
                         <td class="text-center ">
-                            <button class="btn btn-primary" (click)="salidaInventario(inventario)">Ajustar</button>
+                            <button class="btn btn-primary" (click)="salidaInventario(lote_inventario)">Ajustar</button>
                         </td>
                     </tr>
                 </tbody>
