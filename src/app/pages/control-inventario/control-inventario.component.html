@@ -4,39 +4,23 @@
         <div class=" card p-0 mb-2 ">
             <div class="form-row p-2">
                 <div class="form-group col-md-3">
-                    <label>Nombre</label>
-                    <input type="text" placeholder="Nombre del producto" class="form-control" [(ngModel)]="detalle_inventario_search.le.fecha">
+                    <div class="dropdown">
+                        <div class="">
+                            <label position="stacked">Articulo<span color="danger">*</span></label>
+                            <input type="text" (keyup)="buscarServicios($event)" placeholder="Nombre" [(ngModel)]="busqueda"  class="form-control">
+                        </div>
+                        <div *ngIf="search_servicios.length && busqueda != ''" class="dropdown-menu show w-100">
+                            <div *ngFor="let servicio of search_servicios;let i=index" (click)="addToSearch(servicio)" >
+                                <div *ngIf="i>0" class="dropdown-divider"></div>
+                                <div class="dropdown-item"  >
+                                    {{servicio.nombre}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <label>Nombre</label>
+                    <input type="text" placeholder="Nombre del producto" class="form-control" [(ngModel)]="lote_inventario_search.le.f"> -->
                 </div>
-                <div class="form-group col-md-3">
-                    <label>código</label>
-                    <input type="text" placeholder="Código del producto" class="form-control" [(ngModel)]="detalle_inventario_search.ge.fecha">
-                </div>
-                <!-- <div class="form-group col-md-3">
-                    <label>Cliente:</label>
-                    <select name="usuario_cliente" [(ngModel)]="detalle_inventario_search.eq.id_usuario_cliente"
-                        class="form-control">
-                        <option [value]="null" selected="selected">Seleccione un cliente</option>
-                        <option *ngFor="let usuario of usuario_list" [value]="usuario.id">
-                            {{usuario.nombre|titlecase}}</option>
-                    </select> -->
-                <!-- <div class="form-group col-md-3">
-                    <label>Vendedor:</label>
-                    <select  name="centro_medico" [(ngModel)]="detalle_inventario_search.eq.id_usuario_atendio"
-                        class="form-control">
-                        <option [value]="null" selected="selected">Seleccione un usuario</option>
-                        <option *ngFor="let usuario_atendio of usuarios_atendio" [value]="usuario_atendio.id">
-                            {{usuario_atendio.nombre|titlecase}}</option>
-                    </select>
-                </div> -->
-                <!-- <div class="form-group col-md-3">
-                    <label>Centro Medico:</label>
-                    <select  name="centro_medico" [(ngModel)]="detalle_inventario_search.eq.id_centro_medico"
-                        class="form-control">
-                        <option [value]="null" selected="selected">Seleccione un centro medico</option>
-                        <option *ngFor="let centro_medico of centros_medicos" [value]="centro_medico.id">
-                            {{centro_medico.nombre|titlecase}}</option>
-                    </select>
-                </div> -->
                 <div class="form-group col-md-3">
                     <label>&nbsp;</label>
                     <button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
@@ -47,6 +31,8 @@
             <table class="basica">
                 <thead>
                     <tr>
+                        <th>Lote</th>
+                        <th>Caducidad</th>
                         <th>Articulo</th>
                         <th>Código</th>
                         <th>Unidad de medida</th>
@@ -55,26 +41,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let inventario of inventarios">
-                        <td>{{servicio_dic? servicio_dic[inventario.id_servicio].nombre:''}}</td>
-                        <td>{{servicio_dic? servicio_dic[inventario.id_servicio].codigo:''}}</td>
-                        <td>{{unidad_dic? unidad_dic[servicio_dic[inventario.id_servicio].id_unidad_medida].nombre:''}}
-                        </td>
-                        <td>{{inventario.cantidad}}</td>
+                    <tr *ngFor="let lote_inventario of lotes_inventario">
+                        <td class="text-center">{{lote_inventario.id}}</td>
+                        <td class="text-center">{{lote_inventario.fecha_caducidad}}</td>
+                        <td>{{servicio_dic? servicio_dic[lote_inventario.id_servicio].nombre:''}}</td>
+                        <td>{{servicio_dic? servicio_dic[lote_inventario.id_servicio].codigo:''}}</td>
+                        <td>{{unidad_dic? unidad_dic[servicio_dic[lote_inventario.id_servicio].id_unidad_medida].nombre:''}}</td>
+                        <td>{{lote_inventario.existente}}</td>
                         <td class="text-center ">
-                            <button class="btn btn-primary" (click)="salidaInventario(inventario)">Salida
-                                inventario</button>
+                            <button class="btn btn-primary" (click)="salidaInventario(inventario)">Ajustar</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
-            <app-paginacion [path]="'/reporte-inventario'" [pages]="pages" [totalPages]="totalPages"
+            <app-paginacion [path]="'/control-inventario'" [pages]="pages" [totalPages]="totalPages"
                 [currentPage]="currentPage"></app-paginacion>
         </div>
     </div>
 </div>
+
 <div class="custom-modal" *ngIf="show_modal">
     <div style="width: 30rem;">
         <form>

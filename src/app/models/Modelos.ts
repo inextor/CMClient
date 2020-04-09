@@ -417,6 +417,18 @@ export interface Inventario{
 
 }
 
+export interface Lote_Inventario{
+	id?:number;
+	id_inventario?:number;
+	id_centro_medico?:number;
+	id_servicio?:number;
+	recibido?:number;
+	existente?:number;
+	fecha_caducidad?:Date;
+	tiempo_creacion?:Date;
+	tiempo_actualizacion?:Date;
+}
+
 export interface Notificacion{
 	id?:number;
 	id_usuario?:number;

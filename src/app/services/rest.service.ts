@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
-import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor } from '../models/Modelos';
+import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
@@ -66,14 +66,10 @@ export interface RequisicionInfo
 export class RestService {
 	public currentUserSubject: BehaviorSubject<any>;
 	public currentUser: Observable<any>;
-
 	public errorBehaviorSubject: BehaviorSubject<ErrorMensaje>;
 	public errorObservable:Observable<ErrorMensaje>;
 	public keyUpObserver:Observable<KeyboardEvent>;
-
-
 	urlBase:string = '';
-
 	public bitacora:ObjRest<Bitacora>;
 	public centro_medico:ObjRest<Centro_Medico>;
 	public proveedor:ObjRest<Proveedor>;
@@ -121,11 +117,11 @@ export class RestService {
 	public requisicionInfo:ObjRest<RequisicionInfo>;
 	public doctor_servicio:ObjRest<Doctor_Servicio>;
 	public distribucionInfo:SearchRest<Distribucion,DistribucionInfo>;
-
 	public citaInfo:SearchRest<Cita,CitaInfo>;
 	public horarios_centro_medico:SearchRest<Centro_Medico,HorariosCentroMedico>;
 	public sucursal_doctor:ObjRest<Sucursal_Doctor>;
 	public categoria_merma:ObjRest<Categoria_Merma>;
+	public lote_inventario:ObjRest<Lote_Inventario>;
 	
 
 
@@ -140,10 +136,7 @@ export class RestService {
 	constructor(private http: HttpClient)
 	{
 		//Produccion por cambiarx`x
-		this.urlBase = 'http://54.175.170.17/Mehr/api';
-
-		if( window.location.hostname.indexOf('127.0.0.1' ) == 0 )
-			this.urlBase = 'https://expediente.centromedico.life/Mehr/';
+		this.urlBase = 'https://expediente.centromedico.life/api';
 
 		if( window.location.hostname.indexOf('localhost') == 0 )
 			this.urlBase = 'http://127.0.0.1/CentroMedico/';
@@ -215,7 +208,8 @@ export class RestService {
 		this.horarios_centro_medico			= new SearchRest<Centro_Medico,HorariosCentroMedico>(`${this.urlBase}/horarios_centro_medico.php`,http);
 		this.sucursal_doctor				= new ObjRest<Sucursal_Doctor>(`${this.urlBase}/sucursal_doctor.php`,http);
 		this.detalle_requisicion			= new ObjRest<Detalle_Requisicion>(`${this.urlBase}/detalle_requisicion.php`,http);
-		this.categoria_merma			= new ObjRest<Categoria_Merma>(`${this.urlBase}/categoria_merma.php`,http);
+		this.categoria_merma				= new ObjRest<Categoria_Merma>(`${this.urlBase}/categoria_merma.php`,http);
+		this.lote_inventario				= new ObjRest<Lote_Inventario>(`${this.urlBase}/lote_inventario.php`,http);
 	
 	}
 
