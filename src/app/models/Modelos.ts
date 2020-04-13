@@ -756,3 +756,18 @@ export interface Categoria_Merma{
 	descripcion?:string;
 }
 
+export interface Tipo_Poliza{
+	id?:number;
+	id_centro_medico?:number;
+	nombre?:string;
+	costo?:number;
+	meses?:number;
+	cantidad_personas?:number;
+}
+
+export interface Servicio_Poliza{
+	id?:number;
+	id_tipo_poliza?:number;
+	id_servicio?:number;
+	limite_uso_servicio?:number;
+}

@@ -98,8 +98,6 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			x.unsubscribe();
 		});
 	}
-
-
 	
 	buscar(evt: any)
 	{

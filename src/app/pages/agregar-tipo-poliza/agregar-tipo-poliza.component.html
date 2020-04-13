@@ -1,0 +1,94 @@
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3 ">{{this.tipo_poliza.id ? 'EDITAR':'AGREGAR'}} TIPO POLIZA</h4>
+        <app-loading [display]="is_loading"></app-loading>
+        <div class="container card mt-3 mb-3 pt-3 ">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label position="stacked">Nombre<span color="danger">*</span></label>
+                        <input required placeholder="Nombre" type="text" class="form-control" name="nombre" [(ngModel)]="tipo_poliza.nombre">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label position="stacked">Costo<span color="danger">*</span></label>
+                        <input required placeholder="costo" type="text" class="form-control" name="costo" [(ngModel)]="tipo_poliza.costo">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Duración</label>
+                        <select class="form-control" name="meses"
+                            [(ngModel)]="tipo_poliza.meses">
+                            <option value="null" selected hidden>Seleccione una opción </option>
+                            <option value="3"> 3 meses </option>
+                            <option value="6"> 6 meses</option>
+                            <option value="12"> 12 meses</option>
+                            <option value="18"> 18 meses</option>
+                            <option value="24"> 24 meses</option>
+                            <option value="30"> 30 meses</option>
+                            <option value="36"> 36 meses</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label position="stacked">Limite de personas<span color="danger">*</span></label>
+                        <input required placeholder="Limite de personas" type="text" class="form-control" name="cantidad_personas"
+                            [(ngModel)]="tipo_poliza.cantidad_personas">
+                    </div>
+                </div>
+            
+            </form>
+        </div>
+        
+        <div class="container card mt-3 mb-3 pt-3 ">
+      
+                <h5 class="p-2">*AGREGAR SERVICIOS</h5>
+                <div class="form-row p-2">
+    
+                    <div class="form-group col-md-6">
+                        <div class="dropdown">
+                            <div class="">
+                                <label position="stacked">Articulo<span color="danger">*</span></label>
+                                <input type="text" (keyup)="buscarServicios($event)" [(ngModel)]="busquedaServicio"  class="form-control">
+                            </div>
+                            <div *ngIf="search_servicios.length" class="dropdown-menu show w-100">
+                                <div *ngFor="let servicio of search_servicios;let i=index" (click)="AgregarServicio(servicio)">
+                                    <div *ngIf="i>0" class="dropdown-divider"></div>
+                                    <div class="dropdown-item">
+                                        {{servicio.nombre}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-1 mb-2 ">
+                    <table class="basica p-1 m-0">
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Limite uso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let servicio_tipo_poliza of servicios_tipo_poliza">
+                                <td>
+                                    <label>{{servicio_tipo_poliza.servicio.nombre | titlecase}}</label>
+                                </td>
+                                <td>
+                                    <input type="number" (change)="aumentarLimite(servicio_tipo_poliza)"
+                                    [(ngModel)]="servicio_tipo_poliza.servicio_poliza.limite_uso_servicio" step="1" min=0>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">x</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        </div>
+        <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+            [disabled]="is_loading">{{this.tipo_poliza.id ? 'Guardar':'Agregar'}}</button>
+    </div>
+</div>

@@ -102,6 +102,9 @@ import { ReporteInventarioComponent } from './pages/reporte-inventario/reporte-i
 import { OrganizacionesComponent } from './pages/organizaciones/organizaciones.component';
 import { ControlInventarioComponent } from './pages/control-inventario/control-inventario.component';
 import { MaximosMinimosComponent } from './pages/maximos-minimos/maximos-minimos.component';
+import { PolizasComponent } from './pages/polizas/polizas.component';
+import { AgregarTipoPolizaComponent } from './pages/agregar-tipo-poliza/agregar-tipo-poliza.component';
+import { TipoPolizasComponent } from './pages/tipo-polizas/tipo-polizas.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -211,6 +214,9 @@ export function init_app(rest: RestService) {
     OrganizacionesComponent,
     ControlInventarioComponent,
     MaximosMinimosComponent,
+    PolizasComponent,
+    AgregarTipoPolizaComponent,
+    TipoPolizasComponent,
   ],
   imports: [
     AccessModule,

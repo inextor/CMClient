@@ -72,6 +72,8 @@ import { ReporteInventarioComponent} from './pages/reporte-inventario/reporte-in
 import { OrganizacionesComponent} from './pages/organizaciones/organizaciones.component';
 import { ControlInventarioComponent} from './pages/control-inventario/control-inventario.component';
 import { MaximosMinimosComponent } from './pages/maximos-minimos/maximos-minimos.component';
+import {TipoPolizasComponent} from './pages/tipo-polizas/tipo-polizas.component';
+import {AgregarTipoPolizaComponent} from './pages/agregar-tipo-poliza/agregar-tipo-poliza.component';
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
 	{ path: "login", component: LoginComponent, pathMatch: "full" },
@@ -111,7 +113,6 @@ const routes: Routes = [
 			{ path: "agregar-gasto", component: AgregarGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-organizacion", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-organizacion/:id", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
-		
 			{ path: "editar-organizacion", component: AgregarOrganizacionComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-paciente", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-pregunta", component: AgregarPreguntaComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -121,6 +122,7 @@ const routes: Routes = [
 			{ path: "agregar-requisicion", component: AgregarRequisicionComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-tipo-gasto", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-tipo-precio", component: AgregarTipoPrecioComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "agregar-tipo-poliza", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "base", component: BaseComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "centros-medicos", component: CentrosMedicosComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -154,6 +156,7 @@ const routes: Routes = [
 			{ path: "editar-requisicion:/id", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-tipo-gasto/:id", component: AgregarTipoGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-tipo-precio/:id", component: AgregarTipoPrecioComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "editar-tipo-poliza/:id", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },	
 			{ path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "especialidades", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -189,6 +192,8 @@ const routes: Routes = [
 			{ path: "organizaciones", component:OrganizacionesComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "control-inventario", component:ControlInventarioComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "maximos-minimos", component:MaximosMinimosComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "tipo-polizas", component:TipoPolizasComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			
 		]
 	},
 ];
