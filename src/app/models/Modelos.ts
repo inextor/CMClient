@@ -512,6 +512,7 @@ export interface Poliza{
 	id?:number;
 	id_paciente?:number;
 	id_organizacion?:number;
+	id_tipo_poliza?:number;
 	descricion?:string;
 	estado?:string;
 	nombre_mes_pago?:string;
@@ -618,6 +619,7 @@ export interface Respuesta_Historia_Clinica{
 export interface Servicio{
 	id?:number;
 	id_organizacion?:number;
+	id_centro_medico?:number;
 	id_unidad_medida?:number;
 	id_imagen?:number;
 	codigo?:string;
@@ -654,6 +656,7 @@ export interface Sucursal_Doctor{
 export interface Tipo_Gasto{
 	id?:number;
 	id_organizacion?:number;
+	id_centro_medico?:number;
 	nombre?:string;
 	tiempo_creacion?:Date;
 

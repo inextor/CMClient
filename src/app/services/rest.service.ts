@@ -157,13 +157,9 @@ export class RestService {
 
 		this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('usuario')));
 		this.currentUser = this.currentUserSubject.asObservable();
-
-
 		this.keyUpObserver = fromEvent<KeyboardEvent>( window.document.body, 'keyup' );
-
 		this.errorBehaviorSubject = new BehaviorSubject<ErrorMensaje>(null);
 		this.errorObservable = this.errorBehaviorSubject.asObservable();
-
 		//this.doctor = new DoctorRest(http,this.urlBase);
 		this.bitacora						= new ObjRest<Bitacora>						(`${this.urlBase}/bitacora.php`,http);
 		this.centro_medico					= new ObjRest<Centro_Medico>				(`${this.urlBase}/centro_medico.php`,http);
@@ -198,13 +194,11 @@ export class RestService {
 		this.respuesta_historia_clinica		= new ObjRest<Respuesta_Historia_Clinica>	(`${this.urlBase}/respuesta_historia_clinica.php`,http);
 		this.servicio						= new ObjRest<Servicio>						(`${this.urlBase}/servicio.php`,http); //NO SOPORTA POST
 		this.servicio_recurso				= new ObjRest<Servicio_Recurso>				(`${this.urlBase}/servicio_recurso.php`,http); //PARA dar de alta el servicio
-
 		//this.sesion						= new ObjRest<Sesion>							(`${this.urlBase}/sesion.php`,http);
 		this.tipo_gasto						= new ObjRest<Tipo_Gasto>					(`${this.urlBase}/tipo_gasto.php`,http);
 		this.tipo_precio					= new ObjRest<Tipo_Precio>					(`${this.urlBase}/tipo_precio.php`,http);
 		this.usuario						= new ObjRest<Usuario>						(`${this.urlBase}/usuario.php`,http);
 		// this.usuario_centro_medico		= new ObjRest<Usuario_Centro_Medico>		(`${this.urlBase}/usuario_centro_medico.php`,http);
-
 		this.unidad_medida					= new ObjRest<Unidad_Medida>				(`${this.urlBase}/unidad_medida.php`,http);
 		this.venta							= new ObjRest<Venta>						(`${this.urlBase}/venta.php`,http);
 		this.searchCita						= new SearchRest<SearchCitaRequest,SearchCitaResponse>(`${this.urlBase}/searchCita.php`,http);

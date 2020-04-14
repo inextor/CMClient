@@ -105,6 +105,7 @@ import { MaximosMinimosComponent } from './pages/maximos-minimos/maximos-minimos
 import { PolizasComponent } from './pages/polizas/polizas.component';
 import { AgregarTipoPolizaComponent } from './pages/agregar-tipo-poliza/agregar-tipo-poliza.component';
 import { TipoPolizasComponent } from './pages/tipo-polizas/tipo-polizas.component';
+import { AgregarPolizaComponent } from './pages/agregar-poliza/agregar-poliza.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -217,6 +218,7 @@ export function init_app(rest: RestService) {
     PolizasComponent,
     AgregarTipoPolizaComponent,
     TipoPolizasComponent,
+    AgregarPolizaComponent,
   ],
   imports: [
     AccessModule,

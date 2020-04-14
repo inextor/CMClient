@@ -28,7 +28,7 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 	ngOnInit()
 	{
 		this.currentUser = this.rest.getUsuarioSesion();
-
+		let centro_medico = this.rest.getCurrentCentroMedico();
 		this.gasto_centro_medico.id_usuario = this.currentUser.id;
 
 		this.rest.centro_medico.getAll({ id_organizacion: this.currentUser.id_organizacion }).subscribe((respuesta)=>

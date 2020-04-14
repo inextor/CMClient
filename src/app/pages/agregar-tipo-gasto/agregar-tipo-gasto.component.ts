@@ -18,6 +18,8 @@ export class AgregarTipoGastoComponent  extends BaseComponent implements OnInit 
 
 	ngOnInit() {
 		this.is_loading = true;
+		let centro_medico = this.rest.getCurrentCentroMedico();
+		this.tipoGasto.id_centro_medico = centro_medico.id;
 		this.route.paramMap.subscribe( params =>
 		{
 			this.id_tipo_gasto = params.get('id') == null ? null : parseInt( params.get('id') );

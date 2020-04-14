@@ -40,8 +40,9 @@ export class IngresosComponent extends BaseComponent implements OnInit {
 
 		this.route.queryParams.subscribe( params =>
 		{
+			let centro_medico =this.rest.getCurrentCentroMedico();
 			this.ingreso_search = {
-				eq: {},
+				eq: {id_centro_medico : centro_medico.id},
 				gt: {},
 				ge: {},
 				le: {},

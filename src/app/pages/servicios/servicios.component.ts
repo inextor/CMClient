@@ -29,7 +29,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 		this.route.queryParams.subscribe( params =>
 		{
 			this.servicio_search = {
-				eq: { id_organizacion: this.centro_medico.id_organizacion },
+				eq: { id_organizacion: this.centro_medico.id_organizacion, id_centro_medico: this.centro_medico.id },
 				gt: {},
 				ge: {},
 				le: {},

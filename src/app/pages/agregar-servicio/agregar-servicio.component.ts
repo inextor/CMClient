@@ -50,9 +50,10 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 		this.route.paramMap.subscribe( params =>
 		{
 			this.id = params.get('id') ==null ? null : parseInt(params.get('id') );
+			let centro_medico = this.rest.getCurrentCentroMedico();
 			this.usuario= this.rest.getUsuarioSesion();
 			this.servicio_recurso.servicio.id_organizacion = this.usuario.id_organizacion;
-
+			this.servicio_recurso.servicio.id_centro_medico = centro_medico.id;
 			this.is_loading = true;
 
 			if( this.id )

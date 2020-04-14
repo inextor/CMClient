@@ -1,0 +1,86 @@
+<div class="card p-3">
+	<div class="container">
+		<div class="p-0 mt-3">
+			<div class=" mb-3 d-flex justify-content-between flex-wrap">
+				<div>
+					<h4 class="">{{this.poliza.id ? 'EDITAR':'AGREGAR'}} POLIZA</h4>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary btn-sm" (click)="guardar()"
+						[disabled]="is_loading">{{this.poliza.id ? 'Guardar':'Agregar'}}</button>
+				</div>
+			</div>
+		</div>
+
+		<app-loading [display]="is_loading"></app-loading>
+		<div class="container card mt-3 mb-3 pt-3 ">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<div class="dropdown">
+						<div class="">
+							<label position="stacked">Cliente<span color="danger">*</span></label>
+							<input type="text" placeholder="Buscar Cliente" (keyup)="buscarCliente($event)"
+								[(ngModel)]="busquedaCliente" class="form-control">
+						</div>
+						<div *ngIf="search_clientes.length && busquedaCliente != ''" class="dropdown-menu show w-100">
+							<div *ngFor="let cliente of search_clientes;let i=index" (click)="agregarCliente(cliente)">
+								<div *ngIf="i>0" class="dropdown-divider"></div>
+								<div class="dropdown-item">
+									{{cliente.nombre}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label position="stacked">Tipo Poliza<span color="danger">*</span></label>
+					<select class="form-control" name="id_tipo_poliza" [(ngModel)]="poliza.id_tipo_poliza">
+						<option [value]="null" hidden>Seleccione un tipo de poliza</option>
+						<option *ngFor="let tipo_poliza of tipos_poliza" [value]="tipo_poliza.id">
+							{{tipo_poliza.nombre | titlecase}}</option>
+					</select>
+				</div>
+				<div class="form-group col-md-4">
+					<label>Fecha Inicio<span>*</span></label>
+					<input placeholder="fecha de inicio" class="form-control" type="date" name="nombre_mes_pago"
+						[(ngModel)]="poliza.nombre_mes_pago">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<div class="card p-2">
+						<div class=" p-0">
+							<div class="form-row p-2">
+								<div  *ngIf="familiares.lenght !=0">
+									<div class="d-flex flex-row border "*ngFor="let familiar of familiares">
+									<div class="p-2">
+										Nombre:
+									</div>	
+									
+									<div class="p-2">
+										{{familiar.nombre}}
+									</div>
+								</div>
+								</div>
+
+								<!-- elboton -->
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6">
+					<div class="card p-2">
+						<div>
+							Limite de usuarios: 4
+						</div>
+						<div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
