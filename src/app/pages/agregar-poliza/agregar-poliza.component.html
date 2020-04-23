@@ -34,49 +34,73 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label position="stacked">Tipo Poliza<span color="danger">*</span></label>
-					<select class="form-control" name="id_tipo_poliza" [(ngModel)]="poliza.id_tipo_poliza">
+					<select class="form-control" name="id_tipo_poliza" [(ngModel)]="poliza.id_tipo_poliza" (change)="seleccionarTipoPoliza()">
 						<option [value]="null" hidden>Seleccione un tipo de poliza</option>
-						<option *ngFor="let tipo_poliza of tipos_poliza" [value]="tipo_poliza.id">
+						<option *ngFor="let tipo_poliza of tipos_poliza" [value]="tipo_poliza.id" >
 							{{tipo_poliza.nombre | titlecase}}</option>
 					</select>
 				</div>
 				<div class="form-group col-md-4">
 					<label>Fecha Inicio<span>*</span></label>
-					<input placeholder="fecha de inicio" class="form-control" type="date" name="nombre_mes_pago"
-						[(ngModel)]="poliza.nombre_mes_pago">
+					<input placeholder="fecha de inicio" class="form-control" type="date" name="fecha_inicio"
+						[(ngModel)]="poliza.fecha_inicio">
 				</div>
 			</div>
 
-			<div class="row">
+			<div *ngIf="detalle_poliza && poliza.id_paciente!== null" class="row">
 				<div class="col-sm-12 col-md-6">
 					<div class="card p-2">
+						<div>
+							Agregar Familiares
+						</div>
 						<div class=" p-0">
-							<div class="form-row p-2">
-								<div  *ngIf="familiares.lenght !=0">
-									<div class="d-flex flex-row border "*ngFor="let familiar of familiares">
-									<div class="p-2">
-										Nombre:
-									</div>	
-									
-									<div class="p-2">
-										{{familiar.nombre}}
-									</div>
-								</div>
-								</div>
-
+							<div class="form-row">
+								<table class="table basica">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th style="width: 25px;">Agregar</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let familiar of familiares">
+											<td>
+												{{familiar.nombre}}
+											</td>
+											<td>
+												<button type="button" class="btn btn-primary btn-sm"
+													(click)="agregarFamiliar(familiar)">
+													<i class="fa fa-plus "></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 								<!-- elboton -->
 							</div>
-
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-12 col-md-6">
 					<div class="card p-2">
 						<div>
-							Limite de usuarios: 4
+							Limite de usuarios: {{detalle_poliza.cantidad_personas - familiares_poliza.length}}
 						</div>
 						<div>
-
+							<table class="table basica">
+								<thead>
+									<tr>
+										<th>Nombre</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let familiar_poliza of familiares_poliza">
+										<td>
+											{{familiar_poliza.familiar.nombre}}
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

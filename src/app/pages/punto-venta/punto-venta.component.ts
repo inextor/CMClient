@@ -146,6 +146,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 				}
 				console.log("datosBenta", this.datosVenta);
 				this.ventas = response[2].datos;
+				console.log('laventa',this.ventas);
 				this.calcularTotalVenta();
 				this.is_loading = false;
 			}, (error) => {
@@ -265,6 +266,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			x.unsubscribe();
 		}, (error) => this.showError(error));
 	}
+	
 	guardarVenta() {
 		this.is_loading = true;
 		console.log("guardando venta", this.datosVenta);

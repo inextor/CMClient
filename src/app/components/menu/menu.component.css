@@ -69,6 +69,16 @@ a{
   vertical-align:middle;
   margin-right:3px;
 }
+
+.menuIconsTemp{
+  width:35px;
+  height:35px;
+  vertical-align:middle;
+  margin-left:6px;
+  margin-right:6px;
+}
+
+
 .menuSubButtons{
   padding-left: 30px;
   padding-bottom: 5px;

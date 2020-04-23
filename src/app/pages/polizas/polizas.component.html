@@ -29,22 +29,20 @@
 					<tr>
 						<th>ID</th>
 						<th>CLIENTE</th>
+						<th>TIPO POLIZA</th>
 						<th>ESTADO</th>
-						<th>DESCRIPCIÓN</th>
 						<th>OPCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let poliza of polizas">
-						<td>
-							<div>{{ poliza.id }}</div>
-						</td>
-						<td>{{poliza.id_paciente}}</td>
-						<td>{{poliza.estado}}</td>
-						<td>{{poliza.descripcion}}</td>
-						<td class="p-0 options">
+						<td class="text-center"><div>{{ poliza.id }}</div></td>
+						<td class="text-center">{{usuarios_dic[ poliza.id_paciente ].nombre}}</td>
+						<td class="text-center">{{tipos_poliza_dic[ poliza.id_tipo_poliza  ].nombre}}</td>
+						<td class="text-center">{{poliza.estado}}</td>
+						<td class="p-0 options text-center">
 							<button class="btn btn-light p-0 m-1 border "
-								[routerLink]="['/editar-especialidad', poliz.id]"
+								[routerLink]="['/editar-especialidad', poliza.id]"
 								data-toggle="tooltip" title="Editar">
 								<span class="">
 									<i class="">

@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
-import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario, Tipo_Poliza, Servicio_Poliza } from '../models/Modelos';
+import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario, Tipo_Poliza, Servicio_Poliza, Pago_Poliza } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
@@ -63,8 +63,12 @@ export interface TipoPolizaInfo
 	tipo_poliza	: Tipo_Poliza;
 	servicios_poliza: Servicio_Poliza_Info[];
 }
-//
-
+//POLIZAS Y PACIENTES AFILIADOS
+export interface PolizaInfo
+{
+	poliza	: Poliza;
+	familiares_poliza: Paciente[];
+}
 // export interface InventarioInfo
 // {
 // 	lote_inventario	: Lote_Inventario;
@@ -136,6 +140,8 @@ export class RestService {
 	public lote_inventario:ObjRest<Lote_Inventario>;
 	public tipo_poliza: ObjRest<Tipo_Poliza>;
 	public tipoPolizaInfo:ObjRest<TipoPolizaInfo>;
+	public polizaInfo:ObjRest<PolizaInfo>
+	public pago_poliza:ObjRest<Pago_Poliza>
 	
 
 
@@ -220,7 +226,8 @@ export class RestService {
 		this.lote_inventario				= new ObjRest<Lote_Inventario>(`${this.urlBase}/lote_inventario.php`,http);
 		this.tipo_poliza				= new ObjRest<Tipo_Poliza>(`${this.urlBase}/tipo_poliza.php`,http);
 		this.tipoPolizaInfo				= new ObjRest<TipoPolizaInfo>					(`${this.urlBase}/tipoPolizaInfo.php`,http);
-	
+		this.polizaInfo				= new ObjRest<PolizaInfo>					(`${this.urlBase}/polizaInfo.php`,http);
+		this.pago_poliza				= new ObjRest<Pago_Poliza>					(`${this.urlBase}/pago_poliza.php`,http);
 	}
 
 	getCurrentCentroMedico():Centro_Medico

@@ -76,6 +76,7 @@ import {TipoPolizasComponent} from './pages/tipo-polizas/tipo-polizas.component'
 import {AgregarTipoPolizaComponent} from './pages/agregar-tipo-poliza/agregar-tipo-poliza.component';
 import {PolizasComponent} from './pages/polizas/polizas.component';
 import {AgregarPolizaComponent} from './pages/agregar-poliza/agregar-poliza.component';
+import {PagosPolizaComponent} from './pages/pagos-poliza/pagos-poliza.component';
 
 
 const routes: Routes = [
@@ -204,6 +205,7 @@ const routes: Routes = [
 			{ path: "maximos-minimos", component:MaximosMinimosComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "tipo-polizas", component:TipoPolizasComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "polizas", component:PolizasComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "pagos-poliza", component:PagosPolizaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			
 		]
 	},

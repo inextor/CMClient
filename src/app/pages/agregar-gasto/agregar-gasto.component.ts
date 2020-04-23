@@ -41,8 +41,6 @@ export class AgregarGastoComponent extends BaseComponent implements OnInit {
 		this.route.paramMap.subscribe( params =>
 		{
 			this.id_gasto = params.get('id') == null ? null : parseInt( params.get('id') );
-
-
 			this.rest.tipo_gasto.getAll({ id_organizacion:this.currentUser.id_organizacion}).subscribe((respTipoGasto)=>
 			{
 				this.tiposGasto = respTipoGasto.datos;

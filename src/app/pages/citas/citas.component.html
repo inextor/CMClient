@@ -276,7 +276,7 @@
 						<button class=" btn btn-light p-0 m-1 border "
 							*ngIf="i.cita.estatus == 'ACTIVA' && i.cita.confirmado_por_doctor=='NO'"
 							(click)="currentInfoCita=i;showConfirmDoctor=true" data-toggle="tooltip"
-							title="Confirmar doctor">
+							title="Confirmar doctor" [appAccess]="['DOCTOR','ADMIN']">
 							<!--span class="oi" data-glyph="people" title="icon name" aria-hidden="true"></span-->
 							<span>
 								<i class="">

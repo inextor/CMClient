@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService, Servicio_Poliza_Info } from '../../services/rest.service';
 import { Router,ActivatedRoute } from "@angular/router";
-import { Especialidad, Tipo_Poliza, Servicio } from '../../models/Modelos';
+import { Especialidad, Tipo_Poliza, Servicio, Tipo_Precio } from '../../models/Modelos';
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { compareByFieldSpec } from '@fullcalendar/core';
 
 interface ServicioById {
 	[key:number]:Servicio;
@@ -34,34 +36,65 @@ export class AgregarTipoPolizaComponent extends BaseComponent implements OnInit 
 	tipo_poliza:Tipo_Poliza = {
 		nombre: '',
 		id_centro_medico:null,
-    costo:null,
+		id_tipo_precio:null,
+    precio:null,
     meses:null,
     cantidad_personas:null
 	};
+	tipos_precio: Tipo_Precio[]=[];
 
 	ngOnInit() {
-		let centro_medico = this.rest.getCurrentCentroMedico();
-		this.tipo_poliza = {
-		id: null,
-		id_centro_medico: centro_medico.id,
-      	nombre:'',
-      	costo:null,
-      	meses:null,
-      	cantidad_personas:null,
-		};
+	
 
 		this.route.paramMap.subscribe( params =>
 		{
+
+			let centro_medico = this.rest.getCurrentCentroMedico();
+			this.tipo_poliza = {
+			id: null,
+			id_centro_medico: centro_medico.id,
+			id_tipo_precio: null,
+			  nombre:'',
+			  precio:null,
+			  meses:null,
+			  cantidad_personas:null,
+			};
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			if( id != null )
 			{
 				this.is_loading = true;
-				//this.rest.getCentroMedico( id ).subscribe((centro_medico)=>
-				this.rest.tipo_poliza.get( id ).subscribe((tipo_poliza)=>
-				{
-					this.is_loading = false;
-					this.tipo_poliza = tipo_poliza;
-				}, error=>this.showError(error));
+				forkJoin([
+						this.rest.tipo_poliza.get( id ),
+						this.rest.tipo_precio.getAll({})
+					]).subscribe((response)=>{
+
+						this.tipo_poliza = response[0];
+						this.tipos_precio = response[1].datos;
+						// this.tipo_poliza.id_tipo_precio = this.tipos_precio[0].id;
+						console.log('tiposppressssio',this.tipo_poliza);
+						this.is_loading = false;
+				
+					},(error)=>
+					{
+						this.showError( error );
+						this.is_loading = false ;
+					}
+				);
+			}else{
+				this.is_loading = true;
+				forkJoin([
+						this.rest.tipo_precio.getAll({})
+					]).subscribe((response)=>{
+						this.tipos_precio = response[0].datos;
+						this.tipo_poliza.id_tipo_precio = this.tipos_precio[0].id;
+						console.log('tiposppressssio',response[0]);
+						this.is_loading = false;
+					},(error)=>
+					{
+						this.showError( error );
+						this.is_loading = false ;
+					}
+				);
 			}
 		});
 	}
@@ -107,7 +140,7 @@ export class AgregarTipoPolizaComponent extends BaseComponent implements OnInit 
 	agregar()
 	{
 		this.is_loading = true;
-
+		
 		if( this.tipo_poliza.id)
 		{
 			//this.rest.actualizarCentroMedico( this.centro_medico ).subscribe((centro_medico)=>{

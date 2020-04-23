@@ -87,7 +87,7 @@
 				</span>
 			</button>
 			<!-- confirmar doctor -->
-			<button class=" btn btn-light p-0 m-1 border "
+			<button class=" btn btn-light p-0 m-1 border " [appAccess]="['DOCTOR','ADMIN']"
 				*ngIf="currentInfoCita && currentInfoCita.cita.confirmado_por_doctor!='SI'"
 				(click)="showConfirmDoctor=true" data-toggle="tooltip" title="Confirmar doctor">
 

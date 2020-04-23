@@ -65,7 +65,6 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		});
 	}
 
-
 	loadById(id: number) {
 		this.rest.consulta.get(id).subscribe(consulta => {
 			this.loadConsultaData(consulta);
@@ -192,8 +191,6 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 			, tipo_precio: tipo_precios[0]
 		}
 	}
-
-
 
 	guardar() {
 		this.is_loading = true;

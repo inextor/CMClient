@@ -513,9 +513,11 @@ export interface Poliza{
 	id_paciente?:number;
 	id_organizacion?:number;
 	id_tipo_poliza?:number;
+	id_servicio?:number;
 	descricion?:string;
 	estado?:string;
 	nombre_mes_pago?:string;
+	fecha_inicio?:Date;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 }
@@ -762,8 +764,9 @@ export interface Categoria_Merma{
 export interface Tipo_Poliza{
 	id?:number;
 	id_centro_medico?:number;
+	id_tipo_precio?:number;
 	nombre?:string;
-	costo?:number;
+	precio?:number;
 	meses?:number;
 	cantidad_personas?:number;
 }
@@ -773,4 +776,15 @@ export interface Servicio_Poliza{
 	id_tipo_poliza?:number;
 	id_servicio?:number;
 	limite_uso_servicio?:number;
+}
+
+export interface Pago_Poliza{
+	id?:number;
+	id_poliza?:number;
+	id_organizacion?:number;
+	id_usuario?:number;
+	id_venta?:number;
+	cantidad?:number;
+	fecha_cobro?:Date;
+	estado?:string;
 }
