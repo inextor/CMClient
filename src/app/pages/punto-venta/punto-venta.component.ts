@@ -425,12 +425,11 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 	pagarVenta() {
 		this.pago.id_venta = this.datosVenta.venta.id;
-
 		this.calcularCantidades();
 		this.calcularCambio(this.pago);
+		this.datosVenta.venta.estatus = 'PROCESADA';
 		this.rest.pago.create(this.pago).subscribe((response) => {
 			this.is_loading = false;
-			this.datosVenta.venta.estatus = 'PROCESADA';
 			this.router.navigate(['/ticket-venta', this.datosVenta.venta.id, 1]);
 		}, (error) => {
 			this.is_loading = false;
@@ -500,10 +499,10 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			i.detalle_venta.total = i.precio_servicio.precio * i.detalle_venta.cantidad;
 			i.detalle_venta.subtotal = i.detalle_venta.total / (1 + (centro_medico.iva * 0.01));
 			i.detalle_venta.iva = i.detalle_venta.total - i.detalle_venta.subtotal;
-
 			total += i.detalle_venta.total;
 			subtotal += i.detalle_venta.subtotal;
 			iva += i.detalle_venta.iva;
+			console.log(subtotal);
 		}
 
 		console.log('Precios', prices);

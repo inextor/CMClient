@@ -28,6 +28,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.queryParams.subscribe( params =>
 		{
+			
 			this.servicio_search = {
 				eq: { id_organizacion: this.centro_medico.id_organizacion, id_centro_medico: this.centro_medico.id },
 				gt: {},
@@ -47,6 +48,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 			this.rest.servicio.search( this.servicio_search ).subscribe((respuesta)=>
 			{
 				this.servicios = respuesta.datos;
+				console.log('losservicios',this.servicios);
 				this.setPages( this.servicio_search.pagina, respuesta.total );
 				this.is_loading = false;
 			},error=> this.showError(error));
@@ -55,13 +57,14 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 
 	changeSearch(nombre:string)
 	{
+		
 	}
 
 	search()
 	{
 		this.is_loading = true;
 		this.servicio_search.pagina= 0;
-		this.servicio_search.eq.id_organizacion =this.centro_medico.id_organizacion;
+		this.servicio_search.lk.id_organizacion =this.centro_medico.id_organizacion;
 		this.servicio_search.lk.codigo	= this.servicio_search.lk.nombre;
         let search = {};
         let array = ['eq','le','lt','ge','gt','csv','lk'];

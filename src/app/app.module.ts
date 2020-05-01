@@ -107,6 +107,8 @@ import { AgregarTipoPolizaComponent } from './pages/agregar-tipo-poliza/agregar-
 import { TipoPolizasComponent } from './pages/tipo-polizas/tipo-polizas.component';
 import { AgregarPolizaComponent } from './pages/agregar-poliza/agregar-poliza.component';
 import { PagosPolizaComponent } from './pages/pagos-poliza/pagos-poliza.component';
+import { FacturasComponent } from './pages/facturas/facturas.component';
+import { AgregarFacturaComponent } from './pages/agregar-factura/agregar-factura.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -221,6 +223,8 @@ export function init_app(rest: RestService) {
     TipoPolizasComponent,
     AgregarPolizaComponent,
     PagosPolizaComponent,
+    FacturasComponent,
+    AgregarFacturaComponent,
   ],
   imports: [
     AccessModule,

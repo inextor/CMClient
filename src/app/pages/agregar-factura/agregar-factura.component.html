@@ -1,0 +1,112 @@
+<div class="card p-3">
+    <div class="container">
+
+
+        <div class="p-0 mt-3">
+            <div class=" mb-3 d-flex justify-content-between flex-wrap">
+                <div>
+                    <h4>{{this.venta.id ? 'FACTURA':'AGREGAR'}} </h4>
+                </div>
+                <div>
+                    <button  type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="guardar()"
+				[disabled]="is_loading">Facturar</button>
+                </div>
+            </div>
+        </div>
+
+        <app-loading [display]="is_loading"></app-loading>
+        <div class="form-row">
+            <div class="card">
+                <div class="p-3 m-3 border-box row">
+                    <div *ngIf="usuario" class="row w-100">
+                        <div class="form-group col-md-6">
+                            <label position="stacked">Nombre<span color="danger">*</span></label>
+                            <input disabled placeholder="Nombre" type="text" class="form-control" name="nombre"
+                                [(ngModel)]="usuario.nombre">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label position="stacked">Subtotal<span color="danger">*</span></label>
+                            <input disabled placeholder="Telefono" type="text" class="form-control" name="subtotal"
+                                [(ngModel)]="venta.subtotal">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label position="stacked">Iva<span color="danger">*</span></label>
+                            <input disabled placeholder="RFC" type="text" class="form-control" name="iva"
+                                [(ngModel)]="venta.iva">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label position="stacked">Total Venta<span color="danger">*</span></label>
+                            <input disabled placeholder="Direccion" type="text" class="form-control" name="total"
+                                [(ngModel)]="venta.total">
+                        </div>
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-md-12 form-group">
+                            <label>RFC</label>
+                            <input type="text" name="factura_rfc" [(ngModel)]="venta.factura_rfc" class="form-control"
+                                (keyup)="buscarRfc($event)" id="buscarRfc">
+                            <div *ngIf="search_rfc.length"
+                                class="dropdown-menu show w-100 no-selectable-text dropdown ml-3 mr-3">
+                                <div *ngFor="let usuario of search_rfc" (click)="selectRfc(usuario)">
+                                    <div class="dropdown-item search">
+                                        {{usuario.factura_rfc|uppercase}} <i class="text-muted">
+                                            {{usuario.usuario|uppercase}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-md-6 form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="text" name="factura_correo_electronico"
+                                [(ngModel)]="venta.factura_correo_electronico" class="form-control">
+                        </div>
+                        
+                        <div class="col-md-6 form-group">
+                            <label>Uso CFDI</label>
+                            <select [(ngModel)]="venta.factura_uso_cfdi" class="form-control">
+                                <option value="G01" selected> G01 - Adquisición de mercancias</option>
+                                <option value="G03"> G03 - Gastos en general</option>
+                                <option value="D01"> D01 - Honorarios médicos, dentales y gastos hospitalarios.</option>
+                                <option value="D02"> D02 - Gastos médicos por incapacidad o discapacidad</option>
+                                <option value="P01"> P01 - Por definir</option>
+                                <option value="I02"> I02 - Mobilario y equipo de oficina por inversiones</option>
+                                <option value="I04"> I04 - Equipo de computo y accesorios</option>
+                                <option value="I06"> I06 - Comunicaciones telefónicas</option>
+                                <option value="I08"> I08 - Otra maquinaria y equipo</option>
+                                <option value="D03"> D03 - Gastos funerales.</option>
+                                <option value="D04"> D04 - Donativos.</option>
+                                <option value="I07"> I07 - Comunicaciones satelitales</option>
+                                <option value="I03"> I03 - Equipo de transporte</option>
+                                <option value="I01"> I01 - Construcciones</option>
+                                <option value="I05"> I05 - Dados, troqueles, moldes, matrices y herramental</option>
+                                <!--option value="D07"> D07 - Primas por seguros de gastos médicos.</option>
+                                <option value="D08"> D08 - Gastos de transportación escolar obligatoria.</option>
+                                <option value="D09"> D09 - Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones.</option>
+                                <option value="D10"> D10 - Pagos por servicios educativos (colegiaturas)</option>
+                                <option value="G02"> G02 - Devoluciones, descuentos o bonificaciones</option>
+                                <option value="D05"> D05 - Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación).</option>
+                                <option value="D06"> D06 - Aportaciones voluntarias al SAR.</option -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-md-6 form-group">
+                            <label>Razón Social</label>
+                            <input type="text" name="factura_rason_social" [(ngModel)]="venta.factura_razon_social"
+                                class="form-control">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Codigo Postal</label>
+                            <input type="text" name="factura_codigo_postal" [(ngModel)]="venta.factura_codigo_postal"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

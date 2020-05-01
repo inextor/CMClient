@@ -788,3 +788,7 @@ export interface Pago_Poliza{
 	fecha_cobro?:Date;
 	estado?:string;
 }
+
+export interface Facturar{
+	id?:number;
+}

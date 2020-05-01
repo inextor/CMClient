@@ -77,7 +77,8 @@ import {AgregarTipoPolizaComponent} from './pages/agregar-tipo-poliza/agregar-ti
 import {PolizasComponent} from './pages/polizas/polizas.component';
 import {AgregarPolizaComponent} from './pages/agregar-poliza/agregar-poliza.component';
 import {PagosPolizaComponent} from './pages/pagos-poliza/pagos-poliza.component';
-
+import {FacturasComponent} from './pages/facturas/facturas.component'
+import {AgregarFacturaComponent} from './pages/agregar-factura/agregar-factura.component'
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -206,7 +207,10 @@ const routes: Routes = [
 			{ path: "tipo-polizas", component:TipoPolizasComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "polizas", component:PolizasComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "pagos-poliza", component:PagosPolizaComponent, pathMatch:"full", canActivate:[AuthGuard]},
-			
+			{ path: "facturas", component:FacturasComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "agregar-factura", component:AgregarFacturaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "agregar-factura/:id", component:AgregarFacturaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+
 		]
 	},
 ];

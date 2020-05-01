@@ -70,7 +70,6 @@
 						<option value="PROCESADA">PROCESADA</option>
 					</select>
 				</div>
-
 				<div class="form-group col-md-3">
 					<label>&nbsp;</label>
 					<button type="button" class="btn btn-primary w-100" (click)="search()">Buscar</button>
@@ -89,7 +88,6 @@
 						<th>PENDIENTE</th>
 						<th>ESTADO</th>
 						<th>VENTAS</th>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -100,15 +98,16 @@
 						<td class="text-right">{{venta.total ? (venta.total| currency):'N/A'}}</td>
 						<td class="text-right">{{venta.pendiente ? (venta.pendiente| currency):'N/A'}}</td>
 						<td>{{venta.estatus}}</td>
-						<td class="text-center"><button [routerLink]="['/punto-venta',venta.id]" class="btn btn-primary">Proceder al pago</button></td>
-
+						<td class="text-center">
+							<button [routerLink]="['/punto-venta',venta.id]" class="btn btn-primary m-2">Proceder al pago</button>
+							<button *ngIf="venta.facturada=='NO'" [queryParams]="{id: venta.id}" [routerLink]="['/agregar-factura']" class="btn btn-primary">Facturar </button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
 		<!-- vista para dispositivos -->
-
 		<div class="hidden-desktop ">
             <div class="d-flex flex-row border " *ngFor="let venta of ventas">
                 <div class="p-2 tableColor">
@@ -132,11 +131,9 @@
                 </div>
             </div>
 		</div>
-		
 		<div>
 			<app-paginacion [path]="'/ventas'" [pages]="pages" [totalPages]="totalPages" [currentPage]="currentPage">
 			</app-paginacion>
 		</div>
-
 	</div>
 </div>
