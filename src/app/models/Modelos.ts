@@ -252,29 +252,31 @@ export interface Expediente{
 }
 
 export interface Factura{
-	FacturaID?:number;
-	NoFactura?:string;
-	Serie?:string;
-	Folio?:number;
-	Monto?:number;
-	ClienteID?:number;
-	Fecha?:string;
-	Status?:number;
-	Cancelar?:number;
-	FechaFac?:string;
-	FormaPago?:string;
-	Moneda?:number;
-	TipoCambio?:number;
+	id?:number;
+	noFactura?:string;
+	serie?:string;
+	folio?:number;
+	monto?:number;
+	id_cliente?:number;
+	fecha?:string;
+	status?:number;
+	cancelar?:number;
+	fechaFac?:string;
+	formaPago?:string;
+	moneda?:number;
+	tipoCambio?:number;
 	id_centro_medico?:number;
 	id_usuario_doctor?:number;
-	FolioFiscal?:string;
-	UsoCFDI?:string;
-	MetodoPago?:string;
-	CondicionPago?:string;
-	GeneracionFactura?:number;
-	RecuperarPDF?:number;
-	NotaFactura?:string;
-	MensajeError?:string;
+	folioFiscal?:string;
+	usoCFDI?:string;
+	metodoPago?:string;
+	condicionPago?:string;
+	generacionFactura?:number;
+	recuperarPDF?:number;
+	pdf_path?:string;
+	xml_path?:string;
+	notaFactura?:string;
+	mensajeError?:string;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
 

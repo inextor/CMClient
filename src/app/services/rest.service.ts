@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse,HttpResponse} from '@angular/common/http';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
@@ -670,4 +670,9 @@ export class RestService {
 
 		return null;
 	}
+
+	downloadFile(path): Observable<any>{
+		return this.http.get(`${this.urlBase}/files/${path}`,{headers:this.getSessionHeaders(),withCredentials:true});
+  }
+
 }
