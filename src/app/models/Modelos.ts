@@ -681,8 +681,6 @@ export interface Unidad_Medida{
 	codigo?:string;
 	nombre?:string;
 	tipo?:string;
-
-
 }
 
 export interface Usuario{
@@ -754,6 +752,7 @@ export interface Venta{
 	factura_codigo_postal?:string;
 	factura_correo_electronico?:string;
 	factura_uso_cfdi?:string;
+	factura_forma_pago?:string;
 	facturada?:string;
 }
 

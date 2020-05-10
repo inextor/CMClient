@@ -1,0 +1,24 @@
+<div class="card p-3">
+    <div class="container">
+        <h4 class="mb-3 mt-3 ">{{this.unidad_medida.id ? 'EDITAR':'AGREGAR'}} ESPECIALIDAD</h4>
+        <app-loading [display]="is_loading"></app-loading>
+        <form>
+            <div class="form-group">
+                <label position="stacked">Nombre unidad<span color="danger">*</span></label>
+                <input placeholder="Nombre de la unidad de medida" required type="text" class="form-control" name="nombre" [(ngModel)]="unidad_medida.nombre">
+            </div>
+            <div class="form-group">
+                <label position="stacked">codigo<span color="danger">*</span></label>
+                <input placeholder="Codigo de la unidad de medida" required type="text" class="form-control" name="codigo"
+                    [(ngModel)]="unidad_medida.codigo">
+            </div>
+            <div class="form-group">
+                <label position="stacked">tipo<span color="danger">*</span></label>
+                <input placeholder="Tipo de la unidad de medida" required type="text" class="form-control" name="tipo"
+                    [(ngModel)]="unidad_medida.tipo">
+            </div>
+            <button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+                [disabled]="is_loading">{{this.unidad_medida.id ? 'Guardar':'Agregar'}}</button>
+        </form>
+    </div>
+</div>

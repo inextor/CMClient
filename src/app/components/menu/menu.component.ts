@@ -11,6 +11,7 @@ import { Centro_Medico } from 'src/app/models/Modelos';
 export class MenuComponent implements OnInit {
   constructor(private rest: RestService, public router: Router ) {}
   showCentros:boolean = false;
+  showConfig:boolean = false;
   show_logout: boolean = false;
   show_seleccionar_centro_medico:boolean = false;
   @Input() show:boolean;

@@ -1,0 +1,21 @@
+<div class="card p-3">
+	<div class="container">
+		<h4 class="mb-3 mt-3 ">{{this.categoria_merma.id ? 'EDITAR':'AGREGAR'}} CATEGORIA MERMA</h4>
+		<app-loading [display]="is_loading"></app-loading>
+			<form >
+				<div class="form-group">
+					<label position="stacked">Nombre Categoria<span color="danger">*</span></label>
+					<input placeholder="Nombre de la categoria" required type="text" class="form-control" name="nombre"
+						[(ngModel)]="categoria_merma.nombre">
+				</div>
+				<div class="form-group">
+					<label position="stacked">Descripción<span color="danger">*</span></label>
+					<input placeholder="Descripción de la categoria" required type="text" class="form-control" name="descripcion"
+						[(ngModel)]="categoria_merma.descripcion">
+				</div>
+
+				<button type="button" expand="block" type="submit" class="btn btn-primary btn-sm" (click)="agregar()"
+			[disabled]="is_loading">{{this.categoria_merma.id ? 'Guardar':'Agregar'}}</button>
+			</form>
+	</div>
+</div>

@@ -97,8 +97,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label position="stacked">RFC<span color="danger">*</span></label>
-                    <input placeholder="RFC" type="text" class="form-control" name="rfc"
-                        [(ngModel)]="usuario.factura_rfc">
+                    <input placeholder="RFC" required type="text" class="form-control" name="rfc"
+                        [(ngModel)]="usuario.factura_rfc" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Razon Social</label>

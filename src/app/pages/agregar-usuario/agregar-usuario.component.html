@@ -38,6 +38,7 @@
 					<option value="ASISTENTE">Asistente</option>
 				</select>
 			</div>
+		
 			<div class="form-group col-md-6">
 				<label position="stacked">Contraseña</label>
 				<input placeholder="Contraseña" type="password" class="form-control" name="contrasena"
@@ -47,6 +48,18 @@
 				<label position="stacked">Confirmar contraseña</label>
 				<input placeholder="reingrese Contraseña" type="password" class="form-control" name="confirmar_contrasena"
 					[(ngModel)]="confirmar_contrasena">
+			</div>
+			<div class="form-group col-md-4">
+				<label position="stacked">Nombre<span color="danger">*</span></label>
+				<input placeholder="Nombre" type="text" class="form-control" name="nombre" [(ngModel)]="usuario.nombre">
+			</div>
+			<div class="form-group col-md-4">
+				<label position="stacked">Correo<span color="danger">*</span></label>
+				<input placeholder="Correo" type="text" class="form-control" name="correo_electronico" [(ngModel)]="usuario.correo_electronico">
+			</div>
+			<div class="form-group col-md-4">
+				<label position="stacked">Teléfono<span color="danger">*</span></label>
+				<input placeholder="Teléfono" type="text" class="form-control" name="telefono" [(ngModel)]="usuario.telefono">
 			</div>
 			<div>
 				<div *ngIf="error_message" class="alert alert-danger" role="alert">

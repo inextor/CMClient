@@ -94,6 +94,25 @@
 				<img src="./assets/icon/Mehr-Software-20.png" class="menuIcons" />Citas
 			</a>
 		</div>
+		<!-- CONFIGURACION -->
+		<div [appAccess]="['ADMIN']" class="sidebar">
+			<a (click)="showConfig = !showConfig" class="btn list-group-item list-group-item-action color1 group"><img
+					src="./assets/icon/Mehr-Software-17.png" class="menuIcons" />Config</a>
+		</div>
+		<div *ngIf="showConfig">
+			<div>
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a [routerLink]="['/tipo-precios']" class="list-group-item list-group-item-action color1 ">Tipos Precio</a>
+				</div>
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a [routerLink]="['/unidades-medida']" class="list-group-item list-group-item-action color1 ">Unidades Medida</a>
+				</div>
+				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+					<a [routerLink]="['/categorias-merma']" class="list-group-item list-group-item-action color1 ">Categorias Merma</a>
+				</div>
+			</div>
+		</div>
+		
 	<!-- OPCIONES PACIENTES -->
 	<div [appAccess]="['PACIENTE']" class="sidebar">
 		<a [routerLink]="['/citas-paciente']" class="list-group-item list-group-item-action color1 group ">

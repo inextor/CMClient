@@ -109,6 +109,10 @@ import { AgregarPolizaComponent } from './pages/agregar-poliza/agregar-poliza.co
 import { PagosPolizaComponent } from './pages/pagos-poliza/pagos-poliza.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
 import { AgregarFacturaComponent } from './pages/agregar-factura/agregar-factura.component';
+import { UnidadesMedidaComponent } from './pages/unidades-medida/unidades-medida.component';
+import { AgregarUnidadMedidaComponent } from './pages/agregar-unidad-medida/agregar-unidad-medida.component';
+import { CategoriasMermaComponent } from './pages/categorias-merma/categorias-merma.component';
+import { AgregarCategoriaMermaComponent } from './pages/agregar-categoria-merma/agregar-categoria-merma.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -225,6 +229,10 @@ export function init_app(rest: RestService) {
     PagosPolizaComponent,
     FacturasComponent,
     AgregarFacturaComponent,
+    UnidadesMedidaComponent,
+    AgregarUnidadMedidaComponent,
+    CategoriasMermaComponent,
+    AgregarCategoriaMermaComponent,
   ],
   imports: [
     AccessModule,

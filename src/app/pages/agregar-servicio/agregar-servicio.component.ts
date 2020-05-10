@@ -143,7 +143,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 					'id': null,
 					'nombre': '',
 					'codigo': '',
-					'prestado_por': 'centro_medico',
+					'prestado_por': 'CENTRO_MEDICO',
 					'tipo':null,
 					'id_unidad_medida':null
 				},

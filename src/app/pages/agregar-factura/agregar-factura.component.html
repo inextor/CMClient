@@ -1,7 +1,6 @@
 <div class="card p-3">
     <div class="container">
 
-
         <div class="p-0 mt-3">
             <div class=" mb-3 d-flex justify-content-between flex-wrap">
                 <div>
@@ -56,13 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row w-100">
-                        <div class="col-md-6 form-group">
-                            <label>Correo Electrónico</label>
-                            <input type="text" name="factura_correo_electronico"
-                                [(ngModel)]="venta.factura_correo_electronico" class="form-control">
-                        </div>
-                        
+                    <div class="row w-100">    
                         <div class="col-md-6 form-group">
                             <label>Uso CFDI</label>
                             <select [(ngModel)]="venta.factura_uso_cfdi" class="form-control">
@@ -90,14 +83,28 @@
                                 <option value="D06"> D06 - Aportaciones voluntarias al SAR.</option -->
                             </select>
                         </div>
+                        <div class="col-md-6 form-group">
+                            <label>Forma Pago</label>
+                            <select [(ngModel)]="venta.factura_forma_pago" class="form-control">
+                                <option value="01" selected> 01 - Efectivo</option>
+                                <option value="02"> 02 - Cheque</option>
+                                <option value="04"> 04 - Tarjeta de crédito</option>
+                                <option value="28"> 28 - Tarjeta de debito</option>
+                            </select>`
+                        </div>
+
                     </div>
                     <div class="row w-100">
+                        <div class="col-md-6 form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="text" name="factura_correo_electronico"
+                                [(ngModel)]="venta.factura_correo_electronico" class="form-control">
+                        </div>
                         <div class="col-md-6 form-group">
                             <label>Razón Social</label>
                             <input type="text" name="factura_rason_social" [(ngModel)]="venta.factura_razon_social"
                                 class="form-control">
                         </div>
-
                         <div class="col-md-6 form-group">
                             <label>Codigo Postal</label>
                             <input type="text" name="factura_codigo_postal" [(ngModel)]="venta.factura_codigo_postal"

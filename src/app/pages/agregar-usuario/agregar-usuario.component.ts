@@ -15,6 +15,8 @@ export class AgregarUsuarioComponent extends BaseComponent implements OnInit {
 
 	usuario:Usuario = {
 		id_organizacion: null,
+		nombre:'',
+		telefono: '',
 		contrasena: '',
 		correo_electronico:'',
 		tipo: null,

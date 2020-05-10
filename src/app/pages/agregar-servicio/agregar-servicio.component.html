@@ -102,8 +102,8 @@
 				<div class="p-2 dateColor">
 					<div>Nombre: {{recurso_response.servicio.nombre | titlecase}}</div>
 					<div>Precio Referencia: {{recurso_response.servicio.precio_referencia | currency }}</div>
-					<div >Cantidad: <input type="number" class="form-control" [(ngModel)]="recurso_response.recurso.cantidad"
-						min="0" (change)="updateCantidades()"></div>
+					<div>Cantidad: <input type="number" class="form-control"
+							[(ngModel)]="recurso_response.recurso.cantidad" min="0" (change)="updateCantidades()"></div>
 				</div>
 			</div>
 		</div>
@@ -117,8 +117,14 @@
 				<tr *ngFor="let centro_medico of centros_medicos; index as i">
 					<td><b>{{centro_medico.nombre}}</b></td>
 					<td *ngFor="let tipo_precio of tipo_precios; index as j">
-						<input placeholder="$" type="number" class="form-control" [name]="i+'-'+j"
-							[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">$</span>
+							</div>
+							<input placeholder="Precio del servicio con iva incluido." type="number"
+								class="form-control" [name]="i+'-'+j"
+								[(ngModel)]="precios[centro_medico.id][tipo_precio.id].precio" step="any">
+						</div>
 						<span
 							*ngIf="servicio_recurso.servicio.precio_referencia && servicio_recurso.servicio.precio_referencia<precios[centro_medico.id][tipo_precio.id].precio"
 							class="text-success">

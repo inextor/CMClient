@@ -1,80 +1,45 @@
-<!-- NAVBAR -->
-<div class="page">
-	<header>
-		<app-header title="Especialidades" [pagina]="'jjj'"></app-header>
-	</header>
-	<!-- FIN NAVBAR -->
-	<div>
-		<div class="page_content">
-			<!-- MENU -->
-			<div class="pt-2 flex-wrap justify-content-start">
-				<app-menu></app-menu>
-			</div>
-			<!-- FIN MENU -->
-			<!-- CONTENIDO -->
-			<main class="p-2">
-				<div class="card p-3">
-					<div class="container">
-					<h5>TIPO DE PRECIOS</h5>
-					<td>
-						<button type="button" class="btn btn-primary btn-sm" size="small"
-							[routerLink]="['/agregar-tipo-precio']">Agregar tipo precio
-						</button>
-					</td>
-					<table class="basica">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan=2>
-									<app-paginacion [path]="'/tipo-precio'"  [totalPages]="totalPages" [currentPage]="currentPage"></app-paginacion>
-									<!--
-									<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups"
-										*ngIf="totalPages>1">
-										<div class="btn-group mr-2" role="group" aria-label="First group">
-											<button [disabled]="currentPage == 0" type="button" class="btn btn-secondary"
-												[routerLink]="['/tipo-precio',0]">&lt;&lt;</button>
-											<button [disabled]="currentPage == 0" type="button" class="btn btn-secondary"
-												[routerLink]="['/tipo-precio',currentPage-1]">&lt;</button>
-										</div>
-										<div class="btn-group mr-2" role="group" aria-label="Second group"
-											*ngFor="let page of pages">
-											<button type="button" class="btn btn-secondary"
-												[routerLink]="['/tipo-precio',page]">{{page+1}}</button>
-										</div>
-										<div class="btn-group" role="group" aria-label="Third group">
-											<button [disabled]="currentPage >= totalPages-1 " type="button"
-												class="btn btn-secondary"
-												[routerLink]="['/tipo-precio',currentPage+1]">&gt;&gt;</button>
-											<button [disabled]="currentPage >= totalPages-1 " type="button"
-												class="btn btn-secondary"
-												[routerLink]="['/tipo-precio',this.totalPages]">&gt;</button>
-										</div>
-									</div>
-									-->
-								</td>
-							</tr>
-							<tr *ngFor="let tipo of tiposPrecio">
-								<td>{{tipo.nombre}}</td>
-								<!-- 	" -->
-								<td>
-									<button type="button" class="btn btn-primary btn-sm mr-2" size="small" [routerLink]="['/editar-tipo-precio',tipo.id]">
-										<!-- <span class="btn btn-primary btn-sm mr-2" data-glyph="create" title="icon name"
-											aria-hidden="true"></span> -->
-											Editar
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</div>
+<div class="card p-3">
+	<div class="">
+
+
+		<div class="p-0">
+			<div class="d-flex justify-content-between flex-wrap">
+				<div class="mb-3">
+					<h4>TIPOS DE PRECIO</h4>
 				</div>
-			</main>
-			<!-- FIN CONTENIDO -->
+				<div class="mb-3">
+					<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-tipo-precio']">
+						<i class="fa fa-plus mr-2"></i>Tipo Precio
+					</button>
+				</div>
+			</div>
 		</div>
+
+		<div class="card full">
+			<table class="basica">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let tipo of tiposPrecio">
+						<td>{{tipo.nombre}}</td>
+						<!-- 	" -->
+						<td>
+							<button type="button" class="btn btn-primary btn-sm mr-2" size="small"
+								[routerLink]="['/editar-tipo-precio',tipo.id]">
+								<!-- <span class="btn btn-primary btn-sm mr-2" data-glyph="create" title="icon name"
+											aria-hidden="true"></span> -->
+								Editar
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<app-paginacion [path]="'/tipo-precios'" [pages]="pages" [totalPages]="totalPages"
+			[currentPage]="currentPage"></app-paginacion>
 	</div>
 </div>

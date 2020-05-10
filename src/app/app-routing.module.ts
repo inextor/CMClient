@@ -79,6 +79,10 @@ import {AgregarPolizaComponent} from './pages/agregar-poliza/agregar-poliza.comp
 import {PagosPolizaComponent} from './pages/pagos-poliza/pagos-poliza.component';
 import {FacturasComponent} from './pages/facturas/facturas.component'
 import {AgregarFacturaComponent} from './pages/agregar-factura/agregar-factura.component'
+import {UnidadesMedidaComponent} from './pages/unidades-medida/unidades-medida.component'
+import {AgregarUnidadMedidaComponent} from './pages/agregar-unidad-medida/agregar-unidad-medida.component'
+import {CategoriasMermaComponent} from './pages/categorias-merma/categorias-merma.component'
+import {AgregarCategoriaMermaComponent} from './pages/agregar-categoria-merma/agregar-categoria-merma.component'
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -130,6 +134,9 @@ const routes: Routes = [
 			{ path: "agregar-tipo-poliza", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-poliza", component:AgregarPolizaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "agregar-unidad-medida", component:AgregarUnidadMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "agregar-categoria-merma", component:AgregarCategoriaMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+
 			//FIN AGREGAR
 			{ path: "base", component: BaseComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "centros-medicos", component: CentrosMedicosComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -169,6 +176,9 @@ const routes: Routes = [
 			{ path: "editar-tipo-poliza/:id", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },	
 			{ path: "editar-poliza/:id", component:AgregarPolizaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "editar-unidad-medida/:id", component:AgregarUnidadMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "editar-categoria-merma/:id", component:AgregarCategoriaMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			
 			//fin EDITAR
 			{ path: "especialidades", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -191,7 +201,7 @@ const routes: Routes = [
 			/*{ path: "ticket-venta", component: TicketVentaComponent, pathMatch: "full", canActivate: [AuthGuard]},*/
 			{ path: "ticket-venta/:id", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "ticket-venta/:id/:imprimir", component: ImprimirTicketComponent, pathMatch: "full", canActivate: [AuthGuard]},
-			{ path: "tipo-precios/:pagina", component: TipoPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
+			{ path: "tipo-precios", component: TipoPreciosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "usuarios", component: UsuariosComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "ventas", component: VentasComponent, pathMatch: "full", canActivate: [AuthGuard]},
 			{ path: "ver-consultas/doctor/:id_doctor/paciente/:id_paciente", component: VerConsultasComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -210,6 +220,8 @@ const routes: Routes = [
 			{ path: "facturas", component:FacturasComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "agregar-factura", component:AgregarFacturaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "agregar-factura/:id", component:AgregarFacturaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "unidades-medida", component:UnidadesMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "categorias-merma", component:CategoriasMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 
 		]
 	},
