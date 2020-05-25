@@ -1,6 +1,5 @@
 <div class="card p-3">
     <div class="container">
-
         <div class="p-0">
             <div class=" mb-3 d-flex justify-content-between flex-wrap">
                 <div>
@@ -13,8 +12,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
             <div *ngIf="usuario.id_imagen">
                 <img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+usuario.id_imagen">
@@ -86,7 +83,7 @@
                         [(ngModel)]="usuario.contrasena" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">
                 </div>
-                <div class="form-group col-md-6">
+                <div *ngIf="!this.usuario.id" class="form-group col-md-6">
                     <label position="stacked">Confirmar contraseña</label>
                     <input placeholder="Confirmar" required type="password" class="form-control" name="confirmar_contrasena"
                         [(ngModel)]="confirmar_contrasena" oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
@@ -102,14 +99,30 @@
                         oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Razon Social</label>
+                    <label position="stacked">Razon Social<span color="danger">*</span></label>
                     <input placeholder="Razon Social"class="form-control" name="razon_social"
                         [(ngModel)]="usuario.factura_razon_social">
                 </div>
                 <div class="form-group col-md-6">
-                    <label position="stacked">Código Postal</label>
+                    <label position="stacked">Código Postal<span color="danger">*</span></label>
                     <input placeholder="Codigo postal" class="form-control" name="codigo_postal"
                         [(ngModel)]="usuario.factura_codigo_postal">
+                </div>
+            </div>
+            <label for="">Información de aseguradora</label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label position="stacked">Nombre Aseguranza<span color="danger">*</span></label>
+                    <select name="id_aseguranza" required [(ngModel)]="usuario.id_aseguranza" class="form-control"  oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                    oninput="setCustomValidity('')">
+                        <option [value]="null">Seleccione uno</option>
+                        <option *ngFor="let aseguranza of aseguranzas" [value]="aseguranza.id">{{aseguranza.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">No. Aseguranza<span color="danger">*</span></label>
+                    <input placeholder="Numero Aseguranza"class="form-control" name="numero_aseguranza"
+                        [(ngModel)]="usuario.numero_aseguranza">
                 </div>
                 <div>
                     <div *ngIf="error_message" class="alert alert-danger" role="alert">

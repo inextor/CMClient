@@ -101,7 +101,7 @@
 						<td class="text-center">
 							<button *ngIf="venta.estatus !=='PAGADA'" [routerLink]="['/punto-venta',venta.id]" class="btn btn-primary m-2">Proceder al pago</button>
 							<button *ngIf="venta.facturado=='FACTURADO'" [queryParams]="{id_cliente: venta.id_usuario_cliente, noFactura: venta.id}" [routerLink]="['/facturas']" class="btn btn-primary">Facturado</button>
-							<button *ngIf="venta.facturado=='NO'" [queryParams]="{id: venta.id}" [routerLink]="['/agregar-factura']" class="btn btn-primary">Facturar </button>
+							<button *ngIf="venta.facturado=='NO' && venta.pendiente==0" [queryParams]="{id: venta.id}" [routerLink]="['/agregar-factura']" class="btn btn-primary">Facturar </button>
 						</td>
 					</tr>
 				</tbody>

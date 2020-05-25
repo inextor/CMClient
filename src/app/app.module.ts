@@ -113,6 +113,9 @@ import { UnidadesMedidaComponent } from './pages/unidades-medida/unidades-medida
 import { AgregarUnidadMedidaComponent } from './pages/agregar-unidad-medida/agregar-unidad-medida.component';
 import { CategoriasMermaComponent } from './pages/categorias-merma/categorias-merma.component';
 import { AgregarCategoriaMermaComponent } from './pages/agregar-categoria-merma/agregar-categoria-merma.component';
+import { AseguranzasComponent } from './pages/aseguranzas/aseguranzas.component';
+import { AgregarAseguranzaComponent } from './pages/agregar-aseguranza/agregar-aseguranza.component';
+import { PagosAseguranzaComponent } from './pages/pagos-aseguranza/pagos-aseguranza.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -233,6 +236,9 @@ export function init_app(rest: RestService) {
     AgregarUnidadMedidaComponent,
     CategoriasMermaComponent,
     AgregarCategoriaMermaComponent,
+    AseguranzasComponent,
+    AgregarAseguranzaComponent,
+    PagosAseguranzaComponent,
   ],
   imports: [
     AccessModule,

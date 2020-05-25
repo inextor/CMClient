@@ -83,6 +83,9 @@ import {UnidadesMedidaComponent} from './pages/unidades-medida/unidades-medida.c
 import {AgregarUnidadMedidaComponent} from './pages/agregar-unidad-medida/agregar-unidad-medida.component'
 import {CategoriasMermaComponent} from './pages/categorias-merma/categorias-merma.component'
 import {AgregarCategoriaMermaComponent} from './pages/agregar-categoria-merma/agregar-categoria-merma.component'
+import {AseguranzasComponent} from './pages/aseguranzas/aseguranzas.component'
+import {AgregarAseguranzaComponent} from './pages/agregar-aseguranza/agregar-aseguranza.component'
+import {PagosAseguranzaComponent} from './pages/pagos-aseguranza/pagos-aseguranza.component'
 
 const routes: Routes = [
 	{ path: "", component: LoginComponent, pathMatch: "full" },
@@ -136,6 +139,7 @@ const routes: Routes = [
 			{ path: "agregar-usuario", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "agregar-unidad-medida", component:AgregarUnidadMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "agregar-categoria-merma", component:AgregarCategoriaMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "agregar-aseguranza", component:AgregarAseguranzaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 
 			//FIN AGREGAR
 			{ path: "base", component: BaseComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -178,6 +182,7 @@ const routes: Routes = [
 			{ path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-unidad-medida/:id", component:AgregarUnidadMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "editar-categoria-merma/:id", component:AgregarCategoriaMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "editar-aseguranza/:id", component:AgregarAseguranzaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			
 			//fin EDITAR
 			{ path: "especialidades", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
@@ -222,6 +227,8 @@ const routes: Routes = [
 			{ path: "agregar-factura/:id", component:AgregarFacturaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "unidades-medida", component:UnidadesMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "categorias-merma", component:CategoriasMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "aseguranzas", component:AseguranzasComponent, pathMatch:"full", canActivate:[AuthGuard]},
+			{ path: "pagos-aseguranza", component:PagosAseguranzaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 
 		]
 	},

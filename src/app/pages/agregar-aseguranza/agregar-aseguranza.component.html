@@ -1,0 +1,101 @@
+<div class="card p-3">
+    <div class="container">
+        <div class="p-0">
+            <div class=" mb-3 d-flex justify-content-between flex-wrap">
+                <div>
+                    <h4>{{this.aseguranza.id ? 'EDITAR':'AGREGAR'}}</h4>
+                </div>
+                <div>
+                    <button type="button" expand="block" form="aseguranzaForm" type="submit"
+                        class="btn btn-primary btn-sm" [disabled]="is_loading"><i
+                            class="fa fa-save mr-2"></i>{{this.aseguranza.id ? 'Guardar':'Agregar'}}</button>
+                </div>
+            </div>
+        </div>
+        <!-- <label position="stacked">Agrega una imagen<span color="danger">*</span></label>
+            <div *ngIf="aseguranza.id_imagen">
+                <img width="80px" height="80px" [src]="rest.urlBase+'/imagen.php?id='+aseguranza.id_imagen">
+            </div>
+            <input type="file" (change)="uploadImage($event)" name="image"> -->
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="">Agregar Imagen*</label>
+                <app-image-uploader [(image)]="aseguranza.id_imagen"></app-image-uploader>
+            </div>
+        </div>
+        <form ngNativeValidate id="aseguranzaForm" (submit)="agregar()">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label position="stacked">Nombre<span color="danger">*</span></label>
+                    <input placeholder="Nombre" required type="text" class="form-control" name="nombre"
+                        [(ngModel)]="aseguranza.nombre"
+                        oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Tipo Precio<span color="danger">*</span></label>
+                    <select name="tipo_precio" required [(ngModel)]="aseguranza.id_tipo_precio" class="form-control"
+                        oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                        oninput="setCustomValidity('')">
+                        <option [value]="null">Seleccione un tipo de precio</option>
+                        <option *ngFor="let tipo_precio of tipos_precio" [value]="tipo_precio.id">
+                            {{tipo_precio.nombre | uppercase}}
+                            <!-- [selected]="datosVenta.venta.id_tipo_precio==tipo_precio.id" -->
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked" for="tel">Teléfono<span color="danger">*</span></label>
+                    <input placeholder="Teléfono" required type="tel" pattern="[0-9]{10}" class="form-control"
+                        name="telefono" [(ngModel)]="aseguranza.telefono"
+                        oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
+                    <input placeholder="Correo Electrónico" required type="email" class="form-control"
+                        name="factura_correo_electronico" [(ngModel)]="aseguranza.factura_correo_electronico"
+                        oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Corte<span color="danger">*</span></label>
+                    <select name="tiempo_corte" required [(ngModel)]="aseguranza.tiempo_corte" class="form-control"
+                        oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                        oninput="setCustomValidity('')">
+                        <option [value]="null">Seleccione los dias de corte</option>
+                        <option value="6">6 días</option>
+                        <option value="15">15 días</option>
+                        <option value="30">30 días</option>
+                        <option value="60">60 días</option>
+                    </select>
+                </div>
+            </div>
+            <label for="">Información de facturación</label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label position="stacked">RFC<span color="danger">*</span></label>
+                    <input placeholder="RFC" required type="text" class="form-control" name="rfc"
+                        [(ngModel)]="aseguranza.factura_rfc"
+                        oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+                        oninput="setCustomValidity('')">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Razon Social</label>
+                    <input placeholder="Razon Social" class="form-control" name="razon_social"
+                        [(ngModel)]="aseguranza.factura_razon_social">
+                </div>
+                <div class="form-group col-md-6">
+                    <label position="stacked">Código Postal</label>
+                    <input placeholder="Codigo postal" class="form-control" name="codigo_postal"
+                        [(ngModel)]="aseguranza.factura_codigo_postal">
+                </div>
+                <div>
+                    <div *ngIf="error_message" class="alert alert-danger" role="alert">
+                        {{error_message}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

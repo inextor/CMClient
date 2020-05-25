@@ -1,16 +1,11 @@
 <div class="">
 	<div class="container-fluid">
 		<div class="row">
-			<div class=" card col-sm-12 col-lg-5">
+			<div class="card col-sm-12 col-lg-5">
 				<div class="row">
-
-
-
 					<!--
 					{{datosVenta.venta.factura_rfc}}
 					<app-loading *ngIf="is_loading"></app-loading> -->
-
-
 					<!-- <div class="form-row">
 					<div [ngClass]="{'block':show_name_input,'col-7':true}">
 						<label>Cliente</label>
@@ -94,14 +89,10 @@
 						</tbody>
 					</table>
 					<!-- <label for="">PRODUCTOS Y SERVICIOS</label> -->
-
 				</div>
 				<div class="row">
-
 				</div>
 			</div>
-
-
 			<div class=" card col-sm-12 col-lg-7">
 				<div class="hidden-mobile">
 					<div class="row">
@@ -155,18 +146,15 @@
 								</tr>
 							</tbody>
 						</table>
-
 					</div>
 					<div class="row">
 						<table class="basica">
 							<thead>
 								<tr>
-
 									<th>CANTIDAD</th>
 									<th></th>
 									<th>SERVICIO</th>
 									<th>PRECIO</th>
-
 								</tr>
 							</thead>
 							<tbody>
@@ -244,7 +232,6 @@
 							</tbody>
 						</table>
 					</div>
-
 					<!-- <div class="col-md-2">
 						<div>Iva:</div>
 						<div class="font-weight-bold"></div>
@@ -275,10 +262,7 @@
 							</div>
 						</div>
 					</div> -->
-
-
 				</div>
-
 				<!-- vista en dispositivos moviles -->
 				<div class="mt-2 pt-2 hidden-desktop">
 					<div class="row " *ngFor="let sd of datosVenta.detalles">
@@ -309,7 +293,6 @@
 								</div>
 							</div>
 						</div>
-
 						<!-- <div class="row">
 						<div class="aling-center  image_logo_movil form-check-label" *ngIf="sd.servicio.id_imagen">
 							<img class="image_logo_movil" [src]="rest.urlBase+'/imagen.php?id='+sd.servicio.id_imagen"
@@ -321,12 +304,8 @@
 					</div> -->
 						<!-- <div class="row">
 						<div class="col">
-
 						</div>
-
 					</div> -->
-
-
 					</div>
 				</div>
 			</div>
@@ -342,24 +321,15 @@
 				</button>
 			</div>
 			<div class="p-0 col-lg-5 w-100">
-
-
 				<button class="btn btn-primary h-100 btn-lg  w-100" (click)="guardarVenta()"
 					[disabled]="show_creando_venta">Pagar</button>
-
 				<!-- <div class="col p-0">
 						<button type="button" class="btn btn-danger btn-lg  w-100" >Abonar</button>
 					</div> -->
-
 			</div>
 		</div>
 	</div>
-
 </div>
-
-
-
-
 <!-- anterior pago  -->
 <!-- <footer class="card w-100">
 	<div class="m-auto text-center" *ngIf="procesando_pago">
@@ -367,19 +337,15 @@
 			<span class="sr-only">Loading...</span>
 		</div>
 	</div>
-
 	<div class="row p-3">
-
 		<div class="col-md-2">
 			<div>Subtotal:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.subtotal| currency}}</div>
 		</div>
-
 		<div class="col-md-2">
 			<div>Iva:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.iva| currency}}</div>
 		</div>
-
 		<div class="col-md-2">
 			<div>Total:</div>
 			<div class="font-weight-bold">{{datosVenta.venta.total | currency }}</div>
@@ -399,8 +365,6 @@
 		</div>
 	</div>
 </footer> -->
-
-
 <app-modal [(show)]="show_modal_pago">
 	<div class="p-3 m-3 border-box row">
 		<div class="form-group col-md-6">
@@ -412,7 +376,6 @@
 					<input type="number" class="form-control" name="efectivo" [(ngModel)]="pago.efectivo">
 				</div>
 			</div>
-
 			<div class="row mb-2">
 				<div class="col-6">
 					<label class="col-form-label">Dolares: </label>
@@ -430,14 +393,12 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="col-md-6">
 			<div class="m-auto text-center" *ngIf="procesando_pago">
 				<div class="spinner-border text-success" role="status">
 					<span class="sr-only">Loading...</span>
 				</div>
 			</div>
-
 			<div class="row">
 				<label class="col-8">Total:</label>
 				<label class="col-4 text-right">{{infoPago.total_a_pagar | currency }}</label>
@@ -464,7 +425,6 @@
 				<label class="col-8">:</label>
 				<label class="col-4 text-right">{{pago.dolares*pago.tipo_cambio_dolares | currency}}</label>
 			</div>
-
 			<div *ngIf="debug" class="row">
 				<label class="col-8">En Dlls:</label>
 				<label class="col-4 text-right">{{pago.dolares*pago.tipo_cambio_dolares |currency}}</label>
@@ -500,13 +460,12 @@
 				-->
 			</div>
 		</div>
-
 		<div class="row w-100">
 			<!--button type="button" class="btn btn-primary" [disabled]="procesando_pago || infoPago.cantidad_faltante > 0" (click)="pagarVenta()">Pagar</button-->
 			<div class="col-md-6">
 				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+					<input type="checkbox" class="form-check-input" [(ngModel)]="pago_aseguranza" id="pago_aseguranza_input">
+					<label class="form-check-label" for="pago_aseguranza_input">Pago por Aseguradora</label>
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" [(ngModel)]="facturar" id="facturar_input" class="form-check-input">
@@ -515,7 +474,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div [ngClass]="{'d-none':!facturar}">
 		<div class="p-3 m-3 border-box row">
 			<div class="row w-100">
@@ -582,7 +540,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-6 text-left w-100">
 			<button type="button" class="btn btn-primary m-3" (click)="show_modal_pago=false">
@@ -594,5 +551,4 @@
 				Pagar</button>
 		</div>
 	</div>
-
 </app-modal>

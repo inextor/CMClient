@@ -14,18 +14,17 @@ import { FormsModule } from '@angular/forms';
 	styleUrls: ['./agregar-especialidad.component.css'],
 })
 export class AgregarEspecialidadComponent extends BaseComponent implements OnInit {
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
+	
 	is_loading:boolean	= false;
 
 	especialidad:Especialidad = {
 		nombre: '',
 		abreviacion: ''
 	};
-
-	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
-	{
-		super( rest,router,route,location,titleService);
-	}
-
 	ngOnInit() {
 		this.especialidad = {
 			id: null,

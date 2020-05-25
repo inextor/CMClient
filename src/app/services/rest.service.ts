@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
 import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
-import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario, Tipo_Poliza, Servicio_Poliza, Pago_Poliza, Facturar } from '../models/Modelos';
+import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario, Tipo_Poliza, Servicio_Poliza, Pago_Poliza, Facturar, Aseguranza } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
 import { Tipo_Gasto } from '../models/Modelos';
@@ -144,8 +144,7 @@ export class RestService {
 	public polizaInfo:ObjRest<PolizaInfo>
 	public pago_poliza:ObjRest<Pago_Poliza>
 	public facturar:ObjRest<Facturar>
-	
-
+	public aseguranza:ObjRest<Aseguranza>
 
 	//End vars
 
@@ -231,6 +230,8 @@ export class RestService {
 		this.polizaInfo				= new ObjRest<PolizaInfo>					(`${this.urlBase}/polizaInfo.php`,http);
 		this.pago_poliza				= new ObjRest<Pago_Poliza>					(`${this.urlBase}/pago_poliza.php`,http);
 		this.facturar				= new ObjRest<Facturar> 				(`${this.urlBase}/facturar.php`,http);
+		this.aseguranza				= new ObjRest<Aseguranza> 				(`${this.urlBase}/aseguranza.php`,http);
+		
 	}
 
 	getCurrentCentroMedico():Centro_Medico

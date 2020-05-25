@@ -488,6 +488,8 @@ export interface Paciente{
 export interface Pago{
 	id?:number;
 	id_venta?:number;
+	id_usuario?:number;
+	id_aseguranza?:number;
 	efectivo?:number;
 	dolares?:number;
 	tarjeta?:number;
@@ -700,10 +702,10 @@ export interface Usuario{
 	factura_razon_social?:string;
 	factura_codigo_postal?:string;
 	factura_correo_electronico?:string;
+	id_aseguranza?:number;
+	numero_aseguranza?:number;
 	tiempo_creacion?:Date;
 	tiempo_actualizacion?:Date;
-
-
 }
 
 export interface Usuario_Centro_Medico{
@@ -792,4 +794,23 @@ export interface Pago_Poliza{
 
 export interface Facturar{
 	id?:number;
+}
+
+export interface Aseguranza{
+	id?:number;
+	nombre?:string;
+	id_centro_medico?:number;
+	id_organizacion?:number;
+	id_imagen?:number;
+	id_tipo_precio?:number;
+	telefono?:string;
+	correo_electronico?:string;
+	factura_rfc?:string;
+	factura_razon_social?:string;
+	factura_codigo_postal?:string;
+	factura_correo_electronico?:string;
+	fecha_corte?:Date;
+	tiempo_corte?:number;
+	tiempo_creacion?:Date;
+	tiempo_actualizacion?:Date;
 }

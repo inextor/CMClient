@@ -53,7 +53,9 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 	ventas: Venta[] = [];
 	search_loading: boolean = false;
 	debug: boolean = true;
+	//controles para los checkbox de facturar y pago con aseguranza
 	facturar: boolean = false;
+	pago_aseguranza:boolean=false;
 	is_loading_rfc: boolean = false;
 
 	datosVenta: DatosVenta = {
@@ -428,6 +430,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.calcularCantidades();
 		this.calcularCambio(this.pago);
 		this.datosVenta.venta.estatus = 'PROCESADA';
+		this.validarPagoAseguranza();
 		this.rest.pago.create(this.pago).subscribe((response) => {
 			this.is_loading = false;
 			this.router.navigate(['/ticket-venta', this.datosVenta.venta.id, 1]);
@@ -437,6 +440,17 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		});
 	}
 
+	//validar usuario y aseguranza
+	validarPagoAseguranza(){
+		if(this.pago_aseguranza == true){
+			if(this.datosVenta.cliente.id_aseguranza && this.datosVenta.cliente.numero_aseguranza){
+				this.pago.id_aseguranza = this.datosVenta.cliente.id_aseguranza;
+				this.pago.tipo_pago = 'PENDIENTE';
+			}else{
+				this.showError("El usuario no esta afiliado a una aseguradora.")
+			}
+		}
+	}
 	disminuir(sd) {
 
 		if (this.datosVenta.venta.estatus == "PROCESADA") {
@@ -535,7 +549,11 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 		this.pago.subtotal = this.infoPago.subtotal;
 		this.pago.iva = this.infoPago.iva;
 		this.pago.tipo_cambio_dolares = this.datosVenta.centro_medico.tipo_cambio_dolares;
-
+		this.pago.tipo_pago = 'TOTAL';
+		if(this.datosVenta.venta.id_usuario_cliente){
+			this.pago.id_usuario = this.datosVenta.venta.id_usuario_cliente;
+		}
+		
 		this.infoPago.total_cantidades = this.pago.efectivo
 			+ (this.pago.dolares * this.pago.tipo_cambio_dolares)
 			+ this.pago.tarjeta

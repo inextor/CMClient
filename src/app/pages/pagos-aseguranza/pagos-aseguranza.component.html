@@ -1,0 +1,71 @@
+<div class="card p-3">
+    <div class="">
+        <div class="p-0 ">
+            <div class="mb-3 d-flex justify-content-between flex-wrap">
+                <div>
+                    <h4>PAGOS ASEGURANZA</h4>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="card hidden-mobile">
+                <table class="basica">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ASEGURADORA</th>
+                            <th>AFILIADO</th>
+                            <th>TOTAL</th>
+                            <th>ESTADO</th>
+                            <!-- <th [appAccess]="['Doctor','admin','RECEPCIONISTA']">USUARIO</th>
+                            <th>CANTIDAD</th>
+                            <th [appAccess]="['PACIENTE']" >ESTADO</th>
+                            <th style="width: 300px;">FECHA VENCIMIENTO</th>
+                            <th [appAccess]="['Doctor','admin','RECEPCIONISTA']">OPCIONES</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="pagos.length==0" class="text-center">
+                            <td colspan="5">No se encontraron registros</td>
+                        </tr>
+                        <tr *ngFor="let pago of pagos">
+                            <td class="text-center">{{pago.id}}</td>
+                            <td>{{aseguranzas_dic[pago.id_aseguranza].nombre}}</td>
+                            <td>{{pago.id_usuario?usuarios_dic[pago.id_usuario].nombre :'N/A'}}</td>
+                            <td class="text-center">{{pago.total | currency}}</td>
+                            <td>{{pago.tipo_pago}}</td>
+                            <!-- <td [appAccess]="['Doctor','admin','RECEPCIONISTA']" class="text-center">{{usuarios_dic[ pago.id_usuario ].nombre}}</td>
+                        <td class="text-center">{{pago.cantidad | currency}}</td> 
+                        <td [appAccess]="['PACIENTE']" class="text-center">{{pago.estado}}</td>
+                        <td class="text-center"><button class="btn btn-success">{{pago.fecha_cobro}}</button></td>
+                        <td [appAccess]="['Doctor','admin','RECEPCIONISTA']" class="text-center"><button class="btn btn-primary" (click)="procesarVenta(pago_poliza)">Proceder al pago</button></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- vista para dispositivos -->
+            <!-- <div class="hidden-desktop ">
+            <div class="d-flex flex-row border " *ngFor="let g of gastos">
+                <div class="p-2 tableColor">
+                    <div>Tipo:</div>
+                    <div>Usuario:</div>
+                    <div>Descripcion:</div>
+                    <div>Monto:</div>
+                </div>
+                <div class="p-2">
+                    <div>{{tipo_gastos_dic[ g.gasto_centro_medico.id_tipo_gasto ].nombre}}</div>
+                    <div>{{g.usuario.usuario}}</div>
+                    <div>{{g.gasto_centro_medico.descripcion ? g.gasto_centro_medico.descripcion : 'N/A'}}</div>
+                    <div>{{g.gasto_centro_medico.monto | currency: '$'}}</div>
+                </div>
+            </div>
+        </div> -->
+
+            <div>
+                <app-paginacion [path]="'/pagos-poliza'" [pages]="pages" [totalPages]="totalPages"
+                    [currentPage]="currentPage">
+                </app-paginacion>
+            </div>
+
+        </div>
+    </div>

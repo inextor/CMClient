@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
-import { Usuario , Paciente, Centro_Medico } from '../../models/Modelos';
+import { Usuario , Paciente, Centro_Medico, Aseguranza } from '../../models/Modelos';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 
 @Component({
@@ -18,7 +18,8 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		factura_rfc:'',
 		factura_razon_social:'',
 		factura_codigo_postal:'',
-		tipo: 'PACIENTE'
+		tipo: 'PACIENTE',
+		id_aseguranza: null
 	};
 	paciente:Paciente = {
 		id:null,
@@ -32,7 +33,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 	};
 
 	confirmar_contrasena:string = '';
-
+	aseguranzas:Aseguranza[]=[];
 	ngOnInit()
 	{
 		this.centro_medico = this.rest.getCurrentCentroMedico();
@@ -46,12 +47,27 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 				forkJoin([
 					this.rest.usuario.get( id )
 					,this.rest.paciente.search({ eq:{ id_usuario: id } })
+					,this.rest.aseguranza.getAll({}),
 				])
 				.subscribe((responses)=>
 				{
 					this.is_loading = false;
 					this.usuario	= responses[0];
 					this.paciente	= responses[1].datos[0];
+					this.aseguranzas = responses[2].datos;
+				}
+				,(error)=>
+					this.showError(error));
+			}else{
+				forkJoin([
+					this.rest.aseguranza.getAll({}),
+				])
+				.subscribe((responses)=>
+				{
+					this.is_loading = false;
+					this.aseguranzas = responses[0].datos;
+					console.log("las aseguranzas",this.aseguranzas);
+	
 				}
 				,(error)=>
 					this.showError(error));
