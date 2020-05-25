@@ -116,6 +116,8 @@ import { AgregarCategoriaMermaComponent } from './pages/agregar-categoria-merma/
 import { AseguranzasComponent } from './pages/aseguranzas/aseguranzas.component';
 import { AgregarAseguranzaComponent } from './pages/agregar-aseguranza/agregar-aseguranza.component';
 import { PagosAseguranzaComponent } from './pages/pagos-aseguranza/pagos-aseguranza.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -251,6 +253,7 @@ export function init_app(rest: RestService) {
     CommonModule,
     BrowserAnimationsModule,
 	  FormsModule,
+	  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
   providers: [
