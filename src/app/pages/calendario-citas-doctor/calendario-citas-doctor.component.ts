@@ -33,7 +33,7 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 
 	//calendarEvents:EventInput[] = [];
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
-	@ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 	// CONTROL MODALES 
 	showOptionPaciente: boolean = false;
 	showConfirmCancelar: boolean = false;

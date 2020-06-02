@@ -17,7 +17,7 @@ import { BaseComponent } from '../base/base.component';
 export class VerDoctorComponent extends BaseComponent implements OnInit {
 
 	counterId = 1;
-	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
 	ngOnInit()
 	{

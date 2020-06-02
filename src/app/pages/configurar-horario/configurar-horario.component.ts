@@ -48,7 +48,7 @@ export class ConfigurarHorarioComponent extends BaseComponent implements OnInit 
 		//});
 	}
 
-	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
 
 	ngOnInit()

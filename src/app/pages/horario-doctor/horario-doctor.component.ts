@@ -37,7 +37,7 @@ export class HorarioDoctorComponent implements OnInit {
 	private id_centro_medico:number;
 	private id_servicio:number;
 
-	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
 	constructor(
 		private citasService:CitasService,

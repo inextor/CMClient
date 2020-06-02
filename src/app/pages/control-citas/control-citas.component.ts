@@ -38,7 +38,7 @@ export class ControlCitasComponent implements OnInit {
 	private id_paciente:number;
 	private id_centro_medico:number;
 
-	@ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
 	constructor(
 		private citasService:CitasService,

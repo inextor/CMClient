@@ -35,7 +35,7 @@ export class CalendarioAgendarCitaComponent extends BaseComponent implements OnI
 
 	//calendarEvents:EventInput[] = [];
 	calendarPlugins = [dayGridPlugin, TimeGrid, interactionPlugin];
-	@ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
+	@ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
 	disponible: boolean = false;
 	events: SimpleMap = {};
