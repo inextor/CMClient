@@ -1,0 +1,1 @@
+/home/integranet/Documents/proyects/CMClient/src/.well-known/assetlinks.json
