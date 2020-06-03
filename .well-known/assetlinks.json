@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "life.centromedico.expediente",
+      "sha256_cert_fingerprints": [
+        "DB:8F:B8:03:DB:E4:43:98:8E:7D:28:DD:AF:19:F9:F3:EA:1D:55:79:AD:F6:30:6E:BA:26:AB:1C:21:63:4C:33"
+      ]
+    }
+  }
+]
