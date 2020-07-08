@@ -44,9 +44,11 @@ export class ClientesComponent extends BaseComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		let centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.queryParams.subscribe(params => {
 			this.usuario_search = {
-				eq: {},
+				eq: { id_organizacion : centro_medico.id_organizacion},
 				gt: {},
 				ge: {},
 				le: {},

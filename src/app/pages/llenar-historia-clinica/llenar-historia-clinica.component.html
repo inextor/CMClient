@@ -14,10 +14,17 @@
 				<div>
 					<div class="pt-3 mb-3" *ngFor="let p of preguntas;let i = index;">
 						<div class="">
-							<label class=""
-								*ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' "><b>{{p.pregunta.pregunta}}</b></label>
+							<label class="" *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' "><b>{{p.pregunta.pregunta}}</b></label>
 							<h5 class="pt-2" *ngIf="p.pregunta.tipo_pregunta == 'SECCION_PREGUNTAS' ">
 								<b>{{p.pregunta.pregunta}}</b></h5>
+						</div>
+						<div *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL'">
+							<div class="form-check form-check-inline pl-2">
+								<input *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' " type="text"
+									[name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta"
+									[(ngModel)]="p.respuesta.respuesta">
+
+							</div>
 						</div>
 						<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
 							<div class="mr-3 form-check form-check-inline">

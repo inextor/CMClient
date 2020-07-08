@@ -40,11 +40,14 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 		// {this.doctor = respuesta.datos;});
 		//this.rest.getDoctor( id_doctor ).subscribe(doctor=> this.doctor = doctor);
 		this.titleService.setTitle('Pacientes');
+	
+		let usuario:Usuario = this.rest.getUsuarioSesion();
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.queryParams.subscribe( params =>
 		{
 			this.paciente_search = {
 				lt: {}
-				,eq: {id_organizacion: 1}
+				,eq: {id_organizacion: this.centro_medico.id_organizacion}
 				,ge: {}
 				,gt: {}
 				,le: {}
@@ -52,9 +55,7 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 				,csv: {}
 			};
 
-
-			let usuario:Usuario = this.rest.getUsuarioSesion();
-			this.centro_medico = this.rest.getCurrentCentroMedico();
+			
 			console.log( usuario );
 
 			if(usuario.tipo=="DOCTOR")
