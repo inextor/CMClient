@@ -23,7 +23,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 
 	doctores:Doctor[] = [];
 	is_loading:boolean = false;
-	centro_medico = { id: 1 }; ///XXX sacarlo de la sesion del recepcionista
+	centro_medico: Centro_Medico;
 	selectedDoctor:Doctor = null;
 	doctor_search:SearchObject<Doctor>;
 
@@ -34,6 +34,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 	ngOnInit() {
 		this.titleService.setTitle('Doctores');
 		this.currentUser = this.rest.getUsuarioSesion();
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 		if(this.currentUser==null){
 			this.rest.currentUser.subscribe( usuario => {
 				this.currentUser = usuario;
@@ -53,7 +54,7 @@ export class DoctoresComponent extends BaseComponent implements OnInit {
 		this.route.queryParams.subscribe( params =>
 		{
 			this.doctor_search = {
-				eq: {},
+				eq: {id_centro_medico: this.currentUser.id_centro_medico},
 				gt: {},
 				ge: {},
 				le: {},
