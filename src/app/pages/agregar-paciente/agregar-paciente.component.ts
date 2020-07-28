@@ -11,7 +11,7 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 	centro_medico:Centro_Medico;
 	usuario:Usuario = {
-		id_organizacion: 1,
+		id_organizacion: null,
 		id_imagen: null,
 		contrasena: '',
 		correo_electronico:'',
@@ -23,7 +23,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 	};
 	paciente:Paciente = {
 		id:null,
-		id_organizacion:1,
+		id_organizacion:null,
 		nombre:'',
 		apellidos:'', 
 		sexo:'',
@@ -39,6 +39,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.route.paramMap.subscribe( params =>{
 			this.usuario.id_centro_medico = this.centro_medico.id;
+			this.usuario.id_organizacion = this.centro_medico.id_organizacion;
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			this.is_loading = true;
 

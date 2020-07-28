@@ -10,7 +10,6 @@ import {Router,ActivatedRoute} from "@angular/router"
 import { Title } from '@angular/platform-browser';
 import { Unidad_Medida } from 'src/app/models/Modelos';
 
-
 @Component({
 	selector: 'app-agregar-servicio',
 	templateUrl: './agregar-servicio.component.html',
@@ -215,6 +214,7 @@ export class AgregarServicioComponent extends BaseComponent implements OnInit {
 
 		}
 	}
+	
 	updatePrecios()
 	{
 

@@ -164,6 +164,7 @@ export class RestService {
 
 		this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('usuario')));
 		this.currentUser = this.currentUserSubject.asObservable();
+
 		this.keyUpObserver = fromEvent<KeyboardEvent>( window.document.body, 'keyup' );
 		this.errorBehaviorSubject = new BehaviorSubject<ErrorMensaje>(null);
 		this.errorObservable = this.errorBehaviorSubject.asObservable();

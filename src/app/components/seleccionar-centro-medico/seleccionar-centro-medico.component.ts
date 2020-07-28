@@ -25,6 +25,7 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 	@Output() showChange= new EventEmitter<boolean>();
 	
 	centros: Centro_Medico[] = [];
+	centro_medico: Centro_Medico;
 	last: string = '';
 	centros_search: SearchObject<Sucursal_Doctor>;
 	constructor(public rest: RestService, public router: Router, public route: ActivatedRoute, public location: Location, public titleService: Title) {
@@ -33,12 +34,12 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 
 	ngOnInit() {
 		let usuario = this.rest.getUsuarioSesion();
-
+		this.centro_medico = this.rest.getCurrentCentroMedico();
 
 		this.route.queryParams.subscribe(params => {
 			console.log("params", params);
 			this.centros_search = {
-				eq: { id_doctor: usuario.id },
+				eq: { id_doctor: usuario.id},
 				gt: {},
 				ge: {},
 				le: {},
