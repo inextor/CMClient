@@ -14,7 +14,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./pacientes.component.css']
 })
 export class PacientesComponent extends BaseComponent implements OnInit {
-
+	file:File = null;
+	show_import:boolean = false;
 	pacientes:Paciente[] = [];
 	info_pacientes:SearchPacienteResponse[] = [];
 	tipo_busqueda = 'nombre';
@@ -200,5 +201,6 @@ export class PacientesComponent extends BaseComponent implements OnInit {
 
 		this.router.navigate
 	}
+
 
 }

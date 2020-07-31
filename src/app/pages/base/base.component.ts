@@ -6,9 +6,9 @@ import { Location } from	'@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { HeaderComponent } from '../../components/header/header.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { combineLatest } from 'rxjs';
-import { Observable } from 'rxjs';
-import { forkJoin,of } from 'rxjs';
+
 import { mergeMap,catchError } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { SearchObject } from '../../models/Respuestas';
@@ -73,11 +73,20 @@ export class BaseComponent implements OnInit {
 		//this.rest.getNetworkMonitor().subscribe((is_loading)=>
 	}
 
+	// showSuccess(str:string):void
+	// {
+	// 	this.rest.showErrorMessage(new ErrorMessage( str,'alert-success' ));
+	// }
+
 	showError(error:any) {
 		this.is_loading	= false;
 		let str_error	= this.getErrorMessage( error );
 		this.rest.showError({ mensaje: str_error, tipo:'alert-danger' });
 	}
+	// showErrorMessage(error:ErrorMessage)
+	// {
+	// 	this.errorBehaviorSubject.next( error);
+	// }
 
 	getErrorMessage( error:any )
 	{

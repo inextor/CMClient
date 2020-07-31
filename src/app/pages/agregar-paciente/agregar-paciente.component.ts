@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Usuario , Paciente, Centro_Medico, Aseguranza } from '../../models/Modelos';
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
+import { RestService } from '../../services/rest.service';
+import { SearchPacienteResponse,SearchPacienteRequest,SearchObject } from '../../models/Respuestas';
+import {Router,ActivatedRoute} from "@angular/router"
+import { SeleccionarDoctorComponent } from '../../components/seleccionar-doctor/seleccionar-doctor.component';
+import { Location } from	'@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-agregar-paciente',
@@ -9,6 +15,12 @@ import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
   styleUrls: ['./agregar-paciente.component.css']
 })
 export class AgregarPacienteComponent extends BaseComponent implements OnInit {
+	constructor( public rest:RestService, public router:Router, public route:ActivatedRoute, public location: Location, public titleService:Title)
+	{
+		super( rest,router,route,location,titleService);
+	}
+	file:File = null;
+	show_import:boolean = false;
 	centro_medico:Centro_Medico;
 	usuario:Usuario = {
 		id_organizacion: null,
@@ -40,6 +52,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		this.route.paramMap.subscribe( params =>{
 			this.usuario.id_centro_medico = this.centro_medico.id;
 			this.usuario.id_organizacion = this.centro_medico.id_organizacion;
+			this.paciente.id_organizacion = this.usuario.id_organizacion
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			this.is_loading = true;
 
@@ -65,10 +78,9 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 				])
 				.subscribe((responses)=>
 				{
-					this.is_loading = false;
+			
 					this.aseguranzas = responses[0].datos;
-					console.log("las aseguranzas",this.aseguranzas);
-	
+					this.is_loading = false;
 				}
 				,(error)=>
 					this.showError(error));
@@ -128,4 +140,70 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 			}, error => this.showError(error));
 		}
 	}
+	onFileChanged(event)
+	{
+		if (event.target.files.length)
+		{
+			this.file = event.target.files[0];
+		}
+	}
+
+
+	uploadFile()
+	{
+		this.is_loading = true;
+		this.rest.xlsx2json( this.file,["nombre","apellidos","telefono","correo_electronico","fecha_nacimiento","sexo","domicilio"]).then((json)=>
+		{
+			//Filter json then upload
+			// console.log(json);
+			json.forEach(lista => {
+				console.log(lista);
+				this.usuario = {
+					id_organizacion: this.rest.getCurrentCentroMedico().id_organizacion,
+					id_centro_medico: this.rest.getCurrentCentroMedico().id,
+					id_imagen: null,
+					contrasena:lista.correo_electronico? lista.correo_electronico:lista.telefono,
+					correo_electronico:lista.correo_electronico,
+					usuario:lista.correo_electronico? lista.correo_electronico:lista.telefono,
+					factura_rfc:'',
+					factura_razon_social:'',
+					factura_codigo_postal:'',
+					tipo: 'PACIENTE',
+					id_aseguranza: null
+				};
+				// this.rest.getDateFromMysqlString(lista.fecha_nacimiento)
+				// let fecha_nacimiento = new Date(this.rest.getDateFromMysqlString(lista.fecha_nacimiento));
+				this.paciente = {
+					id_organizacion:this.rest.getCurrentCentroMedico().id_organizacion,
+					nombre:lista.nombre,
+					apellidos:lista.apellidos, 
+					sexo:lista.sexo,
+					fecha_nacimiento: lista.fecha_nacimiento,
+					telefono:lista.telefono,
+					domicilio: lista.domicilio,
+				};
+
+				this.rest.registrarUsuarioPacienteImport( this.usuario, this.paciente ).subscribe((usuario)=>
+				{
+					this.is_loading = false;
+					this.router.navigate(['/pacientes']);
+				}, error=> this.showError(error) );
+
+			});
+			// this.rest.cliente.batchUpdate(json).subscribe((result)=>
+			// {
+			// 	if( this.pacientes.length == 0 )
+			// 	{
+			// 		this.setPages( 0, result.length );
+			// 		this.pacientes = result.slice(0,this.pageSize);
+			// 	}
+			// 	this.is_loading =  false;
+            //     this.show_import = false;
+            //     this.showSuccess('Imported succesfully '+result.length+' items');
+
+			// },(error)=>this.showError(error));
+		});
+	}
+
+	
 }

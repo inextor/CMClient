@@ -14,6 +14,7 @@ import {SearchGastoCentroMedico,SearchGastoCentroMedicoResponse} from '../models
 import {RespuestaPreguntaHistoriaClinica } from '../models/Respuestas';
 import {DistribucionInfo} from '../models/Respuestas';
 import { CitaInfo,HorariosCentroMedico } from '../models/Respuestas';
+import * as XLSX from 'xlsx';
 
 import {	Centro_Medico, Cita,
 	Comision_Por_Servios, Comisiones_Doctor, Configuracion, Consultorio, Consultorio_Doctor,
@@ -23,6 +24,17 @@ import {	Centro_Medico, Cita,
 	Servicio, Tipo_Precio, Usuario,Unidad_Medida, Venta, Proveedor, Requisicion, Doctor_Servicio,Categoria_Merma
 	} from	'../models/Modelos';
 
+export class ErrorMessage{
+
+	message:string;
+	type:string;
+	
+	constructor(message:string,type:string)
+	{
+			this.message = message;
+			this.type = type;
+	}
+}
 
 export interface DetalleServicio {
 	detalle_venta:Detalle_Venta;
@@ -505,6 +517,13 @@ export class RestService {
 		}
 		return this.http.post<any>(`${this.urlBase}/usuario_paciente.php`,{usuario,paciente},{ headers: this.getSessionHeaders(),withCredentials:true});
 	}
+	registrarUsuarioPacienteImport(usuario,paciente):Observable<any>
+	{
+		// if(paciente.fecha_nacimiento){
+		// 	paciente.fecha_nacimiento = paciente.fecha_nacimiento.substring(0,10);
+		// }
+		return this.http.post<any>(`${this.urlBase}/usuario_paciente.php`,{usuario,paciente},{ headers: this.getSessionHeaders(),withCredentials:true});
+	}
 
 	guardarHorarioDoctor(idDoctor:number, idCentroMedico:number, horarios:Horario_Doctor[]):Observable<any>
 	{
@@ -677,4 +696,48 @@ export class RestService {
 		return this.http.get(`${this.urlBase}/files/${path}`,{headers:this.getSessionHeaders(),withCredentials:true});
   }
 
+//   showErrorMessage(error:ErrorMessage)
+// 	{
+// 		this.errorBehaviorSubject.next( error);
+// 	}
+   
+  xlsx2json(file:File,headers):Promise<any>
+    {
+        if( file == null )
+            return Promise.reject();
+
+        return new Promise((resolve,reject)=>
+        {
+            const reader: FileReader = new FileReader();
+
+            reader.onload = (e: any) => {
+                /* read workbook */
+                const bstr: string = e.target.result;
+                const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+                console.log('Names are',wb.SheetNames );
+
+                /* grab first sheet */
+                const wsname: string = wb.SheetNames[0];
+                const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+                console.log( ws );
+                /* save data */
+                let data = XLSX.utils.sheet_to_json(ws, {header: headers});
+                data.splice(0,1);
+                console.log( data );
+                resolve(data);
+            };
+            reader.readAsBinaryString( file );
+        });
+    }
+
+    array2xlsx(array:any[],filename:string,headers:string[])
+    {
+            let ws = XLSX.utils.json_to_sheet(array, {header: headers });
+            let wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, filename );
+            let x = XLSX.writeFile( wb, filename );
+            console.log( x );
+    }
 }
