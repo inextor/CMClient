@@ -6,7 +6,7 @@
                     <h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}}</h4>
                 </div>
                 <div>
-					<button type="button" class="mr-2 btn btn-primary rounded lift" (click)="show_import=true">Importar</button>
+					<button [appAccess]="['ADMIN']" type="button" class="mr-2 btn btn-primary rounded lift" (click)="show_import=true">Importar</button>
                     <button type="button" expand="block" form="pacienteForm" type="submit"
                         class="btn btn-primary btn-sm" [disabled]="is_loading"><i
                             class="fa fa-save mr-2"></i>{{this.usuario.id ? 'Guardar':'Agregar'}}</button>

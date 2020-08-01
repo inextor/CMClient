@@ -46,6 +46,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	confirmar_contrasena:string = '';
 	aseguranzas:Aseguranza[]=[];
+
 	ngOnInit()
 	{
 		this.centro_medico = this.rest.getCurrentCentroMedico();
@@ -55,20 +56,20 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 			this.paciente.id_organizacion = this.usuario.id_organizacion
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			this.is_loading = true;
-
+			console.log('el id de usuario',id);
 			if( id )
 			{
 				forkJoin([
 					this.rest.usuario.get( id )
 					,this.rest.paciente.search({ eq:{ id_usuario: id } })
-					,this.rest.aseguranza.getAll({}),
+					// ,this.rest.aseguranza.getAll({}) ,
 				])
 				.subscribe((responses)=>
 				{
 					this.is_loading = false;
 					this.usuario	= responses[0];
 					this.paciente	= responses[1].datos[0];
-					this.aseguranzas = responses[2].datos;
+					// this.aseguranzas = responses[2].datos;
 				}
 				,(error)=>
 					this.showError(error));

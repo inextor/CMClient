@@ -54,7 +54,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			this.rest.paciente.update( this.paciente ).subscribe((paciente)=>
 			{
 				this.is_loading = false;
-				this.router.navigate(['/home']);
+				this.router.navigate(['/dashboard']);
 			},error=>this.showError(error));
 
 		}
@@ -64,7 +64,7 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 			this.rest.paciente.create( this.paciente ).subscribe((paciente)=>
 			{
 				this.is_loading = false;
-				this.router.navigate(['/home']);
+				this.router.navigate(['/dashboard']);
 			},error=>this.showError(error));
 		}
 	}
