@@ -155,12 +155,12 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 		this.rest.xlsx2json( this.file,["nombre","apellidos","telefono","correo_electronico","fecha_nacimiento","sexo","domicilio"]).then((json)=>
 		{
 			//Filter json then upload
-			// console.log(json);
+			console.log(json);
 			json.forEach(lista => {
 				console.log(lista);
+				 let centro_medico = this.rest.getCurrentCentroMedico();
 				this.usuario = {
-					id_organizacion: this.rest.getCurrentCentroMedico().id_organizacion,
-					id_centro_medico: this.rest.getCurrentCentroMedico().id,
+					id_centro_medico: centro_medico.id,
 					id_imagen: null,
 					contrasena:lista.correo_electronico? lista.correo_electronico:lista.telefono,
 					correo_electronico:lista.correo_electronico,
@@ -168,17 +168,18 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 					factura_rfc:'',
 					factura_razon_social:'',
 					factura_codigo_postal:'',
-					tipo: 'PACIENTE',
+					tipo:'PACIENTE',
 					id_aseguranza: null
 				};
-				// this.rest.getDateFromMysqlString(lista.fecha_nacimiento)
+				// let fecha_nacimiento = lista.fecha_nacimiento?this.rest.getMysqlStringFromLocaDate(lista.fecha_nacimiento):'';
+				// console.log(fecha_nacimiento);
 				// let fecha_nacimiento = new Date(this.rest.getDateFromMysqlString(lista.fecha_nacimiento));
 				this.paciente = {
-					id_organizacion:this.rest.getCurrentCentroMedico().id_organizacion,
+					id_organizacion:centro_medico.id_organizacion,
 					nombre:lista.nombre,
 					apellidos:lista.apellidos, 
 					sexo:lista.sexo,
-					fecha_nacimiento: lista.fecha_nacimiento,
+					fecha_nacimiento: lista.fecha_nacimiento?lista.fecha_nacimiento: null,
 					telefono:lista.telefono,
 					domicilio: lista.domicilio,
 				};
