@@ -82,11 +82,19 @@
 							</div> -->
 							<!-- editar -->
 
-							<button type="button" class="p-0 btn btn-light m-1 border"
-								[routerLink]="['/editar-paciente',paciente.id_usuario]" data-toggle="tooltip" title="Editar"
-								[appAccess]="['RECEPCIONISTA','ADMIN']">
+							<button *ngIf="paciente.familiar !==1" type="button" class="p-0 btn btn-light m-1 border"
+								[routerLink]="['/editar-paciente',paciente.id_usuario]" data-toggle="tooltip"
+								title="Editar" [appAccess]="['RECEPCIONISTA','ADMIN']">
 								<img src="./assets/icon/options/editar.png" height="35px" width="35px"
-											class="menuIcons icons" /></button>
+									class="menuIcons icons" /></button>
+
+
+							<button *ngIf="paciente.familiar ==1" type="button" class="p-0 btn btn-light m-1 border"
+								[routerLink]="['/editar-familiar',paciente.id]" data-toggle="tooltip"
+								title="Editar" [appAccess]="['RECEPCIONISTA','ADMIN']">
+								<img src="./assets/icon/options/editar.png" height="35px" width="35px"
+									class="menuIcons icons" /></button>
+
 							<!-- citas -->
 							<button class=" p-0 btn btn-light m-1 border " [routerLink]="['/citas']"
 								[queryParams]="{id_paciente: paciente.id}" data-toggle="tooltip" title="Ver citas">

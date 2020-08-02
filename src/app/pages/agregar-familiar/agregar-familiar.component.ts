@@ -22,6 +22,8 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	paciente:Paciente = {
 		nombre:'',
 		apellidos:'',
+		familiar:1,
+		id_organizacion:null,
 		fecha_nacimiento: '',
 		telefono: ''
 	};
@@ -29,6 +31,9 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	ngOnInit() {
 		this.route.paramMap.subscribe( params =>
 			{
+				let centro_medico = this.rest.getCurrentCentroMedico();
+				this.paciente.id_organizacion = centro_medico.id_organizacion;
+				this.paciente.familiar = 1 ;
 				let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 				if( id != null )
 				{
@@ -46,7 +51,6 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 	guardarPaciente()
 	{
 		this.is_loading = true;
-
 
 		if( this.paciente.id )
 		{

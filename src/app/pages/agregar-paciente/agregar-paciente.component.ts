@@ -69,6 +69,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 					this.is_loading = false;
 					this.usuario	= responses[0];
 					this.paciente	= responses[1].datos[0];
+					console.log('esFamiliar',this.paciente);
 					// this.aseguranzas = responses[2].datos;
 				}
 				,(error)=>

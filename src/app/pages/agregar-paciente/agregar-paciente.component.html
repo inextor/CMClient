@@ -6,7 +6,8 @@
                     <h4>{{this.usuario.id ? 'EDITAR':'AGREGAR'}}</h4>
                 </div>
                 <div>
-					<button [appAccess]="['ADMIN']" type="button" class="mr-2 btn btn-primary rounded lift" (click)="show_import=true">Importar</button>
+                    <button [appAccess]="['ADMIN']" type="button" class="mr-2 btn btn-primary rounded lift"
+                        (click)="show_import=true">Importar</button>
                     <button type="button" expand="block" form="pacienteForm" type="submit"
                         class="btn btn-primary btn-sm" [disabled]="is_loading"><i
                             class="fa fa-save mr-2"></i>{{this.usuario.id ? 'Guardar':'Agregar'}}</button>
@@ -53,14 +54,14 @@
                 <div class="form-group col-md-6">
                     <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
 
-                    <input  type="date" class="form-control" name="fecha_nacimiento"
+                    <input type="date" class="form-control" name="fecha_nacimiento"
                         [(ngModel)]="paciente.fecha_nacimiento"
                         oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked" for="tel">Teléfono(celular)<span color="danger">*</span></label>
-                    <input placeholder="Teléfono"  type="tel" pattern="[0-9]{10}" class="form-control"
+                    <input placeholder="Teléfono" type="tel" pattern="[0-9]{10}" class="form-control"
                         name="telefono_celular" [(ngModel)]="paciente.telefono"
                         oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">
@@ -101,47 +102,51 @@
                         oninput="setCustomValidity('')">
                 </div>
             </div>
-            <label for="">Información de facturación</label>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label position="stacked">RFC<span color="danger">*</span></label>
-                    <input placeholder="RFC" type="text" class="form-control" name="rfc"
-                        [(ngModel)]="usuario.factura_rfc"
-                        oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
-                        oninput="setCustomValidity('')">
-                </div>
-                <div class="form-group col-md-6">
-                    <label position="stacked">Razon Social<span color="danger">*</span></label>
-                    <input placeholder="Razon Social" class="form-control" name="razon_social"
-                        [(ngModel)]="usuario.factura_razon_social">
-                </div>
-                <div class="form-group col-md-6">
-                    <label position="stacked">Código Postal<span color="danger">*</span></label>
-                    <input placeholder="Codigo postal" class="form-control" name="codigo_postal"
-                        [(ngModel)]="usuario.factura_codigo_postal">
-                </div>
-            </div>
-            <div>
-                <label *ngIf="aseguranzas.length !== 0" for="">Información de aseguradora</label>
+            <div *ngIf="paciente.familiar == 0 || paciente.familiar == null">
+                <label for="">Información de facturación</label>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label position="stacked">Nombre Aseguranza<span color="danger">*</span></label>
-                        <select name="id_aseguranza" [(ngModel)]="usuario.id_aseguranza" class="form-control"
-                            oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                        <label position="stacked">RFC<span color="danger">*</span></label>
+                        <input placeholder="RFC" type="text" class="form-control" name="rfc"
+                            [(ngModel)]="usuario.factura_rfc"
+                            oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                             oninput="setCustomValidity('')">
-                            <option [value]="null">Seleccione uno</option>
-                            <option *ngFor="let aseguranza of aseguranzas" [value]="aseguranza.id">{{aseguranza.nombre}}
-                            </option>
-                        </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label position="stacked">No. Aseguranza<span color="danger">*</span></label>
-                        <input placeholder="Numero Aseguranza" class="form-control" name="numero_aseguranza"
-                            [(ngModel)]="usuario.numero_aseguranza">
+                        <label position="stacked">Razon Social<span color="danger">*</span></label>
+                        <input placeholder="Razon Social" class="form-control" name="razon_social"
+                            [(ngModel)]="usuario.factura_razon_social">
                     </div>
-                    <div>
-                        <div *ngIf="error_message" class="alert alert-danger" role="alert">
-                            {{error_message}}
+                    <div class="form-group col-md-6">
+                        <label position="stacked">Código Postal<span color="danger">*</span></label>
+                        <input placeholder="Codigo postal" class="form-control" name="codigo_postal"
+                            [(ngModel)]="usuario.factura_codigo_postal">
+                    </div>
+                </div>
+
+                <div>
+                    <label *ngIf="aseguranzas.length !== 0" for="">Información de aseguradora</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label position="stacked">Nombre Aseguranza<span color="danger">*</span></label>
+                            <select name="id_aseguranza" [(ngModel)]="usuario.id_aseguranza" class="form-control"
+                                oninvalid="this.setCustomValidity('Por favor, selecciona una opcion.')"
+                                oninput="setCustomValidity('')">
+                                <option [value]="null">Seleccione uno</option>
+                                <option *ngFor="let aseguranza of aseguranzas" [value]="aseguranza.id">
+                                    {{aseguranza.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label position="stacked">No. Aseguranza<span color="danger">*</span></label>
+                            <input placeholder="Numero Aseguranza" class="form-control" name="numero_aseguranza"
+                                [(ngModel)]="usuario.numero_aseguranza">
+                        </div>
+                        <div>
+                            <div *ngIf="error_message" class="alert alert-danger" role="alert">
+                                {{error_message}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,7 +167,8 @@
                 <button type="button" class="btn btn-primary rounded w-100" (click)="show_import=false">Cancel</button>
             </div>
             <div class="col-6">
-                <button type="button" class="btn btn-primary rounded w-100" (click)="uploadFile()" [disabled]="file==null">Upload</button>
+                <button type="button" class="btn btn-primary rounded w-100" (click)="uploadFile()"
+                    [disabled]="file==null">Upload</button>
             </div>
         </div>
     </div>
