@@ -45,6 +45,10 @@ export class AgregarFamiliarComponent extends BaseComponent implements OnInit {
 						this.paciente = paciente;
 					}, error=>this.showError(error));
 				}
+				let id_usuario = params.get('id_usuario') ==null ? null : parseInt(params.get('id_usuario') );
+				if(id_usuario!=null){
+					this.paciente.id_usuario = id_usuario;
+				}
 			});
 	}
 
