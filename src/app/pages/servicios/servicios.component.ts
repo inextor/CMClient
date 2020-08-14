@@ -19,18 +19,20 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 	{
 		super( rest,router,route,location,titleService);
 	}
-	centro_medico:Centro_Medico;
+	centro_medico;
 	servicios:Servicio[]= [];
 	is_loading:boolean = false;
 	servicio_search:SearchObject<Servicio>;
 
 	ngOnInit() {
-		this.centro_medico = this.rest.getCurrentCentroMedico();
+		this.centro_medico = this.rest.getUsuarioSesion();
+		console.log('imprimiendo currentCentroMedico',this.centro_medico);
+			// console.log('imprimiendo organizacion',this.centro_medico);
 		this.route.queryParams.subscribe( params =>
 		{
 			
 			this.servicio_search = {
-				eq: { id_organizacion: this.centro_medico.id_organizacion, id_centro_medico: this.centro_medico.id },
+				eq: { id_organizacion: this.centro_medico.id_organizacion, id_centro_medico: this.centro_medico.id_centro_medico },
 				gt: {},
 				ge: {},
 				le: {},
@@ -38,6 +40,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 				lk: {},
 				csv: {},
 			};
+			console.log('servicios_search',this.servicio_search);
 			this.titleService.setTitle('Servicios')
 			this.servicio_search.lk.codigo	= "lk.codigo" in params ?params["lk.codigo"]:null;
 			this.servicio_search.lk.nombre	= "lk.nombre" in params ?params["lk.nombre"]:null;

@@ -643,7 +643,7 @@ export class RestService {
 		);
 	}
 
-	guardarDatosVenta(datosVenta:DatosVenta):Observable<DatosVenta>
+		guardarDatosVenta(datosVenta:DatosVenta):Observable<DatosVenta>
 	{
 		let venta_subscription = datosVenta.venta.id ? this.venta.update( datosVenta.venta ) : this.venta.create( datosVenta.venta );
 		return venta_subscription.pipe(

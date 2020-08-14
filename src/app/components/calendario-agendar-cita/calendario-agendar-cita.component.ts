@@ -87,7 +87,7 @@ export class CalendarioAgendarCitaComponent extends BaseComponent implements OnI
 	citas_dic: any = {};
 	ngOnInit() {
 		this.usuario = this.rest.getUsuarioSesion();
-		this.centro_medico = this.rest.getCurrentCentroMedico();
+		// this.centro_medico = this.rest.getCurrentCentroMedico();
 		this.counterId = 0;
 		if (this.usuario && this.usuario.tipo == 'PACIENTE') {
 			if (window.innerWidth <= 700) {
@@ -205,18 +205,18 @@ export class CalendarioAgendarCitaComponent extends BaseComponent implements OnI
 
 	getEvents(info, successCallback, errorCallback) {
 		console.log('Getting events for', info.start);
-		let centro_medico = this.rest.getCurrentCentroMedico();
+		let usuario_sesion = this.rest.getUsuarioSesion();
 		let id_doctor: number = this.usuario.id;
-		let id_centro_medico: number = centro_medico.id;
+		// let id_centro_medico: number = centro_medico.id;
 
 		forkJoin([
-			this.rest.horario_doctor.getAll({ id_centro_medico: id_centro_medico }, { id_doctor: id_doctor })
+			this.rest.horario_doctor.getAll({ id_centro_medico: usuario_sesion.id_centro_medico }, { id_doctor: id_doctor })
 			, this.rest.cita.search
 				(
 					{
 						eq:
 						{
-							id_centro_medico: id_centro_medico
+							id_centro_medico: usuario_sesion.id_centro_medico
 							, id_doctor: id_doctor
 							, estatus: 'ACTIVA'
 						}

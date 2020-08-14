@@ -174,7 +174,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 		return {
 			venta: {
-				id_centro_medico: centro_medico.id
+				id_centro_medico: usuario.id_centro_medico
 				, id_usuario_cliente: this.cita.id_paciente
 				, id_usuario_atendio: usuario.id
 				, iva: centro_medico.iva

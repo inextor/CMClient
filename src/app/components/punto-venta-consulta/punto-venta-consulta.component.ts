@@ -185,19 +185,21 @@ export class PuntoVentaConsultaComponent implements OnInit, OnChanges {
 				}
 				//Else
 				let centro_medico = this.rest.getCurrentCentroMedico();
+				let usuario_sesion = this.rest.getUsuarioSesion();
+				console.log('cm',centro_medico);
 				return this.rest.precio_servicio.search
 				({
 					eq:
 					{
 						id_servicio			: servicio.id
-						,id_centro_medico	: centro_medico.id
+						,id_centro_medico	: usuario_sesion.id_centro_medico
 					}
 				})
 			})
-		)
-		.subscribe((response)=>
+		).subscribe((response)=>
 		{
 			this.is_loading = false;
+			console.log('response',response)
 			if( response.datos.length == 0 )
 			{
 				this.busqueda = '';

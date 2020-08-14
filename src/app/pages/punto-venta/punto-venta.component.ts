@@ -197,9 +197,9 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 			this.is_loading = false;
 			return;
 		}
-
+		let centro_medico = this.rest.getUsuarioSesion();
 		let x = this.rest.usuario.search({
-			eq: { tipo: 'PACIENTE' }
+			eq: { tipo: 'PACIENTE', id_centro_medico: centro_medico.id_centro_medico, id_organizacion: centro_medico.id_organizacion }
 			, lk: { nombre: evt.target.value, usuario: evt.target.value }, limite: 8
 		}).subscribe((response) => {
 			this.is_loading = false;
@@ -342,12 +342,13 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 						}
 						//Else
 						let centro_medico = this.rest.getCurrentCentroMedico();
+						let usuario_sesion = this.rest.getUsuarioSesion();
 						return this.rest.precio_servicio.search
 							({
 								eq:
 								{
 									id_servicio: servicio.id
-									, id_centro_medico: centro_medico.id
+									, id_centro_medico: usuario_sesion.id_centro_medico
 								}
 							})
 					})
@@ -575,7 +576,7 @@ export class PuntoVentaComponent extends BaseComponent implements OnInit {
 
 		return {
 			venta: {
-				id_centro_medico: centro_medico.id
+				id_centro_medico: usuario.id_centro_medico
 				, id_usuario_atendio: usuario.id
 				, iva: centro_medico.iva
 				, total: 0

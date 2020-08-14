@@ -329,11 +329,11 @@ export class CalendarioCitasDoctorComponent extends BaseComponent implements OnI
 			limite: 500
 
 		};
-		this.cita_search.eq = { id_centro_medico: centro_medico.id, id_doctor: id_doctor }
+		this.cita_search.eq = { id_centro_medico: usuario.id_centro_medico, id_doctor: id_doctor }
 		this.cita_search.ge = { inicio: this.rest.getMysqlStringFromLocaDate(info.start) }
 		this.cita_search.le = { inicio: this.rest.getMysqlStringFromLocaDate(info.end) }
 		forkJoin([
-			this.rest.horario_doctor.getAll({ id_centro_medico: centro_medico.id }, { id_doctor: id_doctor })
+			this.rest.horario_doctor.getAll({ id_centro_medico: usuario.id_centro_medico }, { id_doctor: id_doctor })
 			, this.rest.searchCita.search(this.cita_search),
 		]).subscribe((responses) => {
 			let disponibilidad = [];
