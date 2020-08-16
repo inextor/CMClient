@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../../pages/base/base.component'
 import { RestService } from 'src/app/services/rest.service';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/Modelos';
+import { Usuario, Doctor , Centro_Medico} from 'src/app/models/Modelos';
 import { ThrowStmt } from '@angular/compiler';
 @Component({
 	selector: "app-header",
@@ -10,27 +10,31 @@ import { ThrowStmt } from '@angular/compiler';
 	styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
+	
 	@Input() pagina: string;
 	@Input() clinica;
 	showCentros =false;
 	usuario: Usuario=null
 	nombre:string=null
 	isNavbarCollapsed=false;
+	show_seleccionar_centro_medico:boolean = false;
+	centro_medico: Centro_Medico;
+	@Input() show:boolean;
 	ngOnInit()
 	{ 
 		
-		let usuario = this.rest.getUsuarioSesion();
+		 this.usuario = this.rest.getUsuarioSesion();
 		this.clinica = this.rest.getCurrentCentroMedico();
-		if( usuario )
+		if( this.usuario )
 		{
-			this.nombre=usuario.nombre;
-			if ( usuario.tipo == "RECEPCIONISTA" || usuario.tipo == "ADMIN" || usuario.tipo == "ASISTENTE" ){
-				this.rest.usuario.get(usuario.id).subscribe(params=>{
+			this.nombre=this.usuario.nombre;
+			if ( this.usuario.tipo == "RECEPCIONISTA" || this.usuario.tipo == "ADMIN" || this.usuario.tipo == "ASISTENTE" ){
+				this.rest.usuario.get(this.usuario.id).subscribe(params=>{
 					this.nombre=params.nombre
 				});
 			}
-			else if(usuario.tipo == "DOCTOR"){
-				this.rest.doctor.get(usuario.id).subscribe(params => {
+			else if(this.usuario.tipo == "DOCTOR"){
+				this.rest.doctor.get(this.usuario.id).subscribe(params => {
 					this.nombre = params.nombre
 				});
 			}
@@ -43,11 +47,33 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 			// }
 		}
 	}
+
+	editarHorario()
+	{
+		// console.log("FOOO seleccionar horario", doctor );
+		// this.selected_doctor = doctor;
+		this.show_seleccionar_centro_medico = true;
+	}
+
+	onSeleccionarCentroMedico(centro_medico)
+	{
+		console.log('FOOOO seleccionar centro medico');
+		this.router.navigate(['/configurar-horario','doctor',this.usuario.id, 'centro-medico',centro_medico.id_centro_medico]);
+		this.show_seleccionar_centro_medico = false;
+	}
+
 	closeMenu(){
 		if(this.isNavbarCollapsed == true){
-			this.isNavbarCollapsed = false;
+			this.isNavbarCollapsed = false; 	
 		}
 	}
+
+	// seleccionar_clinica(){
+	// 	this.show_seleccionar_centro_medico = true;
+	//   }
+	  closed(){
+		this.show_seleccionar_centro_medico = false;
+	  }
 
 	logout() {
 		// remove user from local storage and set current user to null

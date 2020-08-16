@@ -65,7 +65,7 @@ export class AgregarFacturaComponent extends BaseComponent implements OnInit {
             this.venta = responses[0];
      
             console.log('laventa',this.venta);
-            this.rest.usuario.get(this.venta.id_usuario_cliente).subscribe((response) => {
+            this.rest.paciente.get(this.venta.id_usuario_cliente).subscribe((response) => {
               this.is_loading = false;
               this.usuario = response;
               console.log('elusuario',this.usuario);

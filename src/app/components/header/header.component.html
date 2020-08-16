@@ -8,7 +8,17 @@
 
 		<div class="p-1 bd-highlight collapse navbar-collapse"><img src="./assets/icon/Mehr-Software-34.png"
 				class="logoUser" /></div>
-		<div class="p-2 bd-highlight alling collapse navbar-collapse hidden-xs"><a>{{nombre}}</a></div>
+		<div class="p-2 bd-highlight alling collapse navbar-collapse hidden-xs">
+			<div class="dropdown">
+				<button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a  class="pr-2" style="color: white;">{{nombre}}</a>
+				</button>
+				<div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu2">
+				  <button class="dropdown-item" type="button" [routerLink]="['/editar-doctor',usuario.id]" [appAccess]="['DOCTOR']"><i class="fas fa-user-edit"></i> Editar Perfil</button>
+				  <button class="dropdown-item" type="button"  (click)="editarHorario()"[appAccess]="['DOCTOR']" > <i class="fas fa-clock"></i> Configurar Horario</button>
+				</div>
+			  </div>
+		</div>
 		<button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
 			data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false"
 			aria-label="Toggle navigation">
@@ -109,6 +119,11 @@
 		</li>
 	</ul>
 </div>
+<app-seleccionar-centro-medico [(show)]="show_seleccionar_centro_medico" [showCancel]="true"
+	(selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico>
+
+<!-- <app-seleccionar-centro-medico [show]="show_seleccionar_centro_medico"
+	(selected)="onSeleccionarCentroMedico($event)"></app-seleccionar-centro-medico> -->
 
 <!-- <a class="nav-link dropdown-toggle dropdown-toggle" id="id01" ngbDropdownToggle>Centro Medico</a>
 <a class="nav-link dropdown-toggle dropdown-toggle" id="id02" ngbDropdownToggle>Doctores</a>

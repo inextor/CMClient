@@ -20,7 +20,7 @@ import { WindowScrollController } from '@fullcalendar/core';
 export class SeleccionarCentroMedicoComponent extends BaseComponent implements OnInit {
 
 	@Input() show: boolean;
-	@Input() showCancel: boolean;
+	@Input() showCancel: boolean = true;
 	@Output() selected = new EventEmitter<Centro_Medico>();
 	@Output() showChange= new EventEmitter<boolean>();
 	
@@ -36,6 +36,16 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 		let usuario = this.rest.getUsuarioSesion();
 		this.centro_medico = this.rest.getCurrentCentroMedico();
 
+		this.rest.keyUpObserver.subscribe((e)=>
+		{
+			if( e.keyCode == 27 )
+			{
+				if( this.showCancel )
+				{
+					this.showChange.emit( false );
+				}
+			}
+		});
 		this.route.queryParams.subscribe(params => {
 			console.log("params", params);
 			this.centros_search = {
@@ -118,10 +128,10 @@ export class SeleccionarCentroMedicoComponent extends BaseComponent implements O
 	{
 		this.showChange.emit( false );
 	}
-
-	dismissModal() {
-		//		this.modalCtrl.dismiss(null);
-	}
+// 
+	// dismissModal() {
+	// 			this.modalCtrl.dismiss(null);
+	// }
 
 	seleccionarCentro(centro_medico: Centro_Medico) {
 		this.selected.emit(centro_medico);
