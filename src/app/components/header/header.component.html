@@ -37,7 +37,7 @@
 		<!-- SUB MENU CENTROS MEDICOS -->
 		<div *ngIf="showCentros" class="color1">
 			<li [appAccess]="['ADMIN','DOCTOR']">
-				<a (click)="closeMenu()" href="#" [routerLink]="['/especialidades']" class="nav-link subMenu">Especialidades
+				<a (click)="closeMenu()" [routerLink]="['/especialidades']" class="nav-link subMenu">Especialidades
 				</a>
 			</li>
 			<li [appAccess]="['ADMIN']">
