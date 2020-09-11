@@ -53,8 +53,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Fecha de nacimiento<span color="danger">*</span></label>
-
-                    <input type="date" class="form-control" name="fecha_nacimiento"
+                    <input type="date" required class="form-control" name="fecha_nacimiento"
                         [(ngModel)]="paciente.fecha_nacimiento"
                         oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">
@@ -75,7 +74,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label position="stacked">Correo Electrónico<span color="danger">*</span></label>
-                    <input placeholder="Correo Electrónico" required type="email" class="form-control"
+                    <input placeholder="Correo Electrónico" type="email" class="form-control"
                         name="correo_electronico" [(ngModel)]="usuario.correo_electronico"
                         oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
                         oninput="setCustomValidity('')">

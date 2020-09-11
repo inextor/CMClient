@@ -21,7 +21,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 	}
 	file:File = null;
 	show_import:boolean = false;
-	centro_medico:Centro_Medico;
+	// centro_medico:Centro_Medico;
 	usuario:Usuario = {
 		id_organizacion: null,
 		id_imagen: null,
@@ -49,11 +49,11 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 
 	ngOnInit()
 	{
-		this.centro_medico = this.rest.getCurrentCentroMedico();
+		let usuario_session = this.rest.getUsuarioSesion();
 		this.route.paramMap.subscribe( params =>{
-			this.usuario.id_centro_medico = this.centro_medico.id;
-			this.usuario.id_organizacion = this.centro_medico.id_organizacion;
-			this.paciente.id_organizacion = this.usuario.id_organizacion
+			this.usuario.id_centro_medico = usuario_session.id_centro_medico;
+			this.usuario.id_organizacion = usuario_session.id_organizacion;
+			this.paciente.id_organizacion =usuario_session.id_organizacion;
 			let id = params.get('id') ==null ? null : parseInt(params.get('id') );
 			this.is_loading = true;
 			console.log('el id de usuario',id);
@@ -76,7 +76,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 					this.showError(error));
 			}else{
 				forkJoin([
-					this.rest.aseguranza.getAll({}),
+					this.rest.aseguranza.search({}),
 				])
 				.subscribe((responses)=>
 				{
@@ -160,9 +160,10 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 			console.log(json);
 			json.forEach(lista => {
 				console.log(lista);
-				 let centro_medico = this.rest.getCurrentCentroMedico();
+				let usuario_session = this.rest.getUsuarioSesion();
+				//  let centro_medico = this.rest.getCurrentCentroMedico();
 				this.usuario = {
-					id_centro_medico: centro_medico.id,
+					id_centro_medico: usuario_session.id_centro_medico,
 					id_imagen: null,
 					contrasena:lista.correo_electronico? lista.correo_electronico:lista.telefono,
 					correo_electronico:lista.correo_electronico,
@@ -177,7 +178,7 @@ export class AgregarPacienteComponent extends BaseComponent implements OnInit {
 				// console.log(fecha_nacimiento);
 				// let fecha_nacimiento = new Date(this.rest.getDateFromMysqlString(lista.fecha_nacimiento));
 				this.paciente = {
-					id_organizacion:centro_medico.id_organizacion,
+					id_organizacion:usuario_session.id_organizacion,
 					nombre:lista.nombre,
 					apellidos:lista.apellidos, 
 					sexo:lista.sexo,

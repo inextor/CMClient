@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders,HttpParams,HttpErrorResponse,HttpResponse} from
 import { Observable, BehaviorSubject,forkJoin, fromEvent,of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError,flatMap } from 'rxjs/operators';
-import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso, ErrorMensaje} from '../models/Respuestas';
+import { LoginResponse,AgregarUsuarioResponse,SearchCitaRequest,SearchCitaResponse,Respuesta,ServicioResponseItem,Servicio_Recurso} from '../models/Respuestas';
 import { Pregunta_Historia_Clinica,Especialidad_Pregunta, Bitacora, Consulta, Especialidad, Historia_Horario, Respuesta_Historia_Clinica, Sesion, Ingreso, Sucursal_Doctor, Lote_Inventario, Tipo_Poliza, Servicio_Poliza, Pago_Poliza, Facturar, Aseguranza } from '../models/Modelos';
 import { PreguntasHistoriaClinicaResponse } from '../models/Respuestas';
 import { SesionInfo,Especialidad_Pregunta_Accion } from '../models/Respuestas';
@@ -24,15 +24,15 @@ import {	Centro_Medico, Cita,
 	Servicio, Tipo_Precio, Usuario,Unidad_Medida, Venta, Proveedor, Requisicion, Doctor_Servicio,Categoria_Merma
 	} from	'../models/Modelos';
 
-export class ErrorMessage{
+export class ErrorMensaje{
 
-	message:string;
-	type:string;
+	mensaje:string;
+	tipo:string;
 	
-	constructor(message:string,type:string)
+	constructor(mensaje:string,tipo:string)
 	{
-			this.message = message;
-			this.type = type;
+		this.mensaje = mensaje;
+		this.tipo = tipo;
 	}
 }
 
@@ -536,9 +536,59 @@ export class RestService {
 		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
 	}
 
+	getErrorString( error ):string
+	{
+		if( error == null || error === undefined)
+			return 'Error desconocido';
+
+		if( typeof error === "string" )
+			return error;
+
+		if( 'error' in error )
+		{
+			if( typeof(error.error) == 'string' )
+			{
+			return error.error;
+			}
+
+			if( error.error && 'error' in error.error && error.error.error )
+		{
+			 return error.error.error;
+		}
+		}
+
+		if( error instanceof HttpErrorResponse )
+		{
+			return error.statusText;
+		}
+		else
+		{
+			return 'Error desconocido';
+		}
+
+	}
+
+	showSuccessNotification(msg:string):void
+	{
+		this.showError(new ErrorMensaje( msg,'alert-success'));
+	}
+
+	showErrorNotification(error:any )
+	{
+		console.log('Error to display is',error );
+		if( error instanceof ErrorMensaje )
+		{
+			this.showError( error );
+			return;
+		}
+
+		let str_error	= this.getErrorString( error );
+		this.showError(new ErrorMensaje( str_error,'alert-danger' ));
+	}
+
 	showError(error:ErrorMensaje)
 	{
-		this.errorBehaviorSubject.next( error);
+		this.errorBehaviorSubject.next(error);
 	}
 
 	getDetalleServicios(venta:Venta,servicios:Servicio[],detalles_venta:Detalle_Venta[],precios_servicios:Precio_Servicio[]):DetalleServicio[]

@@ -11,7 +11,7 @@
 				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
 					<a (click)="seleccionar_clinica()" class="list-group-item list-group-item-action color1 ">Seleccionar CM</a>
 				</div>
-				<div [appAccess]="['ADMIN']" class="menuSubButtons">
+				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
 					<a [routerLink]="['/especialidades']" class="list-group-item list-group-item-action color1 ">Especialidades</a>
 				</div>
 				<div [appAccess]="['ADMIN']" class="menuSubButtons">
@@ -23,7 +23,7 @@
 				<div [appAccess]="['ADMIN','DOCTOR']" class="menuSubButtons">
 					<a [routerLink]="['/gastos']" class="list-group-item list-group-item-action color1 ">Gastos</a>
 				</div>
-				<div [appAccess]="['ADMIN']" [routerLink]="['/inventario']" class="menuSubButtons">
+				<div [appAccess]="['ADMIN']" [routerLink]="['/inventario']" class="menuSubButtons"> 	
 					<a class="list-group-item list-group-item-action color1 ">Inventario</a>
 				</div>
 				<div [appAccess]="['ADMIN','DOCTOR']"[routerLink]="['/proveedores']"  class="menuSubButtons">

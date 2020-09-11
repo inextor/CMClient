@@ -95,8 +95,8 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 					let now = this.rest.getLocalDateFromMysqlString(this.consulta.fin_consulta);
 					let defaultTime = 1800;
 					let diferencia = (now.getTime() - date.getTime()) / 10;
-					console.log(date, now);
-					console.log("inicio consulta", this.consulta.inicio_consulta);
+					// console.log(date, now);
+					// console.log("inicio consulta", this.consulta.inicio_consulta);
 					this.porcentaje = diferencia / defaultTime + '%';
 					this.tiempo_transcurrido = (((now.getTime() - date.getTime()) / 1000) / 60);
 
@@ -199,6 +199,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 				this.consulta.id_venta = datosVenta.venta.id;
 				this.datosVenta = datosVenta;
 				return this.consulta.id ? this.rest.consulta.update(this.consulta) : this.rest.consulta.create(this.consulta);
+	
 			})
 			, flatMap((consulta) => {
 				this.consulta = consulta;
@@ -228,7 +229,7 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 
 	//timer
 	startTimer() {
-		console.log("porcent", this.porcentaje);
+		// console.log("porcent", this.porcentaje);
 		if (this.consulta.inicio_consulta == null) {
 			let date = new Date();
 			let str = this.rest.getMysqlStringFromLocaDate(date);
@@ -238,8 +239,10 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		this.guardar().subscribe((consulta) => {
 			this.is_loading = false;
 			this.loadConsultaData(consulta);
+			this.showSuccess('La consulta ha comenzado');
 		}, (error) => this.showError(error));
 	}
+
 	pauseTimer() {
 
 		if (this.consulta.fin_consulta == null) {
@@ -253,20 +256,22 @@ export class AgregarConsultaComponent extends BaseComponent implements OnInit {
 		this.is_loading = true;
 		this.guardar().subscribe((response) => {
 			this.is_loading = false;
+			this.showSuccess('La consulta ha finalizado');
 		}, (error) => this.showError(error));
 	}
+
 	actualizarTimer() {
 
 		if (this.consulta.inicio_consulta != null) {
-			console.log("entro actualizar");
+			// console.log("entro actualizar");
 			let date = this.rest.getLocalDateFromMysqlString(this.consulta.inicio_consulta);
 			let now = new Date();
 			let defaultTime = 1800;
 			let diferencia = (now.getTime() - date.getTime()) / 10;
-			console.log(date, now);
-			console.log("inicio consulta", this.consulta.inicio_consulta);
+			// console.log(date, now);
+			// console.log("inicio consulta", this.consulta.inicio_consulta);
 			this.porcentaje = (diferencia / defaultTime).toFixed(2) + '%';
-			console.log("entro actualizar porcentaje", this.porcentaje);
+			// console.log("entro actualizar porcentaje", this.porcentaje);
 			this.tiempo_transcurrido = Math.floor(((now.getTime() - date.getTime()) / 1000) / 60);
 			this.tiempo_transcurrido_segundos = (((now.getTime() - date.getTime()) / 1000).toFixed(0));
 		}

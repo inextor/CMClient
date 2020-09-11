@@ -29,22 +29,22 @@
 							*ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null">
 							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
 								*ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null"
-								role="progressbar" [ngStyle]="{width:porcentaje}"  aria-valuenow="100" aria-valuemin="0"
+								role="progressbar" [ngStyle]="{width:porcentaje}" aria-valuenow="100" aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
 						<div *ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta != null"
-							class="progress text" style="height: 20px;border-radius: 6px;" >
+							class="progress text" style="height: 20px;border-radius: 6px;">
 							<div class="progress-bar bg-warning h-100" role="progressbar" [ngStyle]="{width:porcentaje}"
-								aria-valuenow="100" aria-valuemin="0"  aria-valuemax="100"></div>
+								aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 						<div class="pt-2 d-flex flex-row-reverse"
 							*ngIf="this.consulta.inicio_consulta == null && this.consulta.fin_consulta == null">
-
 							<button (click)='startTimer()' class="btn btn-primary">Iniciar Consulta</button>
 						</div>
 						<div class="pt-2 d-flex flex-row-reverse"
 							*ngIf="this.consulta.inicio_consulta != null && this.consulta.fin_consulta == null">
-							<button (click)='pauseTimer()' class="btn btn-primary mr-2">Finalizar Consulta</button>
+							<button  type="button" expand="block" form="consultaForm"
+								type="submit" class="btn btn-primary mr-2">Finalizar Consulta</button>
 						</div>
 						<!-- al finalizar la cita -->
 						<div class="pt-2 d-flex flex-row-reverse"
@@ -68,34 +68,42 @@
 					<!-- fin servicios -->
 				</div>
 
+
 				<div class="form-group col-md-6">
+					<form ngNativeValidate id="consultaForm" (submit)="pauseTimer()">
 					<div class="card p-2">
 						<div class="mb-2">
 							<label class="">Motivo de la Consulta</label>
-							<textarea class="form-control" [(ngModel)]="consulta.motivo_consulta"></textarea>
+							<textarea class="form-control" [(ngModel)]="consulta.motivo_consulta" name="motivo_consulta" required
+								oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+								oninput="setCustomValidity('')"></textarea>
 						</div>
 						<div class="mt-2 mb-2">
 							<label class="">Diagnostico Objetivo</label>
-							<textarea class="form-control " [(ngModel)]="consulta.diagnostico"></textarea>
+							<textarea class="form-control " [(ngModel)]="consulta.diagnostico" name="diagnostico" ></textarea>
 						</div>
 						<div class="mt-2 mb-2">
 							<label class="">Diagnostico Subjetivo</label>
-							<textarea class="form-control" [(ngModel)]="consulta.subjetivo"></textarea>
+							<textarea class="form-control" [(ngModel)]="consulta.subjetivo" name="subjetivo" ></textarea>
 						</div>
 						<div class="mt-2 mb-2">
 							<label class="">Tratamiento</label>
-							<textarea class="form-control" [(ngModel)]="consulta.tratamiento"></textarea>
+							<textarea class="form-control" [(ngModel)]="consulta.tratamiento" name="tratamiento" required
+								oninvalid="this.setCustomValidity('Por favor, complete este campo.')"
+								oninput="setCustomValidity('')"></textarea>
 						</div>
 
 						<div class="mt-2 mb-2">
 							<label class="">Analisis</label>
-							<textarea class="form-control" [(ngModel)]="consulta.analisis"></textarea>
+							<textarea class="form-control" [(ngModel)]="consulta.analisis" name="analisis" ></textarea>
 						</div>
 						<div *ngIf="error_message">
 							<div class="alert alert-danger" role="alert">{{error_message}}</div>
 						</div>
 					</div>
+					</form>
 				</div>
+
 			</div>
 			<!-- <div>
 				<button type="button" [disabled]="is_loading" (click)="guardar()"

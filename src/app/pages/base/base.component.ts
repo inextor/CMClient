@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../../services/rest.service';
+import { RestService,ErrorMensaje } from '../../services/rest.service';
 import { Usuario,Tipo_Gasto } from '../../models/Modelos';
 import { Router,ActivatedRoute,Params, ParamMap} from "@angular/router"
 import { Location } from	'@angular/common';
@@ -78,10 +78,20 @@ export class BaseComponent implements OnInit {
 	// 	this.rest.showErrorMessage(new ErrorMessage( str,'alert-success' ));
 	// }
 
-	showError(error:any) {
-		this.is_loading	= false;
-		let str_error	= this.getErrorMessage( error );
-		this.rest.showError({ mensaje: str_error, tipo:'alert-danger' });
+	// showError(error:any):void {
+	// 	this.is_loading	= false;
+	// 	let str_error	= this.getErrorMessage( error );
+	// 	this.rest.showError({ mensaje: str_error, tipo:'alert-danger' });
+	// }
+
+	showSuccess(str:string):void
+	{
+		this.rest.showError(new ErrorMensaje( str,'alert-success' ));
+	}
+	
+	showError(error:any):void {
+		this.is_loading = false;
+		this.rest.showError(error);
 	}
 	// showErrorMessage(error:ErrorMessage)
 	// {

@@ -223,6 +223,7 @@ export interface Documento_Histora_Clinica{
 
 export interface Especialidad{
 	id?:number;
+	id_centro_medico?:number;
 	nombre?:string;
 	abreviacion?:string;
 	tiempo_creacion?:Date;

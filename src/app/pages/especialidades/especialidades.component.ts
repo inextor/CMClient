@@ -30,12 +30,14 @@ export class EspecialidadesComponent extends BaseComponent implements OnInit {
 		this.is_loading = true;
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
 		// this.rest.especialidad.getAll({}).subscribe((respuesta)=>
-
+		// obteniendo el id del centro medico de la session del usuario
+		let usuario = this.rest.getUsuarioSesion();
 		this.route.queryParams.subscribe( params =>
 		{
+			
 			console.log("params",params);
 			this.especialidad_search = {
-				eq: {},
+				eq: {id_centro_medico:usuario.id_centro_medico},
 				gt: {},
 				ge: {},
 				le: {},

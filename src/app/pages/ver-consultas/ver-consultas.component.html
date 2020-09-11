@@ -3,7 +3,7 @@
 		<div class="p-0">
 			<div class="d-flex justify-content-between flex-wrap">
 				<div class="mb-3">
-					<h4>HISTORIAL CONSULTAS</h4>
+					<h4>HISTORIAL DE CONSULTAS</h4>
 				</div>
 				<div class="mb-3">
 					<!-- <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/agregar-especialidad']">
@@ -20,11 +20,18 @@
 			<div *ngFor="let consulta of consultas" class="card mt-3 mb-3 p-3">
 				<div><b>Fecha:</b>{{consulta.tiempo_creacion | date:'medium'}}</div>
 				<p *ngIf="consulta.motivo_consulta && consulta.motivo_consulta.trim() !== ''"><strong>Motivo
-						Consulta:</strong> {{consulta.motivo_consulta}}</p>
-				<p *ngIf="consulta.diagnostico && consulta.diagnostico.trim() !== ''"><strong>Diagnostico:</strong>
+						Consulta:</strong>
+					{{consulta.motivo_consulta}}</p>
+				<p *ngIf="consulta.diagnostico && consulta.diagnostico.trim() !== ''"><strong>Diagnostico
+						Objetivo:</strong>
 					{{consulta.diagnostico}}</p>
-				<p *ngIf="consulta.medicamento && consulta.medicamento.trim() !== ''"><strong>Tratamiento:</strong>
-					{{consulta.medicamento}}</p>
+				<p *ngIf="consulta.subjetivo && consulta.subjetivo.trim() !== ''"><strong>Diagnostico 
+						Subjetivo:</strong>
+					{{consulta.subjetivo}}</p>
+				<p *ngIf="consulta.tratamiento && consulta.tratamiento.trim() !== ''"><strong>Tratamiento:</strong>
+					{{consulta.tratamiento}}</p>
+				<p *ngIf="consulta.analisis && consulta.analisis.trim() !== ''"><strong>Analisis:</strong>
+					{{consulta.analisis}}</p>
 				<!-- <div>
 				<button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm">Editar</button><button type="button"[routerLink]="['/editar-consulta',consulta.id]" class="btn btn-primary btn-sm ml-3">Ver</button>
 			</div> -->
