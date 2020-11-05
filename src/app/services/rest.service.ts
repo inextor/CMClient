@@ -28,7 +28,7 @@ export class ErrorMensaje{
 
 	mensaje:string;
 	tipo:string;
-	
+
 	constructor(mensaje:string,tipo:string)
 	{
 		this.mensaje = mensaje;
@@ -126,7 +126,8 @@ export class RestService {
 	public pago:ObjRest<Pago>;
 	public poliza:ObjRest<Poliza>;
 	public precio_servicio:ObjRest<Precio_Servicio>;
-	public pregunta_historia_clinica:ObjRest<Pregunta_Historia_Clinica>;
+  public pregunta_historia_clinica:ObjRest<Pregunta_Historia_Clinica>;
+	public odontograma:ObjRest<Pregunta_Historia_Clinica>;
 	public recepcionista_doctor:ObjRest<Recepcionista_Doctor>;
 	public respuesta_historia_clinica:ObjRest<Respuesta_Historia_Clinica>;
 	public servicio:ObjRest<Servicio>;
@@ -209,7 +210,9 @@ export class RestService {
 		this.pago							= new ObjRest<Pago>							(`${this.urlBase}/pago.php`,http);
 		this.poliza							= new ObjRest<Poliza>						(`${this.urlBase}/poliza.php`,http);
 		this.precio_servicio				= new ObjRest<Precio_Servicio>				(`${this.urlBase}/precio_servicio.php`,http);
-		this.pregunta_historia_clinica		= new ObjRest<Pregunta_Historia_Clinica>	(`${this.urlBase}/pregunta_historia_clinica.php`,http);
+    this.pregunta_historia_clinica		= new ObjRest<Pregunta_Historia_Clinica>	(`${this.urlBase}/pregunta_historia_clinica.php`,http);
+		this.odontograma		= new ObjRest<Pregunta_Historia_Clinica>	(`${this.urlBase}/odontograma.php`,http);
+
 		this.recepcionista_doctor			= new ObjRest<Recepcionista_Doctor>			(`${this.urlBase}/recepcionista_doctor.php`,http);
 		this.respuesta_historia_clinica		= new ObjRest<Respuesta_Historia_Clinica>	(`${this.urlBase}/respuesta_historia_clinica.php`,http);
 		this.servicio						= new ObjRest<Servicio>						(`${this.urlBase}/servicio.php`,http); //NO SOPORTA POST
@@ -244,7 +247,7 @@ export class RestService {
 		this.pago_poliza				= new ObjRest<Pago_Poliza>					(`${this.urlBase}/pago_poliza.php`,http);
 		this.facturar				= new ObjRest<Facturar> 				(`${this.urlBase}/facturar.php`,http);
 		this.aseguranza				= new ObjRest<Aseguranza> 				(`${this.urlBase}/aseguranza.php`,http);
-		
+
 	}
 
 	getCurrentCentroMedico():Centro_Medico
@@ -272,13 +275,13 @@ export class RestService {
 				if(response && response.sesion.id) {
 					localStorage.setItem("usuario", JSON.stringify( response ) );
 					localStorage.setItem('session_token', response.sesion.id );
-					this.currentUserSubject.next(response);	
+					this.currentUserSubject.next(response);
 				}
 				return response;
 			}));
 		return result;
 	}
-	 
+
 	statusMenu():boolean{
 		if(this.isLoggedIn){
 			if(localStorage.getItem("activate_menu")=='true'){
@@ -503,6 +506,19 @@ export class RestService {
 		}
 
 		return this.http.get<Respuesta<RespuestaPreguntaHistoriaClinica>>(`${this.urlBase}/respuestaHistoriaClinica.php`,{params,headers:this.getSessionHeaders()});
+  }
+  getPreguntasRespuestasOdontograma(id_paciente:number,id_doctor:number,id_especialidad:number=null):Observable<Respuesta<RespuestaPreguntaHistoriaClinica>>
+	{
+		let params = new HttpParams();
+		params = params.set('id_paciente',''+id_paciente );
+		params = params.set('id_doctor',''+id_doctor);
+
+		if( id_especialidad !== null )
+		{
+			params = params.set('id_especialidad',''+id_doctor);
+		}
+
+		return this.http.get<Respuesta<RespuestaPreguntaHistoriaClinica>>(`${this.urlBase}/respuestaOdontograma.php`,{params,headers:this.getSessionHeaders()});
 	}
 
 	guardarRespuestasHistoriaClinica(respuestas:Respuesta_Historia_Clinica[]):Observable<RespuestaPreguntaHistoriaClinica[]>
@@ -750,7 +766,7 @@ export class RestService {
 // 	{
 // 		this.errorBehaviorSubject.next( error);
 // 	}
-   
+
   xlsx2json(file:File,headers):Promise<any>
     {
         if( file == null )

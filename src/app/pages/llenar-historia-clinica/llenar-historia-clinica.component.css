@@ -9,5 +9,9 @@
   .print{
   display: block !important;
   }
-  
+
+}
+
+.color-boton{
+  background-color: #2196f3 !important;
 }

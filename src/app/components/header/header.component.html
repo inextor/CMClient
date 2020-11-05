@@ -15,7 +15,7 @@
 				</button>
 				<div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu2">
 				  <button class="dropdown-item" type="button" [routerLink]="['/editar-doctor',usuario.id]" [appAccess]="['DOCTOR']"><i class="fas fa-user-edit"></i> Editar Perfil</button>
-				  <button class="dropdown-item" type="button"  (click)="editarHorario()"[appAccess]="['DOCTOR']" > <i class="fas fa-clock"></i> Configurar Horario</button>
+				  <button class="dropdown-item" type="button"  (click)="editarHorario()" [appAccess]="['DOCTOR']" > <i class="fas fa-clock"></i> Configurar Horario</button>
 				</div>
 			  </div>
 		</div>

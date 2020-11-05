@@ -177,13 +177,13 @@ const routes: Routes = [
 			{ path: "editar-requisicion:/id", component: AgregarPacienteComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-tipo-gasto/:id", component: AgregarTipoGastoComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-tipo-precio/:id", component: AgregarTipoPrecioComponent, pathMatch: "full", canActivate: [AuthGuard] },
-			{ path: "editar-tipo-poliza/:id", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },	
+			{ path: "editar-tipo-poliza/:id", component: AgregarTipoPolizaComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-poliza/:id", component:AgregarPolizaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "editar-usuario/:id", component: AgregarUsuarioComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "editar-unidad-medida/:id", component:AgregarUnidadMedidaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "editar-categoria-merma/:id", component:AgregarCategoriaMermaComponent, pathMatch:"full", canActivate:[AuthGuard]},
 			{ path: "editar-aseguranza/:id", component:AgregarAseguranzaComponent, pathMatch:"full", canActivate:[AuthGuard]},
-			
+
 			//fin EDITAR
 			{ path: "especialidades", component: EspecialidadesComponent, pathMatch: "full", canActivate: [AuthGuard] },
 			{ path: "familiares", component: FamiliaresComponent, pathMatch: "full", canActivate: [AuthGuard] },

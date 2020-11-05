@@ -1,84 +1,1165 @@
-<div class="card p-3">
-	<div class="container">
-		<h4 class="no-print">HISTORIA CLINICA</h4>
+<div class="card p-1 ">
+  <div class="border p-1">
+    <h4 class="no-print">HISTORIA CLINICA</h4>
 
-		<div class="mt-3">
-			<div>
-				<div class="form-row">
-					<div class="col-md-4">
-						<label for="paciente_nombre"><b>Nombre:</b> {{paciente.nombre}} {{paciente.apellidos}}</label>
-				
-					</div>
+    <div class="mt-3">
+      <div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <label for="paciente_nombre"><b>Nombre:</b> {{paciente.nombre}} {{paciente.apellidos}}</label>
+          </div>
+        </div>
+        <div *ngIf="preguntas.length==0" class="border text-center mb-2">
+          No existe ningun cuestionario, por favor configurarlo en la especialidad del doctor.
+        </div>
+        <div >
+          <tr class="pt-3 mb-3" *ngFor="let p of preguntas;let i = index;">
+            <ng-container
+              *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL' || p.pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA' || p.pregunta.tipo_pregunta =='SECCION_PREGUNTAS'">
 
-				</div>
-				<div>
-					<div class="pt-3 mb-3" *ngFor="let p of preguntas;let i = index;">
-						<div class="">
-							<label class="" *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' "><b>{{p.pregunta.pregunta}}</b></label>
-							<h5 class="pt-2" *ngIf="p.pregunta.tipo_pregunta == 'SECCION_PREGUNTAS' ">
-								<b>{{p.pregunta.pregunta}}</b></h5>
-						</div>
-						<div *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL'">
-							<div class="form-check form-check-inline pl-2">
-								<input *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' " type="text"
-									[name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta"
-									[(ngModel)]="p.respuesta.respuesta">
+              <!-- preguntas y seccion preguntas -->
+              <div>
+                <label class=""
+                  *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL' || p.pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA' "><b>{{p.pregunta.pregunta}}</b></label>
+                <h5 class="pt-2" *ngIf="p.pregunta.tipo_pregunta == 'SECCION_PREGUNTAS' ">
+                  <b>{{p.pregunta.pregunta}}</b></h5>
+              </div>
+              <!-- fin -->
 
-							</div>
-						</div>
-						<div *ngIf="p.pregunta.es_pregunta_binaria == 'SI'">
-							<div class="mr-3 form-check form-check-inline">
-								<input type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria"
-									class="form-check-input" [name]="'pregunta'+i">
-								<label class="form-check-label">SI</label>
-							</div>
-							<div class="mr-3 form-check form-check-inline">
-								<input type="radio" value="NO" [(ngModel)]="p.respuesta.respuesta_binaria"
-									class="form-check-input" [name]="'pregunta'+i">
-								<label class="form-check-label">NO</label>
-							</div>
-							<div class="mr-3 form-check form-check-inline">
-								<input type="radio" value="OTRO" [(ngModel)]="p.respuesta.respuesta_binaria"
-									class="form-check-input" [name]="'pregunta'+i">
-								<label class="form-check-label mr-2">OTRO</label>
+              <div *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL'">
+                <div class="form-check form-check-inline pl-2">
+                  <input
+                    *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL'||p.pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA' "
+                    type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta"
+                    [(ngModel)]="p.respuesta.respuesta">
+                </div>
+              </div>
 
-								<div class="form-check form-check-inline pl-2">
-									<input *ngIf="p.pregunta.tipo_pregunta != 'SECCION_PREGUNTAS' " type="text"
-										[name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta"
-										[(ngModel)]="p.respuesta.respuesta">
+              <div
+                *ngIf="p.pregunta.es_pregunta_binaria == 'SI' && p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL' || p.pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA' ">
 
-								</div>
-							</div>
-						</div>
+                <div class="mr-3 form-check form-check-inline">
+                  <input type="radio" value="SI" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input"
+                    [name]="'pregunta'+i">
+                  <label class="form-check-label">SI</label>
+                </div>
 
-					</div>
+                <div class="mr-3 form-check form-check-inline">
+                  <input type="radio" value="NO" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input"
+                    [name]="'pregunta'+i">
+                  <label class="form-check-label">NO</label>
+                </div>
 
-					<div class="pt-4 bloqueDoctor print">
-						<div class="grid">
-							<div class="row">
-								<label>Firma del paciente: _______________________</label> <label class="pl-4">Fecha:
-									_______________________</label>
+                <div class="mr-3 form-check form-check-inline">
+                  <input type="radio" value="OTRO" [(ngModel)]="p.respuesta.respuesta_binaria" class="form-check-input"
+                    [name]="'pregunta'+i">
+                  <label class="form-check-label mr-2">OTRO</label>
 
-							</div>
-							<div class=row>
-								<p class="text-justify">La información que presento es verdadera y legitima, la cual se
-									mantendrá confidencial y bajo el resguardo de
-									Clinica Smiler Ortho Center. Informare a la clínica sobre la existencia de algun
-									cambio en la salud del paciente.
-									Y autorizo a Clínica Smile Ortho Center y a su resonsable del Dr. Luis Eduardo Perez
-									Madrigal, El realizar el tratamiento de Ortodoncia
-									o Dental sugerido por el responsable.
-								</p>
-							</div>
-						</div>
+                  <div class="form-check form-check-inline pl-2">
+                    <input
+                      *ngIf="p.pregunta.tipo_pregunta == 'PREGUNTA_GENERAL' || p.pregunta.tipo_pregunta == 'PREGUNTA_ESPECIFICA' "
+                      type="text" [name]="'a'+ p.pregunta.id" [value]="p.respuesta.respuesta"
+                      [(ngModel)]="p.respuesta.respuesta">
 
-					</div>
-					<div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_message}}</div>
-					<div>
-						<button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                  </div>
+                </div>
+              </div>
+
+            </ng-container>
+
+          </tr>
+
+
+
+          <!--  -->
+          <div class="pt-4 bloqueDoctor print">
+            <div class="grid">
+              <div class="row">
+                <label>Firma del paciente: _______________________</label> <label class="pl-4">Fecha:
+                  _______________________</label>
+
+              </div>
+              <div class=row>
+                <p class="text-justify">La información que presento es verdadera y legitima, la cual se
+                  mantendrá confidencial y bajo el resguardo de
+                  Clinica. Informare a la clínica sobre la existencia de algun
+                  cambio en la salud del paciente.
+                  Y autorizo a Clínica y a su resonsable del Dr, El realizar el tratamiento de Ortodoncia
+                  o Dental sugerido por el responsable.
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="error_message" class="alert alert-danger" role="alert">{{error_message}}</div>
+          <div>
+            <button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border p-1 mt-1" *ngIf="preguntas_odontograma.length">
+    <h4 class="no-print">ODONTOGRAMA</h4>
+    <div>
+      <div class="" *ngIf="preguntas_odontograma.length > 0">
+        <!--  -->
+        <div class="row mb-0 mr-0 ml-0" *ngIf="preguntas_seccion_a">
+          <div class="col-md-6 col-lg-6 col-sm-12 border">
+            <div class="row">
+
+
+              <!-- 18 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/18.png" alt="18">
+                  </div>
+                </div>
+                <div class="border text-center ">
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[35])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[35]?'D':''}}</span>
+                    </button>
+                  </div>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[36])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[36]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[37])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[37]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[38])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[38]?'P':''}}</span></button>
+                  </div>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[39])"><span
+                        style="font-size: 9px;">{{preguntas_seccion_a[39]?'M':''}}</span></button>
+                  </div>
+
+                </div>
+                <div class="text-center">
+                  18
+                </div>
+              </div>
+              <!-- 17 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/17.png" alt="17">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[30])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[30]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[31])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[31]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[32])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[32]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[33])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[33]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_a[34])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[34]?'M':''}}</span></button>
+
+                </div>
+                <div class="text-center">
+                  17
+                </div>
+              </div>
+              <!-- 16 -->
+              <div class="p-0 col-sm ">
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/16.png" alt="16">
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[25])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[25]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[26])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[26]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[27])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[27]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[28])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[28]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[29])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[29]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  16
+                </div>
+              </div>
+              <!-- 15 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/15.png" alt="15">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[20])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[20]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[21])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[21]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[22])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[22]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[23])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[23]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[38])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[24]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  15
+                </div>
+              </div>
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/14.png" alt="12">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_a[15])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[15]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[16])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[16]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[27])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[17]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[18])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[18]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[19])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[19]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  14
+                </div>
+              </div>
+              <!-- 13 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/13.png" alt="13">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_a[10])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[10]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[11])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[11]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[12])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[12]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[13])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[13]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[14])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[14]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  13
+                </div>
+              </div>
+              <!-- 12 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/12.png" alt="12">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[5])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[5]?'D':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[6])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[6]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[7])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[7]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[8])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[8]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[9])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[9]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  12
+                </div>
+              </div>
+              <!-- 11 -->
+              <div class="p-0 col-sm ">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/11.png" alt="11">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[0])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[0]?'D':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[1])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[1]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[2])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[2]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[3])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[3]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[4])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[4]?'M':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  11
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-6 col-sm-12 border">
+            <div class="row ">
+
+
+
+              <!-- 21 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/21.png" alt="21">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[40])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[40]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[41])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[41]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[42])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[42]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[43])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[43]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_a[44])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[44]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  21
+                </div>
+              </div>
+              <!-- 22 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/22.png" alt="2">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[45])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[45]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[46])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[46]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[47])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[47]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[48])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[48]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[49])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[49]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  22
+                </div>
+              </div>
+              <!-- 23 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/23.png" alt="23">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[50])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[50]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[51])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[51]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[52])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[52]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[53])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[53]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_a[54])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[54]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  23
+                </div>
+              </div>
+              <!-- 24 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/24.png" alt="24">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[55])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[55]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[56])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[56]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[57])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[57]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[58])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[58]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[59])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[59]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  24
+                </div>
+              </div>
+              <!-- 25 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/25.png" alt="25">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_a[60])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[60]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[61])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[61]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[62])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[62]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[63])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[63]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[64])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[64]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  25
+                </div>
+              </div>
+              <!-- 26 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/26.png" alt="26">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_a[65])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_a[65]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[66])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[66]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[67])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[67]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[68])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[68]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[69])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[69]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  26
+                </div>
+              </div>
+              <!-- 27 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/27.png" alt="27">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[70])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[70]?'M':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[71])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[71]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[72])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[72]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[73])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[73]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[74])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[74]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  27
+                </div>
+              </div>
+              <!-- 28 -->
+              <div class="p-0 col-sm">
+                <div>
+                  <div class="">
+                    <img class="mx-auto d-block" src="../../../assets/odontograma/28.png" alt="28">
+                  </div>
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[75])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[75]?'M':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[76])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[76]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[77])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[77]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_a[78])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_a[78]?'P':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_a[79])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_a[79]?'D':''}}</span></button>
+                </div>
+                <div class="text-center">
+                  28
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- seccion B -->
+        <!--  -->
+        <div class="row mb-3 mr-0 ml-0" *ngIf="preguntas_seccion_b">
+          <div class="col-md-6 col-lg-6 col-sm-12 border">
+            <div class="row">
+
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  48
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[75])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[75]?'D':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[76])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[76]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[77])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[77]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[78])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[78]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[79])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[79]?'M':''}}</span></button>
+                </div>
+
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/48.png" alt="48">
+                </div>
+
+              </div>
+              <!-- 47-->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  47
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[70])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[70]?'D':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[71])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[71]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[72])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[72]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[73])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[73]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[74])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[74]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/47.png" alt="47">
+                </div>
+              </div>
+              <!-- 46 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  46
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_b[65])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[65]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[66])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[66]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[67])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[67]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[68])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[68]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[69])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[69]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/46.png" alt="46">
+                </div>
+              </div>
+
+
+              <!-- 45 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  45
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_b[60])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[60]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[61])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[61]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[62])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[62]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[63])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[63]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[64])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[64]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/45.png" alt="45">
+                </div>
+              </div>
+              <!-- 45 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  44
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[55])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[55]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[56])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[56]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[57])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[57]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[58])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[58]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[59])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[59]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/44.png" alt="44">
+                </div>
+              </div>
+              <!-- 43 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  43
+                </div>
+                <div class="border text-center ">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[50])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[50]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[51])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[51]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[52])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[52]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[53])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[53]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[54])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[54]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/43.png" alt="43">
+                </div>
+              </div>
+              <!-- 42 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  42
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[45])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[45]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[46])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[46]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[47])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[47]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[48])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[48]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[49])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[49]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/42.png" alt="42">
+                </div>
+              </div>
+              <!-- 41 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  41
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[40])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[40]?'D':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[41])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[41]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[42])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[42]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[43])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[43]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[44])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[44]?'M':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/41.png" alt="41">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 31 -->
+          <div class="col-md-6 col-lg-6 col-sm-12 border">
+            <div class="row">
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  31
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[0])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[0]?'M':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[1])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[1]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[2])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[2]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[3])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[3]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[4])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[4]?'D':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/31.png" alt="31">
+                </div>
+              </div>
+              <!-- 32  -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  32
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[5])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[5]?'M':''}}</span></button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[6])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[6]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[7])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[7]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[8])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[8]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[9])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[9]?'D':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/32.png" alt="32">
+                </div>
+              </div>
+              <!-- 33 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  33
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_b[10])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[10]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[11])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[11]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[12])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[12]?'I':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[13])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[13]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[14])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[14]?'V':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/33.png" alt="33">
+                </div>
+              </div>
+              <!-- 34 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  34
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border btn-sm"
+                    (click)="registrarRespuesta(preguntas_seccion_b[15])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[15]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[16])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[16]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[17])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[17]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[18])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[18]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[19])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[19]?'V':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/34.png" alt="34">
+                </div>
+              </div>
+              <!-- 35 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  35
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[20])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[20]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[21])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[21]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[22])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[22]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[23])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[23]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[24])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[24]?'V':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/35.png" alt="35">
+                </div>
+              </div>
+              <!-- 36 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  36
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[25])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[25]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[26])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[26]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[27])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[27]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[28])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[28]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[29])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[29]?'D':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/36.png" alt="36">
+                </div>
+              </div>
+              <!-- 37 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  37
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[30])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[30]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[31])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[31]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[32])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[32]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[33])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[33]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[34])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[34]?'D':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/37.png" alt="37">
+                </div>
+              </div>
+              <!-- 37 -->
+              <div class="p-0 col-sm">
+                <div class="text-center">
+                  38
+                </div>
+                <div class="border text-center">
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                    (click)="registrarRespuesta(preguntas_seccion_b[35])">
+                    <span style="font-size: 9px;">{{preguntas_seccion_b[35]?'M':''}}</span>
+                  </button>
+                  <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[36])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[36]?'V':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[37])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[37]?'O':''}}</span></button>
+                    <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border"
+                      (click)="registrarRespuesta(preguntas_seccion_b[38])">
+                      <span style="font-size: 9px;">{{preguntas_seccion_b[38]?'L':''}}</span></button>
+                  </div>
+                  <button type="button" class="btn btn-light btn-sm  p-0 pl-1 pr-1 border "
+                    (click)="registrarRespuesta(preguntas_seccion_b[39])"><span
+                      style="font-size: 9px;">{{preguntas_seccion_b[39]?'D':''}}</span></button>
+                </div>
+                <div class="">
+                  <img class="mx-auto d-block" src="../../../assets/odontograma/38.png" alt="38">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="basica">
+        <thead>
+          <tr>
+            <th>No. Diente / Parte</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of preguntas_odontograma;let i = index;">
+            <ng-container *ngIf="p.respuesta.respuesta && p.pregunta.tipo_pregunta=='PREGUNTA_ODONTOGRAMA'">
+              <td>
+                {{p.pregunta.pregunta}}
+              </td>
+              <td>
+                {{p.respuesta.respuesta}}
+              </td>
+            </ng-container>
+
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
 </div>
+<app-modal [show]="seleccionarAnalisis">
+  <div class="modal-content" class="customModal">
+    <div class="modal-header">
+      <h5 class="modal-title">Opciones</h5>
+    </div>
+    <div class="modal-body pb-0 ">
+      <div class="border p-2">
+        <div class="text-center pb-2"><h3> No. Diente / Parte</h3></div>
+        <div class="text-center"><h5>{{respuesta_odontograma?respuesta_odontograma.pregunta.pregunta:"No se selecciono ningun diente."}}</h5></div>
+      </div>
+      <label class="">Seleccionar </label>
+      <select name="opcion_odontograma" [(ngModel)]="opcion_odontograma" class="form-control">
+        <option [value]="'CARIES'">CARIES</option>
+        <option [value]="'AMALGAMA DESADAPTADA'">AMALGAMA DESADAPTADA</option>
+        <option [value]="'FRACTURA'">FRACTURA</option>
+        <option [value]="'CORONA BUENA'">CORONA BUENA</option>
+        <option [value]="'PERNO BUENO'">PERNO BUENO</option>
+        <option [value]="'PÓNTICO'">PÓNTICO</option>
+        <option [value]="'RESINA ADAPTADA'">RESINA ADAPTADA</option>
+        <option [value]="'DIENTE SANO'">DIENTE SANO</option>
+        <option [value]="'DIENTE AUSENTE'">DIENTE AUSENTE</option>
+        <option [value]="'CORONA DESADAPTADA'">CORONA DESADAPTADA</option>
+        <option [value]="'PERNO MALO'">PERNO MALO</option>
+        <option [value]="'RESINA DESADAPTADA'">RESINA DESADAPTADA</option>
+        <option [value]="'SELLANTE BUENO'">SELLANTE BUENO</option>
+        <option [value]="'PROVISIONAL'">PROVISIONAL</option>
+        <option [value]="'ENDODONCIA BUENA'">ENDODONCIA BUENA</option>
+        <option [value]="'IMPLANTE BUENO'">IMPLANTE BUENO</option>
+        <option [value]="'AMALGAMA ADAPTADA'">AMALGAMA ADAPTADA</option>
+        <option [value]="'SELLANTE DESADAPTADO'">SELLANTE DESADAPTADO</option>
+        <option [value]="'EXTRACCIÓN INDICADA'">EXTRACCIÓN INDICADA</option>
+        <option [value]="'ENDODONCIA MALA'">ENDODONCIA MALA</option>
+        <option [value]="'IMPLANTE MALO'">IMPLANTE MALO</option>
+        <option [value]="'OTROS'">OTROS</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <a class="btn text-light  btn-secondary" (click)="seleccionarAnalisis=false">Cancelar</a>
+      <a class="btn text-light  btn-primary" (click)="guardarRespuestaOdontograma()">Guardar</a>
+    </div>
+  </div>
+</app-modal>
