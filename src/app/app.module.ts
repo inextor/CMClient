@@ -118,7 +118,6 @@ import { AgregarAseguranzaComponent } from './pages/agregar-aseguranza/agregar-a
 import { PagosAseguranzaComponent } from './pages/pagos-aseguranza/pagos-aseguranza.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { OdontogramaComponent } from './pages/odontograma/odontograma.component';
 
 export function init_app(rest: RestService) {
   return () =>
@@ -242,7 +241,6 @@ export function init_app(rest: RestService) {
     AseguranzasComponent,
     AgregarAseguranzaComponent,
     PagosAseguranzaComponent,
-    OdontogramaComponent,
   ],
   imports: [
     AccessModule,
