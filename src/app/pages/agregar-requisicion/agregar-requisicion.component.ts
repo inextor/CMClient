@@ -42,7 +42,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	detalles_requisicion:Detalle_Requisicion_Info[] = [];
 	servicios_by_id:ServicioById	= {};
 	total=0;
-	
+
 	ngOnInit()
 	{
 		this.route.paramMap.subscribe( params =>
@@ -55,9 +55,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 				,id_centro_medico	: centro_medico.id
 				,id_centro_medico_distribuidor:null
 				,id_proveedor		: null
-				,flete : 0 
+				,flete : 0
 				,importacion: 0
-				,subtotal: 0 
+				,subtotal: 0
 				,total: 0
 			}
 
@@ -72,7 +72,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			}, (error) => this.showError(error));
 		});
 	}
-	
+
 	clean(){
 		let usuario = this.rest.getUsuarioSesion();
 		let centro_medico = this.rest.getCurrentCentroMedico();
@@ -81,9 +81,9 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			,id_centro_medico	: centro_medico.id
 			,id_centro_medico_distribuidor:null
 			,id_proveedor		: null
-			,flete : 0 
+			,flete : 0
 			,importacion: 0
-			,subtotal: 0 
+			,subtotal: 0
 			,total: 0
 		}
 		this.detalles_requisicion.length=0;
@@ -92,13 +92,13 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 	buscarInventariosSucursal(evt: any){
 		let x = this.rest.inventario.search({
 			lk: { nombre: evt.target.value },
-			eq:{id_centro_medico: this.requisicion.id_centro_medico_distribuidor?this.requisicion.id_centro_medico_distribuidor:0},
+			eq:{},
 		}).subscribe((response) => {
 			this.search_servicios = response.datos;
 			x.unsubscribe();
 		});
 	}
-	
+
 	buscar(evt: any)
 	{
 		let x = this.rest.servicio.search({
@@ -127,7 +127,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			servicio: servicio
 			,detalle_requisicion:{id_servicio	: servicio.id, cantidad : 1 ,precio : servicio.precio_referencia }
 		});
-		
+
 		this.calcularCantidades(total);
 		this.busqueda			= '';
 		this.search_servicios	= [];
@@ -153,7 +153,7 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			servicio: servicioRequisicion
 			,detalle_requisicion:{id_servicio	: servicio.id_servicio, cantidad : 1 ,precio : servicio.precio_referencia }
 		});
-		
+
 		this.calcularCantidades(total);
 		this.busqueda			= '';
 		this.search_servicios	= [];
@@ -172,14 +172,14 @@ export class AgregarRequisicionComponent extends BaseComponent implements OnInit
 			return;
 		}}
 	// addServicio(servicio,this.list_detalles){
-		
+
 	// 	this.calcularCantidades(this.detalles_requisicion)
 	// }
 	calcularCantidades(total){
 
 		this.detalles_requisicion.forEach(i => {
 			// total += i.detalle_requisicion.cantidad;
-	
+
 			total += i.detalle_requisicion.cantidad * i.detalle_requisicion.precio;
 			i.detalle_requisicion.subtotal= total
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
-import { Usuario,Servicio, Centro_Medico,} from '../../models/Modelos';
-import { ServicioResponseItem,Respuesta, } from '../../models/Respuestas';
+import { Usuario,Servicio,} from '../../models/Modelos';
 import {Router,ActivatedRoute} from "@angular/router"
 import { BaseComponent } from '../base/base.component';
 import { Location } from	'@angular/common';
@@ -30,7 +29,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 			// console.log('imprimiendo organizacion',this.centro_medico);
 		this.route.queryParams.subscribe( params =>
 		{
-			
+
 			this.servicio_search = {
 				eq: { id_organizacion: this.centro_medico.id_organizacion, id_centro_medico: this.centro_medico.id_centro_medico },
 				gt: {},
@@ -60,7 +59,7 @@ export class ServiciosComponent extends BaseComponent implements OnInit {
 
 	changeSearch(nombre:string)
 	{
-		
+
 	}
 
 	search()
